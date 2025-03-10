@@ -183,63 +183,38 @@ const ConsensusExplainer = () => {
                   const isSelected = selectedNodes.includes(i);
                   
                   return (
-                    <React.Fragment key={`vrf-node-${i}`}>
-                      <motion.div
-                        className={`absolute rounded-full ${
-                          isSelected ? 'bg-blue-400' : 'bg-slate-300/60'
-                        }`}
-                        style={{ 
-                          width: isSelected ? 4 + Math.random() * 2 : 3 + Math.random() * 2,
-                          height: isSelected ? 4 + Math.random() * 2 : 3 + Math.random() * 2,
-                        }}
-                        animate={{
-                          x: isSelected ? 
-                            [x, 0, x] : 
-                            x,
-                          y: isSelected ? 
-                            [y, 0, y] : 
-                            y,
-                          scale: isSelected ? [1, 1.8, 1] : [1, 1.2, 1],
-                          opacity: isSelected ? [0.7, 1, 0.7] : [0.4, 0.6, 0.4],
-                          boxShadow: isSelected ? 
-                            ['0 0 0px rgba(59, 130, 246, 0)', 
-                             '0 0 10px rgba(59, 130, 246, 0.8)', 
-                             '0 0 0px rgba(59, 130, 246, 0)'] : 
-                            'none'
-                        }}
-                        transition={{
-                          duration: isSelected ? 4 : 3,
-                          repeat: Infinity,
-                          delay: i * 0.01,
-                          times: isSelected ? [0, 0.5, 1] : undefined,
-                          ease: isSelected ? "easeInOut" : "linear"
-                        }}
-                      />
-                      
-                      {isSelected && (
-                        <motion.div
-                          className="absolute bg-gradient-to-r from-blue-500/20 to-blue-500/40"
-                          style={{ 
-                            width: Math.sqrt(x*x + y*y),
-                            height: 1.5,
-                            left: 0,
-                            top: 0,
-                            transformOrigin: "0 0",
-                            transform: `rotate(${Math.atan2(y, x)}rad) translateZ(0)`
-                          }}
-                          animate={{
-                            opacity: [0.2, 0.5, 0.2, 0],
-                            height: [1.5, 2, 1.5, 0]
-                          }}
-                          transition={{
-                            duration: 4,
-                            repeat: Infinity,
-                            delay: i * 0.01,
-                            times: [0, 0.3, 0.5, 1]
-                          }}
-                        />
-                      )}
-                    </React.Fragment>
+                    <motion.div
+                      key={`vrf-node-${i}`}
+                      className={`absolute rounded-full ${
+                        isSelected ? 'bg-blue-400' : 'bg-slate-300/60'
+                      }`}
+                      style={{ 
+                        width: isSelected ? 4 + Math.random() * 2 : 3 + Math.random() * 2,
+                        height: isSelected ? 4 + Math.random() * 2 : 3 + Math.random() * 2,
+                      }}
+                      animate={{
+                        x: isSelected ? 
+                          [x, 0, x] : 
+                          x,
+                        y: isSelected ? 
+                          [y, 0, y] : 
+                          y,
+                        scale: isSelected ? [1, 1.8, 1] : [1, 1.2, 1],
+                        opacity: isSelected ? [0.7, 1, 0.7] : [0.4, 0.6, 0.4],
+                        boxShadow: isSelected ? 
+                          ['0 0 0px rgba(59, 130, 246, 0)', 
+                           '0 0 10px rgba(59, 130, 246, 0.8)', 
+                           '0 0 0px rgba(59, 130, 246, 0)'] : 
+                          'none'
+                      }}
+                      transition={{
+                        duration: isSelected ? 4 : 3,
+                        repeat: Infinity,
+                        delay: i * 0.01,
+                        times: isSelected ? [0, 0.5, 1] : undefined,
+                        ease: isSelected ? "easeInOut" : "linear"
+                      }}
+                    />
                   );
                 })}
                 
@@ -258,24 +233,24 @@ const ConsensusExplainer = () => {
                     ease: "easeInOut"
                   }}
                 >
-                  <motion.div
-                    className="z-10 text-white font-bold text-2xl bg-blue-500/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-400/30"
-                    animate={{
-                      scale: [0.95, 1.05, 0.95],
-                      textShadow: [
-                        "0 0 5px rgba(59, 130, 246, 0.3)",
-                        "0 0 10px rgba(59, 130, 246, 0.6)",
-                        "0 0 5px rgba(59, 130, 246, 0.3)"
-                      ]
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    VRF
-                  </motion.div>
+                   <motion.div
+                     className="z-10 text-white font-bold text-2xl bg-blue-500/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-400/30"
+                     animate={{
+                       scale: [0.95, 1.05, 0.95],
+                       textShadow: [
+                         "0 0 5px rgba(59, 130, 246, 0.3)",
+                         "0 0 10px rgba(59, 130, 246, 0.6)",
+                         "0 0 5px rgba(59, 130, 246, 0.3)"
+                       ]
+                     }}
+                     transition={{
+                       duration: 3,
+                       repeat: Infinity,
+                       ease: "easeInOut"
+                     }}
+                   >
+                     VRF
+                   </motion.div>
                 </motion.div>
                 
                 <motion.div 
