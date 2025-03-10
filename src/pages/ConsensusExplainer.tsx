@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -458,54 +457,7 @@ const ConsensusExplainer = () => {
                           delay: i * 0.3
                         }}
                       />
-                      {item.expandable && item.name === 'Adjustment (Aᵢ)' ? (
-                        <Collapsible
-                          open={isAdjustmentOpen}
-                          onOpenChange={setIsAdjustmentOpen}
-                          className="w-full"
-                        >
-                          <div className="flex items-center justify-between w-full">
-                            <div>
-                              <p className="text-sm font-medium text-white">{item.name}</p>
-                              <p className="text-xs text-slate-300 mt-0.5">{item.description}</p>
-                            </div>
-                            <CollapsibleTrigger asChild>
-                              <button className="p-1 rounded-full bg-slate-700/50 hover:bg-slate-700/80 transition-colors">
-                                {isAdjustmentOpen ? (
-                                  <ChevronUp className="h-4 w-4 text-purple-300" />
-                                ) : (
-                                  <ChevronDown className="h-4 w-4 text-purple-300" />
-                                )}
-                              </button>
-                            </CollapsibleTrigger>
-                          </div>
-                          <CollapsibleContent className="mt-3 ml-6 space-y-2 text-sm border-l-2 border-purple-500/30 pl-4">
-                            <div className="p-3 bg-slate-800/50 rounded-lg">
-                              <div className="text-center mb-3 text-purple-300 font-mono">
-                                Aᵢ = (Lᵢ + Rᵢ)/2 × (1 - Kᵢ) × (1 + Dᵢ)
-                              </div>
-                              <ul className="space-y-2">
-                                <li className="flex items-start">
-                                  <span className="text-purple-400 font-mono mr-2">Lᵢ</span>
-                                  <span className="text-slate-300">Liveness score (uptime, missed votes, block proposal success rate)</span>
-                                </li>
-                                <li className="flex items-start">
-                                  <span className="text-purple-400 font-mono mr-2">Rᵢ</span>
-                                  <span className="text-slate-300">Performance score (latency, compute efficiency)</span>
-                                </li>
-                                <li className="flex items-start">
-                                  <span className="text-purple-400 font-mono mr-2">Kᵢ</span>
-                                  <span className="text-slate-300">Block skip penalty</span>
-                                </li>
-                                <li className="flex items-start">
-                                  <span className="text-purple-400 font-mono mr-2">Dᵢ</span>
-                                  <span className="text-slate-300">Delegation bonus favoring well-reputed validators</span>
-                                </li>
-                              </ul>
-                            </div>
-                          </CollapsibleContent>
-                        </Collapsible>
-                      ) : item.expandable && item.name === 'Vote reduction (F)' ? (
+                      {item.expandable && item.name === 'Vote reduction (F)' ? (
                         <Collapsible
                           open={isVoteReductionOpen}
                           onOpenChange={setIsVoteReductionOpen}
