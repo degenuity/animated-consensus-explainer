@@ -234,16 +234,26 @@ interface BLSVisualizationProps {
 
 const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, activeFormula }) => {
   const [leaderReceived, setLeaderReceived] = useState(false);
+  const [showSuccessEffect, setShowSuccessEffect] = useState(false);
 
   useEffect(() => {
     setLeaderReceived(false);
+    setShowSuccessEffect(false);
     
     if (activeSection === 1 && activeFormula === 1) {
-      const timer = setTimeout(() => {
+      // First timer for receiving the message
+      const receiveTimer = setTimeout(() => {
         setLeaderReceived(true);
+        
+        // Second timer for the success effect after receiving
+        const successTimer = setTimeout(() => {
+          setShowSuccessEffect(true);
+        }, 500);
+        
+        return () => clearTimeout(successTimer);
       }, 3000);
       
-      return () => clearTimeout(timer);
+      return () => clearTimeout(receiveTimer);
     }
   }, [activeSection, activeFormula]);
 
@@ -433,35 +443,70 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             animate={{ 
               x: 0, 
               opacity: 1,
-              scale: leaderReceived ? [1, 1.1, 1] : 1,
-              borderColor: leaderReceived ? ["#ef4444", "#4ade80", "#4ade80"] : "#ef4444",
-              boxShadow: leaderReceived ? ["0 0 0px rgba(234, 56, 76, 0.2)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] : "none"
+              scale: showSuccessEffect ? [1, 1.15, 1] : 1,
             }}
             transition={{ 
               delay: 0.8, 
               type: "spring",
-              scale: { duration: 0.5, repeat: 0 },
-              borderColor: { duration: 1, repeat: 0 },
-              boxShadow: { duration: 1, repeat: 0 }
+              scale: { duration: 0.8, repeat: 0 }
             }}
           >
-            <div className={`w-16 h-16 rounded-xl bg-slate-800 border-2 flex items-center justify-center shadow-md flex-col transition-colors duration-500 ${leaderReceived ? 'border-green-400' : 'border-red-500/20'}`}>
+            <motion.div 
+              className={`w-16 h-16 rounded-xl bg-slate-800 flex items-center justify-center shadow-md flex-col transition-all duration-700 overflow-hidden relative ${leaderReceived ? 'border-2 border-green-500' : 'border-2 border-red-500/20'}`}
+              animate={{
+                boxShadow: leaderReceived ? 
+                  ["0 0 0px rgba(74, 222, 128, 0)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] : 
+                  "none"
+              }}
+              transition={{ duration: 2, repeat: showSuccessEffect ? Infinity : 0 }}
+            >
+              {showSuccessEffect && (
+                <motion.div
+                  className="absolute inset-0 bg-green-500/10"
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    opacity: [0, 0.6, 0],
+                    scale: [0.9, 1.1, 1]
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              )}
+              
               <motion.span
                 className={`text-sm font-bold transition-colors duration-500 ${leaderReceived ? 'text-green-400' : 'text-red-400/70'}`}
+                animate={{
+                  textShadow: showSuccessEffect ? 
+                    ["0 0 0px rgba(74, 222, 128, 0)", "0 0 10px rgba(74, 222, 128, 0.7)", "0 0 0px rgba(74, 222, 128, 0)"] : 
+                    "none"
+                }}
+                transition={{ duration: 1.5, repeat: showSuccessEffect ? Infinity : 0 }}
               >
                 Leader
               </motion.span>
+              
               {leaderReceived && (
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ type: "spring", damping: 12 }}
+                  animate={{ 
+                    scale: 1, 
+                    opacity: 1,
+                    rotate: showSuccessEffect ? [0, 10, 0, -10, 0] : 0
+                  }}
+                  transition={{
+                    type: "spring", 
+                    damping: 12,
+                    rotate: { repeat: showSuccessEffect ? Infinity : 0, duration: 2 }
+                  }}
                   className="mt-1"
                 >
                   <Check size={16} className="text-green-400" />
                 </motion.div>
               )}
-            </div>
+            </motion.div>
           </motion.div>
           
           <motion.div
@@ -517,7 +562,7 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 }}
-                  className="ml-1 text-green-400"
+                  className={`ml-1 ${showSuccessEffect ? 'text-green-400' : 'text-green-400/70'}`}
                 >
                   ✓ Received
                 </motion.span>
