@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -47,6 +48,7 @@ const ConsensusExplainer = () => {
           Scaling Consensus on X1
         </h1>
 
+        {/* First section - VRF-Based Subcommittee Selection */}
         <motion.div
           animate={{
             scale: activeSection === 0 ? 1 : 0.95,
@@ -336,6 +338,7 @@ const ConsensusExplainer = () => {
           </Card>
         </motion.div>
 
+        {/* Second section - BLS Signature Aggregation */}
         <motion.div
           animate={{
             scale: activeSection === 1 ? 1 : 0.95,
