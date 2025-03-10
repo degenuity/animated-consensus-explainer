@@ -41,7 +41,7 @@ const ConsensusExplainer = () => {
         className="max-w-4xl mx-auto"
       >
         <h1 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400">
-          Scaling Consensus
+          Scaling Consensus on X1
         </h1>
 
         <motion.div
