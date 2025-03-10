@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -125,7 +124,9 @@ const ConsensusExplainer = () => {
                       }}
                     />
                     <span className="relative z-10 text-cyan-300 font-bold tracking-wide text-lg flex justify-center">
-                      P<sub>i</sub> = (S<sub>i</sub> / ∑S<sub>j</sub>) × F × A<sub>i</sub>
+                      <span className="inline-flex items-baseline">
+                        P<sub className="text-sm">i</sub> = (S<sub className="text-sm">i</sub> / ∑S<sub className="text-sm">j</sub>) × F × A<sub className="text-sm">i</sub>
+                      </span>
                     </span>
                   </motion.div>
                 </motion.div>
@@ -694,3 +695,4 @@ const ConsensusExplainer = () => {
 };
 
 export default ConsensusExplainer;
+
