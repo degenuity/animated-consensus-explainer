@@ -25,8 +25,53 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
   content, 
   index
 }) => {
-  // Extract the color name (e.g., "blue" from "blue-400")
-  const colorName = color.split('-')[0];
+  // Get color classes based on color prop
+  const getColorClasses = () => {
+    switch (color) {
+      case 'blue-400':
+        return {
+          dot: 'bg-blue-400',
+          icon: 'text-blue-300',
+          border: 'border-blue-500/30'
+        };
+      case 'green-400':
+        return {
+          dot: 'bg-green-400',
+          icon: 'text-green-300',
+          border: 'border-green-500/30'
+        };
+      case 'purple-400':
+        return {
+          dot: 'bg-purple-400',
+          icon: 'text-purple-300',
+          border: 'border-purple-500/30'
+        };
+      default:
+        return {
+          dot: 'bg-blue-400',
+          icon: 'text-blue-300',
+          border: 'border-blue-500/30'
+        };
+    }
+  };
+  
+  const colorClasses = getColorClasses();
+  
+  // Get shadow colors for animation
+  const getShadowValues = () => {
+    switch (color) {
+      case 'green-400':
+        return ['rgba(34, 197, 94, 0)', 'rgba(34, 197, 94, 0.5)', 'rgba(34, 197, 94, 0)'];
+      case 'blue-400':
+        return ['rgba(59, 130, 246, 0)', 'rgba(59, 130, 246, 0.5)', 'rgba(59, 130, 246, 0)'];
+      case 'purple-400':
+        return ['rgba(168, 85, 247, 0)', 'rgba(168, 85, 247, 0.5)', 'rgba(168, 85, 247, 0)'];
+      default:
+        return ['rgba(59, 130, 246, 0)', 'rgba(59, 130, 246, 0.5)', 'rgba(59, 130, 246, 0)'];
+    }
+  };
+  
+  const shadowValues = getShadowValues();
   
   return (
     <motion.div
@@ -41,13 +86,13 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
       className="flex items-center p-2 rounded-lg hover:bg-slate-700/30"
     >
       <motion.div 
-        className={`w-3 h-3 rounded-full bg-${color} mr-3`}
+        className={`w-3 h-3 rounded-full ${colorClasses.dot} mr-3`}
         animate={{ 
           scale: [1, 1.5, 1],
           boxShadow: [
-            `0 0 0px rgba(${colorName === 'green' ? '34, 197, 94' : colorName === 'blue' ? '59, 130, 246' : colorName === 'purple' ? '168, 85, 247' : '59, 130, 246'}, 0)`,
-            `0 0 10px rgba(${colorName === 'green' ? '34, 197, 94' : colorName === 'blue' ? '59, 130, 246' : colorName === 'purple' ? '168, 85, 247' : '59, 130, 246'}, 0.5)`,
-            `0 0 0px rgba(${colorName === 'green' ? '34, 197, 94' : colorName === 'blue' ? '59, 130, 246' : colorName === 'purple' ? '168, 85, 247' : '59, 130, 246'}, 0)`
+            `0 0 0px ${shadowValues[0]}`,
+            `0 0 10px ${shadowValues[1]}`,
+            `0 0 0px ${shadowValues[2]}`
           ]
         }}
         transition={{ 
@@ -71,16 +116,16 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
             <CollapsibleTrigger asChild>
               <button className="p-1 rounded-full bg-slate-700/50 hover:bg-slate-700/80 transition-colors">
                 {isOpen ? (
-                  <ChevronUp className={`h-4 w-4 text-${color.replace('400', '300')}`} />
+                  <ChevronUp className={`h-4 w-4 ${colorClasses.icon}`} />
                 ) : (
-                  <ChevronDown className={`h-4 w-4 text-${color.replace('400', '300')}`} />
+                  <ChevronDown className={`h-4 w-4 ${colorClasses.icon}`} />
                 )}
               </button>
             </CollapsibleTrigger>
           </div>
           
           <CollapsibleContent 
-            className={`mt-3 ml-6 space-y-2 text-sm border-l-2 border-${color.replace('400', '500')}/30 pl-4`}
+            className={`mt-3 ml-6 space-y-2 text-sm ${colorClasses.border} border-l-2 pl-4`}
           >
             {content}
           </CollapsibleContent>
