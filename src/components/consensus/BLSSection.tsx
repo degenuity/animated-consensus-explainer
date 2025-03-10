@@ -110,8 +110,8 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
             <div className="space-y-3">
               <ExpandableItem 
                 name="Individual signatures (σᵢ)" 
-                color="violet-400" 
-                description="From each validator" 
+                color="purple-400" 
+                description="From each validator where skᵢ is the validator's secret key" 
                 expandable={false}
                 index={0}
               />
