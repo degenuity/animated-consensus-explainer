@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -108,7 +107,7 @@ const ConsensusExplainer = () => {
                         ease: "easeInOut"
                       }}
                     />
-                    <span className="relative z-10">P_i = (S_i / ΣS_j) × F × A_i</span>
+                    <span className="relative z-10 text-cyan-300 font-bold">P_i = (S_i / ΣS_j) × F × A_i</span>
                   </motion.div>
                 </motion.div>
                 
@@ -382,7 +381,7 @@ const ConsensusExplainer = () => {
                         ease: "easeInOut"
                       }}
                     />
-                    <span className="relative z-10">σ_i = H(M)^sk_i</span>
+                    <span className="relative z-10 text-pink-300 font-bold">σ_i = H(M)^sk_i</span>
                   </motion.div>
                   
                   <motion.div 
@@ -409,7 +408,7 @@ const ConsensusExplainer = () => {
                         ease: "easeInOut"
                       }}
                     />
-                    <span className="relative z-10">σ_agg = Π σ_i</span>
+                    <span className="relative z-10 text-pink-300 font-bold">σ_agg = Π σ_i</span>
                   </motion.div>
                 </motion.div>
                 
