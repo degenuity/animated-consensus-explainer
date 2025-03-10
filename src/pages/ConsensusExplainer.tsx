@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -186,11 +187,11 @@ const ConsensusExplainer = () => {
                     <React.Fragment key={`vrf-node-${i}`}>
                       <motion.div
                         className={`absolute rounded-full ${
-                          isSelected ? 'bg-blue-400' : 'bg-slate-400'
+                          isSelected ? 'bg-blue-400' : 'bg-slate-300'
                         }`}
                         style={{ 
-                          width: 2 + Math.random() * 2,
-                          height: 2 + Math.random() * 2,
+                          width: 3 + Math.random() * 2,
+                          height: 3 + Math.random() * 2,
                         }}
                         animate={{
                           x: isSelected ? 
@@ -200,10 +201,10 @@ const ConsensusExplainer = () => {
                             [y, 0, y] : 
                             y,
                           scale: isSelected ? [1, 1.8, 1] : [1, 1.2, 1],
-                          opacity: isSelected ? [0.4, 1, 0.4] : [0.2, 0.4, 0.2],
+                          opacity: isSelected ? [0.6, 1, 0.6] : [0.3, 0.5, 0.3],
                           boxShadow: isSelected ? 
                             ['0 0 0px rgba(59, 130, 246, 0)', 
-                             '0 0 10px rgba(59, 130, 246, 0.5)', 
+                             '0 0 10px rgba(59, 130, 246, 0.8)', 
                              '0 0 0px rgba(59, 130, 246, 0)'] : 
                             'none'
                         }}
@@ -218,18 +219,18 @@ const ConsensusExplainer = () => {
                       
                       {isSelected && (
                         <motion.div
-                          className="absolute bg-gradient-to-r from-blue-500/5 to-blue-500/20"
+                          className="absolute bg-gradient-to-r from-blue-500/20 to-blue-500/40"
                           style={{ 
                             width: Math.sqrt(x*x + y*y),
-                            height: 1,
+                            height: 1.5,
                             left: 0,
                             top: 0,
                             transformOrigin: "0 0",
                             transform: `rotate(${Math.atan2(y, x)}rad) translateZ(0)`
                           }}
                           animate={{
-                            opacity: [0.1, 0.3, 0.1, 0],
-                            height: [1, 1.5, 1, 0]
+                            opacity: [0.2, 0.5, 0.2, 0],
+                            height: [1.5, 2, 1.5, 0]
                           }}
                           transition={{
                             duration: 4,
@@ -246,7 +247,6 @@ const ConsensusExplainer = () => {
                 <motion.div
                   className="relative w-32 h-32 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur z-20"
                   animate={{
-                    rotateY: [0, 360],
                     boxShadow: [
                       "0 0 15px rgba(59, 130, 246, 0.3)",
                       "0 0 25px rgba(59, 130, 246, 0.6)",
@@ -254,9 +254,9 @@ const ConsensusExplainer = () => {
                     ]
                   }}
                   transition={{
-                    duration: 20,
+                    duration: 3,
                     repeat: Infinity,
-                    ease: "linear"
+                    ease: "easeInOut"
                   }}
                 >
                   <svg width="80" height="80" viewBox="0 0 100 100" className="absolute">
@@ -699,4 +699,3 @@ const ConsensusExplainer = () => {
 };
 
 export default ConsensusExplainer;
-
