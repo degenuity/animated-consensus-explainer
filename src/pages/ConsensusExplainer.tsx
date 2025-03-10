@@ -418,7 +418,7 @@ const ConsensusExplainer = () => {
                   {[
                     { name: 'Individual signatures (σᵢ)', color: 'violet-400', description: 'From each validator' },
                     { name: 'Message hash H(M)', color: 'pink-400', description: 'Cryptographic digest of data' },
-                    { name: 'Aggregated signature (σₐₒₒ)', color: 'indigo-400', description: 'Compressed proof of consensus' }
+                    { name: 'Aggregated signature (σₐgg)', color: 'indigo-400', description: 'Compressed proof of consensus' }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
