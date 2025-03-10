@@ -71,7 +71,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 />
                 <span className="relative z-10 text-pink-300 font-bold tracking-wide text-lg flex justify-center">
                   <span className="inline-flex items-baseline">
-                    σ<sub className="text-sm">i</sub> = H(M)<sup>ski</sup>
+                    σ<sub className="text-sm">i</sub> = H(M)<sup>sk<sub>i</sub></sup>
                   </span>
                 </span>
               </motion.div>
