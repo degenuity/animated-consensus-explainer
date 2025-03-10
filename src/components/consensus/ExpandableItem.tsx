@@ -25,6 +25,9 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
   content, 
   index
 }) => {
+  // Extract the color name (e.g., "blue" from "blue-400")
+  const colorName = color.split('-')[0];
+  
   return (
     <motion.div
       initial={{ x: -20, opacity: 0 }}
@@ -42,9 +45,9 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
         animate={{ 
           scale: [1, 1.5, 1],
           boxShadow: [
-            `0 0 0px rgb(var(--${color.split('-')[0]}-rgb)/0)`,
-            `0 0 10px rgb(var(--${color.split('-')[0]}-rgb)/0.5)`,
-            `0 0 0px rgb(var(--${color.split('-')[0]}-rgb)/0)`
+            `0 0 0px rgba(${colorName === 'green' ? '34, 197, 94' : colorName === 'blue' ? '59, 130, 246' : colorName === 'purple' ? '168, 85, 247' : '59, 130, 246'}, 0)`,
+            `0 0 10px rgba(${colorName === 'green' ? '34, 197, 94' : colorName === 'blue' ? '59, 130, 246' : colorName === 'purple' ? '168, 85, 247' : '59, 130, 246'}, 0.5)`,
+            `0 0 0px rgba(${colorName === 'green' ? '34, 197, 94' : colorName === 'blue' ? '59, 130, 246' : colorName === 'purple' ? '168, 85, 247' : '59, 130, 246'}, 0)`
           ]
         }}
         transition={{ 
