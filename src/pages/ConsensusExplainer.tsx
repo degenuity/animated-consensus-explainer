@@ -421,7 +421,12 @@ const ConsensusExplainer = () => {
                 <div className="space-y-3">
                   {[
                     { name: 'Individual signatures (σᵢ)', color: 'violet-400', description: 'From each validator' },
-                    { name: 'Message hash H(M)', color: 'pink-400', description: 'Cryptographic digest of data' },
+                    { 
+                      name: 'Vote reduction (F)', 
+                      color: 'pink-400', 
+                      description: 'Global factor reducing vote frequency',
+                      expandable: true 
+                    },
                     { name: 'Aggregated signature (σₐgg)', color: 'indigo-400', description: 'Compressed proof of consensus' }
                   ].map((item, i) => (
                     <motion.div
@@ -452,10 +457,44 @@ const ConsensusExplainer = () => {
                           delay: i * 0.3
                         }}
                       />
-                      <div>
-                        <p className="text-sm font-medium text-white">{item.name}</p>
-                        <p className="text-xs text-slate-300 mt-0.5">{item.description}</p>
-                      </div>
+                      {item.expandable ? (
+                        <Collapsible
+                          open={isVoteReductionOpen}
+                          onOpenChange={setIsVoteReductionOpen}
+                          className="w-full"
+                        >
+                          <div className="flex items-center justify-between w-full">
+                            <div>
+                              <p className="text-sm font-medium text-white">{item.name}</p>
+                              <p className="text-xs text-slate-300 mt-0.5">{item.description}</p>
+                            </div>
+                            <CollapsibleTrigger asChild>
+                              <button className="p-1 rounded-full bg-slate-700/50 hover:bg-slate-700/80 transition-colors">
+                                {isVoteReductionOpen ? (
+                                  <ChevronUp className="h-4 w-4 text-pink-300" />
+                                ) : (
+                                  <ChevronDown className="h-4 w-4 text-pink-300" />
+                                )}
+                              </button>
+                            </CollapsibleTrigger>
+                          </div>
+                          <CollapsibleContent className="mt-3 ml-6 space-y-2 text-sm border-l-2 border-pink-500/30 pl-4">
+                            <div className="p-3 bg-slate-800/50 rounded-lg">
+                              <p className="text-slate-300">
+                                The global vote reduction factor (F) serves a critical function in the VRF-based subcommittee selection mechanism. Its primary purpose is to decrease the frequency of validator vote transmissions during consensus.
+                              </p>
+                              <p className="mt-2 text-slate-300">
+                                For instance, if F is set to 1/100 or 1/1000, validator vote frequency is reduced to 1% or 0.1% respectively. This reduction helps minimize network congestion and computational overhead while maintaining security.
+                              </p>
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
+                      ) : (
+                        <div>
+                          <p className="text-sm font-medium text-white">{item.name}</p>
+                          <p className="text-xs text-slate-300 mt-0.5">{item.description}</p>
+                        </div>
+                      )}
                     </motion.div>
                   ))}
                 </div>
@@ -670,47 +709,4 @@ const ConsensusExplainer = () => {
                   </motion.div>
                 )}
                 
-                <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
-                  <defs>
-                    <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="rgba(139, 92, 246, 0)" />
-                      <stop offset="50%" stopColor="rgba(139, 92, 246, 0.4)" />
-                      <stop offset="100%" stopColor="rgba(139, 92, 246, 0)" />
-                    </linearGradient>
-                  </defs>
-                  
-                  {activeSection === 1 && Array.from({ length: 6 }).map((_, i) => {
-                    const startX = 20 + Math.random() * 60;
-                    const startY = 10 + Math.random() * 80;
-                    
-                    return (
-                      <motion.path
-                        key={`path-${i}`}
-                        d={`M${startX},${startY} Q${(startX + 50) / 2},${startY - 20} 50,50`}
-                        stroke="url(#line-gradient)"
-                        strokeWidth="1"
-                        fill="transparent"
-                        animate={{
-                          opacity: [0, 0.6, 0],
-                          pathLength: [0, 1, 1]
-                        }}
-                        transition={{
-                          duration: 2 + Math.random(),
-                          repeat: Infinity,
-                          delay: i * 0.7,
-                          ease: "easeInOut"
-                        }}
-                      />
-                    );
-                  })}
-                </svg>
-              </div>
-            </div>
-          </Card>
-        </motion.div>
-      </motion.div>
-    </div>
-  );
-};
-
-export default ConsensusExplainer;
+                <svg className="absolute
