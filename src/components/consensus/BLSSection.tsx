@@ -66,11 +66,13 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 animate={{ 
                   boxShadow: activeSection === 1 && activeFormula === 0 ? 
                     ["0 0 0px rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.3)", "0 0 0px rgba(139, 92, 246, 0)"] : 
-                    "none",
-                  borderColor: activeFormula === 0 ? "rgba(139, 92, 246, 0.5)" : "transparent"
+                    "none"
                 }}
                 transition={{ duration: 2, repeat: activeFormula === 0 ? Infinity : 0 }}
-                style={{ borderWidth: activeFormula === 0 ? "1px" : "0px" }}
+                style={{ 
+                  borderWidth: "1px",
+                  borderColor: activeFormula === 0 ? "rgba(139, 92, 246, 0.5)" : "transparent"
+                }}
               >
                 <motion.span
                   className="absolute inset-0 bg-violet-400/10"
@@ -101,11 +103,13 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 animate={{ 
                   boxShadow: activeSection === 1 && activeFormula === 1 ? 
                     ["0 0 0px rgba(99, 102, 241, 0)", "0 0 20px rgba(99, 102, 241, 0.3)", "0 0 0px rgba(99, 102, 241, 0)"] : 
-                    "none",
-                  borderColor: activeFormula === 1 ? "rgba(99, 102, 241, 0.5)" : "transparent" 
+                    "none"
                 }}
                 transition={{ duration: 2, repeat: activeFormula === 1 ? Infinity : 0 }}
-                style={{ borderWidth: activeFormula === 1 ? "1px" : "0px" }}
+                style={{ 
+                  borderWidth: "1px",
+                  borderColor: activeFormula === 1 ? "rgba(99, 102, 241, 0.5)" : "transparent"
+                }}
               >
                 <motion.span
                   className="absolute inset-0 bg-indigo-400/10"
@@ -136,11 +140,13 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 animate={{ 
                   boxShadow: activeSection === 1 && activeFormula === 2 ? 
                     ["0 0 0px rgba(234, 56, 76, 0)", "0 0 20px rgba(234, 56, 76, 0.3)", "0 0 0px rgba(234, 56, 76, 0)"] : 
-                    "none",
-                  borderColor: activeFormula === 2 ? "rgba(234, 56, 76, 0.5)" : "transparent"
+                    "none"
                 }}
                 transition={{ duration: 2, repeat: activeFormula === 2 ? Infinity : 0 }}
-                style={{ borderWidth: activeFormula === 2 ? "1px" : "0px" }}
+                style={{ 
+                  borderWidth: "1px",
+                  borderColor: activeFormula === 2 ? "rgba(234, 56, 76, 0.5)" : "transparent"
+                }}
               >
                 <motion.span
                   className="absolute inset-0 bg-red-400/10"
