@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -141,7 +140,7 @@ const ConsensusExplainer = () => {
                 <div className="space-y-3">
                   {[
                     { name: 'Stake weight (Sᵢ)', color: 'blue-400', description: 'Validator importance based on staked tokens' },
-                    { name: 'Vote reduction (F)', color: 'green-400', description: 'Global factor reducing committee size' },
+                    { name: 'Vote reduction (F)', color: 'green-400', description: 'Global factor reducing committee size', expandable: true },
                     { 
                       name: 'Adjustment (Aᵢ)', 
                       color: 'purple-400', 
@@ -221,6 +220,38 @@ const ConsensusExplainer = () => {
                                   <span className="text-slate-300">Delegation bonus favoring well-reputed validators</span>
                                 </li>
                               </ul>
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
+                      ) : item.name === 'Vote reduction (F)' && item.expandable ? (
+                        <Collapsible
+                          open={isVoteReductionOpen}
+                          onOpenChange={setIsVoteReductionOpen}
+                          className="w-full"
+                        >
+                          <div className="flex items-center justify-between w-full">
+                            <div>
+                              <p className="text-sm font-medium text-white">{item.name}</p>
+                              <p className="text-xs text-slate-300 mt-0.5">{item.description}</p>
+                            </div>
+                            <CollapsibleTrigger asChild>
+                              <button className="p-1 rounded-full bg-slate-700/50 hover:bg-slate-700/80 transition-colors">
+                                {isVoteReductionOpen ? (
+                                  <ChevronUp className="h-4 w-4 text-green-300" />
+                                ) : (
+                                  <ChevronDown className="h-4 w-4 text-green-300" />
+                                )}
+                              </button>
+                            </CollapsibleTrigger>
+                          </div>
+                          <CollapsibleContent className="mt-3 ml-6 space-y-2 text-sm border-l-2 border-green-500/30 pl-4">
+                            <div className="p-3 bg-slate-800/50 rounded-lg">
+                              <p className="text-slate-300">
+                                The global vote reduction factor, denoted as F in the document, serves a critical function in the proposed VRF-based subcommittee selection mechanism for vote reduction. Its primary purpose is to decrease the frequency with which validators need to transmit votes during the consensus process. This reduction in voting frequency directly contributes to minimizing network congestion and reducing the computational overhead involved in signature verification.
+                              </p>
+                              <p className="mt-2 text-slate-300">
+                                In practical terms, F acts as a scaling factor. For instance, if F is set to 1/100 or 1/1000, it means that the frequency of votes transmitted by each validator is reduced to 1% or 0.1% of what it would normally be. This significant reduction ensures that the blockchain's consensus remains efficient and can operate smoothly even as the number of validators increases, without compromising on decentralization or security. Thus, F plays a key role in enhancing the scalability of the consensus mechanism.
+                              </p>
                             </div>
                           </CollapsibleContent>
                         </Collapsible>
@@ -484,10 +515,10 @@ const ConsensusExplainer = () => {
                           <CollapsibleContent className="mt-3 ml-6 space-y-2 text-sm border-l-2 border-pink-500/30 pl-4">
                             <div className="p-3 bg-slate-800/50 rounded-lg">
                               <p className="text-slate-300">
-                                The global vote reduction factor (F) serves a critical function in the VRF-based subcommittee selection mechanism. Its primary purpose is to decrease the frequency of validator vote transmissions during consensus.
+                                The global vote reduction factor, denoted as F in the document, serves a critical function in the proposed VRF-based subcommittee selection mechanism for vote reduction. Its primary purpose is to decrease the frequency with which validators need to transmit votes during the consensus process. This reduction in voting frequency directly contributes to minimizing network congestion and reducing the computational overhead involved in signature verification.
                               </p>
                               <p className="mt-2 text-slate-300">
-                                For instance, if F is set to 1/100 or 1/1000, validator vote frequency is reduced to 1% or 0.1% respectively. This reduction helps minimize network congestion and computational overhead while maintaining security.
+                                In practical terms, F acts as a scaling factor. For instance, if F is set to 1/100 or 1/1000, it means that the frequency of votes transmitted by each validator is reduced to 1% or 0.1% of what it would normally be. This significant reduction ensures that the blockchain's consensus remains efficient and can operate smoothly even as the number of validators increases, without compromising on decentralization or security. Thus, F plays a key role in enhancing the scalability of the consensus mechanism.
                               </p>
                             </div>
                           </CollapsibleContent>
