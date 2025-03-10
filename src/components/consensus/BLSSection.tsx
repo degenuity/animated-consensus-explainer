@@ -78,12 +78,12 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 <motion.span
                   className="absolute inset-0 bg-violet-400/10"
                   animate={{ 
-                    width: activeSection === 1 && activeFormula === 0 ? ["0%", "100%", "0%"] : "0%",
+                    width: ["0%", "100%", "0%"],
                     left: ["0%", "0%", "100%"] 
                   }}
                   transition={{ 
                     duration: 3,
-                    repeat: activeFormula === 0 ? Infinity : 0,
+                    repeat: Infinity,
                     ease: "easeInOut"
                   }}
                 />
