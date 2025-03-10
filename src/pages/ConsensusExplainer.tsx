@@ -155,66 +155,66 @@ const ConsensusExplainer = () => {
               </div>
               
               <div className="relative h-72 flex items-center justify-center perspective">
-                {/* 3D Network of Validators */}
+                {/* Large Network of Validators */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  {Array.from({ length: 12 }).map((_, i) => {
-                    const angle = (i / 12) * Math.PI * 2;
-                    const radius = 110;
+                  {Array.from({ length: 150 }).map((_, i) => {
+                    const radius = 140 + Math.random() * 40;
+                    const angle = (i / 150) * Math.PI * 2;
                     const x = Math.cos(angle) * radius;
                     const y = Math.sin(angle) * radius;
-                    const size = Math.random() * 3 + 2;
-                    const delay = i * 0.15;
+                    const isSelected = i % 5 === 0;  // Example selection criteria
                     
                     return (
                       <React.Fragment key={`vrf-node-${i}`}>
                         <motion.div
-                          className={`absolute rounded-full ${i % 3 === 0 ? 'bg-blue-400' : i % 3 === 1 ? 'bg-green-400' : 'bg-purple-400'}`}
+                          className={`absolute rounded-full ${
+                            isSelected ? 'bg-blue-400' : 'bg-slate-400'
+                          }`}
                           style={{ 
-                            width: size,
-                            height: size,
+                            width: 2 + Math.random() * 2,
+                            height: 2 + Math.random() * 2,
                             x,
                             y,
                             zIndex: 10
                           }}
                           animate={{
-                            scale: [1, 1.3, 1],
-                            opacity: activeSection === 0 ? [0.4, 1, 0.4] : [0.2, 0.5, 0.2],
-                            boxShadow: activeSection === 0 ? 
-                              [`0 0 0px rgb(var(--${i % 3 === 0 ? 'blue' : i % 3 === 1 ? 'green' : 'purple'}-rgb)/0)`,
-                               `0 0 10px rgb(var(--${i % 3 === 0 ? 'blue' : i % 3 === 1 ? 'green' : 'purple'}-rgb)/0.5)`,
-                               `0 0 0px rgb(var(--${i % 3 === 0 ? 'blue' : i % 3 === 1 ? 'green' : 'purple'}-rgb)/0)`] : 
-                              "none"
+                            scale: isSelected ? [1, 1.8, 1] : [1, 1.2, 1],
+                            opacity: isSelected ? [0.4, 1, 0.4] : [0.2, 0.4, 0.2],
+                            boxShadow: isSelected ? 
+                              ['0 0 0px rgba(59, 130, 246, 0)', 
+                               '0 0 10px rgba(59, 130, 246, 0.5)', 
+                               '0 0 0px rgba(59, 130, 246, 0)'] : 
+                              'none'
                           }}
                           transition={{
                             duration: 3,
                             repeat: Infinity,
-                            delay
+                            delay: i * 0.01
                           }}
                         />
                         
-                        {/* Connection lines to VRF */}
-                        <motion.div
-                          className="absolute bg-gradient-to-r from-blue-500/5 to-blue-500/20"
-                          style={{ 
-                            width: Math.sqrt(x*x + y*y),
-                            height: 1,
-                            left: 0,
-                            top: 0,
-                            transformOrigin: "0 0",
-                            transform: `rotate(${Math.atan2(y, x)}rad) translateZ(0)`
-                          }}
-                          animate={{
-                            opacity: activeSection === 0 ? 
-                              [0.1, 0.3, 0.1] : 
-                              [0.05, 0.15, 0.05],
-                            height: [1, 1.5, 1]
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            delay: delay + 0.5
-                          }}
-                        />
+                        {isSelected && (
+                          <motion.div
+                            className="absolute bg-gradient-to-r from-blue-500/5 to-blue-500/20"
+                            style={{ 
+                              width: Math.sqrt(x*x + y*y),
+                              height: 1,
+                              left: 0,
+                              top: 0,
+                              transformOrigin: "0 0",
+                              transform: `rotate(${Math.atan2(y, x)}rad) translateZ(0)`
+                            }}
+                            animate={{
+                              opacity: [0.1, 0.3, 0.1],
+                              height: [1, 1.5, 1]
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              delay: i * 0.01
+                            }}
+                          />
+                        )}
                       </React.Fragment>
                     );
                   })}
@@ -276,40 +276,7 @@ const ConsensusExplainer = () => {
                   </motion.div>
                 </motion.div>
                 
-                {/* Selection effect */}
-                {activeSection === 0 && (
-                  <motion.div
-                    className="absolute inset-0 pointer-events-none"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <motion.div
-                        key={`selection-pulse-${i}`}
-                        className="absolute left-1/2 top-1/2 rounded-full border border-blue-400/30"
-                        style={{
-                          width: 10 + i * 10,
-                          height: 10 + i * 10,
-                          marginLeft: -5 - i * 5,
-                          marginTop: -5 - i * 5
-                        }}
-                        animate={{
-                          scale: [1, 2, 1],
-                          opacity: [0, 0.5, 0]
-                        }}
-                        transition={{
-                          duration: 3,
-                          repeat: Infinity,
-                          delay: i * 0.3,
-                          ease: "easeOut"
-                        }}
-                      />
-                    ))}
-                  </motion.div>
-                )}
-                
-                {/* Status animation */}
+                {/* Selection status animation */}
                 <motion.div 
                   className="absolute bottom-0 right-0 text-xs text-blue-300 bg-blue-500/10 rounded-lg px-3 py-1 border border-blue-500/20"
                   animate={{ 
@@ -327,7 +294,7 @@ const ConsensusExplainer = () => {
                     animate={{ opacity: [1, 0.5, 1] }}
                     transition={{ duration: 0.8, repeat: Infinity }}
                   />
-                  Selecting validators...
+                  Selected 30 validators from network of 150
                 </motion.div>
               </div>
             </div>
