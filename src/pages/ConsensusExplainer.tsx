@@ -709,4 +709,14 @@ const ConsensusExplainer = () => {
                   </motion.div>
                 )}
                 
-                <svg className="absolute
+                <svg className="absolute" />
+              </div>
+            </div>
+          </Card>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+};
+
+export default ConsensusExplainer;
