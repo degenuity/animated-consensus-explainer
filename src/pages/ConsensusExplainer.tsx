@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
 const ConsensusExplainer = () => {
   const [activeSection, setActiveSection] = useState(0);
+  const [selectedNodes, setSelectedNodes] = useState<number[]>([]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -11,6 +13,28 @@ const ConsensusExplainer = () => {
     }, 8000);
     return () => clearInterval(timer);
   }, []);
+
+  // Effect to rotate the selected nodes every 4 seconds when VRF section is active
+  useEffect(() => {
+    if (activeSection !== 0) return;
+    
+    // Select random nodes
+    const selectRandomNodes = () => {
+      const allNodes = Array.from({ length: 150 }, (_, i) => i);
+      const shuffled = [...allNodes].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, 30); // Select 30 random nodes
+    };
+
+    // Initial selection
+    setSelectedNodes(selectRandomNodes());
+    
+    // Update selection periodically
+    const selectionTimer = setInterval(() => {
+      setSelectedNodes(selectRandomNodes());
+    }, 4000);
+    
+    return () => clearInterval(selectionTimer);
+  }, [activeSection]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white py-12 px-4 sm:px-6 lg:px-8">
@@ -162,7 +186,7 @@ const ConsensusExplainer = () => {
                     const angle = (i / 150) * Math.PI * 2;
                     const x = Math.cos(angle) * radius;
                     const y = Math.sin(angle) * radius;
-                    const isSelected = i % 5 === 0;  // Example selection criteria
+                    const isSelected = selectedNodes.includes(i);
                     
                     return (
                       <React.Fragment key={`vrf-node-${i}`}>
@@ -173,11 +197,14 @@ const ConsensusExplainer = () => {
                           style={{ 
                             width: 2 + Math.random() * 2,
                             height: 2 + Math.random() * 2,
-                            x,
-                            y,
-                            zIndex: 10
                           }}
                           animate={{
+                            x: isSelected ? 
+                              [x, 0, x] : // Move selected nodes to center and back
+                              x,
+                            y: isSelected ? 
+                              [y, 0, y] : // Move selected nodes to center and back
+                              y,
                             scale: isSelected ? [1, 1.8, 1] : [1, 1.2, 1],
                             opacity: isSelected ? [0.4, 1, 0.4] : [0.2, 0.4, 0.2],
                             boxShadow: isSelected ? 
@@ -187,9 +214,11 @@ const ConsensusExplainer = () => {
                               'none'
                           }}
                           transition={{
-                            duration: 3,
+                            duration: isSelected ? 4 : 3,
                             repeat: Infinity,
-                            delay: i * 0.01
+                            delay: i * 0.01,
+                            times: isSelected ? [0, 0.5, 1] : undefined,
+                            ease: isSelected ? "easeInOut" : "linear"
                           }}
                         />
                         
@@ -205,13 +234,14 @@ const ConsensusExplainer = () => {
                               transform: `rotate(${Math.atan2(y, x)}rad) translateZ(0)`
                             }}
                             animate={{
-                              opacity: [0.1, 0.3, 0.1],
-                              height: [1, 1.5, 1]
+                              opacity: [0.1, 0.3, 0.1, 0],
+                              height: [1, 1.5, 1, 0]
                             }}
                             transition={{
-                              duration: 2,
+                              duration: 4,
                               repeat: Infinity,
-                              delay: i * 0.01
+                              delay: i * 0.01,
+                              times: [0, 0.3, 0.5, 1]
                             }}
                           />
                         )}
@@ -284,7 +314,7 @@ const ConsensusExplainer = () => {
                     y: [10, 0, 0, -10]
                   }}
                   transition={{ 
-                    duration: 3,
+                    duration: 4,
                     repeat: Infinity, 
                     times: [0, 0.1, 0.9, 1]
                   }}
@@ -294,7 +324,7 @@ const ConsensusExplainer = () => {
                     animate={{ opacity: [1, 0.5, 1] }}
                     transition={{ duration: 0.8, repeat: Infinity }}
                   />
-                  Selected 30 validators from network of 150
+                  Selected {selectedNodes.length} validators from network of 150
                 </motion.div>
               </div>
             </div>
