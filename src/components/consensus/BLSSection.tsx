@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -125,9 +126,19 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                   }}
                 />
                 <span className="relative z-10 text-indigo-400 font-bold tracking-wide text-lg flex justify-center">
-                  <span className="inline-flex items-baseline">
+                  <motion.span 
+                    className="inline-flex items-baseline"
+                    animate={{ 
+                      scale: activeSection === 1 && activeFormula === 1 ? [1, 1.05, 1] : 1
+                    }}
+                    transition={{ 
+                      duration: 1.5, 
+                      repeat: activeFormula === 1 ? Infinity : 0,
+                      ease: "easeInOut"
+                    }}
+                  >
                     σ<sub className="text-sm">agg</sub> = ∏ σ<sub className="text-sm">i</sub>
-                  </span>
+                  </motion.span>
                 </span>
               </motion.div>
               
@@ -162,9 +173,22 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                   }}
                 />
                 <span className="relative z-10 text-red-400 font-bold tracking-wide text-lg flex justify-center">
-                  <span className="inline-flex items-baseline">
+                  <motion.span 
+                    className="inline-flex items-baseline"
+                    animate={{ 
+                      scale: activeSection === 1 && activeFormula === 2 ? [1, 1.05, 1] : 1,
+                      textShadow: activeSection === 1 && activeFormula === 2 ? 
+                        ["0 0 0px rgba(248, 113, 113, 0)", "0 0 5px rgba(248, 113, 113, 0.5)", "0 0 0px rgba(248, 113, 113, 0)"] : 
+                        "none"
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: activeFormula === 2 ? Infinity : 0,
+                      ease: "easeInOut"
+                    }}
+                  >
                     𝑒(σ<sub className="text-sm">agg</sub>,g)=𝑒(H(M),∑pk<sub className="text-sm">i</sub>)
-                  </span>
+                  </motion.span>
                 </span>
               </motion.div>
             </motion.div>
