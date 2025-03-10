@@ -580,13 +580,26 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           
           <div className="absolute top-[40%] left-2/3 transform -translate-x-1/2 -translate-y-1/2">
             <motion.div
-              className="bg-slate-800 border border-red-500 p-2 rounded-lg shadow-md flex items-center justify-center"
+              className="bg-slate-800 border border-red-500 p-2 rounded-lg shadow-md flex items-center justify-center overflow-hidden relative"
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
+              <motion.span
+                className="absolute inset-0 bg-red-400/10"
+                initial={{ width: "0%" }}
+                animate={{ 
+                  width: activeSection === 1 && activeFormula === 2 ? ["0%", "100%", "0%"] : "0%", 
+                  left: ["0%", "0%", "100%"] 
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
               <motion.p
-                className="text-red-400 font-mono text-sm font-bold"
+                className="text-red-400 font-mono text-sm font-bold relative z-10"
                 animate={{ scale: [0.95, 1.05, 0.95] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
@@ -604,13 +617,27 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             </motion.div>
             
             <motion.div
-              className="bg-slate-800 border border-red-500 p-2 rounded-lg shadow-md flex items-center justify-center"
+              className="bg-slate-800 border border-red-500 p-2 rounded-lg shadow-md flex items-center justify-center overflow-hidden relative"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
+              <motion.span
+                className="absolute inset-0 bg-red-400/10"
+                initial={{ width: "0%" }}
+                animate={{ 
+                  width: activeSection === 1 && activeFormula === 2 ? ["0%", "100%", "0%"] : "0%", 
+                  left: ["0%", "0%", "100%"] 
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.5
+                }}
+              />
               <motion.p
-                className="text-red-400 font-mono text-sm font-bold"
+                className="text-red-400 font-mono text-sm font-bold relative z-10"
                 animate={{ scale: [0.95, 1.05, 0.95] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
