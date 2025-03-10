@@ -343,7 +343,7 @@ const ConsensusExplainer = () => {
                   transition={{ delay: 0.3 }}
                   className="p-4 bg-slate-700/50 rounded-lg border border-violet-500/20"
                 >
-                  <motion.div
+                  <motion.div 
                     className="text-sm font-mono bg-slate-800/80 p-3 rounded mb-3 overflow-hidden relative"
                     animate={{ 
                       boxShadow: activeSection === 1 ? 
@@ -366,7 +366,9 @@ const ConsensusExplainer = () => {
                       }}
                     />
                     <span className="relative z-10 text-pink-300 font-bold tracking-wide text-lg flex justify-center">
-                      σ<sub>i</sub> = H(M)<sup>sk<sub>i</sub></sup>
+                      <span className="inline-flex items-baseline">
+                        σ<sub className="text-sm">i</sub> = H(M)<sup>ski</sup>
+                      </span>
                     </span>
                   </motion.div>
                   
@@ -394,7 +396,9 @@ const ConsensusExplainer = () => {
                       }}
                     />
                     <span className="relative z-10 text-pink-300 font-bold tracking-wide text-lg flex justify-center">
-                      σ<sub>agg</sub> = ∏ σ<sub>i</sub>
+                      <span className="inline-flex items-baseline">
+                        σ<sub className="text-sm">agg</sub> = ∏ σ<sub className="text-sm">i</sub>
+                      </span>
                     </span>
                   </motion.div>
                 </motion.div>
