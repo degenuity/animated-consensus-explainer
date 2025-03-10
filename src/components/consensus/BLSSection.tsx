@@ -40,6 +40,13 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               transition={{ delay: 0.3 }}
               className="p-4 bg-slate-700/50 rounded-lg border border-violet-500/20"
             >
+              <p className="text-sm text-slate-300 mb-3">
+                Each validator in a subcommittee generates a BLS signature 
+                <span className="inline-flex items-baseline mx-1">σ<sub className="text-xs">i</sub></span>
+                on the vote message 
+                <span className="mx-1">M</span>:
+              </p>
+              
               <motion.div 
                 className="text-sm font-mono bg-slate-800/80 p-3 rounded mb-3 overflow-hidden relative"
                 animate={{ 
