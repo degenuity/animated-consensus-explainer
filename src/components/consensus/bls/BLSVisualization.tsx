@@ -5,7 +5,7 @@ import {
   BLSStageTwo, 
   BLSStageThree, 
   BLSIdleAnimation 
-} from './BLSVisualizationStages';
+} from './stages';
 
 interface BLSVisualizationProps {
   activeSection: number;
