@@ -13,21 +13,17 @@ const ConsensusExplainer = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Effect to rotate the selected nodes every 4 seconds when VRF section is active
   useEffect(() => {
     if (activeSection !== 0) return;
     
-    // Select random nodes
     const selectRandomNodes = () => {
       const allNodes = Array.from({ length: 150 }, (_, i) => i);
       const shuffled = [...allNodes].sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, 30); // Select 30 random nodes
+      return shuffled.slice(0, 30);
     };
 
-    // Initial selection
     setSelectedNodes(selectRandomNodes());
     
-    // Update selection periodically
     const selectionTimer = setInterval(() => {
       setSelectedNodes(selectRandomNodes());
     }, 4000);
@@ -47,7 +43,6 @@ const ConsensusExplainer = () => {
           Scaling Consensus
         </h1>
 
-        {/* VRF Section */}
         <motion.div
           animate={{
             scale: activeSection === 0 ? 1 : 0.95,
@@ -57,7 +52,6 @@ const ConsensusExplainer = () => {
           className="mb-10"
         >
           <Card className="p-6 mb-8 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative">
-            {/* Background particle effect */}
             <div className="absolute inset-0 overflow-hidden">
               {Array.from({ length: 20 }).map((_, i) => (
                 <motion.div
@@ -116,7 +110,6 @@ const ConsensusExplainer = () => {
                       repeat: Infinity
                     }}
                   >
-                    {/* Animated highlighting for the formula */}
                     <motion.span
                       className="absolute inset-0 bg-blue-400/10"
                       initial={{ width: "0%" }}
@@ -180,78 +173,74 @@ const ConsensusExplainer = () => {
               </div>
               
               <div className="relative h-72 flex items-center justify-center perspective">
-                {/* Large Network of Validators */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  {Array.from({ length: 150 }).map((_, i) => {
-                    const radius = 140 + Math.random() * 40;
-                    const angle = (i / 150) * Math.PI * 2;
-                    const x = Math.cos(angle) * radius;
-                    const y = Math.sin(angle) * radius;
-                    const isSelected = selectedNodes.includes(i);
-                    
-                    return (
-                      <React.Fragment key={`vrf-node-${i}`}>
+                {Array.from({ length: 150 }).map((_, i) => {
+                  const radius = 140 + Math.random() * 40;
+                  const angle = (i / 150) * Math.PI * 2;
+                  const x = Math.cos(angle) * radius;
+                  const y = Math.sin(angle) * radius;
+                  const isSelected = selectedNodes.includes(i);
+                  
+                  return (
+                    <React.Fragment key={`vrf-node-${i}`}>
+                      <motion.div
+                        className={`absolute rounded-full ${
+                          isSelected ? 'bg-blue-400' : 'bg-slate-400'
+                        }`}
+                        style={{ 
+                          width: 2 + Math.random() * 2,
+                          height: 2 + Math.random() * 2,
+                        }}
+                        animate={{
+                          x: isSelected ? 
+                            [x, 0, x] : 
+                            x,
+                          y: isSelected ? 
+                            [y, 0, y] : 
+                            y,
+                          scale: isSelected ? [1, 1.8, 1] : [1, 1.2, 1],
+                          opacity: isSelected ? [0.4, 1, 0.4] : [0.2, 0.4, 0.2],
+                          boxShadow: isSelected ? 
+                            ['0 0 0px rgba(59, 130, 246, 0)', 
+                             '0 0 10px rgba(59, 130, 246, 0.5)', 
+                             '0 0 0px rgba(59, 130, 246, 0)'] : 
+                            'none'
+                        }}
+                        transition={{
+                          duration: isSelected ? 4 : 3,
+                          repeat: Infinity,
+                          delay: i * 0.01,
+                          times: isSelected ? [0, 0.5, 1] : undefined,
+                          ease: isSelected ? "easeInOut" : "linear"
+                        }}
+                      />
+                      
+                      {isSelected && (
                         <motion.div
-                          className={`absolute rounded-full ${
-                            isSelected ? 'bg-blue-400' : 'bg-slate-400'
-                          }`}
+                          className="absolute bg-gradient-to-r from-blue-500/5 to-blue-500/20"
                           style={{ 
-                            width: 2 + Math.random() * 2,
-                            height: 2 + Math.random() * 2,
+                            width: Math.sqrt(x*x + y*y),
+                            height: 1,
+                            left: 0,
+                            top: 0,
+                            transformOrigin: "0 0",
+                            transform: `rotate(${Math.atan2(y, x)}rad) translateZ(0)`
                           }}
                           animate={{
-                            x: isSelected ? 
-                              [x, 0, x] : // Move selected nodes to center and back
-                              x,
-                            y: isSelected ? 
-                              [y, 0, y] : // Move selected nodes to center and back
-                              y,
-                            scale: isSelected ? [1, 1.8, 1] : [1, 1.2, 1],
-                            opacity: isSelected ? [0.4, 1, 0.4] : [0.2, 0.4, 0.2],
-                            boxShadow: isSelected ? 
-                              ['0 0 0px rgba(59, 130, 246, 0)', 
-                               '0 0 10px rgba(59, 130, 246, 0.5)', 
-                               '0 0 0px rgba(59, 130, 246, 0)'] : 
-                              'none'
+                            opacity: [0.1, 0.3, 0.1, 0],
+                            height: [1, 1.5, 1, 0]
                           }}
                           transition={{
-                            duration: isSelected ? 4 : 3,
+                            duration: 4,
                             repeat: Infinity,
                             delay: i * 0.01,
-                            times: isSelected ? [0, 0.5, 1] : undefined,
-                            ease: isSelected ? "easeInOut" : "linear"
+                            times: [0, 0.3, 0.5, 1]
                           }}
                         />
-                        
-                        {isSelected && (
-                          <motion.div
-                            className="absolute bg-gradient-to-r from-blue-500/5 to-blue-500/20"
-                            style={{ 
-                              width: Math.sqrt(x*x + y*y),
-                              height: 1,
-                              left: 0,
-                              top: 0,
-                              transformOrigin: "0 0",
-                              transform: `rotate(${Math.atan2(y, x)}rad) translateZ(0)`
-                            }}
-                            animate={{
-                              opacity: [0.1, 0.3, 0.1, 0],
-                              height: [1, 1.5, 1, 0]
-                            }}
-                            transition={{
-                              duration: 4,
-                              repeat: Infinity,
-                              delay: i * 0.01,
-                              times: [0, 0.3, 0.5, 1]
-                            }}
-                          />
-                        )}
-                      </React.Fragment>
-                    );
-                  })}
-                </div>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
                 
-                {/* VRF Core */}
                 <motion.div
                   className="relative w-32 h-32 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur z-20"
                   animate={{
@@ -268,7 +257,6 @@ const ConsensusExplainer = () => {
                     ease: "linear"
                   }}
                 >
-                  {/* Rotating hexagon shape */}
                   <svg width="80" height="80" viewBox="0 0 100 100" className="absolute">
                     <motion.polygon
                       points="50,10 90,30 90,70 50,90 10,70 10,30"
@@ -307,7 +295,6 @@ const ConsensusExplainer = () => {
                   </motion.div>
                 </motion.div>
                 
-                {/* Selection status animation */}
                 <motion.div 
                   className="absolute bottom-0 right-0 text-xs text-blue-300 bg-blue-500/10 rounded-lg px-3 py-1 border border-blue-500/20"
                   animate={{ 
@@ -332,7 +319,6 @@ const ConsensusExplainer = () => {
           </Card>
         </motion.div>
 
-        {/* BLS Section */}
         <motion.div
           animate={{
             scale: activeSection === 1 ? 1 : 0.95,
@@ -341,7 +327,6 @@ const ConsensusExplainer = () => {
           transition={{ duration: 0.5 }}
         >
           <Card className="p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative">
-            {/* Background gradient effect */}
             <div className="absolute inset-0 bg-gradient-to-br from-violet-900/10 to-indigo-900/10" />
             
             <h2 className="text-2xl font-semibold mb-4 text-violet-400 relative z-10">
@@ -365,7 +350,6 @@ const ConsensusExplainer = () => {
                     }}
                     transition={{ duration: 2, repeat: Infinity }}
                   >
-                    {/* Animated highlighting for the formula */}
                     <motion.span
                       className="absolute inset-0 bg-violet-400/10"
                       initial={{ width: "0%" }}
@@ -393,7 +377,6 @@ const ConsensusExplainer = () => {
                     }}
                     transition={{ duration: 2, repeat: Infinity, delay: 1 }}
                   >
-                    {/* Animated highlighting for the formula */}
                     <motion.span
                       className="absolute inset-0 bg-violet-400/10"
                       initial={{ width: "0%" }}
@@ -458,7 +441,6 @@ const ConsensusExplainer = () => {
               </div>
               
               <div className="relative h-72 flex items-center justify-center">
-                {/* Individual signatures flowing toward aggregation */}
                 {activeSection === 1 && (
                   <div className="absolute inset-0">
                     {Array.from({ length: 15 }).map((_, i) => {
@@ -496,7 +478,6 @@ const ConsensusExplainer = () => {
                   </div>
                 )}
                 
-                {/* BLS Aggregation visualization */}
                 <motion.div 
                   className="absolute w-28 h-28 bg-gradient-to-tr from-violet-500/20 to-indigo-500/20 backdrop-blur-sm flex items-center justify-center z-10"
                   style={{
@@ -521,7 +502,6 @@ const ConsensusExplainer = () => {
                     ease: "easeInOut"
                   }}
                 >
-                  {/* Rotating geometric pattern */}
                   <motion.div 
                     className="absolute inset-2 rounded-full overflow-hidden opacity-40"
                     animate={{
@@ -594,7 +574,6 @@ const ConsensusExplainer = () => {
                   </motion.div>
                 </motion.div>
                 
-                {/* Aggregation pulse effect */}
                 {activeSection === 1 && (
                   <motion.div
                     className="absolute inset-0 pointer-events-none"
@@ -628,7 +607,6 @@ const ConsensusExplainer = () => {
                   </motion.div>
                 )}
                 
-                {/* Verification beam */}
                 {activeSection === 1 && (
                   <motion.div
                     className="absolute top-1/2 right-0 h-1 bg-gradient-to-r from-violet-500/0 via-violet-500/50 to-violet-500/0"
@@ -649,28 +627,28 @@ const ConsensusExplainer = () => {
                   />
                 )}
                 
-                {/* Status message */}
-                <motion.div 
-                  className="absolute bottom-0 left-0 text-xs text-violet-300 bg-violet-500/10 rounded-lg px-3 py-1 border border-violet-500/20"
-                  animate={{ 
-                    opacity: [0, 1, 1, 0],
-                    y: [10, 0, 0, -10]
-                  }}
-                  transition={{ 
-                    duration: 3, 
-                    repeat: Infinity,
-                    times: [0, 0.1, 0.9, 1]
-                  }}
-                >
-                  <motion.span 
-                    className="inline-block w-2 h-2 rounded-full bg-violet-400 mr-1.5"
-                    animate={{ opacity: [1, 0.5, 1] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                  />
-                  {activeSection === 1 ? "Aggregating signatures..." : "Ready for aggregation"}
-                </motion.div>
+                {activeSection === 1 && (
+                  <motion.div 
+                    className="absolute bottom-0 left-0 text-xs text-violet-300 bg-violet-500/10 rounded-lg px-3 py-1 border border-violet-500/20"
+                    animate={{ 
+                      opacity: [0, 1, 1, 0],
+                      y: [10, 0, 0, -10]
+                    }}
+                    transition={{ 
+                      duration: 3, 
+                      repeat: Infinity,
+                      times: [0, 0.1, 0.9, 1]
+                    }}
+                  >
+                    <motion.span 
+                      className="inline-block w-2 h-2 rounded-full bg-violet-400 mr-1.5"
+                      animate={{ opacity: [1, 0.5, 1] }}
+                      transition={{ duration: 0.8, repeat: Infinity }}
+                    />
+                    {activeSection === 1 ? "Aggregating signatures..." : "Ready for aggregation"}
+                  </motion.div>
+                )}
                 
-                {/* Connection network between signatures */}
                 <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
                   <defs>
                     <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
