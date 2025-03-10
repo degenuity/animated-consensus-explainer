@@ -36,8 +36,8 @@ export const BLSFormulaAnimation: React.FC<BLSFormulaAnimationProps> = ({
         borderColor: isActive ? `rgba(${shadowColor[0]}, ${shadowColor[1]}, ${shadowColor[2]}, 0.5)` : "transparent"
       }}
     >
-      {/* The sliding background effect with inline styles instead of Tailwind classes */}
-      <motion.span
+      {/* The sliding background effect */}
+      <motion.div
         className="absolute inset-0"
         initial={{ width: "0%", left: "0%" }}
         animate={{ 
@@ -48,11 +48,11 @@ export const BLSFormulaAnimation: React.FC<BLSFormulaAnimationProps> = ({
           duration: 3,
           repeat: Infinity,
           ease: "easeInOut",
-          paused: !isActive
+          repeatDelay: 0
         }}
         style={{
-          backgroundColor: `var(--color-${color})`,
-          opacity: 0.1
+          backgroundColor: isActive ? `var(--color-${color})` : `var(--color-${color})`,
+          opacity: isActive ? 0.15 : 0.05
         }}
       />
       <span className={`relative z-10 text-${color} font-bold tracking-wide text-lg flex justify-center`}>

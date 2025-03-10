@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from "framer-motion";
 import { User, Server, Check, ArrowRight } from "lucide-react";
@@ -139,17 +138,15 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     setShowSuccessEffect(false);
     
     if (activeSection === 1 && activeFormula === 1) {
-      // First timer for receiving the message - extended delay for better visibility
       const receiveTimer = setTimeout(() => {
         setLeaderReceived(true);
         
-        // Second timer for the success effect after receiving
         const successTimer = setTimeout(() => {
           setShowSuccessEffect(true);
-        }, 800); // Increased delay for more noticeable transition
+        }, 800);
         
         return () => clearTimeout(successTimer);
-      }, 2000); // Shortened to show the reception earlier
+      }, 2000);
       
       return () => clearTimeout(receiveTimer);
     }
