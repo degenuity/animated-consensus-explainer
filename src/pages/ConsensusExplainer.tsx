@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -135,7 +136,7 @@ const ConsensusExplainer = () => {
                   {[
                     { name: 'Stake weight (Sᵢ)', color: 'blue-400', description: 'Validator importance based on staked tokens' },
                     { name: 'Vote reduction (F)', color: 'green-400', description: 'Global factor reducing committee size' },
-                    { name: 'Adjustment (A₍ᵢ₎)', color: 'purple-400', description: 'Performance-based multiplier' }
+                    { name: 'Adjustment (Aᵢ)', color: 'purple-400', description: 'Performance-based multiplier' }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
