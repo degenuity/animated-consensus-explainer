@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, User, Server, Check, ArrowRight } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ExpandableItem } from './ExpandableItem';
 
@@ -216,18 +216,20 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           exit={{ opacity: 0 }}
           className="absolute inset-0"
         >
-          {/* Validators generating signatures */}
-          {Array.from({ length: 9 }).map((_, i) => {
-            const angle = (i * 40) % 360;
-            const radius = 80 + (i % 3) * 15;
+          {/* Validators (small circles representing validators) */}
+          {Array.from({ length: 12 }).map((_, i) => {
+            const angle = (i * 30) % 360;
+            const radius = 100;
             const x = 50 + Math.cos(angle * Math.PI / 180) * radius / 200;
             const y = 50 + Math.sin(angle * Math.PI / 180) * radius / 200;
             
             return (
               <motion.div
                 key={`validator-${i}`}
-                className="absolute w-6 h-6 rounded-full flex items-center justify-center bg-slate-800/80 border border-purple-500/30"
+                className="absolute rounded-full bg-slate-800 border border-purple-500 flex items-center justify-center"
                 style={{
+                  width: 24,
+                  height: 24,
                   left: `${x * 100}%`,
                   top: `${y * 100}%`,
                   transform: 'translate(-50%, -50%)',
@@ -236,25 +238,21 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: i * 0.1, duration: 0.3 }}
               >
-                <motion.div
-                  className="w-1.5 h-1.5 rounded-full bg-purple-400"
-                  animate={{ scale: [1, 1.5, 1], opacity: [0.7, 1, 0.7] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                />
+                <User size={12} className="text-purple-400" />
                 
                 {/* Signature animation */}
                 <motion.div
-                  className="absolute w-3 h-3 rounded-full bg-purple-400/30"
-                  initial={{ scale: 0 }}
+                  className="absolute w-4 h-4 rounded-full bg-purple-400"
+                  initial={{ scale: 0, opacity: 0 }}
                   animate={{
-                    scale: [0, 1.5, 0],
+                    scale: [0, 1, 0],
                     opacity: [0, 0.8, 0]
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 1.5,
                     repeat: Infinity,
-                    delay: 0.5 + i * 0.2,
-                    repeatDelay: 1
+                    delay: i * 0.2 % 1,
+                    repeatDelay: 0.5
                   }}
                 />
               </motion.div>
@@ -263,7 +261,7 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           
           {/* Message being signed (M) */}
           <motion.div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-xl bg-slate-800/60 border border-purple-500/20 flex items-center justify-center"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-xl bg-slate-800 border border-purple-500 flex items-center justify-center"
             animate={{
               boxShadow: ['0 0 0px rgba(139, 92, 246, 0)', '0 0 15px rgba(139, 92, 246, 0.3)', '0 0 0px rgba(139, 92, 246, 0)']
             }}
@@ -280,13 +278,52 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             </motion.div>
           </motion.div>
           
-          <div className="absolute bottom-2 left-2 right-2 text-center">
+          {/* Signature lines connecting validators to message */}
+          {Array.from({ length: 12 }).map((_, i) => {
+            const angle = (i * 30) % 360;
+            const startRadius = 100;
+            const startX = 50 + Math.cos(angle * Math.PI / 180) * startRadius / 200;
+            const startY = 50 + Math.sin(angle * Math.PI / 180) * startRadius / 200;
+            
+            return (
+              <motion.div
+                key={`sig-line-${i}`}
+                className="absolute bg-purple-400 origin-left"
+                style={{
+                  height: 2,
+                  left: `${startX * 100}%`,
+                  top: `${startY * 100}%`,
+                  width: 0,
+                  transform: `rotate(${angle + 180}deg)`,
+                  transformOrigin: 'left center',
+                  opacity: 0
+                }}
+                animate={{
+                  width: ['0%', '15%', '0%'],
+                  opacity: [0, 0.7, 0]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.2 % 1.5,
+                  repeatDelay: 0.5
+                }}
+              />
+            );
+          })}
+          
+          <div className="absolute bottom-2 left-0 right-0 text-center">
             <motion.p 
-              className="text-xs text-purple-300 font-medium"
+              className="text-xs text-purple-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block"
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              Each validator creates a signature using their secret key
+              <motion.span 
+                className="inline-block w-2 h-2 rounded-full bg-purple-400 mr-1.5 align-middle"
+                animate={{ opacity: [1, 0.5, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+              />
+              Each validator creates a signature on message M
             </motion.p>
           </div>
         </motion.div>
@@ -300,20 +337,42 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           exit={{ opacity: 0 }}
           className="absolute inset-0"
         >
-          {/* Individual signatures flowing to center */}
+          {/* Validators in a circle */}
           {Array.from({ length: 12 }).map((_, i) => {
-            const startAngle = (i * 30) % 360;
-            const startRadius = 90;
-            const startX = 50 + Math.cos(startAngle * Math.PI / 180) * startRadius / 200;
-            const startY = 50 + Math.sin(startAngle * Math.PI / 180) * startRadius / 200;
+            const angle = (i * 30) % 360;
+            const radius = 100;
+            const x = 50 + Math.cos(angle * Math.PI / 180) * radius / 200;
+            const y = 50 + Math.sin(angle * Math.PI / 180) * radius / 200;
             
             return (
               <motion.div
-                key={`sig-${i}`}
-                className="absolute rounded-full bg-indigo-400"
+                key={`validator-${i}`}
+                className="absolute rounded-full bg-slate-800 border border-indigo-500/30 flex items-center justify-center"
                 style={{
-                  width: 6 + Math.random() * 3,
-                  height: 6 + Math.random() * 3,
+                  width: 20,
+                  height: 20,
+                  left: `${x * 100}%`,
+                  top: `${y * 100}%`,
+                  transform: 'translate(-50%, -50%)',
+                }}
+              >
+                <User size={10} className="text-indigo-400/80" />
+              </motion.div>
+            );
+          })}
+          
+          {/* Signatures flowing to the relay node */}
+          {Array.from({ length: 12 }).map((_, i) => {
+            const angle = (i * 30) % 360;
+            const startRadius = 100;
+            const startX = 50 + Math.cos(angle * Math.PI / 180) * startRadius / 200;
+            const startY = 50 + Math.sin(angle * Math.PI / 180) * startRadius / 200;
+            
+            return (
+              <motion.div
+                key={`sig-flow-${i}`}
+                className="absolute w-4 h-4 rounded-full bg-indigo-400"
+                style={{
                   left: `${startX * 100}%`,
                   top: `${startY * 100}%`,
                   transform: 'translate(-50%, -50%)',
@@ -321,15 +380,14 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                 animate={{
                   left: ['', '50%'],
                   top: ['', '50%'],
-                  scale: [1, 0.6],
-                  opacity: [0, 1, 0.8, 0]
+                  scale: [0.7, 0.4, 0],
+                  opacity: [0.8, 0.6, 0]
                 }}
                 transition={{
-                  duration: 2 + Math.random(),
+                  duration: 1.5,
                   repeat: Infinity,
-                  delay: i * 0.2,
-                  repeatDelay: Math.random(),
-                  times: [0, 0.6, 0.8, 1]
+                  delay: i * 0.2 % 1,
+                  repeatDelay: 0.5
                 }}
               />
             );
@@ -341,63 +399,68 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             style={{
               background: 'radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, rgba(99, 102, 241, 0) 70%)'
             }}
-            animate={{
-              scale: [0.9, 1.1, 0.9]
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
           >
             <motion.div
-              className="w-12 h-12 rounded-full bg-slate-800/80 border-2 border-indigo-500/40 flex items-center justify-center"
+              className="w-12 h-12 rounded-md bg-slate-800 border-2 border-indigo-500 flex items-center justify-center"
               animate={{
                 boxShadow: ['0 0 0px rgba(99, 102, 241, 0)', '0 0 20px rgba(99, 102, 241, 0.4)', '0 0 0px rgba(99, 102, 241, 0)']
               }}
-              transition={{ duration: 3, repeat: Infinity }}
+              transition={{ duration: 2, repeat: Infinity }}
             >
-              <motion.div
-                className="text-xl font-bold text-indigo-400"
-                animate={{
-                  scale: [0.9, 1.1, 0.9]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                σ<sub>agg</sub>
-              </motion.div>
+              <Server className="text-indigo-400" size={24} />
             </motion.div>
           </motion.div>
           
-          <div className="absolute bottom-2 left-2 right-2 text-center">
-            <motion.p 
-              className="text-xs text-indigo-300 font-medium"
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              Relay node aggregates all signatures into one compact proof
-            </motion.p>
-          </div>
-          
-          {/* Pulse rings */}
-          {Array.from({ length: 3 }).map((_, i) => (
+          {/* Aggregated signature growing in the relay node */}
+          <motion.div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          >
             <motion.div
-              key={`pulse-ring-${i}`}
-              className="absolute left-1/2 top-1/2 rounded-full border border-indigo-400/30"
-              style={{
-                width: 30 + i * 30,
-                height: 30 + i * 30,
-                marginLeft: -15 - i * 15,
-                marginTop: -15 - i * 15,
-              }}
+              className="text-indigo-400 font-mono text-lg"
+              initial={{ opacity: 0, scale: 0.5 }}
               animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0, 0.3, 0]
+                opacity: [0, 1, 1],
+                scale: [0.5, 1.2, 1]
               }}
               transition={{
                 duration: 3,
                 repeat: Infinity,
-                delay: i * 0.7,
-                ease: "easeOut"
+                repeatDelay: 1
               }}
-            />
-          ))}
+            >
+              σ<sub>agg</sub>
+            </motion.div>
+          </motion.div>
+          
+          {/* Leader arrow pointing right */}
+          <motion.div
+            className="absolute top-1/2 left-[70%] transform -translate-y-1/2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              repeatDelay: 2,
+              delay: 2
+            }}
+          >
+            <ArrowRight className="text-indigo-400" size={24} />
+          </motion.div>
+          
+          <div className="absolute bottom-2 left-0 right-0 text-center">
+            <motion.p 
+              className="text-xs text-indigo-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block"
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <motion.span 
+                className="inline-block w-2 h-2 rounded-full bg-indigo-400 mr-1.5 align-middle"
+                animate={{ opacity: [1, 0.5, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+              />
+              Relay node aggregates all signatures into one
+            </motion.p>
+          </div>
         </motion.div>
       )}
       
@@ -409,16 +472,16 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           exit={{ opacity: 0 }}
           className="absolute inset-0"
         >
-          {/* Leader node verifying */}
+          {/* Leader node on the left */}
           <motion.div
-            className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-slate-800/80 border-2 border-red-500/30 flex items-center justify-center"
+            className="absolute top-1/2 left-[25%] transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-md bg-slate-800 border-2 border-red-500 flex items-center justify-center"
             animate={{
               boxShadow: ['0 0 0px rgba(234, 56, 76, 0)', '0 0 15px rgba(234, 56, 76, 0.3)', '0 0 0px rgba(234, 56, 76, 0)']
             }}
             transition={{ duration: 2, repeat: Infinity }}
           >
             <motion.div
-              className="text-lg font-bold text-red-400"
+              className="font-bold text-red-400"
               animate={{ scale: [0.95, 1.05, 0.95] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
@@ -428,14 +491,12 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           
           {/* Aggregated signature */}
           <motion.div
-            className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-800/60 border border-red-500/30 p-2 rounded-lg"
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[30%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 bg-slate-800 border border-red-500 p-2 rounded-lg"
           >
             <motion.p
               className="text-red-400 font-mono text-sm"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
               σ<sub>agg</sub>
             </motion.p>
@@ -443,80 +504,115 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           
           {/* Public keys sum */}
           <motion.div
-            className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 translate-y-1/2 bg-slate-800/60 border border-red-500/30 p-2 rounded-lg"
-            animate={{ y: [0, 5, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-[30%] left-[50%] transform -translate-x-1/2 translate-y-1/2 bg-slate-800 border border-red-500 p-2 rounded-lg"
           >
             <motion.p
               className="text-red-400 font-mono text-sm"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              animate={{ y: [0, 5, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
               ∑pk<sub>i</sub>
             </motion.p>
           </motion.div>
           
-          {/* Verification line */}
+          {/* Verification process beams */}
           <motion.div
-            className="absolute top-1/2 left-[37%] h-0.5 bg-red-500/70"
-            style={{ width: '30%' }}
+            className="absolute top-1/2 left-[30%] right-[50%] h-0.5 bg-red-500/70"
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ 
-              scaleX: [0, 1, 1, 0],
-              opacity: [0, 1, 1, 0]
+              scaleX: [0, 1],
+              opacity: [0, 1]
+            }}
+            transition={{ 
+              duration: 1.5,
+              repeat: Infinity,
+              repeatDelay: 2
+            }}
+          />
+          
+          <motion.div
+            className="absolute top-[75%] left-1/4 w-1/4 h-0.5 bg-green-500/70 origin-left"
+            style={{ transform: "rotate(45deg)" }}
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ 
+              scaleX: [0, 1],
+              opacity: [0, 1]
+            }}
+            transition={{ 
+              duration: 1.5,
+              delay: 1.5,
+              repeat: Infinity,
+              repeatDelay: 2
+            }}
+          />
+          
+          <motion.div
+            className="absolute top-[25%] left-1/4 w-1/4 h-0.5 bg-green-500/70 origin-left"
+            style={{ transform: "rotate(-45deg)" }}
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ 
+              scaleX: [0, 1],
+              opacity: [0, 1]
+            }}
+            transition={{ 
+              duration: 1.5,
+              delay: 1.5,
+              repeat: Infinity,
+              repeatDelay: 2
+            }}
+          />
+          
+          {/* Verified checkmark */}
+          <motion.div
+            className="absolute top-1/2 right-[25%] transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-slate-800 border-2 border-green-500 flex items-center justify-center"
+            animate={{
+              opacity: [0, 0, 1],
+              boxShadow: [
+                '0 0 0px rgba(34, 197, 94, 0)',
+                '0 0 0px rgba(34, 197, 94, 0)',
+                '0 0 15px rgba(34, 197, 94, 0.3)',
+                '0 0 15px rgba(34, 197, 94, 0.3)',
+                '0 0 0px rgba(34, 197, 94, 0)'
+              ]
             }}
             transition={{ 
               duration: 4,
               repeat: Infinity,
-              times: [0, 0.3, 0.7, 1]
-            }}
-          />
-          
-          {/* Checkmark */}
-          <motion.div
-            className="absolute top-1/2 right-1/4 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-slate-800/80 border-2 border-green-500/30 flex items-center justify-center"
-            animate={{
-              boxShadow: [
-                '0 0 0px rgba(34, 197, 94, 0)',
-                '0 0 15px rgba(34, 197, 94, 0.3)',
-                '0 0 0px rgba(34, 197, 94, 0)'
-              ],
-              opacity: [0, 1]
-            }}
-            transition={{ 
-              boxShadow: { duration: 2, repeat: Infinity },
-              opacity: { duration: 0.5, delay: 2 }
+              times: [0, 0.5, 0.6, 0.9, 1],
+              repeatDelay: 0.5
             }}
           >
-            <motion.svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 2.5 }}
-            >
-              <motion.path
-                d="M5 13L9 17L19 7"
-                stroke="#4ade80"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 0.8, delay: 2.5 }}
-              />
-            </motion.svg>
+            <Check className="text-green-500" size={28} />
           </motion.div>
           
-          <div className="absolute bottom-2 left-2 right-2 text-center">
+          {/* O(1) time indicator */}
+          <motion.div 
+            className="absolute right-[15%] top-[30%] bg-slate-800/80 border border-green-500/30 rounded-lg px-2 py-1"
+            animate={{
+              opacity: [0, 0, 1, 1, 0],
+              y: [5, 5, 0, 0, -5]
+            }}
+            transition={{ 
+              duration: 4,
+              repeat: Infinity,
+              times: [0, 0.5, 0.6, 0.9, 1],
+              repeatDelay: 0.5
+            }}
+          >
+            <motion.p className="text-xs text-green-400 font-mono">O(1) time</motion.p>
+          </motion.div>
+          
+          <div className="absolute bottom-2 left-0 right-0 text-center">
             <motion.p 
-              className="text-xs text-red-300 font-medium"
+              className="text-xs text-red-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block"
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
             >
+              <motion.span 
+                className="inline-block w-2 h-2 rounded-full bg-red-400 mr-1.5 align-middle"
+                animate={{ opacity: [1, 0.5, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+              />
               Leader verifies the signature in constant time
             </motion.p>
           </div>
@@ -524,7 +620,7 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
       )}
       
       {/* Static BLS logo shown when section is inactive */}
-      {(activeSection !== 1 || !activeFormula) && (
+      {activeSection !== 1 && (
         <motion.div 
           className="absolute w-28 h-28 bg-gradient-to-tr from-violet-500/20 to-indigo-500/20 backdrop-blur-sm flex items-center justify-center z-10"
           style={{
@@ -621,32 +717,7 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           </motion.div>
         </motion.div>
       )}
-      
-      {activeSection === 1 && (
-        <motion.div 
-          className="absolute bottom-0 left-0 text-xs text-violet-300 bg-violet-500/10 rounded-lg px-3 py-1 border border-violet-500/20"
-          animate={{ 
-            opacity: [0, 1, 1, 0],
-            y: [10, 0, 0, -10]
-          }}
-          transition={{ 
-            duration: 3, 
-            repeat: Infinity,
-            times: [0, 0.1, 0.9, 1]
-          }}
-        >
-          <motion.span 
-            className="inline-block w-2 h-2 rounded-full bg-violet-400 mr-1.5"
-            animate={{ opacity: [1, 0.5, 1] }}
-            transition={{ duration: 0.8, repeat: Infinity }}
-          />
-          {activeSection === 1 ? 
-            activeFormula === 0 ? "Generating signatures..." :
-            activeFormula === 1 ? "Aggregating signatures..." :
-            "Verifying signature..." 
-            : "Ready for BLS demonstration"}
-        </motion.div>
-      )}
     </div>
   );
 };
+
