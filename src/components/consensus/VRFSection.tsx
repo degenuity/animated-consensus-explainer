@@ -131,7 +131,7 @@ export const VRFSection: React.FC<VRFSectionProps> = ({
                 content={
                   <div className="p-3 bg-slate-800/50 rounded-lg">
                     <p className="text-slate-300">
-                      The global vote reduction factor, denoted as F in the document, serves a critical function in the proposed VRF-based subcommittee selection mechanism for vote reduction. Its primary purpose is to decrease the frequency with which validators need to transmit votes during the consensus process. This reduction in voting frequency directly contributes to minimizing network congestion and reducing the computational overhead involved in signature verification.
+                      The global vote reduction factor, denoted as F, serves a critical function in the proposed VRF-based subcommittee selection mechanism for vote reduction. Its primary purpose is to decrease the frequency with which validators need to transmit votes during the consensus process. This reduction in voting frequency directly contributes to minimizing network congestion and reducing the computational overhead involved in signature verification.
                     </p>
                     <p className="mt-2 text-slate-300">
                       In practical terms, F acts as a scaling factor. For instance, if F is set to 1/100 or 1/1000, it means that the frequency of votes transmitted by each validator is reduced to 1% or 0.1% of what it would normally be. This significant reduction ensures that the blockchain's consensus remains efficient and can operate smoothly even as the number of validators increases, without compromising on decentralization or security. Thus, F plays a key role in enhancing the scalability of the consensus mechanism.
