@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -131,15 +130,17 @@ const ConsensusExplainer = () => {
                         ease: "easeInOut"
                       }}
                     />
-                    <span className="relative z-10 text-cyan-300 font-bold">P_i = (S_i / ΣS_j) × F × A_i</span>
+                    <span className="relative z-10 text-cyan-300 font-bold tracking-wide text-lg flex justify-center">
+                      P<sub>i</sub> = (S<sub>i</sub> / ∑S<sub>j</sub>) × F × A<sub>i</sub>
+                    </span>
                   </motion.div>
                 </motion.div>
                 
                 <div className="space-y-3">
                   {[
-                    { name: 'Stake weight (S_i)', color: 'blue-400', description: 'Validator importance based on staked tokens' },
+                    { name: 'Stake weight (S₍ᵢ₎)', color: 'blue-400', description: 'Validator importance based on staked tokens' },
                     { name: 'Vote reduction (F)', color: 'green-400', description: 'Global factor reducing committee size' },
-                    { name: 'Adjustment (A_i)', color: 'purple-400', description: 'Performance-based multiplier' }
+                    { name: 'Adjustment (A₍ᵢ₎)', color: 'purple-400', description: 'Performance-based multiplier' }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
@@ -378,7 +379,9 @@ const ConsensusExplainer = () => {
                         ease: "easeInOut"
                       }}
                     />
-                    <span className="relative z-10 text-pink-300 font-bold">σ_i = H(M)^sk_i</span>
+                    <span className="relative z-10 text-pink-300 font-bold tracking-wide text-lg flex justify-center">
+                      σ<sub>i</sub> = H(M)<sup>sk<sub>i</sub></sup>
+                    </span>
                   </motion.div>
                   
                   <motion.div 
@@ -405,15 +408,17 @@ const ConsensusExplainer = () => {
                         ease: "easeInOut"
                       }}
                     />
-                    <span className="relative z-10 text-pink-300 font-bold">σ_agg = Π σ_i</span>
+                    <span className="relative z-10 text-pink-300 font-bold tracking-wide text-lg flex justify-center">
+                      σ<sub>agg</sub> = ∏ σ<sub>i</sub>
+                    </span>
                   </motion.div>
                 </motion.div>
                 
                 <div className="space-y-3">
                   {[
-                    { name: 'Individual signatures (σ_i)', color: 'violet-400', description: 'From each validator' },
+                    { name: 'Individual signatures (σᵢ)', color: 'violet-400', description: 'From each validator' },
                     { name: 'Message hash H(M)', color: 'pink-400', description: 'Cryptographic digest of data' },
-                    { name: 'Aggregated signature (σ_agg)', color: 'indigo-400', description: 'Compressed proof of consensus' }
+                    { name: 'Aggregated signature (σₐₒₒ)', color: 'indigo-400', description: 'Compressed proof of consensus' }
                   ].map((item, i) => (
                     <motion.div
                       key={i}
