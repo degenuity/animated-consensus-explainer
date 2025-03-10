@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -205,6 +206,23 @@ interface BLSVisualizationProps {
 }
 
 const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, activeFormula }) => {
+  // State to track if the leader has received the aggregated message
+  const [leaderReceived, setLeaderReceived] = useState(false);
+
+  // Reset leaderReceived state when activeFormula changes
+  useEffect(() => {
+    setLeaderReceived(false);
+    
+    // Set leaderReceived to true after a delay when on formula 1
+    if (activeSection === 1 && activeFormula === 1) {
+      const timer = setTimeout(() => {
+        setLeaderReceived(true);
+      }, 3000); // Set delay for leader receiving message
+      
+      return () => clearTimeout(timer);
+    }
+  }, [activeSection, activeFormula]);
+
   return (
     <div className="relative h-80 sm:h-96 flex items-center justify-center">
       {/* STEP 1: Individual Validators Generate Signatures */}
@@ -399,15 +417,37 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           <motion.div
             className="absolute top-1/2 right-4 transform -translate-y-1/2"
             initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.8, type: "spring" }}
+            animate={{ 
+              x: 0, 
+              opacity: 1,
+              scale: leaderReceived ? [1, 1.1, 1] : 1,
+              borderColor: leaderReceived ? ["#ef4444", "#4ade80", "#4ade80"] : "#ef4444",
+              boxShadow: leaderReceived ? ["0 0 0px rgba(234, 56, 76, 0.2)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] : "none"
+            }}
+            transition={{ 
+              delay: 0.8, 
+              type: "spring",
+              scale: { duration: 0.5, repeat: 0 },
+              borderColor: { duration: 1, repeat: 0 },
+              boxShadow: { duration: 1, repeat: 0 }
+            }}
           >
-            <div className="w-16 h-16 rounded-xl bg-slate-800 border border-red-500/20 flex items-center justify-center shadow-md flex-col">
+            <div className={`w-16 h-16 rounded-xl bg-slate-800 border-2 flex items-center justify-center shadow-md flex-col transition-colors duration-500 ${leaderReceived ? 'border-green-400' : 'border-red-500/20'}`}>
               <motion.span
-                className="text-sm font-bold text-red-400/70"
+                className={`text-sm font-bold transition-colors duration-500 ${leaderReceived ? 'text-green-400' : 'text-red-400/70'}`}
               >
                 Leader
               </motion.span>
+              {leaderReceived && (
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: "spring", damping: 12 }}
+                  className="mt-1"
+                >
+                  <Check size={16} className="text-green-400" />
+                </motion.div>
+              )}
             </div>
           </motion.div>
           
@@ -416,15 +456,16 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             className="absolute top-1/2 left-1/2 transform -translate-y-1/2 z-30"
             initial={{ opacity: 0, x: 0 }}
             animate={{
-              opacity: [0, 1, 0],
-              x: [0, 100],
-              scale: [0.8, 1.2, 0.8]
+              opacity: [0, 1, 1, 0],
+              x: [0, 100, 100, 100],
+              scale: [0.8, 1.2, 1.2, 0.8]
             }}
             transition={{
-              duration: 3,
+              duration: 4,
               repeat: Infinity,
-              repeatDelay: 1.5,
-              delay: 2
+              repeatDelay: 1,
+              delay: 1.5,
+              times: [0, 0.3, 0.7, 1]
             }}
           >
             <div className="h-10 w-10 px-2 py-1 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
@@ -461,6 +502,16 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
               Relay node sends aggregated "Agg" signature to leader
+              {leaderReceived && (
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="ml-1 text-green-400"
+                >
+                  ✓ Received
+                </motion.span>
+              )}
             </motion.div>
           </div>
         </motion.div>
@@ -482,18 +533,18 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             transition={{ delay: 0.2, type: "spring" }}
           >
             <motion.div 
-              className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-red-500 flex flex-col items-center justify-center shadow-lg"
+              className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-green-500 flex flex-col items-center justify-center shadow-lg"
               animate={{
                 boxShadow: [
-                  '0 0 0px rgba(234, 56, 76, 0)',
-                  '0 0 15px rgba(234, 56, 76, 0.3)',
-                  '0 0 0px rgba(234, 56, 76, 0)'
+                  '0 0 0px rgba(74, 222, 128, 0)',
+                  '0 0 15px rgba(74, 222, 128, 0.3)',
+                  '0 0 0px rgba(74, 222, 128, 0)'
                 ]
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
               <motion.span
-                className="text-lg font-bold text-red-400 mb-1"
+                className="text-lg font-bold text-green-400 mb-1"
               >
                 Leader
               </motion.span>
@@ -759,3 +810,4 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
     </div>
   );
 };
+
