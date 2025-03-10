@@ -36,9 +36,9 @@ export const BLSFormulaAnimation: React.FC<BLSFormulaAnimationProps> = ({
         borderColor: isActive ? `rgba(${shadowColor[0]}, ${shadowColor[1]}, ${shadowColor[2]}, 0.5)` : "transparent"
       }}
     >
-      {/* The sliding background effect - modified to ensure it works in all boxes */}
+      {/* The sliding background effect with inline styles instead of Tailwind classes */}
       <motion.span
-        className={`absolute inset-0 bg-${color}/10`}
+        className="absolute inset-0"
         initial={{ width: "0%", left: "0%" }}
         animate={{ 
           width: ["0%", "100%", "0%"],
@@ -48,11 +48,11 @@ export const BLSFormulaAnimation: React.FC<BLSFormulaAnimationProps> = ({
           duration: 3,
           repeat: Infinity,
           ease: "easeInOut",
-          // No pausing condition - always animate regardless of active status
-          // but reduce opacity when not active
+          paused: !isActive
         }}
         style={{
-          opacity: isActive ? 1 : 0.3
+          backgroundColor: `var(--color-${color})`,
+          opacity: 0.1
         }}
       />
       <span className={`relative z-10 text-${color} font-bold tracking-wide text-lg flex justify-center`}>
