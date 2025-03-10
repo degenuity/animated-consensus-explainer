@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -187,11 +186,11 @@ const ConsensusExplainer = () => {
                     <React.Fragment key={`vrf-node-${i}`}>
                       <motion.div
                         className={`absolute rounded-full ${
-                          isSelected ? 'bg-blue-400' : 'bg-slate-300'
+                          isSelected ? 'bg-blue-400' : 'bg-slate-300/60'
                         }`}
                         style={{ 
-                          width: 3 + Math.random() * 2,
-                          height: 3 + Math.random() * 2,
+                          width: isSelected ? 4 + Math.random() * 2 : 3 + Math.random() * 2,
+                          height: isSelected ? 4 + Math.random() * 2 : 3 + Math.random() * 2,
                         }}
                         animate={{
                           x: isSelected ? 
@@ -201,7 +200,7 @@ const ConsensusExplainer = () => {
                             [y, 0, y] : 
                             y,
                           scale: isSelected ? [1, 1.8, 1] : [1, 1.2, 1],
-                          opacity: isSelected ? [0.6, 1, 0.6] : [0.3, 0.5, 0.3],
+                          opacity: isSelected ? [0.7, 1, 0.7] : [0.4, 0.6, 0.4],
                           boxShadow: isSelected ? 
                             ['0 0 0px rgba(59, 130, 246, 0)', 
                              '0 0 10px rgba(59, 130, 246, 0.8)', 
@@ -259,24 +258,6 @@ const ConsensusExplainer = () => {
                     ease: "easeInOut"
                   }}
                 >
-                  <svg width="100" height="100" viewBox="0 0 100 100" className="absolute">
-                    <motion.polygon
-                      points="50,10 90,30 90,70 50,90 10,70 10,30"
-                      fill="none"
-                      stroke="rgba(59, 130, 246, 0.6)"
-                      strokeWidth="1"
-                      animate={{
-                        rotate: [0, 360],
-                        strokeDasharray: ["10,10", "1,10", "10,10"]
-                      }}
-                      transition={{
-                        duration: 30,
-                        repeat: Infinity,
-                        ease: "linear"
-                      }}
-                    />
-                  </svg>
-                  
                   <motion.div
                     className="z-10 text-white font-bold text-2xl bg-blue-500/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-400/30"
                     animate={{
@@ -532,10 +513,10 @@ const ConsensusExplainer = () => {
                         stroke="url(#bls-gradient)"
                         strokeWidth="1"
                         animate={{
-                          strokeDasharray: ["0,20", "20,0", "0,20"]
+                          strokeDasharray: ["10,10", "1,10", "10,10"]
                         }}
                         transition={{
-                          duration: 5,
+                          duration: 3,
                           repeat: Infinity,
                           ease: "linear"
                         }}
