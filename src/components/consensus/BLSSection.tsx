@@ -111,7 +111,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               <ExpandableItem 
                 name="Individual signatures (σᵢ)" 
                 color="purple-400" 
-                description="From each validator where skᵢ is the validator's secret key" 
+                description="From each validator where H(M) is the hash of the vote message and skᵢ is the validator's secret key" 
                 expandable={false}
                 index={0}
               />
