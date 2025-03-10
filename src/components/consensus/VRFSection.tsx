@@ -107,7 +107,11 @@ export const VRFSection: React.FC<VRFSectionProps> = ({
                 />
                 <span className="relative z-10 text-cyan-300 font-bold tracking-wide text-lg flex justify-center">
                   <span className="inline-flex items-baseline">
-                    P<sub className="text-sm">i</sub> = (S<sub className="text-sm">i</sub> / ∑S<sub className="text-sm">j</sub>) × F × A<sub className="text-sm">i</sub>
+                    P<sub className="text-sm">i</sub> = (
+                    <span className="text-blue-400">S<sub className="text-sm">i</sub></span> / 
+                    <span className="text-blue-400">∑S<sub className="text-sm">j</sub></span>) × 
+                    <span className="text-green-400">F</span> × 
+                    <span className="text-purple-400">A<sub className="text-sm">i</sub></span>
                   </span>
                 </span>
               </motion.div>
