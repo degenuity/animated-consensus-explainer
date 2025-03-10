@@ -133,7 +133,7 @@ const ConsensusExplainer = () => {
                 
                 <div className="space-y-3">
                   {[
-                    { name: 'Stake weight (S₍ᵢ₎)', color: 'blue-400', description: 'Validator importance based on staked tokens' },
+                    { name: 'Stake weight (Sᵢ)', color: 'blue-400', description: 'Validator importance based on staked tokens' },
                     { name: 'Vote reduction (F)', color: 'green-400', description: 'Global factor reducing committee size' },
                     { name: 'Adjustment (A₍ᵢ₎)', color: 'purple-400', description: 'Performance-based multiplier' }
                   ].map((item, i) => (
