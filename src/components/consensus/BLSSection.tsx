@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -17,10 +16,8 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
   isVoteReductionOpen,
   setIsVoteReductionOpen
 }) => {
-  // State to track which formula is currently being highlighted
   const [activeFormula, setActiveFormula] = useState(0);
 
-  // Cycle through formulas when this section is active
   useEffect(() => {
     if (activeSection !== 1) {
       setActiveFormula(0);
@@ -206,18 +203,15 @@ interface BLSVisualizationProps {
 }
 
 const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, activeFormula }) => {
-  // State to track if the leader has received the aggregated message
   const [leaderReceived, setLeaderReceived] = useState(false);
 
-  // Reset leaderReceived state when activeFormula changes
   useEffect(() => {
     setLeaderReceived(false);
     
-    // Set leaderReceived to true after a delay when on formula 1
     if (activeSection === 1 && activeFormula === 1) {
       const timer = setTimeout(() => {
         setLeaderReceived(true);
-      }, 3000); // Set delay for leader receiving message
+      }, 3000);
       
       return () => clearTimeout(timer);
     }
@@ -225,7 +219,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
 
   return (
     <div className="relative h-80 sm:h-96 flex items-center justify-center">
-      {/* STEP 1: Individual Validators Generate Signatures */}
       {activeSection === 1 && activeFormula === 0 && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -233,7 +226,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           exit={{ opacity: 0 }}
           className="absolute inset-0"
         >
-          {/* Central relay node */}
           <motion.div
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
             animate={{ scale: [0.95, 1.05, 0.95] }}
@@ -253,7 +245,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             </motion.div>
           </motion.div>
 
-          {/* Validators circle */}
           <div className="absolute inset-0">
             {Array.from({ length: 10 }).map((_, i) => {
               const angle = (i * 36) * (Math.PI / 180);
@@ -285,7 +276,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                       <User size={15} className="text-purple-400" />
                     </div>
                     
-                    {/* Message "M" traveling from validator to relay */}
                     <motion.div
                       className="absolute w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
                       initial={{ 
@@ -324,7 +314,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             })}
           </div>
           
-          {/* Visual explanation */}
           <div className="absolute bottom-2 left-0 right-0 text-center">
             <motion.div 
               className="text-xs text-purple-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border border-purple-500/30"
@@ -343,7 +332,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
         </motion.div>
       )}
       
-      {/* STEP 2: Aggregation of Signatures */}
       {activeSection === 1 && activeFormula === 1 && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -351,7 +339,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           exit={{ opacity: 0 }}
           className="absolute inset-0"
         >
-          {/* Validators sending signatures */}
           <div className="absolute inset-0">
             {Array.from({ length: 10 }).map((_, i) => {
               const angle = (i * 36) * (Math.PI / 180);
@@ -370,7 +357,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                     translateY: "-50%",
                   }}
                 >
-                  {/* Validator node */}
                   <div className="w-8 h-8 rounded-full bg-slate-800 border border-indigo-500/30 flex items-center justify-center opacity-70">
                     <User size={12} className="text-indigo-400/70" />
                   </div>
@@ -379,14 +365,12 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             })}
           </div>
           
-          {/* Relay node aggregating signatures */}
           <motion.div
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 100 }}
           >
-            {/* Pulsing aggregation effect */}
             <motion.div
               className="absolute inset-0 rounded-xl"
               style={{
@@ -413,7 +397,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             </motion.div>
           </motion.div>
           
-          {/* Leader node receiving aggregated signature */}
           <motion.div
             className="absolute top-1/2 right-4 transform -translate-y-1/2"
             initial={{ x: 50, opacity: 0 }}
@@ -451,7 +434,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             </div>
           </motion.div>
           
-          {/* Aggregated signature moving to leader */}
           <motion.div
             className="absolute top-1/2 left-1/2 transform -translate-y-1/2 z-30"
             initial={{ opacity: 0, x: 0 }}
@@ -473,7 +455,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             </div>
           </motion.div>
           
-          {/* Flow indicator arrow */}
           <motion.div
             className="absolute top-1/2 right-[43%] transform -translate-y-1/2"
             animate={{
@@ -488,7 +469,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             <ArrowRight className="text-indigo-400" size={20} />
           </motion.div>
           
-          {/* Visual explanation */}
           <div className="absolute bottom-2 left-0 right-0 text-center">
             <motion.div 
               className="text-xs text-indigo-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border border-indigo-500/30"
@@ -517,7 +497,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
         </motion.div>
       )}
       
-      {/* STEP 3: Verification of Aggregated Signature */}
       {activeSection === 1 && activeFormula === 2 && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -525,7 +504,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           exit={{ opacity: 0 }}
           className="absolute inset-0"
         >
-          {/* Leader node - larger and prominent */}
           <motion.div
             className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 z-20"
             initial={{ scale: 0.9, opacity: 0 }}
@@ -557,7 +535,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
               </motion.div>
             </motion.div>
             
-            {/* Aggregated signature box being verified */}
             <motion.div 
               className="absolute -top-10 -right-5 w-10 h-10 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -571,7 +548,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             </motion.div>
           </motion.div>
           
-          {/* Verification equation components */}
           <div className="absolute top-[40%] left-2/3 transform -translate-x-1/2 -translate-y-1/2">
             <motion.div
               className="bg-slate-800 border border-red-500 p-2 rounded-lg shadow-md flex items-center justify-center"
@@ -588,7 +564,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
               </motion.p>
             </motion.div>
             
-            {/* Equals sign */}
             <motion.div
               className="my-2 flex justify-center"
               initial={{ opacity: 0 }}
@@ -614,7 +589,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             </motion.div>
           </div>
           
-          {/* Verification rays */}
           <motion.div
             className="absolute top-1/2 left-[43%] w-[15%] h-0.5 bg-gradient-to-r from-red-500 to-red-500/0"
             initial={{ scaleX: 0, opacity: 0 }}
@@ -630,7 +604,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             style={{ transformOrigin: 'left' }}
           />
           
-          {/* Resulting verification checkmark */}
           <motion.div
             className="absolute top-1/2 right-1/6 transform -translate-y-1/2 z-10"
             animate={{
@@ -649,7 +622,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             </div>
           </motion.div>
           
-          {/* O(1) time indicator */}
           <motion.div 
             className="absolute right-10 top-[65%] bg-slate-800 border border-green-500 rounded-lg px-3 py-1.5 shadow-md shadow-green-500/10"
             initial={{ opacity: 0, y: 10 }}
@@ -673,7 +645,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             </motion.p>
           </motion.div>
           
-          {/* Visual explanation */}
           <div className="absolute bottom-2 left-0 right-0 text-center">
             <motion.div 
               className="text-xs text-red-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border border-red-500/30"
@@ -692,7 +663,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
         </motion.div>
       )}
       
-      {/* BLS logo when section is inactive */}
       {activeSection !== 1 && (
         <motion.div 
           className="absolute inset-0 flex items-center justify-center"
@@ -704,7 +674,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           >
-            {/* Outer spinning ring */}
             <motion.div
               className="absolute inset-0 rounded-full border-4 border-violet-500/30"
               style={{ 
@@ -721,7 +690,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             />
             
-            {/* Middle spinning ring */}
             <motion.div
               className="absolute inset-4 rounded-full border-2 border-indigo-500/40"
               style={{ 
@@ -738,7 +706,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
               transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
             />
             
-            {/* Central BLS logo */}
             <motion.div
               className="z-10 h-16 w-16 rounded-full bg-gradient-to-tr from-violet-500/20 to-indigo-500/20 backdrop-blur-sm border border-violet-400/30 flex items-center justify-center"
               animate={{
@@ -766,7 +733,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
               </motion.span>
             </motion.div>
             
-            {/* Orbiting elements */}
             {[0, 1, 2].map((i) => {
               const delay = i * 1.5;
               const angle = i * (360 / 3);
@@ -810,4 +776,3 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
     </div>
   );
 };
-
