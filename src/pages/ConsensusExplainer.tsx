@@ -175,7 +175,7 @@ const ConsensusExplainer = () => {
                           delay: i * 0.3
                         }}
                       />
-                      {item.expandable ? (
+                      {item.name === 'Adjustment (Aᵢ)' && item.expandable ? (
                         <Collapsible
                           open={isAdjustmentOpen}
                           onOpenChange={setIsAdjustmentOpen}
@@ -457,7 +457,7 @@ const ConsensusExplainer = () => {
                           delay: i * 0.3
                         }}
                       />
-                      {item.expandable && item.name === 'Vote reduction (F)' ? (
+                      {item.name === 'Vote reduction (F)' && item.expandable ? (
                         <Collapsible
                           open={isVoteReductionOpen}
                           onOpenChange={setIsVoteReductionOpen}
