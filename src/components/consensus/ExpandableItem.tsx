@@ -46,6 +46,24 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
           icon: 'text-purple-300',
           border: 'border-purple-500/30'
         };
+      case 'indigo-400':
+        return {
+          dot: 'bg-indigo-400',
+          icon: 'text-indigo-300',
+          border: 'border-indigo-500/30'
+        };
+      case 'pink-400':
+        return {
+          dot: 'bg-pink-400',
+          icon: 'text-pink-300',
+          border: 'border-pink-500/30'
+        };
+      case 'red-400':
+        return {
+          dot: 'bg-red-400',
+          icon: 'text-red-300',
+          border: 'border-red-500/30'
+        };
       default:
         return {
           dot: 'bg-blue-400',
@@ -57,7 +75,7 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
   
   const colorClasses = getColorClasses();
   
-  // Get shadow colors for animation
+  // Get shadow values for animation
   const getShadowValues = () => {
     switch (color) {
       case 'green-400':
@@ -66,6 +84,12 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
         return ['rgba(59, 130, 246, 0)', 'rgba(59, 130, 246, 0.5)', 'rgba(59, 130, 246, 0)'];
       case 'purple-400':
         return ['rgba(168, 85, 247, 0)', 'rgba(168, 85, 247, 0.5)', 'rgba(168, 85, 247, 0)'];
+      case 'indigo-400':
+        return ['rgba(99, 102, 241, 0)', 'rgba(99, 102, 241, 0.5)', 'rgba(99, 102, 241, 0)'];
+      case 'pink-400':
+        return ['rgba(236, 72, 153, 0)', 'rgba(236, 72, 153, 0.5)', 'rgba(236, 72, 153, 0)'];
+      case 'red-400':
+        return ['rgba(234, 56, 76, 0)', 'rgba(234, 56, 76, 0.5)', 'rgba(234, 56, 76, 0)'];
       default:
         return ['rgba(59, 130, 246, 0)', 'rgba(59, 130, 246, 0.5)', 'rgba(59, 130, 246, 0)'];
     }

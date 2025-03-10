@@ -137,7 +137,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                     ease: "easeInOut"
                   }}
                 />
-                <span className="relative z-10 text-pink-400 font-bold tracking-wide text-lg flex justify-center">
+                <span className="relative z-10 text-red-400 font-bold tracking-wide text-lg flex justify-center">
                   <span className="inline-flex items-baseline">
                     𝑒(σ<sub className="text-sm">agg</sub>,g)=𝑒(H(M),∑pk<sub className="text-sm">i</sub>)
                   </span>
@@ -164,7 +164,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
 
               <ExpandableItem 
                 name="Verification of aggregated signature" 
-                color="pink-400" 
+                color="red-400" 
                 description="Where pkᵢ are the public keys of the participating validators" 
                 expandable={false}
                 index={2}
