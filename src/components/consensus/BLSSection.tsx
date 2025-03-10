@@ -77,7 +77,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               >
                 <motion.span
                   className="absolute inset-0 bg-violet-400/10"
-                  initial={{ width: "0%" }}
                   animate={{ 
                     width: activeSection === 1 && activeFormula === 0 ? ["0%", "100%", "0%"] : "0%",
                     left: ["0%", "0%", "100%"] 
@@ -114,14 +113,13 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               >
                 <motion.span
                   className="absolute inset-0 bg-indigo-400/10"
-                  initial={{ width: "0%" }}
                   animate={{ 
-                    width: activeSection === 1 && activeFormula === 1 ? ["0%", "100%", "0%"] : "0%", 
+                    width: ["0%", "100%", "0%"],
                     left: ["0%", "0%", "100%"] 
                   }}
                   transition={{ 
                     duration: 3,
-                    repeat: activeFormula === 1 ? Infinity : 0,
+                    repeat: Infinity,
                     ease: "easeInOut"
                   }}
                 />
@@ -161,14 +159,13 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               >
                 <motion.span
                   className="absolute inset-0 bg-red-400/10"
-                  initial={{ width: "0%" }}
                   animate={{ 
-                    width: activeSection === 1 && activeFormula === 2 ? ["0%", "100%", "0%"] : "0%", 
+                    width: ["0%", "100%", "0%"],
                     left: ["0%", "0%", "100%"] 
                   }}
                   transition={{ 
                     duration: 3,
-                    repeat: activeFormula === 2 ? Infinity : 0,
+                    repeat: Infinity,
                     ease: "easeInOut"
                   }}
                 />
@@ -241,17 +238,17 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
     setShowSuccessEffect(false);
     
     if (activeSection === 1 && activeFormula === 1) {
-      // First timer for receiving the message
+      // First timer for receiving the message - extended delay for better visibility
       const receiveTimer = setTimeout(() => {
         setLeaderReceived(true);
         
         // Second timer for the success effect after receiving
         const successTimer = setTimeout(() => {
           setShowSuccessEffect(true);
-        }, 500);
+        }, 800); // Increased delay for more noticeable transition
         
         return () => clearTimeout(successTimer);
-      }, 3000);
+      }, 2000); // Shortened to show the reception earlier
       
       return () => clearTimeout(receiveTimer);
     }
@@ -448,7 +445,7 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             transition={{ 
               delay: 0.8, 
               type: "spring",
-              scale: { duration: 0.8, repeat: 0 }
+              scale: { duration: 0.8, repeat: showSuccessEffect ? Infinity : 0 }
             }}
           >
             <motion.div 
@@ -456,9 +453,14 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
               animate={{
                 boxShadow: leaderReceived ? 
                   ["0 0 0px rgba(74, 222, 128, 0)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] : 
-                  "none"
+                  "none",
+                backgroundColor: leaderReceived ? ["rgb(30 41 59)", "rgb(20 83 45 / 30%)", "rgb(30 41 59)"] : "rgb(30 41 59)"
               }}
-              transition={{ duration: 2, repeat: showSuccessEffect ? Infinity : 0 }}
+              transition={{ 
+                duration: 2, 
+                repeat: showSuccessEffect ? Infinity : 0,
+                times: leaderReceived ? [0, 0.5, 1] : undefined
+              }}
             >
               {showSuccessEffect && (
                 <motion.div
@@ -632,9 +634,8 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             >
               <motion.span
                 className="absolute inset-0 bg-red-400/10"
-                initial={{ width: "0%" }}
                 animate={{ 
-                  width: activeSection === 1 && activeFormula === 2 ? ["0%", "100%", "0%"] : "0%", 
+                  width: ["0%", "100%", "0%"],
                   left: ["0%", "0%", "100%"] 
                 }}
                 transition={{ 
@@ -669,9 +670,8 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             >
               <motion.span
                 className="absolute inset-0 bg-red-400/10"
-                initial={{ width: "0%" }}
                 animate={{ 
-                  width: activeSection === 1 && activeFormula === 2 ? ["0%", "100%", "0%"] : "0%", 
+                  width: ["0%", "100%", "0%"],
                   left: ["0%", "0%", "100%"] 
                 }}
                 transition={{ 
@@ -878,3 +878,4 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
     </div>
   );
 };
+
