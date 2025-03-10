@@ -76,6 +76,10 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 </span>
               </motion.div>
               
+              <p className="text-sm text-slate-300 mb-3">
+                The relay node aggregates all signatures within the subcommittee which is then submitted to the leader:
+              </p>
+              
               <motion.div 
                 className="text-sm font-mono bg-slate-800/80 p-3 rounded overflow-hidden relative"
                 animate={{ 
