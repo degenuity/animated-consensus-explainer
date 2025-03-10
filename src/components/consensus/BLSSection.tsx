@@ -81,7 +81,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               </p>
               
               <motion.div 
-                className="text-sm font-mono bg-slate-800/80 p-3 rounded overflow-hidden relative"
+                className="text-sm font-mono bg-slate-800/80 p-3 rounded mb-3 overflow-hidden relative"
                 animate={{ 
                   boxShadow: activeSection === 1 ? 
                     ["0 0 0px rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.3)", "0 0 0px rgba(139, 92, 246, 0)"] : 
@@ -106,6 +106,40 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 <span className="relative z-10 text-pink-300 font-bold tracking-wide text-lg flex justify-center">
                   <span className="inline-flex items-baseline">
                     σ<sub className="text-sm">agg</sub> = ∏ σ<sub className="text-sm">i</sub>
+                  </span>
+                </span>
+              </motion.div>
+              
+              <p className="text-sm text-slate-300 mb-3">
+                The leader verifies the aggregated signature in constant time using:
+              </p>
+              
+              <motion.div 
+                className="text-sm font-mono bg-slate-800/80 p-3 rounded overflow-hidden relative"
+                animate={{ 
+                  boxShadow: activeSection === 1 ? 
+                    ["0 0 0px rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.3)", "0 0 0px rgba(139, 92, 246, 0)"] : 
+                    "none"
+                }}
+                transition={{ duration: 2, repeat: Infinity, delay: 2 }}
+              >
+                <motion.span
+                  className="absolute inset-0 bg-violet-400/10"
+                  initial={{ width: "0%" }}
+                  animate={{ 
+                    width: activeSection === 1 ? ["0%", "100%", "0%"] : "0%", 
+                    left: ["0%", "0%", "100%"] 
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: 3,
+                    ease: "easeInOut"
+                  }}
+                />
+                <span className="relative z-10 text-pink-300 font-bold tracking-wide text-lg flex justify-center">
+                  <span className="inline-flex items-baseline">
+                    𝑒(σ<sub className="text-sm">agg</sub>,g)=𝑒(H(M),∑pk<sub className="text-sm">i</sub>)
                   </span>
                 </span>
               </motion.div>
