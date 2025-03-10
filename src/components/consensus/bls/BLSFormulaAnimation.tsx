@@ -33,6 +33,7 @@ export const BLSFormulaAnimation: React.FC<BLSFormulaAnimationProps> = ({
         borderColor: activeFormula === formulaIndex ? `rgba(${shadowColor[0]}, ${shadowColor[1]}, ${shadowColor[2]}, 0.5)` : "transparent"
       }}
     >
+      {/* The key animation issue is here - we need to make this animation consistent regardless of activeSection */}
       <motion.span
         className={`absolute inset-0 bg-${color}/10`}
         animate={{ 
