@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -155,17 +154,17 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               />
               
               <ExpandableItem 
-                name="Message hash H(M)" 
-                color="pink-400" 
-                description="Hash of consensus state" 
-                expandable={false}
-                index={1}
-              />
-              
-              <ExpandableItem 
                 name="Aggregated signature (σₐgg)" 
                 color="indigo-400" 
                 description="Compressed proof of consensus" 
+                expandable={false}
+                index={1}
+              />
+
+              <ExpandableItem 
+                name="Verification of aggregated signature" 
+                color="pink-400" 
+                description="Where pkᵢ are the public keys of the participating validators" 
                 expandable={false}
                 index={2}
               />
