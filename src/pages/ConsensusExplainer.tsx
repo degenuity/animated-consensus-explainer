@@ -175,7 +175,7 @@ const ConsensusExplainer = () => {
                 </div>
               </div>
               
-              <div className="relative h-72 flex items-center justify-center perspective">
+              <div className="relative h-80 flex items-center justify-center perspective">
                 {Array.from({ length: 150 }).map((_, i) => {
                   const radius = 140 + Math.random() * 40;
                   const angle = (i / 150) * Math.PI * 2;
@@ -245,7 +245,7 @@ const ConsensusExplainer = () => {
                 })}
                 
                 <motion.div
-                  className="relative w-32 h-32 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur z-20"
+                  className="relative w-40 h-40 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur z-20"
                   animate={{
                     boxShadow: [
                       "0 0 15px rgba(59, 130, 246, 0.3)",
@@ -259,7 +259,7 @@ const ConsensusExplainer = () => {
                     ease: "easeInOut"
                   }}
                 >
-                  <svg width="80" height="80" viewBox="0 0 100 100" className="absolute">
+                  <svg width="100" height="100" viewBox="0 0 100 100" className="absolute">
                     <motion.polygon
                       points="50,10 90,30 90,70 50,90 10,70 10,30"
                       fill="none"
@@ -278,7 +278,7 @@ const ConsensusExplainer = () => {
                   </svg>
                   
                   <motion.div
-                    className="z-10 text-white font-bold text-lg bg-blue-500/20 backdrop-blur-sm px-4 py-2 rounded-full border border-blue-400/30"
+                    className="z-10 text-white font-bold text-2xl bg-blue-500/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-400/30"
                     animate={{
                       scale: [0.95, 1.05, 0.95],
                       textShadow: [
@@ -298,7 +298,7 @@ const ConsensusExplainer = () => {
                 </motion.div>
                 
                 <motion.div 
-                  className="absolute bottom-0 right-0 text-xs text-blue-300 bg-blue-500/10 rounded-lg px-3 py-1 border border-blue-500/20"
+                  className="absolute bottom-5 right-5 text-sm text-blue-300 bg-blue-500/10 rounded-lg px-3 py-1 border border-blue-500/20"
                   animate={{ 
                     opacity: [0, 1, 1, 0],
                     y: [10, 0, 0, -10]
