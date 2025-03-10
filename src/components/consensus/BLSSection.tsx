@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -216,24 +215,24 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
           exit={{ opacity: 0 }}
           className="absolute inset-0"
         >
-          {/* Central message being signed */}
+          {/* Central relay node */}
           <motion.div
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
-            animate={{ scale: [0.9, 1.05, 0.9] }}
+            animate={{ scale: [0.95, 1.05, 0.95] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
-            <motion.div className="w-16 h-16 rounded-xl bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
-              <motion.span
-                className="text-2xl font-bold text-purple-400"
-                animate={{ opacity: [0.7, 1, 0.7] }}
+            <motion.div className="w-20 h-20 rounded-xl bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+              <motion.div
+                className="flex flex-col items-center justify-center"
+                animate={{ opacity: [0.8, 1, 0.8] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                M
-              </motion.span>
+                <Server className="text-purple-400 mb-1" size={20} />
+                <motion.span className="text-xs font-bold text-purple-300">
+                  Relay Node
+                </motion.span>
+              </motion.div>
             </motion.div>
-            <motion.p className="text-xs text-center mt-2 text-purple-300 font-semibold">
-              Vote Message
-            </motion.p>
           </motion.div>
 
           {/* Validators circle */}
@@ -268,21 +267,30 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                       <User size={15} className="text-purple-400" />
                     </div>
                     
-                    {/* Pulsing signature generation effect */}
+                    {/* Message "M" traveling from validator to relay */}
                     <motion.div
-                      className="w-6 h-6 absolute rounded-full bg-purple-500"
-                      initial={{ scale: 0, opacity: 0 }}
+                      className="absolute w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
+                      initial={{ 
+                        x: 0, 
+                        y: 0,
+                        opacity: 0,
+                        scale: 0.7
+                      }}
                       animate={{ 
-                        scale: [0, 1, 0],
-                        opacity: [0, 0.7, 0],
+                        x: [0, -x * 0.7],
+                        y: [0, -y * 0.7],
+                        opacity: [0, 0.9, 0],
+                        scale: [0.7, 1, 0.7]
                       }}
                       transition={{
                         duration: 2,
                         repeat: Infinity,
-                        delay: i * 0.2 % 1.5,
-                        repeatDelay: 0.5
+                        delay: i * 0.3,
+                        repeatDelay: 1
                       }}
-                    />
+                    >
+                      <span className="text-white font-bold text-xs">M</span>
+                    </motion.div>
                     
                     <motion.p 
                       className="text-xs mt-2 text-purple-300 font-medium"
@@ -293,31 +301,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                       σ<sub>{i+1}</sub>
                     </motion.p>
                   </motion.div>
-                  
-                  {/* Signature line to message */}
-                  <motion.div
-                    className="absolute top-1/2 left-1/2 h-0.5 bg-purple-500 origin-left z-10"
-                    initial={{ width: 0, opacity: 0 }}
-                    animate={{ 
-                      width: Math.sqrt(x*x + y*y) - 70, 
-                      opacity: [0, 0.6, 0.2],
-                      rotate: Math.atan2(y, x) * (180 / Math.PI)
-                    }}
-                    transition={{
-                      width: { 
-                        duration: 0.8,
-                        delay: i * 0.1 + 0.2
-                      },
-                      opacity: {
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatType: "reverse" 
-                      }
-                    }}
-                    style={{
-                      transformOrigin: '0% 50%',
-                    }}
-                  />
                 </motion.div>
               );
             })}
@@ -336,7 +319,7 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                 animate={{ opacity: [1, 0.4, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
-              Each validator creates a BLS signature on message M
+              Each validator sends message M to the relay node
             </motion.div>
           </div>
         </motion.div>
@@ -373,32 +356,6 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                   <div className="w-8 h-8 rounded-full bg-slate-800 border border-indigo-500/30 flex items-center justify-center opacity-70">
                     <User size={12} className="text-indigo-400/70" />
                   </div>
-                  
-                  {/* Signature particles moving to relay */}
-                  {Array.from({ length: 3 }).map((_, j) => (
-                    <motion.div
-                      key={`sig-particle-${i}-${j}`}
-                      className="absolute w-3 h-3 rounded-full bg-indigo-500 shadow-lg shadow-indigo-500/50"
-                      initial={{ 
-                        x: 0, 
-                        y: 0,
-                        opacity: 0,
-                        scale: 0.7
-                      }}
-                      animate={{ 
-                        x: [0, -x * 0.9],
-                        y: [0, -y * 0.9],
-                        opacity: [0, 0.9, 0],
-                        scale: [0.7, 0.9, 0.5]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.15 + j * 0.4,
-                        repeatDelay: 0.5
-                      }}
-                    />
-                  ))}
                 </motion.div>
               );
             })}
@@ -429,32 +386,12 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             />
             
             <motion.div className="w-20 h-20 rounded-xl bg-slate-800 border-2 border-indigo-500 flex flex-col items-center justify-center shadow-lg shadow-indigo-500/20 relative">
-              <Server className="text-indigo-400" size={22} />
+              <Server className="text-indigo-400" size={20} />
               <motion.span
                 className="text-indigo-400 font-bold text-xs mt-1"
               >
                 Relay Node
               </motion.span>
-              
-              {/* Growing aggregated signature */}
-              <motion.div
-                className="absolute -bottom-10 bg-slate-800/80 px-3 py-1 rounded-full border border-indigo-500"
-                animate={{
-                  scale: [0.9, 1.05, 0.9],
-                  boxShadow: [
-                    '0 0 0px rgba(99, 102, 241, 0.1)',
-                    '0 0 10px rgba(99, 102, 241, 0.5)',
-                    '0 0 0px rgba(99, 102, 241, 0.1)'
-                  ]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <motion.span
-                  className="text-sm font-mono text-indigo-400 font-bold"
-                >
-                  σ<sub>agg</sub>
-                </motion.span>
-              </motion.div>
             </motion.div>
           </motion.div>
           
@@ -465,7 +402,7 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.8, type: "spring" }}
           >
-            <div className="w-16 h-16 rounded-xl bg-slate-800 border border-red-500/20 flex items-center justify-center shadow-md">
+            <div className="w-16 h-16 rounded-xl bg-slate-800 border border-red-500/20 flex items-center justify-center shadow-md flex-col">
               <motion.span
                 className="text-sm font-bold text-red-400/70"
               >
@@ -490,8 +427,8 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
               delay: 2
             }}
           >
-            <div className="h-8 px-3 py-1 rounded-full bg-indigo-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
-              <span className="text-white font-bold font-mono text-sm">σ<sub>agg</sub></span>
+            <div className="h-10 w-10 px-2 py-1 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+              <span className="text-white font-bold text-xs">Agg</span>
             </div>
           </motion.div>
           
@@ -523,7 +460,7 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
                 animate={{ opacity: [1, 0.4, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
-              Relay node aggregates all signatures into one compact proof
+              Relay node sends aggregated "Agg" signature to leader
             </motion.div>
           </div>
         </motion.div>
@@ -567,6 +504,19 @@ const BLSVisualization: React.FC<BLSVisualizationProps> = ({ activeSection, acti
               >
                 Verifying...
               </motion.div>
+            </motion.div>
+            
+            {/* Aggregated signature box being verified */}
+            <motion.div 
+              className="absolute -top-10 -right-5 w-10 h-10 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ 
+                opacity: [0, 1, 1],
+                scale: [0.8, 1, 1]
+              }}
+              transition={{ delay: 0.5, duration: 1 }}
+            >
+              <span className="text-white font-bold text-xs">Agg</span>
             </motion.div>
           </motion.div>
           
