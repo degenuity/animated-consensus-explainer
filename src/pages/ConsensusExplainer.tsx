@@ -8,6 +8,7 @@ const ConsensusExplainer = () => {
   const [activeSection, setActiveSection] = useState(0);
   const [selectedNodes, setSelectedNodes] = useState<number[]>([]);
   const [isAdjustmentOpen, setIsAdjustmentOpen] = useState(false);
+  const [isVoteReductionOpen, setIsVoteReductionOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
