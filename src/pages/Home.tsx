@@ -33,15 +33,15 @@ const Home = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link to="/consensus">
-            <Button className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-8 py-6 text-lg">
-              VRF-based Subcommitees and BLS Aggregation
-            </Button>
-          </Link>
-          
           <Link to="/whitepaper">
             <Button className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-8 py-6 text-lg">
               X1 Whitepaper
+            </Button>
+          </Link>
+          
+          <Link to="/consensus">
+            <Button className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-8 py-6 text-lg">
+              VRF-based Subcommitees and BLS Aggregation
             </Button>
           </Link>
         </div>
