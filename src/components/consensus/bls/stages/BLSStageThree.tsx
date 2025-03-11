@@ -91,7 +91,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
               </motion.div>
               Aggregated Signatures
             </motion.div>
-            <div className="h-32 overflow-y-auto pr-2 grid grid-cols-2 gap-2">
+            <div className="h-[240px] overflow-y-auto pr-2 grid grid-cols-2 gap-2">
               {Array.from({ length: 10 }).map((_, index) => (
                 <motion.div
                   key={index}
