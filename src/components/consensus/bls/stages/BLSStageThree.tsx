@@ -151,20 +151,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
             style={{ transformOrigin: 'center' }}
           />
           
-          <motion.div
-            className="text-center p-2 rounded-md bg-slate-800/80 border border-slate-700 mt-1"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.4 }}
-          >
-            <motion.span 
-              className="text-slate-300 text-sm"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
-            >
-              Single verification step
-            </motion.span>
-          </motion.div>
+          {/* Removed the "Single verification step" text here */}
         </motion.div>
       </div>
       
