@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -65,7 +64,7 @@ const ConsensusExplainer = () => {
           
           <div className="flex items-center justify-between w-full ml-20">
             <Link to="/">
-              <Button variant="ghost" className="text-white hover:text-blue-500 hover:bg-slate-700 flex items-center gap-2">
+              <Button variant="ghost" className="text-white hover:text-blue-500 flex items-center gap-2">
                 <ArrowLeft size={16} />
                 Back to Home
               </Button>
