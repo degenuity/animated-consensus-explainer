@@ -55,7 +55,7 @@ const Home = () => {
         transition={{ duration: 0.8, delay: 0.3 }}
         className="max-w-4xl mx-auto relative h-80 mb-8"
       >
-        <div className="relative h-full w-full bg-slate-900/50 rounded-xl overflow-hidden border border-purple-500/20">
+        <div className="relative h-full w-full">
           <BLSStageOne activeSection={1} activeFormula={0} />
         </div>
       </motion.div>
