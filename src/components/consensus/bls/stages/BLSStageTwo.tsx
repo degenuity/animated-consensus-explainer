@@ -17,62 +17,45 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
   const [showSuccessEffect, setShowSuccessEffect] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
 
-  // Reset state when component changes visibility
+  // Use this to directly trigger leader received state from the animation
+  const handleAggregationComplete = useCallback(() => {
+    console.log("Aggregation complete callback triggered, setting leaderReceived to true");
+    setLeaderReceived(true);
+    
+    // Add a slight delay before showing success effect
+    setTimeout(() => {
+      console.log("Setting showSuccessEffect to true");
+      setShowSuccessEffect(true);
+    }, 200);
+  }, []);
+
+  // Reset state when component changes visibility or formula changes
   useEffect(() => {
     console.log("BLSStageTwo effect triggered, activeSection:", activeSection, "activeFormula:", activeFormula);
     
-    // Reset everything when section or formula changes
+    // Reset states when section or formula changes
     setLeaderReceived(false);
     setShowSuccessEffect(false);
     setAnimationComplete(false);
     
-    // Start a timer to set leaderReceived to true after a specific delay
-    // This simulates the "touching" effect but uses time instead
-    let leaderTimer: NodeJS.Timeout;
-    let successTimer: NodeJS.Timeout;
+    // Only set additional timeout to complete animation if we're in stage 1 and formula 1
     let completeTimer: NodeJS.Timeout;
     
-    if (activeSection === 1 && activeFormula === 1) {
-      console.log("Setting up timers for stage 1");
-      
-      // Set the leader to receive after 6.5 seconds (5s animation + 1.5s delay)
-      leaderTimer = setTimeout(() => {
-        console.log("Setting leaderReceived to true");
-        setLeaderReceived(true);
-        
-        // Success effect shortly after
-        successTimer = setTimeout(() => {
-          console.log("Setting showSuccessEffect to true");
-          setShowSuccessEffect(true);
-          
-          // Don't set animationComplete immediately
-          completeTimer = setTimeout(() => {
-            console.log("Setting animationComplete to true");
-            setAnimationComplete(true);
-          }, 5000);
-        }, 200);
-      }, 6500);
+    if (activeSection === 1 && activeFormula === 1 && leaderReceived) {
+      console.log("Setting timer for animation completion");
+      completeTimer = setTimeout(() => {
+        console.log("Setting animationComplete to true");
+        setAnimationComplete(true);
+      }, 5000);
     }
     
-    const cleanup = () => {
+    return () => {
       console.log("Cleaning up BLSStageTwo timers");
-      clearTimeout(leaderTimer);
-      clearTimeout(successTimer);
       clearTimeout(completeTimer);
-      setLeaderReceived(false);
-      setShowSuccessEffect(false);
-      setAnimationComplete(false);
     };
-    
-    return cleanup;
-  }, [activeSection, activeFormula]);
+  }, [activeSection, activeFormula, leaderReceived]);
 
-  // This function is now just for completeness but won't actually control the state changes
-  const handleAggregationComplete = useCallback(() => {
-    console.log("Aggregation complete triggered");
-    // We're not setting leaderReceived here anymore since we're using the timer approach
-  }, []);
-
+  // If we're not in the right section or formula, don't render
   if (activeSection !== 1 || activeFormula !== 1) return null;
   
   return (

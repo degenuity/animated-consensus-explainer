@@ -13,11 +13,10 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
   useEffect(() => {
     const animate = async () => {
       console.log("Starting aggregation animation");
-      // Move the box to position where its right side will touch the leader box's left side
-      // Stopping at x:20 as requested
+      // Make the box appear and move to position x:20
       await controls.start({
         opacity: [0, 1, 1],
-        x: [0, 20, 20], // Keeping x position at 20
+        x: [0, 20, 20],
         scale: [0.8, 1.2, 1]
       });
       
@@ -31,7 +30,7 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
     
     animate();
     
-    // Reset the ref when the component unmounts or gets updated
+    // Reset the ref when the component unmounts
     return () => {
       hasTriggeredCallback.current = false;
     };
@@ -49,10 +48,10 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
       initial={{ opacity: 0, x: 0 }}
       animate={controls}
       transition={{
-        duration: 5, // Slower animation
+        duration: 3, // Slightly faster animation for debugging
         times: [0, 0.3, 1],
         repeat: 0,
-        delay: 1.5,
+        delay: 1,
       }}
     >
       <motion.div 

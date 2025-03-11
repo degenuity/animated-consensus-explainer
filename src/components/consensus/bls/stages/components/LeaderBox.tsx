@@ -11,6 +11,9 @@ interface LeaderBoxProps {
 export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSuccessEffect }) => {
   console.log("LeaderBox rendering with leaderReceived:", leaderReceived, "showSuccessEffect:", showSuccessEffect);
   
+  // Define classes for the border based on the received state
+  const borderClass = leaderReceived ? 'border-green-500' : 'border-red-500';
+  
   return (
     <motion.div
       className="absolute top-1/2 right-4 transform -translate-y-1/2"
@@ -27,11 +30,8 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
       }}
     >
       <motion.div 
-        className={`w-16 h-16 rounded-xl bg-slate-800 flex items-center justify-center shadow-md flex-col transition-all duration-300 overflow-hidden relative ${
-          leaderReceived ? 'border-2 border-green-500' : 'border-2 border-red-500'
-        }`}
+        className={`w-16 h-16 rounded-xl bg-slate-800 flex items-center justify-center shadow-md flex-col transition-all duration-300 overflow-hidden relative border-2 ${borderClass}`}
         animate={{
-          borderColor: leaderReceived ? "rgb(74, 222, 128)" : "rgb(239, 68, 68)",
           boxShadow: leaderReceived ? 
             ["0 0 0px rgba(74, 222, 128, 0)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] : 
             ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"]
