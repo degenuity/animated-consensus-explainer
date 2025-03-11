@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
@@ -18,10 +18,25 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
+  const [pdfError, setPdfError] = useState<boolean>(false);
+
+  // Reset loading state when PDF URL changes
+  useEffect(() => {
+    setLoading(true);
+    setPdfError(false);
+  }, [pdfUrl]);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
     setLoading(false);
+    setPdfError(false);
+    console.log('PDF loaded successfully:', pdfUrl);
+  };
+
+  const onDocumentLoadError = (error: Error) => {
+    console.error('Error loading PDF:', error, pdfUrl);
+    setLoading(false);
+    setPdfError(true);
   };
 
   const changePage = (offset: number) => {
@@ -48,28 +63,34 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
           </div>
         )}
         
-        <Document
-          file={pdfUrl}
-          onLoadSuccess={onDocumentLoadSuccess}
-          onLoadError={() => setLoading(false)}
-          loading={<div className="text-center py-8">Loading PDF...</div>}
-          error={<div className="text-center text-red-500 py-8">Failed to load PDF. Please check the URL and try again.</div>}
-          className="flex justify-center"
-        >
-          <Page 
-            pageNumber={pageNumber} 
-            scale={1.0}
-            renderTextLayer={true}
-            renderAnnotationLayer={true}
-            className="border border-slate-200"
-          />
-        </Document>
+        {pdfError ? (
+          <div className="text-center text-red-500 py-8 bg-slate-50 rounded">
+            <p>Failed to load PDF. Please check the URL and try again.</p>
+            <p className="text-sm mt-2">PDF URL: {pdfUrl}</p>
+          </div>
+        ) : (
+          <Document
+            file={pdfUrl}
+            onLoadSuccess={onDocumentLoadSuccess}
+            onLoadError={onDocumentLoadError}
+            loading={<div className="text-center py-8">Loading PDF...</div>}
+            className="flex justify-center"
+          >
+            <Page 
+              pageNumber={pageNumber} 
+              scale={1.0}
+              renderTextLayer={true}
+              renderAnnotationLayer={true}
+              className="border border-slate-200"
+            />
+          </Document>
+        )}
         
         <div className="flex justify-between items-center mt-4 px-2">
           <div className="flex items-center space-x-2">
             <Button
               onClick={previousPage}
-              disabled={pageNumber <= 1}
+              disabled={pageNumber <= 1 || pdfError}
               variant="outline"
               size="sm"
               className="flex items-center text-black hover:text-blue-500"
@@ -80,7 +101,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
             
             <Button
               onClick={nextPage}
-              disabled={pageNumber >= (numPages || 1)}
+              disabled={pageNumber >= (numPages || 1) || pdfError}
               variant="outline"
               size="sm"
               className="flex items-center text-black hover:text-blue-500"
@@ -91,15 +112,17 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
           </div>
           
           <p className="text-sm">
-            Page {pageNumber} of {numPages || '-'}
+            {!pdfError ? `Page ${pageNumber} of ${numPages || '-'}` : ''}
           </p>
           
-          <a href={pdfUrl} download target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="sm" className="flex items-center gap-1 text-black hover:text-blue-500">
-              <Download size={16} />
-              Download
-            </Button>
-          </a>
+          {!pdfError && (
+            <a href={pdfUrl} download target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="sm" className="flex items-center gap-1 text-black hover:text-blue-500">
+                <Download size={16} />
+                Download
+              </Button>
+            </a>
+          )}
         </div>
       </div>
     </div>
