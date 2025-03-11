@@ -12,6 +12,7 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
   
   useEffect(() => {
     const animate = async () => {
+      console.log("Starting aggregation animation");
       // Move the box to position where its right side will touch the leader box's left side
       // Stopping at x:20 as requested
       await controls.start({
@@ -20,6 +21,7 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
         scale: [0.8, 1.2, 1]
       });
       
+      console.log("Animation completed, triggering callback");
       // Ensure callback is only triggered once
       if (!hasTriggeredCallback.current && onComplete) {
         hasTriggeredCallback.current = true;

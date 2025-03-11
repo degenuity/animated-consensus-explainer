@@ -19,6 +19,8 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
 
   // Reset state when component changes visibility
   useEffect(() => {
+    console.log("BLSStageTwo effect triggered, activeSection:", activeSection, "activeFormula:", activeFormula);
+    
     // Reset everything when section or formula changes
     setLeaderReceived(false);
     setShowSuccessEffect(false);
@@ -27,18 +29,25 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     // Start a timer to set leaderReceived to true after a specific delay
     // This simulates the "touching" effect but uses time instead
     let leaderTimer: NodeJS.Timeout;
+    let successTimer: NodeJS.Timeout;
+    let completeTimer: NodeJS.Timeout;
     
     if (activeSection === 1 && activeFormula === 1) {
+      console.log("Setting up timers for stage 1");
+      
       // Set the leader to receive after 6.5 seconds (5s animation + 1.5s delay)
       leaderTimer = setTimeout(() => {
+        console.log("Setting leaderReceived to true");
         setLeaderReceived(true);
         
         // Success effect shortly after
-        setTimeout(() => {
+        successTimer = setTimeout(() => {
+          console.log("Setting showSuccessEffect to true");
           setShowSuccessEffect(true);
           
           // Don't set animationComplete immediately
-          setTimeout(() => {
+          completeTimer = setTimeout(() => {
+            console.log("Setting animationComplete to true");
             setAnimationComplete(true);
           }, 5000);
         }, 200);
@@ -46,7 +55,10 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     }
     
     const cleanup = () => {
+      console.log("Cleaning up BLSStageTwo timers");
       clearTimeout(leaderTimer);
+      clearTimeout(successTimer);
+      clearTimeout(completeTimer);
       setLeaderReceived(false);
       setShowSuccessEffect(false);
       setAnimationComplete(false);
