@@ -20,13 +20,13 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
         }}
         initial={{ opacity: 0, x: 0 }}
         animate={{
-          opacity: [0, 1, 1, 0],
-          x: [0, 100, 100, 100],
-          scale: [0.8, 1.2, 1.2, 0.8]
+          opacity: [0, 1, 1],
+          x: [0, 100, 100],
+          scale: [0.8, 1.2, 1.2]
         }}
         transition={{
-          duration: 3,
-          times: [0, 0.3, 0.8, 1],
+          duration: 2,
+          times: [0, 0.3, 1],
           repeat: 0,
           delay: 1.5,
           onComplete: onComplete

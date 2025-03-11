@@ -23,7 +23,7 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     setAnimationComplete(false);
     
     if (activeSection === 1 && activeFormula === 1) {
-      // Everything is handled by the animation sequence now
+      // Animation is triggered by the component lifecycle
     }
   }, [activeSection, activeFormula]);
 
@@ -31,20 +31,21 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     setAnimationComplete(true);
     setLeaderReceived(true);
     
+    // Trigger leader box verification animation immediately after Agg box arrives
     const successTimer = setTimeout(() => {
       setShowSuccessEffect(true);
       
-      // Reset after 4 seconds if still on the same stage
+      // Reset after 2 seconds to restart the animation
       const resetTimer = setTimeout(() => {
         if (activeSection === 1 && activeFormula === 1) {
           setLeaderReceived(false);
           setShowSuccessEffect(false);
           setAnimationComplete(false);
         }
-      }, 4000);
+      }, 2000);
       
       return () => clearTimeout(resetTimer);
-    }, 800);
+    }, 300); // Reduced delay to make verification happen quicker
     
     return () => clearTimeout(successTimer);
   };
