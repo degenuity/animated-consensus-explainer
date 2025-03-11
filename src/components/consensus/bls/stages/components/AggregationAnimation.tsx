@@ -7,8 +7,8 @@ export const AggregationAnimation: React.FC = () => {
   return (
     <>
       <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-y-1/2 z-10"
-        style={{ marginLeft: "100px" }}
+        className="absolute top-1/2 left-1/2 transform -translate-y-1/2"
+        style={{ marginLeft: "100px", zIndex: 10 }}
         initial={{ opacity: 0, x: 0 }}
         animate={{
           opacity: [0, 1, 1, 0],
@@ -29,7 +29,8 @@ export const AggregationAnimation: React.FC = () => {
       </motion.div>
       
       <motion.div
-        className="absolute top-1/2 right-[43%] transform -translate-y-1/2 z-5"
+        className="absolute top-1/2 right-[43%] transform -translate-y-1/2"
+        style={{ zIndex: 5 }}
         animate={{
           x: [0, 10, 0],
           opacity: [0.5, 1, 0.5]
