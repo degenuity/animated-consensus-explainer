@@ -3,15 +3,19 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import PDFViewer from "@/components/PDFViewer";
 
 const Home = () => {
+  // Replace this URL with your actual PDF URL when you have one
+  const pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+  
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="max-w-4xl mx-auto text-center"
+        className="max-w-4xl mx-auto text-center mb-16"
       >
         <h1 className="text-5xl font-bold mb-6">
           <span className="text-white">Scaling Consensus on </span>
@@ -28,6 +32,16 @@ const Home = () => {
             Explore Consensus Mechanisms
           </Button>
         </Link>
+      </motion.div>
+      
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="max-w-4xl mx-auto"
+      >
+        <h2 className="text-3xl font-bold mb-8 text-center">Consensus Whitepaper</h2>
+        <PDFViewer pdfUrl={pdfUrl} title="Example PDF Document" />
       </motion.div>
     </div>
   );
