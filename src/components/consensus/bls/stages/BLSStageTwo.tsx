@@ -18,6 +18,7 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
   const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
+    // Reset everything when section or formula changes
     setLeaderReceived(false);
     setShowSuccessEffect(false);
     setAnimationComplete(false);
