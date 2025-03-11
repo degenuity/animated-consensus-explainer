@@ -12,7 +12,7 @@ import ConsensusExplainer from "./pages/ConsensusExplainer";
 import Whitepaper from "./pages/Whitepaper";
 import NotFound from "./pages/NotFound";
 
-// Enhanced error boundary component with better logging
+// Simplified error boundary component
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean; error: Error | null }
@@ -55,38 +55,30 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// Create a basic QueryClient with better error logging
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+// Create a basic QueryClient without any complex options that might cause issues
+const queryClient = new QueryClient();
 
 const App = () => {
   const [isRouterError, setIsRouterError] = useState(false);
   
-  // Add a component mounted log
+  // Add component mounted log for debugging
   useEffect(() => {
     console.log("App component mounted successfully");
     
     // Add window error handler
     const handleError = (event: ErrorEvent) => {
-      console.error("Global error caught:", event.error);
+      console.error("Global error caught in App component:", event.error);
     };
     
     window.addEventListener('error', handleError);
     return () => window.removeEventListener('error', handleError);
   }, []);
 
+  // Render with simpler structure
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <Toaster />
-          <Sonner />
           <BrowserRouter>
             {isRouterError ? (
               <div className="min-h-screen bg-black text-white flex items-center justify-center">
@@ -110,6 +102,8 @@ const App = () => {
               </Routes>
             )}
           </BrowserRouter>
+          <Toaster />
+          <Sonner />
         </TooltipProvider>
       </QueryClientProvider>
     </ErrorBoundary>
