@@ -43,9 +43,9 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
       className="absolute inset-0 flex items-center justify-center"
     >
       <div className="relative w-full h-full">
-        {/* Leader Node - Top Left */}
+        {/* Leader Node - Top Center */}
         <motion.div
-          className="absolute top-[15%] left-[15%]"
+          className="absolute top-[15%] left-[50%] transform -translate-x-1/2"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2, type: "spring" }}
@@ -76,9 +76,9 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
           </motion.div>
         </motion.div>
         
-        {/* Aggregation Box with Signatures - Left Middle */}
+        {/* Aggregation Box with Signatures - Center */}
         <motion.div 
-          className="absolute left-[10%] top-[40%] bg-slate-800/90 backdrop-blur rounded-lg p-3 border border-indigo-500/50 shadow-lg max-w-[250px]"
+          className="absolute left-[50%] top-[50%] transform -translate-x-1/2 -translate-y-1/2 bg-slate-800/90 backdrop-blur rounded-lg p-3 border border-indigo-500/50 shadow-lg max-w-[300px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -131,72 +131,6 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
             ))}
           </div>
         </motion.div>
-        
-        {/* Verification Process - Central Element */}
-        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2">
-          <motion.div 
-            className="relative flex flex-col items-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            <motion.div 
-              className="flex items-center justify-center space-x-4 mb-4"
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8 }}
-            >
-              <motion.div
-                className="w-12 h-12 rounded-lg bg-red-400/10 border border-red-500 flex items-center justify-center"
-                animate={{ 
-                  borderColor: ["rgba(239, 68, 68, 0.5)", "rgba(239, 68, 68, 0.9)", "rgba(239, 68, 68, 0.5)"] 
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <motion.span 
-                  className="text-red-400 font-bold"
-                  animate={{ scale: [0.95, 1.05, 0.95] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  σ<sub>agg</sub>
-                </motion.span>
-              </motion.div>
-              
-              <motion.div
-                className="flex items-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-              >
-                <motion.div 
-                  className="w-8 h-0.5 bg-gradient-to-r from-red-500 to-red-500/0"
-                  animate={{ 
-                    scaleX: [1, 1.2, 1],
-                    opacity: [0.5, 1, 0.5]
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  style={{ transformOrigin: 'left' }}
-                />
-              </motion.div>
-              
-              <motion.div
-                className="w-12 h-12 rounded-lg bg-slate-800 border border-red-500 flex items-center justify-center"
-                animate={{
-                  borderColor: ["rgba(239, 68, 68, 0.5)", "rgba(239, 68, 68, 0.9)", "rgba(239, 68, 68, 0.5)"]
-                }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
-              >
-                <motion.span 
-                  className="text-red-400 font-bold"
-                  animate={{ scale: [0.95, 1.05, 0.95] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
-                >
-                  PKs
-                </motion.span>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </div>
         
         {/* Status Indicator - Bottom */}
         <div className="absolute bottom-4 left-0 right-0 text-center">
