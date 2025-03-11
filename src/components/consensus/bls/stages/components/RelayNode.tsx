@@ -9,7 +9,7 @@ interface RelayNodeProps {
 
 export const RelayNode: React.FC<RelayNodeProps> = ({ showSuccessEffect = false }) => {
   return (
-    <div className="absolute inset-0 flex items-center justify-center" style={{ zIndex: 20 }}>
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" style={{ zIndex: 20 }}>
       <div className="relative">
         <motion.div
           className="absolute"
