@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { BLSFormulas } from './bls/BLSFormulas';
 import { BLSVisualization } from './bls/BLSVisualization';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface BLSSectionProps {
   activeSection: number | null;
@@ -17,9 +18,10 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
   setIsVoteReductionOpen
 }) => {
   const [activeFormula, setActiveFormula] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (activeSection !== 1) {
+    if (activeSection !== 1 && !isMobile) {
       setActiveFormula(0);
       return;
     }
@@ -29,9 +31,9 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     }, 5000);
     
     return () => clearInterval(formulaInterval);
-  }, [activeSection]);
+  }, [activeSection, isMobile]);
 
-  const isActive = activeSection === 1;
+  const isActive = activeSection === 1 || isMobile;
 
   return (
     <motion.div
@@ -50,7 +52,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           <BLSFormulas activeSection={activeSection} activeFormula={activeFormula} />
-          <BLSVisualization activeSection={activeSection} activeFormula={activeFormula} />
+          <BLSVisualization activeSection={isMobile ? 1 : activeSection} activeFormula={activeFormula} />
         </div>
       </Card>
     </motion.div>

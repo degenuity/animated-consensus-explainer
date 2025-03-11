@@ -6,6 +6,7 @@ import { ParticleBackground } from './vrf/ParticleBackground';
 import { FormulaDisplay } from './vrf/FormulaDisplay';
 import { NetworkVisualization } from './vrf/NetworkVisualization';
 import { ExplanationList } from './vrf/ExplanationList';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface VRFSectionProps {
   activeSection: number | null;
@@ -24,7 +25,8 @@ export const VRFSection: React.FC<VRFSectionProps> = ({
   setIsVoteReductionOpen,
   selectedNodes
 }) => {
-  const isActive = activeSection === 0;
+  const isMobile = useIsMobile();
+  const isActive = activeSection === 0 || isMobile;
 
   return (
     <motion.div
