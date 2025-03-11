@@ -6,15 +6,32 @@ import { Check } from "lucide-react";
 interface LeaderBoxProps {
   leaderReceived: boolean;
   showSuccessEffect: boolean;
+  verificationComplete?: boolean;  // New prop for verification status
 }
 
-export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSuccessEffect }) => {
+export const LeaderBox: React.FC<LeaderBoxProps> = ({ 
+  leaderReceived, 
+  showSuccessEffect,
+  verificationComplete = false   // Default to false if not provided
+}) => {
   useEffect(() => {
-    console.log("LeaderBox rendering with leaderReceived:", leaderReceived, "showSuccessEffect:", showSuccessEffect);
-  }, [leaderReceived, showSuccessEffect]);
+    console.log("LeaderBox rendering with leaderReceived:", leaderReceived, 
+                "showSuccessEffect:", showSuccessEffect,
+                "verificationComplete:", verificationComplete);
+  }, [leaderReceived, showSuccessEffect, verificationComplete]);
   
-  // Define classes for the border based on the received state
-  const borderClass = leaderReceived ? 'border-green-500' : 'border-red-500';
+  // Define border and background classes based on the states
+  const borderClass = verificationComplete 
+    ? 'border-green-500' 
+    : leaderReceived 
+      ? 'border-indigo-500'
+      : 'border-red-500';
+  
+  const glowClass = verificationComplete
+    ? 'green-glow'
+    : leaderReceived
+      ? 'indigo-glow'
+      : 'red-glow';
   
   return (
     <motion.div
@@ -32,11 +49,13 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
       }}
     >
       <motion.div 
-        className={`w-16 h-16 rounded-xl bg-slate-800 flex items-center justify-center shadow-md flex-col transition-all duration-300 overflow-hidden relative border-2 ${borderClass}`}
+        className={`w-16 h-16 rounded-xl bg-slate-800 flex items-center justify-center shadow-md flex-col transition-all duration-300 overflow-hidden relative border-2 ${borderClass} ${glowClass}`}
         animate={{
-          boxShadow: leaderReceived ? 
-            ["0 0 0px rgba(74, 222, 128, 0)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] : 
-            ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"]
+          boxShadow: verificationComplete ?
+            ["0 0 0px rgba(74, 222, 128, 0)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] :
+            leaderReceived ? 
+              ["0 0 0px rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.4)", "0 0 10px rgba(139, 92, 246, 0.2)"] : 
+              ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"]
         }}
         transition={{ 
           duration: 2, 
@@ -46,7 +65,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
       >
         {showSuccessEffect && (
           <motion.div
-            className="absolute inset-0 bg-green-500/10"
+            className={`absolute inset-0 ${verificationComplete ? 'bg-green-500/10' : 'bg-indigo-500/10'}`}
             initial={{ opacity: 0 }}
             animate={{ 
               opacity: [0, 0.6, 0],
@@ -63,7 +82,11 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
         <motion.span
           className="text-sm font-bold"
           animate={{
-            color: leaderReceived ? "rgb(74 222 128)" : "rgb(248 113 113)"
+            color: verificationComplete ? 
+              "rgb(74 222 128)" :
+              leaderReceived ? 
+                "rgb(139 92 246)" : 
+                "rgb(248 113 113)"
           }}
           transition={{ 
             duration: 0.3
@@ -87,7 +110,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
             }}
             className="mt-1"
           >
-            <Check size={16} className="text-green-400" />
+            <Check size={16} className={verificationComplete ? "text-green-400" : "text-indigo-400"} />
           </motion.div>
         )}
       </motion.div>

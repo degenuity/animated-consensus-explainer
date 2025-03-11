@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
+import { LeaderBox } from './components/LeaderBox';
 
 interface BLSStageThreeProps {
   activeSection: number;
@@ -104,6 +106,9 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
   
   if (activeSection !== 1 || activeFormula !== 2) return null;
   
+  // Determine if verification is complete (all 10 signatures verified)
+  const allSignaturesVerified = verifiedSignatures.length === 10;
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -120,14 +125,16 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
             transition={{ delay: 0.2, type: "spring" }}
           >
             <motion.div 
-              className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-green-500 flex flex-col items-center justify-center shadow-lg"
+              className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-indigo-500 flex flex-col items-center justify-center shadow-lg"
               animate={{
                 boxShadow: completionPause ? 
-                  '0 0 15px rgba(74, 222, 128, 0.3)' : 
+                  allSignaturesVerified ? 
+                    '0 0 15px rgba(74, 222, 128, 0.3)' : 
+                    '0 0 15px rgba(139, 92, 246, 0.3)' : 
                   [
-                    '0 0 0px rgba(74, 222, 128, 0)',
-                    '0 0 15px rgba(74, 222, 128, 0.3)',
-                    '0 0 0px rgba(74, 222, 128, 0)'
+                    '0 0 0px rgba(139, 92, 246, 0)',
+                    '0 0 15px rgba(139, 92, 246, 0.3)',
+                    '0 0 0px rgba(139, 92, 246, 0)'
                   ]
               }}
               transition={{ 
@@ -136,7 +143,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
               }}
             >
               <motion.span
-                className="text-lg font-bold text-green-400 mb-1"
+                className={`text-lg font-bold ${allSignaturesVerified ? "text-green-400" : "text-indigo-400"} mb-1`}
               >
                 Leader
               </motion.span>
@@ -171,7 +178,9 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
                   key={index}
                   className={`p-2 rounded-md text-xs flex items-center justify-between ${
                     verifiedSignatures.includes(index) 
-                      ? 'bg-green-900/30 border border-green-500/50' 
+                      ? allSignaturesVerified && index === verifiedSignatures.length - 1
+                        ? 'bg-green-900/30 border border-green-500/50' 
+                        : 'bg-green-900/30 border border-green-500/50'
                       : 'bg-slate-700/50 border border-slate-600/50'
                   }`}
                   initial={{ opacity: 0 }}
@@ -207,21 +216,30 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
           </motion.div>
         </div>
         
+        {/* Add LeaderBox overlay */}
+        <LeaderBox 
+          leaderReceived={true} 
+          showSuccessEffect={completionPause} 
+          verificationComplete={allSignaturesVerified}
+        />
+        
         {/* Status Indicator - Bottom */}
         <div className="absolute bottom-4 left-0 right-0 text-center">
           <motion.div 
-            className="text-xs text-green-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border border-green-500/30"
+            className="text-xs text-indigo-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border border-indigo-500/30"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
             <motion.span 
-              className="inline-block w-2 h-2 rounded-full bg-green-400 mr-1.5 align-middle"
+              className={`inline-block w-2 h-2 rounded-full ${allSignaturesVerified ? "bg-green-400" : "bg-indigo-400"} mr-1.5 align-middle`}
               animate={{ opacity: completionPause ? 1 : [1, 0.4, 1] }}
               transition={{ duration: 1.5, repeat: completionPause ? 0 : Infinity }}
             />
             <span className="mr-1">Verifying signatures:</span>
-            <span className="text-green-400 font-bold">{verifiedSignatures.length}</span>
+            <span className={`${allSignaturesVerified ? "text-green-400" : "text-indigo-400"} font-bold`}>
+              {verifiedSignatures.length}
+            </span>
             <span className="text-gray-400">/10</span>
             <span className="ml-1">
               {completionPause ? '(Complete!)' : '(In progress...)'}
