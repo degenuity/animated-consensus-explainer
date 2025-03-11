@@ -10,3 +10,4 @@ export { Input } from './input';
 export { Label } from './label';
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip';
+export { TooltipProvider } from './tooltip';

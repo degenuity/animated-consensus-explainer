@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => ({
       output: {
         manualChunks: {
           react: ['react', 'react-dom', 'react-router-dom'],
+          // Important: Use individual component imports instead of directory
           ui: ['@/components/ui/button', '@/components/ui/toast', '@/components/ui/toaster'],
           pdf: ['react-pdf', 'pdfjs-dist'],
         },
