@@ -58,20 +58,31 @@ const ConsensusExplainer = () => {
         transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto"
       >
-        <div className="flex items-center justify-between mb-8">
-          <Link to="/">
-            <Button variant="ghost" className="text-white hover:bg-slate-700 flex items-center gap-2">
-              <ArrowLeft size={16} />
-              Back to Home
-            </Button>
+        <div className="flex items-center justify-between mb-8 relative">
+          {/* X1 Logo in top left */}
+          <Link to="/" className="absolute left-0 top-0">
+            <img 
+              src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
+              alt="X1 Logo" 
+              className="h-16 w-auto"
+            />
           </Link>
           
-          <Button 
-            className="bg-purple-500 hover:bg-purple-600 text-white"
-            onClick={scrollToModels}
-          >
-            Models
-          </Button>
+          <div className="flex items-center justify-between w-full ml-20">
+            <Link to="/">
+              <Button variant="ghost" className="text-white hover:bg-slate-700 flex items-center gap-2">
+                <ArrowLeft size={16} />
+                Back to Home
+              </Button>
+            </Link>
+            
+            <Button 
+              className="bg-purple-500 hover:bg-purple-600 text-white"
+              onClick={scrollToModels}
+            >
+              Models
+            </Button>
+          </div>
         </div>
 
         <h1 className="text-4xl font-bold text-center mb-12">

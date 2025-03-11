@@ -7,6 +7,17 @@ import { Button } from "@/components/ui/button";
 const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto relative">
+        {/* X1 Logo in top left */}
+        <Link to="/" className="absolute left-0 top-0">
+          <img 
+            src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
+            alt="X1 Logo" 
+            className="h-16 w-auto"
+          />
+        </Link>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
