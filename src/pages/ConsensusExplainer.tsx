@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -83,7 +82,7 @@ const ConsensusExplainer = () => {
             className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent flex items-center gap-2"
             onClick={scrollToPDF}
           >
-            View PDF
+            View Paper
             <ArrowDown size={16} />
           </Button>
         </div>
@@ -94,7 +93,7 @@ const ConsensusExplainer = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
         >
-          Models
+          Models in this paper
         </motion.h2>
 
         <div 
