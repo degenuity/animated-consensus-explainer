@@ -61,12 +61,6 @@ const queryClient = new QueryClient({
     queries: {
       retry: 1,
       refetchOnWindowFocus: false,
-      // Updated error handling for React Query v5+
-      onSettled: (data, error) => {
-        if (error) {
-          console.error('Query error:', error);
-        }
-      }
     },
   },
 });
