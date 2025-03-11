@@ -26,11 +26,14 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
       return;
     }
     
-    const formulaInterval = setInterval(() => {
-      setActiveFormula(prev => (prev + 1) % 3);
-    }, 5000);
-    
-    return () => clearInterval(formulaInterval);
+    // Auto-rotation is now only active when the section is not being interacted with
+    if (!isMobile) {
+      const formulaInterval = setInterval(() => {
+        setActiveFormula(prev => (prev + 1) % 3);
+      }, 5000);
+      
+      return () => clearInterval(formulaInterval);
+    }
   }, [activeSection, isMobile]);
 
   const isActive = activeSection === 1 || isMobile;
