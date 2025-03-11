@@ -35,7 +35,7 @@ const Home = () => {
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link to="/consensus">
             <Button className="bg-blue-500 hover:bg-blue-600 text-white text-lg px-8 py-6 rounded-lg font-medium w-full">
-              Explore Consensus Mechanisms
+              VRF-based Subcommitees and BLS Aggregation
             </Button>
           </Link>
           
