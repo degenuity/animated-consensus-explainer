@@ -10,6 +10,10 @@
     <meta property="og:image" content="/og-image.png" />
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
     <base href="/">
+    <!-- Force disable any caching -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
   </head>
 
   <body>
@@ -17,5 +21,23 @@
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Fallback content that will show if JS fails to load -->
+    <noscript>
+      <div style="color: red; padding: 20px;">
+        JavaScript is required to run this application.
+      </div>
+    </noscript>
+    <script>
+      // Simple check to ensure the page is loading correctly
+      console.log("HTML document loaded");
+      
+      // Basic error detection
+      setTimeout(function() {
+        if (!document.querySelector('#root').childNodes.length) {
+          console.error("App did not render within 5 seconds");
+          document.body.innerHTML += '<div style="color: red; padding: 20px; margin-top: 20px;">App failed to render within expected time</div>';
+        }
+      }, 5000);
+    </script>
   </body>
 </html>
