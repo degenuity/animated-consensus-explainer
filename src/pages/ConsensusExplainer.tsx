@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -86,9 +85,7 @@ const ConsensusExplainer = () => {
         </div>
 
         <h1 className="text-4xl font-bold text-center mb-12">
-          <span className="text-white">Scaling Consensus on </span>
-          <span className="text-white">X</span>
-          <span className="text-blue-400">1</span>
+          <span className="text-white">X1 Research</span>
         </h1>
 
         {/* PDF Section - Title removed */}

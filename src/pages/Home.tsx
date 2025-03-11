@@ -25,9 +25,7 @@ const Home = () => {
         className="max-w-4xl mx-auto text-center mb-16"
       >
         <h1 className="text-5xl font-bold mb-6">
-          <span className="text-white">Scaling Consensus on </span>
-          <span className="text-white">X</span>
-          <span className="text-blue-400">1</span>
+          <span className="text-white">X1 Research</span>
         </h1>
         
         <p className="text-xl mb-10 text-slate-300">
