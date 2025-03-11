@@ -48,6 +48,24 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
           >
             Verifying...
           </motion.div>
+          
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ 
+              scale: 1, 
+              opacity: 1,
+              rotate: [0, 10, 0, -10, 0]
+            }}
+            transition={{
+              type: "spring", 
+              damping: 12,
+              delay: 0.7,
+              rotate: { repeat: Infinity, duration: 2 }
+            }}
+            className="mt-2"
+          >
+            <Check size={16} className="text-green-400" />
+          </motion.div>
         </motion.div>
         
         <motion.div 
@@ -153,72 +171,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         </motion.div>
       </div>
       
-      {/* Leader Verification - Using the same style as in stage two */}
-      <motion.div
-        className="absolute top-1/2 right-[15%] transform -translate-y-1/2 z-10"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ 
-          opacity: 1, 
-          scale: 1,
-          transition: { delay: 1.2 }
-        }}
-      >
-        <motion.div 
-          className="w-16 h-16 rounded-xl bg-slate-800 border-2 border-green-500 flex items-center justify-center shadow-lg shadow-green-500/20 flex-col"
-          animate={{
-            boxShadow: ["0 0 5px rgba(74, 222, 128, 0.1)", "0 0 15px rgba(74, 222, 128, 0.4)", "0 0 5px rgba(74, 222, 128, 0.1)"],
-            backgroundColor: ["rgb(30 41 59)", "rgb(20 83 45 / 30%)", "rgb(30 41 59)"]
-          }}
-          transition={{ 
-            duration: 2, 
-            repeat: Infinity,
-            times: [0, 0.5, 1]
-          }}
-        >
-          <motion.div
-            className="absolute inset-0 bg-green-500/10"
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: [0, 0.6, 0],
-              scale: [0.9, 1.1, 1]
-            }}
-            transition={{ 
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          
-          <motion.span
-            className="text-sm font-bold text-green-400"
-            animate={{
-              textShadow: ["0 0 0px rgba(74, 222, 128, 0)", "0 0 10px rgba(74, 222, 128, 0.7)", "0 0 0px rgba(74, 222, 128, 0)"]
-            }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            Leader
-          </motion.span>
-          
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ 
-              scale: 1, 
-              opacity: 1,
-              rotate: [0, 10, 0, -10, 0]
-            }}
-            transition={{
-              type: "spring", 
-              damping: 12,
-              rotate: { repeat: Infinity, duration: 2 }
-            }}
-            className="mt-1"
-          >
-            <Check size={16} className="text-green-400" />
-          </motion.div>
-        </motion.div>
-      </motion.div>
-      
-      {/* Verification Time Info - Moving it higher from bottom (to top-[85%]) to avoid overlap with status indicator */}
+      {/* Verification Time Info */}
       <motion.div 
         className="absolute right-[15%] top-[85%] bg-slate-800/80 backdrop-blur border border-green-500 rounded-lg px-4 py-2 shadow-lg"
         initial={{ opacity: 0, y: 20, scale: 0.9 }}
