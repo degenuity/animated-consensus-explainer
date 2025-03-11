@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { Toaster as Sonner } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 
 // Direct imports for all pages
 import Home from "./pages/Home"
@@ -12,8 +12,15 @@ import ConsensusExplainer from "./pages/ConsensusExplainer"
 import Whitepaper from "./pages/Whitepaper"
 import NotFound from "./pages/NotFound"
 
-// Create a client with default settings
-const queryClient = new QueryClient()
+// Create a client with simple configs for production
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  }
+})
 
 // Simple error boundary fallback
 const ErrorFallback = ({ error }: { error: Error }) => {
@@ -24,7 +31,6 @@ const ErrorFallback = ({ error }: { error: Error }) => {
         <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
         <pre className="bg-red-100 p-4 rounded overflow-auto max-h-96 text-sm">
           {error.message}
-          {error.stack}
         </pre>
         <button 
           onClick={() => window.location.reload()} 
@@ -37,12 +43,22 @@ const ErrorFallback = ({ error }: { error: Error }) => {
   );
 };
 
-// Fixed ErrorBoundaryWrapper with proper children prop
-class ErrorBoundaryWrapper extends React.Component<{ children: React.ReactNode }> {
-  state = { hasError: false, error: null as Error | null };
+// Fixed ErrorBoundary with proper typing
+class ErrorBoundaryWrapper extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; error: Error | null }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
   
   static getDerivedStateFromError(error: Error) {
     return { hasError: true, error };
+  }
+  
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error("Caught error:", error, errorInfo);
   }
   
   render() {

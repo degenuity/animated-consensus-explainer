@@ -4,38 +4,37 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// Add extensive debugging to help diagnose the issue
-console.log("===== Application Initialization Starting =====")
-console.log("Environment:", import.meta.env.MODE)
-console.log("Base URL:", import.meta.env.BASE_URL)
-
-// Define an error handler for unhandled errors
-window.addEventListener('error', (event) => {
-  console.error("GLOBAL ERROR:", event.error)
-})
-
-// Listen for uncaught promises
+// Setup global promises error handling
 window.addEventListener('unhandledrejection', (event) => {
   console.error("UNHANDLED PROMISE REJECTION:", event.reason)
 })
 
+// Setup global error handler
+window.addEventListener('error', (event) => {
+  console.error("GLOBAL ERROR:", event.error || event.message)
+})
+
 // Get the root element
 const rootElement = document.getElementById('root')
-console.log("Root element found:", !!rootElement)
 
-// Try to render the app with additional error handling
-try {
-  if (rootElement) {
-    console.log("Attempting to create root and render app...")
-    // Remove StrictMode temporarily to rule out double-rendering issues
+// Try to render the app with better error handling
+if (rootElement) {
+  try {
+    console.log("Creating React root and mounting application...")
     const root = ReactDOM.createRoot(rootElement)
     root.render(<App />)
-    console.log("===== Application Rendering Complete =====")
-  } else {
-    console.error("Root element not found")
-    document.body.innerHTML = '<div style="color: red; padding: 20px;">Root element not found</div>'
+    console.log("Application mounted successfully")
+  } catch (error) {
+    console.error("CRITICAL ERROR DURING RENDER:", error)
+    rootElement.innerHTML = `
+      <div style="color: red; padding: 20px; text-align: center;">
+        <h2>Application Failed to Load</h2>
+        <p>${error instanceof Error ? error.message : String(error)}</p>
+        <button onclick="window.location.reload()" style="background: #3498db; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px;">Reload Page</button>
+      </div>
+    `
   }
-} catch (error) {
-  console.error("CRITICAL RENDER ERROR:", error)
-  document.body.innerHTML = `<div style="color: red; padding: 20px;">Failed to render app: ${error instanceof Error ? error.message : String(error)}</div>`
+} else {
+  console.error("Root element not found")
+  document.body.innerHTML = '<div style="color: red; padding: 20px;">Root element not found</div>'
 }
