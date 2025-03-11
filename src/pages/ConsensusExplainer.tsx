@@ -47,7 +47,7 @@ const ConsensusExplainer = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -65,14 +65,14 @@ const ConsensusExplainer = () => {
           
           <div className="flex items-center justify-between w-full ml-20">
             <Link to="/">
-              <Button variant="ghost" className="text-white hover:text-blue-500 bg-transparent hover:bg-transparent flex items-center gap-2">
+              <Button variant="ghost" className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent flex items-center gap-2">
                 <ArrowLeft size={16} />
                 Back to Home
               </Button>
             </Link>
             
             <Button 
-              className="bg-purple-500 hover:bg-purple-600 text-white"
+              className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-6"
               onClick={scrollToModels}
             >
               Models
@@ -81,7 +81,7 @@ const ConsensusExplainer = () => {
         </div>
 
         <h1 className="text-4xl font-bold text-center mb-12">
-          <span className="text-white">VRF-Based Subcommittees and BLS Aggregation</span>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">VRF-Based Subcommittees and BLS Aggregation</span>
         </h1>
 
         <motion.div
@@ -98,7 +98,7 @@ const ConsensusExplainer = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-3xl font-bold mb-8 text-center text-purple-400"
+          className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
         >
           Models
         </motion.h2>
