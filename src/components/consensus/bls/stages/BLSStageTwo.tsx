@@ -38,16 +38,16 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
       // Don't set animationComplete immediately so the Agg box stays visible
       setTimeout(() => {
         setAnimationComplete(true);
-      }, 3000);
+      }, 4000);
       
-      // Reset after 7 seconds to restart the animation
+      // Reset after 10 seconds to restart the animation
       const resetTimer = setTimeout(() => {
         if (activeSection === 1 && activeFormula === 1) {
           setLeaderReceived(false);
           setShowSuccessEffect(false);
           setAnimationComplete(false);
         }
-      }, 7000); // Increased from 5000 ms
+      }, 10000); // Increased to allow for full animation cycle
       
       return () => clearTimeout(resetTimer);
     }, 200); // Short delay to make verification happen quickly
