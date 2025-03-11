@@ -13,7 +13,7 @@ const Home = () => {
           <img 
             src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
             alt="X1 Logo" 
-            className="h-16 w-auto"
+            className="h-5 w-auto" // Changed from h-16 to h-5 (approximately 1/3)
           />
         </Link>
       </div>
