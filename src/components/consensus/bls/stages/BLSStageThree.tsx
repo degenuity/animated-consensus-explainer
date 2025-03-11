@@ -145,43 +145,13 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
       
       <motion.div
         className="absolute top-1/2 right-1/6 transform -translate-y-1/2 z-10"
-        animate={{
-          opacity: [0, 0, 1],
-          scale: [0.5, 0.5, 1]
-        }}
-        transition={{ 
-          duration: 3,
-          repeat: Infinity,
-          repeatDelay: 0.5,
-          times: [0, 0.7, 1]
-        }}
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1.2 }}
       >
         <div className="w-16 h-16 rounded-full bg-slate-800 border-2 border-green-500 flex items-center justify-center shadow-lg shadow-green-500/20">
           <Check className="text-green-500" size={28} />
         </div>
-      </motion.div>
-      
-      <motion.div 
-        className="absolute right-10 top-[65%] bg-slate-800 border border-green-500 rounded-lg px-3 py-1.5 shadow-md shadow-green-500/10"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{
-          opacity: [0, 1, 1, 0],
-          y: [10, 0, 0, -10]
-        }}
-        transition={{ 
-          duration: 3,
-          repeat: Infinity,
-          repeatDelay: 0.5,
-          times: [0, 0.1, 0.9, 1]
-        }}
-      >
-        <motion.p 
-          className="text-xs font-bold text-green-400"
-          animate={{ scale: [0.95, 1.05, 0.95] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          O(1) Constant Time
-        </motion.p>
       </motion.div>
       
       <div className="absolute bottom-2 left-0 right-0 text-center">
