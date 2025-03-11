@@ -7,22 +7,41 @@
     <title>X1 Research</title>
     <meta name="description" content="X1 Research" />
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
-    <!-- Force disable any caching -->
+    <!-- Force disable caching -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
+    <style>
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      .loading-spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid blue; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
+      .error-message { color: red; padding: 20px; margin-top: 20px; border: 1px solid red; border-radius: 4px; }
+    </style>
   </head>
 
   <body>
     <div id="root">
+      <!-- Initial loading state -->
       <div style="padding: 20px; text-align: center;">
         <div style="color: blue; font-size: 18px; margin-bottom: 10px;">Loading X1 Research...</div>
-        <div style="width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid blue; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+        <div class="loading-spinner"></div>
+        <div id="loading-timeout" style="display: none; margin-top: 20px;">
+          <p>Loading is taking longer than expected. Please check your connection or try reloading.</p>
+          <button onclick="window.location.reload()" style="margin-top: 10px; padding: 8px 16px; background-color: blue; color: white; border: none; border-radius: 4px; cursor: pointer;">
+            Reload Page
+          </button>
+        </div>
       </div>
     </div>
-    <style>
-      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
+    
+    <!-- Loading timeout script -->
+    <script>
+      // Show reload button if app takes too long to load
+      setTimeout(function() {
+        const loadingTimeout = document.getElementById('loading-timeout');
+        if (loadingTimeout) loadingTimeout.style.display = 'block';
+      }, 10000);
+    </script>
+    
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
