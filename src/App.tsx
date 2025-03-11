@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import ConsensusExplainer from "./pages/ConsensusExplainer";
-import Apples from "./pages/Apples";
+import Whitepaper from "./pages/Whitepaper";
 import NotFound from "./pages/NotFound";
 
 // Create a new QueryClient instance that doesn't retry failed queries by default
@@ -28,7 +28,7 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/consensus" element={<ConsensusExplainer />} />
           <Route path="/consensus/*" element={<ConsensusExplainer />} />
-          <Route path="/apples" element={<Apples />} />
+          <Route path="/whitepaper" element={<Whitepaper />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

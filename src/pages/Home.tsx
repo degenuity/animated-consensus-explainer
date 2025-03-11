@@ -39,9 +39,9 @@ const Home = () => {
             </Button>
           </Link>
           
-          <Link to="/apples">
+          <Link to="/whitepaper">
             <Button className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-8 py-6 text-lg">
-              Learn About Apples
+              X1 Whitepaper
             </Button>
           </Link>
         </div>
