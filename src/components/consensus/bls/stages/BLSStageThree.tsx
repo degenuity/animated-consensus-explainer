@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Check, Clock } from "lucide-react";
 
@@ -9,6 +9,30 @@ interface BLSStageThreeProps {
 }
 
 export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, activeFormula }) => {
+  const [verifiedSignatures, setVerifiedSignatures] = useState<number[]>([]);
+  
+  useEffect(() => {
+    if (activeSection !== 1 || activeFormula !== 2) {
+      setVerifiedSignatures([]);
+      return;
+    }
+    
+    // Clear the verification state
+    setVerifiedSignatures([]);
+    
+    // Verify signatures one by one
+    const verifyInterval = setInterval(() => {
+      setVerifiedSignatures(prev => {
+        if (prev.length < 10) {
+          return [...prev, prev.length];
+        }
+        return prev;
+      });
+    }, 500);
+    
+    return () => clearInterval(verifyInterval);
+  }, [activeSection, activeFormula]);
+  
   if (activeSection !== 1 || activeFormula !== 2) return null;
   
   return (
@@ -18,90 +42,97 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
       exit={{ opacity: 0 }}
       className="absolute inset-0"
     >
-      {/* Leader and Aggregation Boxes side by side */}
-      <div className="absolute top-1/2 left-[15%] transform -translate-y-1/2 flex items-center space-x-4 z-20">
-        {/* Leader Node */}
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, type: "spring" }}
+      {/* Leader Node */}
+      <motion.div
+        className="absolute top-[25%] left-[15%] transform -translate-y-1/2"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.2, type: "spring" }}
+      >
+        <motion.div 
+          className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-green-500 flex flex-col items-center justify-center shadow-lg"
+          animate={{
+            boxShadow: [
+              '0 0 0px rgba(74, 222, 128, 0)',
+              '0 0 15px rgba(74, 222, 128, 0.3)',
+              '0 0 0px rgba(74, 222, 128, 0)'
+            ]
+          }}
+          transition={{ duration: 3, repeat: Infinity }}
         >
-          <motion.div 
-            className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-green-500 flex flex-col items-center justify-center shadow-lg"
-            animate={{
-              boxShadow: [
-                '0 0 0px rgba(74, 222, 128, 0)',
-                '0 0 15px rgba(74, 222, 128, 0.3)',
-                '0 0 0px rgba(74, 222, 128, 0)'
-              ]
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
+          <motion.span
+            className="text-lg font-bold text-green-400 mb-1"
           >
-            <motion.span
-              className="text-lg font-bold text-green-400 mb-1"
-            >
-              Leader
-            </motion.span>
-            <motion.div
-              className="text-xs text-slate-300 bg-slate-900/50 px-2 py-1 rounded-full mt-1"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              Verifying...
-            </motion.div>
-            
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ 
-                scale: 1, 
-                opacity: 1,
-                rotate: [0, 10, 0, -10, 0]
-              }}
-              transition={{
-                type: "spring", 
-                damping: 12,
-                delay: 0.7,
-                rotate: { repeat: Infinity, duration: 2 }
-              }}
-              className="mt-2"
-            >
-              <Check size={16} className="text-green-400" />
-            </motion.div>
+            Leader
+          </motion.span>
+          <motion.div
+            className="text-xs text-slate-300 bg-slate-900/50 px-2 py-1 rounded-full mt-1"
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            Verifying...
           </motion.div>
         </motion.div>
-        
-        {/* Aggregation Box */}
-        <motion.div 
-          className="w-16 h-16 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ 
-            opacity: 1,
-            scale: 1
-          }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
-          <span className="text-white font-bold text-xs">Agg</span>
-        </motion.div>
-      </div>
+      </motion.div>
       
-      {/* Aggregated Signature Flow */}
-      <motion.div
-        className="absolute top-1/2 left-[25%] w-[10%] h-0.5 bg-gradient-to-r from-red-500 to-red-500/0"
-        initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ 
-          scaleX: 1,
-          opacity: [0, 1, 0.5]
-        }}
-        transition={{ 
-          duration: 1,
-          repeat: Infinity,
-          repeatDelay: 2
-        }}
-        style={{ transformOrigin: 'left' }}
-      />
+      {/* Aggregation Box with Signatures */}
+      <motion.div 
+        className="absolute left-[15%] top-[40%] bg-slate-800/90 backdrop-blur rounded-lg p-3 border border-indigo-500/50 shadow-lg"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+      >
+        <motion.div className="text-sm font-medium text-indigo-400 mb-2 flex items-center">
+          <motion.div 
+            className="w-6 h-6 rounded-md bg-indigo-500 flex items-center justify-center shadow-md mr-2"
+          >
+            <span className="text-white font-bold text-xs">Agg</span>
+          </motion.div>
+          Aggregated Signatures
+        </motion.div>
+        <div className="h-32 overflow-y-auto pr-2 grid grid-cols-2 gap-2">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <motion.div
+              key={index}
+              className={`p-2 rounded-md text-xs flex items-center justify-between ${
+                verifiedSignatures.includes(index) 
+                  ? 'bg-green-900/30 border border-green-500/50' 
+                  : 'bg-slate-700/50 border border-slate-600/50'
+              }`}
+              initial={{ opacity: 0 }}
+              animate={{ 
+                opacity: 1,
+                backgroundColor: verifiedSignatures.includes(index) 
+                  ? ["rgba(20, 83, 45, 0.3)", "rgba(20, 83, 45, 0.5)", "rgba(20, 83, 45, 0.3)"]
+                  : "rgba(51, 65, 85, 0.5)",
+              }}
+              transition={{ 
+                delay: index * 0.1 + 0.5,
+                backgroundColor: {
+                  duration: 2,
+                  repeat: verifiedSignatures.includes(index) ? Infinity : 0,
+                }
+              }}
+            >
+              <span className={verifiedSignatures.includes(index) ? 'text-green-400' : 'text-white'}>
+                σ<sub>{index + 1}</sub>
+              </span>
+              {verifiedSignatures.includes(index) && (
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring" }}
+                >
+                  <Check size={16} className="text-green-400" />
+                </motion.div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
       
       {/* Verification Process - Central Element */}
-      <div className="absolute top-[30%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <motion.div 
           className="relative flex flex-col items-center"
           initial={{ opacity: 0 }}
@@ -126,7 +157,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
                 animate={{ scale: [0.95, 1.05, 0.95] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                Agg
+                σ<sub>agg</sub>
               </motion.span>
             </motion.div>
             
@@ -163,20 +194,12 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
               </motion.span>
             </motion.div>
           </motion.div>
-          
-          <motion.div
-            className="w-full h-0.5 bg-slate-600/50 my-2"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 1.2, duration: 0.5 }}
-            style={{ transformOrigin: 'center' }}
-          />
         </motion.div>
       </div>
       
       {/* Verification Time Info */}
       <motion.div 
-        className="absolute right-[15%] top-[85%] bg-slate-800/80 backdrop-blur border border-green-500 rounded-lg px-4 py-2 shadow-lg"
+        className="absolute right-[15%] top-[40%] bg-slate-800/80 backdrop-blur border border-green-500 rounded-lg px-4 py-2 shadow-lg"
         initial={{ opacity: 0, y: 20, scale: 0.9 }}
         animate={{
           opacity: 1,
@@ -239,7 +262,12 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
             animate={{ opacity: [1, 0.4, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
-          Leader verifies the aggregated signature in constant time
+          <span className="mr-1">Verifying signatures:</span>
+          <span className="text-green-400 font-bold">{verifiedSignatures.length}</span>
+          <span className="text-gray-400">/10</span>
+          <span className="ml-1">
+            {verifiedSignatures.length === 10 ? '(Complete!)' : '(In progress...)'}
+          </span>
         </motion.div>
       </div>
     </motion.div>
