@@ -18,26 +18,26 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
       exit={{ opacity: 0 }}
       className="absolute inset-0"
     >
-      <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
-        animate={{ scale: [0.95, 1.05, 0.95] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <motion.div className="w-20 h-20 rounded-xl bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
-          <motion.div
-            className="flex flex-col items-center justify-center"
-            animate={{ opacity: [0.8, 1, 0.8] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <Server className="text-purple-400 mb-1" size={20} />
-            <motion.span className="text-xs font-bold text-purple-300">
-              Relay Node
-            </motion.span>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <motion.div
+          className="absolute z-20"
+          animate={{ scale: [0.95, 1.05, 0.95] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <motion.div className="w-20 h-20 rounded-xl bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+            <motion.div
+              className="flex flex-col items-center justify-center"
+              animate={{ opacity: [0.8, 1, 0.8] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Server className="text-purple-400 mb-1" size={20} />
+              <motion.span className="text-xs font-bold text-purple-300">
+                Relay Node
+              </motion.span>
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
 
-      <div className="absolute inset-0 flex items-center justify-center">
         {Array.from({ length: 10 }).map((_, i) => {
           const angle = (i * 36) * (Math.PI / 180);
           const radius = 120;
@@ -127,3 +127,4 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
     </motion.div>
   );
 };
+
