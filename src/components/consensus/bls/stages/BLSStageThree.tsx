@@ -227,11 +227,6 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
             <span className="ml-1">
               {completionPause ? '(Complete!)' : '(In progress...)'}
             </span>
-            {completionPause && (
-              <span className="ml-1 text-yellow-300">
-                Returning to stage 1...
-              </span>
-            )}
           </motion.div>
         </div>
       </div>
