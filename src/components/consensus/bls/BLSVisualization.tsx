@@ -51,14 +51,14 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
       <BLSIdleAnimation activeSection={activeSection} />
       
       {activeSection === 1 && (
-        <div className="absolute bottom-[-20px] left-0 right-0 flex justify-center items-center gap-1 mb-1">
+        <div className="absolute bottom-[-16px] left-0 right-0 flex justify-center items-center gap-1 mb-1">
           <Button 
             variant="ghost" 
             size="sm" 
-            className="h-6 w-6 p-0 text-indigo-400 hover:text-indigo-300 bg-slate-800/60 border border-indigo-500/10"
+            className="h-5 w-5 p-0 text-indigo-400 hover:text-indigo-300 bg-slate-800/40 border border-indigo-500/10"
             onClick={handlePrevStage}
           >
-            <ChevronLeft size={12} />
+            <ChevronLeft size={10} />
           </Button>
           
           <div className="flex gap-1">
@@ -67,14 +67,14 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
                 key={stageIndex}
                 variant="ghost"
                 size="sm"
-                className={`w-5 h-5 p-0 rounded-full ${
+                className={`w-4 h-4 p-0 rounded-full ${
                   activeFormula === stageIndex 
                     ? 'bg-indigo-500/80 text-white' 
-                    : 'bg-slate-800/60 text-indigo-400 hover:text-indigo-300 border border-indigo-500/10'
+                    : 'bg-slate-800/40 text-indigo-400 hover:text-indigo-300 border border-indigo-500/10'
                 }`}
                 onClick={() => handleSelectStage(stageIndex)}
               >
-                <Circle size={activeFormula === stageIndex ? 6 : 5} fill={activeFormula === stageIndex ? "white" : "none"} />
+                <Circle size={activeFormula === stageIndex ? 4 : 3} fill={activeFormula === stageIndex ? "white" : "none"} />
               </Button>
             ))}
           </div>
@@ -82,10 +82,10 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
           <Button 
             variant="ghost" 
             size="sm" 
-            className="h-6 w-6 p-0 text-indigo-400 hover:text-indigo-300 bg-slate-800/60 border border-indigo-500/10"
+            className="h-5 w-5 p-0 text-indigo-400 hover:text-indigo-300 bg-slate-800/40 border border-indigo-500/10"
             onClick={handleNextStage}
           >
-            <ChevronRight size={12} />
+            <ChevronRight size={10} />
           </Button>
         </div>
       )}

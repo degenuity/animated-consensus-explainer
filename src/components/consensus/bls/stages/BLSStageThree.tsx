@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from "framer-motion";
 import { Check, Clock } from "lucide-react";
 
@@ -11,11 +11,17 @@ interface BLSStageThreeProps {
 export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, activeFormula }) => {
   const [verifiedSignatures, setVerifiedSignatures] = useState<number[]>([]);
   const [completionPause, setCompletionPause] = useState(false);
+  const verifyIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
   useEffect(() => {
     if (activeSection !== 1 || activeFormula !== 2) {
       setVerifiedSignatures([]);
       setCompletionPause(false);
+      // Clear any existing interval when component becomes inactive
+      if (verifyIntervalRef.current) {
+        clearInterval(verifyIntervalRef.current);
+        verifyIntervalRef.current = null;
+      }
       return;
     }
     
@@ -23,35 +29,61 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
     setVerifiedSignatures([]);
     setCompletionPause(false);
     
+    // If there's an existing interval, clear it
+    if (verifyIntervalRef.current) {
+      clearInterval(verifyIntervalRef.current);
+    }
+    
     // Verify signatures one by one
-    const verifyInterval = setInterval(() => {
+    verifyIntervalRef.current = setInterval(() => {
       setVerifiedSignatures(prev => {
+        // If we've verified all signatures but not yet paused
+        if (prev.length === 10 && !completionPause) {
+          // Immediately clear the interval to stop adding signatures
+          if (verifyIntervalRef.current) {
+            clearInterval(verifyIntervalRef.current);
+            verifyIntervalRef.current = null;
+          }
+          
+          setCompletionPause(true);
+          
+          // After exactly 2 seconds, reset and signal to restart from Stage 1
+          setTimeout(() => {
+            const event = new CustomEvent('bls-verification-complete', { 
+              detail: { restartAnimation: true } 
+            });
+            document.dispatchEvent(event);
+          }, 2000);
+          
+          return prev; // Return unchanged to avoid adding more signatures
+        }
+        
+        // If we haven't verified all signatures yet, add the next one
         if (prev.length < 10) {
           return [...prev, prev.length];
         }
         
-        // When all 10 signatures are verified, trigger the pause
-        if (prev.length === 10 && !completionPause) {
-          setCompletionPause(true);
-          
-          // After 2 seconds, reset the verification state and signal to restart from Stage 1
-          setTimeout(() => {
-            setVerifiedSignatures([]);
-            setCompletionPause(false);
-            
-            // This will restart from Stage 1 by changing the activeFormula in the parent
-            // The parent component (BLSSection) monitors this event and resets to Stage 1
-            const event = new CustomEvent('bls-verification-complete', { detail: { restartAnimation: true } });
-            document.dispatchEvent(event);
-          }, 2000);
-        }
-        
         return prev;
       });
-    }, 250); // Changed back to 250ms as requested
+    }, 250);
     
-    return () => clearInterval(verifyInterval);
+    // Cleanup function
+    return () => {
+      if (verifyIntervalRef.current) {
+        clearInterval(verifyIntervalRef.current);
+        verifyIntervalRef.current = null;
+      }
+    };
   }, [activeSection, activeFormula, completionPause]);
+  
+  // Also cleanup on component unmount
+  useEffect(() => {
+    return () => {
+      if (verifyIntervalRef.current) {
+        clearInterval(verifyIntervalRef.current);
+      }
+    };
+  }, []);
   
   if (activeSection !== 1 || activeFormula !== 2) return null;
   
@@ -91,7 +123,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
                 animate={{ opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                Verifying...
+                {completionPause ? "Complete!" : "Verifying..."}
               </motion.div>
             </motion.div>
           </motion.div>
@@ -163,15 +195,20 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
           >
             <motion.span 
               className="inline-block w-2 h-2 rounded-full bg-green-400 mr-1.5 align-middle"
-              animate={{ opacity: [1, 0.4, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
+              animate={{ opacity: completionPause ? 1 : [1, 0.4, 1] }}
+              transition={{ duration: 1.5, repeat: completionPause ? 0 : Infinity }}
             />
             <span className="mr-1">Verifying signatures:</span>
             <span className="text-green-400 font-bold">{verifiedSignatures.length}</span>
             <span className="text-gray-400">/10</span>
             <span className="ml-1">
-              {verifiedSignatures.length === 10 ? '(Complete!)' : '(In progress...)'}
+              {completionPause ? '(Complete!)' : '(In progress...)'}
             </span>
+            {completionPause && (
+              <span className="ml-1 text-yellow-300">
+                Returning to stage 1...
+              </span>
+            )}
           </motion.div>
         </div>
       </div>
