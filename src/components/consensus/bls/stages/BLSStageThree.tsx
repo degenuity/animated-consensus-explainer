@@ -78,7 +78,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
           
           {/* Aggregation Box with Signatures - Right Side */}
           <motion.div 
-            className="bg-slate-800/90 backdrop-blur rounded-lg p-3 border border-indigo-500/50 shadow-lg max-w-[300px]"
+            className="bg-slate-800/90 backdrop-blur rounded-lg p-3 border border-indigo-500/50 shadow-lg max-w-[300px] mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -91,7 +91,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
               </motion.div>
               Aggregated Signatures
             </motion.div>
-            <div className="h-[240px] overflow-y-auto pr-2 grid grid-cols-2 gap-2">
+            <div className="h-[200px] overflow-y-auto pr-2 grid grid-cols-2 gap-2">
               {Array.from({ length: 10 }).map((_, index) => (
                 <motion.div
                   key={index}
