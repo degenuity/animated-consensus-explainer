@@ -35,6 +35,20 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
       return () => clearInterval(formulaInterval);
     }
   }, [activeSection, isMobile]);
+  
+  // Listen for the verification completion event to restart animation
+  useEffect(() => {
+    const handleVerificationComplete = () => {
+      // Reset to Stage 1
+      setActiveFormula(0);
+    };
+    
+    document.addEventListener('bls-verification-complete', handleVerificationComplete);
+    
+    return () => {
+      document.removeEventListener('bls-verification-complete', handleVerificationComplete);
+    };
+  }, []);
 
   const isActive = activeSection === 1 || isMobile;
 

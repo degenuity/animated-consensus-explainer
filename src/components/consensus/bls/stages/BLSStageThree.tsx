@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Check, Clock } from "lucide-react";
@@ -33,16 +34,21 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         if (prev.length === 10 && !completionPause) {
           setCompletionPause(true);
           
-          // After 2 seconds, reset the verification state
+          // After 2 seconds, reset the verification state and signal to restart from Stage 1
           setTimeout(() => {
             setVerifiedSignatures([]);
             setCompletionPause(false);
+            
+            // This will restart from Stage 1 by changing the activeFormula in the parent
+            // The parent component (BLSSection) monitors this event and resets to Stage 1
+            const event = new CustomEvent('bls-verification-complete', { detail: { restartAnimation: true } });
+            document.dispatchEvent(event);
           }, 2000);
         }
         
         return prev;
       });
-    }, 125); // Changed from 250ms to 125ms (twice as fast)
+    }, 250); // Changed back to 250ms as requested
     
     return () => clearInterval(verifyInterval);
   }, [activeSection, activeFormula, completionPause]);
