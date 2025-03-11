@@ -55,7 +55,10 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           <BLSFormulas activeSection={activeSection} activeFormula={activeFormula} />
-          <BLSVisualization activeSection={isMobile ? 1 : activeSection} activeFormula={activeFormula} />
+          <div className="flex flex-col">
+            <BLSVisualization activeSection={isMobile ? 1 : activeSection} activeFormula={activeFormula} />
+            <div className="h-10"></div> {/* Added space for the toggle controls */}
+          </div>
         </div>
       </Card>
     </motion.div>

@@ -51,7 +51,7 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
       <BLSIdleAnimation activeSection={activeSection} />
       
       {activeSection === 1 && (
-        <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-2 mb-1">
+        <div className="absolute bottom-[-40px] left-0 right-0 flex justify-center items-center gap-2 mb-1">
           <Button 
             variant="ghost" 
             size="sm" 
