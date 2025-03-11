@@ -18,6 +18,13 @@ const Home = () => {
     }
   }, []);
 
+  // Simple test element to ensure rendering works
+  const TestElement = () => (
+    <div className="p-4 m-4 bg-blue-500 text-white rounded">
+      If you can see this, rendering is working!
+    </div>
+  );
+
   if (error) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
@@ -37,6 +44,8 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
+      <TestElement />
+      
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -6,11 +6,16 @@ import './index.css'
 
 console.log("Starting application initialization")
 
-const container = document.getElementById('root')
+// Get the root element
+const rootElement = document.getElementById('root')
 
-if (container) {
-  const root = ReactDOM.createRoot(container)
-  root.render(<App />)
+// Create root and render app
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  )
   console.log("Application rendering complete")
 } else {
   console.error("Root element not found")
