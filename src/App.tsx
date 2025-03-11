@@ -19,25 +19,23 @@ function App() {
   console.log("App component rendering")
   
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <BrowserRouter>
-            <div className="min-h-screen bg-background">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/consensus" element={<ConsensusExplainer />} />
-                <Route path="/consensus/*" element={<ConsensusExplainer />} />
-                <Route path="/whitepaper" element={<Whitepaper />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </div>
-          </BrowserRouter>
-          <Toaster />
-          <Sonner />
-        </TooltipProvider>
-      </QueryClientProvider>
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <BrowserRouter>
+          <div className="min-h-screen bg-background">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/consensus" element={<ConsensusExplainer />} />
+              <Route path="/consensus/*" element={<ConsensusExplainer />} />
+              <Route path="/whitepaper" element={<Whitepaper />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+        <Toaster />
+        <Sonner />
+      </TooltipProvider>
+    </QueryClientProvider>
   )
 }
 

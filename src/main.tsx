@@ -12,9 +12,7 @@ const rootElement = document.getElementById('root')
 // Create root and render app
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <App />
   )
   console.log("Application rendering complete")
 } else {
