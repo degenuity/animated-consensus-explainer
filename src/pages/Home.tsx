@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -9,7 +8,6 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto relative">
-        {/* X1 Logo in top left */}
         <Link to="/" className="absolute left-0 top-0">
           <img 
             src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
@@ -48,7 +46,6 @@ const Home = () => {
         </div>
       </motion.div>
 
-      {/* BLS Animation Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -57,25 +54,6 @@ const Home = () => {
       >
         <div className="relative h-full w-full">
           <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
-        </div>
-      </motion.div>
-
-      {/* Cat Image Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        className="max-w-md mx-auto mb-16"
-      >
-        <div className="bg-slate-800 rounded-xl p-4 shadow-lg border border-slate-700">
-          <img 
-            src="https://images.unsplash.com/photo-1535268647677-300dbf3d78d1" 
-            alt="Grey tabby kitten" 
-            className="w-full h-auto rounded-lg shadow-md"
-          />
-          <p className="text-slate-300 text-sm mt-3 text-center italic">
-            Our feline blockchain security expert
-          </p>
         </div>
       </motion.div>
     </div>
