@@ -6,6 +6,7 @@ import { RelayNode } from './components/RelayNode';
 import { LeaderBox } from './components/LeaderBox';
 import { AggregationAnimation } from './components/AggregationAnimation';
 import { StatusMessage } from './components/StatusMessage';
+import { useToast } from '@/hooks/use-toast';
 
 interface BLSStageTwoProps {
   activeSection: number;
@@ -20,6 +21,7 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
   const mounted = useRef(true);
   const transitionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const successTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const toast = useToast();
 
   // Reset state when formula changes
   useEffect(() => {
