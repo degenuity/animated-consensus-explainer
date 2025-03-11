@@ -20,7 +20,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [pdfError, setPdfError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [scale, setScale] = useState<number>(1.3); // Adjusted scale from 1.5 to 1.3
+  const [scale, setScale] = useState<number>(1.3);
 
   // Reset loading state when PDF URL changes
   useEffect(() => {
@@ -69,46 +69,50 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       : pdfUrl;
 
   return (
-    <div className="flex flex-col items-center w-full max-w-4xl mx-auto"> {/* Adjusted from 5xl to 4xl */}
+    <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
       {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
       
-      <div className="relative bg-white rounded-lg shadow-lg p-3 w-full overflow-auto max-h-[70vh]"> {/* Adjusted from 80vh to 70vh */}
-        {loading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-slate-100 bg-opacity-80 z-10">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-          </div>
-        )}
+      <div className="relative bg-white rounded-lg shadow-lg p-3 w-full flex flex-col">
+        {/* Fixed height container for PDF with overflow */}
+        <div className="overflow-auto h-[60vh] mb-4">
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-100 bg-opacity-80 z-10">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+          )}
+          
+          {pdfError ? (
+            <div className="text-center text-red-500 py-8 bg-slate-50 rounded">
+              <p>Failed to load PDF. Please check the URL and try again.</p>
+              <p className="text-sm mt-2">PDF URL: {pdfUrl}</p>
+              {errorMessage && (
+                <p className="text-xs mt-2 max-w-md mx-auto overflow-hidden text-gray-600">
+                  Error details: {errorMessage}
+                </p>
+              )}
+            </div>
+          ) : (
+            <Document
+              file={finalPdfUrl}
+              onLoadSuccess={onDocumentLoadSuccess}
+              onLoadError={onDocumentLoadError}
+              loading={<div className="text-center py-8">Loading PDF...</div>}
+              className="flex justify-center min-h-[40vh]"
+            >
+              <Page 
+                pageNumber={pageNumber} 
+                scale={scale}
+                renderTextLayer={true}
+                renderAnnotationLayer={true}
+                className="border border-slate-200"
+                width={window.innerWidth > 768 ? 700 : undefined}
+              />
+            </Document>
+          )}
+        </div>
         
-        {pdfError ? (
-          <div className="text-center text-red-500 py-8 bg-slate-50 rounded">
-            <p>Failed to load PDF. Please check the URL and try again.</p>
-            <p className="text-sm mt-2">PDF URL: {pdfUrl}</p>
-            {errorMessage && (
-              <p className="text-xs mt-2 max-w-md mx-auto overflow-hidden text-gray-600">
-                Error details: {errorMessage}
-              </p>
-            )}
-          </div>
-        ) : (
-          <Document
-            file={finalPdfUrl}
-            onLoadSuccess={onDocumentLoadSuccess}
-            onLoadError={onDocumentLoadError}
-            loading={<div className="text-center py-8">Loading PDF...</div>}
-            className="flex justify-center min-h-[50vh]" // Adjusted from 60vh to 50vh
-          >
-            <Page 
-              pageNumber={pageNumber} 
-              scale={scale}
-              renderTextLayer={true}
-              renderAnnotationLayer={true}
-              className="border border-slate-200"
-              width={window.innerWidth > 768 ? 700 : undefined} // Adjusted from 800 to 700
-            />
-          </Document>
-        )}
-        
-        <div className="flex justify-between items-center mt-4 px-2 flex-wrap gap-2">
+        {/* Controls are now outside the scrollable area and always visible */}
+        <div className="flex justify-between items-center px-2 flex-wrap gap-2 bg-white py-2 border-t border-slate-200">
           <div className="flex items-center space-x-2">
             <Button
               onClick={previousPage}
