@@ -7,8 +7,8 @@ import { ArrowLeft } from "lucide-react";
 import PDFViewer from "@/components/PDFViewer";
 
 const Whitepaper = () => {
-  // Create an absolute path for the PDF file
-  const pdfPath = `${window.location.origin}/X1-WHITEPAPER-02032025.pdf`;
+  // Using the GitHub raw content URL for reliability on the live site
+  const pdfUrl = "https://raw.githubusercontent.com/degenuity/animated-consensus-explainer/main/X1-WHITEPAPER-02032025.pdf";
   
   return (
     <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
@@ -42,7 +42,7 @@ const Whitepaper = () => {
         </h1>
 
         <PDFViewer 
-          pdfUrl={pdfPath} 
+          pdfUrl={pdfUrl} 
           title="X1 Blockchain Technical Whitepaper"
         />
       </motion.div>
