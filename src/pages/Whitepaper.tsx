@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import PDFViewer from "@/components/PDFViewer";
 
 const Whitepaper = () => {
   return (
@@ -25,7 +26,7 @@ const Whitepaper = () => {
         transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto"
       >
-        <div className="flex items-center mb-8">
+        <div className="flex items-center justify-between mb-8">
           <Link to="/">
             <Button variant="ghost" className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent flex items-center gap-2">
               <ArrowLeft size={16} />
@@ -38,29 +39,10 @@ const Whitepaper = () => {
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">X1 Whitepaper</span>
         </h1>
 
-        <div className="bg-slate-800/50 p-8 rounded-lg shadow-lg">
-          <p className="text-lg mb-6">
-            This is the X1 Whitepaper page. Here you can find detailed information about the X1 blockchain
-            technology and its innovations.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <div className="bg-slate-700/50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-2 text-blue-400">Consensus</h3>
-              <p>X1's innovative consensus mechanism combines security with high performance.</p>
-            </div>
-            
-            <div className="bg-slate-700/50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-2 text-green-400">Scalability</h3>
-              <p>How X1 achieves high throughput while maintaining decentralization.</p>
-            </div>
-            
-            <div className="bg-slate-700/50 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-2 text-purple-400">Tokenomics</h3>
-              <p>The economic model behind X1's ecosystem and token distribution.</p>
-            </div>
-          </div>
-        </div>
+        <PDFViewer 
+          pdfUrl="/X1-WHITEPAPER-02032025.pdf" 
+          title="X1 Blockchain Technical Whitepaper"
+        />
       </motion.div>
     </div>
   );
