@@ -25,7 +25,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
       }}
     >
       <motion.div 
-        className={`w-16 h-16 rounded-xl bg-slate-800 flex items-center justify-center shadow-md flex-col transition-all duration-300 overflow-hidden relative`}
+        className="w-16 h-16 rounded-xl bg-slate-800 flex items-center justify-center shadow-md flex-col transition-all duration-300 overflow-hidden relative"
         initial={{ 
           borderColor: "rgb(239, 68, 68)",
           border: "2px solid rgb(239, 68, 68)"
@@ -35,10 +35,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
           border: leaderReceived ? "2px solid rgb(74, 222, 128)" : "2px solid rgb(239, 68, 68)",
           boxShadow: leaderReceived ? 
             ["0 0 0px rgba(74, 222, 128, 0)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] : 
-            ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"],
-          backgroundColor: leaderReceived ? 
-            ["rgb(30 41 59)", "rgb(20 83 45 / 30%)", "rgb(30 41 59)"] : 
-            ["rgb(30 41 59)", "rgb(127 29 29 / 30%)", "rgb(30 41 59)"]
+            ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"]
         }}
         transition={{ 
           duration: 2, 
@@ -66,14 +63,10 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
           className="text-sm font-bold"
           initial={{ color: "rgb(248 113 113)" }}
           animate={{
-            color: leaderReceived ? "rgb(74 222 128)" : "rgb(248 113 113)",
-            textShadow: showSuccessEffect ? 
-              ["0 0 0px rgba(74, 222, 128, 0)", "0 0 10px rgba(74, 222, 128, 0.7)", "0 0 0px rgba(74, 222, 128, 0)"] : 
-              leaderReceived ? "none" : ["0 0 0px rgba(239, 68, 68, 0)", "0 0 10px rgba(239, 68, 68, 0.7)", "0 0 0px rgba(239, 68, 68, 0)"]
+            color: leaderReceived ? "rgb(74 222 128)" : "rgb(248 113 113)"
           }}
           transition={{ 
-            duration: 1.5, 
-            repeat: Infinity
+            duration: 0.3
           }}
         >
           Leader
