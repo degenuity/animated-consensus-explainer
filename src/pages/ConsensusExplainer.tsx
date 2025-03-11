@@ -70,19 +70,21 @@ const ConsensusExplainer = () => {
                 Back to Home
               </Button>
             </Link>
-            
-            <Button 
-              className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-6"
-              onClick={scrollToModels}
-            >
-              Models
-            </Button>
           </div>
         </div>
 
-        <h1 className="text-4xl font-bold text-center mb-12">
+        <h1 className="text-4xl font-bold text-center mb-4">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">VRF-Based Subcommittees and BLS Aggregation</span>
         </h1>
+        
+        <div className="flex justify-center mb-12">
+          <Button 
+            className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-6"
+            onClick={scrollToModels}
+          >
+            Models
+          </Button>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
