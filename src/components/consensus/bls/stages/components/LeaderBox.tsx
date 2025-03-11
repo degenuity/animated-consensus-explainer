@@ -21,11 +21,12 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
   }, [leaderReceived, showSuccessEffect, verificationComplete]);
   
   // Define border and background classes based on the states
-  const borderClass = verificationComplete 
+  // When showSuccessEffect is true (animation starts), we'll use green
+  const borderClass = showSuccessEffect || verificationComplete 
     ? 'border-green-500' 
     : 'border-red-500';
   
-  const glowClass = verificationComplete
+  const glowClass = showSuccessEffect || verificationComplete
     ? 'green-glow'
     : 'red-glow';
   
@@ -47,7 +48,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
       <motion.div 
         className={`w-16 h-16 rounded-xl bg-slate-800 flex items-center justify-center shadow-md flex-col transition-all duration-300 overflow-hidden relative border-2 ${borderClass} ${glowClass}`}
         animate={{
-          boxShadow: verificationComplete ?
+          boxShadow: showSuccessEffect || verificationComplete ?
             ["0 0 0px rgba(74, 222, 128, 0)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] :
             ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"]
         }}
@@ -59,7 +60,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
       >
         {showSuccessEffect && (
           <motion.div
-            className={`absolute inset-0 ${verificationComplete ? 'bg-green-500/10' : 'bg-red-500/10'}`}
+            className="absolute inset-0 bg-green-500/10"
             initial={{ opacity: 0 }}
             animate={{ 
               opacity: [0, 0.6, 0],
@@ -76,7 +77,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
         <motion.span
           className="text-sm font-bold"
           animate={{
-            color: verificationComplete ? 
+            color: showSuccessEffect || verificationComplete ? 
               "rgb(74 222 128)" :
               "rgb(248 113 113)"
           }}
@@ -102,7 +103,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
             }}
             className="mt-1"
           >
-            <Check size={16} className={verificationComplete ? "text-green-400" : "text-red-400"} />
+            <Check size={16} className={showSuccessEffect || verificationComplete ? "text-green-400" : "text-red-400"} />
           </motion.div>
         )}
       </motion.div>
