@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowDown } from "lucide-react";
 import { VRFSection } from '@/components/consensus/VRFSection';
 import { BLSSection } from '@/components/consensus/BLSSection';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -80,10 +80,11 @@ const ConsensusExplainer = () => {
         <div className="flex justify-center mb-12">
           <Button 
             variant="ghost" 
-            className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent"
+            className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent flex items-center gap-2"
             onClick={scrollToModels}
           >
             Models
+            <ArrowDown size={16} />
           </Button>
         </div>
 
