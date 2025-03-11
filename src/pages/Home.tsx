@@ -30,7 +30,7 @@ const Home = () => {
             </Button>
           </Link>
           
-          <Link to="/models">
+          <Link to="/consensus#models-section">
             <Button className="bg-purple-500 hover:bg-purple-600 text-white text-lg px-8 py-6 rounded-lg font-medium w-full sm:w-auto">
               Models
             </Button>

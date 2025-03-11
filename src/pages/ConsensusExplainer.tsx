@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -41,6 +42,14 @@ const ConsensusExplainer = () => {
   const getVRFActiveState = () => isMobile ? true : activeSection === 0;
   const getBLSActiveState = () => isMobile ? true : activeSection === 1;
 
+  // Scroll to models section when the Models button is clicked
+  const scrollToModels = () => {
+    const modelsSection = document.getElementById('models-section');
+    if (modelsSection) {
+      modelsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
@@ -57,11 +66,12 @@ const ConsensusExplainer = () => {
             </Button>
           </Link>
           
-          <Link to="/models">
-            <Button className="bg-purple-500 hover:bg-purple-600 text-white">
-              Models
-            </Button>
-          </Link>
+          <Button 
+            className="bg-purple-500 hover:bg-purple-600 text-white"
+            onClick={scrollToModels}
+          >
+            Models
+          </Button>
         </div>
 
         <h1 className="text-4xl font-bold text-center mb-12">
@@ -80,8 +90,9 @@ const ConsensusExplainer = () => {
           <PDFViewer pdfUrl={pdfUrl} title="Vote Optimization with BLS in Large Decentralized Networks" />
         </motion.div>
 
-        {/* Models Title */}
+        {/* Models Title with ID for scroll target */}
         <motion.h2
+          id="models-section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
