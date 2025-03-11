@@ -72,7 +72,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
               disabled={pageNumber <= 1}
               variant="outline"
               size="sm"
-              className="flex items-center"
+              className="flex items-center text-black hover:text-blue-500"
             >
               <ChevronLeft size={16} />
               Previous
@@ -83,7 +83,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
               disabled={pageNumber >= (numPages || 1)}
               variant="outline"
               size="sm"
-              className="flex items-center"
+              className="flex items-center text-black hover:text-blue-500"
             >
               Next
               <ChevronRight size={16} />
@@ -95,7 +95,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
           </p>
           
           <a href={pdfUrl} download target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="sm" className="flex items-center gap-1">
+            <Button variant="outline" size="sm" className="flex items-center gap-1 text-black hover:text-blue-500">
               <Download size={16} />
               Download
             </Button>
