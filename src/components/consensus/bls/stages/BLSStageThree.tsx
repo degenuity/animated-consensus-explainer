@@ -182,9 +182,9 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         </motion.div>
       </motion.div>
       
-      {/* Verification Time Info */}
+      {/* Verification Time Info - Moved lower (from bottom-[10%] to bottom-[5%]) */}
       <motion.div 
-        className="absolute right-[15%] bottom-[10%] bg-slate-800/80 backdrop-blur border border-green-500 rounded-lg px-4 py-2 shadow-lg"
+        className="absolute right-[15%] bottom-[5%] bg-slate-800/80 backdrop-blur border border-green-500 rounded-lg px-4 py-2 shadow-lg"
         initial={{ opacity: 0, y: 20, scale: 0.9 }}
         animate={{
           opacity: 1,
