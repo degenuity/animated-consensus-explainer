@@ -7,7 +7,7 @@ import { ArrowLeft } from "lucide-react";
 
 const Apples = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto relative">
         {/* X1 Logo in top left */}
         <Link to="/" className="absolute left-0 top-0">
@@ -27,7 +27,7 @@ const Apples = () => {
       >
         <div className="flex items-center mb-8">
           <Link to="/">
-            <Button variant="ghost" className="text-white hover:bg-slate-700 flex items-center gap-2">
+            <Button variant="ghost" className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent flex items-center gap-2">
               <ArrowLeft size={16} />
               Back to Home
             </Button>
@@ -35,7 +35,7 @@ const Apples = () => {
         </div>
 
         <h1 className="text-4xl font-bold text-center mb-12">
-          <span className="text-white">Apples</span>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Apples</span>
         </h1>
 
         <div className="bg-slate-800/50 p-8 rounded-lg shadow-lg">
