@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export const LeaderNode: React.FC = () => {
   return (
     <motion.div
-      className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 z-20"
+      className="absolute top-1/2 left-[25%] transform -translate-x-1/2 -translate-y-1/2 z-20"
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 0.2, type: "spring" }}

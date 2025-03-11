@@ -8,7 +8,7 @@ import {
   VerificationTimeInfo,
   AggregatedSignatureFlow,
   StatusIndicator
-} from './BLSStageThree';
+} from './BLSStageThree/index';
 
 interface BLSStageThreeProps {
   activeSection: number;

@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 export const LeaderVerification: React.FC = () => {
   return (
     <motion.div
-      className="absolute top-1/2 right-10 transform -translate-y-1/2 z-10"
+      className="absolute top-1/2 right-[15%] transform -translate-y-1/2 z-10"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ 
         opacity: 1, 
