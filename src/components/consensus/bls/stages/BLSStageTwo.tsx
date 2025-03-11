@@ -42,7 +42,7 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     const successTimer = setTimeout(() => {
       setShowSuccessEffect(true);
       
-      // Don't set animationComplete immediately so the Agg box stays visible
+      // Don't set animationComplete immediately so the Agg box stays visible for a while
       setTimeout(() => {
         setAnimationComplete(true);
       }, 5000);

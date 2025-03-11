@@ -12,9 +12,10 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
   
   useEffect(() => {
     const animate = async () => {
+      // Move the box to a position where its left side will touch the leader box's left side
       await controls.start({
         opacity: [0, 1, 1],
-        x: [0, 40, 40],
+        x: [0, 80, 80], // Increased x position to better reach the leader box
         scale: [0.8, 1.2, 1]
       });
       
@@ -26,6 +27,11 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
     };
     
     animate();
+    
+    // Reset the ref when the component unmounts or gets updated
+    return () => {
+      hasTriggeredCallback.current = false;
+    };
   }, [controls, onComplete]);
 
   return (
