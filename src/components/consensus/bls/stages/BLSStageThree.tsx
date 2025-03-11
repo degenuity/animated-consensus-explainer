@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -17,16 +16,13 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
   const restartTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const eventDispatchedRef = useRef(false);
   
-  // Reset state when component becomes inactive
   useEffect(() => {
     if (activeSection !== 1 || activeFormula !== 2) {
-      // Clear state
       setVerifiedSignatures([]);
       setCompletionPause(false);
       setIsAnimationComplete(false);
       eventDispatchedRef.current = false;
       
-      // Clear any running timers
       if (verifyIntervalRef.current) {
         clearInterval(verifyIntervalRef.current);
         verifyIntervalRef.current = null;
@@ -39,7 +35,6 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
       return;
     }
     
-    // Reset the verification state when component becomes active
     if (!isAnimationComplete) {
       setVerifiedSignatures([]);
       setCompletionPause(false);
@@ -48,7 +43,6 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
     }
     
     return () => {
-      // Cleanup timers on unmount
       if (verifyIntervalRef.current) {
         clearInterval(verifyIntervalRef.current);
         verifyIntervalRef.current = null;
@@ -61,9 +55,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
     };
   }, [activeSection, activeFormula, isAnimationComplete]);
   
-  // Function to start verification process
   const startVerificationProcess = () => {
-    // Clear existing interval if any
     if (verifyIntervalRef.current) {
       clearInterval(verifyIntervalRef.current);
       verifyIntervalRef.current = null;
@@ -71,34 +63,28 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
     
     let count = 0;
     
-    // Start new interval for signature verification
     verifyIntervalRef.current = setInterval(() => {
       if (count < 10) {
         count++;
         setVerifiedSignatures(prev => [...prev, prev.length]);
       } else {
-        // Stop the interval after all 10 are verified
         if (verifyIntervalRef.current) {
           clearInterval(verifyIntervalRef.current);
           verifyIntervalRef.current = null;
         }
         
-        // Set completion state
         setCompletionPause(true);
         setIsAnimationComplete(true);
         
-        // Only dispatch event after 5 second pause if we haven't already
         if (!eventDispatchedRef.current) {
           console.log("Stage 3 completed, waiting 5 seconds before resetting to Stage 1");
           
-          // Set timeout for the restart - INCREASED FROM 3 to 5 SECONDS
           restartTimeoutRef.current = setTimeout(() => {
             console.log("Dispatching bls-verification-complete event");
-            // Dispatch event to parent component to restart animation
             const event = new CustomEvent('bls-verification-complete');
             document.dispatchEvent(event);
             eventDispatchedRef.current = true;
-          }, 5000); // Increased from 3000 to 5000 ms
+          }, 5000);
         }
       }
     }, 250);
@@ -106,7 +92,6 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
   
   if (activeSection !== 1 || activeFormula !== 2) return null;
   
-  // Determine if verification is complete (all 10 signatures verified)
   const allSignaturesVerified = verifiedSignatures.length === 10;
   
   return (
@@ -118,7 +103,6 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
     >
       <div className="relative w-full h-full flex justify-center items-center">
         <div className="flex flex-row items-center justify-center gap-8 max-w-3xl">
-          {/* Leader Node - Left Side */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -157,7 +141,6 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
             </motion.div>
           </motion.div>
           
-          {/* Aggregation Box with Signatures - Right Side */}
           <motion.div 
             className="bg-slate-800/90 backdrop-blur rounded-lg p-3 border border-red-500/50 shadow-lg max-w-[330px] mb-6"
             initial={{ opacity: 0, y: 20 }}
@@ -234,14 +217,12 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
           </motion.div>
         </div>
         
-        {/* Add LeaderBox overlay in the correct position */}
         <LeaderBox 
           leaderReceived={true} 
           showSuccessEffect={completionPause} 
           verificationComplete={allSignaturesVerified}
         />
         
-        {/* Status Indicator - Bottom */}
         <div className="absolute bottom-4 left-0 right-0 text-center">
           <motion.div 
             className={`text-xs font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border ${allSignaturesVerified ? 'border-green-500/30 text-green-300' : 'border-red-500/30 text-red-300'}`}
