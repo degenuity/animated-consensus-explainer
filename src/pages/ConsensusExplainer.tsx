@@ -63,7 +63,7 @@ const ConsensusExplainer = () => {
             />
           </Link>
           
-          <div className="flex items-center justify-between w-full ml-20">
+          <div className="flex items-center justify-end w-full">
             <Link to="/">
               <Button variant="ghost" className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent flex items-center gap-2">
                 <ArrowLeft size={16} />
