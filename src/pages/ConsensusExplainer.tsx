@@ -1,6 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 import { VRFSection } from '@/components/consensus/VRFSection';
 import { BLSSection } from '@/components/consensus/BLSSection';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -43,6 +46,15 @@ const ConsensusExplainer = () => {
         transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto"
       >
+        <div className="flex items-center justify-between mb-8">
+          <Link to="/">
+            <Button variant="ghost" className="text-white hover:bg-slate-700 flex items-center gap-2">
+              <ArrowLeft size={16} />
+              Back to Home
+            </Button>
+          </Link>
+        </div>
+
         <h1 className="text-4xl font-bold text-center mb-12">
           <span className="text-white">Scaling Consensus on </span>
           <span className="text-white">X</span>
