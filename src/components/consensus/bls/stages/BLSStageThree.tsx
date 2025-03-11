@@ -125,16 +125,16 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
             transition={{ delay: 0.2, type: "spring" }}
           >
             <motion.div 
-              className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-indigo-500 flex flex-col items-center justify-center shadow-lg"
+              className={`w-24 h-24 rounded-lg bg-slate-800 border-2 ${allSignaturesVerified ? 'border-green-500' : 'border-red-500'} flex flex-col items-center justify-center shadow-lg ${allSignaturesVerified ? 'green-glow' : 'red-glow'}`}
               animate={{
                 boxShadow: completionPause ? 
                   allSignaturesVerified ? 
                     '0 0 15px rgba(74, 222, 128, 0.3)' : 
-                    '0 0 15px rgba(139, 92, 246, 0.3)' : 
+                    '0 0 15px rgba(239, 68, 68, 0.3)' : 
                   [
-                    '0 0 0px rgba(139, 92, 246, 0)',
-                    '0 0 15px rgba(139, 92, 246, 0.3)',
-                    '0 0 0px rgba(139, 92, 246, 0)'
+                    '0 0 0px rgba(239, 68, 68, 0)',
+                    '0 0 15px rgba(239, 68, 68, 0.3)',
+                    '0 0 0px rgba(239, 68, 68, 0)'
                   ]
               }}
               transition={{ 
@@ -143,7 +143,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
               }}
             >
               <motion.span
-                className={`text-lg font-bold ${allSignaturesVerified ? "text-green-400" : "text-indigo-400"} mb-1`}
+                className={`text-lg font-bold ${allSignaturesVerified ? "text-green-400" : "text-red-400"} mb-1`}
               >
                 Leader
               </motion.span>
@@ -159,18 +159,36 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
           
           {/* Aggregation Box with Signatures - Right Side */}
           <motion.div 
-            className="bg-slate-800/90 backdrop-blur rounded-lg p-3 border border-indigo-500/50 shadow-lg max-w-[330px] mb-6"
+            className="bg-slate-800/90 backdrop-blur rounded-lg p-3 border border-red-500/50 shadow-lg max-w-[330px] mb-6"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0,
+              borderColor: allSignaturesVerified ? "rgba(74, 222, 128, 0.5)" : "rgba(239, 68, 68, 0.5)"
+            }}
+            transition={{ 
+              delay: 0.4,
+              borderColor: { duration: 0.5 }
+            }}
           >
-            <motion.div className="text-sm font-medium text-indigo-400 mb-2 flex items-center">
+            <motion.div className="text-sm font-medium mb-2 flex items-center">
               <motion.div 
-                className="w-6 h-6 rounded-md bg-indigo-500 flex items-center justify-center shadow-md mr-2"
+                className={`w-6 h-6 rounded-md ${allSignaturesVerified ? 'bg-green-500' : 'bg-red-500'} flex items-center justify-center shadow-md mr-2`}
+                animate={{ 
+                  backgroundColor: allSignaturesVerified ? "rgb(74, 222, 128)" : "rgb(239, 68, 68)"
+                }}
+                transition={{ duration: 0.5 }}
               >
                 <span className="text-white font-bold text-xs">Agg</span>
               </motion.div>
-              Aggregated Signatures
+              <motion.span
+                animate={{ 
+                  color: allSignaturesVerified ? "rgb(74, 222, 128)" : "rgb(248, 113, 113)"
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                Aggregated Signatures
+              </motion.span>
             </motion.div>
             <div className="h-[210px] overflow-y-auto pr-2 grid grid-cols-2 gap-2">
               {Array.from({ length: 10 }).map((_, index) => (
@@ -216,7 +234,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
           </motion.div>
         </div>
         
-        {/* Add LeaderBox overlay */}
+        {/* Add LeaderBox overlay in the correct position */}
         <LeaderBox 
           leaderReceived={true} 
           showSuccessEffect={completionPause} 
@@ -226,18 +244,18 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         {/* Status Indicator - Bottom */}
         <div className="absolute bottom-4 left-0 right-0 text-center">
           <motion.div 
-            className="text-xs text-indigo-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border border-indigo-500/30"
+            className={`text-xs font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border ${allSignaturesVerified ? 'border-green-500/30 text-green-300' : 'border-red-500/30 text-red-300'}`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
             <motion.span 
-              className={`inline-block w-2 h-2 rounded-full ${allSignaturesVerified ? "bg-green-400" : "bg-indigo-400"} mr-1.5 align-middle`}
+              className={`inline-block w-2 h-2 rounded-full ${allSignaturesVerified ? "bg-green-400" : "bg-red-400"} mr-1.5 align-middle`}
               animate={{ opacity: completionPause ? 1 : [1, 0.4, 1] }}
               transition={{ duration: 1.5, repeat: completionPause ? 0 : Infinity }}
             />
             <span className="mr-1">Verifying signatures:</span>
-            <span className={`${allSignaturesVerified ? "text-green-400" : "text-indigo-400"} font-bold`}>
+            <span className={`${allSignaturesVerified ? "text-green-400" : "text-red-400"} font-bold`}>
               {verifiedSignatures.length}
             </span>
             <span className="text-gray-400">/10</span>

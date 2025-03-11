@@ -116,7 +116,11 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     >
       <Validators count={10} />
       <RelayNode showSuccessEffect={showSuccessEffect} />
-      <LeaderBox leaderReceived={leaderReceived} showSuccessEffect={showSuccessEffect} />
+      <LeaderBox 
+        leaderReceived={leaderReceived} 
+        showSuccessEffect={showSuccessEffect} 
+        verificationComplete={stageComplete} 
+      />
       {!animationComplete && (
         <AggregationAnimation onComplete={handleAggregationComplete} />
       )}
