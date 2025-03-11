@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   BLSStageOne, 
   BLSStageTwo, 
@@ -12,11 +12,13 @@ import { ChevronLeft, ChevronRight, Circle } from 'lucide-react';
 interface BLSVisualizationProps {
   activeSection: number | null;
   activeFormula: number;
+  setActiveFormula?: (formula: number) => void;
 }
 
 export const BLSVisualization: React.FC<BLSVisualizationProps> = ({ 
   activeSection, 
-  activeFormula: externalActiveFormula 
+  activeFormula: externalActiveFormula,
+  setActiveFormula
 }) => {
   // When component is active (hovered), use local state for the formula/stage
   const [localActiveFormula, setLocalActiveFormula] = useState(0);
@@ -25,27 +27,34 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
   const activeFormula = activeSection === 1 ? localActiveFormula : externalActiveFormula;
   
   const handlePrevStage = () => {
-    setLocalActiveFormula(prev => (prev - 1 + 3) % 3);  // Ensure we wrap around from 0 to 2
+    const newFormula = (localActiveFormula - 1 + 3) % 3;
+    setLocalActiveFormula(newFormula);
+    if (setActiveFormula) setActiveFormula(newFormula);
   };
   
   const handleNextStage = () => {
-    setLocalActiveFormula(prev => (prev + 1) % 3);
+    const newFormula = (localActiveFormula + 1) % 3;
+    setLocalActiveFormula(newFormula);
+    if (setActiveFormula) setActiveFormula(newFormula);
   };
   
   const handleSelectStage = (stage: number) => {
     setLocalActiveFormula(stage);
+    if (setActiveFormula) setActiveFormula(stage);
   };
   
   // Force update local formula when external one changes
-  React.useEffect(() => {
-    if (activeSection === 1) {
-      setLocalActiveFormula(externalActiveFormula);
-    }
-  }, [externalActiveFormula, activeSection]);
+  useEffect(() => {
+    setLocalActiveFormula(externalActiveFormula);
+  }, [externalActiveFormula]);
 
   return (
     <div className="relative h-80 sm:h-96 flex items-center justify-center">
-      <BLSStageOne activeSection={activeSection} activeFormula={activeFormula} />
+      <BLSStageOne 
+        key={`stage-one-${activeFormula === 0 ? 'active' : 'inactive'}`} 
+        activeSection={activeSection} 
+        activeFormula={activeFormula} 
+      />
       <BLSStageTwo activeSection={activeSection} activeFormula={activeFormula} />
       <BLSStageThree activeSection={activeSection} activeFormula={activeFormula} />
       <BLSIdleAnimation activeSection={activeSection} />

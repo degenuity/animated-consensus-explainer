@@ -18,7 +18,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
   setIsVoteReductionOpen
 }) => {
   const [activeFormula, setActiveFormula] = useState(0);
-  const [animationKey, setAnimationKey] = useState(0); // Add a key to force re-render
+  const [animationKey, setAnimationKey] = useState(0); // For resetting animations
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     const handleVerificationComplete = () => {
       // Reset to Stage 1
       setActiveFormula(0);
-      // Force re-render of Stage 1 by updating the key
+      // Force re-render of the visualization by updating the key
       setAnimationKey(prevKey => prevKey + 1);
     };
     
@@ -77,6 +77,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               key={animationKey} 
               activeSection={isMobile ? 1 : activeSection} 
               activeFormula={activeFormula} 
+              setActiveFormula={setActiveFormula}
             />
             <div className="h-10"></div> {/* Added space for the toggle controls */}
           </div>
