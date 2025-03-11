@@ -29,7 +29,12 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
           times: [0, 0.3, 1],
           repeat: 0,
           delay: 1.5,
-          onComplete: onComplete
+          // Trigger the onComplete callback earlier, before the animation fully completes
+          onUpdate: (progress) => {
+            if (progress > 0.7 && onComplete) {
+              onComplete();
+            }
+          }
         }}
       >
         <div className="h-10 w-10 px-2 py-1 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
