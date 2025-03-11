@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -103,3 +104,13 @@
     @apply bg-background text-foreground font-satoshi;
   }
 }
+
+/* Add the missing glow effect classes */
+.red-glow {
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+}
+
+.green-glow {
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.3);
+}
+

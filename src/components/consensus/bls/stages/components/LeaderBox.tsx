@@ -23,15 +23,11 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
   // Define border and background classes based on the states
   const borderClass = verificationComplete 
     ? 'border-green-500' 
-    : leaderReceived 
-      ? 'border-red-500'
-      : 'border-red-500';
+    : 'border-red-500';
   
   const glowClass = verificationComplete
     ? 'green-glow'
-    : leaderReceived
-      ? 'red-glow'
-      : 'red-glow';
+    : 'red-glow';
   
   return (
     <motion.div
@@ -53,9 +49,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
         animate={{
           boxShadow: verificationComplete ?
             ["0 0 0px rgba(74, 222, 128, 0)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] :
-            leaderReceived ? 
-              ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"] : 
-              ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"]
+            ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"]
         }}
         transition={{ 
           duration: 2, 
@@ -84,9 +78,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
           animate={{
             color: verificationComplete ? 
               "rgb(74 222 128)" :
-              leaderReceived ? 
-                "rgb(248 113 113)" : 
-                "rgb(248 113 113)"
+              "rgb(248 113 113)"
           }}
           transition={{ 
             duration: 0.3
