@@ -6,7 +6,7 @@ import { Clock } from "lucide-react";
 export const VerificationTimeInfo: React.FC = () => {
   return (
     <motion.div 
-      className="absolute right-[15%] top-[75%] bg-slate-800/80 backdrop-blur border border-green-500 rounded-lg px-4 py-2 shadow-lg"
+      className="absolute right-[15%] bottom-[15%] bg-slate-800/80 backdrop-blur border border-green-500 rounded-lg px-4 py-2 shadow-lg"
       initial={{ opacity: 0, y: 20, scale: 0.9 }}
       animate={{
         opacity: 1,
