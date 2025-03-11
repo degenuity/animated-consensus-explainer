@@ -1,5 +1,5 @@
 
-import React, { ErrorBoundary, Suspense } from 'react'
+import React from 'react'
 import { Toaster } from "@/components/ui/toaster"
 import { Toaster as Sonner } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
@@ -16,7 +16,7 @@ import NotFound from "./pages/NotFound"
 const queryClient = new QueryClient()
 
 // Simple error boundary fallback
-const ErrorFallback = ({ error }) => {
+const ErrorFallback = ({ error }: { error: Error }) => {
   console.error("Application error:", error);
   return (
     <div className="min-h-screen bg-red-50 text-red-900 flex items-center justify-center p-4">
@@ -37,16 +37,17 @@ const ErrorFallback = ({ error }) => {
   );
 };
 
-class ErrorBoundaryWrapper extends React.Component {
-  state = { hasError: false, error: null };
+// Fixed ErrorBoundaryWrapper with proper children prop
+class ErrorBoundaryWrapper extends React.Component<{ children: React.ReactNode }> {
+  state = { hasError: false, error: null as Error | null };
   
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: Error) {
     return { hasError: true, error };
   }
   
   render() {
     if (this.state.hasError) {
-      return <ErrorFallback error={this.state.error} />;
+      return <ErrorFallback error={this.state.error!} />;
     }
     return this.props.children;
   }

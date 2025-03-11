@@ -14,6 +14,11 @@ window.addEventListener('error', (event) => {
   console.error("GLOBAL ERROR:", event.error)
 })
 
+// Listen for uncaught promises
+window.addEventListener('unhandledrejection', (event) => {
+  console.error("UNHANDLED PROMISE REJECTION:", event.reason)
+})
+
 // Get the root element
 const rootElement = document.getElementById('root')
 console.log("Root element found:", !!rootElement)
@@ -22,12 +27,9 @@ console.log("Root element found:", !!rootElement)
 try {
   if (rootElement) {
     console.log("Attempting to create root and render app...")
+    // Remove StrictMode temporarily to rule out double-rendering issues
     const root = ReactDOM.createRoot(rootElement)
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    )
+    root.render(<App />)
     console.log("===== Application Rendering Complete =====")
   } else {
     console.error("Root element not found")
@@ -35,5 +37,5 @@ try {
   }
 } catch (error) {
   console.error("CRITICAL RENDER ERROR:", error)
-  document.body.innerHTML = `<div style="color: red; padding: 20px;">Failed to render app: ${error.message}</div>`
+  document.body.innerHTML = `<div style="color: red; padding: 20px;">Failed to render app: ${error instanceof Error ? error.message : String(error)}</div>`
 }
