@@ -43,7 +43,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         
         return prev;
       });
-    }, 500);
+    }, 250); // Changed from 500ms to 250ms (twice as fast)
     
     return () => clearInterval(verifyInterval);
   }, [activeSection, activeFormula, completionPause]);
