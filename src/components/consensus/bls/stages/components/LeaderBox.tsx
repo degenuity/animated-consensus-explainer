@@ -57,7 +57,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
         )}
         
         <motion.span
-          className={`text-sm font-bold transition-colors duration-500 ${leaderReceived ? 'text-green-400' : 'text-red-400'}`}
+          className={`text-sm font-bold ${leaderReceived ? 'text-green-400' : 'text-red-400'}`}
           animate={{
             textShadow: showSuccessEffect ? 
               ["0 0 0px rgba(74, 222, 128, 0)", "0 0 10px rgba(74, 222, 128, 0.7)", "0 0 0px rgba(74, 222, 128, 0)"] : 

@@ -27,9 +27,9 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
         times: [0, 0.3, 1],
         repeat: 0,
         delay: 1.5,
-        // Trigger the onComplete callback when the animation reaches about halfway
+        // Trigger the onComplete callback when the animation reaches the leader
         onUpdate: (progress) => {
-          if (progress > 0.5 && onComplete) {
+          if (progress > 0.6 && onComplete) {
             onComplete();
           }
         }

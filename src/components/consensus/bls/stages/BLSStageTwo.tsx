@@ -28,7 +28,7 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
   }, [activeSection, activeFormula]);
 
   const handleAggregationComplete = () => {
-    // Immediate leader box color change when Agg touches it
+    // Leader box color change when Agg touches it
     setLeaderReceived(true);
     
     // Trigger success effect shortly after
