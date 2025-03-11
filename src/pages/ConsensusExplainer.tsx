@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -16,11 +15,9 @@ const ConsensusExplainer = () => {
   const [isVoteReductionOpen, setIsVoteReductionOpen] = useState(false);
   const isMobile = useIsMobile();
   
-  // Use the GitHub raw file URL for the PDF
   const pdfUrl = "https://raw.githubusercontent.com/degenuity/animated-consensus-explainer/main/Vote_Optimization_with_BLS_in_large_decentralized_networks_5.pdf";
 
   useEffect(() => {
-    // Only run node selection logic when VRF section is active or hovered or on mobile
     if (activeSection !== 0 && !isMobile) return;
     
     const selectRandomNodes = () => {
@@ -38,11 +35,9 @@ const ConsensusExplainer = () => {
     return () => clearInterval(selectionTimer);
   }, [activeSection, isMobile]);
 
-  // On mobile, we'll always display both sections as active
   const getVRFActiveState = () => isMobile ? true : activeSection === 0;
   const getBLSActiveState = () => isMobile ? true : activeSection === 1;
 
-  // Scroll to models section when the Models button is clicked
   const scrollToModels = () => {
     const modelsSection = document.getElementById('models-section');
     if (modelsSection) {
@@ -59,7 +54,6 @@ const ConsensusExplainer = () => {
         className="max-w-4xl mx-auto"
       >
         <div className="flex items-center justify-between mb-8 relative">
-          {/* X1 Logo in top left */}
           <Link to="/" className="absolute left-0 top-0">
             <img 
               src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
@@ -86,10 +80,9 @@ const ConsensusExplainer = () => {
         </div>
 
         <h1 className="text-4xl font-bold text-center mb-12">
-          <span className="text-white">X1 Research</span>
+          <span className="text-white">VRF-Based Subcommittees and BLS Aggregation</span>
         </h1>
 
-        {/* PDF Section - Title removed */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -99,7 +92,6 @@ const ConsensusExplainer = () => {
           <PDFViewer pdfUrl={pdfUrl} title="Vote Optimization with BLS in Large Decentralized Networks" />
         </motion.div>
 
-        {/* Models Title with ID for scroll target */}
         <motion.h2
           id="models-section"
           initial={{ opacity: 0, y: 20 }}
@@ -110,7 +102,6 @@ const ConsensusExplainer = () => {
           Models
         </motion.h2>
 
-        {/* First section - VRF-Based Subcommittee Selection */}
         <div 
           className="mb-10"
           onMouseEnter={() => !isMobile && setActiveSection(0)}
@@ -126,7 +117,6 @@ const ConsensusExplainer = () => {
           />
         </div>
 
-        {/* Second section - BLS Signature Aggregation */}
         <div
           className="mb-16"
           onMouseEnter={() => !isMobile && setActiveSection(1)}
