@@ -16,7 +16,7 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
       // Stopping at x:20 as requested
       await controls.start({
         opacity: [0, 1, 1],
-        x: [0, 20, 20], // Reduced x position to stop earlier at x:20
+        x: [0, 20, 20], // Keeping x position at 20
         scale: [0.8, 1.2, 1]
       });
       

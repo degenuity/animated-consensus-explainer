@@ -24,7 +24,29 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     setShowSuccessEffect(false);
     setAnimationComplete(false);
     
+    // Start a timer to set leaderReceived to true after a specific delay
+    // This simulates the "touching" effect but uses time instead
+    let leaderTimer: NodeJS.Timeout;
+    
+    if (activeSection === 1 && activeFormula === 1) {
+      // Set the leader to receive after 6.5 seconds (5s animation + 1.5s delay)
+      leaderTimer = setTimeout(() => {
+        setLeaderReceived(true);
+        
+        // Success effect shortly after
+        setTimeout(() => {
+          setShowSuccessEffect(true);
+          
+          // Don't set animationComplete immediately
+          setTimeout(() => {
+            setAnimationComplete(true);
+          }, 5000);
+        }, 200);
+      }, 6500);
+    }
+    
     const cleanup = () => {
+      clearTimeout(leaderTimer);
       setLeaderReceived(false);
       setShowSuccessEffect(false);
       setAnimationComplete(false);
@@ -33,34 +55,11 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     return cleanup;
   }, [activeSection, activeFormula]);
 
+  // This function is now just for completeness but won't actually control the state changes
   const handleAggregationComplete = useCallback(() => {
     console.log("Aggregation complete triggered");
-    // Leader box color change when Agg touches it
-    setLeaderReceived(true);
-    
-    // Trigger success effect shortly after
-    const successTimer = setTimeout(() => {
-      setShowSuccessEffect(true);
-      
-      // Don't set animationComplete immediately so the Agg box stays visible for a while
-      setTimeout(() => {
-        setAnimationComplete(true);
-      }, 5000);
-      
-      // Reset after 12 seconds to restart the animation
-      const resetTimer = setTimeout(() => {
-        if (activeSection === 1 && activeFormula === 1) {
-          setLeaderReceived(false);
-          setShowSuccessEffect(false);
-          setAnimationComplete(false);
-        }
-      }, 12000); // Increased to allow for full animation cycle with the slower Agg animation
-      
-      return () => clearTimeout(resetTimer);
-    }, 200); // Short delay to make verification happen quickly
-    
-    return () => clearTimeout(successTimer);
-  }, [activeSection, activeFormula]);
+    // We're not setting leaderReceived here anymore since we're using the timer approach
+  }, []);
 
   if (activeSection !== 1 || activeFormula !== 1) return null;
   
