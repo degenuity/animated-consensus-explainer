@@ -7,6 +7,9 @@ import { ArrowLeft } from "lucide-react";
 import PDFViewer from "@/components/PDFViewer";
 
 const Whitepaper = () => {
+  // Create an absolute path for the PDF file
+  const pdfPath = `${window.location.origin}/X1-WHITEPAPER-02032025.pdf`;
+  
   return (
     <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
@@ -39,7 +42,7 @@ const Whitepaper = () => {
         </h1>
 
         <PDFViewer 
-          pdfUrl="/X1-WHITEPAPER-02032025.pdf" 
+          pdfUrl={pdfPath} 
           title="X1 Blockchain Technical Whitepaper"
         />
       </motion.div>
