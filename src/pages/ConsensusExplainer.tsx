@@ -7,6 +7,7 @@ import { ArrowLeft } from "lucide-react";
 import { VRFSection } from '@/components/consensus/VRFSection';
 import { BLSSection } from '@/components/consensus/BLSSection';
 import { useIsMobile } from '@/hooks/use-mobile';
+import PDFViewer from "@/components/PDFViewer";
 
 const ConsensusExplainer = () => {
   const [activeSection, setActiveSection] = useState<number | null>(null);
@@ -14,6 +15,9 @@ const ConsensusExplainer = () => {
   const [isAdjustmentOpen, setIsAdjustmentOpen] = useState(false);
   const [isVoteReductionOpen, setIsVoteReductionOpen] = useState(false);
   const isMobile = useIsMobile();
+  
+  // PDF file path
+  const pdfUrl = "/Vote_Optimization_with_BLS_in_large_decentralized_networks_5.pdf";
 
   useEffect(() => {
     // Only run node selection logic when VRF section is active or hovered or on mobile
@@ -79,6 +83,7 @@ const ConsensusExplainer = () => {
 
         {/* Second section - BLS Signature Aggregation */}
         <div
+          className="mb-16"
           onMouseEnter={() => !isMobile && setActiveSection(1)}
           onMouseLeave={() => !isMobile && setActiveSection(null)}
         >
@@ -88,6 +93,17 @@ const ConsensusExplainer = () => {
             setIsVoteReductionOpen={setIsVoteReductionOpen}
           />
         </div>
+        
+        {/* PDF Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="max-w-4xl mx-auto"
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center">Consensus Whitepaper</h2>
+          <PDFViewer pdfUrl={pdfUrl} title="Vote Optimization with BLS in Large Decentralized Networks" />
+        </motion.div>
       </motion.div>
     </div>
   );
