@@ -19,11 +19,13 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
   const [pdfError, setPdfError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   // Reset loading state when PDF URL changes
   useEffect(() => {
     setLoading(true);
     setPdfError(false);
+    setErrorMessage('');
   }, [pdfUrl]);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
@@ -37,6 +39,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
     console.error('Error loading PDF:', error, pdfUrl);
     setLoading(false);
     setPdfError(true);
+    setErrorMessage(error.message || 'Unknown error');
   };
 
   const changePage = (offset: number) => {
@@ -67,6 +70,11 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
           <div className="text-center text-red-500 py-8 bg-slate-50 rounded">
             <p>Failed to load PDF. Please check the URL and try again.</p>
             <p className="text-sm mt-2">PDF URL: {pdfUrl}</p>
+            {errorMessage && (
+              <p className="text-xs mt-2 max-w-md mx-auto overflow-hidden text-gray-600">
+                Error details: {errorMessage}
+              </p>
+            )}
           </div>
         ) : (
           <Document

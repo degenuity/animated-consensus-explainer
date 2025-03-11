@@ -16,8 +16,8 @@ const ConsensusExplainer = () => {
   const [isVoteReductionOpen, setIsVoteReductionOpen] = useState(false);
   const isMobile = useIsMobile();
   
-  // PDF file path with proper absolute path
-  const pdfUrl = `${window.location.origin}/Vote_Optimization_with_BLS_in_large_decentralized_networks_5.pdf`;
+  // Update PDF URL to use the relative path that points to the file in the public folder
+  const pdfUrl = `/Vote_Optimization_with_BLS_in_large_decentralized_networks_5.pdf`;
 
   useEffect(() => {
     // Only run node selection logic when VRF section is active or hovered or on mobile
