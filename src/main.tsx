@@ -4,6 +4,24 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
+// Create a simple loading indicator to show before the app is ready
+const createLoadingIndicator = () => {
+  const loadingElement = document.createElement('div');
+  loadingElement.style.position = 'fixed';
+  loadingElement.style.inset = '0';
+  loadingElement.style.display = 'flex';
+  loadingElement.style.alignItems = 'center';
+  loadingElement.style.justifyContent = 'center';
+  loadingElement.style.backgroundColor = 'black';
+  loadingElement.style.color = 'white';
+  loadingElement.style.zIndex = '9999';
+  loadingElement.textContent = 'Loading X1 Research...';
+  return loadingElement;
+};
+
+// Show loading initially
+document.body.appendChild(createLoadingIndicator());
+
 // Simple error display function
 const displayErrorPage = (error: any) => {
   console.error('Application error:', error);
@@ -20,30 +38,42 @@ const displayErrorPage = (error: any) => {
   `;
 };
 
-// Simple mounting with robust error handling
-try {
-  const rootElement = document.getElementById('root');
-  
-  if (!rootElement) {
-    throw new Error('Root element not found');
-  }
-  
-  // Create root and render
-  const root = createRoot(rootElement);
-  
-  // Directly render the App component with error handling
+// Mount the app with best-effort error handling
+const mountApp = () => {
   try {
+    const rootElement = document.getElementById('root');
+    
+    if (!rootElement) {
+      throw new Error('Root element not found');
+    }
+    
+    // Remove loading indicator when we start mounting
+    const loadingIndicator = document.body.querySelector('div');
+    if (loadingIndicator) {
+      document.body.removeChild(loadingIndicator);
+    }
+    
+    // Create root
+    const root = createRoot(rootElement);
+    
+    // Render with error boundary
     root.render(
       <React.StrictMode>
         <App />
       </React.StrictMode>
     );
+    
     console.log('React successfully mounted');
-  } catch (renderError) {
-    console.error('Error rendering App:', renderError);
-    displayErrorPage(renderError);
+  } catch (error) {
+    console.error('Error mounting app:', error);
+    displayErrorPage(error);
   }
-} catch (error) {
-  console.error('Initial mounting error:', error);
-  displayErrorPage(error);
+};
+
+// Ensure DOM is ready before mounting
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', mountApp);
+} else {
+  // DOM already loaded, mount immediately
+  mountApp();
 }

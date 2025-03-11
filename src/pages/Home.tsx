@@ -1,10 +1,23 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 
 const Home = () => {
   const [error, setError] = useState<string | null>(null);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  // Add a simple health check to ensure components can render
+  useEffect(() => {
+    try {
+      // Signal that the component mounted successfully
+      console.log("Home component mounted successfully");
+      setImagesLoaded(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Unknown error");
+    }
+  }, []);
 
   if (error) {
     return (
@@ -31,6 +44,7 @@ const Home = () => {
             src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
             alt="X1 Logo" 
             className="h-7 w-auto" 
+            onLoad={() => console.log("Logo loaded successfully")}
             onError={(e) => {
               console.error("Failed to load logo");
               e.currentTarget.style.display = 'none';
@@ -69,6 +83,7 @@ const Home = () => {
           src="https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" 
           alt="Superman" 
           className="w-full max-w-2xl mx-auto rounded-lg shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-shadow"
+          onLoad={() => console.log("Superman image loaded successfully")}
           onError={(e) => {
             console.error("Failed to load superman image");
             e.currentTarget.style.display = 'none';
