@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from "framer-motion";
 import { Validators } from './components/Validators';
 import { RelayNode } from './components/RelayNode';
@@ -16,47 +15,54 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
   const [leaderReceived, setLeaderReceived] = useState(false);
   const [showSuccessEffect, setShowSuccessEffect] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
+  const mounted = useRef(true);
 
-  // Use this to directly trigger leader received state from the animation
-  const handleAggregationComplete = useCallback(() => {
-    console.log("Aggregation complete callback triggered, setting leaderReceived to true");
-    setLeaderReceived(true);
-    
-    // Add a slight delay before showing success effect
-    setTimeout(() => {
-      console.log("Setting showSuccessEffect to true");
-      setShowSuccessEffect(true);
-    }, 200);
-  }, []);
-
-  // Reset state when component changes visibility or formula changes
+  // Reset state when formula changes
   useEffect(() => {
-    console.log("BLSStageTwo effect triggered, activeSection:", activeSection, "activeFormula:", activeFormula);
+    console.log("BLSStageTwo stage/formula changed - resetting states");
     
-    // Reset states when section or formula changes
+    // Reset all states when we're not in the right stage/formula
+    if (activeSection !== 1 || activeFormula !== 1) {
+      setLeaderReceived(false);
+      setShowSuccessEffect(false);
+      setAnimationComplete(false);
+      return;
+    }
+    
+    // Keep track of component mount state to prevent updates after unmount
+    mounted.current = true;
+    
+    // Reset animation-related states when we first enter this formula
     setLeaderReceived(false);
     setShowSuccessEffect(false);
     setAnimationComplete(false);
     
-    // Only set additional timeout to complete animation if we're in stage 1 and formula 1
-    let completeTimer: NodeJS.Timeout;
-    
-    if (activeSection === 1 && activeFormula === 1 && leaderReceived) {
-      console.log("Setting timer for animation completion");
-      completeTimer = setTimeout(() => {
-        console.log("Setting animationComplete to true");
-        setAnimationComplete(true);
-      }, 5000);
-    }
-    
     return () => {
-      console.log("Cleaning up BLSStageTwo timers");
-      clearTimeout(completeTimer);
+      mounted.current = false;
     };
-  }, [activeSection, activeFormula, leaderReceived]);
+  }, [activeSection, activeFormula]);
+
+  // Use this to directly trigger leader received state from the animation
+  const handleAggregationComplete = useCallback(() => {
+    console.log("Aggregation complete callback triggered");
+    
+    if (!mounted.current) return;
+    
+    // Set leader received immediately after the animation completes
+    setLeaderReceived(true);
+    
+    // Add a slight delay before showing success effect
+    setTimeout(() => {
+      if (!mounted.current) return;
+      console.log("Setting showSuccessEffect to true");
+      setShowSuccessEffect(true);
+    }, 100);
+  }, []);
 
   // If we're not in the right section or formula, don't render
   if (activeSection !== 1 || activeFormula !== 1) return null;
+  
+  console.log("BLSStageTwo rendering with states:", { leaderReceived, showSuccessEffect, animationComplete });
   
   return (
     <motion.div

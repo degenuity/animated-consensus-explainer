@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 
@@ -9,7 +9,9 @@ interface LeaderBoxProps {
 }
 
 export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSuccessEffect }) => {
-  console.log("LeaderBox rendering with leaderReceived:", leaderReceived, "showSuccessEffect:", showSuccessEffect);
+  useEffect(() => {
+    console.log("LeaderBox rendering with leaderReceived:", leaderReceived, "showSuccessEffect:", showSuccessEffect);
+  }, [leaderReceived, showSuccessEffect]);
   
   // Define classes for the border based on the received state
   const borderClass = leaderReceived ? 'border-green-500' : 'border-red-500';
@@ -26,7 +28,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
       transition={{ 
         delay: 0.8, 
         type: "spring",
-        scale: { duration: 0.8, repeat: showSuccessEffect ? Infinity : 0 }
+        scale: { duration: 0.8, repeat: showSuccessEffect ? 3 : 0 }
       }}
     >
       <motion.div 

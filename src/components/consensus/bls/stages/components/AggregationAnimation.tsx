@@ -13,6 +13,10 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
   useEffect(() => {
     const animate = async () => {
       console.log("Starting aggregation animation");
+      
+      // Reset the ref when we start a new animation
+      hasTriggeredCallback.current = false;
+      
       // Make the box appear and move to position x:20
       await controls.start({
         opacity: [0, 1, 1],
@@ -48,10 +52,10 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
       initial={{ opacity: 0, x: 0 }}
       animate={controls}
       transition={{
-        duration: 3, // Slightly faster animation for debugging
+        duration: 2, // Even faster animation for testing
         times: [0, 0.3, 1],
         repeat: 0,
-        delay: 1,
+        delay: 0.5, // Reduced delay for testing
       }}
     >
       <motion.div 
