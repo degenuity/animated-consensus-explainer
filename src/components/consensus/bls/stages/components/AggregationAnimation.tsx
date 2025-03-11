@@ -21,8 +21,8 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
         initial={{ opacity: 0, x: 0 }}
         animate={{
           opacity: [0, 1, 1],
-          x: [0, 20, 20],
-          scale: [0.8, 1.2, 1.2]
+          x: [0, 40, 40],
+          scale: [0.8, 1.2, 1]
         }}
         transition={{
           duration: 2,
@@ -38,7 +38,7 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
         }}
       >
         <motion.div 
-          className="h-10 w-10 px-2 py-1 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg shadow-indigo-500/30"
+          className="h-10 w-10 px-2 py-1 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg"
           animate={{ 
             boxShadow: ["0px 0px 0px rgba(99, 102, 241, 0.3)", "0px 0px 15px rgba(99, 102, 241, 0.5)", "0px 0px 5px rgba(99, 102, 241, 0.3)"]
           }}

@@ -38,7 +38,7 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
       // Don't set animationComplete immediately so the Agg box stays visible
       setTimeout(() => {
         setAnimationComplete(true);
-      }, 1000);
+      }, 1500);
       
       // Reset after 5 seconds to restart the animation
       const resetTimer = setTimeout(() => {
@@ -50,7 +50,7 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
       }, 5000); // Keep as 5000 ms
       
       return () => clearTimeout(resetTimer);
-    }, 200); // Reduced delay to make verification happen quicker
+    }, 200); // Short delay to make verification happen quickly
     
     return () => clearTimeout(successTimer);
   };
