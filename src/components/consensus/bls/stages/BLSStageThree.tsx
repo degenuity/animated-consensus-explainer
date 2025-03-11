@@ -10,15 +10,18 @@ interface BLSStageThreeProps {
 
 export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, activeFormula }) => {
   const [verifiedSignatures, setVerifiedSignatures] = useState<number[]>([]);
+  const [completionPause, setCompletionPause] = useState(false);
   
   useEffect(() => {
     if (activeSection !== 1 || activeFormula !== 2) {
       setVerifiedSignatures([]);
+      setCompletionPause(false);
       return;
     }
     
     // Clear the verification state
     setVerifiedSignatures([]);
+    setCompletionPause(false);
     
     // Verify signatures one by one
     const verifyInterval = setInterval(() => {
@@ -26,12 +29,24 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         if (prev.length < 10) {
           return [...prev, prev.length];
         }
+        
+        // When all 10 signatures are verified, trigger the pause
+        if (prev.length === 10 && !completionPause) {
+          setCompletionPause(true);
+          
+          // After 2 seconds, reset the verification state
+          setTimeout(() => {
+            setVerifiedSignatures([]);
+            setCompletionPause(false);
+          }, 2000);
+        }
+        
         return prev;
       });
     }, 500);
     
     return () => clearInterval(verifyInterval);
-  }, [activeSection, activeFormula]);
+  }, [activeSection, activeFormula, completionPause]);
   
   if (activeSection !== 1 || activeFormula !== 2) return null;
   
@@ -91,7 +106,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
               </motion.div>
               Aggregated Signatures
             </motion.div>
-            <div className="h-[200px] overflow-y-auto pr-2 grid grid-cols-2 gap-2">
+            <div className="h-[180px] overflow-y-auto pr-2 grid grid-cols-2 gap-2">
               {Array.from({ length: 10 }).map((_, index) => (
                 <motion.div
                   key={index}
