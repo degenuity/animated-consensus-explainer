@@ -18,68 +18,71 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
       exit={{ opacity: 0 }}
       className="absolute inset-0"
     >
-      {/* Leader Node */}
-      <motion.div
-        className="absolute top-1/2 left-[15%] transform -translate-x-1/2 -translate-y-1/2 z-20"
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 0.2, type: "spring" }}
-      >
-        <motion.div 
-          className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-green-500 flex flex-col items-center justify-center shadow-lg"
-          animate={{
-            boxShadow: [
-              '0 0 0px rgba(74, 222, 128, 0)',
-              '0 0 15px rgba(74, 222, 128, 0.3)',
-              '0 0 0px rgba(74, 222, 128, 0)'
-            ]
-          }}
-          transition={{ duration: 3, repeat: Infinity }}
+      {/* Leader and Aggregation Boxes side by side */}
+      <div className="absolute top-1/2 left-[15%] transform -translate-y-1/2 flex items-center space-x-4 z-20">
+        {/* Leader Node */}
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.2, type: "spring" }}
         >
-          <motion.span
-            className="text-lg font-bold text-green-400 mb-1"
-          >
-            Leader
-          </motion.span>
-          <motion.div
-            className="text-xs text-slate-300 bg-slate-900/50 px-2 py-1 rounded-full mt-1"
-            animate={{ opacity: [0.7, 1, 0.7] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            Verifying...
-          </motion.div>
-          
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ 
-              scale: 1, 
-              opacity: 1,
-              rotate: [0, 10, 0, -10, 0]
+          <motion.div 
+            className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-green-500 flex flex-col items-center justify-center shadow-lg"
+            animate={{
+              boxShadow: [
+                '0 0 0px rgba(74, 222, 128, 0)',
+                '0 0 15px rgba(74, 222, 128, 0.3)',
+                '0 0 0px rgba(74, 222, 128, 0)'
+              ]
             }}
-            transition={{
-              type: "spring", 
-              damping: 12,
-              delay: 0.7,
-              rotate: { repeat: Infinity, duration: 2 }
-            }}
-            className="mt-2"
+            transition={{ duration: 3, repeat: Infinity }}
           >
-            <Check size={16} className="text-green-400" />
+            <motion.span
+              className="text-lg font-bold text-green-400 mb-1"
+            >
+              Leader
+            </motion.span>
+            <motion.div
+              className="text-xs text-slate-300 bg-slate-900/50 px-2 py-1 rounded-full mt-1"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              Verifying...
+            </motion.div>
+            
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ 
+                scale: 1, 
+                opacity: 1,
+                rotate: [0, 10, 0, -10, 0]
+              }}
+              transition={{
+                type: "spring", 
+                damping: 12,
+                delay: 0.7,
+                rotate: { repeat: Infinity, duration: 2 }
+              }}
+              className="mt-2"
+            >
+              <Check size={16} className="text-green-400" />
+            </motion.div>
           </motion.div>
         </motion.div>
         
+        {/* Aggregation Box */}
         <motion.div 
-          className="absolute -top-10 -right-5 w-10 h-10 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg"
+          className="w-16 h-16 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
-            opacity: [0, 1, 1],
-            scale: [0.8, 1, 1]
+            opacity: 1,
+            scale: 1
           }}
-          transition={{ delay: 0.5, duration: 1 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
         >
           <span className="text-white font-bold text-xs">Agg</span>
         </motion.div>
-      </motion.div>
+      </div>
       
       {/* Aggregated Signature Flow */}
       <motion.div
