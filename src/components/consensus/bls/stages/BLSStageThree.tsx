@@ -42,95 +42,96 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
       exit={{ opacity: 0 }}
       className="absolute inset-0 flex items-center justify-center"
     >
-      <div className="relative w-full h-full">
-        {/* Leader Node - Top Center */}
-        <motion.div
-          className="absolute top-[15%] left-[50%] transform -translate-x-1/2"
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, type: "spring" }}
-        >
-          <motion.div 
-            className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-green-500 flex flex-col items-center justify-center shadow-lg"
-            animate={{
-              boxShadow: [
-                '0 0 0px rgba(74, 222, 128, 0)',
-                '0 0 15px rgba(74, 222, 128, 0.3)',
-                '0 0 0px rgba(74, 222, 128, 0)'
-              ]
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
+      <div className="relative w-full h-full flex justify-center items-center">
+        <div className="flex flex-row items-center justify-center gap-8 max-w-3xl">
+          {/* Leader Node - Left Side */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, type: "spring" }}
           >
-            <motion.span
-              className="text-lg font-bold text-green-400 mb-1"
-            >
-              Leader
-            </motion.span>
-            <motion.div
-              className="text-xs text-slate-300 bg-slate-900/50 px-2 py-1 rounded-full mt-1"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              Verifying...
-            </motion.div>
-          </motion.div>
-        </motion.div>
-        
-        {/* Aggregation Box with Signatures - Center */}
-        <motion.div 
-          className="absolute left-[50%] top-[50%] transform -translate-x-1/2 -translate-y-1/2 bg-slate-800/90 backdrop-blur rounded-lg p-3 border border-indigo-500/50 shadow-lg max-w-[300px]"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <motion.div className="text-sm font-medium text-indigo-400 mb-2 flex items-center">
             <motion.div 
-              className="w-6 h-6 rounded-md bg-indigo-500 flex items-center justify-center shadow-md mr-2"
+              className="w-24 h-24 rounded-lg bg-slate-800 border-2 border-green-500 flex flex-col items-center justify-center shadow-lg"
+              animate={{
+                boxShadow: [
+                  '0 0 0px rgba(74, 222, 128, 0)',
+                  '0 0 15px rgba(74, 222, 128, 0.3)',
+                  '0 0 0px rgba(74, 222, 128, 0)'
+                ]
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
             >
-              <span className="text-white font-bold text-xs">Agg</span>
-            </motion.div>
-            Aggregated Signatures
-          </motion.div>
-          <div className="h-32 overflow-y-auto pr-2 grid grid-cols-2 gap-2">
-            {Array.from({ length: 10 }).map((_, index) => (
-              <motion.div
-                key={index}
-                className={`p-2 rounded-md text-xs flex items-center justify-between ${
-                  verifiedSignatures.includes(index) 
-                    ? 'bg-green-900/30 border border-green-500/50' 
-                    : 'bg-slate-700/50 border border-slate-600/50'
-                }`}
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  opacity: 1,
-                  backgroundColor: verifiedSignatures.includes(index) 
-                    ? ["rgba(20, 83, 45, 0.3)", "rgba(20, 83, 45, 0.5)", "rgba(20, 83, 45, 0.3)"]
-                    : "rgba(51, 65, 85, 0.5)",
-                }}
-                transition={{ 
-                  delay: index * 0.1 + 0.5,
-                  backgroundColor: {
-                    duration: 2,
-                    repeat: verifiedSignatures.includes(index) ? Infinity : 0,
-                  }
-                }}
+              <motion.span
+                className="text-lg font-bold text-green-400 mb-1"
               >
-                <span className={verifiedSignatures.includes(index) ? 'text-green-400' : 'text-white'}>
-                  σ<sub>{index + 1}</sub>
-                </span>
-                {verifiedSignatures.includes(index) && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring" }}
-                  >
-                    <Check size={16} className="text-green-400" />
-                  </motion.div>
-                )}
+                Leader
+              </motion.span>
+              <motion.div
+                className="text-xs text-slate-300 bg-slate-900/50 px-2 py-1 rounded-full mt-1"
+                animate={{ opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                Verifying...
               </motion.div>
-            ))}
-          </div>
-        </motion.div>
+            </motion.div>
+          </motion.div>
+          
+          {/* Aggregation Box with Signatures - Right Side */}
+          <motion.div 
+            className="bg-slate-800/90 backdrop-blur rounded-lg p-3 border border-indigo-500/50 shadow-lg max-w-[300px]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            <motion.div className="text-sm font-medium text-indigo-400 mb-2 flex items-center">
+              <motion.div 
+                className="w-6 h-6 rounded-md bg-indigo-500 flex items-center justify-center shadow-md mr-2"
+              >
+                <span className="text-white font-bold text-xs">Agg</span>
+              </motion.div>
+              Aggregated Signatures
+            </motion.div>
+            <div className="h-32 overflow-y-auto pr-2 grid grid-cols-2 gap-2">
+              {Array.from({ length: 10 }).map((_, index) => (
+                <motion.div
+                  key={index}
+                  className={`p-2 rounded-md text-xs flex items-center justify-between ${
+                    verifiedSignatures.includes(index) 
+                      ? 'bg-green-900/30 border border-green-500/50' 
+                      : 'bg-slate-700/50 border border-slate-600/50'
+                  }`}
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    opacity: 1,
+                    backgroundColor: verifiedSignatures.includes(index) 
+                      ? ["rgba(20, 83, 45, 0.3)", "rgba(20, 83, 45, 0.5)", "rgba(20, 83, 45, 0.3)"]
+                      : "rgba(51, 65, 85, 0.5)",
+                  }}
+                  transition={{ 
+                    delay: index * 0.1 + 0.5,
+                    backgroundColor: {
+                      duration: 2,
+                      repeat: verifiedSignatures.includes(index) ? Infinity : 0,
+                    }
+                  }}
+                >
+                  <span className={verifiedSignatures.includes(index) ? 'text-green-400' : 'text-white'}>
+                    σ<sub>{index + 1}</sub>
+                  </span>
+                  {verifiedSignatures.includes(index) && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring" }}
+                    >
+                      <Check size={16} className="text-green-400" />
+                    </motion.div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
         
         {/* Status Indicator - Bottom */}
         <div className="absolute bottom-4 left-0 right-0 text-center">
