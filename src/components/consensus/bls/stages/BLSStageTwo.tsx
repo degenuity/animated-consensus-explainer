@@ -94,7 +94,8 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
         console.log("Stage Two complete, preparing for transition to Stage Three (after 4 seconds)");
         setStageComplete(true);
         
-        // Dispatch a custom event to signal that stage two is complete
+        // Make sure stage-two-complete event is dispatched even if the component is unmounted
+        // This ensures stage three will be shown
         const event = new CustomEvent('bls-stage-two-complete');
         document.dispatchEvent(event);
       }, 4000); // Adding a 4-second wait before transition

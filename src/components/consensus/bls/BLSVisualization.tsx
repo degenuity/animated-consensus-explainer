@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
   BLSStageOne, 
@@ -63,8 +64,16 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
         activeSection={activeSection} 
         activeFormula={activeFormula} 
       />
-      <BLSStageTwo activeSection={activeSection} activeFormula={activeFormula} />
-      <BLSStageThree activeSection={activeSection} activeFormula={activeFormula} />
+      <BLSStageTwo 
+        key={`stage-two-${activeFormula === 1 ? 'active' : 'inactive'}`}
+        activeSection={activeSection} 
+        activeFormula={activeFormula} 
+      />
+      <BLSStageThree 
+        key={`stage-three-${activeFormula === 2 ? 'active' : 'inactive'}`}
+        activeSection={activeSection} 
+        activeFormula={activeFormula} 
+      />
       <BLSIdleAnimation activeSection={activeSection} />
       
       {activeSection === 1 && (
