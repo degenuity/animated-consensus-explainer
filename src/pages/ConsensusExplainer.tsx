@@ -39,10 +39,10 @@ const ConsensusExplainer = () => {
   const getVRFActiveState = () => isMobile ? true : activeSection === 0;
   const getBLSActiveState = () => isMobile ? true : activeSection === 1;
 
-  const scrollToModels = () => {
-    const modelsSection = document.getElementById('models-section');
-    if (modelsSection) {
-      modelsSection.scrollIntoView({ behavior: 'smooth' });
+  const scrollToPDF = () => {
+    const pdfSection = document.getElementById('pdf-section');
+    if (pdfSection) {
+      pdfSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -81,24 +81,14 @@ const ConsensusExplainer = () => {
           <Button 
             variant="ghost" 
             className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent flex items-center gap-2"
-            onClick={scrollToModels}
+            onClick={scrollToPDF}
           >
-            Models
+            View PDF
             <ArrowDown size={16} />
           </Button>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="max-w-4xl mx-auto mb-12"
-        >
-          <PDFViewer pdfUrl={pdfUrl} title="Vote Optimization with BLS in Large Decentralized Networks" />
-        </motion.div>
-
         <motion.h2
-          id="models-section"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -133,6 +123,16 @@ const ConsensusExplainer = () => {
             setIsVoteReductionOpen={setIsVoteReductionOpen}
           />
         </div>
+
+        <motion.div
+          id="pdf-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="max-w-4xl mx-auto mb-12"
+        >
+          <PDFViewer pdfUrl={pdfUrl} title="Vote Optimization with BLS in Large Decentralized Networks" />
+        </motion.div>
       </motion.div>
     </div>
   );
