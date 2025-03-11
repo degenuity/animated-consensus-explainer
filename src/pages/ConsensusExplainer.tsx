@@ -79,7 +79,8 @@ const ConsensusExplainer = () => {
         
         <div className="flex justify-center mb-12">
           <Button 
-            className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-6"
+            variant="ghost" 
+            className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent"
             onClick={scrollToModels}
           >
             Models
