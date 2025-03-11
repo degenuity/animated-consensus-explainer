@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +39,12 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-4xl mx-auto"
+      >
         <Link to="/" className="block mb-8">
           <img 
             src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
@@ -51,9 +57,14 @@ const Home = () => {
             }}
           />
         </Link>
-      </div>
+      </motion.div>
 
-      <div className="max-w-4xl mx-auto text-center mb-16">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="max-w-4xl mx-auto text-center mb-16"
+      >
         <h1 className="text-5xl font-bold mb-6">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00C6FF] to-[#0072FF]">X1 Research</span>
         </h1>
@@ -62,7 +73,12 @@ const Home = () => {
           Learn how X1 Blockchain's consensus mechanisms improve scalability and efficiency
         </p>
         
-        <div className="flex flex-col gap-4 max-w-md mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex flex-col gap-4 max-w-md mx-auto"
+        >
           <Link to="/whitepaper" className="w-full">
             <Button className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-8 py-6 text-lg w-full">
               X1 Whitepaper
@@ -74,11 +90,15 @@ const Home = () => {
               VRF-based Subcommitees and BLS Aggregation
             </Button>
           </Link>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      {/* Superman Image */}
-      <div className="max-w-4xl mx-auto text-center mb-16">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
+        className="max-w-4xl mx-auto text-center mb-16"
+      >
         <img 
           src="https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" 
           alt="Superman" 
@@ -90,7 +110,7 @@ const Home = () => {
           }}
         />
         <p className="text-blue-400 mt-4 font-medium">X1: The Superman of Blockchains</p>
-      </div>
+      </motion.div>
     </div>
   );
 };
