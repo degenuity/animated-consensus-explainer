@@ -55,6 +55,11 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const previousPage = () => changePage(-1);
   const nextPage = () => changePage(1);
 
+  // Create absolute URL for PDF if it starts with a slash
+  const absolutePdfUrl = pdfUrl.startsWith('/') 
+    ? `${window.location.origin}${pdfUrl}`
+    : pdfUrl;
+
   return (
     <div className="flex flex-col items-center w-full max-w-3xl mx-auto">
       {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
@@ -78,7 +83,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
           </div>
         ) : (
           <Document
-            file={pdfUrl}
+            file={absolutePdfUrl}
             onLoadSuccess={onDocumentLoadSuccess}
             onLoadError={onDocumentLoadError}
             loading={<div className="text-center py-8">Loading PDF...</div>}
@@ -124,7 +129,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
           </p>
           
           {!pdfError && (
-            <a href={pdfUrl} download target="_blank" rel="noopener noreferrer">
+            <a href={absolutePdfUrl} download target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="sm" className="flex items-center gap-1 text-black hover:text-blue-500">
                 <Download size={16} />
                 Download
