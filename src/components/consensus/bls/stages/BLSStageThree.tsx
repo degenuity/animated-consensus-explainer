@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -86,18 +85,18 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         setCompletionPause(true);
         setIsAnimationComplete(true);
         
-        // Only dispatch event after 3 second pause if we haven't already
+        // Only dispatch event after 5 second pause if we haven't already
         if (!eventDispatchedRef.current) {
-          console.log("Stage 3 completed, waiting 3 seconds before resetting to Stage 1");
+          console.log("Stage 3 completed, waiting 5 seconds before resetting to Stage 1");
           
-          // Set timeout for the restart - INCREASED FROM 2 to 3 SECONDS
+          // Set timeout for the restart - INCREASED FROM 3 to 5 SECONDS
           restartTimeoutRef.current = setTimeout(() => {
             console.log("Dispatching bls-verification-complete event");
             // Dispatch event to parent component to restart animation
             const event = new CustomEvent('bls-verification-complete');
             document.dispatchEvent(event);
             eventDispatchedRef.current = true;
-          }, 3000); // Increased from 2000 to 3000 ms
+          }, 5000); // Increased from 3000 to 5000 ms
         }
       }
     }, 250);
