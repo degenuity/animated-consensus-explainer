@@ -14,6 +14,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
   const [isAnimationComplete, setIsAnimationComplete] = useState(false);
   const verifyIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const restartTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const eventDispatchedRef = useRef(false);
   
   // Reset state when component becomes inactive
   useEffect(() => {
@@ -22,6 +23,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
       setVerifiedSignatures([]);
       setCompletionPause(false);
       setIsAnimationComplete(false);
+      eventDispatchedRef.current = false;
       
       // Clear any running timers
       if (verifyIntervalRef.current) {
@@ -37,12 +39,10 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
     }
     
     // Reset the verification state when component becomes active
-    setVerifiedSignatures([]);
-    setCompletionPause(false);
-    setIsAnimationComplete(false);
-    
-    // Start verification process only if not already completed
     if (!isAnimationComplete) {
+      setVerifiedSignatures([]);
+      setCompletionPause(false);
+      eventDispatchedRef.current = false;
       startVerificationProcess();
     }
     
@@ -58,18 +58,19 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         restartTimeoutRef.current = null;
       }
     };
-  }, [activeSection, activeFormula]);
+  }, [activeSection, activeFormula, isAnimationComplete]);
   
   // Function to start verification process
   const startVerificationProcess = () => {
-    let count = 0;
-    
     // Clear existing interval if any
     if (verifyIntervalRef.current) {
       clearInterval(verifyIntervalRef.current);
+      verifyIntervalRef.current = null;
     }
     
-    // Start new interval
+    let count = 0;
+    
+    // Start new interval for signature verification
     verifyIntervalRef.current = setInterval(() => {
       if (count < 10) {
         count++;
@@ -83,16 +84,19 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         
         // Set completion state
         setCompletionPause(true);
+        setIsAnimationComplete(true);
         
         // Only dispatch event after 2 second pause if we haven't already
-        if (!isAnimationComplete) {
-          setIsAnimationComplete(true);
+        if (!eventDispatchedRef.current) {
+          console.log("Stage 3 completed, waiting 2 seconds before resetting to Stage 1");
           
           // Set timeout for the restart
           restartTimeoutRef.current = setTimeout(() => {
+            console.log("Dispatching bls-verification-complete event");
             // Dispatch event to parent component to restart animation
             const event = new CustomEvent('bls-verification-complete');
             document.dispatchEvent(event);
+            eventDispatchedRef.current = true;
           }, 2000);
         }
       }

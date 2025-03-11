@@ -12,41 +12,41 @@ import { ChevronLeft, ChevronRight, Circle } from 'lucide-react';
 interface BLSVisualizationProps {
   activeSection: number | null;
   activeFormula: number;
-  setActiveFormula?: (formula: number) => void;
+  setActiveFormula: (formula: number) => void;
 }
 
 export const BLSVisualization: React.FC<BLSVisualizationProps> = ({ 
   activeSection, 
-  activeFormula: externalActiveFormula,
+  activeFormula,
   setActiveFormula
 }) => {
-  // When component is active (hovered), use local state for the formula/stage
-  const [localActiveFormula, setLocalActiveFormula] = useState(0);
-  
-  // Use external formula state when not active, use local state when active
-  const activeFormula = activeSection === 1 ? localActiveFormula : externalActiveFormula;
-  
+  // Listen for verification complete events
+  useEffect(() => {
+    const handleVerificationComplete = () => {
+      // Transition to stage 1
+      setActiveFormula(0);
+    };
+    
+    document.addEventListener('bls-verification-complete', handleVerificationComplete);
+    
+    return () => {
+      document.removeEventListener('bls-verification-complete', handleVerificationComplete);
+    };
+  }, [setActiveFormula]);
+
   const handlePrevStage = () => {
-    const newFormula = (localActiveFormula - 1 + 3) % 3;
-    setLocalActiveFormula(newFormula);
-    if (setActiveFormula) setActiveFormula(newFormula);
+    const newFormula = (activeFormula - 1 + 3) % 3;
+    setActiveFormula(newFormula);
   };
   
   const handleNextStage = () => {
-    const newFormula = (localActiveFormula + 1) % 3;
-    setLocalActiveFormula(newFormula);
-    if (setActiveFormula) setActiveFormula(newFormula);
+    const newFormula = (activeFormula + 1) % 3;
+    setActiveFormula(newFormula);
   };
   
   const handleSelectStage = (stage: number) => {
-    setLocalActiveFormula(stage);
-    if (setActiveFormula) setActiveFormula(stage);
+    setActiveFormula(stage);
   };
-  
-  // Force update local formula when external one changes
-  useEffect(() => {
-    setLocalActiveFormula(externalActiveFormula);
-  }, [externalActiveFormula]);
 
   return (
     <div className="relative h-80 sm:h-96 flex items-center justify-center">
