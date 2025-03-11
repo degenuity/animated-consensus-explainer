@@ -1,12 +1,33 @@
 
-import React from 'react';
-import { motion } from "framer-motion";
+import React, { useEffect, useRef } from 'react';
+import { motion, useAnimation } from "framer-motion";
 
 interface AggregationAnimationProps {
   onComplete?: () => void;
 }
 
 export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onComplete }) => {
+  const controls = useAnimation();
+  const hasTriggeredCallback = useRef(false);
+  
+  useEffect(() => {
+    const animate = async () => {
+      await controls.start({
+        opacity: [0, 1, 1],
+        x: [0, 40, 40],
+        scale: [0.8, 1.2, 1]
+      });
+      
+      // Ensure callback is only triggered once
+      if (!hasTriggeredCallback.current && onComplete) {
+        hasTriggeredCallback.current = true;
+        onComplete();
+      }
+    };
+    
+    animate();
+  }, [controls, onComplete]);
+
   return (
     <motion.div
       className="absolute"
@@ -17,22 +38,12 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
         zIndex: 10 
       }}
       initial={{ opacity: 0, x: 0 }}
-      animate={{
-        opacity: [0, 1, 1],
-        x: [0, 40, 40],
-        scale: [0.8, 1.2, 1]
-      }}
+      animate={controls}
       transition={{
         duration: 5, // Slower animation
         times: [0, 0.3, 1],
         repeat: 0,
         delay: 1.5,
-        // Trigger the onComplete callback when the animation reaches the leader
-        onUpdate: (progress) => {
-          if (progress > 0.6 && onComplete) {
-            onComplete();
-          }
-        }
       }}
     >
       <motion.div 

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from "framer-motion";
 import { Validators } from './components/Validators';
 import { RelayNode } from './components/RelayNode';
@@ -17,18 +17,24 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
   const [showSuccessEffect, setShowSuccessEffect] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
 
+  // Reset state when component changes visibility
   useEffect(() => {
     // Reset everything when section or formula changes
     setLeaderReceived(false);
     setShowSuccessEffect(false);
     setAnimationComplete(false);
     
-    if (activeSection === 1 && activeFormula === 1) {
-      // Animation is triggered by the component lifecycle
-    }
+    const cleanup = () => {
+      setLeaderReceived(false);
+      setShowSuccessEffect(false);
+      setAnimationComplete(false);
+    };
+    
+    return cleanup;
   }, [activeSection, activeFormula]);
 
-  const handleAggregationComplete = () => {
+  const handleAggregationComplete = useCallback(() => {
+    console.log("Aggregation complete triggered");
     // Leader box color change when Agg touches it
     setLeaderReceived(true);
     
@@ -54,7 +60,7 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     }, 200); // Short delay to make verification happen quickly
     
     return () => clearTimeout(successTimer);
-  };
+  }, [activeSection, activeFormula]);
 
   if (activeSection !== 1 || activeFormula !== 1) return null;
   
