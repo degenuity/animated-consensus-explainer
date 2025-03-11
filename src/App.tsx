@@ -7,9 +7,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Suspense, lazy, useState, useEffect } from "react";
 import React from "react";
 
-// Lazy load pages to improve initial load performance
-const Home = lazy(() => import("./pages/Home"));
-const ConsensusExplainer = lazy(() => import("./pages/ConsensusExplainer"));
+// Import ConsensusExplainer normally instead of using lazy loading
+import Home from "./pages/Home";
+import ConsensusExplainer from "./pages/ConsensusExplainer";
+
+// Continue to lazy load these components
 const Whitepaper = lazy(() => import("./pages/Whitepaper"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -91,15 +93,21 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Suspense fallback={<Loading />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/consensus" element={<ConsensusExplainer />} />
-                <Route path="/consensus/*" element={<ConsensusExplainer />} />
-                <Route path="/whitepaper" element={<Whitepaper />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/consensus" element={<ConsensusExplainer />} />
+              <Route path="/consensus/*" element={<ConsensusExplainer />} />
+              <Route path="/whitepaper" element={
+                <Suspense fallback={<Loading />}>
+                  <Whitepaper />
+                </Suspense>
+              } />
+              <Route path="*" element={
+                <Suspense fallback={<Loading />}>
+                  <NotFound />
+                </Suspense>
+              } />
+            </Routes>
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
