@@ -25,7 +25,7 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
           scale: [0.8, 1.2, 1]
         }}
         transition={{
-          duration: 2,
+          duration: 4, // Increased from 2 to 4 seconds
           times: [0, 0.3, 1],
           repeat: 0,
           delay: 1.5,
