@@ -20,7 +20,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [pdfError, setPdfError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [scale, setScale] = useState<number>(1.5); // Increased default scale
+  const [scale, setScale] = useState<number>(1.3); // Adjusted scale from 1.5 to 1.3
 
   // Reset loading state when PDF URL changes
   useEffect(() => {
@@ -69,10 +69,10 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       : pdfUrl;
 
   return (
-    <div className="flex flex-col items-center w-full max-w-5xl mx-auto"> {/* Increased max-width */}
+    <div className="flex flex-col items-center w-full max-w-4xl mx-auto"> {/* Adjusted from 5xl to 4xl */}
       {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
       
-      <div className="relative bg-white rounded-lg shadow-lg p-3 w-full overflow-auto max-h-[80vh]"> {/* Added max-height and overflow-auto */}
+      <div className="relative bg-white rounded-lg shadow-lg p-3 w-full overflow-auto max-h-[70vh]"> {/* Adjusted from 80vh to 70vh */}
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-slate-100 bg-opacity-80 z-10">
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -95,7 +95,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
             onLoadSuccess={onDocumentLoadSuccess}
             onLoadError={onDocumentLoadError}
             loading={<div className="text-center py-8">Loading PDF...</div>}
-            className="flex justify-center min-h-[60vh]" // Increased minimum height
+            className="flex justify-center min-h-[50vh]" // Adjusted from 60vh to 50vh
           >
             <Page 
               pageNumber={pageNumber} 
@@ -103,7 +103,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
               renderTextLayer={true}
               renderAnnotationLayer={true}
               className="border border-slate-200"
-              width={window.innerWidth > 768 ? 800 : undefined} // Responsive width
+              width={window.innerWidth > 768 ? 700 : undefined} // Adjusted from 800 to 700
             />
           </Document>
         )}
