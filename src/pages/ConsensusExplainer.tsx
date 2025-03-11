@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -73,6 +74,16 @@ const ConsensusExplainer = () => {
         >
           <PDFViewer pdfUrl={pdfUrl} title="Vote Optimization with BLS in Large Decentralized Networks" />
         </motion.div>
+
+        {/* Models Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-3xl font-bold mb-8 text-center text-purple-400"
+        >
+          Models
+        </motion.h2>
 
         {/* First section - VRF-Based Subcommittee Selection */}
         <div 
