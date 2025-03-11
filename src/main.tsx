@@ -15,12 +15,13 @@ const createLoadingIndicator = () => {
   loadingElement.style.backgroundColor = 'black';
   loadingElement.style.color = 'white';
   loadingElement.style.zIndex = '9999';
+  loadingElement.style.fontFamily = 'sans-serif';
   loadingElement.textContent = 'Loading X1 Research...';
   return loadingElement;
 };
 
-// Show loading initially
-document.body.appendChild(createLoadingIndicator());
+const loadingIndicator = createLoadingIndicator();
+document.body.appendChild(loadingIndicator);
 
 // Simple error display function
 const displayErrorPage = (error: any) => {
@@ -38,26 +39,23 @@ const displayErrorPage = (error: any) => {
   `;
 };
 
-// Mount the app with best-effort error handling
+// Simplified mounting function with immediate execution
 const mountApp = () => {
   try {
+    // Find the root element
     const rootElement = document.getElementById('root');
     
     if (!rootElement) {
       throw new Error('Root element not found');
     }
     
-    // Remove loading indicator when we start mounting
-    const loadingIndicator = document.body.querySelector('div');
-    if (loadingIndicator) {
+    // Remove loading indicator if it exists
+    if (loadingIndicator.parentNode) {
       document.body.removeChild(loadingIndicator);
     }
     
-    // Create root
-    const root = createRoot(rootElement);
-    
-    // Render with error boundary
-    root.render(
+    // Create root and render
+    createRoot(rootElement).render(
       <React.StrictMode>
         <App />
       </React.StrictMode>
@@ -70,10 +68,11 @@ const mountApp = () => {
   }
 };
 
-// Ensure DOM is ready before mounting
+// Execute based on document ready state
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', mountApp);
+  // If the document is still loading, add a listener
+  window.addEventListener('DOMContentLoaded', mountApp);
 } else {
-  // DOM already loaded, mount immediately
+  // If the document is already loaded, mount immediately
   mountApp();
 }
