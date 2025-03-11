@@ -1,20 +1,18 @@
 
 import React from 'react'
-import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-console.log("Application initialization started");
+console.log("Starting application initialization")
 
-const rootElement = document.getElementById('root');
+const container = document.getElementById('root')
 
-if (!rootElement) {
-  console.error('Root element not found');
+if (container) {
+  const root = ReactDOM.createRoot(container)
+  root.render(<App />)
+  console.log("Application rendering complete")
 } else {
-  console.log("Root element found, creating root");
-  const root = createRoot(rootElement);
-  
-  root.render(<App />);
-  
-  console.log("React render completed");
+  console.error("Root element not found")
+  document.body.innerHTML = '<div style="color: red; padding: 20px;">Root element not found</div>'
 }

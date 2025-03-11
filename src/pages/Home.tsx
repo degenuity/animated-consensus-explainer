@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 import { BLSStageOne } from "@/components/consensus/bls/stages";
 
@@ -10,10 +9,8 @@ const Home = () => {
   const [error, setError] = useState<string | null>(null);
   const [imagesLoaded, setImagesLoaded] = useState(false);
 
-  // Add a simple health check to ensure components can render
   useEffect(() => {
     try {
-      // Signal that the component mounted successfully
       console.log("Home component mounted successfully");
       setImagesLoaded(true);
     } catch (err) {
@@ -94,7 +91,6 @@ const Home = () => {
         </motion.div>
       </motion.div>
 
-      {/* Add BLS Animation */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
