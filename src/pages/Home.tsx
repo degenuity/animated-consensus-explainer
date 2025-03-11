@@ -8,11 +8,19 @@ import { BLSStageOne } from '@/components/consensus/bls/stages';
 const Home = () => {
   const [error, setError] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [renderBLS, setRenderBLS] = useState(false);
 
   useEffect(() => {
     try {
       console.log("Home component mounted");
+      
+      // Set loaded state immediately to show content
       setLoaded(true);
+      
+      // Delay BLS animation to ensure main content renders first
+      setTimeout(() => {
+        setRenderBLS(true);
+      }, 500);
       
       return () => {
         console.log("Home component unmounted");
@@ -95,16 +103,18 @@ const Home = () => {
         </div>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
-        className="max-w-4xl mx-auto relative h-80 mb-8"
-      >
-        <div className="relative h-full w-full">
-          <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
-        </div>
-      </motion.div>
+      {renderBLS && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="max-w-4xl mx-auto relative h-80 mb-8"
+        >
+          <div className="relative h-full w-full">
+            <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
+          </div>
+        </motion.div>
+      )}
 
       {/* Superman Image */}
       <motion.div

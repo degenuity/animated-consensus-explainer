@@ -3,11 +3,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Suspense, lazy, useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import React from "react";
 
-// Import all pages directly without lazy loading for now to diagnose the issue
+// Import all pages directly
 import Home from "./pages/Home";
 import ConsensusExplainer from "./pages/ConsensusExplainer";
 import Whitepaper from "./pages/Whitepaper";
@@ -33,6 +33,7 @@ class ErrorBoundary extends React.Component<
   }
 
   static getDerivedStateFromError(error: Error) {
+    console.error("Error caught in ErrorBoundary:", error);
     return { hasError: true, error };
   }
 
@@ -78,7 +79,12 @@ const App = () => {
   useEffect(() => {
     // Log when app is mounted
     console.log("App component mounted");
-    setIsLoaded(true);
+    
+    // Force a repaint to ensure DOM is fully rendered
+    setTimeout(() => {
+      setIsLoaded(true);
+      console.log("App marked as loaded");
+    }, 100);
     
     // Return cleanup function
     return () => {
