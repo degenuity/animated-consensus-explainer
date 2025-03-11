@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -65,14 +64,13 @@ const ConsensusExplainer = () => {
           <span className="text-blue-400">1</span>
         </h1>
 
-        {/* PDF Section - Moved to appear before the VRF section */}
+        {/* PDF Section - Title removed */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
           className="max-w-4xl mx-auto mb-12"
         >
-          <h2 className="text-3xl font-bold mb-8 text-center">Consensus Whitepaper</h2>
           <PDFViewer pdfUrl={pdfUrl} title="Vote Optimization with BLS in Large Decentralized Networks" />
         </motion.div>
 
