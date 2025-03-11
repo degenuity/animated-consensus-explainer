@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from "framer-motion";
-import { Check, Clock } from "lucide-react";
+import { Check, Clock, Shield } from "lucide-react";
 
 interface BLSStageThreeProps {
   activeSection: number;
@@ -62,69 +62,92 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         </motion.div>
       </motion.div>
       
-      <div className="absolute top-[40%] left-2/3 transform -translate-x-1/2 -translate-y-1/2">
-        <motion.div
-          className="bg-slate-800 border border-red-500 p-2 rounded-lg shadow-md flex items-center justify-center overflow-hidden relative"
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          <motion.span
-            className="absolute inset-0 bg-red-400/10"
-            animate={{ 
-              width: ["0%", "100%", "0%"],
-              left: ["0%", "0%", "100%"] 
-            }}
-            transition={{ 
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.p
-            className="text-red-400 font-mono text-sm font-bold relative z-10"
-            animate={{ scale: [0.95, 1.05, 0.95] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            𝑒(σ<sub>agg</sub>,g)
-          </motion.p>
-        </motion.div>
-        
-        <motion.div
-          className="my-2 flex justify-center"
+      {/* Visual verification process instead of formulas */}
+      <div className="absolute top-[45%] left-[60%] transform -translate-x-1/2 -translate-y-1/2">
+        <motion.div 
+          className="relative flex flex-col items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          <span className="text-xl text-red-400">=</span>
-        </motion.div>
-        
-        <motion.div
-          className="bg-slate-800 border border-red-500 p-2 rounded-lg shadow-md flex items-center justify-center overflow-hidden relative"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          <motion.span
-            className="absolute inset-0 bg-red-400/10"
-            animate={{ 
-              width: ["0%", "100%", "0%"],
-              left: ["0%", "0%", "100%"] 
-            }}
-            transition={{ 
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.5
-            }}
-          />
-          <motion.p
-            className="text-red-400 font-mono text-sm font-bold relative z-10"
-            animate={{ scale: [0.95, 1.05, 0.95] }}
-            transition={{ duration: 2, repeat: Infinity }}
+          <motion.div 
+            className="flex items-center justify-center space-x-4 mb-4"
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.8 }}
           >
-            𝑒(H(M),∑pk<sub>i</sub>)
-          </motion.p>
+            <motion.div
+              className="w-12 h-12 rounded-lg bg-red-400/10 border border-red-500 flex items-center justify-center"
+              animate={{ 
+                borderColor: ["rgba(239, 68, 68, 0.5)", "rgba(239, 68, 68, 0.9)", "rgba(239, 68, 68, 0.5)"] 
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <motion.span 
+                className="text-red-400 font-bold"
+                animate={{ scale: [0.95, 1.05, 0.95] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                Agg
+              </motion.span>
+            </motion.div>
+            
+            <motion.div
+              className="flex items-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              <motion.div 
+                className="w-8 h-0.5 bg-gradient-to-r from-red-500 to-red-500/0"
+                animate={{ 
+                  scaleX: [1, 1.2, 1],
+                  opacity: [0.5, 1, 0.5]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+                style={{ transformOrigin: 'left' }}
+              />
+            </motion.div>
+            
+            <motion.div
+              className="w-12 h-12 rounded-lg bg-slate-800 border border-red-500 flex items-center justify-center"
+              animate={{
+                borderColor: ["rgba(239, 68, 68, 0.5)", "rgba(239, 68, 68, 0.9)", "rgba(239, 68, 68, 0.5)"]
+              }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+            >
+              <motion.span 
+                className="text-red-400 font-bold"
+                animate={{ scale: [0.95, 1.05, 0.95] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
+              >
+                PKs
+              </motion.span>
+            </motion.div>
+          </motion.div>
+          
+          <motion.div
+            className="w-full h-0.5 bg-slate-600/50 my-2"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 1.2, duration: 0.5 }}
+            style={{ transformOrigin: 'center' }}
+          />
+          
+          <motion.div
+            className="text-center p-2 rounded-md bg-slate-800/80 border border-slate-700 mt-1"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.4 }}
+          >
+            <motion.span 
+              className="text-slate-300 text-sm"
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+            >
+              Single verification step
+            </motion.span>
+          </motion.div>
         </motion.div>
       </div>
       
@@ -144,7 +167,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
       />
       
       <motion.div
-        className="absolute top-1/2 right-1/6 transform -translate-y-1/2 z-10"
+        className="absolute top-1/2 right-10 transform -translate-y-1/2 z-10"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ 
           opacity: 1, 
