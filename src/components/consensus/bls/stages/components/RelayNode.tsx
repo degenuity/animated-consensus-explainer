@@ -10,7 +10,11 @@ interface RelayNodeProps {
 export const RelayNode: React.FC<RelayNodeProps> = ({ showSuccessEffect = false }) => {
   return (
     <motion.div
-      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20"
+      className="absolute top-1/2 left-1/2 w-20 h-20"
+      style={{
+        transform: 'translate(-50%, -50%)',
+        zIndex: 20
+      }}
       initial={{ scale: 0.8 }}
       animate={{ scale: 1 }}
       transition={{ type: "spring", stiffness: 100 }}
