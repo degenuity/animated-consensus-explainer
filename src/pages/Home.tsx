@@ -26,7 +26,7 @@ const Home = () => {
         className="max-w-4xl mx-auto text-center mb-16"
       >
         <h1 className="text-5xl font-bold mb-6">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">X1 Research</span>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#1EAEDB] to-[#0FA0CE]">X1 Research</span>
         </h1>
         
         <p className="text-xl mb-10 text-slate-300">
