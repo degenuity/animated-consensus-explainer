@@ -32,10 +32,16 @@ const Home = () => {
           Learn how X1 Blockchain's consensus mechanisms improve scalability and efficiency
         </p>
         
-        <div className="flex justify-center">
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link to="/consensus">
             <Button className="bg-blue-500 hover:bg-blue-600 text-white text-lg px-8 py-6 rounded-lg font-medium w-full">
               Explore Consensus Mechanisms
+            </Button>
+          </Link>
+          
+          <Link to="/apples">
+            <Button className="bg-red-500 hover:bg-red-600 text-white text-lg px-8 py-6 rounded-lg font-medium w-full">
+              Learn About Apples
             </Button>
           </Link>
         </div>
