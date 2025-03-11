@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -55,6 +56,25 @@ const Home = () => {
         <div className="relative h-full w-full">
           <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
         </div>
+      </motion.div>
+
+      {/* Dog image section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="max-w-md mx-auto text-center mb-12"
+      >
+        <div className="rounded-xl overflow-hidden shadow-lg shadow-blue-500/20">
+          <img 
+            src="https://images.unsplash.com/photo-1485833077593-4278bba3f11f?auto=format&fit=crop&w=800"
+            alt="Dog relaxing in nature" 
+            className="w-full h-auto"
+          />
+        </div>
+        <p className="text-sm mt-3 text-slate-400 italic">
+          Taking a break from blockchain research
+        </p>
       </motion.div>
     </div>
   );
