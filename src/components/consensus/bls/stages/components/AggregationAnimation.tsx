@@ -10,7 +10,7 @@ export const AggregationAnimation: React.FC = () => {
         className="absolute"
         style={{ 
           top: "50%",
-          left: "60%", 
+          right: "25%", 
           transform: "translateY(-50%)",
           zIndex: 10 
         }}
@@ -37,7 +37,7 @@ export const AggregationAnimation: React.FC = () => {
         className="absolute"
         style={{ 
           top: "50%",
-          right: "47%",
+          left: "55%",
           transform: "translateY(-50%)",
           zIndex: 5 
         }}
