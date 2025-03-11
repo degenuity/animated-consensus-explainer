@@ -43,8 +43,10 @@ const ConsensusExplainer = () => {
         transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto"
       >
-        <h1 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-violet-400">
-          Scaling Consensus on X1
+        <h1 className="text-4xl font-bold text-center mb-12">
+          <span className="text-white">Scaling Consensus on </span>
+          <span className="text-white">X</span>
+          <span className="text-blue-400">1</span>
         </h1>
 
         {/* First section - VRF-Based Subcommittee Selection */}
