@@ -1,7 +1,7 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { LeaderBox } from './components/LeaderBox';
 
 interface BLSStageThreeProps {
   activeSection: number;
@@ -216,12 +216,6 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
             </div>
           </motion.div>
         </div>
-        
-        <LeaderBox 
-          leaderReceived={true} 
-          showSuccessEffect={completionPause} 
-          verificationComplete={allSignaturesVerified}
-        />
         
         <div className="absolute bottom-4 left-0 right-0 text-center">
           <motion.div 
