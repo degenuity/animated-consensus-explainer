@@ -51,30 +51,30 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
       <BLSIdleAnimation activeSection={activeSection} />
       
       {activeSection === 1 && (
-        <div className="absolute bottom-[-40px] left-0 right-0 flex justify-center items-center gap-2 mb-1">
+        <div className="absolute bottom-[-20px] left-0 right-0 flex justify-center items-center gap-1 mb-1">
           <Button 
             variant="ghost" 
             size="sm" 
-            className="text-indigo-400 hover:text-indigo-300 bg-slate-800/80 border border-indigo-500/20"
+            className="h-6 w-6 p-0 text-indigo-400 hover:text-indigo-300 bg-slate-800/60 border border-indigo-500/10"
             onClick={handlePrevStage}
           >
-            <ChevronLeft size={16} />
+            <ChevronLeft size={12} />
           </Button>
           
-          <div className="flex gap-2">
+          <div className="flex gap-1">
             {[0, 1, 2].map(stageIndex => (
               <Button
                 key={stageIndex}
                 variant="ghost"
                 size="sm"
-                className={`w-8 h-8 p-0 rounded-full ${
+                className={`w-5 h-5 p-0 rounded-full ${
                   activeFormula === stageIndex 
-                    ? 'bg-indigo-500 text-white' 
-                    : 'bg-slate-800/80 text-indigo-400 hover:text-indigo-300 border border-indigo-500/20'
+                    ? 'bg-indigo-500/80 text-white' 
+                    : 'bg-slate-800/60 text-indigo-400 hover:text-indigo-300 border border-indigo-500/10'
                 }`}
                 onClick={() => handleSelectStage(stageIndex)}
               >
-                <Circle size={activeFormula === stageIndex ? 10 : 8} fill={activeFormula === stageIndex ? "white" : "none"} />
+                <Circle size={activeFormula === stageIndex ? 6 : 5} fill={activeFormula === stageIndex ? "white" : "none"} />
               </Button>
             ))}
           </div>
@@ -82,13 +82,13 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
           <Button 
             variant="ghost" 
             size="sm" 
-            className="text-indigo-400 hover:text-indigo-300 bg-slate-800/80 border border-indigo-500/20"
+            className="h-6 w-6 p-0 text-indigo-400 hover:text-indigo-300 bg-slate-800/60 border border-indigo-500/10"
             onClick={handleNextStage}
           >
-            <ChevronRight size={16} />
+            <ChevronRight size={12} />
           </Button>
         </div>
       )}
     </div>
   );
-};
+}

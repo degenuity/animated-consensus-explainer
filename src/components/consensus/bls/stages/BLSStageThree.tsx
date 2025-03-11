@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Check, Clock } from "lucide-react";
@@ -43,7 +42,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         
         return prev;
       });
-    }, 250); // Changed from 500ms to 250ms (twice as fast)
+    }, 125); // Changed from 250ms to 125ms (twice as fast)
     
     return () => clearInterval(verifyInterval);
   }, [activeSection, activeFormula, completionPause]);
