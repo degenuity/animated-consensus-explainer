@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Clock } from "lucide-react";
 
 interface BLSStageThreeProps {
   activeSection: number;
@@ -146,12 +146,78 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
       <motion.div
         className="absolute top-1/2 right-1/6 transform -translate-y-1/2 z-10"
         initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1.2 }}
+        animate={{ 
+          opacity: 1, 
+          scale: 1,
+          transition: { delay: 1.2 }
+        }}
       >
-        <div className="w-16 h-16 rounded-full bg-slate-800 border-2 border-green-500 flex items-center justify-center shadow-lg shadow-green-500/20">
-          <Check className="text-green-500" size={28} />
-        </div>
+        <motion.div 
+          className="w-16 h-16 rounded-full bg-slate-800 border-2 border-green-500 flex items-center justify-center shadow-lg shadow-green-500/20"
+          animate={{
+            boxShadow: ["0 0 5px rgba(74, 222, 128, 0.1)", "0 0 15px rgba(74, 222, 128, 0.4)", "0 0 5px rgba(74, 222, 128, 0.1)"],
+          }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", damping: 12, delay: 1.3 }}
+          >
+            <Check className="text-green-500" size={28} />
+          </motion.div>
+        </motion.div>
+      </motion.div>
+      
+      <motion.div 
+        className="absolute right-10 top-[65%] bg-slate-800/80 backdrop-blur border border-green-500 rounded-lg px-4 py-2 shadow-lg"
+        initial={{ opacity: 0, y: 20, scale: 0.9 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          scale: 1,
+        }}
+        transition={{ 
+          delay: 1.5,
+          type: "spring",
+          stiffness: 300,
+          damping: 20
+        }}
+      >
+        <motion.div 
+          className="flex items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.7 }}
+        >
+          <Clock size={14} className="text-green-400" />
+          <motion.p 
+            className="text-sm font-bold text-green-400"
+            animate={{ 
+              textShadow: ["0 0 0px rgba(74, 222, 128, 0)", "0 0 5px rgba(74, 222, 128, 0.5)", "0 0 0px rgba(74, 222, 128, 0)"]
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            O(1) Constant Time Verification
+          </motion.p>
+        </motion.div>
+        
+        <motion.div 
+          className="w-full h-0.5 bg-gradient-to-r from-green-500/20 via-green-500/50 to-green-500/20 mt-1.5"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ delay: 1.9, duration: 0.8 }}
+          style={{ transformOrigin: 'left' }}
+        />
+        
+        <motion.p 
+          className="text-xs text-slate-300 mt-1.5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+        >
+          Single pairing check for all signatures
+        </motion.p>
       </motion.div>
       
       <div className="absolute bottom-2 left-0 right-0 text-center">
