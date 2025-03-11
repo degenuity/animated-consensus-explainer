@@ -4,25 +4,15 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import React from "react";
+import React, { useState } from "react";
 
-// Import all pages directly
+// Direct imports for all pages
 import Home from "./pages/Home";
 import ConsensusExplainer from "./pages/ConsensusExplainer";
 import Whitepaper from "./pages/Whitepaper";
 import NotFound from "./pages/NotFound";
 
-// Loading component
-const Loading = () => (
-  <div className="min-h-screen bg-black text-white flex items-center justify-center">
-    <div className="text-center">
-      <p className="text-xl mb-4">Loading...</p>
-    </div>
-  </div>
-);
-
-// Error boundary component
+// Simple error boundary component
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean; error: Error | null }
@@ -63,7 +53,7 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// Create a new QueryClient instance with simpler configuration
+// Create a basic QueryClient
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -74,27 +64,7 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    // Log when app is mounted
-    console.log("App component mounted");
-    
-    // Force a repaint to ensure DOM is fully rendered
-    setTimeout(() => {
-      setIsLoaded(true);
-      console.log("App marked as loaded");
-    }, 100);
-    
-    // Return cleanup function
-    return () => {
-      console.log("App component unmounted");
-    };
-  }, []);
-
-  if (!isLoaded) {
-    return <Loading />;
-  }
+  const [isRouterError, setIsRouterError] = useState(false);
 
   return (
     <ErrorBoundary>
@@ -103,13 +73,27 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/consensus" element={<ConsensusExplainer />} />
-              <Route path="/consensus/*" element={<ConsensusExplainer />} />
-              <Route path="/whitepaper" element={<Whitepaper />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            {isRouterError ? (
+              <div className="min-h-screen bg-black text-white flex items-center justify-center">
+                <div className="text-center">
+                  <h1 className="text-xl mb-4">Router Error</h1>
+                  <button 
+                    onClick={() => window.location.reload()} 
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                  >
+                    Reload Page
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/consensus" element={<ConsensusExplainer />} />
+                <Route path="/consensus/*" element={<ConsensusExplainer />} />
+                <Route path="/whitepaper" element={<Whitepaper />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            )}
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
