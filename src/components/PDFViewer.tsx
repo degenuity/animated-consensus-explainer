@@ -73,8 +73,8 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
       
       <div className="relative bg-white rounded-lg shadow-lg p-3 w-full flex flex-col">
-        {/* Fixed height container for PDF with overflow */}
-        <div className="overflow-auto h-[60vh] mb-4">
+        {/* Increased height container for PDF with overflow */}
+        <div className="overflow-auto h-[90vh] mb-4">
           {loading && (
             <div className="absolute inset-0 flex items-center justify-center bg-slate-100 bg-opacity-80 z-10">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -111,8 +111,8 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
           )}
         </div>
         
-        {/* Controls are now outside the scrollable area and always visible */}
-        <div className="flex justify-between items-center px-2 flex-wrap gap-2 bg-white py-2 border-t border-slate-200">
+        {/* Controls are outside the scrollable area and always visible */}
+        <div className="flex justify-between items-center px-2 flex-wrap gap-2 bg-white py-2 border-t border-slate-200 sticky bottom-0">
           <div className="flex items-center space-x-2">
             <Button
               onClick={previousPage}
