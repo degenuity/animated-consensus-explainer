@@ -23,11 +23,19 @@ const Home = () => {
           Learn how modern blockchain consensus mechanisms improve scalability and efficiency
         </p>
         
-        <Link to="/consensus">
-          <Button className="bg-blue-500 hover:bg-blue-600 text-white text-lg px-8 py-6 rounded-lg font-medium">
-            Explore Consensus Mechanisms
-          </Button>
-        </Link>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Link to="/consensus">
+            <Button className="bg-blue-500 hover:bg-blue-600 text-white text-lg px-8 py-6 rounded-lg font-medium w-full sm:w-auto">
+              Explore Consensus Mechanisms
+            </Button>
+          </Link>
+          
+          <Link to="/models">
+            <Button className="bg-purple-500 hover:bg-purple-600 text-white text-lg px-8 py-6 rounded-lg font-medium w-full sm:w-auto">
+              Models
+            </Button>
+          </Link>
+        </div>
       </motion.div>
     </div>
   );

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+
+import React from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,19 +7,15 @@ import { ArrowLeft } from "lucide-react";
 import { VRFSection } from '@/components/consensus/VRFSection';
 import { BLSSection } from '@/components/consensus/BLSSection';
 import { useIsMobile } from '@/hooks/use-mobile';
-import PDFViewer from "@/components/PDFViewer";
 
-const ConsensusExplainer = () => {
-  const [activeSection, setActiveSection] = useState<number | null>(null);
-  const [selectedNodes, setSelectedNodes] = useState<number[]>([]);
-  const [isAdjustmentOpen, setIsAdjustmentOpen] = useState(false);
-  const [isVoteReductionOpen, setIsVoteReductionOpen] = useState(false);
+const ModelsPage = () => {
+  const [activeSection, setActiveSection] = React.useState<number | null>(null);
+  const [selectedNodes, setSelectedNodes] = React.useState<number[]>([]);
+  const [isAdjustmentOpen, setIsAdjustmentOpen] = React.useState(false);
+  const [isVoteReductionOpen, setIsVoteReductionOpen] = React.useState(false);
   const isMobile = useIsMobile();
   
-  // PDF file path
-  const pdfUrl = "/Vote_Optimization_with_BLS_in_large_decentralized_networks_5.pdf";
-
-  useEffect(() => {
+  React.useEffect(() => {
     // Only run node selection logic when VRF section is active or hovered or on mobile
     if (activeSection !== 0 && !isMobile) return;
     
@@ -37,10 +34,6 @@ const ConsensusExplainer = () => {
     return () => clearInterval(selectionTimer);
   }, [activeSection, isMobile]);
 
-  // On mobile, we'll always display both sections as active
-  const getVRFActiveState = () => isMobile ? true : activeSection === 0;
-  const getBLSActiveState = () => isMobile ? true : activeSection === 1;
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
@@ -56,39 +49,11 @@ const ConsensusExplainer = () => {
               Back to Home
             </Button>
           </Link>
-          
-          <Link to="/models">
-            <Button className="bg-purple-500 hover:bg-purple-600 text-white">
-              Models
-            </Button>
-          </Link>
         </div>
 
         <h1 className="text-4xl font-bold text-center mb-12">
-          <span className="text-white">Scaling Consensus on </span>
-          <span className="text-white">X</span>
-          <span className="text-blue-400">1</span>
+          <span className="text-purple-400">Consensus Models</span>
         </h1>
-
-        {/* PDF Section - Title removed */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="max-w-4xl mx-auto mb-12"
-        >
-          <PDFViewer pdfUrl={pdfUrl} title="Vote Optimization with BLS in Large Decentralized Networks" />
-        </motion.div>
-
-        {/* Models Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-3xl font-bold mb-8 text-center text-purple-400"
-        >
-          Models
-        </motion.h2>
 
         {/* First section - VRF-Based Subcommittee Selection */}
         <div 
@@ -123,4 +88,4 @@ const ConsensusExplainer = () => {
   );
 };
 
-export default ConsensusExplainer;
+export default ModelsPage;
