@@ -1,4 +1,3 @@
-
 export * from './LeaderNode';
 export * from './VerificationProcess';
 export * from './LeaderVerification';
