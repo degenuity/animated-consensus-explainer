@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from "framer-motion";
 import { Check, Clock } from "lucide-react";
@@ -152,7 +153,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         </motion.div>
       </div>
       
-      {/* Leader Verification - Check Mark */}
+      {/* Leader Verification - Using Stage Two styling */}
       <motion.div
         className="absolute top-1/2 right-[15%] transform -translate-y-1/2 z-10"
         initial={{ opacity: 0, scale: 0.5 }}
@@ -163,18 +164,56 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         }}
       >
         <motion.div 
-          className="w-16 h-16 rounded-full bg-slate-800 border-2 border-green-500 flex items-center justify-center shadow-lg shadow-green-500/20"
+          className="w-16 h-16 rounded-xl bg-slate-800 border-2 border-green-500 flex items-center justify-center shadow-lg shadow-green-500/20 flex-col"
           animate={{
             boxShadow: ["0 0 5px rgba(74, 222, 128, 0.1)", "0 0 15px rgba(74, 222, 128, 0.4)", "0 0 5px rgba(74, 222, 128, 0.1)"],
+            backgroundColor: ["rgb(30 41 59)", "rgb(20 83 45 / 30%)", "rgb(30 41 59)"]
           }}
-          transition={{ duration: 2, repeat: Infinity }}
+          transition={{ 
+            duration: 2, 
+            repeat: Infinity,
+            times: [0, 0.5, 1]
+          }}
         >
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", damping: 12, delay: 1.3 }}
+            className="absolute inset-0 bg-green-500/10"
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: [0, 0.6, 0],
+              scale: [0.9, 1.1, 1]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          
+          <motion.span
+            className="text-sm font-bold text-green-400"
+            animate={{
+              textShadow: ["0 0 0px rgba(74, 222, 128, 0)", "0 0 10px rgba(74, 222, 128, 0.7)", "0 0 0px rgba(74, 222, 128, 0)"]
+            }}
+            transition={{ duration: 1.5, repeat: Infinity }}
           >
-            <Check className="text-green-500" size={28} />
+            Leader
+          </motion.span>
+          
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ 
+              scale: 1, 
+              opacity: 1,
+              rotate: [0, 10, 0, -10, 0]
+            }}
+            transition={{
+              type: "spring", 
+              damping: 12,
+              rotate: { repeat: Infinity, duration: 2 }
+            }}
+            className="mt-1"
+          >
+            <Check size={16} className="text-green-400" />
           </motion.div>
         </motion.div>
       </motion.div>
