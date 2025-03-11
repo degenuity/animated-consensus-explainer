@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Github, FileText } from "lucide-react";
+import { BLSStageOne } from "@/components/consensus/bls/stages";
 
 const Home = () => {
   return (
@@ -45,6 +46,10 @@ const Home = () => {
               efficient, and scalable for real-world blockchain applications.
             </p>
           </motion.div>
+
+          <div className="mb-12 relative h-60 flex items-center justify-center overflow-hidden">
+            <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
+          </div>
 
           <motion.div 
             className="flex flex-col sm:flex-row gap-4 justify-center"
