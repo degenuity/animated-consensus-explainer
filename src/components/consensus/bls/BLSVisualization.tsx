@@ -23,7 +23,7 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
   // Listen for verification complete events
   useEffect(() => {
     const handleVerificationComplete = () => {
-      // Transition to stage 1
+      // Ensure we transition to stage 1 (formula 0)
       setActiveFormula(0);
     };
     

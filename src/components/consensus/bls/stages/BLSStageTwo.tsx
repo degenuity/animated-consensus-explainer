@@ -35,14 +35,14 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     const successTimer = setTimeout(() => {
       setShowSuccessEffect(true);
       
-      // Reset after 2 seconds to restart the animation
+      // Reset after 3 seconds to restart the animation
       const resetTimer = setTimeout(() => {
         if (activeSection === 1 && activeFormula === 1) {
           setLeaderReceived(false);
           setShowSuccessEffect(false);
           setAnimationComplete(false);
         }
-      }, 2000);
+      }, 3000); // Increased from 2000 to 3000 ms
       
       return () => clearTimeout(resetTimer);
     }, 300); // Reduced delay to make verification happen quicker
