@@ -15,25 +15,39 @@ interface BLSStageTwoProps {
 export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeFormula }) => {
   const [leaderReceived, setLeaderReceived] = useState(false);
   const [showSuccessEffect, setShowSuccessEffect] = useState(false);
+  const [animationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
     setLeaderReceived(false);
     setShowSuccessEffect(false);
+    setAnimationComplete(false);
     
     if (activeSection === 1 && activeFormula === 1) {
-      const receiveTimer = setTimeout(() => {
-        setLeaderReceived(true);
-        
-        const successTimer = setTimeout(() => {
-          setShowSuccessEffect(true);
-        }, 800);
-        
-        return () => clearTimeout(successTimer);
-      }, 2000);
-      
-      return () => clearTimeout(receiveTimer);
+      // Everything is handled by the animation sequence now
     }
   }, [activeSection, activeFormula]);
+
+  const handleAggregationComplete = () => {
+    setAnimationComplete(true);
+    setLeaderReceived(true);
+    
+    const successTimer = setTimeout(() => {
+      setShowSuccessEffect(true);
+      
+      // Reset after 4 seconds if still on the same stage
+      const resetTimer = setTimeout(() => {
+        if (activeSection === 1 && activeFormula === 1) {
+          setLeaderReceived(false);
+          setShowSuccessEffect(false);
+          setAnimationComplete(false);
+        }
+      }, 4000);
+      
+      return () => clearTimeout(resetTimer);
+    }, 800);
+    
+    return () => clearTimeout(successTimer);
+  };
 
   if (activeSection !== 1 || activeFormula !== 1) return null;
   
@@ -47,7 +61,9 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
       <Validators count={10} />
       <RelayNode showSuccessEffect={showSuccessEffect} />
       <LeaderBox leaderReceived={leaderReceived} showSuccessEffect={showSuccessEffect} />
-      <AggregationAnimation />
+      {!animationComplete && (
+        <AggregationAnimation onComplete={handleAggregationComplete} />
+      )}
       <StatusMessage leaderReceived={leaderReceived} showSuccessEffect={showSuccessEffect} />
     </motion.div>
   );

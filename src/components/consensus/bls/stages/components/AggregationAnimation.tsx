@@ -3,7 +3,11 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-export const AggregationAnimation: React.FC = () => {
+interface AggregationAnimationProps {
+  onComplete?: () => void;
+}
+
+export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onComplete }) => {
   return (
     <>
       <motion.div
@@ -21,11 +25,11 @@ export const AggregationAnimation: React.FC = () => {
           scale: [0.8, 1.2, 1.2, 0.8]
         }}
         transition={{
-          duration: 4,
-          repeat: Infinity,
-          repeatDelay: 1,
+          duration: 3,
+          times: [0, 0.3, 0.8, 1],
+          repeat: 0,
           delay: 1.5,
-          times: [0, 0.3, 0.7, 1]
+          onComplete: onComplete
         }}
       >
         <div className="h-10 w-10 px-2 py-1 rounded-md bg-indigo-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
