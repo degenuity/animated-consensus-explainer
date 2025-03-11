@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from "framer-motion";
 import { Validators } from './components/Validators';
@@ -15,7 +16,9 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
   const [leaderReceived, setLeaderReceived] = useState(false);
   const [showSuccessEffect, setShowSuccessEffect] = useState(false);
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [stageComplete, setStageComplete] = useState(false);
   const mounted = useRef(true);
+  const transitionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Reset state when formula changes
   useEffect(() => {
@@ -26,6 +29,13 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
       setLeaderReceived(false);
       setShowSuccessEffect(false);
       setAnimationComplete(false);
+      setStageComplete(false);
+      
+      // Clear any pending timeouts
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current);
+        transitionTimeoutRef.current = null;
+      }
       return;
     }
     
@@ -36,9 +46,16 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     setLeaderReceived(false);
     setShowSuccessEffect(false);
     setAnimationComplete(false);
+    setStageComplete(false);
     
     return () => {
       mounted.current = false;
+      
+      // Clean up any timeouts
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current);
+        transitionTimeoutRef.current = null;
+      }
     };
   }, [activeSection, activeFormula]);
 
@@ -56,13 +73,25 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
       if (!mounted.current) return;
       console.log("Setting showSuccessEffect to true");
       setShowSuccessEffect(true);
+      
+      // Set a timeout for the stage to complete (2 additional seconds)
+      transitionTimeoutRef.current = setTimeout(() => {
+        if (!mounted.current) return;
+        console.log("Stage Two complete, preparing for transition to Stage Three");
+        setStageComplete(true);
+        
+        // Dispatch a custom event to signal that stage two is complete
+        // This can be used by BLSVisualization to automatically move to stage three
+        const event = new CustomEvent('bls-stage-two-complete');
+        document.dispatchEvent(event);
+      }, 2000); // Adding a 2-second wait before transition
     }, 100);
   }, []);
 
   // If we're not in the right section or formula, don't render
   if (activeSection !== 1 || activeFormula !== 1) return null;
   
-  console.log("BLSStageTwo rendering with states:", { leaderReceived, showSuccessEffect, animationComplete });
+  console.log("BLSStageTwo rendering with states:", { leaderReceived, showSuccessEffect, animationComplete, stageComplete });
   
   return (
     <motion.div

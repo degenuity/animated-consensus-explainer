@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
   BLSStageOne, 
@@ -27,10 +26,19 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
       setActiveFormula(0);
     };
     
+    // New event listener for stage two complete
+    const handleStageTwoComplete = () => {
+      console.log("BLSVisualization: Received stage-two-complete event, moving to stage three");
+      // Move to stage three (formula 2)
+      setActiveFormula(2);
+    };
+    
     document.addEventListener('bls-verification-complete', handleVerificationComplete);
+    document.addEventListener('bls-stage-two-complete', handleStageTwoComplete);
     
     return () => {
       document.removeEventListener('bls-verification-complete', handleVerificationComplete);
+      document.removeEventListener('bls-stage-two-complete', handleStageTwoComplete);
     };
   }, [setActiveFormula]);
 
