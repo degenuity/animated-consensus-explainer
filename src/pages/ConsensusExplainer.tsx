@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -16,8 +15,8 @@ const ConsensusExplainer = () => {
   const [isVoteReductionOpen, setIsVoteReductionOpen] = useState(false);
   const isMobile = useIsMobile();
   
-  // Update PDF URL to use the relative path that points to the file in the public folder
-  const pdfUrl = `/Vote_Optimization_with_BLS_in_large_decentralized_networks_5.pdf`;
+  // Update PDF URL to use the GitHub raw file URL
+  const pdfUrl = "https://raw.githubusercontent.com/degenuity/animated-consensus-explainer/main/Vote_Optimization_with_BLS_in_large_decentralized_networks_5.pdf";
 
   useEffect(() => {
     // Only run node selection logic when VRF section is active or hovered or on mobile
