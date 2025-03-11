@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import PDFViewer from "@/components/PDFViewer";
 
 const Home = () => {
-  // Replace this URL with your actual PDF URL when you have one
-  const pdfUrl = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+  // Use the local PDF file path instead of the external URL
+  const pdfUrl = "/Vote_Optimization_with_BLS_in_large_decentralized_networks_5.pdf";
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 text-white py-12 px-4 sm:px-6 lg:px-8">
@@ -41,7 +41,7 @@ const Home = () => {
         className="max-w-4xl mx-auto"
       >
         <h2 className="text-3xl font-bold mb-8 text-center">Consensus Whitepaper</h2>
-        <PDFViewer pdfUrl={pdfUrl} title="Example PDF Document" />
+        <PDFViewer pdfUrl={pdfUrl} title="Vote Optimization with BLS in Large Decentralized Networks" />
       </motion.div>
     </div>
   );
