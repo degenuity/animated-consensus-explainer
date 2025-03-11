@@ -19,6 +19,7 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
   const [stageComplete, setStageComplete] = useState(false);
   const mounted = useRef(true);
   const transitionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const successTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Reset state when formula changes
   useEffect(() => {
@@ -35,6 +36,11 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
       if (transitionTimeoutRef.current) {
         clearTimeout(transitionTimeoutRef.current);
         transitionTimeoutRef.current = null;
+      }
+      
+      if (successTimeoutRef.current) {
+        clearTimeout(successTimeoutRef.current);
+        successTimeoutRef.current = null;
       }
       return;
     }
@@ -56,6 +62,11 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
         clearTimeout(transitionTimeoutRef.current);
         transitionTimeoutRef.current = null;
       }
+      
+      if (successTimeoutRef.current) {
+        clearTimeout(successTimeoutRef.current);
+        successTimeoutRef.current = null;
+      }
     };
   }, [activeSection, activeFormula]);
 
@@ -65,26 +76,28 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
     
     if (!mounted.current) return;
     
+    // Set animation complete to prevent re-rendering the animation
+    setAnimationComplete(true);
+    
     // Set leader received immediately after the animation completes
     setLeaderReceived(true);
     
     // Add a slight delay before showing success effect
-    setTimeout(() => {
+    successTimeoutRef.current = setTimeout(() => {
       if (!mounted.current) return;
       console.log("Setting showSuccessEffect to true");
       setShowSuccessEffect(true);
       
-      // Set a timeout for the stage to complete (2 additional seconds)
+      // Set a timeout for the stage to complete (4 seconds instead of 2)
       transitionTimeoutRef.current = setTimeout(() => {
         if (!mounted.current) return;
-        console.log("Stage Two complete, preparing for transition to Stage Three");
+        console.log("Stage Two complete, preparing for transition to Stage Three (after 4 seconds)");
         setStageComplete(true);
         
         // Dispatch a custom event to signal that stage two is complete
-        // This can be used by BLSVisualization to automatically move to stage three
         const event = new CustomEvent('bls-stage-two-complete');
         document.dispatchEvent(event);
-      }, 2000); // Adding a 2-second wait before transition
+      }, 4000); // Adding a 4-second wait before transition
     }, 100);
   }, []);
 

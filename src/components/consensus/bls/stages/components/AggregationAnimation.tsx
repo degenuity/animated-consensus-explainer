@@ -52,10 +52,10 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
       initial={{ opacity: 0, x: 0 }}
       animate={controls}
       transition={{
-        duration: 2, // Animation duration
+        duration: 1.5, // Slightly shorter animation duration
         times: [0, 0.3, 1],
         repeat: 0,
-        delay: 0.5, // Delay before animation starts
+        delay: 0.4, // Slightly shorter delay before animation starts
       }}
     >
       <motion.div 
