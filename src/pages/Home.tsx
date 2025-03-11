@@ -32,15 +32,15 @@ const Home = () => {
           Learn how X1 Blockchain's consensus mechanisms improve scalability and efficiency
         </p>
         
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link to="/whitepaper">
-            <Button className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-8 py-6 text-lg">
+        <div className="flex flex-col gap-4 max-w-md mx-auto">
+          <Link to="/whitepaper" className="w-full">
+            <Button className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-8 py-6 text-lg w-full">
               X1 Whitepaper
             </Button>
           </Link>
           
-          <Link to="/consensus">
-            <Button className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-8 py-6 text-lg">
+          <Link to="/consensus" className="w-full">
+            <Button className="bg-blue-400 hover:bg-blue-500 text-black font-medium rounded-full px-8 py-6 text-lg w-full">
               VRF-based Subcommitees and BLS Aggregation
             </Button>
           </Link>
