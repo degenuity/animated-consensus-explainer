@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from "framer-motion";
 import { User, Server } from "lucide-react";
@@ -48,7 +47,7 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
             >
               <Server className="text-purple-400 mb-1" size={20} />
               <motion.span className="text-xs font-bold text-purple-300">
-                X1
+                Relay node
               </motion.span>
             </motion.div>
           </motion.div>
@@ -124,8 +123,6 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
           );
         })}
       </div>
-      
-      {/* Removed the text that was here about validators sending messages */}
     </motion.div>
   );
 };
