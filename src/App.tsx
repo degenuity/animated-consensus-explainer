@@ -3,17 +3,15 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Suspense, lazy, useState, useEffect } from "react";
 import React from "react";
 
-// Import ConsensusExplainer normally instead of using lazy loading
+// Import all pages directly without lazy loading for now to diagnose the issue
 import Home from "./pages/Home";
 import ConsensusExplainer from "./pages/ConsensusExplainer";
-
-// Continue to lazy load these components
-const Whitepaper = lazy(() => import("./pages/Whitepaper"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+import Whitepaper from "./pages/Whitepaper";
+import NotFound from "./pages/NotFound";
 
 // Loading component
 const Loading = () => (
@@ -64,11 +62,12 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// Create a new QueryClient instance
+// Create a new QueryClient instance with simpler configuration
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false,
+      retry: 1,
+      refetchOnWindowFocus: false,
     },
   },
 });
@@ -80,6 +79,11 @@ const App = () => {
     // Log when app is mounted
     console.log("App component mounted");
     setIsLoaded(true);
+    
+    // Return cleanup function
+    return () => {
+      console.log("App component unmounted");
+    };
   }, []);
 
   if (!isLoaded) {
@@ -97,16 +101,8 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/consensus" element={<ConsensusExplainer />} />
               <Route path="/consensus/*" element={<ConsensusExplainer />} />
-              <Route path="/whitepaper" element={
-                <Suspense fallback={<Loading />}>
-                  <Whitepaper />
-                </Suspense>
-              } />
-              <Route path="*" element={
-                <Suspense fallback={<Loading />}>
-                  <NotFound />
-                </Suspense>
-              } />
+              <Route path="/whitepaper" element={<Whitepaper />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
