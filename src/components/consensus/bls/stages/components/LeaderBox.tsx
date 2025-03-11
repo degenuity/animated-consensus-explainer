@@ -29,13 +29,15 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
         animate={{
           boxShadow: leaderReceived ? 
             ["0 0 0px rgba(74, 222, 128, 0)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] : 
-            "none",
-          backgroundColor: leaderReceived ? ["rgb(30 41 59)", "rgb(20 83 45 / 30%)", "rgb(30 41 59)"] : "rgb(30 41 59)"
+            ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"],
+          backgroundColor: leaderReceived ? 
+            ["rgb(30 41 59)", "rgb(20 83 45 / 30%)", "rgb(30 41 59)"] : 
+            ["rgb(30 41 59)", "rgb(127 29 29 / 30%)", "rgb(30 41 59)"]
         }}
         transition={{ 
           duration: 2, 
-          repeat: showSuccessEffect ? Infinity : 0,
-          times: leaderReceived ? [0, 0.5, 1] : undefined
+          repeat: Infinity,
+          times: [0, 0.5, 1]
         }}
       >
         {showSuccessEffect && (
@@ -59,9 +61,12 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({ leaderReceived, showSucces
           animate={{
             textShadow: showSuccessEffect ? 
               ["0 0 0px rgba(74, 222, 128, 0)", "0 0 10px rgba(74, 222, 128, 0.7)", "0 0 0px rgba(74, 222, 128, 0)"] : 
-              "none"
+              leaderReceived ? "none" : ["0 0 0px rgba(239, 68, 68, 0)", "0 0 10px rgba(239, 68, 68, 0.7)", "0 0 0px rgba(239, 68, 68, 0)"]
           }}
-          transition={{ duration: 1.5, repeat: showSuccessEffect ? Infinity : 0 }}
+          transition={{ 
+            duration: 1.5, 
+            repeat: Infinity
+          }}
         >
           Leader
         </motion.span>
