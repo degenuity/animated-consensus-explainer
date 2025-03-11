@@ -5,19 +5,13 @@ import { VRFSection } from '@/components/consensus/VRFSection';
 import { BLSSection } from '@/components/consensus/BLSSection';
 
 const ConsensusExplainer = () => {
-  const [activeSection, setActiveSection] = useState(0);
+  const [activeSection, setActiveSection] = useState<number | null>(null);
   const [selectedNodes, setSelectedNodes] = useState<number[]>([]);
   const [isAdjustmentOpen, setIsAdjustmentOpen] = useState(false);
   const [isVoteReductionOpen, setIsVoteReductionOpen] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveSection((prev) => (prev + 1) % 2);
-    }, 8000);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
+    // Only run node selection logic when VRF section is active or hovered
     if (activeSection !== 0) return;
     
     const selectRandomNodes = () => {
@@ -50,21 +44,32 @@ const ConsensusExplainer = () => {
         </h1>
 
         {/* First section - VRF-Based Subcommittee Selection */}
-        <VRFSection 
-          activeSection={activeSection} 
-          isAdjustmentOpen={isAdjustmentOpen}
-          setIsAdjustmentOpen={setIsAdjustmentOpen}
-          isVoteReductionOpen={isVoteReductionOpen}
-          setIsVoteReductionOpen={setIsVoteReductionOpen}
-          selectedNodes={selectedNodes}
-        />
+        <div 
+          className="mb-10"
+          onMouseEnter={() => setActiveSection(0)}
+          onMouseLeave={() => setActiveSection(null)}
+        >
+          <VRFSection 
+            activeSection={activeSection} 
+            isAdjustmentOpen={isAdjustmentOpen}
+            setIsAdjustmentOpen={setIsAdjustmentOpen}
+            isVoteReductionOpen={isVoteReductionOpen}
+            setIsVoteReductionOpen={setIsVoteReductionOpen}
+            selectedNodes={selectedNodes}
+          />
+        </div>
 
         {/* Second section - BLS Signature Aggregation */}
-        <BLSSection 
-          activeSection={activeSection}
-          isVoteReductionOpen={isVoteReductionOpen}
-          setIsVoteReductionOpen={setIsVoteReductionOpen}
-        />
+        <div
+          onMouseEnter={() => setActiveSection(1)}
+          onMouseLeave={() => setActiveSection(null)}
+        >
+          <BLSSection 
+            activeSection={activeSection}
+            isVoteReductionOpen={isVoteReductionOpen}
+            setIsVoteReductionOpen={setIsVoteReductionOpen}
+          />
+        </div>
       </motion.div>
     </div>
   );

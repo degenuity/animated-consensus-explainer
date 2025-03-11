@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from "framer-motion";
 
 interface BLSFormulaAnimationProps {
-  activeSection: number;
+  activeSection: number | null;
   activeFormula: number;
   formulaIndex: number;
   color: string;

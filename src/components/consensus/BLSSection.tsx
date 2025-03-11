@@ -6,7 +6,7 @@ import { BLSFormulas } from './bls/BLSFormulas';
 import { BLSVisualization } from './bls/BLSVisualization';
 
 interface BLSSectionProps {
-  activeSection: number;
+  activeSection: number | null;
   isVoteReductionOpen: boolean;
   setIsVoteReductionOpen: (isOpen: boolean) => void;
 }
@@ -31,15 +31,17 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     return () => clearInterval(formulaInterval);
   }, [activeSection]);
 
+  const isActive = activeSection === 1;
+
   return (
     <motion.div
       animate={{
-        scale: activeSection === 1 ? 1 : 0.95,
-        opacity: activeSection === 1 ? 1 : 0.5
+        scale: isActive ? 1 : 0.95,
+        opacity: isActive ? 1 : 0.5
       }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative">
+      <Card className="p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-violet-500/50 transition-colors">
         <div className="absolute inset-0 bg-gradient-to-br from-violet-900/10 to-indigo-900/10" />
         
         <h2 className="text-2xl font-semibold mb-4 text-violet-400 relative z-10">

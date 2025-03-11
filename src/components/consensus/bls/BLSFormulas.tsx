@@ -5,7 +5,7 @@ import { BLSFormulaAnimation } from './BLSFormulaAnimation';
 import { ExpandableItem } from '../ExpandableItem';
 
 interface BLSFormulasProps {
-  activeSection: number;
+  activeSection: number | null;
   activeFormula: number;
 }
 

@@ -8,7 +8,7 @@ import {
 } from './stages';
 
 interface BLSVisualizationProps {
-  activeSection: number;
+  activeSection: number | null;
   activeFormula: number;
 }
 
