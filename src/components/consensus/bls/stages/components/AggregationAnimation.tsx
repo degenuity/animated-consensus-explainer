@@ -13,10 +13,10 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
   useEffect(() => {
     const animate = async () => {
       // Move the box to position where its right side will touch the leader box's left side
-      // Stopping earlier than before
+      // Stopping at x:20 as requested
       await controls.start({
         opacity: [0, 1, 1],
-        x: [0, 40, 40], // Reduced x position to stop earlier
+        x: [0, 20, 20], // Reduced x position to stop earlier at x:20
         scale: [0.8, 1.2, 1]
       });
       
