@@ -153,7 +153,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         </motion.div>
       </div>
       
-      {/* Leader Verification - Using Stage Two styling */}
+      {/* Leader Verification - Using the same style as in stage two */}
       <motion.div
         className="absolute top-1/2 right-[15%] transform -translate-y-1/2 z-10"
         initial={{ opacity: 0, scale: 0.5 }}
@@ -218,9 +218,9 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         </motion.div>
       </motion.div>
       
-      {/* Verification Time Info - Moving it higher from bottom (to top-[75%]) to avoid overlap with status indicator */}
+      {/* Verification Time Info - Moving it higher from bottom (to top-[85%]) to avoid overlap with status indicator */}
       <motion.div 
-        className="absolute right-[15%] top-[75%] bg-slate-800/80 backdrop-blur border border-green-500 rounded-lg px-4 py-2 shadow-lg"
+        className="absolute right-[15%] top-[85%] bg-slate-800/80 backdrop-blur border border-green-500 rounded-lg px-4 py-2 shadow-lg"
         initial={{ opacity: 0, y: 20, scale: 0.9 }}
         animate={{
           opacity: 1,
