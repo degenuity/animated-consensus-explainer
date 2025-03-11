@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Direct imports for all pages
 import Home from "./pages/Home";
@@ -12,7 +12,7 @@ import ConsensusExplainer from "./pages/ConsensusExplainer";
 import Whitepaper from "./pages/Whitepaper";
 import NotFound from "./pages/NotFound";
 
-// Simple error boundary component
+// Enhanced error boundary component with better logging
 class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean; error: Error | null }
@@ -20,6 +20,7 @@ class ErrorBoundary extends React.Component<
   constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false, error: null };
+    console.log("ErrorBoundary component initialized");
   }
 
   static getDerivedStateFromError(error: Error) {
@@ -28,7 +29,8 @@ class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error("App error caught:", error, errorInfo);
+    console.error("App error details:", error);
+    console.error("Component stack:", errorInfo.componentStack);
   }
 
   render() {
@@ -53,18 +55,34 @@ class ErrorBoundary extends React.Component<
   }
 }
 
-// Create a basic QueryClient
+// Create a basic QueryClient with better error logging
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 1,
       refetchOnWindowFocus: false,
+      onError: (error) => {
+        console.error('Query error:', error);
+      }
     },
   },
 });
 
 const App = () => {
   const [isRouterError, setIsRouterError] = useState(false);
+  
+  // Add a component mounted log
+  useEffect(() => {
+    console.log("App component mounted successfully");
+    
+    // Add window error handler
+    const handleError = (event: ErrorEvent) => {
+      console.error("Global error caught:", event.error);
+    };
+    
+    window.addEventListener('error', handleError);
+    return () => window.removeEventListener('error', handleError);
+  }, []);
 
   return (
     <ErrorBoundary>
