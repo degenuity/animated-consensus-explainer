@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Github } from "lucide-react";
+import { ArrowRight, Github, FileText } from "lucide-react";
 
 const Home = () => {
   return (
@@ -56,6 +56,13 @@ const Home = () => {
               <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-all duration-200 shadow-md hover:shadow-blue-500/20 flex items-center gap-2 w-full sm:w-auto">
                 <span>Explore Consensus</span>
                 <ArrowRight size={16} />
+              </Button>
+            </Link>
+            
+            <Link to="/whitepaper">
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md transition-all duration-200 shadow-md hover:shadow-purple-500/20 flex items-center gap-2 w-full sm:w-auto">
+                <span>X1 Whitepaper</span>
+                <FileText size={16} />
               </Button>
             </Link>
             
