@@ -12,15 +12,22 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
   const [verifiedSignatures, setVerifiedSignatures] = useState<number[]>([]);
   const [completionPause, setCompletionPause] = useState(false);
   const verifyIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const restartTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   useEffect(() => {
     if (activeSection !== 1 || activeFormula !== 2) {
       setVerifiedSignatures([]);
       setCompletionPause(false);
-      // Clear any existing interval when component becomes inactive
+      
+      // Clear any existing interval and timeout when component becomes inactive
       if (verifyIntervalRef.current) {
         clearInterval(verifyIntervalRef.current);
         verifyIntervalRef.current = null;
+      }
+      
+      if (restartTimeoutRef.current) {
+        clearTimeout(restartTimeoutRef.current);
+        restartTimeoutRef.current = null;
       }
       return;
     }
@@ -32,39 +39,39 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
     // If there's an existing interval, clear it
     if (verifyIntervalRef.current) {
       clearInterval(verifyIntervalRef.current);
+      verifyIntervalRef.current = null;
     }
     
-    // Verify signatures one by one
+    // If there's an existing timeout, clear it
+    if (restartTimeoutRef.current) {
+      clearTimeout(restartTimeoutRef.current);
+      restartTimeoutRef.current = null;
+    }
+    
+    // Start verifying signatures one by one
+    let count = 0;
     verifyIntervalRef.current = setInterval(() => {
-      setVerifiedSignatures(prev => {
-        // If we've verified all signatures but not yet paused
-        if (prev.length === 10 && !completionPause) {
-          // Immediately clear the interval to stop adding signatures
-          if (verifyIntervalRef.current) {
-            clearInterval(verifyIntervalRef.current);
-            verifyIntervalRef.current = null;
-          }
-          
-          setCompletionPause(true);
-          
-          // After exactly 2 seconds, reset and signal to restart from Stage 1
-          setTimeout(() => {
-            const event = new CustomEvent('bls-verification-complete', { 
-              detail: { restartAnimation: true } 
-            });
-            document.dispatchEvent(event);
-          }, 2000);
-          
-          return prev; // Return unchanged to avoid adding more signatures
-        }
+      if (count < 10) {
+        count++;
+        setVerifiedSignatures(prev => [...prev, prev.length]);
+      } else {
+        // Once all 10 signatures are verified, clear interval and set completion state
+        clearInterval(verifyIntervalRef.current!);
+        verifyIntervalRef.current = null;
+        setCompletionPause(true);
         
-        // If we haven't verified all signatures yet, add the next one
-        if (prev.length < 10) {
-          return [...prev, prev.length];
-        }
-        
-        return prev;
-      });
+        // Wait exactly 2 seconds, then reset and signal to restart from Stage 1
+        restartTimeoutRef.current = setTimeout(() => {
+          const event = new CustomEvent('bls-verification-complete', { 
+            detail: { restartAnimation: true } 
+          });
+          document.dispatchEvent(event);
+          
+          // Clear completion state for next cycle
+          setCompletionPause(false);
+          setVerifiedSignatures([]);
+        }, 2000);
+      }
     }, 250);
     
     // Cleanup function
@@ -73,17 +80,13 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
         clearInterval(verifyIntervalRef.current);
         verifyIntervalRef.current = null;
       }
-    };
-  }, [activeSection, activeFormula, completionPause]);
-  
-  // Also cleanup on component unmount
-  useEffect(() => {
-    return () => {
-      if (verifyIntervalRef.current) {
-        clearInterval(verifyIntervalRef.current);
+      
+      if (restartTimeoutRef.current) {
+        clearTimeout(restartTimeoutRef.current);
+        restartTimeoutRef.current = null;
       }
     };
-  }, []);
+  }, [activeSection, activeFormula]);
   
   if (activeSection !== 1 || activeFormula !== 2) return null;
   

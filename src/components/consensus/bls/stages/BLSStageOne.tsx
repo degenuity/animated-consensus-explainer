@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from "framer-motion";
 import { User, Server } from "lucide-react";
 
@@ -9,10 +9,21 @@ interface BLSStageOneProps {
 }
 
 export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeFormula }) => {
+  // Use this key to force animations to restart
+  const [animationKey, setAnimationKey] = React.useState(0);
+  
+  // Reset animation when component becomes active
+  useEffect(() => {
+    if (activeSection === 1 && activeFormula === 0) {
+      setAnimationKey(prev => prev + 1);
+    }
+  }, [activeSection, activeFormula]);
+  
   if (activeSection !== 1 || activeFormula !== 0) return null;
   
   return (
     <motion.div
+      key={animationKey}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -127,4 +138,3 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
     </motion.div>
   );
 };
-
