@@ -59,6 +59,25 @@ const Home = () => {
           <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
         </div>
       </motion.div>
+
+      {/* Cat Image Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="max-w-md mx-auto mb-16"
+      >
+        <div className="bg-slate-800 rounded-xl p-4 shadow-lg border border-slate-700">
+          <img 
+            src="https://images.unsplash.com/photo-1535268647677-300dbf3d78d1" 
+            alt="Grey tabby kitten" 
+            className="w-full h-auto rounded-lg shadow-md"
+          />
+          <p className="text-slate-300 text-sm mt-3 text-center italic">
+            Our feline blockchain security expert
+          </p>
+        </div>
+      </motion.div>
     </div>
   );
 };
