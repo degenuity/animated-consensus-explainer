@@ -21,7 +21,7 @@ export const AggregationAnimation: React.FC<AggregationAnimationProps> = ({ onCo
         initial={{ opacity: 0, x: 0 }}
         animate={{
           opacity: [0, 1, 1],
-          x: [0, 100, 100],
+          x: [0, 80, 80], // Reduced from 100 to 80 to stop before reaching the leader box
           scale: [0.8, 1.2, 1.2]
         }}
         transition={{
