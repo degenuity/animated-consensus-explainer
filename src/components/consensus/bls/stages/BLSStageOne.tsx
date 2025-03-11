@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from "framer-motion";
 import { User, Server } from "lucide-react";
@@ -6,9 +5,10 @@ import { User, Server } from "lucide-react";
 interface BLSStageOneProps {
   activeSection: number;
   activeFormula: number;
+  showX1Label?: boolean;
 }
 
-export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeFormula }) => {
+export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeFormula, showX1Label = false }) => {
   const [innerKey, setInnerKey] = useState(0);
   const prevFormulaRef = useRef(activeFormula);
   
@@ -48,7 +48,7 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
             >
               <Server className="text-purple-400 mb-1" size={20} />
               <motion.span className="text-xs font-bold text-purple-300">
-                Relay node
+                {showX1Label ? "X1" : "Relay node"}
               </motion.span>
             </motion.div>
           </motion.div>

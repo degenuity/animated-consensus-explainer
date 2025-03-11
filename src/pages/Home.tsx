@@ -56,7 +56,7 @@ const Home = () => {
         className="max-w-4xl mx-auto relative h-80 mb-8"
       >
         <div className="relative h-full w-full">
-          <BLSStageOne activeSection={1} activeFormula={0} />
+          <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
         </div>
       </motion.div>
     </div>
