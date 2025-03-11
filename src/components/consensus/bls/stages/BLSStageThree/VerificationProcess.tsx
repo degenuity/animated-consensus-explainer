@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export const VerificationProcess: React.FC = () => {
   return (
-    <div className="absolute top-1/3 left-[55%] transform -translate-x-1/2 -translate-y-1/2">
+    <div className="absolute top-[30%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">
       <motion.div 
         className="relative flex flex-col items-center"
         initial={{ opacity: 0 }}
