@@ -29,7 +29,7 @@ const Home = () => {
         </h1>
         
         <p className="text-xl mb-10 text-slate-300">
-          Learn how modern blockchain consensus mechanisms improve scalability and efficiency
+          Learn how X1 Blockchain's consensus mechanisms improve scalability and efficiency
         </p>
         
         <div className="flex justify-center">
