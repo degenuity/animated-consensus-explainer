@@ -24,13 +24,13 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
   const borderClass = verificationComplete 
     ? 'border-green-500' 
     : leaderReceived 
-      ? 'border-indigo-500'
+      ? 'border-red-500'
       : 'border-red-500';
   
   const glowClass = verificationComplete
     ? 'green-glow'
     : leaderReceived
-      ? 'indigo-glow'
+      ? 'red-glow'
       : 'red-glow';
   
   return (
@@ -54,7 +54,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
           boxShadow: verificationComplete ?
             ["0 0 0px rgba(74, 222, 128, 0)", "0 0 20px rgba(74, 222, 128, 0.4)", "0 0 10px rgba(74, 222, 128, 0.2)"] :
             leaderReceived ? 
-              ["0 0 0px rgba(139, 92, 246, 0)", "0 0 20px rgba(139, 92, 246, 0.4)", "0 0 10px rgba(139, 92, 246, 0.2)"] : 
+              ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"] : 
               ["0 0 0px rgba(239, 68, 68, 0)", "0 0 20px rgba(239, 68, 68, 0.4)", "0 0 10px rgba(239, 68, 68, 0.2)"]
         }}
         transition={{ 
@@ -65,7 +65,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
       >
         {showSuccessEffect && (
           <motion.div
-            className={`absolute inset-0 ${verificationComplete ? 'bg-green-500/10' : 'bg-indigo-500/10'}`}
+            className={`absolute inset-0 ${verificationComplete ? 'bg-green-500/10' : 'bg-red-500/10'}`}
             initial={{ opacity: 0 }}
             animate={{ 
               opacity: [0, 0.6, 0],
@@ -85,7 +85,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
             color: verificationComplete ? 
               "rgb(74 222 128)" :
               leaderReceived ? 
-                "rgb(139 92 246)" : 
+                "rgb(248 113 113)" : 
                 "rgb(248 113 113)"
           }}
           transition={{ 
@@ -110,7 +110,7 @@ export const LeaderBox: React.FC<LeaderBoxProps> = ({
             }}
             className="mt-1"
           >
-            <Check size={16} className={verificationComplete ? "text-green-400" : "text-indigo-400"} />
+            <Check size={16} className={verificationComplete ? "text-green-400" : "text-red-400"} />
           </motion.div>
         )}
       </motion.div>
