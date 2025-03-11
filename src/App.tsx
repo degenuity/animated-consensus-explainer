@@ -12,28 +12,37 @@ import ConsensusExplainer from "./pages/ConsensusExplainer";
 import Whitepaper from "./pages/Whitepaper";
 import NotFound from "./pages/NotFound";
 
-// Create a simple QueryClient
-const queryClient = new QueryClient();
+// Create a simple QueryClient with minimal configuration
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const App = () => {
   console.log("App component rendering");
   
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/consensus" element={<ConsensusExplainer />} />
-            <Route path="/consensus/*" element={<ConsensusExplainer />} />
-            <Route path="/whitepaper" element={<Whitepaper />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-        <Toaster />
-        <Sonner />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/consensus" element={<ConsensusExplainer />} />
+              <Route path="/consensus/*" element={<ConsensusExplainer />} />
+              <Route path="/whitepaper" element={<Whitepaper />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+          <Toaster />
+          <Sonner />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </React.StrictMode>
   );
 };
 
