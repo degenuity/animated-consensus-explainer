@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { BLSStageOne } from "@/components/consensus/bls/stages";
 
 const Home = () => {
   const [error, setError] = useState<string | null>(null);
@@ -91,6 +92,18 @@ const Home = () => {
             </Button>
           </Link>
         </motion.div>
+      </motion.div>
+
+      {/* Add BLS Animation */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.8 }}
+        className="max-w-4xl mx-auto flex justify-center mb-16 relative"
+        style={{ height: "280px" }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 z-10 pointer-events-none"></div>
+        <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
       </motion.div>
 
       <motion.div 
