@@ -57,6 +57,21 @@ const Home = () => {
           <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
         </div>
       </motion.div>
+
+      {/* Superman Image */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="max-w-4xl mx-auto text-center mb-16"
+      >
+        <img 
+          src="https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" 
+          alt="Superman" 
+          className="w-full max-w-2xl mx-auto rounded-lg shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-shadow"
+        />
+        <p className="text-blue-400 mt-4 font-medium">X1: The Superman of Blockchains</p>
+      </motion.div>
     </div>
   );
 };
