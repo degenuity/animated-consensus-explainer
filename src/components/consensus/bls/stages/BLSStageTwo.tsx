@@ -28,13 +28,17 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
   }, [activeSection, activeFormula]);
 
   const handleAggregationComplete = () => {
-    // Immediate leader box color change
+    // Immediate leader box color change when Agg touches it
     setLeaderReceived(true);
     
     // Trigger success effect shortly after
     const successTimer = setTimeout(() => {
       setShowSuccessEffect(true);
-      setAnimationComplete(true);
+      
+      // Don't set animationComplete immediately so the Agg box stays visible
+      setTimeout(() => {
+        setAnimationComplete(true);
+      }, 1000);
       
       // Reset after 5 seconds to restart the animation
       const resetTimer = setTimeout(() => {
@@ -43,10 +47,10 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
           setShowSuccessEffect(false);
           setAnimationComplete(false);
         }
-      }, 5000); // Increased from 3000 to 5000 ms
+      }, 5000); // Keep as 5000 ms
       
       return () => clearTimeout(resetTimer);
-    }, 300); // Reduced delay to make verification happen quicker
+    }, 200); // Reduced delay to make verification happen quicker
     
     return () => clearTimeout(successTimer);
   };
