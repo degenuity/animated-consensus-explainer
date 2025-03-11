@@ -37,7 +37,7 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
         </motion.div>
       </motion.div>
 
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 flex items-center justify-center">
         {Array.from({ length: 10 }).map((_, i) => {
           const angle = (i * 36) * (Math.PI / 180);
           const radius = 120;
@@ -58,7 +58,10 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
                 duration: 0.5,
                 type: "spring",
               }}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              className="absolute"
+              style={{
+                transform: `translate(${x}px, ${y}px)`,
+              }}
             >
               <motion.div
                 className="flex flex-col items-center"

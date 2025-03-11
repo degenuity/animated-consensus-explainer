@@ -40,7 +40,7 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
       exit={{ opacity: 0 }}
       className="absolute inset-0"
     >
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 flex items-center justify-center">
         {Array.from({ length: 10 }).map((_, i) => {
           const angle = (i * 36) * (Math.PI / 180);
           const radius = 120;
@@ -50,12 +50,9 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
           return (
             <motion.div
               key={`agg-validator-${i}`}
-              className="absolute top-1/2 left-1/2"
+              className="absolute"
               style={{
-                x, 
-                y,
-                translateX: "-50%",
-                translateY: "-50%",
+                transform: `translate(${x}px, ${y}px)`,
               }}
             >
               <div className="w-8 h-8 rounded-full bg-slate-800 border border-indigo-500/30 flex items-center justify-center opacity-70">
