@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import ConsensusExplainer from "./pages/ConsensusExplainer";
 import NotFound from "./pages/NotFound";
@@ -19,6 +19,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/consensus" element={<ConsensusExplainer />} />
+          <Route path="/consensus/*" element={<ConsensusExplainer />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

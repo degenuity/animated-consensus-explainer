@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -15,7 +16,7 @@ const ConsensusExplainer = () => {
   const [isVoteReductionOpen, setIsVoteReductionOpen] = useState(false);
   const isMobile = useIsMobile();
   
-  // Update PDF URL to use the GitHub raw file URL
+  // Use the GitHub raw file URL for the PDF
   const pdfUrl = "https://raw.githubusercontent.com/degenuity/animated-consensus-explainer/main/Vote_Optimization_with_BLS_in_large_decentralized_networks_5.pdf";
 
   useEffect(() => {
@@ -63,7 +64,7 @@ const ConsensusExplainer = () => {
             <img 
               src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
               alt="X1 Logo" 
-              className="h-7 w-auto" // Changed from h-5 to h-7 (1/3 bigger)
+              className="h-7 w-auto" 
             />
           </Link>
           
