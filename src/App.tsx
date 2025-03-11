@@ -8,7 +8,14 @@ import Home from "./pages/Home";
 import ConsensusExplainer from "./pages/ConsensusExplainer";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+// Create a new QueryClient instance that doesn't retry failed queries by default
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
