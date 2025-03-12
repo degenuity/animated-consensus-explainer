@@ -25,33 +25,33 @@ const ValidatorFinancials = () => {
 
         <div className="relative mx-auto" style={{ height: '820px' }}>
           {/* First Row - Main Boxes */}
-          <div className="absolute left-[80px] top-[120px]" style={{ width: '180px' }}>
+          <div className="absolute left-[50px] top-[80px]" style={{ width: '180px' }}>
             <InflationBox />
           </div>
           
-          <div className="absolute left-[420px] top-[160px]" style={{ width: '250px' }}>
+          <div className="absolute left-[380px] top-[100px]" style={{ width: '250px' }}>
             <TotalStakeBox />
           </div>
           
-          <div className="absolute right-[80px] top-[120px]" style={{ width: '180px' }}>
+          <div className="absolute right-[50px] top-[80px]" style={{ width: '180px' }}>
             <DeflationBox />
           </div>
 
           {/* Second Row */}
-          <div className="absolute left-[280px] top-[220px]" style={{ width: '250px' }}>
+          <div className="absolute left-[240px] top-[260px]" style={{ width: '250px' }}>
             <InternalRewardsBox />
           </div>
           
-          <div className="absolute right-[280px] top-[160px]" style={{ width: '250px' }}>
+          <div className="absolute right-[240px] top-[260px]" style={{ width: '250px' }}>
             <NetworkUsageCostsBox />
           </div>
 
           {/* Bottom Row */}
-          <div className="absolute left-[140px] top-[530px]" style={{ width: '450px' }}>
+          <div className="absolute left-[140px] top-[520px]" style={{ width: '450px' }}>
             <BlockProductionEligibilityBox />
           </div>
           
-          <div className="absolute right-[140px] top-[530px]" style={{ width: '450px' }}>
+          <div className="absolute right-[140px] top-[520px]" style={{ width: '450px' }}>
             <ProfitabilityBox />
           </div>
 
