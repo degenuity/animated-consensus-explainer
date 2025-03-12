@@ -18,34 +18,85 @@
       window.pdfjsLib = window.pdfjsLib || {};
       window.pdfjsLib.GlobalWorkerOptions = window.pdfjsLib.GlobalWorkerOptions || {};
       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+      
+      // Debug logging
+      console.log('HTML script executed');
+      console.log('PDF.js global setup completed');
     </script>
     
     <style>
       body { 
         margin: 0; 
         padding: 0;
-        background-color: #000; /* Ensure dark background even before React loads */
-        color: #fff;
+        background-color: #000 !important; /* Ensure dark background even before React loads */
+        color: #fff !important;
         min-height: 100vh;
         width: 100%;
+        display: block !important;
+        visibility: visible !important;
       }
       
       #root {
         min-height: 100vh;
         width: 100%;
-        display: flex;
+        display: flex !important;
         flex-direction: column;
+        visibility: visible !important;
       }
       
       /* Force visibility of UI elements */
       h1, h2, p, a, button, div {
         visibility: visible !important;
         opacity: 1 !important;
+        display: block;
+      }
+      
+      /* Emergency fallback content */
+      #emergency-content {
+        padding: 20px;
+        color: white;
+        text-align: center;
+        display: block;
+      }
+      
+      #emergency-content a {
+        display: inline-block;
+        padding: 10px 20px;
+        background: blue;
+        color: white;
+        margin: 0 10px;
+        text-decoration: none;
+        border-radius: 4px;
       }
     </style>
   </head>
   <body>
+    <!-- Emergency content that will show if JS fails completely -->
+    <div id="emergency-content" style="display: none;">
+      <h1>X1 Research</h1>
+      <p>Loading application...</p>
+      <div>
+        <a href="/whitepaper">Whitepaper</a>
+        <a href="/consensus">Consensus</a>
+      </div>
+    </div>
+    
     <div id="root"></div>
+    
+    <script>
+      // Show emergency content if the root is empty after a delay
+      setTimeout(function() {
+        const rootElement = document.getElementById('root');
+        if (!rootElement || !rootElement.children || rootElement.children.length === 0) {
+          console.log('Root element empty after timeout, showing emergency content');
+          document.getElementById('emergency-content').style.display = 'block';
+        } else {
+          console.log('Root element has content, hiding emergency content');
+          document.getElementById('emergency-content').style.display = 'none';
+        }
+      }, 2000);
+    </script>
+    
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     

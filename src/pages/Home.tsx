@@ -1,9 +1,28 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const Home = () => {
+  // Add debug logging
+  useEffect(() => {
+    console.log("Home component mounted");
+    
+    // Debug DOM visibility
+    const root = document.getElementById('root');
+    console.log("Root element:", root);
+    console.log("Root children:", root?.children);
+    
+    // Force visibility
+    if (root) {
+      root.style.visibility = 'visible';
+      root.style.display = 'block';
+    }
+    
+    document.body.style.backgroundColor = '#000000';
+    document.body.style.color = '#ffffff';
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white flex justify-center items-center flex-col p-4">
       <motion.div
@@ -12,7 +31,7 @@ const Home = () => {
         transition={{ duration: 0.8 }}
         className="text-center"
       >
-        <h1 className="text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+        <h1 className="text-5xl font-bold mb-8 text-white">
           X1 Research
         </h1>
         
