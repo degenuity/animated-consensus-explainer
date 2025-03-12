@@ -11,9 +11,15 @@ export const internalRewardsSubitems = [
 ];
 
 export const networkCostsSubitems = [
-  "base fees",
-  "priority fees",
-  "MEV"
+  { 
+    text: "base fees", 
+    isHeader: true,
+    subItems: [
+      { text: "block rewards", isSubHeader: true },
+      { text: "priority fees" },
+      { text: "MEV" }
+    ]
+  }
 ];
 
 export const totalStakeSubitems = [
@@ -55,14 +61,6 @@ export const connectionPaths = [
     color: "#F97316", 
     animationIndex: 2,
     dotPosition: { x: "980", y: "150" }
-  },
-  
-  // Network Costs to Block Rewards
-  { 
-    path: "M 850 250 L 850 300 L 750 300 L 750 350", 
-    color: "#F97316", 
-    animationIndex: 3,
-    dotPosition: { x: "850", y: "325" }
   },
   
   // Total Stake to Block Production
@@ -136,7 +134,7 @@ export const boxes = [
     x: 820,
     y: 100,
     width: 190,
-    height: 150,
+    height: 300,
     title: "network usage costs",
     icon: "network-costs" as const,
     color: "#F97316",
@@ -156,19 +154,6 @@ export const boxes = [
     color: "234, 179, 8",
     animationIndex: 0,
     simpleStyle: true
-  },
-  
-  // Block Rewards Box
-  {
-    x: 650,
-    y: 350,
-    width: 200,
-    height: 180,
-    title: "block rewards",
-    icon: "block-rewards" as const,
-    color: "#3B82F6",
-    animationIndex: 3,
-    subitems: networkCostsSubitems
   },
   
   // Block Production Box

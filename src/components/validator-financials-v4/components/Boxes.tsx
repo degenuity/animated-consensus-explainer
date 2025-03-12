@@ -54,9 +54,29 @@ const Boxes: React.FC = () => {
         color="249, 115, 22"
         animationDelay={0.2}
         subBoxes={[
-          { title: "transaction fees" },
-          { title: "resource usage" },
-          { title: "operation costs" }
+          { 
+            title: "base fees", 
+            fullWidth: true,
+            customColor: "amber"
+          },
+          { 
+            title: "block rewards", 
+            fullWidth: true,
+            customColor: "green",
+            isSubitem: true
+          },
+          {
+            title: "priority fees",
+            fullWidth: true,
+            customColor: "green",
+            isSubitem: true
+          },
+          {
+            title: "MEV",
+            fullWidth: true,
+            customColor: "green",
+            isSubitem: true
+          }
         ]}
       />
 
