@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from "framer-motion";
 import { BLSFormulaAnimation } from './BLSFormulaAnimation';
@@ -28,13 +29,6 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
           />
         </div>
         
-        <p className="text-sm text-slate-300 mb-3">
-          Each validator in a subcommittee generates a BLS signature 
-          <span className="inline-flex items-baseline mx-1">σ<sub className="text-xs">i</sub></span>
-          on the vote message 
-          <span className="mx-1">M</span>:
-        </p>
-        
         <BLSFormulaAnimation 
           activeSection={activeSection}
           activeFormula={activeFormula}
@@ -62,16 +56,12 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
           <ExpandableItem 
             name="Aggregated signature (σₐgg)" 
             color="indigo-400" 
-            description="Compressed proof of consensus" 
+            description="Compressed proof of consensus. The relay node aggregates all signatures within the subcommittee which is then submitted to the leader." 
             expandable={false}
             index={1}
             isActive={activeSection === 1 && activeFormula === 1}
           />
         </div>
-        
-        <p className="text-sm text-slate-300 mb-3">
-          The relay node aggregates all signatures within the subcommittee which is then submitted to the leader:
-        </p>
         
         <BLSFormulaAnimation 
           activeSection={activeSection}
@@ -100,16 +90,12 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
           <ExpandableItem 
             name="Verification of aggregated signature" 
             color="red-400" 
-            description="Where pkᵢ are the public keys of the participating validators" 
+            description="Where pkᵢ are the public keys of the participating validators. The leader verifies the aggregated signature in constant time using a pairing-based verification." 
             expandable={false}
             index={2}
             isActive={activeSection === 1 && activeFormula === 2}
           />
         </div>
-        
-        <p className="text-sm text-slate-300 mb-3">
-          The leader verifies the aggregated signature in constant time using:
-        </p>
         
         <BLSFormulaAnimation 
           activeSection={activeSection}
