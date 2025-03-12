@@ -71,13 +71,21 @@ export const profitabilitySubitems = [
     text: "operational costs", 
     desc: "only cost is server", 
     id: "operational-costs", 
-    color: "#EAB308" 
+    color: "#EAB308",
+    isHorizontal: true 
+  },
+  {
+    text: "+",
+    id: "plus-operator",
+    color: "#8E9196", // Medium gray color for the plus sign
+    isHorizontal: true,
+    isOperator: true
   },
   { 
     text: "total validator rewards", 
     desc: "aggregate", 
     id: "total-validator-rewards", 
-    color: "#10B981", 
-    hasPlus: true 
+    color: "#10B981",
+    isHorizontal: true
   }
 ];
