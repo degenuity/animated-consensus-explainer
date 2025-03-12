@@ -14,6 +14,7 @@ interface ConnectionSVGProps {
   animateMotion?: boolean;
   id?: string;
   renderAsDefinition?: boolean;
+  renderOrder?: "background" | "foreground";
 }
 
 const ConnectionLine: React.FC<ConnectionSVGProps> = ({ 
@@ -26,7 +27,8 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
   animationDirection,
   animateMotion,
   id,
-  renderAsDefinition = false
+  renderAsDefinition = false,
+  renderOrder = "background"
 }) => {
   const { lineVariants, dotVariants } = useConnectionAnimation({
     animationIndex
