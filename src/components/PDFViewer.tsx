@@ -1,17 +1,32 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { Document, Page } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { Button } from './ui/button';
 import { ChevronLeft, ChevronRight, Download, ZoomIn, ZoomOut } from 'lucide-react';
 
-// Import pdfjs separately to handle initialization
-import * as pdfjs from 'pdfjs-dist';
-
 interface PDFViewerProps {
   pdfUrl: string;
   title?: string;
 }
+
+// Initialize PDF.js worker explicitly here, outside of the component
+// This ensures it happens only once across the application
+const initializeWorker = () => {
+  try {
+    const workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+    pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
+    console.log("PDF.js worker initialized with:", workerSrc);
+    return true;
+  } catch (error) {
+    console.error("Failed to initialize PDF.js worker:", error);
+    return false;
+  }
+};
+
+// Initialize immediately
+const workerInitialized = initializeWorker();
 
 const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [numPages, setNumPages] = useState<number | null>(null);
@@ -20,36 +35,29 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [pdfError, setPdfError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [scale, setScale] = useState<number>(1.3);
-  const [workerInitialized, setWorkerInitialized] = useState<boolean>(false);
+  const [isReady, setIsReady] = useState<boolean>(workerInitialized);
   const initAttempted = useRef(false);
 
-  // Initialize PDF.js worker
+  // Fallback initialization (if needed)
   useEffect(() => {
-    if (initAttempted.current) return;
+    if (initAttempted.current || isReady) return;
     initAttempted.current = true;
     
-    try {
-      // Explicitly set the worker path using HTTPS (not protocol-relative URL)
-      const workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
-      
-      // Type-safe way to check for pdfjsLib
-      if (typeof window !== 'undefined' && 'pdfjsLib' in window && window.pdfjsLib) {
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-      } else {
-        console.log("Setting up worker without pdfjsLib");
-        // Fallback approach
-        (pdfjs as any).GlobalWorkerOptions = (pdfjs as any).GlobalWorkerOptions || {};
-        (pdfjs as any).GlobalWorkerOptions.workerSrc = workerSrc;
+    // If first initialization failed, try again
+    if (!isReady) {
+      try {
+        const success = initializeWorker();
+        setIsReady(success);
+        if (success) {
+          console.log("PDF.js worker initialized successfully on retry");
+        }
+      } catch (error) {
+        console.error("Failed to initialize PDF.js worker on retry:", error);
+        setPdfError(true);
+        setErrorMessage("Failed to initialize PDF viewer");
       }
-      
-      console.log("PDF.js worker path configured:", workerSrc);
-      setWorkerInitialized(true);
-    } catch (error) {
-      console.error("Failed to initialize PDF.js worker:", error);
-      setPdfError(true);
-      setErrorMessage("Failed to initialize PDF viewer");
     }
-  }, []);
+  }, [isReady]);
 
   // Reset loading state when PDF URL changes
   useEffect(() => {
@@ -96,7 +104,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       ? `${window.location.origin}${pdfUrl}`
       : pdfUrl;
 
-  if (!workerInitialized) {
+  if (!isReady) {
     return (
       <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
         {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
