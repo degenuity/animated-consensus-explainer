@@ -73,14 +73,27 @@ const Boxes: React.FC = () => {
       <BoxContainer
         position="left-1/2 transform -translate-x-1/2 top-[350px]"
         iconType="block-production"
-        title="Block Production"
+        title="block production eligibility"
         color="59, 130, 246"
         animationDelay={0.8}
         subBoxes={[
-          "Eligibility Status",
-          "Performance Stats",
-          "Network Impact"
+          {
+            title: "stake weight",
+            description: "amount of XNT staked",
+            fullWidth: true
+          },
+          {
+            title: "randomness",
+            description: "ACP anti-collusion protocol",
+            fullWidth: false
+          },
+          {
+            title: "performance/reputation",
+            description: "from recorded history",
+            fullWidth: false
+          }
         ]}
+        useAlternativeStyle={true}
       />
     </>
   );
