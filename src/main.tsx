@@ -41,33 +41,7 @@ document.body.style.overflow = 'auto';
 document.body.style.backgroundColor = '#000';
 document.body.style.color = '#fff';
 
-// Set PDF.js worker source
-// Using a safer approach that doesn't rely on window globals
-try {
-  // Check if pdfjs-dist is available in the global scope
-  if (window['pdfjs-dist/build/pdf']) {
-    const pdfjsLib = window['pdfjs-dist/build/pdf'];
-    if (pdfjsLib && pdfjsLib.GlobalWorkerOptions) {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-      console.log('PDF.js worker configured via global');
-    }
-  } else {
-    // Alternative approach if the global is not available
-    console.log('PDF.js global not found, will try to configure during component initialization');
-    
-    // Create a global function that components can call to set up PDF.js
-    window.configurePdfjs = function(pdfjsLib) {
-      if (pdfjsLib && pdfjsLib.GlobalWorkerOptions) {
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-        console.log('PDF.js worker configured via component call');
-        return true;
-      }
-      return false;
-    };
-  }
-} catch (error) {
-  console.error('Error configuring PDF worker:', error);
-}
+// We're removing the PDF.js configuration from main.tsx as it's now handled in the component
 
 try {
   const rootElement = document.getElementById('root');
