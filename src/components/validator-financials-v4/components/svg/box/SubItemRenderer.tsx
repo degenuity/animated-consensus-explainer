@@ -22,13 +22,36 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   width,
   height
 }) => {
-  const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id, isHorizontal } = item;
+  const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id, isHorizontal, isOperator } = item;
   const itemHeight = height || (desc ? 50 : 40);
   
   // Add horizontal padding when items are displayed horizontally
   const horizontalPadding = isHorizontal ? 5 : 0;
   const adjustedWidth = isHorizontal ? width - (horizontalPadding * 2) : width;
   const adjustedX = isHorizontal ? x + horizontalPadding : x;
+  
+  // For operator symbols (×), use a different style
+  if (isOperator) {
+    return (
+      <motion.g
+        key={`subitem-${id || index}`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 + index * 0.1 }}
+      >
+        <foreignObject 
+          x={adjustedX} 
+          y={y + yOffset} 
+          width={adjustedWidth} 
+          height={itemHeight}
+        >
+          <div className="flex flex-col justify-center h-full text-center">
+            <div className="text-2xl font-bold" style={{ color: itemColor || "#3B82F6" }}>{text}</div>
+          </div>
+        </foreignObject>
+      </motion.g>
+    );
+  }
   
   return (
     <motion.g
@@ -84,3 +107,4 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
 };
 
 export default SubItemRenderer;
+

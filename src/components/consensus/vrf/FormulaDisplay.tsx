@@ -38,10 +38,11 @@ export const FormulaDisplay: React.FC = () => {
         />
         <span className="relative z-10 text-cyan-300 font-bold tracking-wide text-lg flex justify-center">
           <span className="inline-flex items-baseline">
-            P<sub className="text-sm">i</sub> = (<span className="text-blue-400">S<sub className="text-sm">i</sub></span> / <span className="text-blue-400">∑S<sub className="text-sm">j</sub></span>) <span className="text-cyan-300 mx-1">×</span> <span className="text-green-400 mx-1">F</span> <span className="text-cyan-300 mx-1">×</span> <span className="text-purple-400">A<sub className="text-sm">i</sub></span>
+            P<sub className="text-sm">i</sub> = (<span className="text-blue-400">S<sub className="text-sm">i</sub></span> / <span className="text-blue-400">∑S<sub className="text-sm">j</sub></span>) <span className="text-cyan-300 mx-1 text-xl">×</span> <span className="text-green-400 mx-1">F</span> <span className="text-cyan-300 mx-1 text-xl">×</span> <span className="text-purple-400">A<sub className="text-sm">i</sub></span>
           </span>
         </span>
       </motion.div>
     </motion.div>
   );
 };
+

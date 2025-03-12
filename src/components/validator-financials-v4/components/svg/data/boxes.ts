@@ -79,11 +79,11 @@ export const boxes = [
     simpleStyle: true
   },
   
-  // Block Production Box - increased width to allow for padding
+  // Block Production Box - increased width to accommodate operators and padding
   {
     x: 320,
     y: 500,
-    width: 460,  // Increased width from 420 to 460 to accommodate padding
+    width: 520,  // Increased width from 460 to 520 to accommodate operators
     height: 140,
     title: "block production eligibility",
     icon: "block-production" as const,
@@ -107,3 +107,4 @@ export const boxes = [
     borderColor: "#3B82F6"
   }
 ];
+

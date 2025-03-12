@@ -11,6 +11,7 @@ export interface SubItem {
   id?: string;
   subItems?: SubItem[];
   isHorizontal?: boolean;
+  isOperator?: boolean;
 }
 
 export interface BoxProps {
@@ -39,3 +40,4 @@ export const boxVariants = {
     }
   })
 };
+

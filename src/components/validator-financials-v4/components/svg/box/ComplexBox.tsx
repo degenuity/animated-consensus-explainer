@@ -31,27 +31,43 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
     if (allHorizontal) {
       // For horizontal layout
       const horizontalItems = processedSubitems as SubItem[];
+      
       // Calculate item width with some margin between items
       const itemMargin = 10; // 10px margin between items
-      const totalMargins = (horizontalItems.length - 1) * itemMargin;
-      const itemWidth = (width - 20 - totalMargins) / horizontalItems.length;
       
-      renderedItems.push(
-        <g key="horizontal-items">
-          {horizontalItems.map((item, index) => (
-            <SubItemRenderer 
-              key={`item-${item.id || index}`}
-              item={{...item}}
-              index={index}
-              x={x + 10 + (itemWidth + itemMargin) * index}
-              y={y}
-              yOffset={yOffset}
-              width={itemWidth}
-              height={height - yOffset - 10}
-            />
-          ))}
-        </g>
-      );
+      // Filter out operator items to calculate widths for content items
+      const contentItems = horizontalItems.filter(item => !item.isOperator);
+      const operatorItems = horizontalItems.filter(item => item.isOperator);
+      
+      // Operators get less space than content items
+      const operatorWidth = 30; // Fixed width for operator symbols
+      const totalOperatorWidth = operatorItems.length * operatorWidth;
+      const totalMargins = (horizontalItems.length - 1) * itemMargin;
+      const remainingWidth = width - 20 - totalMargins - totalOperatorWidth;
+      const contentItemWidth = contentItems.length > 0 ? remainingWidth / contentItems.length : 0;
+      
+      // Map of positions for each item
+      let currentX = x + 10;
+      
+      horizontalItems.forEach((item, index) => {
+        const itemWidth = item.isOperator ? operatorWidth : contentItemWidth;
+        
+        renderedItems.push(
+          <SubItemRenderer 
+            key={`item-${item.id || index}`}
+            item={{...item}}
+            index={index}
+            x={currentX}
+            y={y}
+            yOffset={yOffset}
+            width={itemWidth}
+            height={height - yOffset - 10}
+          />
+        );
+        
+        // Update position for next item
+        currentX += itemWidth + itemMargin;
+      });
       
       return renderedItems;
     }
@@ -128,3 +144,4 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
 };
 
 export default ComplexBox;
+

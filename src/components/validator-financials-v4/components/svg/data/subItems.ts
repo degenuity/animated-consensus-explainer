@@ -36,12 +36,26 @@ export const blockProductionSubitems = [
     color: "#3B82F6",
     isHorizontal: true
   },
+  {
+    text: "×",
+    id: "multiply-1",
+    color: "#3B82F6",
+    isHorizontal: true,
+    isOperator: true
+  },
   { 
     text: "randomness", 
     desc: "ACP anti-collusion protocol", 
     id: "randomness",
     color: "#3B82F6",
     isHorizontal: true
+  },
+  {
+    text: "×",
+    id: "multiply-2",
+    color: "#3B82F6",
+    isHorizontal: true,
+    isOperator: true
   },
   { 
     text: "performance/reputation", 
@@ -67,3 +81,4 @@ export const profitabilitySubitems = [
     hasPlus: true 
   }
 ];
+
