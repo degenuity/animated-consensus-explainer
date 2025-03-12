@@ -6,8 +6,8 @@ import { ArrowRight, FileText } from "lucide-react";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
-      {/* Header with X1 Logo - positioned exactly like on the consensus page */}
+    <div className="min-h-screen bg-slate-900 text-white">
+      {/* Header with X1 Logo */}
       <header className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between mb-8">
           <Link to="/" className="flex items-center">
@@ -20,9 +20,9 @@ const Home = () => {
         </div>
       </header>
       
-      <div className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00C6FF] to-[#0072FF]">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-blue-400">
             X1 Research
           </h1>
           
@@ -32,21 +32,27 @@ const Home = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/consensus-explainer">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-all duration-200 shadow-md hover:shadow-blue-500/20 flex items-center gap-2 w-full sm:w-auto">
+              <Button 
+                variant="default" 
+                className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto"
+              >
                 <span>Explore Consensus</span>
                 <ArrowRight size={16} />
               </Button>
             </Link>
             
             <Link to="/whitepaper">
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-md transition-all duration-200 shadow-md hover:shadow-purple-500/20 flex items-center gap-2 w-full sm:w-auto">
+              <Button 
+                variant="default" 
+                className="bg-purple-600 hover:bg-purple-700 text-white w-full sm:w-auto"
+              >
                 <span>X1 Whitepaper</span>
                 <FileText size={16} />
               </Button>
             </Link>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
