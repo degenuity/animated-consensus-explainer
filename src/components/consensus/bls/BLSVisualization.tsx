@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { 
   BLSStageOne, 
@@ -20,17 +19,13 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
   activeFormula,
   setActiveFormula
 }) => {
-  // Listen for verification complete events
   useEffect(() => {
     const handleVerificationComplete = () => {
-      // Ensure we transition to stage 1 (formula 0)
       setActiveFormula(0);
     };
     
-    // New event listener for stage two complete
     const handleStageTwoComplete = () => {
       console.log("BLSVisualization: Received stage-two-complete event, moving to stage three");
-      // Move to stage three (formula 2)
       setActiveFormula(2);
     };
     
@@ -77,7 +72,7 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
       <BLSIdleAnimation activeSection={activeSection} />
       
       {activeSection === 1 && (
-        <div className="absolute bottom-[-20px] left-0 right-0 flex justify-center items-center gap-1 mb-1">
+        <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-1 mb-4">
           <Button 
             variant="ghost" 
             size="sm" 
