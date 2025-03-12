@@ -43,12 +43,10 @@ export function useConnectionAnimation({
   const dotVariants: Variants = {
     hidden: { opacity: 0 },
     visible: (i: number) => ({
-      opacity: [0, 1, 0],
+      opacity: 1,
       transition: {
         delay: i * 0.3 + dotAnimationDelay,
-        duration: dotAnimationDuration,
-        repeat: Infinity,
-        repeatDelay: 1
+        duration: 0.5
       }
     })
   };

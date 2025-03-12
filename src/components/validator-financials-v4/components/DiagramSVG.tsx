@@ -17,6 +17,26 @@ const DiagramSVG = () => {
   
   return (
     <div className="w-full h-full relative">
+      <style>
+        {`
+          @keyframes moveDotRight {
+            0% { transform: translateX(-20px); }
+            100% { transform: translateX(20px); }
+          }
+          @keyframes moveDotLeft {
+            0% { transform: translateX(20px); }
+            100% { transform: translateX(-20px); }
+          }
+          @keyframes moveDotUp {
+            0% { transform: translateY(20px); }
+            100% { transform: translateY(-20px); }
+          }
+          @keyframes moveDotDown {
+            0% { transform: translateY(-20px); }
+            100% { transform: translateY(20px); }
+          }
+        `}
+      </style>
       <svg
         width="100%"
         height="100%"
@@ -33,6 +53,7 @@ const DiagramSVG = () => {
             dotPosition={connection.dotPosition}
             label={connection.label}
             labelPosition={connection.labelPosition}
+            animationDirection={connection.animationDirection}
           />
         ))}
         

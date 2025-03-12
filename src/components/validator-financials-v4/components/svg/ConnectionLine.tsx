@@ -10,6 +10,7 @@ interface ConnectionSVGProps {
   dotPosition?: { x: string; y: string };
   label?: string;
   labelPosition?: { x: number; y: number };
+  animationDirection?: "right" | "left" | "up" | "down";
 }
 
 const ConnectionLine: React.FC<ConnectionSVGProps> = ({ 
@@ -18,7 +19,8 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
   animationIndex,
   dotPosition,
   label,
-  labelPosition
+  labelPosition,
+  animationDirection
 }) => {
   const { lineVariants, dotVariants } = useConnectionAnimation({
     animationIndex
@@ -47,6 +49,9 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
           variants={dotVariants}
           initial="hidden"
           animate="visible"
+          style={animationDirection ? {
+            animation: `moveDot${animationDirection.charAt(0).toUpperCase() + animationDirection.slice(1)} 3s linear infinite`
+          } : undefined}
         />
       )}
       
