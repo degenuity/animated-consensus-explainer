@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-slate-900 text-white relative">
+    <div className="min-h-screen bg-slate-900 text-white relative font-blueprint">
       {/* Logo in top left corner */}
       <div className="absolute top-4 left-4 z-10">
         <Link to="/">
@@ -24,10 +24,10 @@ const Home = () => {
             alt="X1 Logo" 
             style={{ height: '28px', marginBottom: '20px' }} 
           />
-          <h1 style={{ color: '#60a5fa', fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>
+          <h1 className="text-blue-400 text-2xl font-bold mb-5">
             X1 Research
           </h1>
-          <p>Welcome to X1 Research</p>
+          <p className="font-blueprint">Welcome to X1 Research</p>
         </div>
       </div>
     </div>
