@@ -7,40 +7,25 @@ const Home = () => {
   // Debug logging for component lifecycle
   useEffect(() => {
     console.log("Home component mounted");
-    document.body.style.backgroundColor = '#000000';
-    document.body.style.color = '#ffffff';
     
-    // Debug element visibility
-    const rootElement = document.getElementById('root');
-    console.log("Root element exists:", Boolean(rootElement));
-    console.log("Root element children count:", rootElement?.children?.length);
+    // Add a static indicator that the component rendered
+    const indicator = document.createElement('div');
+    indicator.id = 'home-component-rendered';
+    indicator.style.display = 'none';
+    document.body.appendChild(indicator);
     
-    if (rootElement) {
-      // Ensure root element is visible
-      rootElement.style.display = 'block';
-      rootElement.style.visibility = 'visible';
-      rootElement.style.backgroundColor = '#000000';
-      
-      // Create a debug marker
-      const marker = document.createElement('div');
-      marker.id = 'home-rendered-marker';
-      marker.textContent = 'Home component rendered';
-      marker.style.display = 'none';
-      rootElement.appendChild(marker);
+    // Force the emergency content to hide if Home component mounts
+    const emergencyContent = document.getElementById('emergency-content');
+    if (emergencyContent) {
+      emergencyContent.style.display = 'none';
     }
-
-    // Add a static element as a fallback
-    const staticElement = document.createElement('div');
-    staticElement.innerHTML = `
-      <div style="position: fixed; bottom: 10px; right: 10px; padding: 5px; background: blue; color: white; font-size: 10px; z-index: 9999;">
-        Home component rendered at ${new Date().toISOString()}
-      </div>
-    `;
-    document.body.appendChild(staticElement);
     
     return () => {
       console.log("Home component unmounting");
-      document.body.removeChild(staticElement);
+      const indicator = document.getElementById('home-component-rendered');
+      if (indicator) {
+        document.body.removeChild(indicator);
+      }
     };
   }, []);
 

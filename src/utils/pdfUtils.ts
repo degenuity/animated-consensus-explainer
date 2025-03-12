@@ -1,6 +1,4 @@
 
-import { pdfjs } from 'react-pdf';
-
 // Module-level variable to track initialization state
 let isWorkerInitialized = false;
 
@@ -16,13 +14,13 @@ export const initializePdfWorker = (): boolean => {
   }
   
   try {
-    console.log("PDF.js library status:", pdfjs ? "Available" : "Not available");
-    
     // Direct assignment to the window object to ensure it's accessible
     if (typeof window !== 'undefined') {
+      console.log("Initializing PDF.js worker on window object...");
+      
       // Create a safety wrapper around pdfjs to avoid errors
       if (!window.pdfjsLib) {
-        window.pdfjsLib = pdfjs || {};
+        window.pdfjsLib = {};
       }
       
       // Directly assign GlobalWorkerOptions to window.pdfjsLib
@@ -33,20 +31,13 @@ export const initializePdfWorker = (): boolean => {
       // Set the worker source directly on the window object
       const workerSrc = `https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`;
       window.pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-      console.log("PDF.js worker initialized on window.pdfjsLib with:", workerSrc);
+      console.log("PDF.js worker initialized with:", workerSrc);
       
-      // If pdfjs is available, also set it there
-      if (pdfjs) {
-        // Create GlobalWorkerOptions if needed
-        if (!pdfjs.GlobalWorkerOptions) {
-          console.log("pdfjs.GlobalWorkerOptions not available, creating it");
-          (pdfjs as any).GlobalWorkerOptions = {};
-        }
-        
-        // Set worker source
-        pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
-        console.log("PDF.js worker also initialized on imported pdfjs with:", workerSrc);
-      }
+      // Try to load the worker script directly
+      const script = document.createElement('script');
+      script.src = workerSrc;
+      script.async = false; // Load synchronously
+      document.head.appendChild(script);
     }
     
     isWorkerInitialized = true;

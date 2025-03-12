@@ -10,8 +10,12 @@
     <!-- Import Inter font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     
-    <!-- Preload PDF.js worker script -->
-    <link rel="preload" href="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js" as="script" crossorigin="anonymous">
+    <!-- Import React and ReactDOM before our application code -->
+    <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    
+    <!-- Load PDF.js worker immediately and directly -->
+    <script src="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js"></script>
     
     <!-- Initialize PDF.js globals -->
     <script>
@@ -28,6 +32,8 @@
       window.addEventListener('DOMContentLoaded', function() {
         console.log('DOMContentLoaded fired');
         console.log('Root element:', document.getElementById('root'));
+        console.log('React available:', typeof React !== 'undefined');
+        console.log('ReactDOM available:', typeof ReactDOM !== 'undefined');
       });
       
       // Force visibility for all elements
@@ -135,7 +141,7 @@
     </div>
     
     <!-- Emergency content that will show if JS fails completely -->
-    <div id="emergency-content" style="display: none;">
+    <div id="emergency-content">
       <h1>X1 Research</h1>
       <p>Loading application...</p>
       <div>

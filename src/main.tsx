@@ -4,9 +4,16 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
+// Ensure React is available globally (though we also load it in index.html now)
+if (typeof window !== 'undefined' && !window.React) {
+  window.React = React;
+}
+
 // Enhanced error handling and debug information
 console.log('Starting application...');
 console.log('Environment:', import.meta.env.MODE);
+console.log('React version:', React.version);
+console.log('ReactDOM available:', !!ReactDOM);
 
 // Force display debugging - these styles will be applied regardless of React
 document.documentElement.style.height = '100%';
