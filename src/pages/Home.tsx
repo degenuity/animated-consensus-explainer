@@ -8,8 +8,36 @@ import { ArrowRight } from 'lucide-react';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto relative">
+    <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Blue Laser Background Effect */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[#0A0F1B]">
+          {/* Bright Blue Laser */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.7, 0.9, 0.7] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-0 right-[30%] w-[3px] h-full bg-[#33C3F0] rotate-[20deg] blur-[2px] shadow-[0_0_15px_5px_rgba(51,195,240,0.5)]"
+          />
+          {/* Secondary Lasers */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute top-0 right-[10%] w-[2px] h-full bg-[#1EAEDB] rotate-[30deg] blur-[3px] shadow-[0_0_10px_3px_rgba(30,174,219,0.4)]"
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.2, 0.4, 0.2] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            className="absolute top-0 right-[60%] w-[1px] h-full bg-[#0FA0CE] rotate-[15deg] blur-[2px] shadow-[0_0_8px_2px_rgba(15,160,206,0.3)]"
+          />
+          {/* Background Geometric Shapes */}
+          <div className="absolute inset-0 opacity-[0.15] bg-[url('/lovable-uploads/f1a18c33-470c-4dee-b393-1d339754f763.png')] bg-cover bg-center" />
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* X1 Logo in top left */}
         <Link to="/" className="absolute left-0 top-0">
           <img 
@@ -24,7 +52,7 @@ const Home = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="max-w-4xl mx-auto text-center mb-16"
+        className="max-w-4xl mx-auto text-center mb-16 relative z-10"
       >
         <h1 className="text-5xl font-bold mb-6">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00C6FF] to-[#0072FF]">X1 Research</span>
@@ -68,7 +96,7 @@ const Home = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
-        className="max-w-4xl mx-auto relative h-80 mb-8"
+        className="max-w-4xl mx-auto relative h-80 mb-8 z-10"
       >
         <div className="relative h-full w-full">
           <BLSStageOne activeSection={1} activeFormula={0} />
