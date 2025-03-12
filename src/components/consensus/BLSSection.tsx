@@ -6,6 +6,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { BLSStageOne } from '@/components/consensus/bls/stages/BLSStageOne';
 import { BLSStageTwo } from '@/components/consensus/bls/stages/BLSStageTwo';
 import { BLSStageThree } from '@/components/consensus/bls/stages/BLSStageThree';
+import { ExpandableItem } from '@/components/consensus/ExpandableItem';
 
 interface BLSSectionProps {
   activeSection: number | null;
@@ -55,6 +56,20 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     };
   }, []);
 
+  // Listen for stage two completion
+  useEffect(() => {
+    const handleStageTwoComplete = () => {
+      // Move to Stage 3
+      setActiveFormula(2);
+    };
+    
+    document.addEventListener('bls-stage-two-complete', handleStageTwoComplete);
+    
+    return () => {
+      document.removeEventListener('bls-stage-two-complete', handleStageTwoComplete);
+    };
+  }, []);
+
   const isActive = activeSection === 1 || isMobile;
 
   return (
@@ -74,13 +89,36 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           <div className="bg-slate-900/50 p-4 rounded-lg text-white">
-            <h3 className="text-lg font-medium mb-2">Mathematical Foundation</h3>
+            <h3 className="text-lg font-medium mb-2">BLS Process</h3>
             <p className="text-sm text-slate-300">
-              BLS signatures use bilinear pairings on elliptic curves, allowing multiple signatures to be efficiently verified in a single operation.
+              BLS signatures use bilinear pairings on elliptic curves for efficient verification.
             </p>
-            <p className="text-sm text-slate-300 mt-2">
-              The scheme enables thousands of validator signatures to be compressed into a single signature, dramatically reducing network overhead.
-            </p>
+            
+            <div className="mt-6 space-y-2">
+              <ExpandableItem
+                name="Individual Signatures"
+                color="purple-400"
+                description="Each validator signs independently"
+                expandable={false}
+                index={0}
+              />
+              
+              <ExpandableItem
+                name="Aggregated Signatures"
+                color="purple-400"
+                description="Signatures combined into single proof"
+                expandable={false}
+                index={1}
+              />
+              
+              <ExpandableItem
+                name="Verification of Aggregated Signatures"
+                color="purple-400"
+                description="Single verification for all signatures"
+                expandable={false}
+                index={2}
+              />
+            </div>
           </div>
           <div className="flex flex-col">
             <div className="bg-slate-900/50 p-4 rounded-lg h-full flex items-center justify-center relative overflow-hidden">
