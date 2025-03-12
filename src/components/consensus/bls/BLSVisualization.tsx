@@ -38,7 +38,7 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
   }, [setActiveFormula]);
 
   return (
-    <div className="relative h-80 sm:h-96 flex items-center justify-center">
+    <div className="relative h-96 sm:h-120 flex items-center justify-center">
       <BLSStageOne 
         key={`stage-one-${activeFormula === 0 ? 'active' : 'inactive'}`} 
         activeSection={activeSection} 
