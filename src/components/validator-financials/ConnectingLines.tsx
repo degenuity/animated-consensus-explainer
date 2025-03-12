@@ -4,10 +4,24 @@ import { motion } from "framer-motion";
 
 const ConnectingLines = () => (
   <>
-    {/* Connecting lines with absolute positioning for exact placement */}
-    
     {/* Inflation to Internal Rewards */}
-    <div className="absolute top-[150px] left-[220px] w-[100px] h-[2px] bg-blue-500/60 rotate-[30deg]">
+    <div className="absolute top-[120px] left-[180px] w-[80px] h-[2px] bg-blue-500/60 rotate-[45deg]">
+      <motion.div 
+        className="absolute top-0 left-0 h-full w-[20px] bg-blue-400"
+        animate={{ 
+          x: [0, 80, 0],
+          opacity: [0, 1, 0]
+        }}
+        transition={{ 
+          duration: 2,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
+    </div>
+
+    {/* Total Stake to Internal Rewards - Horizontal line */}
+    <div className="absolute top-[220px] left-[480px] w-[100px] h-[2px] bg-blue-500/60 -rotate-[15deg]">
       <motion.div 
         className="absolute top-0 left-0 h-full w-[20px] bg-blue-400"
         animate={{ 
@@ -22,28 +36,12 @@ const ConnectingLines = () => (
       />
     </div>
 
-    {/* Total Stake to Internal Rewards */}
-    <div className="absolute top-[150px] left-[400px] w-[100px] h-[2px] bg-blue-500/60 rotate-[-30deg]">
-      <motion.div 
-        className="absolute top-0 left-0 h-full w-[20px] bg-blue-400"
-        animate={{ 
-          x: [0, 100, 0],
-          opacity: [0, 1, 0]
-        }}
-        transition={{ 
-          duration: 2,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-      />
-    </div>
-
-    {/* Base Fees to Deflation */}
-    <div className="absolute top-[230px] right-[220px] w-[80px] h-[2px] bg-yellow-500/60 rotate-[30deg]">
+    {/* Network Usage Costs to Deflation */}
+    <div className="absolute top-[180px] right-[250px] w-[100px] h-[2px] bg-yellow-500/60 rotate-[-45deg]">
       <motion.div 
         className="absolute top-0 left-0 h-full w-[20px] bg-yellow-400"
         animate={{ 
-          x: [0, 80, 0],
+          x: [0, 100, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -55,11 +53,11 @@ const ConnectingLines = () => (
     </div>
 
     {/* Internal Rewards to Block Production Eligibility */}
-    <div className="absolute top-[260px] left-[220px] h-[100px] w-[2px] bg-green-500/60">
+    <div className="absolute top-[300px] left-[300px] h-[120px] w-[2px] bg-green-500/60">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-green-400"
         animate={{ 
-          y: [0, 100, 0],
+          y: [0, 120, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -71,11 +69,11 @@ const ConnectingLines = () => (
     </div>
 
     {/* Total Stake to Block Production Eligibility */}
-    <div className="absolute top-[170px] left-[420px] h-[190px] w-[2px] bg-blue-500/60">
+    <div className="absolute top-[180px] left-[450px] h-[240px] w-[2px] bg-blue-500/60">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-blue-400"
         animate={{ 
-          y: [0, 190, 0],
+          y: [0, 240, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -86,32 +84,16 @@ const ConnectingLines = () => (
       />
     </div>
 
-    {/* Block Rewards to Profitability */}
-    <div className="absolute top-[380px] right-[310px] h-[70px] w-[2px] bg-green-500/60">
+    {/* Network Usage Costs to Profitability */}
+    <div className="absolute top-[280px] right-[200px] h-[140px] w-[2px] bg-green-500/60">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-green-400"
         animate={{ 
-          y: [0, 70, 0],
+          y: [0, 140, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
           duration: 2.6,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-      />
-    </div>
-
-    {/* Network Usage Costs to Profitability */}
-    <div className="absolute top-[260px] right-[320px] h-[190px] w-[2px] bg-yellow-500/60">
-      <motion.div 
-        className="absolute top-0 left-0 w-full h-[20px] bg-yellow-400"
-        animate={{ 
-          y: [0, 190, 0],
-          opacity: [0, 1, 0]
-        }}
-        transition={{ 
-          duration: 3.2,
           repeat: Infinity,
           ease: "linear"
         }}
