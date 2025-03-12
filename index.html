@@ -19,6 +19,18 @@
       .error-message { color: red; padding: 20px; margin-top: 20px; border: 1px solid red; border-radius: 4px; }
       .app-loading { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(to bottom, #0f172a, #1e293b); color: white; transition: opacity 0.2s ease; }
       .fade-out { opacity: 0; }
+      
+      /* Ensure the body has a background color even before React loads */
+      body { 
+        background: linear-gradient(to bottom, #0f172a, #1e293b); 
+        color: white; 
+        margin: 0; 
+        font-family: 'Satoshi', sans-serif;
+      }
+      
+      #root {
+        min-height: 100vh; /* Ensure root takes up at least full viewport height */
+      }
     </style>
   </head>
 
@@ -38,41 +50,50 @@
       </div>
     </div>
     
+    <!-- Required for Select feature -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    
     <!-- Optimized loading timeout script -->
     <script>
       // Performance monitoring
       const startTime = performance.now();
       console.log('Page load started at:', startTime);
       
-      // Show reload button if app takes too long to load (reduced from 2s to 3s)
+      // Show reload button if app takes too long to load
       const loadingTimeoutId = setTimeout(function() {
         const loadingTimeout = document.getElementById('loading-timeout');
         if (loadingTimeout) {
           loadingTimeout.style.display = 'block';
           console.log('Loading timeout displayed after:', performance.now() - startTime, 'ms');
         }
-      }, 3000); // Increased to 3 seconds to give app more time to load
+      }, 5000); // Increased to 5 seconds to give app more time to load
       
       // Clear the timeout when the app is loaded
       document.addEventListener('DOMContentLoaded', function() {
         console.log('DOMContentLoaded fired after:', performance.now() - startTime, 'ms');
-        const appLoading = document.querySelector('.app-loading');
-        if (appLoading) {
-          setTimeout(() => {
-            appLoading.classList.add('fade-out');
-          }, 200); // Small delay to ensure content is rendered
-        }
       });
 
       // Monitor performance
       window.addEventListener('load', function() {
         clearTimeout(loadingTimeoutId);
         console.log('Window load event fired after:', performance.now() - startTime, 'ms');
-        
-        if (window.performance && window.performance.timing) {
-          const timing = window.performance.timing;
-          console.log('Navigation start to DOMContentLoaded:', timing.domContentLoadedEventEnd - timing.navigationStart, 'ms');
-          console.log('Navigation start to load:', timing.loadEventEnd - timing.navigationStart, 'ms');
+      });
+      
+      // Add global error handler
+      window.addEventListener('error', function(event) {
+        console.error('Global error caught:', event.error);
+        // Only show the error UI if the app hasn't loaded yet
+        if (document.querySelector('.app-loading')) {
+          const errorMessage = document.createElement('div');
+          errorMessage.className = 'error-message';
+          errorMessage.innerHTML = `
+            <strong>Error loading application:</strong>
+            <p>${event.error ? event.error.message : 'Unknown error'}</p>
+            <button onclick="window.location.reload()" style="margin-top: 10px; padding: 8px 16px; background: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">
+              Reload Page
+            </button>
+          `;
+          document.querySelector('.app-loading').appendChild(errorMessage);
         }
       });
     </script>

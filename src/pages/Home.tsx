@@ -33,9 +33,6 @@ const Home = () => {
   const [isVisible, setIsVisible] = useState(true);
   
   useEffect(() => {
-    console.log('✅ Home component mounted');
-    setIsVisible(true);
-    
     // Add event listeners to catch errors from child components
     const handleError = (event) => {
       console.error('🔴 Error caught:', event.error);
