@@ -32,22 +32,22 @@ const BoxContainer: React.FC<BoxContainerProps> = ({
       transition={{ duration: 0.8, delay: animationDelay, type: "spring" }}
     >
       <motion.div 
-        className="w-52 h-44 bg-[#1a2233] border border-[#2a3349] rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
+        className="w-52 bg-[#1a1f31] border border-[#2a3349] rounded-xl flex flex-col items-center justify-center p-6 shadow-lg"
         animate={{ 
-          boxShadow: [`0 0 0px rgba(${color}, 0)`, `0 0 20px rgba(${color}, 0.3)`, `0 0 0px rgba(${color}, 0)`]
+          boxShadow: [`0 0 0px rgba(${color}, 0)`, `0 0 15px rgba(${color}, 0.25)`, `0 0 0px rgba(${color}, 0)`]
         }}
         transition={{ duration: 3, repeat: Infinity }}
       >
-        {icon}
+        <div className="mb-4">{icon}</div>
         <motion.div 
-          className="text-lg font-bold text-white"
-          animate={{ scale: [1, 1.05, 1] }}
+          className="text-xl font-semibold text-white text-center"
+          animate={{ scale: [1, 1.03, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           {title}
         </motion.div>
-        <div className="text-sm text-white/80 mt-1">{subtitle}</div>
-        {description && <div className="text-xs text-white/70 mt-2 text-center">{description}</div>}
+        <div className="text-sm text-gray-300 mt-1">{subtitle}</div>
+        {description && <div className="text-xs text-gray-400 mt-3 text-center">{description}</div>}
       </motion.div>
     </motion.div>
   );

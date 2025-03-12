@@ -22,17 +22,17 @@ const FactorBox: React.FC<FactorBoxProps> = ({
   const getIcon = () => {
     switch (title.toLowerCase()) {
       case 'stake weight':
-        return <ShieldCheck size={16} />;
+        return <ShieldCheck size={18} className="mb-1" />;
       case 'randomness':
-        return <Shuffle size={16} />;
+        return <Shuffle size={18} className="mb-1" />;
       case 'performance':
-        return <Activity size={16} />;
+        return <Activity size={18} className="mb-1" />;
       case 'operational costs':
-        return <DollarSign size={16} />;
+        return <DollarSign size={18} className="mb-1" />;
       case 'total rewards':
-        return <TrendingUp size={16} />;
+        return <TrendingUp size={18} className="mb-1" />;
       default:
-        return <ShieldCheck size={16} />;
+        return <ShieldCheck size={18} className="mb-1" />;
     }
   };
 
@@ -58,7 +58,7 @@ const FactorBox: React.FC<FactorBoxProps> = ({
           }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <div className={`${color} mb-1`}>{getIcon()}</div>
+          <div className={`text-${color}-400`}>{getIcon()}</div>
           <div className="text-[10px] font-medium text-white text-center">{title}</div>
         </motion.div>
       </motion.div>
@@ -68,15 +68,15 @@ const FactorBox: React.FC<FactorBoxProps> = ({
   // For the new layout within a flex container
   return (
     <motion.div 
-      className="w-24 h-24 bg-[#1a2233] border border-[#2a3349] rounded-lg flex flex-col items-center justify-center p-2 shadow-lg"
+      className="bg-[#1a1f31] border border-[#2a3349] rounded-lg flex flex-col items-center justify-center p-3 shadow-lg"
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
       whileHover={{ scale: 1.05 }}
     >
-      <div className={`text-${color}-400 mb-1`}>{getIcon()}</div>
-      <div className="text-xs font-medium text-white text-center">{title}</div>
-      <div className="text-[9px] text-gray-400 text-center mt-1">{description}</div>
+      <div className={`text-${color}-400`}>{getIcon()}</div>
+      <div className="text-sm font-medium text-white text-center mt-1">{title}</div>
+      <div className="text-[10px] text-gray-400 text-center mt-1">{description}</div>
     </motion.div>
   );
 };

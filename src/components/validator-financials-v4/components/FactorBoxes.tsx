@@ -6,55 +6,64 @@ import FactorBox from './FactorBox';
 const FactorBoxes: React.FC = () => {
   return (
     <>
-      {/* Block Production Eligibility Factors */}
+      {/* Block Production Eligibility Factors - centered below Block Production box */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 2.2 }}
-        className="absolute left-[17%] top-[400px] flex gap-2 items-center"
+        transition={{ duration: 0.6, delay: 1.2 }}
+        className="absolute left-1/2 top-[420px] transform -translate-x-1/2 flex flex-col gap-4"
       >
-        <FactorBox
-          title="Stake Weight"
-          description="Amount of XNT staked"
-          color="blue"
-          index={0}
-        />
-        <div className="text-gray-500 mx-1">×</div>
-        <FactorBox
-          title="Randomness"
-          description="ACP anti-collusion protocol"
-          color="blue"
-          index={1}
-        />
-        <div className="text-gray-500 mx-1">×</div>
-        <FactorBox
-          title="Performance"
-          description="From recorded history"
-          color="blue"
-          index={2}
-        />
-      </motion.div>
-
-      {/* Validator Profitability Factors */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 2.2 }}
-        className="absolute right-[17%] top-[400px] flex gap-2 items-center"
-      >
-        <FactorBox
-          title="Operational Costs"
-          description="Only cost is server"
-          color="yellow"
-          index={0}
-        />
-        <div className="text-gray-500 mx-1">+</div>
-        <FactorBox
-          title="Total Rewards"
-          description="Aggregate earnings"
-          color="green"
-          index={1}
-        />
+        {/* Stake Weight - Full width */}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 1.4 }}
+          className="w-[500px]"
+        >
+          <div className="bg-[#1a1f31] border border-[#2a3349] rounded-lg p-4">
+            <div className="flex items-center mb-2">
+              <span className="text-blue-400 text-base font-medium">stake weight</span>
+            </div>
+            <div className="text-xs text-gray-400">amount of XNT staked</div>
+          </div>
+        </motion.div>
+        
+        {/* Two smaller boxes in a row */}
+        <div className="flex gap-4 justify-between">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 1.6 }}
+            className="flex-1 relative"
+          >
+            <div className="bg-[#1a1f31] border border-[#2a3349] rounded-lg p-4">
+              <div className="flex items-center mb-2">
+                <span className="text-blue-400 text-base font-medium">randomness</span>
+              </div>
+              <div className="text-xs text-gray-400">ACP anti-collusion protocol</div>
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl">
+                ×
+              </div>
+            </div>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 1.8 }}
+            className="flex-1 relative"
+          >
+            <div className="bg-[#1a1f31] border border-[#2a3349] rounded-lg p-4">
+              <div className="flex items-center mb-2">
+                <span className="text-blue-400 text-base font-medium">performance</span>
+              </div>
+              <div className="text-xs text-gray-400">from recorded history</div>
+              <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl">
+                ×
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </motion.div>
     </>
   );

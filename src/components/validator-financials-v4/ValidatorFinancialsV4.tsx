@@ -25,15 +25,15 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
 
   return (
     <motion.div 
-      className="w-full relative overflow-hidden bg-slate-900/50 rounded-xl min-h-[600px] flex items-center justify-center"
+      className="w-full relative overflow-hidden bg-slate-950 rounded-xl min-h-[650px] flex items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="max-w-7xl mx-auto px-4 py-8 relative w-full">
+      <div className="max-w-7xl mx-auto px-4 py-12 relative w-full">
         <Title />
 
-        <div className="relative h-[500px] w-full">
+        <div className="relative h-[600px] w-full">
           <div className="absolute inset-0">
             {/* Render all main boxes */}
             <Boxes />
@@ -52,7 +52,7 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 1.4 }}
-              className="absolute bottom-0 right-8 text-8xl font-bold text-gray-500/30"
+              className="absolute bottom-0 right-8 text-8xl font-bold text-gray-500/20"
             >
               X1
             </motion.div>
