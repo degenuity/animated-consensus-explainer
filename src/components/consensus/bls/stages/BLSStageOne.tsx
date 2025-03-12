@@ -56,8 +56,9 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
           </motion.div>
         </motion.div>
 
-        {Array.from({ length: 10 }).map((_, i) => {
-          const angle = (i * 36) * (Math.PI / 180);
+        {/* Reduced number of animated elements */}
+        {Array.from({ length: 6 }).map((_, i) => {
+          const angle = (i * 60) * (Math.PI / 180);
           const radius = 120;
           const x = Math.cos(angle) * radius;
           const y = Math.sin(angle) * radius;

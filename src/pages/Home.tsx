@@ -1,23 +1,25 @@
 
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, memo } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
 
-// Lazy load the BLS animation component
-const BLSStageOne = lazy(() => import("@/components/consensus/bls/stages").then(module => ({
-  default: module.BLSStageOne
-})));
+// Lazy load the BLS animation component with a more aggressive splitting
+const BLSStageOne = lazy(() => 
+  import("@/components/consensus/bls/stages").then(module => ({
+    default: module.BLSStageOne
+  }))
+);
 
 // Use React.memo to prevent unnecessary re-renders
-const Home = React.memo(() => {
+const Home = memo(() => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
       {/* Header with X1 Logo */}
       <header className="container mx-auto px-4 py-6">
-        <div className="flex items-center justify-between mb-8 relative">
-          <Link to="/" className="absolute left-0 top-0">
+        <div className="flex items-center justify-between mb-8">
+          <Link to="/" className="flex items-center">
             <img 
               src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
               alt="X1 Logo" 
