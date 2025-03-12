@@ -48,9 +48,25 @@ const Home = () => {
     console.log('Animation visibility set to true');
   }, []);
 
+  // Use a function for logging rather than embedding console.log directly in JSX
+  const logRenderingStart = () => {
+    console.log('Home component rendering JSX');
+    return null;
+  };
+
+  const logBLSSection = () => {
+    console.log('Rendering BLS visualization section, isAnimationVisible:', isAnimationVisible);
+    return null;
+  };
+
+  const logBLSStageOne = () => {
+    console.log('Rendering BLSStageOne component');
+    return null;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
-      {console.log('Home component rendering JSX')}
+      {logRenderingStart()}
       {/* Header with X1 Logo */}
       <header className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between mb-8">
@@ -103,12 +119,12 @@ const Home = () => {
             </Link>
           </div>
           
-          {console.log('Rendering BLS visualization section, isAnimationVisible:', isAnimationVisible)}
+          {logBLSSection()}
           {/* Always render the component, but with a fallback */}
           <div className="relative h-72 flex items-center justify-center overflow-visible">
             {isAnimationVisible ? (
               <div>
-                {console.log('Rendering BLSStageOne component')}
+                {logBLSStageOne()}
                 <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
               </div>
             ) : (
