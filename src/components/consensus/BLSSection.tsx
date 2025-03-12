@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { BLSStageOne } from '@/components/consensus/bls/stages/BLSStageOne';
+import { BLSStageTwo } from '@/components/consensus/bls/stages/BLSStageTwo';
+import { BLSStageThree } from '@/components/consensus/bls/stages/BLSStageThree';
 
 interface BLSSectionProps {
   activeSection: number | null;
@@ -74,19 +76,50 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
           <div className="bg-slate-900/50 p-4 rounded-lg text-white">
             <h3 className="text-lg font-medium mb-2">Mathematical Foundation</h3>
             <p className="text-sm text-slate-300">
-              BLS signatures use bilinear pairings on elliptic curves, allowing efficient aggregation of signatures.
+              BLS signatures use bilinear pairings on elliptic curves, allowing multiple signatures to be efficiently verified in a single operation.
+            </p>
+            <p className="text-sm text-slate-300 mt-2">
+              The scheme enables thousands of validator signatures to be compressed into a single signature, dramatically reducing network overhead.
             </p>
           </div>
           <div className="flex flex-col">
             <div className="bg-slate-900/50 p-4 rounded-lg h-full flex items-center justify-center relative overflow-hidden">
-              <BLSStageOne 
-                key={animationKey}
-                activeSection={isActive ? 1 : 0}
-                activeFormula={activeFormula}
-                showX1Label={false} 
-              />
+              {activeFormula === 0 && (
+                <BLSStageOne 
+                  key={`stage-one-${animationKey}`}
+                  activeSection={isActive ? 1 : 0}
+                  activeFormula={activeFormula}
+                  showX1Label={false} 
+                />
+              )}
+              
+              {activeFormula === 1 && (
+                <BLSStageTwo
+                  key={`stage-two-${animationKey}`}
+                  activeSection={isActive ? 1 : 0}
+                  activeFormula={activeFormula}
+                />
+              )}
+              
+              {activeFormula === 2 && (
+                <BLSStageThree
+                  key={`stage-three-${animationKey}`}
+                  activeSection={isActive ? 1 : 0}
+                  activeFormula={activeFormula}
+                />
+              )}
             </div>
-            <div className="h-10"></div>
+            <div className="flex justify-center mt-2 gap-2">
+              {[0, 1, 2].map(idx => (
+                <button
+                  key={idx}
+                  className={`w-2 h-2 rounded-full ${
+                    activeFormula === idx ? 'bg-violet-500' : 'bg-slate-600'
+                  }`}
+                  onClick={() => setActiveFormula(idx)}
+                ></button>
+              ))}
+            </div>
           </div>
         </div>
       </Card>
