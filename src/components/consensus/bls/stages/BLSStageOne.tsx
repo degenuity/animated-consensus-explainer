@@ -25,7 +25,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
     }
   }, [activeSection, activeFormula]);
   
-  if (activeSection !== 1 || activeFormula !== 0) return null;
+  if (activeSection !== 1 && activeFormula !== 0) return null;
   
   return (
     <motion.div

@@ -79,6 +79,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
           <div className="flex flex-col">
             <div className="bg-slate-900/50 p-4 rounded-lg h-full flex items-center justify-center relative overflow-hidden">
               <BLSStageOne 
+                key={animationKey}
                 activeSection={activeSection || 0} 
                 activeFormula={activeFormula}
                 showX1Label={false} 
