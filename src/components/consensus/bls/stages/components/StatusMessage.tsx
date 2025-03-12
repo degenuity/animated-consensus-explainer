@@ -9,7 +9,7 @@ interface StatusMessageProps {
 
 export const StatusMessage: React.FC<StatusMessageProps> = ({ leaderReceived, showSuccessEffect }) => {
   return (
-    <div className="absolute bottom-4 left-0 right-0 text-center">
+    <div className="absolute bottom-6 left-0 right-0 text-center">
       <motion.div 
         className="text-xs text-indigo-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border border-indigo-500/30"
         initial={{ opacity: 0, y: 10 }}

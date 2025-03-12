@@ -125,21 +125,24 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
         })}
       </div>
       
-      <div className="absolute bottom-4 left-0 right-0 text-center">
-        <motion.div 
-          className="text-xs text-purple-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border border-purple-500/30"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          <motion.span 
-            className="inline-block w-2 h-2 rounded-full bg-purple-400 mr-1.5 align-middle"
-            animate={{ opacity: [1, 0.4, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
-          Validators in the subcommittee sign the message and generate individual BLS signatures
-        </motion.div>
-      </div>
+      {/* Text removed for Home page */}
+      {window.location.pathname !== '/' && (
+        <div className="absolute bottom-4 left-0 right-0 text-center">
+          <motion.div 
+            className="text-xs text-purple-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border border-purple-500/30"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <motion.span 
+              className="inline-block w-2 h-2 rounded-full bg-purple-400 mr-1.5 align-middle"
+              animate={{ opacity: [1, 0.4, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
+            Validators in the subcommittee sign the message and generate individual BLS signatures
+          </motion.div>
+        </div>
+      )}
     </motion.div>
   );
 };
