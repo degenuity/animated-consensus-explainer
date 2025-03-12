@@ -8,9 +8,9 @@ const Title: React.FC = () => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="text-2xl font-bold mb-2 mt-4 text-white text-center"
+      className="text-3xl font-bold mb-0 text-white text-left w-full pl-4 mt-2"
     >
-      X1 Validator Economics
+      X1 Validator Financials
     </motion.h2>
   );
 };
