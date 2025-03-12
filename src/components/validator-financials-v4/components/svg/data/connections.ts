@@ -1,4 +1,3 @@
-
 // Connection path definitions for the diagram
 
 export const connectionPaths = [
@@ -20,22 +19,22 @@ export const connectionPaths = [
   
   // Base Fees to Block Rewards (Vertical down with 50% label)
   { 
-    path: "M 820 195 L 820 245", 
+    path: "M 820 220 L 820 270", 
     color: "#EAB308", 
     animationIndex: 3,
-    dotPosition: { x: "820", y: "220" },
+    dotPosition: { x: "820", y: "245" },
     label: "50%",
-    labelPosition: { x: 797, y: 220 }
+    labelPosition: { x: 797, y: 245 }
   },
   
   // Base Fees to Deflation (horizontal right with 50% label)
   { 
-    path: "M 880 170 L 1010 170", 
+    path: "M 880 195 L 1010 195", 
     color: "#EAB308", 
     animationIndex: 3,
-    dotPosition: { x: "945", y: "170" },
+    dotPosition: { x: "945", y: "195" },
     label: "50%",
-    labelPosition: { x: 945, y: 147 }
+    labelPosition: { x: 945, y: 172 }
   },
   
   // Network Costs to Total Stake

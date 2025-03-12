@@ -1,4 +1,3 @@
-
 // Subitem definitions for different boxes
 
 export const internalRewardsSubitems = [
@@ -10,13 +9,11 @@ export const internalRewardsSubitems = [
 export const networkCostsSubitems = [
   { 
     text: "base fees", 
-    isHeader: true,
     id: "base-fees",
     subItems: []
   },
   { 
-    text: "block rewards", 
-    isHeader: true,
+    text: "block rewards",
     id: "block-rewards",
     subItems: [
       { text: "priority fees", id: "priority-fees" },
