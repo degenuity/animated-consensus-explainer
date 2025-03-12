@@ -38,7 +38,7 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
   }, [setActiveFormula]);
 
   return (
-    <div className="relative h-[400px] flex items-center justify-center">
+    <div className="relative h-[450px] flex items-center justify-center">
       <div className="relative w-full h-full">
         <div className="absolute inset-0 flex items-center justify-center">
           <BLSStageOne 

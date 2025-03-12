@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
@@ -216,7 +217,7 @@ export const BLSStageThree: React.FC<BLSStageThreeProps> = ({ activeSection, act
           </motion.div>
         </div>
         
-        <div className="absolute inset-x-0 bottom-4 text-center">
+        <div className="absolute inset-x-0 bottom-0 text-center py-4">
           <motion.div 
             className={`text-xs font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border ${allSignaturesVerified ? 'border-green-500/30 text-green-300' : 'border-red-500/30 text-red-300'}`}
             initial={{ opacity: 0, y: 10 }}
