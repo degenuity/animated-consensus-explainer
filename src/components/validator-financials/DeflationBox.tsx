@@ -12,7 +12,7 @@ const DeflationBox = () => (
   >
     <div className="bg-yellow-500 text-white p-4 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
       <TrendingDown className="mb-2 h-6 w-6" />
-      <div className="text-2xl font-semibold">Deflation</div>
+      <div className="text-2xl font-semibold">deflation</div>
       <div className="text-sm opacity-90">token burns</div>
     </div>
   </motion.div>

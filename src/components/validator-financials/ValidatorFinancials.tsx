@@ -23,35 +23,35 @@ const ValidatorFinancials = () => {
       <div className="max-w-7xl mx-auto relative">
         <Title />
 
-        <div className="relative mx-auto" style={{ height: '750px' }}>
-          {/* First Row */}
-          <div className="absolute left-[100px] top-[80px]" style={{ width: '220px' }}>
+        <div className="relative mx-auto" style={{ height: '820px' }}>
+          {/* First Row - Main Boxes */}
+          <div className="absolute left-[80px] top-[120px]" style={{ width: '180px' }}>
             <InflationBox />
           </div>
           
-          <div className="absolute left-[450px] top-[80px]" style={{ width: '240px' }}>
+          <div className="absolute left-[420px] top-[160px]" style={{ width: '250px' }}>
             <TotalStakeBox />
           </div>
           
-          <div className="absolute right-[100px] top-[80px]" style={{ width: '220px' }}>
+          <div className="absolute right-[80px] top-[120px]" style={{ width: '180px' }}>
             <DeflationBox />
           </div>
 
           {/* Second Row */}
-          <div className="absolute left-[180px] top-[280px]" style={{ width: '250px' }}>
+          <div className="absolute left-[280px] top-[220px]" style={{ width: '250px' }}>
             <InternalRewardsBox />
           </div>
           
-          <div className="absolute right-[180px] top-[280px]" style={{ width: '250px' }}>
+          <div className="absolute right-[280px] top-[160px]" style={{ width: '250px' }}>
             <NetworkUsageCostsBox />
           </div>
 
           {/* Bottom Row */}
-          <div className="absolute left-[80px] top-[550px]" style={{ width: '400px' }}>
+          <div className="absolute left-[140px] top-[530px]" style={{ width: '450px' }}>
             <BlockProductionEligibilityBox />
           </div>
           
-          <div className="absolute right-[80px] top-[550px]" style={{ width: '400px' }}>
+          <div className="absolute right-[140px] top-[530px]" style={{ width: '450px' }}>
             <ProfitabilityBox />
           </div>
 
@@ -66,7 +66,7 @@ const ValidatorFinancials = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.7 }}
-            className="absolute bottom-0 right-6 text-5xl font-bold text-gray-500/50"
+            className="absolute bottom-0 right-6 text-6xl font-bold text-gray-500/50"
           >
             X1
           </motion.div>

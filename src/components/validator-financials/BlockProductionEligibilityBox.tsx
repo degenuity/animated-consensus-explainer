@@ -16,7 +16,7 @@ const BlockProductionEligibilityBox = () => (
         <span className="text-xl text-white">block production eligibility</span>
       </div>
       
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-4">
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -34,14 +34,9 @@ const BlockProductionEligibilityBox = () => (
         >
           <div className="text-blue-400 text-sm font-medium">randomness</div>
           <div className="text-xs text-gray-300 mt-1">ACP anti-collusion protocol</div>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.2 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="absolute inset-0 flex items-center justify-center text-gray-500 font-bold text-xl"
-          >
+          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold text-xl">
             ×
-          </motion.div>
+          </div>
         </motion.div>
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
@@ -51,14 +46,9 @@ const BlockProductionEligibilityBox = () => (
         >
           <div className="text-blue-400 text-sm font-medium">performance/ reputation</div>
           <div className="text-xs text-gray-300 mt-1">from recorded history</div>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.2 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
-            className="absolute inset-0 flex items-center justify-center text-gray-500 font-bold text-xl"
-          >
+          <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold text-xl">
             ×
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </div>

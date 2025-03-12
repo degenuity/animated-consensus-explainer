@@ -30,26 +30,31 @@ const NetworkUsageCostsBox = () => (
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="bg-gray-900/90 border border-gray-700 p-3 rounded mt-4"
+          className="relative mt-3"
         >
-          <div className="text-white mb-2">block rewards</div>
-          <div className="space-y-2">
-            <motion.div 
-              initial={{ opacity: 0, x: -5 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.6 }}
-              className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-xs text-white"
-            >
-              priority fees
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, x: -5 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.7 }}
-              className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-xs text-white"
-            >
-              MEV
-            </motion.div>
+          <div className="bg-gray-800/80 border border-gray-700 p-3 rounded">
+            <div className="text-white mb-2">block rewards</div>
+            <div className="space-y-2">
+              <motion.div 
+                initial={{ opacity: 0, x: -5 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.6 }}
+                className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-xs text-white"
+              >
+                priority fees
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, x: -5 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.7 }}
+                className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-xs text-white"
+              >
+                MEV
+              </motion.div>
+            </div>
+          </div>
+          <div className="absolute -left-10 top-1/2 transform -translate-y-1/2 bg-gray-500/30 rounded-full px-2 py-1 text-xs text-gray-300">
+            50%
           </div>
         </motion.div>
       </div>
