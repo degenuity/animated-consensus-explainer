@@ -1,7 +1,12 @@
 
 import React from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { BoxComponent, ConnectionLine, ExplanationComponent, Logo } from './svg';
+import {
+  BoxComponent,
+  ConnectionLine,
+  ExplanationComponent,
+  Logo
+} from './svg';
 import { viewBoxWidth, viewBoxHeight } from './svg/data/constants';
 import { boxes } from './svg/data/boxes';
 import { connectionPaths } from './svg/data/connections';
@@ -51,6 +56,7 @@ const DiagramSVG = () => {
         {backgroundConnections.map((connection, index) => (
           <ConnectionLine
             key={`connection-bg-${connection.id}-${index}`}
+            id={connection.id} // Add the id prop here
             path={connection.path}
             color={connection.color}
             animationIndex={connection.animationIndex || index}
@@ -59,6 +65,7 @@ const DiagramSVG = () => {
             labelPosition={connection.labelPosition}
             animationDirection={connection.animationDirection}
             animateMotion={connection.animateMotion}
+            animationDuration={connection.animationDuration}
           />
         ))}
       </svg>
@@ -100,6 +107,7 @@ const DiagramSVG = () => {
         {foregroundConnections.map((connection, index) => (
           <ConnectionLine
             key={`connection-fg-${connection.id}-${index}`}
+            id={connection.id} // Add the id prop here
             path={connection.path}
             color={connection.color}
             animationIndex={connection.animationIndex || index}
@@ -108,6 +116,7 @@ const DiagramSVG = () => {
             labelPosition={connection.labelPosition}
             animationDirection={connection.animationDirection}
             animateMotion={connection.animateMotion}
+            animationDuration={connection.animationDuration}
           />
         ))}
       </svg>
