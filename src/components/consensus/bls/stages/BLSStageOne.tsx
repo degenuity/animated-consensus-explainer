@@ -58,46 +58,6 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
           </motion.div>
         </motion.div>
 
-        {/* Render message animations on a lower z-index */}
-        {Array.from({ length: 10 }).map((_, i) => {
-          const angle = (i * 36) * (Math.PI / 180);
-          const radius = 120;
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
-          
-          return (
-            <motion.div
-              key={`message-${i}`}
-              className="absolute z-10"
-              style={{
-                transform: `translate(${x}px, ${y}px)`,
-              }}
-            >
-              {/* Signature message box with "M" - exactly positioned at the validator position */}
-              <motion.div
-                className="w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  x: [0, -x * 0.6], 
-                  y: [0, -y * 0.6],
-                  opacity: [0, 1, 0],
-                  scale: [0.5, 1, 0.5]
-                }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  delay: i * 0.3 + 1, // Add 1 second delay before messages start appearing
-                  repeatDelay: 0,
-                  times: [0, 0.5, 1],
-                  ease: "easeInOut"
-                }}
-              >
-                <span className="text-white font-bold text-xs">M</span>
-              </motion.div>
-            </motion.div>
-          );
-        })}
-
         {/* Render all 10 validators in a circle - on a higher z-index layer */}
         {Array.from({ length: 10 }).map((_, i) => {
           const angle = (i * 36) * (Math.PI / 180);
@@ -140,6 +100,28 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                 >
                   σ<sub>{i+1}</sub>
                 </motion.p>
+              </motion.div>
+              
+              {/* Signature message box with "M" - exactly positioned at the validator position initially */}
+              <motion.div
+                className="absolute z-10 w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
+                initial={{ opacity: 0 }}
+                animate={{ 
+                  x: [0, -x * 0.6], 
+                  y: [0, -y * 0.6],
+                  opacity: [0, 1, 0],
+                  scale: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  delay: i * 0.3 + 2, // 2 second delay before messages start appearing, after validators are positioned
+                  repeatDelay: 0,
+                  times: [0, 0.5, 1],
+                  ease: "easeInOut"
+                }}
+              >
+                <span className="text-white font-bold text-xs">M</span>
               </motion.div>
             </motion.div>
           );
