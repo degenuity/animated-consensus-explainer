@@ -6,12 +6,12 @@ import { Database } from "lucide-react";
 const InternalRewardsBoxV2 = () => {
   return (
     <div className="bg-[#1a2233] border border-[#2a3349] p-4 rounded-lg">
-      <div className="flex items-center justify-center mb-3">
+      <div className="flex items-center justify-center mb-4">
         <Database className="h-5 w-5 text-blue-400 mr-2" />
         <span className="text-xl text-white">internal rewards</span>
       </div>
       
-      <div className="space-y-3">
+      <div className="space-y-4 px-2">
         <motion.div 
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
