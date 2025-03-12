@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-[#1a3a5f] text-white">
+    <div className="min-h-screen bg-blue-900 text-white">
       {/* Logo in top left corner */}
       <div className="absolute top-4 left-4">
         <Link to="/">

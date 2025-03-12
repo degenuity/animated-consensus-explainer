@@ -4,12 +4,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// Simple error handler that logs to console but doesn't modify DOM directly
-const handleError = (error: Error) => {
-  console.error('Application error:', error);
-};
-
-// Create a simple root element if it doesn't exist
+// Create root element
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   console.error('Root element not found');
@@ -28,6 +23,6 @@ if (!rootElement) {
       </React.StrictMode>
     );
   } catch (error) {
-    handleError(error as Error);
+    console.error('Application error:', error);
   }
 }
