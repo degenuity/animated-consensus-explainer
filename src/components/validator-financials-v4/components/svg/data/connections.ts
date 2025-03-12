@@ -17,7 +17,8 @@ export const connectionPaths = [
     animationIndex: 1,
     dotPosition: { x: "615", y: "240" },
     animateMotion: true,
-    animationDirection: "left" as const
+    animationDirection: "left" as const,
+    zIndex: 20
   },
   
   // Line 3: Own Stake to Staking Rewards
@@ -27,7 +28,8 @@ export const connectionPaths = [
     animationIndex: 2,
     dotPosition: { x: "615", y: "280" },
     animateMotion: true,
-    animationDirection: "left" as const
+    animationDirection: "left" as const,
+    zIndex: 20
   },
   
   // Line 4: Total Stake to Stake Weight

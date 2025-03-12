@@ -12,6 +12,7 @@ interface ConnectionSVGProps {
   labelPosition?: { x: number; y: number };
   animationDirection?: "right" | "left" | "up" | "down";
   animateMotion?: boolean;
+  zIndex?: number;
 }
 
 const ConnectionLine: React.FC<ConnectionSVGProps> = ({ 
@@ -22,14 +23,15 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
   label,
   labelPosition,
   animationDirection,
-  animateMotion
+  animateMotion,
+  zIndex
 }) => {
   const { lineVariants, dotVariants } = useConnectionAnimation({
     animationIndex
   });
   
   return (
-    <>
+    <g style={{ zIndex: zIndex || 1 }}>
       <motion.path
         d={path}
         stroke={color}
@@ -114,7 +116,7 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
           </text>
         </g>
       )}
-    </>
+    </g>
   );
 };
 
