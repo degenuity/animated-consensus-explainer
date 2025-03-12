@@ -1,21 +1,13 @@
 
-import React, { Suspense, useState, useEffect } from 'react';
-import { formatPdfUrl, initializePdfWorker } from '@/utils/pdfUtils';
-import { PdfLoading } from './pdf/PdfLoading';
+import React, { useState, useEffect } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+import { Button } from './ui/button';
+import { ChevronLeft, ChevronRight, Download, ZoomIn, ZoomOut } from 'lucide-react';
 
-// Lazy load the heavy PDF-related components with error boundaries
-const LazyPdfDocument = React.lazy(() => 
-  import('./pdf/PdfDocument').catch(err => {
-    console.error("Failed to load PdfDocument component:", err);
-    // Return a minimal component that doesn't crash
-    return { default: () => (
-      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-        <p>Could not load PDF viewer component</p>
-        <p className="text-sm">Try opening the PDF directly instead</p>
-      </div>
-    )}
-  })
-);
+// Configure PDF.js worker
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 interface PDFViewerProps {
   pdfUrl: string;
@@ -23,111 +15,164 @@ interface PDFViewerProps {
 }
 
 const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
-  const [finalPdfUrl, setFinalPdfUrl] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [workerInitialized, setWorkerInitialized] = useState(false);
-  const [initAttempted, setInitAttempted] = useState(false);
+  const [numPages, setNumPages] = useState<number | null>(null);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [pdfError, setPdfError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [scale, setScale] = useState<number>(1.3);
 
-  // Initialize PDF worker when component mounts
+  // Reset loading state when PDF URL changes
   useEffect(() => {
-    if (initAttempted) return;
-    setInitAttempted(true);
-    
-    console.log("Initializing PDF worker from PDFViewer component...");
-    
-    // Small delay to ensure React is fully loaded
-    const timer = setTimeout(() => {
-      try {
-        // Initialize worker
-        const success = initializePdfWorker();
-        setWorkerInitialized(success);
-        
-        if (!success) {
-          setError("Failed to initialize PDF viewer. Please check if JavaScript is fully enabled in your browser.");
-        }
-      } catch (err) {
-        console.error("Error during worker initialization:", err);
-        setError("PDF initialization error: " + (err instanceof Error ? err.message : String(err)));
-      }
-    }, 100);
-    
-    return () => clearTimeout(timer);
-  }, [initAttempted]);
-
-  // Format PDF URL and handle errors
-  useEffect(() => {
-    try {
-      console.log("Formatting PDF URL:", pdfUrl);
-      const formatted = formatPdfUrl(pdfUrl);
-      console.log("Formatted PDF URL:", formatted);
-      setFinalPdfUrl(formatted);
-      setError(null);
-    } catch (err) {
-      console.error("Error formatting PDF URL:", err);
-      setError(err instanceof Error ? err.message : 'Invalid PDF URL');
-    }
+    setLoading(true);
+    setPdfError(false);
+    setErrorMessage('');
+    setPageNumber(1); // Reset to first page when URL changes
   }, [pdfUrl]);
 
-  if (!initAttempted) {
-    return (
-      <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
-        {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
-        <div className="bg-slate-800 border border-slate-700 text-slate-200 px-4 py-3 rounded">
-          <p>Initializing PDF viewer...</p>
-        </div>
-      </div>
-    );
-  }
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages);
+    setLoading(false);
+    setPdfError(false);
+    console.log('PDF loaded successfully:', pdfUrl);
+  };
 
-  if (initAttempted && !workerInitialized) {
-    return (
-      <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
-        {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
-        <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
-          <p>Could not initialize PDF viewer.</p>
-          <p className="text-sm">Error: {error || "Unknown initialization error"}</p>
-          <p className="text-sm mt-2">
-            If you're seeing CSP errors, make sure your browser allows the needed scripts.
-          </p>
-          <div className="mt-4 text-center">
-            <a 
-              href={pdfUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Open PDF directly
-            </a>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const onDocumentLoadError = (error: Error) => {
+    console.error('Error loading PDF:', error, pdfUrl);
+    setLoading(false);
+    setPdfError(true);
+    setErrorMessage(error.message || 'Unknown error');
+  };
+
+  const changePage = (offset: number) => {
+    setPageNumber(prevPageNumber => {
+      const newPageNumber = prevPageNumber + offset;
+      if (newPageNumber > 0 && newPageNumber <= (numPages || 1)) {
+        return newPageNumber;
+      }
+      return prevPageNumber;
+    });
+  };
+
+  const previousPage = () => changePage(-1);
+  const nextPage = () => changePage(1);
+
+  const zoomIn = () => setScale(prev => Math.min(prev + 0.2, 3.0)); // Limit maximum zoom
+  const zoomOut = () => setScale(prev => Math.max(prev - 0.2, 0.8)); // Limit minimum zoom
+
+  // For external URLs, use the URL directly without modification
+  // For local/relative URLs, create an absolute path
+  const finalPdfUrl = pdfUrl.startsWith('http') 
+    ? pdfUrl 
+    : pdfUrl.startsWith('/') 
+      ? `${window.location.origin}${pdfUrl}`
+      : pdfUrl;
 
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
       {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
       
-      {error ? (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded w-full">
-          <p>Error loading PDF: {error}</p>
-          <p className="text-sm">URL: {pdfUrl}</p>
-          <div className="mt-4 text-center">
-            <a 
-              href={pdfUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      <div className="relative bg-white rounded-lg shadow-lg p-3 w-full flex flex-col">
+        {/* Increased height container for PDF with overflow */}
+        <div className="overflow-auto h-[90vh] mb-4">
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-100 bg-opacity-80 z-10">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+            </div>
+          )}
+          
+          {pdfError ? (
+            <div className="text-center text-red-500 py-8 bg-slate-50 rounded">
+              <p>Failed to load PDF. Please check the URL and try again.</p>
+              <p className="text-sm mt-2">PDF URL: {pdfUrl}</p>
+              {errorMessage && (
+                <p className="text-xs mt-2 max-w-md mx-auto overflow-hidden text-gray-600">
+                  Error details: {errorMessage}
+                </p>
+              )}
+            </div>
+          ) : (
+            <Document
+              file={finalPdfUrl}
+              onLoadSuccess={onDocumentLoadSuccess}
+              onLoadError={onDocumentLoadError}
+              loading={<div className="text-center py-8">Loading PDF...</div>}
+              className="flex justify-center min-h-[40vh]"
             >
-              Open PDF directly
-            </a>
-          </div>
+              <Page 
+                pageNumber={pageNumber} 
+                scale={scale}
+                renderTextLayer={true}
+                renderAnnotationLayer={true}
+                className="border border-slate-200"
+                width={window.innerWidth > 768 ? 700 : undefined}
+              />
+            </Document>
+          )}
         </div>
-      ) : (
-        <Suspense fallback={<PdfLoading title={title} />}>
-          {finalPdfUrl && <LazyPdfDocument pdfUrl={finalPdfUrl} />}
-        </Suspense>
-      )}
+        
+        {/* Controls are outside the scrollable area and always visible */}
+        <div className="flex justify-between items-center px-2 flex-wrap gap-2 bg-white py-2 border-t border-slate-200 sticky bottom-0">
+          <div className="flex items-center space-x-2">
+            <Button
+              onClick={previousPage}
+              disabled={pageNumber <= 1 || pdfError}
+              variant="outline"
+              size="sm"
+              className="flex items-center text-black hover:text-blue-500"
+            >
+              <ChevronLeft size={16} />
+              Previous
+            </Button>
+            
+            <Button
+              onClick={nextPage}
+              disabled={pageNumber >= (numPages || 1) || pdfError}
+              variant="outline"
+              size="sm"
+              className="flex items-center text-black hover:text-blue-500"
+            >
+              Next
+              <ChevronRight size={16} />
+            </Button>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <Button
+              onClick={zoomOut}
+              disabled={pdfError}
+              variant="outline"
+              size="sm"
+              className="flex items-center text-black hover:text-blue-500"
+            >
+              <ZoomOut size={16} />
+            </Button>
+            
+            <Button
+              onClick={zoomIn}
+              disabled={pdfError}
+              variant="outline"
+              size="sm"
+              className="flex items-center text-black hover:text-blue-500"
+            >
+              <ZoomIn size={16} />
+            </Button>
+          </div>
+          
+          <p className="text-sm">
+            {!pdfError ? `Page ${pageNumber} of ${numPages || '-'}` : ''}
+          </p>
+          
+          {!pdfError && (
+            <a href={finalPdfUrl} download target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="sm" className="flex items-center gap-1 text-black hover:text-blue-500">
+                <Download size={16} />
+                Download
+              </Button>
+            </a>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

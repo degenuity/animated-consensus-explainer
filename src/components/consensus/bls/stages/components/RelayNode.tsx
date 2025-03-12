@@ -42,7 +42,7 @@ export const RelayNode: React.FC<RelayNodeProps> = ({ showSuccessEffect = false 
           <motion.span
             className="text-indigo-400 font-bold text-xs mt-1"
           >
-            Relay node
+            X1
           </motion.span>
         </motion.div>
       </div>

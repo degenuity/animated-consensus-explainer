@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
+import { BLSFormulas } from './bls/BLSFormulas';
+import { BLSVisualization } from './bls/BLSVisualization';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { FormulaDisplay } from '@/components/consensus/bls/FormulaDisplay';
-import { VisualizationDisplay } from '@/components/consensus/bls/VisualizationDisplay';
 
 interface BLSSectionProps {
   activeSection: number | null;
@@ -18,16 +18,17 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
   setIsVoteReductionOpen
 }) => {
   const [activeFormula, setActiveFormula] = useState(0);
-  const [animationKey, setAnimationKey] = useState(0);
+  const [animationKey, setAnimationKey] = useState(0); // For resetting animations
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (activeSection === 1 || isMobile) {
+    if (activeSection !== 1 && !isMobile) {
       setActiveFormula(0);
-      setAnimationKey(prev => prev + 1);
+      return;
     }
     
-    if (activeSection === 1 && !isMobile) {
+    // Auto-rotation is now only active when the section is not being interacted with
+    if (!isMobile) {
       const formulaInterval = setInterval(() => {
         setActiveFormula(prev => (prev + 1) % 3);
       }, 5000);
@@ -36,9 +37,12 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     }
   }, [activeSection, isMobile]);
   
+  // Listen for the verification completion event to restart animation
   useEffect(() => {
     const handleVerificationComplete = () => {
+      // Reset to Stage 1
       setActiveFormula(0);
+      // Force re-render of the visualization by updating the key
       setAnimationKey(prevKey => prevKey + 1);
     };
     
@@ -46,18 +50,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     
     return () => {
       document.removeEventListener('bls-verification-complete', handleVerificationComplete);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleStageTwoComplete = () => {
-      setActiveFormula(2);
-    };
-    
-    document.addEventListener('bls-stage-two-complete', handleStageTwoComplete);
-    
-    return () => {
-      document.removeEventListener('bls-stage-two-complete', handleStageTwoComplete);
     };
   }, []);
 
@@ -79,13 +71,16 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-          <FormulaDisplay activeFormula={activeFormula} />
-          <VisualizationDisplay 
-            activeSection={activeSection || 0} 
-            activeFormula={activeFormula} 
-            animationKey={animationKey}
-            onFormulaSelect={setActiveFormula}
-          />
+          <BLSFormulas activeSection={activeSection} activeFormula={activeFormula} />
+          <div className="flex flex-col">
+            <BLSVisualization 
+              key={animationKey} 
+              activeSection={isMobile ? 1 : activeSection} 
+              activeFormula={activeFormula} 
+              setActiveFormula={setActiveFormula}
+            />
+            <div className="h-10"></div> {/* Added space for the toggle controls */}
+          </div>
         </div>
       </Card>
     </motion.div>

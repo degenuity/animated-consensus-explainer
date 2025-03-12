@@ -1,25 +1,39 @@
 
-import React from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "./pages/Home"
-import Whitepaper from "./pages/Whitepaper"
-import ConsensusExplainer from "./pages/ConsensusExplainer"
-import NotFound from "./pages/NotFound"
-import "./App.css" // Make sure CSS is loaded
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home";
+import ConsensusExplainer from "./pages/ConsensusExplainer";
+import Whitepaper from "./pages/Whitepaper";
+import NotFound from "./pages/NotFound";
 
-function App() {
-  console.log("App is rendering"); // Debug log
-  
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/whitepaper" element={<Whitepaper />} />
-        <Route path="/consensus" element={<ConsensusExplainer />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
-  )
-}
+// Create a new QueryClient instance that doesn't retry failed queries by default
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
-export default App
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/consensus" element={<ConsensusExplainer />} />
+          <Route path="/consensus/*" element={<ConsensusExplainer />} />
+          <Route path="/whitepaper" element={<Whitepaper />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+export default App;

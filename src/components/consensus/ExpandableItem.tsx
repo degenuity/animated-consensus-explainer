@@ -107,10 +107,10 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
         type: "spring",
         stiffness: 100
       }}
-      className="flex items-start p-2 rounded-lg hover:bg-slate-700/30"
+      className="flex items-center p-2 rounded-lg hover:bg-slate-700/30"
     >
       <motion.div 
-        className={`w-3 h-3 rounded-full ${colorClasses.dot} mr-3 mt-1`}
+        className={`w-3 h-3 rounded-full ${colorClasses.dot} mr-3`}
         animate={{ 
           scale: [1, 1.5, 1],
           boxShadow: [
@@ -132,8 +132,8 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
           onOpenChange={setIsOpen}
           className="w-full"
         >
-          <div className="flex items-start justify-between w-full">
-            <div className="text-left">
+          <div className="flex items-center justify-between w-full">
+            <div>
               <p className="text-sm font-medium text-white">{name}</p>
               <p className="text-xs text-slate-300 mt-0.5">{description}</p>
             </div>
@@ -155,7 +155,7 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
           </CollapsibleContent>
         </Collapsible>
       ) : (
-        <div className="text-left">
+        <div>
           <p className="text-sm font-medium text-white">{name}</p>
           <p className="text-xs text-slate-300 mt-0.5">{description}</p>
         </div>

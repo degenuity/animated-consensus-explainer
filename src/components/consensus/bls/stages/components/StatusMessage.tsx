@@ -3,16 +3,11 @@ import React from 'react';
 import { motion } from "framer-motion";
 
 interface StatusMessageProps {
-  children: React.ReactNode;
-  leaderReceived?: boolean;
-  showSuccessEffect?: boolean;
+  leaderReceived: boolean;
+  showSuccessEffect: boolean;
 }
 
-export const StatusMessage: React.FC<StatusMessageProps> = ({ 
-  children, 
-  leaderReceived = false, 
-  showSuccessEffect = false 
-}) => {
+export const StatusMessage: React.FC<StatusMessageProps> = ({ leaderReceived, showSuccessEffect }) => {
   return (
     <div className="absolute bottom-2 left-0 right-0 text-center">
       <motion.div 
@@ -26,7 +21,7 @@ export const StatusMessage: React.FC<StatusMessageProps> = ({
           animate={{ opacity: [1, 0.4, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />
-        {children}
+        Relay node sends aggregated "Agg" signature to leader
         {leaderReceived && (
           <motion.span
             initial={{ opacity: 0 }}
