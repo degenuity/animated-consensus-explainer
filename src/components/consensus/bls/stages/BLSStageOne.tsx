@@ -110,7 +110,8 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                     duration: 2,
                     repeat: Infinity,
                     delay: i * 0.3,
-                    repeatDelay: 1
+                    repeatDelay: 1,
+                    times: [0, 0.5, 1]
                   }}
                 >
                   <span className="text-white font-bold text-xs">M</span>
