@@ -46,7 +46,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
           height={itemHeight}
         >
           <div className="flex flex-col justify-center h-full text-center">
-            <div className="text-2xl font-bold" style={{ color: itemColor || "#3B82F6" }}>{text}</div>
+            <div className="text-2xl font-normal" style={{ color: itemColor || "#0E7490" }}>{text}</div>
           </div>
         </foreignObject>
       </motion.g>
@@ -107,4 +107,3 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
 };
 
 export default SubItemRenderer;
-

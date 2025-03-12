@@ -28,7 +28,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           transition={{ duration: 0.3, delay: 0.55 }}
           className="flex items-center justify-center"
         >
-          <span className="text-blue-400 text-2xl font-bold">×</span>
+          <span className="text-[#0E7490] text-2xl font-normal">×</span>
         </motion.div>
 
         <motion.div 
@@ -38,7 +38,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           className="border border-blue-500/70 bg-[#141b29] p-3 rounded col-span-1"
         >
           <div className="text-blue-400 text-sm font-medium">randomness</div>
-          <div className="text-xs text-gray-300 mt-1">ACP anti-collusion protocol</div>
+          <div className="text-xs text-gray-300 mt-1">ACP anti-collusion</div>
         </motion.div>
         
         <motion.div
@@ -47,7 +47,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           transition={{ duration: 0.3, delay: 0.65 }}
           className="flex items-center justify-center"
         >
-          <span className="text-blue-400 text-2xl font-bold">×</span>
+          <span className="text-[#0E7490] text-2xl font-normal">×</span>
         </motion.div>
         
         <motion.div 
@@ -56,7 +56,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           transition={{ duration: 0.3, delay: 0.7 }}
           className="border border-blue-500/70 bg-[#141b29] p-3 rounded col-span-1"
         >
-          <div className="text-blue-400 text-sm font-medium">performance/reputation</div>
+          <div className="text-blue-400 text-sm font-medium">performance</div>
           <div className="text-xs text-gray-300 mt-1">from recorded history</div>
         </motion.div>
       </div>
@@ -65,4 +65,3 @@ const BlockProductionEligibilityBoxV2 = () => {
 };
 
 export default BlockProductionEligibilityBoxV2;
-

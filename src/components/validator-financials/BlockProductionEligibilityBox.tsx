@@ -33,7 +33,7 @@ const BlockProductionEligibilityBox = () => (
           className="border border-blue-500/70 bg-gray-800/50 p-3 rounded"
         >
           <div className="text-blue-400 text-sm font-medium">randomness</div>
-          <div className="text-xs text-gray-300 mt-1">ACP anti-collusion protocol</div>
+          <div className="text-xs text-gray-300 mt-1">ACP anti-collusion</div>
         </motion.div>
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
@@ -41,7 +41,7 @@ const BlockProductionEligibilityBox = () => (
           transition={{ duration: 0.3, delay: 0.7 }}
           className="border border-blue-500/70 bg-gray-800/50 p-3 rounded"
         >
-          <div className="text-blue-400 text-sm font-medium">performance/reputation</div>
+          <div className="text-blue-400 text-sm font-medium">performance</div>
           <div className="text-xs text-gray-300 mt-1">from recorded history</div>
         </motion.div>
       </div>
