@@ -18,7 +18,7 @@ const Home = () => {
       </div>
       
       {/* Main content */}
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-screen relative z-10">
         <div className="text-center">
           <h1 className="text-blue-400 text-2xl font-bold mb-5">
             X1 Research
