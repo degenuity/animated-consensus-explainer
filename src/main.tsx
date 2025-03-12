@@ -4,25 +4,16 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// Create root element
+// Simple console logger for debugging
+console.log('Starting application...');
+
 const rootElement = document.getElementById('root');
-if (!rootElement) {
-  console.error('Root element not found');
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 } else {
-  // Remove loading animation if it exists
-  const loadingElement = document.querySelector('.app-loading');
-  if (loadingElement) {
-    loadingElement.remove();
-  }
-  
-  try {
-    const root = ReactDOM.createRoot(rootElement);
-    root.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    );
-  } catch (error) {
-    console.error('Application error:', error);
-  }
+  console.error('Root element not found');
 }

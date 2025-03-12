@@ -1,50 +1,26 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-blue-900 text-white">
-      {/* Logo in top left corner */}
-      <div className="absolute top-4 left-4">
-        <Link to="/">
-          <img 
-            src="/lovable-uploads/bb1906db-aeaf-4ee3-9840-6bc142086f04.png" 
-            alt="X1 Logo" 
-            className="h-10 w-auto"
-          />
+    <div style={{ 
+      minHeight: '100vh', 
+      backgroundColor: '#1a3a5f', 
+      color: 'white',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column'
+    }}>
+      <h1>X1 Research</h1>
+      <div style={{ marginTop: '20px' }}>
+        <Link to="/whitepaper" style={{ color: 'white', marginRight: '20px' }}>
+          Whitepaper
         </Link>
-      </div>
-      
-      {/* Main content */}
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <h1 className="text-blue-400 text-2xl font-bold mb-5">
-            X1 Research
-          </h1>
-          <p className="mb-8">Welcome to X1 Research</p>
-          
-          {/* Navigation buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/whitepaper">
-              <Button 
-                variant="outline" 
-                className="bg-transparent border border-blue-500 text-blue-400 hover:bg-blue-800 hover:text-white hover:border-transparent transition-all"
-              >
-                X1 Whitepaper
-              </Button>
-            </Link>
-            <Link to="/consensus">
-              <Button 
-                variant="outline" 
-                className="bg-transparent border border-blue-500 text-blue-400 hover:bg-blue-800 hover:text-white hover:border-transparent transition-all"
-              >
-                Consensus Explainer
-              </Button>
-            </Link>
-          </div>
-        </div>
+        <Link to="/consensus" style={{ color: 'white' }}>
+          Consensus
+        </Link>
       </div>
     </div>
   );
