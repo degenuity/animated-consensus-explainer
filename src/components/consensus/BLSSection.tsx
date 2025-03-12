@@ -55,9 +55,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
 
   const isActive = activeSection === 1 || isMobile;
 
-  // Add console logs to help debug
-  console.log('BLSSection rendering', { activeSection, activeFormula, animationKey, isActive });
-
   return (
     <motion.div
       animate={{
