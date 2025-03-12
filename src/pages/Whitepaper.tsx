@@ -27,7 +27,7 @@ const Whitepaper = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="max-w-6xl mx-auto"
+        className="max-w-[1440px] mx-auto"
       >
         <div className="flex items-center justify-between mb-8 relative">
           <Link to="/" className="absolute left-0 top-0">
@@ -79,7 +79,7 @@ const Whitepaper = () => {
           transition={{ duration: 0.5 }}
           className="mb-12 overflow-hidden"
         >
-          <Card className="p-4 md:p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
+          <Card className="p-2 md:p-4 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
             <div className="relative z-10">
               <ValidatorFinancialsV3 />
             </div>

@@ -1,18 +1,19 @@
+
 import React from 'react';
 import { motion } from "framer-motion";
 import { TrendingUp, TrendingDown, BarChart3, PieChart, LineChart, ArrowRight, ArrowDown, Lock, Tag, Box, Percent } from "lucide-react";
 
 const BoxAnimation = () => {
   return (
-    <div className="flex flex-col items-center py-12">
+    <div className="flex flex-col items-center py-8 px-8">
       {/* Top row with blue, grey and yellow boxes */}
-      <div className="flex justify-center gap-4 items-center mb-12 relative">
+      <div className="flex justify-center gap-4 items-center mb-12 relative w-full">
         {/* Blue Box */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-48 h-48"
+          className="w-48 h-48 shrink-0"
         >
           <div className="bg-blue-500 text-white p-6 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
             <TrendingUp className="mb-4 h-8 w-8" />
@@ -55,7 +56,7 @@ const BoxAnimation = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="w-64 h-64"
+          className="w-64 h-64 shrink-0"
         >
           <div className="bg-gray-800/90 border border-gray-700 p-4 rounded-lg shadow-lg h-full">
             <div className="flex items-center mb-3">
@@ -96,7 +97,7 @@ const BoxAnimation = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="w-64 h-64"
+          className="w-64 h-64 shrink-0"
         >
           <div className="bg-gray-800/90 border border-gray-700 p-4 rounded-lg shadow-lg h-full">
             <div className="flex items-center mb-3">
@@ -129,7 +130,7 @@ const BoxAnimation = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="w-64 h-64"
+          className="w-64 h-64 shrink-0"
         >
           <div className="bg-gray-800/90 border border-gray-700 p-4 rounded-lg shadow-lg h-full">
             <div className="flex items-center mb-3">
@@ -175,7 +176,7 @@ const BoxAnimation = () => {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="w-48 h-48"
+          className="w-48 h-48 shrink-0"
         >
           <div className="bg-yellow-500 text-white p-6 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
             <TrendingDown className="mb-4 h-8 w-8" />
@@ -347,4 +348,3 @@ const BoxAnimation = () => {
 };
 
 export default BoxAnimation;
-
