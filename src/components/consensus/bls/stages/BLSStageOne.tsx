@@ -80,9 +80,6 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                 type: "spring",
               }}
               className="absolute z-20"
-              style={{
-                transform: `translate(${x}px, ${y}px)`,
-              }}
             >
               <motion.div
                 className="flex flex-col items-center"
@@ -105,6 +102,10 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
               {/* Signature message box with "M" - positioned exactly at validator position */}
               <motion.div
                 className="absolute z-10 w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
+                style={{
+                  top: "4px", // Slight positioning adjustment to center with the validator
+                  left: "1px"
+                }}
                 initial={{ opacity: 0 }}
                 animate={{ 
                   opacity: [0, 1, 0], // Only appear right before movement
