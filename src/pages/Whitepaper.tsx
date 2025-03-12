@@ -9,6 +9,7 @@ import PDFViewer from "@/components/PDFViewer";
 import ValidatorFinancials from "@/components/validator-financials";
 import ValidatorFinancialsV2 from "@/components/validator-financials-v2";
 import { ValidatorFinancialsV3 } from "@/components/validator-financials-v3";
+import { ValidatorFinancialsV4 } from "@/components/validator-financials-v4";
 
 const Whitepaper = () => {
   // Using the GitHub raw content URL for reliability on the live site
@@ -71,6 +72,21 @@ const Whitepaper = () => {
         >
           Models in this paper
         </motion.h2>
+
+        {/* New V4 Animation using BLS-style animation system */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 overflow-hidden"
+        >
+          <Card className="p-4 md:p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-indigo-900/10" />
+            <div className="relative z-10">
+              <ValidatorFinancialsV4 />
+            </div>
+          </Card>
+        </motion.div>
 
         {/* New V3 Simple Animation */}
         <motion.div
