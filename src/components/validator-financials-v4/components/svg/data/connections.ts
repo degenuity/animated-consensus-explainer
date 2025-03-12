@@ -8,8 +8,7 @@ export const connectionPaths = [
     dotPosition: { x: "285", y: "290" },
     animationDirection: "right" as const,
     animateMotion: true,
-    id: "inflation-to-internal-rewards",
-    renderOrder: "background"
+    id: "inflation-to-internal-rewards"
   },
   
   // Line 2: Delegated Stake to Commission
@@ -20,8 +19,7 @@ export const connectionPaths = [
     dotPosition: { x: "615", y: "240" },
     animateMotion: true,
     animationDirection: "left" as const,
-    id: "delegated-stake-to-commission",
-    renderOrder: "foreground"
+    id: "delegated-stake-to-commission"
   },
   
   // Line 3: Own Stake to Staking Rewards
@@ -32,8 +30,7 @@ export const connectionPaths = [
     dotPosition: { x: "615", y: "280" },
     animateMotion: true,
     animationDirection: "left" as const,
-    id: "own-stake-to-staking-rewards",
-    renderOrder: "foreground"
+    id: "own-stake-to-staking-rewards"
   },
   
   // Line 4: Total Stake to Stake Weight
@@ -42,8 +39,7 @@ export const connectionPaths = [
     color: "#3B82F6", 
     animationIndex: 3,
     dotPosition: { x: "615", y: "420" },
-    id: "total-stake-to-stake-weight",
-    renderOrder: "background"
+    id: "total-stake-to-stake-weight"
   },
   
   // Line 5: Base Fee to Deflation
@@ -54,8 +50,7 @@ export const connectionPaths = [
     dotPosition: { x: "1195", y: "230" },
     label: "50%",
     labelPosition: { x: 1195, y: 210 },
-    id: "base-fee-to-deflation",
-    renderOrder: "background"
+    id: "base-fee-to-deflation"
   },
   
   // Line 6: Base Fees to Block Rewards
@@ -66,8 +61,7 @@ export const connectionPaths = [
     dotPosition: { x: "1090", y: "217" },
     label: "50%",
     labelPosition: { x: 1070, y: 217 },
-    id: "base-fees-to-block-rewards",
-    renderOrder: "background"
+    id: "base-fees-to-block-rewards"
   },
   
   // Line 7: Internal Rewards to Total Validator Rewards
@@ -76,8 +70,7 @@ export const connectionPaths = [
     color: "#10B981", 
     animationIndex: 6,
     dotPosition: { x: "720", y: "430" },
-    id: "internal-rewards-to-total-validator-rewards",
-    renderOrder: "background"
+    id: "internal-rewards-to-total-validator-rewards"
   },
   
   // Line 8: Block Rewards to Total Validator Rewards
@@ -86,7 +79,6 @@ export const connectionPaths = [
     color: "#10B981", 
     animationIndex: 7,
     dotPosition: { x: "1040", y: "430" },
-    id: "block-rewards-to-total-validator-rewards",
-    renderOrder: "background"
+    id: "block-rewards-to-total-validator-rewards"
   }
 ];

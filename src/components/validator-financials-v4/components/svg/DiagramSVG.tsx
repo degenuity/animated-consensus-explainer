@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
@@ -13,6 +12,18 @@ import { connectionPaths } from './data/connections';
 
 const DiagramSVG = () => {
   const isMobile = useIsMobile();
+  
+  // Identify connections that need to be on top
+  const topConnections = connectionPaths.filter(conn => 
+    conn.id === 'delegated-stake-to-commission' || 
+    conn.id === 'own-stake-to-staking-rewards'
+  );
+  
+  // Other connections
+  const otherConnections = connectionPaths.filter(conn => 
+    conn.id !== 'delegated-stake-to-commission' && 
+    conn.id !== 'own-stake-to-staking-rewards'
+  );
   
   return (
     <div className="w-full h-full relative">
@@ -36,24 +47,19 @@ const DiagramSVG = () => {
           }
         `}
       </style>
+      
+      {/* Single SVG with all elements properly ordered */}
       <svg
         width="100%"
         height="100%"
         viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
         preserveAspectRatio="xMidYMid meet"
       >
-        {/* Background layers and explanation */}
-        <ExplanationComponent />
-        <Logo />
-        
-        {/* Render the diagram in three distinct layers */}
-        
-        {/* Layer 1: First render all background connections (lines 1, 4, 5, 6, 7, 8) */}
-        {connectionPaths
-          .filter(conn => conn.id !== 'delegated-stake-to-commission' && conn.id !== 'own-stake-to-staking-rewards')
-          .map((connection, index) => (
+        {/* Define connections first */}
+        <defs>
+          {connectionPaths.map((connection, index) => (
             <ConnectionLine
-              key={`connection-bg-${index}`}
+              key={`connection-def-${index}`}
               path={connection.path}
               color={connection.color}
               animationIndex={connection.animationIndex}
@@ -62,10 +68,26 @@ const DiagramSVG = () => {
               labelPosition={connection.labelPosition}
               animationDirection={connection.animationDirection}
               animateMotion={connection.animateMotion}
+              id={connection.id}
+              renderAsDefinition={true}
             />
           ))}
+        </defs>
         
-        {/* Layer 2: Then render all boxes */}
+        {/* Layer 1: Background elements and explanations */}
+        <ExplanationComponent />
+        <Logo />
+        
+        {/* Layer 2: Regular connections */}
+        {otherConnections.map((connection, index) => (
+          <use 
+            key={`connection-use-${index}`} 
+            href={`#connection-${connection.id}`}
+            xlinkHref={`#connection-${connection.id}`} // For older browsers
+          />
+        ))}
+        
+        {/* Layer 3: Boxes */}
         {boxes.map((box, index) => (
           <BoxComponent
             key={`box-${index}`}
@@ -83,22 +105,14 @@ const DiagramSVG = () => {
           />
         ))}
         
-        {/* Layer 3: Finally render the problematic connections on top of everything */}
-        {connectionPaths
-          .filter(conn => conn.id === 'delegated-stake-to-commission' || conn.id === 'own-stake-to-staking-rewards')
-          .map((connection, index) => (
-            <ConnectionLine
-              key={`connection-fg-${index}`}
-              path={connection.path}
-              color={connection.color}
-              animationIndex={connection.animationIndex}
-              dotPosition={connection.dotPosition}
-              label={connection.label}
-              labelPosition={connection.labelPosition}
-              animationDirection={connection.animationDirection}
-              animateMotion={connection.animateMotion}
-            />
-          ))}
+        {/* Layer 4: Top connections */}
+        {topConnections.map((connection, index) => (
+          <use 
+            key={`connection-top-${index}`} 
+            href={`#connection-${connection.id}`}
+            xlinkHref={`#connection-${connection.id}`} // For older browsers
+          />
+        ))}
       </svg>
     </div>
   );
