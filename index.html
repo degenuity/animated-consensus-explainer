@@ -15,6 +15,21 @@
         padding: 0;
         background-color: #000; /* Ensure dark background even before React loads */
         color: #fff;
+        min-height: 100vh;
+        width: 100%;
+      }
+      
+      #root {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      /* Force visibility of UI elements */
+      h1, h2, p, a, button, div {
+        visibility: visible !important;
+        opacity: 1 !important;
       }
     </style>
   </head>

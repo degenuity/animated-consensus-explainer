@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -10,12 +14,14 @@ body {
   background-color: #000;
   color: #fff;
   min-height: 100vh;
+  width: 100%;
 }
 
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 /* Add debugging styles */
@@ -27,9 +33,23 @@ body {
 
 /* Make sure formulas are visible */
 .text-purple-400, .text-indigo-500, .text-red-500,
-.text-violet-400, .text-slate-300, .text-white {
+.text-violet-400, .text-slate-300, .text-white,
+.text-blue-400, .text-green-400, .text-cyan-300 {
   opacity: 1 !important;
   visibility: visible !important;
+  color: inherit !important;
+}
+
+/* Text visibility overrides */
+h1, h2, h3, p, a, button, span, div {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Fix for gradient text that might appear invisible */
+.text-transparent.bg-clip-text {
+  -webkit-text-fill-color: initial;
+  color: white !important;
 }
 
 /* Debug height issues */
