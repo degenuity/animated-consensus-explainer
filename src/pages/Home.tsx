@@ -11,7 +11,7 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
       {/* Header with X1 Logo */}
       <header className="container mx-auto px-4 py-6">
-        <div className="flex items-center">
+        <div className="flex items-center justify-between mb-8 relative">
           <Link to="/" className="absolute left-0 top-0">
             <img 
               src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
