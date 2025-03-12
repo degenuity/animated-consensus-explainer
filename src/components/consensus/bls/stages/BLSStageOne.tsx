@@ -83,7 +83,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
             >
               {/* Signature message box with "M" - positioned exactly at validator position but BEHIND it */}
               <motion.div
-                className="absolute z-10 w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
+                className="absolute z-0 w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
                 initial={{ opacity: 0 }}
                 animate={{ 
                   opacity: [0, 1, 0], // Only appear right before movement
@@ -104,7 +104,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
               </motion.div>
 
               <motion.div
-                className="flex flex-col items-center z-30" // Increased z-index to be higher than messages
+                className="flex flex-col items-center z-50" // Increased z-index to be significantly higher than messages
                 whileHover={{ scale: 1.1 }}
               >
                 <div className="w-10 h-10 rounded-full bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-md">
