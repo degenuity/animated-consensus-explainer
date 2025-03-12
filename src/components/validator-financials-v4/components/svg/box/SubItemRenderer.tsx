@@ -25,6 +25,11 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id, isHorizontal } = item;
   const itemHeight = height || (desc ? 50 : 40);
   
+  // Add horizontal padding when items are displayed horizontally
+  const horizontalPadding = isHorizontal ? 5 : 0;
+  const adjustedWidth = isHorizontal ? width - (horizontalPadding * 2) : width;
+  const adjustedX = isHorizontal ? x + horizontalPadding : x;
+  
   return (
     <motion.g
       key={`subitem-${id || index}`}
@@ -33,9 +38,9 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
       transition={{ delay: 1.2 + index * 0.1 }}
     >
       <rect
-        x={x}
+        x={adjustedX}
         y={y + yOffset}
-        width={width}
+        width={adjustedWidth}
         height={itemHeight}
         rx="4"
         fill="transparent"
@@ -43,9 +48,9 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         strokeWidth="1.5"
       />
       <foreignObject 
-        x={x} 
+        x={adjustedX} 
         y={y + yOffset} 
-        width={width} 
+        width={adjustedWidth} 
         height={itemHeight}
       >
         <div className="flex flex-col justify-center h-full px-4">
@@ -66,7 +71,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
       
       {hasPlus && (
         <foreignObject 
-          x={x + width - 40}
+          x={adjustedX + adjustedWidth - 40}
           y={y + yOffset + (itemHeight/2) - 10}
           width="20" 
           height="20"

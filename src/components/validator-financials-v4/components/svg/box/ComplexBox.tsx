@@ -31,7 +31,10 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
     if (allHorizontal) {
       // For horizontal layout
       const horizontalItems = processedSubitems as SubItem[];
-      const itemWidth = (width - 20) / horizontalItems.length;
+      // Calculate item width with some margin between items
+      const itemMargin = 10; // 10px margin between items
+      const totalMargins = (horizontalItems.length - 1) * itemMargin;
+      const itemWidth = (width - 20 - totalMargins) / horizontalItems.length;
       
       renderedItems.push(
         <g key="horizontal-items">
@@ -40,7 +43,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
               key={`item-${item.id || index}`}
               item={{...item}}
               index={index}
-              x={x + 10 + (itemWidth * index)}
+              x={x + 10 + (itemWidth + itemMargin) * index}
               y={y}
               yOffset={yOffset}
               width={itemWidth}
