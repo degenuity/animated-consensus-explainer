@@ -33,19 +33,22 @@ export const blockProductionSubitems = [
     text: "stake weight", 
     desc: "amount of XNT staked", 
     id: "stake-weight",
-    color: "#3B82F6"
+    color: "#3B82F6",
+    isHorizontal: true
   },
   { 
     text: "randomness", 
     desc: "ACP anti-collusion protocol", 
     id: "randomness",
-    color: "#3B82F6"
+    color: "#3B82F6",
+    isHorizontal: true
   },
   { 
     text: "performance/reputation", 
     desc: "from recorded history", 
     id: "performance-reputation",
-    color: "#3B82F6"
+    color: "#3B82F6",
+    isHorizontal: true
   }
 ];
 

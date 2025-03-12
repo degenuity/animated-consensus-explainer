@@ -10,6 +10,7 @@ export interface SubItem {
   isSubHeader?: boolean;
   id?: string;
   subItems?: SubItem[];
+  isHorizontal?: boolean;
 }
 
 export interface BoxProps {

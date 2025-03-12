@@ -10,6 +10,7 @@ interface SubItemRendererProps {
   y: number;
   yOffset: number;
   width: number;
+  height?: number;
 }
 
 const SubItemRenderer: React.FC<SubItemRendererProps> = ({
@@ -18,10 +19,11 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   x,
   y,
   yOffset,
-  width
+  width,
+  height
 }) => {
-  const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id } = item;
-  const itemHeight = desc ? 50 : 40;
+  const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id, isHorizontal } = item;
+  const itemHeight = height || (desc ? 50 : 40);
   
   return (
     <motion.g
@@ -31,9 +33,9 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
       transition={{ delay: 1.2 + index * 0.1 }}
     >
       <rect
-        x={x + 10}
+        x={x}
         y={y + yOffset}
-        width={width - 20}
+        width={width}
         height={itemHeight}
         rx="4"
         fill="transparent"
@@ -41,9 +43,9 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         strokeWidth="1.5"
       />
       <foreignObject 
-        x={x + 10} 
+        x={x} 
         y={y + yOffset} 
-        width={width - 20} 
+        width={width} 
         height={itemHeight}
       >
         <div className="flex flex-col justify-center h-full px-4">

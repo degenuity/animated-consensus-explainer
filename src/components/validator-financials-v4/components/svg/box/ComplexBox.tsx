@@ -24,6 +24,36 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
     const renderedItems: JSX.Element[] = [];
     let yOffset = 50; // Start after title
     
+    // Check if all top-level items have isHorizontal property
+    const allHorizontal = processedSubitems.length > 0 && 
+                         processedSubitems.every((item: SubItem) => (item as SubItem).isHorizontal);
+    
+    if (allHorizontal) {
+      // For horizontal layout
+      const horizontalItems = processedSubitems as SubItem[];
+      const itemWidth = (width - 20) / horizontalItems.length;
+      
+      renderedItems.push(
+        <g key="horizontal-items">
+          {horizontalItems.map((item, index) => (
+            <SubItemRenderer 
+              key={`item-${item.id || index}`}
+              item={{...item}}
+              index={index}
+              x={x + 10 + (itemWidth * index)}
+              y={y}
+              yOffset={yOffset}
+              width={itemWidth}
+              height={height - yOffset - 10}
+            />
+          ))}
+        </g>
+      );
+      
+      return renderedItems;
+    }
+    
+    // Standard vertical layout (for non-horizontal items)
     const renderItem = (item: SubItem, depth: number = 0, index: number) => {
       const isHeader = depth === 0;
       const isSubHeader = depth === 1;

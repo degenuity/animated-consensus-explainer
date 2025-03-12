@@ -1,3 +1,4 @@
+
 // Box definitions with positions, dimensions and content
 import { 
   internalRewardsSubitems, 
@@ -83,7 +84,7 @@ export const boxes = [
     x: 320,
     y: 500,
     width: 420,
-    height: 180,
+    height: 140, // Reduced height for horizontal layout
     title: "block production eligibility",
     icon: "block-production" as const,
     color: "#3B82F6",

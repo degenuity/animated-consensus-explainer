@@ -26,26 +26,20 @@ const BlockProductionEligibilityBoxV2 = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.6 }}
-          className="relative border border-blue-500/70 bg-[#141b29] p-3 rounded"
+          className="border border-blue-500/70 bg-[#141b29] p-3 rounded"
         >
           <div className="text-blue-400 text-sm font-medium">randomness</div>
           <div className="text-xs text-gray-300 mt-1">ACP anti-collusion protocol</div>
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold text-xl">
-            ×
-          </div>
         </motion.div>
         
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.7 }}
-          className="relative border border-blue-500/70 bg-[#141b29] p-3 rounded"
+          className="border border-blue-500/70 bg-[#141b29] p-3 rounded"
         >
           <div className="text-blue-400 text-sm font-medium">performance/reputation</div>
           <div className="text-xs text-gray-300 mt-1">from recorded history</div>
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold text-xl">
-            ×
-          </div>
         </motion.div>
       </div>
     </div>
