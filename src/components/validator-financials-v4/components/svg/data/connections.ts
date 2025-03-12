@@ -36,12 +36,14 @@ export const connectionPaths = [
     renderOrder: "foreground" as const
   },
   
-  // Line 4: Total Stake to Stake Weight
+  // Line 4: Total Stake to Stake Weight - UPDATED to point specifically to Stake Weight
   { 
-    path: "M 780 320 L 780 420 L 450 420 L 450 500", 
+    path: "M 780 320 L 780 420 L 380 420 L 380 500", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "615", y: "420" },
+    dotPosition: { x: "380", y: "460" },
+    animateMotion: true,
+    animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
     renderOrder: "background" as const
   },
