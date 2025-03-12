@@ -15,7 +15,7 @@ import OperationalCostsNote from './OperationalCostsNote';
 const ValidatorFinancials = () => {
   return (
     <motion.div 
-      className="w-full relative overflow-hidden bg-[#0f1218] min-h-[1000px] py-12"
+      className="w-full relative overflow-hidden bg-[#0f1218] min-h-[1200px] py-16"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -23,9 +23,9 @@ const ValidatorFinancials = () => {
       <div className="max-w-7xl mx-auto relative">
         <Title />
 
-        <div className="relative mx-auto" style={{ height: '900px' }}>
-          {/* First Row - Main Boxes with wider spacing */}
-          <div className="absolute left-[70px] top-[100px]" style={{ width: '200px' }}>
+        <div className="relative mx-auto" style={{ height: '1000px' }}>
+          {/* First Row - Main Boxes with clear spacing */}
+          <div className="absolute left-[50px] top-[100px]" style={{ width: '200px' }}>
             <InflationBox />
           </div>
           
@@ -33,33 +33,33 @@ const ValidatorFinancials = () => {
             <TotalStakeBox />
           </div>
           
-          <div className="absolute right-[70px] top-[100px]" style={{ width: '200px' }}>
+          <div className="absolute right-[50px] top-[100px]" style={{ width: '200px' }}>
             <DeflationBox />
           </div>
 
-          {/* Second Row - Move down and space better */}
-          <div className="absolute left-[150px] top-[350px]" style={{ width: '280px' }}>
+          {/* Second Row - More vertical space between rows */}
+          <div className="absolute left-[100px] top-[400px]" style={{ width: '280px' }}>
             <InternalRewardsBox />
           </div>
           
-          <div className="absolute right-[150px] top-[350px]" style={{ width: '280px' }}>
+          <div className="absolute right-[100px] top-[400px]" style={{ width: '280px' }}>
             <NetworkUsageCostsBox />
           </div>
 
-          {/* Bottom Row - Increase vertical space and adjust width */}
-          <div className="absolute left-[75px] top-[600px]" style={{ width: '380px' }}>
+          {/* Bottom Row - Even more vertical space */}
+          <div className="absolute left-[60px] top-[700px]" style={{ width: '380px' }}>
             <BlockProductionEligibilityBox />
           </div>
           
-          <div className="absolute right-[75px] top-[600px]" style={{ width: '380px' }}>
+          <div className="absolute right-[60px] top-[700px]" style={{ width: '380px' }}>
             <ProfitabilityBox />
           </div>
 
           {/* Connecting Lines */}
           <ConnectingLines />
           
-          {/* Operational Costs Note - Positioned near the bottom right */}
-          <div className="absolute right-[75px] bottom-[50px]" style={{ width: '380px' }}>
+          {/* Operational Costs Note - Bottom of the diagram */}
+          <div className="absolute left-[50%] bottom-[30px] transform -translate-x-1/2" style={{ width: '500px' }}>
             <OperationalCostsNote />
           </div>
 
