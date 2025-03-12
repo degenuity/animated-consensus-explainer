@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Document, Page } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
@@ -33,8 +32,8 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       // Explicitly set the worker path using HTTPS (not protocol-relative URL)
       const workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
       
-      // Set global worker options directly through window object to avoid typing issues
-      if (typeof window !== 'undefined' && window.pdfjsLib) {
+      // Type-safe way to check for pdfjsLib
+      if (typeof window !== 'undefined' && 'pdfjsLib' in window && window.pdfjsLib) {
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
       } else {
         console.log("Setting up worker without pdfjsLib");
