@@ -1,7 +1,7 @@
 
 // Export components
 export { default as BoxComponent } from './box/BoxComponent';
-export { default as ConnectionLine } from './ConnectionLine';
+export { ConnectionLine } from './connection';
 export { default as ExplanationComponent } from './ExplanationComponent';
 export { default as Logo } from './Logo';
 
