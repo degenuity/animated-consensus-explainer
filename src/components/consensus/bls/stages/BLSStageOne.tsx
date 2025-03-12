@@ -92,7 +92,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                   <User size={15} className="text-purple-400" />
                 </div>
                 
-                {/* Signature message box with "M" that animates from validator to relay node with clear opacity changes */}
+                {/* Signature message box with "M" that animates from validator to relay node with explicit opacity values */}
                 <motion.div
                   className="absolute w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
                   initial={{ 
@@ -104,16 +104,16 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                   animate={{ 
                     x: [0, -x * 0.7],
                     y: [0, -y * 0.7],
-                    opacity: [0, 1, 0],
+                    opacity: [0, 1, 0], // Explicit opacity values: start invisible, become fully visible, then fade out
                     scale: [0.7, 1, 0.7]
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 4, // Longer duration to make effect more visible
                     repeat: Infinity,
                     delay: i * 0.3,
-                    repeatDelay: 0.5,
-                    times: [0, 0.4, 1],
-                    ease: "easeInOut"
+                    repeatDelay: 0.2, // Shorter delay between animations
+                    times: [0, 0.3, 1], // Fade in quickly (by 30% of animation), then slowly fade out
+                    ease: "easeInOut" // Smooth easing for better visibility
                   }}
                 >
                   <span className="text-white font-bold text-xs">M</span>
