@@ -1,70 +1,71 @@
 
 export const connectionPaths = [
-  // Inflation to Internal Rewards
+  // Line 1: Inflation to Internal Rewards
   { 
-    path: "M 250 290 H 320", 
+    path: "M 250 290 L 320 290", 
     color: "#3B82F6", 
     animationIndex: 0,
-    dotPosition: { x: "285", y: "290" }
+    dotPosition: { x: "285", y: "290" },
+    animationDirection: "right"
   },
   
-  // Internal Rewards to Block Production
+  // Line 2: Delegated Stake to Commission
   { 
-    path: "M 450 360 L 450 500", 
-    color: "#10B981", 
+    path: "M 650 260 L 580 260", 
+    color: "#3B82F6", 
     animationIndex: 1,
-    dotPosition: { x: "450", y: "430" }
+    dotPosition: { x: "615", y: "260" }
   },
   
-  // Total Stake to Internal Rewards
+  // Line 3: Own Stake to Staking Rewards
   { 
-    path: "M 650 290 H 580", 
+    path: "M 650 300 L 580 300", 
     color: "#3B82F6", 
     animationIndex: 2,
-    dotPosition: { x: "615", y: "290" }
+    dotPosition: { x: "615", y: "300" }
   },
   
-  // Total Stake to Block Production
+  // Line 4: Total Stake to Stake Weight
   { 
-    path: "M 780 320 L 780 420 L 530 420 L 530 500", 
+    path: "M 780 320 L 780 420 L 450 420 L 450 500", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "650", y: "420" }
+    dotPosition: { x: "615", y: "420" }
   },
   
-  // Base Fees to Block Rewards
+  // Line 5: Base Fee to Deflation
   { 
-    path: "M 1090 210 L 1090 255", 
+    path: "M 1090 180 L 1300 280", 
     color: "#EAB308", 
     animationIndex: 4,
-    dotPosition: { x: "1090", y: "230" },
+    dotPosition: { x: "1195", y: "230" },
     label: "50%",
-    labelPosition: { x: 1070, y: 230 }
+    labelPosition: { x: 1195, y: 210 }
   },
   
-  // Base Fees to Deflation
+  // Line 6: Base Fees to Block Rewards
   { 
-    path: "M 1230 210 L 1300 290", 
+    path: "M 1090 180 L 1090 255", 
     color: "#EAB308", 
     animationIndex: 5,
-    dotPosition: { x: "1265", y: "250" },
+    dotPosition: { x: "1090", y: "217" },
     label: "50%",
-    labelPosition: { x: 1250, y: 230 }
+    labelPosition: { x: 1070, y: 217 }
   },
   
-  // Block Rewards to Profitability
+  // Line 7: Internal Rewards to Total Validator Rewards
+  { 
+    path: "M 450 360 L 450 430 L 990 430 L 990 500", 
+    color: "#10B981", 
+    animationIndex: 6,
+    dotPosition: { x: "720", y: "430" }
+  },
+  
+  // Line 8: Block Rewards to Total Validator Rewards
   { 
     path: "M 1090 340 L 1090 430 L 990 430 L 990 500", 
     color: "#10B981", 
-    animationIndex: 6,
-    dotPosition: { x: "1040", y: "430" }
-  },
-  
-  // Total Stake to Profitability
-  { 
-    path: "M 780 320 L 780 430 L 950 430 L 950 500", 
-    color: "#3B82F6", 
     animationIndex: 7,
-    dotPosition: { x: "870", y: "430" }
+    dotPosition: { x: "1040", y: "430" }
   }
 ];
