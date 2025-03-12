@@ -4,17 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
-import { BLSStageOne } from "@/components/consensus/bls/stages";
 import BLSTest from '@/components/BLSTest';
-
-// Debug helper component with visual feedback
-const DebugVisualWrapper = ({ children, label }) => (
-  <div className="relative w-full h-full flex items-center justify-center">
-    <div className="absolute inset-0 border-2 border-dashed border-purple-500"></div>
-    <div className="absolute top-0 left-0 bg-purple-800 text-white text-xs px-2 py-1">{label}</div>
-    {children}
-  </div>
-);
 
 // Enhanced placeholder with debugging information
 const SimplePlaceholder = () => (
@@ -26,10 +16,6 @@ const SimplePlaceholder = () => (
 
 // Main home component - fully debugged
 const Home = () => {
-  // State to control which visualization to show
-  const [showTest, setShowTest] = useState(true);
-  
-  // Force visualization to be visible immediately for debugging
   const [isVisible, setIsVisible] = useState(true);
   
   useEffect(() => {
@@ -42,9 +28,6 @@ const Home = () => {
     return () => window.removeEventListener('error', handleError);
   }, []);
   
-  // Toggle between test component and original implementation
-  const toggleView = () => setShowTest(prev => !prev);
-  
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
       {/* Header with X1 Logo */}
@@ -56,20 +39,9 @@ const Home = () => {
               alt="X1 Logo" 
               className="h-7 w-auto" 
               loading="eager" 
-              fetchPriority="high"
               decoding="async"
             />
           </Link>
-          
-          {/* Debug toggle button */}
-          <Button 
-            onClick={toggleView} 
-            variant="outline" 
-            size="sm" 
-            className="bg-slate-800 border-purple-500 text-purple-300"
-          >
-            Toggle View
-          </Button>
         </div>
       </header>
       
@@ -111,20 +83,10 @@ const Home = () => {
           
           {/* Visualization container with debug wrapper */}
           <div className="relative h-72 flex items-center justify-center overflow-visible border border-purple-700 rounded-lg bg-slate-900/80">
-            {showTest ? (
+            {isVisible ? (
               <BLSTest />
             ) : (
-              <DebugVisualWrapper label="Original Visualization">
-                {isVisible ? (
-                  <BLSStageOne 
-                    activeSection={1} 
-                    activeFormula={0} 
-                    showX1Label={true} 
-                  />
-                ) : (
-                  <SimplePlaceholder />
-                )}
-              </DebugVisualWrapper>
+              <SimplePlaceholder />
             )}
           </div>
         </div>

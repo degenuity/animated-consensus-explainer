@@ -5,18 +5,21 @@ import App from './App.tsx'
 import './index.css'
 import { Toaster } from '@/components/ui/toaster'
 
-// Error boundary component
-class ErrorBoundary extends React.Component {
-  constructor(props) {
+// Error boundary component with proper TypeScript interface
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode }, 
+  { hasError: boolean; error: Error | null; errorInfo: React.ErrorInfo | null }
+> {
+  constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false, error: null, errorInfo: null };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: Error) {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('React Error Boundary caught an error:', error, errorInfo);
     this.setState({ errorInfo });
   }

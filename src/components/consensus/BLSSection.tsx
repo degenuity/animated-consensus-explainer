@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
-import { BLSFormulas } from './bls/BLSFormulas';
-import { BLSVisualization } from './bls/BLSVisualization';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface BLSSectionProps {
@@ -71,15 +69,17 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-          <BLSFormulas activeSection={activeSection} activeFormula={activeFormula} />
+          <div className="bg-slate-900/50 p-4 rounded-lg text-white">
+            <h3 className="text-lg font-medium mb-2">Mathematical Foundation</h3>
+            <p className="text-sm text-slate-300">
+              BLS signatures use bilinear pairings on elliptic curves, allowing efficient aggregation of signatures.
+            </p>
+          </div>
           <div className="flex flex-col">
-            <BLSVisualization 
-              key={animationKey} 
-              activeSection={isMobile ? 1 : activeSection} 
-              activeFormula={activeFormula} 
-              setActiveFormula={setActiveFormula}
-            />
-            <div className="h-10"></div> {/* Added space for the toggle controls */}
+            <div className="bg-slate-900/50 p-4 rounded-lg h-full flex items-center justify-center">
+              <p className="text-slate-300">BLS Visualization Placeholder</p>
+            </div>
+            <div className="h-10"></div>
           </div>
         </div>
       </Card>
