@@ -5,7 +5,25 @@ import { Button } from '@/components/ui/button';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-slate-900 text-white relative blueprint-bg blueprint-grid">
+    <div className="min-h-screen text-white relative">
+      {/* Blueprint background div */}
+      <div className="absolute inset-0 bg-[#1a3a5f] z-0">
+        {/* Grid overlay */}
+        <div className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+              linear-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px),
+              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 2px, transparent 2px)
+            `,
+            backgroundSize: '20px 20px, 20px 20px, 100px 100px, 100px 100px',
+            backgroundPosition: '0 0, 0 0, -1px -1px, -1px -1px',
+            pointerEvents: 'none'
+          }}
+        />
+      </div>
+      
       {/* Logo in top left corner */}
       <div className="absolute top-4 left-4 z-20">
         <Link to="/">
