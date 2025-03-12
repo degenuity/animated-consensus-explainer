@@ -14,6 +14,13 @@ import { connectionPaths } from './data/connections';
 const DiagramSVG = () => {
   const isMobile = useIsMobile();
   
+  // Sort connections by zIndex to ensure proper layering
+  const sortedConnections = [...connectionPaths].sort((a, b) => {
+    const zIndexA = a.zIndex || 1;
+    const zIndexB = b.zIndex || 1;
+    return zIndexA - zIndexB;
+  });
+  
   return (
     <div className="w-full h-full relative">
       <style>
@@ -42,8 +49,8 @@ const DiagramSVG = () => {
         viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
         preserveAspectRatio="xMidYMid meet"
       >
-        {/* Draw all connection lines */}
-        {connectionPaths.map((connection, index) => (
+        {/* Draw all connection lines first */}
+        {sortedConnections.map((connection, index) => (
           <ConnectionLine
             key={`connection-${index}`}
             path={connection.path}
@@ -54,6 +61,7 @@ const DiagramSVG = () => {
             labelPosition={connection.labelPosition}
             animationDirection={connection.animationDirection}
             animateMotion={connection.animateMotion}
+            zIndex={connection.zIndex}
           />
         ))}
         
