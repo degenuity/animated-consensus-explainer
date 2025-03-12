@@ -44,7 +44,7 @@ const BlockProductionEligibilityBox = () => (
           transition={{ duration: 0.3, delay: 0.7 }}
           className="relative border border-blue-500/70 bg-gray-800/50 p-3 rounded"
         >
-          <div className="text-blue-400 text-sm font-medium">performance/ reputation</div>
+          <div className="text-blue-400 text-sm font-medium">performance/reputation</div>
           <div className="text-xs text-gray-300 mt-1">from recorded history</div>
           <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold text-xl">
             ×
