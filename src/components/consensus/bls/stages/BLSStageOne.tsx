@@ -103,7 +103,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                   animate={{ 
                     x: [0, -x * 0.7],
                     y: [0, -y * 0.7],
-                    opacity: [0, 0.9, 0],
+                    opacity: [0, 1, 0],
                     scale: [0.7, 1, 0.7]
                   }}
                   transition={{
