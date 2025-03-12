@@ -79,7 +79,7 @@ const Home = memo(() => {
               alt="X1 Logo" 
               className="h-7 w-auto" 
               loading="eager" 
-              fetchpriority="high"
+              fetchPriority="high"
               decoding="async"
             />
           </Link>
