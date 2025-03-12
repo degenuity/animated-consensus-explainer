@@ -38,23 +38,27 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
   }, [setActiveFormula]);
 
   return (
-    <div className="relative h-96 sm:h-120 flex items-center justify-center">
-      <BLSStageOne 
-        key={`stage-one-${activeFormula === 0 ? 'active' : 'inactive'}`} 
-        activeSection={activeSection} 
-        activeFormula={activeFormula} 
-      />
-      <BLSStageTwo 
-        key={`stage-two-${activeFormula === 1 ? 'active' : 'inactive'}`}
-        activeSection={activeSection} 
-        activeFormula={activeFormula} 
-      />
-      <BLSStageThree 
-        key={`stage-three-${activeFormula === 2 ? 'active' : 'inactive'}`}
-        activeSection={activeSection} 
-        activeFormula={activeFormula} 
-      />
-      <BLSIdleAnimation activeSection={activeSection} />
+    <div className="relative h-[400px] flex items-center justify-center">
+      <div className="relative w-full h-full">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <BLSStageOne 
+            key={`stage-one-${activeFormula === 0 ? 'active' : 'inactive'}`} 
+            activeSection={activeSection} 
+            activeFormula={activeFormula} 
+          />
+          <BLSStageTwo 
+            key={`stage-two-${activeFormula === 1 ? 'active' : 'inactive'}`}
+            activeSection={activeSection} 
+            activeFormula={activeFormula} 
+          />
+          <BLSStageThree 
+            key={`stage-three-${activeFormula === 2 ? 'active' : 'inactive'}`}
+            activeSection={activeSection} 
+            activeFormula={activeFormula} 
+          />
+          <BLSIdleAnimation activeSection={activeSection} />
+        </div>
+      </div>
     </div>
   );
 }
