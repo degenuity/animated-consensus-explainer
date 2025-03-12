@@ -13,25 +13,20 @@
     <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" />
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
     
-    <!-- Disable browser caching -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    
     <style>
       @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-      .loading-spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #0072FF; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
+      .loading-spinner { width: 40px; height: 40px; border: 3px solid #f3f3f3; border-top: 3px solid #0072FF; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
       .error-message { color: red; padding: 20px; margin-top: 20px; border: 1px solid red; border-radius: 4px; }
-      .app-loading { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(to bottom, #0f172a, #1e293b); color: white; transition: opacity 0.3s ease; }
+      .app-loading { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(to bottom, #0f172a, #1e293b); color: white; transition: opacity 0.2s ease; }
       .fade-out { opacity: 0; }
     </style>
   </head>
 
   <body>
     <div id="root">
-      <!-- Initial loading state -->
+      <!-- Simplified loading state -->
       <div class="app-loading">
-        <img src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" alt="X1 Logo" style="height: 28px; margin-bottom: 20px;" />
+        <img src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" alt="X1 Logo" style="height: 28px; margin-bottom: 20px;" fetchpriority="high" />
         <div style="color: #00C6FF; font-size: 18px; margin-bottom: 10px;">Loading X1 Research...</div>
         <div class="loading-spinner"></div>
         <div id="loading-timeout" style="display: none; margin-top: 20px; text-align: center; max-width: 300px;">
@@ -45,22 +40,34 @@
     
     <!-- Optimized loading timeout script -->
     <script>
-      // Show reload button if app takes too long to load (reduced to 2 seconds)
+      // Performance monitoring
+      const startTime = performance.now();
+      console.log('Page load started at:', startTime);
+      
+      // Show reload button if app takes too long to load (reduced from 2s to 3s)
       const loadingTimeoutId = setTimeout(function() {
         const loadingTimeout = document.getElementById('loading-timeout');
-        if (loadingTimeout) loadingTimeout.style.display = 'block';
-      }, 2000);
+        if (loadingTimeout) {
+          loadingTimeout.style.display = 'block';
+          console.log('Loading timeout displayed after:', performance.now() - startTime, 'ms');
+        }
+      }, 3000); // Increased to 3 seconds to give app more time to load
       
       // Clear the timeout when the app is loaded
       document.addEventListener('DOMContentLoaded', function() {
-        clearTimeout(loadingTimeoutId);
-        console.log('DOMContentLoaded event fired');
+        console.log('DOMContentLoaded fired after:', performance.now() - startTime, 'ms');
+        const appLoading = document.querySelector('.app-loading');
+        if (appLoading) {
+          setTimeout(() => {
+            appLoading.classList.add('fade-out');
+          }, 200); // Small delay to ensure content is rendered
+        }
       });
 
       // Monitor performance
       window.addEventListener('load', function() {
-        console.log('Window load event fired at:', new Date().toISOString());
         clearTimeout(loadingTimeoutId);
+        console.log('Window load event fired after:', performance.now() - startTime, 'ms');
         
         if (window.performance && window.performance.timing) {
           const timing = window.performance.timing;
@@ -70,7 +77,7 @@
       });
     </script>
     
-    <!-- Preload and then load the main script -->
+    <!-- Optimize script loading -->
     <link rel="modulepreload" href="/src/main.tsx" />
     <script type="module" src="/src/main.tsx"></script>
   </body>

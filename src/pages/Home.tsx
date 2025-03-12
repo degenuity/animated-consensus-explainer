@@ -5,42 +5,71 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
 
-// Simplified fallback component for faster initial rendering
+// Simplified and improved fallback component for faster initial rendering
 const SimpleBLSFallback = () => (
   <div className="p-4 text-blue-300 flex flex-col items-center">
-    <div className="w-8 h-8 border-2 border-blue-300 border-t-transparent rounded-full animate-spin mb-2"></div>
-    <div>Loading visualization...</div>
+    <div className="animate-pulse flex space-x-4">
+      <div className="flex-1 space-y-4 py-1">
+        <div className="h-4 bg-blue-400/20 rounded w-3/4 mx-auto"></div>
+        <div className="h-4 bg-blue-400/20 rounded w-1/2 mx-auto"></div>
+        <div className="h-4 bg-blue-400/20 rounded w-5/6 mx-auto"></div>
+      </div>
+    </div>
+    <div className="mt-2">Preparing visualization...</div>
   </div>
 );
 
-// Lazy load BLS animation with explicit loading indicator
+// Use a more aggressive code-splitting strategy with smaller chunks
 const BLSStageOne = lazy(() => {
   console.log('Starting to load BLSStageOne');
-  return import("@/components/consensus/bls/stages")
-    .then(module => {
-      console.log('BLSStageOne module loaded successfully');
-      return { default: module.BLSStageOne };
-    })
-    .catch(err => {
-      console.error('Failed to load BLSStageOne:', err);
-      throw err;
-    });
+  // Add a small artificial delay to ensure DOM is ready
+  return new Promise(resolve => {
+    // Remove delay to improve loading time
+    import("@/components/consensus/bls/stages")
+      .then(module => {
+        console.log('BLSStageOne module loaded successfully');
+        resolve({ default: module.BLSStageOne });
+      })
+      .catch(err => {
+        console.error('Failed to load BLSStageOne:', err);
+        // Return a fallback component instead of throwing
+        resolve({ 
+          default: () => <div className="text-red-500 p-4">Failed to load visualization. Please refresh.</div> 
+        });
+      });
+  });
 });
 
 // Use React.memo to prevent unnecessary re-renders
 const Home = memo(() => {
   const [isAnimationVisible, setIsAnimationVisible] = useState(false);
   
-  // Show animation only when in viewport
+  // Show animation only when in viewport and after initial content is loaded
   useEffect(() => {
-    // After initial load, make animation visible
-    const timer = setTimeout(() => {
-      setIsAnimationVisible(true);
-      console.log('Animation visibility set to true');
-    }, 100); // Short delay to ensure other content loads first
-    
-    return () => clearTimeout(timer);
-  }, []);
+    // After initial render, check if page is visible
+    if (document.visibilityState === 'visible') {
+      console.log('Page is visible, preparing to show animation');
+      // Load main content first, then animation later
+      const timer = setTimeout(() => {
+        setIsAnimationVisible(true);
+        console.log('Animation visibility set to true');
+      }, 100);
+      
+      return () => clearTimeout(timer);
+    } else {
+      // If page is hidden (tab not active), delay animation more
+      const visibilityHandler = () => {
+        if (document.visibilityState === 'visible' && !isAnimationVisible) {
+          setIsAnimationVisible(true);
+          console.log('Animation visibility set to true after tab became active');
+          document.removeEventListener('visibilitychange', visibilityHandler);
+        }
+      };
+      
+      document.addEventListener('visibilitychange', visibilityHandler);
+      return () => document.removeEventListener('visibilitychange', visibilityHandler);
+    }
+  }, [isAnimationVisible]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
@@ -53,6 +82,7 @@ const Home = memo(() => {
               alt="X1 Logo" 
               className="h-7 w-auto" 
               loading="eager" 
+              fetchpriority="high"
               decoding="async"
             />
           </Link>
@@ -95,17 +125,16 @@ const Home = memo(() => {
             </Link>
           </div>
           
-          {isAnimationVisible ? (
-            <div className="relative h-72 flex items-center justify-center overflow-visible">
+          {/* Only load visualization when ready */}
+          <div className="relative h-72 flex items-center justify-center overflow-visible">
+            {isAnimationVisible ? (
               <Suspense fallback={<SimpleBLSFallback />}>
                 <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
               </Suspense>
-            </div>
-          ) : (
-            <div className="relative h-72 flex items-center justify-center">
+            ) : (
               <SimpleBLSFallback />
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

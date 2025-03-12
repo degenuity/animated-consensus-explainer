@@ -11,9 +11,6 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      // Use proper configuration format without referencing the missing plugin
-      jsxRuntime: "automatic",
-      devTarget: mode !== "production" ? "es2020" : undefined,
       development: mode !== "production",
       refresh: mode === "development",
     }),
