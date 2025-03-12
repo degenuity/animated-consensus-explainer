@@ -20,26 +20,21 @@ export const usePdfViewer = (pdfUrl: string) => {
   // Initialize PDF.js worker
   useEffect(() => {
     if (initAttempted.current) return;
+    
+    console.log("Initializing PDF.js worker from usePdfViewer hook");
     initAttempted.current = true;
     
-    console.log("Attempting to initialize PDF.js worker from hook");
     try {
-      // Try multiple strategies to load the worker
-      setTimeout(() => {
-        try {
-          const success = initializePdfWorker();
-          setIsReady(success);
-          if (success) {
-            console.log("PDF.js worker initialized successfully from hook");
-          } else {
-            console.error("Failed to initialize PDF.js worker on first attempt");
-            setPdfError(true);
-            setErrorMessage("Failed to initialize PDF viewer - worker initialization failed");
-          }
-        } catch (e) {
-          console.error("Error during delayed worker initialization:", e);
-        }
-      }, 500);
+      const success = initializePdfWorker();
+      setIsReady(success);
+      
+      if (success) {
+        console.log("PDF.js worker initialized successfully from hook");
+      } else {
+        console.error("Failed to initialize PDF.js worker");
+        setPdfError(true);
+        setErrorMessage("Failed to initialize PDF viewer");
+      }
     } catch (error) {
       console.error("Exception during PDF.js worker initialization:", error);
       setPdfError(true);

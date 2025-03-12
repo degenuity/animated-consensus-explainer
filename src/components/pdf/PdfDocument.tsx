@@ -8,10 +8,8 @@ import { PdfError } from './PdfError';
 import { PdfControls } from './PdfControls';
 import { getDefaultPdfOptions } from '@/utils/pdfUtils';
 
-// Ensure PDF.js is available globally for debugging
-if (typeof window !== 'undefined') {
-  (window as any).pdfjs = pdfjs;
-}
+// DO NOT make pdfjs available globally - use proper imports instead
+// Ensure worker initialization happens through the proper channels
 
 interface PdfDocumentProps {
   pdfUrl: string;
@@ -38,11 +36,8 @@ const PdfDocument = ({ pdfUrl }: PdfDocumentProps) => {
   useEffect(() => {
     console.log("PdfDocument mounted with URL:", pdfUrl);
     
-    // Check PDF.js global status 
-    if (typeof window !== 'undefined') {
-      console.log("PDF.js worker status (window.pdfjsLib):", window.pdfjsLib?.GlobalWorkerOptions?.workerSrc || "Not set on window");
-      console.log("PDF.js worker status (imported pdfjs):", pdfjs?.GlobalWorkerOptions?.workerSrc || "Not set on imported pdfjs");
-    }
+    // Check PDF.js worker status 
+    console.log("PDF.js worker status:", pdfjs.GlobalWorkerOptions.workerSrc || "Not set");
     
     return () => {
       console.log("PdfDocument unmounted");

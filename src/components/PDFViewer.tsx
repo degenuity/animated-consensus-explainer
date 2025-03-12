@@ -1,5 +1,5 @@
 
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { formatPdfUrl, initializePdfWorker } from '@/utils/pdfUtils';
 import { PdfLoading } from './pdf/PdfLoading';
 
@@ -17,42 +17,25 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [workerInitialized, setWorkerInitialized] = useState(false);
   const [initAttempted, setInitAttempted] = useState(false);
 
-  // Initialize PDF worker when component mounts - using setTimeout to ensure DOM is ready
+  // Initialize PDF worker when component mounts - using a stable approach
   useEffect(() => {
     if (initAttempted) return;
+    setInitAttempted(true);
     
-    console.log("Starting PDF worker initialization...");
+    console.log("Initializing PDF worker from PDFViewer component...");
     
-    // Use a small timeout to ensure window object is fully available
-    const initTimer = setTimeout(() => {
-      try {
-        // Attempt to add the PDF worker script directly to the page
-        const script = document.createElement('script');
-        script.src = 'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
-        script.async = true;
-        script.onload = () => {
-          console.log("PDF.js worker script loaded successfully via script tag");
-        };
-        script.onerror = (e) => {
-          console.error("Error loading PDF.js worker script via tag:", e);
-        };
-        document.head.appendChild(script);
-        
-        // Also try the regular initialization
-        const success = initializePdfWorker();
-        setWorkerInitialized(success);
-        if (!success) {
-          setError("Failed to initialize PDF viewer. Please check if JavaScript is fully enabled in your browser.");
-        }
-      } catch (err) {
-        console.error("Error during worker initialization:", err);
-        setError("PDF initialization error: " + (err instanceof Error ? err.message : String(err)));
-      } finally {
-        setInitAttempted(true);
+    try {
+      // Initialize worker properly from the pdfjs module
+      const success = initializePdfWorker();
+      setWorkerInitialized(success);
+      
+      if (!success) {
+        setError("Failed to initialize PDF viewer. Please check if JavaScript is fully enabled in your browser.");
       }
-    }, 100); // Small delay to ensure DOM is ready
-    
-    return () => clearTimeout(initTimer);
+    } catch (err) {
+      console.error("Error during worker initialization:", err);
+      setError("PDF initialization error: " + (err instanceof Error ? err.message : String(err)));
+    }
   }, [initAttempted]);
 
   // Format PDF URL and handle errors
@@ -92,6 +75,16 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
           <p className="text-sm mt-2">
             If you're seeing CSP errors, make sure your browser allows the needed scripts.
           </p>
+          <div className="mt-4">
+            <a 
+              href={pdfUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              Open PDF directly
+            </a>
+          </div>
         </div>
       </div>
     );
@@ -102,9 +95,19 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
       
       {error ? (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded w-full">
           <p>Error loading PDF: {error}</p>
           <p className="text-sm">URL: {pdfUrl}</p>
+          <div className="mt-4">
+            <a 
+              href={pdfUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              Open PDF directly
+            </a>
+          </div>
         </div>
       ) : (
         <Suspense fallback={<PdfLoading title={title} />}>
