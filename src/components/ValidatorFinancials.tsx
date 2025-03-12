@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from "framer-motion";
-import { Database, Lock, Tag, Cube, Percent, TrendingUp, TrendingDown } from "lucide-react";
+import { Database, Lock, Tag, Box, Percent, TrendingUp, TrendingDown } from "lucide-react";
 
 const ValidatorFinancials = () => {
   return (
@@ -271,7 +271,7 @@ const ValidatorFinancials = () => {
           >
             <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg">
               <div className="flex items-center mb-4">
-                <Cube className="h-5 w-5 text-blue-400 mr-2" />
+                <Box className="h-5 w-5 text-blue-400 mr-2" />
                 <span className="text-lg text-white">block production eligibility</span>
               </div>
               
