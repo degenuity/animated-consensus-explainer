@@ -13,31 +13,32 @@ export const usePdfViewer = (pdfUrl: string) => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [scale, setScale] = useState<number>(1.3);
   
-  // Initialize worker outside of component
-  const workerInitialized = useRef(initializePdfWorker());
-  const [isReady, setIsReady] = useState<boolean>(workerInitialized.current);
+  // Initialize worker with more robust handling
   const initAttempted = useRef(false);
+  const [isReady, setIsReady] = useState<boolean>(false);
 
-  // Fallback initialization (if needed)
+  // Initialize PDF.js worker
   useEffect(() => {
-    if (initAttempted.current || isReady) return;
+    if (initAttempted.current) return;
     initAttempted.current = true;
     
-    // If first initialization failed, try again
-    if (!isReady) {
-      try {
-        const success = initializePdfWorker();
-        setIsReady(success);
-        if (success) {
-          console.log("PDF.js worker initialized successfully on retry");
-        }
-      } catch (error) {
-        console.error("Failed to initialize PDF.js worker on retry:", error);
+    console.log("Attempting to initialize PDF.js worker");
+    try {
+      const success = initializePdfWorker();
+      setIsReady(success);
+      if (success) {
+        console.log("PDF.js worker initialized successfully");
+      } else {
+        console.error("Failed to initialize PDF.js worker on first attempt");
         setPdfError(true);
-        setErrorMessage("Failed to initialize PDF viewer");
+        setErrorMessage("Failed to initialize PDF viewer - worker initialization failed");
       }
+    } catch (error) {
+      console.error("Exception during PDF.js worker initialization:", error);
+      setPdfError(true);
+      setErrorMessage(`PDF initialization error: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
-  }, [isReady]);
+  }, []);
 
   // Reset loading state when PDF URL changes
   useEffect(() => {
@@ -45,13 +46,14 @@ export const usePdfViewer = (pdfUrl: string) => {
     setPdfError(false);
     setErrorMessage('');
     setPageNumber(1);
+    console.log("PDF URL changed to:", pdfUrl);
   }, [pdfUrl]);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
     setLoading(false);
     setPdfError(false);
-    console.log('PDF loaded successfully:', pdfUrl);
+    console.log('PDF loaded successfully:', pdfUrl, 'with', numPages, 'pages');
   };
 
   const onDocumentLoadError = (error: Error) => {

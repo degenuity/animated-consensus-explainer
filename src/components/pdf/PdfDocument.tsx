@@ -1,11 +1,16 @@
 
-import React from 'react';
-import { Document, Page } from 'react-pdf';
+import React, { useEffect } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { usePdfViewer } from '@/hooks/usePdfViewer';
 import { PdfError } from './PdfError';
 import { PdfControls } from './PdfControls';
+
+// Ensure PDF.js is available globally for debugging
+if (typeof window !== 'undefined') {
+  (window as any).pdfjs = pdfjs;
+}
 
 interface PdfDocumentProps {
   pdfUrl: string;
@@ -28,8 +33,23 @@ const PdfDocument = ({ pdfUrl }: PdfDocumentProps) => {
     zoomOut
   } = usePdfViewer(pdfUrl);
 
+  // Log component mounting for debugging
+  useEffect(() => {
+    console.log("PdfDocument mounted with URL:", pdfUrl);
+    console.log("PDF.js worker status:", pdfjs.GlobalWorkerOptions.workerSrc || "Not set");
+    
+    return () => {
+      console.log("PdfDocument unmounted");
+    };
+  }, [pdfUrl]);
+
   if (!isReady) {
-    return <div className="text-center py-8 bg-slate-50 rounded">Initializing PDF viewer...</div>;
+    return (
+      <div className="text-center py-8 bg-slate-50 rounded text-black">
+        <p>Initializing PDF viewer...</p>
+        <p className="text-sm text-gray-500 mt-2">This may take a moment</p>
+      </div>
+    );
   }
 
   return (
@@ -53,17 +73,20 @@ const PdfDocument = ({ pdfUrl }: PdfDocumentProps) => {
             options={{
               cMapUrl: 'https://unpkg.com/pdfjs-dist@3.11.174/cmaps/',
               cMapPacked: true,
+              standardFontDataUrl: 'https://unpkg.com/pdfjs-dist@3.11.174/standard_fonts/'
             }}
           >
-            <Page 
-              pageNumber={pageNumber} 
-              scale={scale}
-              renderTextLayer={true}
-              renderAnnotationLayer={true}
-              className="border border-slate-200"
-              width={window.innerWidth > 768 ? 700 : undefined}
-              canvasBackground="white"
-            />
+            {pdfError ? null : (
+              <Page 
+                pageNumber={pageNumber} 
+                scale={scale}
+                renderTextLayer={true}
+                renderAnnotationLayer={true}
+                className="border border-slate-200"
+                width={window.innerWidth > 768 ? 700 : undefined}
+                canvasBackground="white"
+              />
+            )}
           </Document>
         )}
       </div>

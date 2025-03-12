@@ -15,6 +15,13 @@ export const initializePdfWorker = (): boolean => {
   }
   
   try {
+    // Check if pdfjs is available
+    if (!pdfjs || !pdfjs.GlobalWorkerOptions) {
+      console.error("PDF.js library not properly loaded");
+      return false;
+    }
+    
+    // Set worker source from CDN
     const workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
     pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
     console.log("PDF.js worker initialized with:", workerSrc);
