@@ -22,29 +22,60 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
 }) => {
   if (animated && path) {
     return (
-      <circle
-        r={radius}
-        fill={color}
-      >
-        <animateMotion
-          path={path}
-          dur={`${animationDuration}s`}
-          repeatCount="indefinite"
-          rotate="auto"
-        />
-        <animate
-          attributeName="r"
-          values="3;5;3"
-          dur="0.8s"
-          repeatCount="indefinite"
-        />
-        <animate
-          attributeName="opacity"
-          values="0.7;1;0.7"
-          dur="0.8s"
-          repeatCount="indefinite"
-        />
-      </circle>
+      <g>
+        {/* Main dot with motion animation */}
+        <circle
+          r={radius}
+          fill={color}
+        >
+          <animateMotion
+            path={path}
+            dur={`${animationDuration}s`}
+            repeatCount="indefinite"
+            rotate="auto"
+          />
+          {/* Pulsating size effect */}
+          <animate
+            attributeName="r"
+            values="3;5;3"
+            dur="0.8s"
+            repeatCount="indefinite"
+          />
+          {/* Pulsating opacity effect */}
+          <animate
+            attributeName="opacity"
+            values="0.7;1;0.7"
+            dur="0.8s"
+            repeatCount="indefinite"
+          />
+        </circle>
+        
+        {/* Optional: Add a subtle glow effect (uncomment if desired) */}
+        {/* <circle
+          r={radius * 2}
+          fill={color}
+          opacity="0.2"
+        >
+          <animateMotion
+            path={path}
+            dur={`${animationDuration}s`}
+            repeatCount="indefinite"
+            rotate="auto"
+          />
+          <animate
+            attributeName="r"
+            values="6;9;6"
+            dur="1.5s"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="opacity"
+            values="0.1;0.3;0.1"
+            dur="1.5s"
+            repeatCount="indefinite"
+          />
+        </circle> */}
+      </g>
     );
   }
   

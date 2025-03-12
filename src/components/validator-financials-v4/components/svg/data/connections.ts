@@ -73,19 +73,20 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // Line 7: Internal Rewards to Total Validator Rewards
+  // Line 7: Internal Rewards to Total Validator Rewards - UPDATED to point specifically to Total Validator Rewards
   { 
-    path: "M 450 360 L 450 430 L 990 430 L 990 500", 
+    path: "M 450 360 L 450 430 L 945 430 L 945 500", 
     color: "#10B981", 
     animationIndex: 6,
-    dotPosition: { x: "720", y: "430" },
+    dotPosition: { x: "700", y: "430" },
+    animateMotion: true, // Added animateMotion: true to enable the traveling dot
     id: "internal-rewards-to-total-validator-rewards",
     renderOrder: "background" as const
   },
   
   // Line 8: Block Rewards to Total Validator Rewards
   { 
-    path: "M 1090 340 L 1090 430 L 990 430 L 990 500", 
+    path: "M 1090 340 L 1090 430 L 945 430 L 945 500", 
     color: "#10B981", 
     animationIndex: 7,
     dotPosition: { x: "1040", y: "430" },
