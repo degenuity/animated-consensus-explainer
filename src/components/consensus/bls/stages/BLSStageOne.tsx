@@ -94,6 +94,9 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                 
                 <motion.div
                   className="absolute w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
+                  style={{ 
+                    zIndex: 5 
+                  }}
                   initial={{ 
                     x: 0, 
                     y: 0,
@@ -107,10 +110,11 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                     scale: [0.7, 1, 0.7]
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 2.5,
                     repeat: Infinity,
                     delay: i * 0.3,
-                    repeatDelay: 1
+                    repeatDelay: 0.5,
+                    times: [0, 0.7, 1]
                   }}
                 >
                   <span className="text-white font-bold text-xs">M</span>
