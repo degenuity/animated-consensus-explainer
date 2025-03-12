@@ -8,6 +8,7 @@ interface ConnectionDotProps {
   cy?: string;
   radius?: number;
   animated?: boolean;
+  animationDuration?: number;
 }
 
 export const ConnectionDot: React.FC<ConnectionDotProps> = ({ 
@@ -16,7 +17,8 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   cx, 
   cy, 
   radius = 5,
-  animated = false
+  animated = false,
+  animationDuration = 1.5
 }) => {
   if (animated && path) {
     return (
@@ -26,7 +28,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
       >
         <animateMotion
           path={path}
-          dur="1.5s"
+          dur={`${animationDuration}s`}
           repeatCount="indefinite"
           rotate="auto"
         />

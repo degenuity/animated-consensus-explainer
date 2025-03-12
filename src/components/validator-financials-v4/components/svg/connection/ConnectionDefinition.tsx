@@ -1,51 +1,21 @@
 
 import React from 'react';
-import { ConnectionLabel } from './ConnectionLabel';
-import { ConnectionDot } from './ConnectionDot';
+import { AnimatedConnection } from './AnimatedConnection';
+import { useConnectionAnimation } from '../hooks/useConnectionAnimation';
 import { ConnectionProps } from './types';
 
-export const ConnectionDefinition: React.FC<ConnectionProps> = ({
-  path,
-  color,
-  dotPosition,
-  label,
-  labelPosition,
-  animateMotion,
-  id
-}) => {
+export const ConnectionDefinition: React.FC<ConnectionProps> = (props) => {
+  const { lineVariants, dotVariants } = useConnectionAnimation({
+    animationIndex: props.animationIndex || 0
+  });
+  
   return (
-    <g id={`connection-${id}`}>
-      <path
-        d={path}
-        stroke={color}
-        strokeWidth="2"
-        fill="none"
+    <g id={`connection-${props.id}`}>
+      <AnimatedConnection
+        {...props}
+        lineVariants={lineVariants}
+        dotVariants={dotVariants}
       />
-      
-      {dotPosition && !animateMotion && (
-        <circle
-          cx={dotPosition.x}
-          cy={dotPosition.y}
-          r="5"
-          fill={color}
-        />
-      )}
-      
-      {animateMotion && (
-        <ConnectionDot 
-          path={path}
-          color={color}
-          animated={true}
-        />
-      )}
-      
-      {label && labelPosition && (
-        <ConnectionLabel 
-          label={label} 
-          position={labelPosition} 
-          color={color} 
-        />
-      )}
     </g>
   );
 };

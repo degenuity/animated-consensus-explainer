@@ -45,7 +45,8 @@ export const connectionPaths = [
     animateMotion: true,
     animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
-    renderOrder: "background" as const
+    renderOrder: "background" as const,
+    animationDuration: 3, // Added longer duration to slow down the animation
   },
   
   // Line 5: Base Fee to Deflation

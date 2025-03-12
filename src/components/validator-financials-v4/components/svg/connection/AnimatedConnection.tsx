@@ -20,7 +20,8 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   animationDirection,
   animateMotion,
   lineVariants,
-  dotVariants
+  dotVariants,
+  animationDuration
 }) => {
   return (
     <g>
@@ -46,7 +47,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
           initial="hidden"
           animate="visible"
           style={animationDirection ? {
-            animation: `moveDot${animationDirection.charAt(0).toUpperCase() + animationDirection.slice(1)} 3s linear infinite`
+            animation: `moveDot${animationDirection.charAt(0).toUpperCase() + animationDirection.slice(1)} ${animationDuration || 3}s linear infinite`
           } : undefined}
         />
       )}
@@ -65,6 +66,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
             path={path}
             color={color}
             animated={true}
+            animationDuration={animationDuration}
           />
         </motion.g>
       )}
