@@ -22,9 +22,8 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "canvas": path.resolve(__dirname, "./node_modules/canvas"), // Add alias for canvas
     },
-    mainFields: ['module', 'jsnext:main', 'jsnext', 'main'],
+    mainFields: ['browser', 'module', 'jsnext:main', 'jsnext', 'main'],
   },
   build: {
     sourcemap: mode !== 'production',
@@ -90,11 +89,15 @@ export default defineConfig(({ mode }) => ({
           }
         }
       },
+      // Handle Node.js built-in modules
+      external: ['canvas', 'canvas.node'],
     },
     // Improve commonjs handling
     commonjsOptions: {
       include: [/node_modules/],
       transformMixedEsModules: true,
+      // Ignore Node.js built-in modules
+      ignore: ['canvas', 'fs', 'path', 'url', 'http', 'https', 'zlib', 'stream', 'util'],
     },
   },
   // Optimize dependency pre-bundling with more specific settings
@@ -108,7 +111,7 @@ export default defineConfig(({ mode }) => ({
       'recharts',
       '@radix-ui/react-toast'
     ],
-    exclude: [],
+    exclude: ['canvas', 'pdfjs-dist'],
     esbuildOptions: {
       target: 'es2020',
       splitting: true,
