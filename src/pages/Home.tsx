@@ -3,18 +3,14 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  console.log("Home component rendering - minimal version");
-  
   return (
     <div className="min-h-screen bg-slate-900 text-white p-8">
       <div className="max-w-md mx-auto text-center space-y-6">
-        <div>
-          <img 
-            src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
-            alt="X1 Logo" 
-            className="h-7 mx-auto mb-4" 
-          />
-        </div>
+        <img 
+          src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
+          alt="X1 Logo" 
+          className="h-7 mx-auto mb-4" 
+        />
         
         <h1 className="text-2xl font-bold text-blue-400">X1 Research</h1>
         

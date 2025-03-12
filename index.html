@@ -5,101 +5,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>X1 Research</title>
-    <meta name="description" content="X1 Research - Learn how X1 Blockchain's consensus mechanisms improve scalability and efficiency" />
+    <meta name="description" content="X1 Research - Learn about X1 Blockchain" />
     
-    <!-- Critical preloads and preconnects -->
-    <link rel="preload" href="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" as="image" fetchpriority="high" />
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-    <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" />
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    <link rel="preload" href="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" as="image" />
     
     <style>
-      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-      .loading-spinner { width: 40px; height: 40px; border: 3px solid #f3f3f3; border-top: 3px solid #0072FF; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
-      .error-message { color: red; padding: 20px; margin-top: 20px; border: 1px solid red; border-radius: 4px; }
-      .app-loading { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(to bottom, #0f172a, #1e293b); color: white; transition: opacity 0.2s ease; }
-      .fade-out { opacity: 0; }
-      
-      /* Ensure the body has a background color even before React loads */
       body { 
-        background: linear-gradient(to bottom, #0f172a, #1e293b); 
+        background: #0f172a; 
         color: white; 
         margin: 0; 
-        font-family: 'Satoshi', sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       }
-      
-      #root {
-        min-height: 100vh; /* Ensure root takes up at least full viewport height */
+      .app-loading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
     </style>
   </head>
-
   <body>
     <div id="root">
-      <!-- Simplified loading state -->
       <div class="app-loading">
         <img src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" alt="X1 Logo" style="height: 28px; margin-bottom: 20px;" />
-        <div style="color: #00C6FF; font-size: 18px; margin-bottom: 10px;">Loading X1 Research...</div>
+        <div style="margin-bottom: 20px;">Loading X1 Research...</div>
         <div class="loading-spinner"></div>
-        <div id="loading-timeout" style="display: none; margin-top: 20px; text-align: center; max-width: 300px;">
-          <p>Loading is taking longer than expected. Please check your connection or try reloading.</p>
-          <button onclick="window.location.reload()" style="margin-top: 10px; padding: 8px 16px; background: linear-gradient(to right, #00C6FF, #0072FF); color: white; border: none; border-radius: 4px; cursor: pointer;">
-            Reload Page
-          </button>
-        </div>
       </div>
     </div>
-    
-    <!-- Required for Select feature -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    
-    <!-- Optimized loading timeout script -->
-    <script>
-      // Performance monitoring
-      const startTime = performance.now();
-      console.log('Page load started at:', startTime);
-      
-      // Show reload button if app takes too long to load
-      const loadingTimeoutId = setTimeout(function() {
-        const loadingTimeout = document.getElementById('loading-timeout');
-        if (loadingTimeout) {
-          loadingTimeout.style.display = 'block';
-          console.log('Loading timeout displayed after:', performance.now() - startTime, 'ms');
-        }
-      }, 5000); // Increased to 5 seconds to give app more time to load
-      
-      // Clear the timeout when the app is loaded
-      document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOMContentLoaded fired after:', performance.now() - startTime, 'ms');
-      });
-
-      // Monitor performance
-      window.addEventListener('load', function() {
-        clearTimeout(loadingTimeoutId);
-        console.log('Window load event fired after:', performance.now() - startTime, 'ms');
-      });
-      
-      // Add global error handler
-      window.addEventListener('error', function(event) {
-        console.error('Global error caught:', event.error);
-        // Only show the error UI if the app hasn't loaded yet
-        if (document.querySelector('.app-loading')) {
-          const errorMessage = document.createElement('div');
-          errorMessage.className = 'error-message';
-          errorMessage.innerHTML = `
-            <strong>Error loading application:</strong>
-            <p>${event.error ? event.error.message : 'Unknown error'}</p>
-            <button onclick="window.location.reload()" style="margin-top: 10px; padding: 8px 16px; background: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer;">
-              Reload Page
-            </button>
-          `;
-          document.querySelector('.app-loading').appendChild(errorMessage);
-        }
-      });
-    </script>
-    
-    <!-- Optimize script loading -->
-    <link rel="modulepreload" href="/src/main.tsx" />
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
