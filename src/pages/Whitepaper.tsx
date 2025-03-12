@@ -3,12 +3,20 @@ import React from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowDown } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import PDFViewer from "@/components/PDFViewer";
 
 const Whitepaper = () => {
   // Using the GitHub raw content URL for reliability on the live site
   const pdfUrl = "https://raw.githubusercontent.com/degenuity/animated-consensus-explainer/main/X1-WHITEPAPER-02032025.pdf";
+  
+  const scrollToPDF = () => {
+    const pdfSection = document.getElementById('pdf-section');
+    if (pdfSection) {
+      pdfSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   
   return (
     <div className="min-h-screen bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
@@ -37,14 +45,72 @@ const Whitepaper = () => {
           </div>
         </div>
 
-        <h1 className="text-4xl font-bold text-center mb-12">
+        <h1 className="text-4xl font-bold text-center mb-4">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">X1 Whitepaper</span>
         </h1>
+        
+        <div className="flex justify-center mb-12">
+          <Button 
+            variant="ghost" 
+            className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent flex items-center gap-2"
+            onClick={scrollToPDF}
+          >
+            View Paper
+            <ArrowDown size={16} />
+          </Button>
+        </div>
 
-        <PDFViewer 
-          pdfUrl={pdfUrl} 
-          title="X1 Blockchain Technical Whitepaper"
-        />
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
+        >
+          Models in this paper
+        </motion.h2>
+
+        {/* VRF-like container */}
+        <motion.div
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
+        >
+          <Card className="p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
+            <div className="relative h-80 flex items-center justify-center z-10">
+              <motion.div
+                className="z-10 text-white font-bold text-2xl bg-blue-500/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-400/30"
+                animate={{
+                  scale: [0.95, 1.05, 0.95],
+                  textShadow: [
+                    "0 0 5px rgba(59, 130, 246, 0.3)",
+                    "0 0 10px rgba(59, 130, 246, 0.6)",
+                    "0 0 5px rgba(59, 130, 246, 0.3)"
+                  ]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                Content coming soon
+              </motion.div>
+            </div>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          id="pdf-section"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="max-w-4xl mx-auto"
+        >
+          <PDFViewer 
+            pdfUrl={pdfUrl} 
+            title="X1 Blockchain Technical Whitepaper"
+          />
+        </motion.div>
       </motion.div>
     </div>
   );
