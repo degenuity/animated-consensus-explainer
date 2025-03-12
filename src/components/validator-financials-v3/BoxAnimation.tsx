@@ -1,13 +1,13 @@
 
 import React from 'react';
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, BarChart3, PieChart, LineChart } from "lucide-react";
+import { TrendingUp, TrendingDown, BarChart3, PieChart, LineChart, ArrowRight } from "lucide-react";
 
 const BoxAnimation = () => {
   return (
     <div className="flex flex-col items-center py-12">
       {/* Top row with blue, grey and yellow boxes */}
-      <div className="flex justify-center gap-4 items-center mb-12">
+      <div className="flex justify-center gap-4 items-center mb-12 relative">
         {/* Blue Box */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -20,6 +20,35 @@ const BoxAnimation = () => {
             <div className="text-xl font-semibold">Blue Box</div>
             <div className="text-sm opacity-90 mt-2">First Element</div>
           </div>
+        </motion.div>
+
+        {/* Animated Line with Arrow from Blue Box to Grey 1 */}
+        <motion.div 
+          className="absolute top-[75px] left-[190px] w-[60px] h-[2px] bg-blue-400"
+          initial={{ width: 0 }}
+          animate={{ width: 60 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <motion.div 
+            className="absolute right-0 top-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+          >
+            <ArrowRight className="text-blue-400 h-4 w-4" style={{ transform: 'translateX(50%) translateY(-25%)' }} />
+          </motion.div>
+          <motion.div 
+            className="absolute top-0 left-0 h-full w-[10px] bg-blue-300"
+            animate={{ 
+              x: [0, 60, 0],
+              opacity: [0, 1, 0]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
         </motion.div>
 
         {/* Grey Box 1 */}
