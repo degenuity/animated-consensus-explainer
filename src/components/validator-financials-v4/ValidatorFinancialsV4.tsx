@@ -25,12 +25,12 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
 
   return (
     <motion.div 
-      className="w-full relative overflow-hidden bg-[#0d111c] rounded-xl min-h-[700px] flex items-center justify-center"
+      className="w-full relative overflow-hidden bg-[#0d111c] rounded-xl min-h-[750px] flex items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="max-w-7xl mx-auto px-4 py-8 relative w-full">
+      <div className="max-w-7xl mx-auto px-4 py-6 relative w-full">
         <Title />
 
         <div className="relative h-[700px] w-full">
