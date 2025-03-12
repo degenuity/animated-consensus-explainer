@@ -79,9 +79,11 @@ export const connectionPaths = [
     color: "#10B981", 
     animationIndex: 6,
     dotPosition: { x: "700", y: "430" },
-    animateMotion: true, // Added animateMotion: true to enable the traveling dot
+    animateMotion: true,
+    animationDirection: "right" as const,
     id: "internal-rewards-to-total-validator-rewards",
-    renderOrder: "background" as const
+    renderOrder: "foreground" as const, // Changed to foreground to show above boxes
+    animationDuration: 3, // Slowed down to match other dots
   },
   
   // Line 8: Block Rewards to Total Validator Rewards
@@ -91,6 +93,5 @@ export const connectionPaths = [
     animationIndex: 7,
     dotPosition: { x: "1040", y: "430" },
     id: "block-rewards-to-total-validator-rewards",
-    renderOrder: "background" as const
+    renderOrder: "foreground" as const // Changed to foreground to show above boxes
   }
-];
