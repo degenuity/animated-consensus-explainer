@@ -12,20 +12,20 @@ export const connectionPaths = [
   
   // Line 2: Delegated Stake to Commission
   { 
-    path: "M 650 260 L 580 260", 
+    path: "M 650 240 L 580 240", 
     color: "#3B82F6", 
     animationIndex: 1,
-    dotPosition: { x: "615", y: "260" },
+    dotPosition: { x: "615", y: "240" },
     animateMotion: true,
     animationDirection: "left" as const
   },
   
   // Line 3: Own Stake to Staking Rewards
   { 
-    path: "M 650 300 L 580 300", 
+    path: "M 650 280 L 580 280", 
     color: "#3B82F6", 
     animationIndex: 2,
-    dotPosition: { x: "615", y: "300" },
+    dotPosition: { x: "615", y: "280" },
     animateMotion: true,
     animationDirection: "left" as const
   },
