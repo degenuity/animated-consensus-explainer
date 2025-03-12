@@ -58,7 +58,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
           </motion.div>
         </motion.div>
 
-        {/* Place the message animations as the bottom layer */}
+        {/* Render message animations on a lower z-index */}
         {Array.from({ length: 10 }).map((_, i) => {
           const angle = (i * 36) * (Math.PI / 180);
           const radius = 120;
@@ -73,10 +73,10 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                 transform: `translate(${x}px, ${y}px)`,
               }}
             >
-              {/* Signature message box with "M" - positioned underneath the validator */}
+              {/* Signature message box with "M" - exactly positioned at the validator position */}
               <motion.div
-                className="absolute w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30 z-10"
-                initial={{ y: 0, x: 0, opacity: 0 }}
+                className="w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
+                initial={{ opacity: 0 }}
                 animate={{ 
                   x: [0, -x * 0.6], 
                   y: [0, -y * 0.6],
