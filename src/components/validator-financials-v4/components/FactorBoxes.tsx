@@ -1,28 +1,56 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import FactorBox from './FactorBox';
-import { PercentSquare, Clock, Wallet, ShieldCheck } from 'lucide-react';
 
 const FactorBoxes: React.FC = () => {
-  const factorBoxes = [
-    { icon: <PercentSquare size={20} />, text: "APR Return", color: "text-blue-400", position: "4%" },
-    { icon: <Clock size={20} />, text: "Uptime", color: "text-indigo-400", position: "30%" },
-    { icon: <Wallet size={20} />, text: "Costs", color: "text-purple-400", position: "70%" },
-    { icon: <ShieldCheck size={20} />, text: "Security", color: "text-rose-400", position: "95%" }
-  ];
-
   return (
     <>
-      {factorBoxes.map((factor, idx) => (
+      {/* Block Production Eligibility Factors */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 2.2 }}
+        className="absolute left-[17%] top-[400px] flex gap-2 items-center"
+      >
         <FactorBox
-          key={`factor-${idx}`}
-          icon={factor.icon}
-          text={factor.text}
-          color={factor.color}
-          position={factor.position}
-          index={idx}
+          title="Stake Weight"
+          description="Amount of XNT staked"
+          color="blue"
         />
-      ))}
+        <div className="text-gray-500 mx-1">×</div>
+        <FactorBox
+          title="Randomness"
+          description="ACP anti-collusion protocol"
+          color="blue"
+        />
+        <div className="text-gray-500 mx-1">×</div>
+        <FactorBox
+          title="Performance"
+          description="From recorded history"
+          color="blue"
+        />
+      </motion.div>
+
+      {/* Validator Profitability Factors */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 2.2 }}
+        className="absolute right-[17%] top-[400px] flex gap-2 items-center"
+      >
+        <FactorBox
+          title="Operational Costs"
+          description="Only cost is server"
+          color="yellow"
+        />
+        <div className="text-gray-500 mx-1">+</div>
+        <FactorBox
+          title="Total Rewards"
+          description="Aggregate earnings"
+          color="green"
+        />
+      </motion.div>
     </>
   );
 };

@@ -11,7 +11,7 @@ const Boxes: React.FC = () => {
     <>
       {/* Inflation box */}
       <BoxContainer
-        position="left-[5%] top-[80px]"
+        position="left-[5%] top-[120px]"
         icon={<TrendingUp size={32} className="text-blue-400 mb-2" />}
         title="Inflation"
         subtitle="Token Issuance"
@@ -20,20 +20,20 @@ const Boxes: React.FC = () => {
         animationDelay={0}
       />
 
-      {/* Deflation box */}
+      {/* Internal Rewards Box - Left */}
       <BoxContainer
-        position="right-[5%] top-[80px]"
-        icon={<TrendingDown size={32} className="text-amber-400 mb-2" />}
-        title="Deflation"
-        subtitle="Token Burns"
-        description="Tokens removed from supply via transaction fees"
-        color="217, 119, 6"
+        position="left-[23%] top-[120px]"
+        icon={<CircleDollarSign size={32} className="text-emerald-400 mb-2" />}
+        title="Internal Rewards"
+        subtitle="Consensus Rewards"
+        description="Consensus participation rewards earned by validators"
+        color="5, 150, 105"
         animationDelay={0.3}
       />
 
       {/* Total Stake Box - Center */}
       <BoxContainer
-        position="left-1/2 transform -translate-x-1/2 top-[220px]"
+        position="left-1/2 transform -translate-x-1/2 top-[120px]"
         icon={<Database className="text-indigo-400 mb-2" size={32} />}
         title="Total Stake"
         subtitle="Validator Collateral"
@@ -42,31 +42,31 @@ const Boxes: React.FC = () => {
         animationDelay={0.6}
       />
 
-      {/* Internal Rewards Box - Left */}
-      <BoxContainer
-        position="left-[5%] top-[350px]"
-        icon={<CircleDollarSign size={32} className="text-emerald-400 mb-2" />}
-        title="Internal Rewards"
-        subtitle="Consensus Rewards"
-        description="Consensus participation rewards earned by validators"
-        color="5, 150, 105"
-        animationDelay={0.9}
-      />
-
       {/* Network Usage Costs Box - Right */}
       <BoxContainer
-        position="right-[5%] top-[350px]"
+        position="right-[23%] top-[120px]"
         icon={<ServerCrash size={32} className="text-orange-400 mb-2" />}
         title="Network Costs"
         subtitle="Processing Costs"
         description="Transaction processing and operational expenses"
         color="234, 88, 12"
-        animationDelay={0.9}
+        animationDelay={0.3}
+      />
+
+      {/* Deflation box */}
+      <BoxContainer
+        position="right-[5%] top-[120px]"
+        icon={<TrendingDown size={32} className="text-amber-400 mb-2" />}
+        title="Deflation"
+        subtitle="Token Burns"
+        description="Tokens removed from supply via transaction fees"
+        color="217, 119, 6"
+        animationDelay={0}
       />
 
       {/* Block Production Box - Left */}
       <BoxContainer
-        position="left-[10%] top-[480px]"
+        position="left-[25%] top-[320px]"
         icon={<ShieldCheck size={32} className="text-blue-400 mb-2" />}
         title="Block Production"
         subtitle="Network Participation"
@@ -77,7 +77,7 @@ const Boxes: React.FC = () => {
 
       {/* Validator Profitability Box - Right */}
       <BoxContainer
-        position="right-[10%] top-[480px]"
+        position="right-[25%] top-[320px]"
         icon={<DollarSign size={32} className="text-green-400 mb-2" />}
         title="Validator Profit"
         subtitle="Economic Returns"
