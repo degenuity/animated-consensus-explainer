@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from "framer-motion";
 import Title from './Title';
@@ -23,25 +22,16 @@ const ValidatorFinancials = () => {
         <Title />
 
         <div className="relative mx-auto" style={{ height: '1000px' }}>
-          {/* First Row - Main Boxes with clear spacing */}
-          <div className="absolute left-[50px] top-[100px]" style={{ width: '200px' }}>
-            <InflationBox />
+          {/* Top Row - Three boxes at same height */}
+          <div className="absolute left-[50px] top-[100px]" style={{ width: '280px' }}>
+            <InternalRewardsBox />
           </div>
           
           <div className="absolute left-[50%] top-[100px] transform -translate-x-1/2" style={{ width: '280px' }}>
             <TotalStakeBox />
           </div>
           
-          <div className="absolute right-[50px] top-[100px]" style={{ width: '200px' }}>
-            <DeflationBox />
-          </div>
-
-          {/* Second Row - More vertical space between rows */}
-          <div className="absolute left-[100px] top-[400px]" style={{ width: '280px' }}>
-            <InternalRewardsBox />
-          </div>
-          
-          <div className="absolute right-[100px] top-[400px]" style={{ width: '280px' }}>
+          <div className="absolute right-[50px] top-[100px]" style={{ width: '280px' }}>
             <NetworkUsageCostsBox />
           </div>
 
@@ -57,7 +47,7 @@ const ValidatorFinancials = () => {
           {/* Connecting Lines */}
           <ConnectingLines />
 
-          {/* X1 Logo - Bottom right corner */}
+          {/* X1 Logo */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
