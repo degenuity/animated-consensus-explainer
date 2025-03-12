@@ -22,18 +22,11 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
   const [activeFormula, setActiveFormula] = useState(0);
   const [animationKey, setAnimationKey] = useState(0); // For resetting animations
   const isMobile = useIsMobile();
-  const [visibleFormula, setVisibleFormula] = useState(0); // Track which formula is actually rendered
-
-  // Use effect to synchronize visibleFormula with activeFormula
-  useEffect(() => {
-    setVisibleFormula(activeFormula);
-  }, [activeFormula]);
 
   useEffect(() => {
     // Reset to initial state when section becomes active
     if (activeSection === 1 || isMobile) {
       setActiveFormula(0);
-      setVisibleFormula(0);
       setAnimationKey(prev => prev + 1); // Force re-render of visualization
     }
     
@@ -52,7 +45,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     const handleVerificationComplete = () => {
       // Reset to Stage 1
       setActiveFormula(0);
-      setVisibleFormula(0);
       // Force re-render of the visualization by updating the key
       setAnimationKey(prevKey => prevKey + 1);
     };
@@ -69,7 +61,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     const handleStageTwoComplete = () => {
       // Move to Stage 3
       setActiveFormula(2);
-      setVisibleFormula(2);
     };
     
     document.addEventListener('bls-stage-two-complete', handleStageTwoComplete);
@@ -89,9 +80,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     setActiveFormula(prev => (prev + 1) % 3);
   };
 
-  // Debug info to help us see what's happening
-  console.log("BLSSection rendering: activeFormula =", activeFormula, "visibleFormula =", visibleFormula);
-
   return (
     <motion.div
       animate={{
@@ -109,48 +97,37 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           <div className="bg-slate-900/50 p-4 rounded-lg text-white formulaDisplay">
-            {/* Formula Stage One */}
-            <div 
-              className={`formula-container transition-all duration-300 ${visibleFormula === 0 ? 'block' : 'hidden'}`}
-              key="formula-0"
-            >
-              <p className="text-sm text-slate-300 mb-4">
+            {/* All Formulas displayed together */}
+            <div className="formula-container mb-6">
+              <p className="text-sm text-slate-300 mb-2">
                 Each validator in a subcommittee generates a BLS signature
                 σ<sub>i</sub> on the vote message M:
               </p>
-              <div className="bg-slate-800 p-3 rounded-md my-3 flex justify-center">
+              <div className="bg-slate-800 p-3 rounded-md my-2 flex justify-center">
                 <code className="text-violet-400 font-mono">
                   σ<sub>i</sub>= H(M)<sup>sk<sub>i</sub></sup>
                 </code>
               </div>
             </div>
             
-            {/* Formula Stage Two */}
-            <div 
-              className={`formula-container transition-all duration-300 ${visibleFormula === 1 ? 'block' : 'hidden'}`}
-              key="formula-1"
-            >
-              <p className="text-sm text-slate-300 mb-4">
+            <div className="formula-container mb-6">
+              <p className="text-sm text-slate-300 mb-2">
                 The relay node aggregates all signatures within the 
                 subcommittee which is then submitted to the leader:
               </p>
-              <div className="bg-slate-800 p-3 rounded-md my-3 flex justify-center">
+              <div className="bg-slate-800 p-3 rounded-md my-2 flex justify-center">
                 <code className="text-violet-400 font-mono">
                   σ<sub>agg</sub>= ∏ σ<sub>i</sub>
                 </code>
               </div>
             </div>
             
-            {/* Formula Stage Three */}
-            <div 
-              className={`formula-container transition-all duration-300 ${visibleFormula === 2 ? 'block' : 'hidden'}`}
-              key="formula-2"
-            >
-              <p className="text-sm text-slate-300 mb-4">
+            <div className="formula-container">
+              <p className="text-sm text-slate-300 mb-2">
                 The leader verifies the aggregated signature in constant time
                 using:
               </p>
-              <div className="bg-slate-800 p-3 rounded-md my-3 flex justify-center border border-red-500/20">
+              <div className="bg-slate-800 p-3 rounded-md my-2 flex justify-center border border-red-500/20">
                 <code className="text-violet-400 font-mono">
                   e(σ<sub>agg</sub>,g)=e(H(M),∑pk<sub>i</sub>)
                 </code>
@@ -220,7 +197,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               <button 
                 className="text-white/70 hover:text-white bg-slate-800/50 p-1 rounded-full"
                 onClick={goToPrevFormula}
-                aria-label="Previous formula"
+                aria-label="Previous stage"
               >
                 <ChevronLeft size={20} />
               </button>
@@ -238,14 +215,14 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                       : 'bg-slate-600'
                   }`}
                   onClick={() => setActiveFormula(idx)}
-                  aria-label={`Formula ${idx + 1}`}
+                  aria-label={`Stage ${idx + 1}`}
                 ></button>
               ))}
               
               <button 
                 className="text-white/70 hover:text-white bg-slate-800/50 p-1 rounded-full"
                 onClick={goToNextFormula}
-                aria-label="Next formula"
+                aria-label="Next stage"
               >
                 <ChevronRight size={20} />
               </button>
