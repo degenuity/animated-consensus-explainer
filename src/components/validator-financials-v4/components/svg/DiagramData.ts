@@ -14,10 +14,16 @@ export const networkCostsSubitems = [
   { 
     text: "base fees", 
     isHeader: true,
+    id: "base-fees",
+    subItems: []
+  },
+  { 
+    text: "block rewards", 
+    isSubHeader: true,
+    id: "block-rewards",
     subItems: [
-      { text: "block rewards", isSubHeader: true },
-      { text: "priority fees" },
-      { text: "MEV" }
+      { text: "priority fees", id: "priority-fees" },
+      { text: "MEV", id: "mev" }
     ]
   }
 ];
@@ -86,6 +92,26 @@ export const connectionPaths = [
     animationIndex: 6,
     dotPosition: { x: "750", y: "300" }
   },
+  
+  // Base Fees to Block Rewards (with 50% label)
+  { 
+    path: "M 820 195 L 820 245", 
+    color: "#EAB308", 
+    animationIndex: 3,
+    dotPosition: { x: "820", y: "220" },
+    label: "50%",
+    labelPosition: { x: 820, y: 220 }
+  },
+  
+  // Base Fees to Deflation (with 50% label)
+  { 
+    path: "M 930 170 L 1010 170", 
+    color: "#EAB308", 
+    animationIndex: 3,
+    dotPosition: { x: "970", y: "170" },
+    label: "50%",
+    labelPosition: { x: 970, y: 170 }
+  }
 ];
 
 export const boxes = [
@@ -131,10 +157,10 @@ export const boxes = [
   
   // Network Costs Box
   {
-    x: 820,
+    x: 790,
     y: 100,
     width: 190,
-    height: 300,
+    height: 400,
     title: "network usage costs",
     icon: "network-costs" as const,
     color: "#F97316",
@@ -145,7 +171,7 @@ export const boxes = [
   // Deflation Box
   {
     x: 1010,
-    y: 100,
+    y: 125,
     width: 150,
     height: 100,
     title: "deflation",

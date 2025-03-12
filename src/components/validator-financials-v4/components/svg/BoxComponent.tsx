@@ -20,6 +20,7 @@ interface SubItem {
   hasPlus?: boolean;
   isHeader?: boolean;
   isSubHeader?: boolean;
+  id?: string;
   subItems?: SubItem[];
 }
 
@@ -113,7 +114,6 @@ const BoxComponent: React.FC<BoxProps> = ({
   }
 
   // Calculate total items including nested subitems
-  let totalItemsHeight = 0;
   let yOffset = 60; // Start after header
   
   // Complex box with subitems
@@ -143,7 +143,7 @@ const BoxComponent: React.FC<BoxProps> = ({
       
       {/* Render subitems */}
       {processedSubitems.map((item, idx) => {
-        const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, subItems } = item as SubItem;
+        const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id, subItems } = item as SubItem;
         const itemHeight = desc ? 45 : 40;
         
         // Handle header and subItems
@@ -160,8 +160,8 @@ const BoxComponent: React.FC<BoxProps> = ({
               width={width - 20}
               height={itemHeight}
               rx="4"
-              fill={isHeader ? "#1a1f31" : "transparent"}
-              stroke={itemColor ? itemColor : (isHeader ? "#F2C44C" : color)}
+              fill={isHeader ? "transparent" : "transparent"}
+              stroke={itemColor ? itemColor : (isHeader ? "#EAB308" : isSubHeader ? "#10B981" : color)}
               strokeWidth="1"
             />
             <foreignObject 
@@ -207,10 +207,43 @@ const BoxComponent: React.FC<BoxProps> = ({
             <React.Fragment key={`item-group-${idx}`}>
               {renderItem}
               
-              {/* Render subheader and subitems with indent */}
+              {/* Render block rewards header */}
+              {isSubHeader && (
+                <motion.g
+                  key={`subheader-${idx}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.3 + idx * 0.1 }}
+                >
+                  <rect
+                    x={x + 20}
+                    y={y + yOffset}
+                    width={width - 40}
+                    height={45}
+                    rx="4"
+                    fill="#0f172a"
+                    stroke="#10B981"
+                    strokeWidth="1"
+                  />
+                  <foreignObject 
+                    x={x + 20} 
+                    y={y + yOffset} 
+                    width={width - 40} 
+                    height={45}
+                  >
+                    <div className="flex items-center justify-center h-full text-xl font-medium text-white">
+                      {text}
+                    </div>
+                  </foreignObject>
+                </motion.g>
+              )}
+              
+              {/* Update offset for block rewards box */}
+              {isSubHeader && (yOffset += 55)}
+              
+              {/* Render subitems with proper styling */}
               {subItems.map((subItem, subIdx) => {
-                const subItemHeight = subItem.desc ? 45 : 40;
-                const isSubHeader = subIdx === 0;
+                const subItemHeight = 40;
                 
                 const subItemComponent = (
                   <motion.g
@@ -225,8 +258,8 @@ const BoxComponent: React.FC<BoxProps> = ({
                       width={width - 40}
                       height={subItemHeight}
                       rx="4"
-                      fill={isSubHeader ? "#1f2937" : "transparent"}
-                      stroke={isSubHeader ? "#10B981" : "#2563eb"}
+                      fill="transparent"
+                      stroke="#10B981"
                       strokeWidth="1"
                     />
                     <foreignObject 
@@ -235,7 +268,7 @@ const BoxComponent: React.FC<BoxProps> = ({
                       width={width - 40} 
                       height={subItemHeight}
                     >
-                      <div className={`flex items-center h-full px-4 ${isSubHeader ? 'text-white font-medium' : 'text-white'}`}>
+                      <div className="flex items-center justify-center h-full px-4 text-white">
                         {subItem.text}
                       </div>
                     </foreignObject>

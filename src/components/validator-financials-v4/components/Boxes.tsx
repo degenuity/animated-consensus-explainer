@@ -3,6 +3,14 @@ import React from 'react';
 import BoxContainer from './BoxContainer';
 import { Percent } from 'lucide-react';
 
+interface SubBox {
+  title: string;
+  description?: string;
+  fullWidth?: boolean;
+  customColor?: 'yellow' | 'green' | 'red' | 'blue';
+  hasAddIcon?: boolean;
+}
+
 const Boxes: React.FC = () => {
   return (
     <>
@@ -57,25 +65,22 @@ const Boxes: React.FC = () => {
           { 
             title: "base fees", 
             fullWidth: true,
-            customColor: "amber"
+            customColor: "yellow"
           },
           { 
             title: "block rewards", 
             fullWidth: true,
-            customColor: "green",
-            isSubitem: true
+            customColor: "green"
           },
           {
             title: "priority fees",
             fullWidth: true,
-            customColor: "green",
-            isSubitem: true
+            customColor: "green"
           },
           {
             title: "MEV",
             fullWidth: true,
-            customColor: "green",
-            isSubitem: true
+            customColor: "green"
           }
         ]}
       />

@@ -7,13 +7,17 @@ interface ConnectionSVGProps {
   color: string;
   animationIndex: number;
   dotPosition?: { x: string; y: string };
+  label?: string;
+  labelPosition?: { x: number; y: number };
 }
 
 const ConnectionLine: React.FC<ConnectionSVGProps> = ({ 
   path, 
   color, 
   animationIndex,
-  dotPosition
+  dotPosition,
+  label,
+  labelPosition
 }) => {
   // Animation variants for connecting lines
   const lineVariants = {
@@ -54,6 +58,7 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
         initial="hidden"
         animate="visible"
       />
+      
       {dotPosition && (
         <motion.circle
           cx={dotPosition.x}
@@ -65,6 +70,31 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
           initial="hidden"
           animate="visible"
         />
+      )}
+      
+      {label && labelPosition && (
+        <g>
+          <circle
+            cx={labelPosition.x}
+            cy={labelPosition.y}
+            r="15"
+            fill="#1f2937"
+            stroke={color}
+            strokeWidth="1"
+            opacity="0.9"
+          />
+          <text
+            x={labelPosition.x}
+            y={labelPosition.y}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fill="white"
+            fontSize="12"
+            fontWeight="500"
+          >
+            {label}
+          </text>
+        </g>
       )}
     </>
   );
