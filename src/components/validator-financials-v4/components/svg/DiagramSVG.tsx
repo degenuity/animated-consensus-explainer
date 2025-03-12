@@ -4,9 +4,9 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
   ConnectionLine,
-} from '..';
-import { ExplanationComponent } from '../ExplanationComponent';
-import { Logo } from '../Logo';
+} from '.';
+import ExplanationComponent from './ExplanationComponent';
+import Logo from './Logo';
 import { viewBoxWidth, viewBoxHeight } from './data/constants';
 import { boxes } from './data/boxes';
 import { connectionPaths } from './data/connections';

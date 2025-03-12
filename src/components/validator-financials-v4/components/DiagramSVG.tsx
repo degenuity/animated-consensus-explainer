@@ -54,6 +54,7 @@ const DiagramSVG = () => {
             label={connection.label}
             labelPosition={connection.labelPosition}
             animationDirection={connection.animationDirection}
+            animateMotion={connection.animateMotion}
           />
         ))}
         
