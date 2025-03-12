@@ -15,7 +15,9 @@ export const connectionPaths = [
     path: "M 650 260 L 580 260", 
     color: "#3B82F6", 
     animationIndex: 1,
-    dotPosition: { x: "615", y: "260" }
+    dotPosition: { x: "615", y: "260" },
+    animateMotion: true,
+    animationDirection: "left" as const
   },
   
   // Line 3: Own Stake to Staking Rewards
@@ -23,7 +25,9 @@ export const connectionPaths = [
     path: "M 650 300 L 580 300", 
     color: "#3B82F6", 
     animationIndex: 2,
-    dotPosition: { x: "615", y: "300" }
+    dotPosition: { x: "615", y: "300" },
+    animateMotion: true,
+    animationDirection: "left" as const
   },
   
   // Line 4: Total Stake to Stake Weight
