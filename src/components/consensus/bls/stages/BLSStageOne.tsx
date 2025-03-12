@@ -58,7 +58,47 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
           </motion.div>
         </motion.div>
 
-        {/* Render all 10 validators in a circle */}
+        {/* Place the message animations as the bottom layer */}
+        {Array.from({ length: 10 }).map((_, i) => {
+          const angle = (i * 36) * (Math.PI / 180);
+          const radius = 120;
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+          
+          return (
+            <motion.div
+              key={`message-${i}`}
+              className="absolute z-10"
+              style={{
+                transform: `translate(${x}px, ${y}px)`,
+              }}
+            >
+              {/* Signature message box with "M" - positioned underneath the validator */}
+              <motion.div
+                className="absolute w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30 z-10"
+                initial={{ y: 0, x: 0, opacity: 0 }}
+                animate={{ 
+                  x: [0, -x * 0.6], 
+                  y: [0, -y * 0.6],
+                  opacity: [0, 1, 0],
+                  scale: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                  repeatDelay: 0,
+                  times: [0, 0.5, 1],
+                  ease: "easeInOut"
+                }}
+              >
+                <span className="text-white font-bold text-xs">M</span>
+              </motion.div>
+            </motion.div>
+          );
+        })}
+
+        {/* Render all 10 validators in a circle - on a higher z-index layer */}
         {Array.from({ length: 10 }).map((_, i) => {
           const angle = (i * 36) * (Math.PI / 180);
           const radius = 120;
@@ -79,7 +119,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                 duration: 0.5,
                 type: "spring",
               }}
-              className="absolute"
+              className="absolute z-20"
               style={{
                 transform: `translate(${x}px, ${y}px)`,
               }}
@@ -91,28 +131,6 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                 <div className="w-10 h-10 rounded-full bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-md">
                   <User size={15} className="text-purple-400" />
                 </div>
-                
-                {/* Signature message box with "M" - now starting from under the validators */}
-                <motion.div
-                  className="absolute w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
-                  initial={{ y: 20, x: 0 }}
-                  animate={{ 
-                    x: [0, -x * 0.6], 
-                    y: [20, -y * 0.6],
-                    opacity: [0, 1, 0],
-                    scale: [0.5, 1, 0.5]
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    delay: i * 0.3,
-                    repeatDelay: 0,
-                    times: [0, 0.5, 1],
-                    ease: "easeInOut"
-                  }}
-                >
-                  <span className="text-white font-bold text-xs">M</span>
-                </motion.div>
                 
                 <motion.p 
                   className="text-xs mt-2 text-purple-300 font-medium"
