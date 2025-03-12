@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { Document, Page } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { Button } from './ui/button';
 import { ChevronLeft, ChevronRight, Download, ZoomIn, ZoomOut } from 'lucide-react';
 
-// Initialize PDF.js worker - We'll do this in a useEffect hook inside the component
-// to ensure it runs in the client-side environment
+// Import pdfjs separately to handle initialization
+import * as pdfjs from 'pdfjs-dist';
 
 interface PDFViewerProps {
   pdfUrl: string;
@@ -21,42 +21,35 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [pdfError, setPdfError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [scale, setScale] = useState<number>(1.3);
-  const [initialized, setInitialized] = useState<boolean>(false);
-  const workerInitialized = useRef(false);
+  const [workerInitialized, setWorkerInitialized] = useState<boolean>(false);
+  const initAttempted = useRef(false);
 
   // Initialize PDF.js worker
   useEffect(() => {
-    // Only run this once
-    if (workerInitialized.current) return;
+    if (initAttempted.current) return;
+    initAttempted.current = true;
     
-    const initializeWorker = () => {
-      try {
-        if (typeof window !== 'undefined') {
-          const workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
-          pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
-          console.log("PDF.js worker initialized:", pdfjs.GlobalWorkerOptions.workerSrc);
-          setInitialized(true);
-          workerInitialized.current = true;
-        }
-      } catch (error) {
-        console.error("Failed to initialize PDF.js worker:", error);
-        setPdfError(true);
-        setErrorMessage("Failed to initialize PDF viewer");
+    try {
+      // Explicitly set the worker path using HTTPS (not protocol-relative URL)
+      const workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+      
+      // Set global worker options directly through window object to avoid typing issues
+      if (typeof window !== 'undefined' && window.pdfjsLib) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
+      } else {
+        console.log("Setting up worker without pdfjsLib");
+        // Fallback approach
+        (pdfjs as any).GlobalWorkerOptions = (pdfjs as any).GlobalWorkerOptions || {};
+        (pdfjs as any).GlobalWorkerOptions.workerSrc = workerSrc;
       }
-    };
-
-    // Try to initialize immediately
-    initializeWorker();
-
-    // As a fallback, also try after a short delay to ensure all resources are loaded
-    const timeoutId = setTimeout(() => {
-      if (!workerInitialized.current) {
-        console.log("Retrying PDF.js worker initialization...");
-        initializeWorker();
-      }
-    }, 1000);
-
-    return () => clearTimeout(timeoutId);
+      
+      console.log("PDF.js worker path configured:", workerSrc);
+      setWorkerInitialized(true);
+    } catch (error) {
+      console.error("Failed to initialize PDF.js worker:", error);
+      setPdfError(true);
+      setErrorMessage("Failed to initialize PDF viewer");
+    }
   }, []);
 
   // Reset loading state when PDF URL changes
@@ -64,7 +57,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
     setLoading(true);
     setPdfError(false);
     setErrorMessage('');
-    setPageNumber(1); // Reset to first page when URL changes
+    setPageNumber(1);
   }, [pdfUrl]);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
@@ -94,25 +87,23 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const previousPage = () => changePage(-1);
   const nextPage = () => changePage(1);
 
-  const zoomIn = () => setScale(prev => Math.min(prev + 0.2, 3.0)); // Limit maximum zoom
-  const zoomOut = () => setScale(prev => Math.max(prev - 0.2, 0.8)); // Limit minimum zoom
+  const zoomIn = () => setScale(prev => Math.min(prev + 0.2, 3.0));
+  const zoomOut = () => setScale(prev => Math.max(prev - 0.2, 0.8));
 
-  // For external URLs, use the URL directly without modification
-  // For local/relative URLs, create an absolute path
+  // For external URLs, use the URL directly
   const finalPdfUrl = pdfUrl.startsWith('http') 
     ? pdfUrl 
     : pdfUrl.startsWith('/') 
       ? `${window.location.origin}${pdfUrl}`
       : pdfUrl;
 
-  // Show error state if PDF.js is not initialized
-  if (!initialized) {
+  if (!workerInitialized) {
     return (
       <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
         {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
         <div className="bg-white rounded-lg shadow-lg p-3 w-full flex flex-col">
           <div className="text-center py-8 bg-slate-50 rounded">
-            <p>PDF viewer is initializing. Please wait...</p>
+            <p className="text-black">PDF viewer is initializing. Please wait...</p>
           </div>
         </div>
       </div>
@@ -124,7 +115,6 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
       
       <div className="relative bg-white rounded-lg shadow-lg p-3 w-full flex flex-col">
-        {/* Increased height container for PDF with overflow */}
         <div className="overflow-auto h-[90vh] mb-4">
           {loading && (
             <div className="absolute inset-0 flex items-center justify-center bg-slate-100 bg-opacity-80 z-10">
@@ -147,7 +137,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
               file={finalPdfUrl}
               onLoadSuccess={onDocumentLoadSuccess}
               onLoadError={onDocumentLoadError}
-              loading={<div className="text-center py-8">Loading PDF...</div>}
+              loading={<div className="text-center py-8 text-black">Loading PDF...</div>}
               className="flex justify-center min-h-[40vh]"
               options={{
                 cMapUrl: 'https://unpkg.com/pdfjs-dist@3.11.174/cmaps/',
@@ -161,12 +151,12 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
                 renderAnnotationLayer={true}
                 className="border border-slate-200"
                 width={window.innerWidth > 768 ? 700 : undefined}
+                canvasBackground="white"
               />
             </Document>
           )}
         </div>
         
-        {/* Controls are outside the scrollable area and always visible */}
         <div className="flex justify-between items-center px-2 flex-wrap gap-2 bg-white py-2 border-t border-slate-200 sticky bottom-0">
           <div className="flex items-center space-x-2">
             <Button
@@ -214,7 +204,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
             </Button>
           </div>
           
-          <p className="text-sm">
+          <p className="text-sm text-black">
             {!pdfError ? `Page ${pageNumber} of ${numPages || '-'}` : ''}
           </p>
           
