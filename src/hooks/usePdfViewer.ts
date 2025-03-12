@@ -60,7 +60,14 @@ export const usePdfViewer = (pdfUrl: string) => {
     console.error('Error loading PDF:', error, pdfUrl);
     setLoading(false);
     setPdfError(true);
-    setErrorMessage(error.message || 'Unknown error');
+    
+    // Check if error is related to CSP
+    const errorMsg = error.message || 'Unknown error';
+    if (errorMsg.includes('CSP') || errorMsg.includes('Content Security Policy') || errorMsg.includes('eval')) {
+      setErrorMessage("Content Security Policy error: The PDF viewer is blocked from running required scripts. Please check browser settings.");
+    } else {
+      setErrorMessage(errorMsg);
+    }
   };
 
   const changePage = (offset: number) => {

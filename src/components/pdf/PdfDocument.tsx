@@ -73,7 +73,11 @@ const PdfDocument = ({ pdfUrl }: PdfDocumentProps) => {
             options={{
               cMapUrl: 'https://unpkg.com/pdfjs-dist@3.11.174/cmaps/',
               cMapPacked: true,
-              standardFontDataUrl: 'https://unpkg.com/pdfjs-dist@3.11.174/standard_fonts/'
+              standardFontDataUrl: 'https://unpkg.com/pdfjs-dist@3.11.174/standard_fonts/',
+              disableAutoFetch: true,
+              disableStream: false,
+              isEvalSupported: false, // Important: Tell PDF.js not to use eval
+              useSystemFonts: true
             }}
           >
             {pdfError ? null : (

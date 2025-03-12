@@ -15,16 +15,26 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [finalPdfUrl, setFinalPdfUrl] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [workerInitialized, setWorkerInitialized] = useState(false);
+  const [initAttempted, setInitAttempted] = useState(false);
 
   // Initialize PDF worker when component mounts
   useEffect(() => {
+    if (initAttempted) return;
+    
     console.log("Initializing PDF worker...");
-    const success = initializePdfWorker();
-    setWorkerInitialized(success);
-    if (!success) {
-      setError("Failed to initialize PDF viewer. Please check if JavaScript is fully enabled in your browser.");
+    try {
+      const success = initializePdfWorker();
+      setWorkerInitialized(success);
+      if (!success) {
+        setError("Failed to initialize PDF viewer. Please check if JavaScript is fully enabled in your browser.");
+      }
+    } catch (err) {
+      console.error("Error during worker initialization:", err);
+      setError("PDF initialization error: " + (err instanceof Error ? err.message : String(err)));
+    } finally {
+      setInitAttempted(true);
     }
-  }, []);
+  }, [initAttempted]);
 
   // Format PDF URL and handle errors
   useEffect(() => {
@@ -42,13 +52,27 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
     }
   }, [pdfUrl, workerInitialized]);
 
-  if (!workerInitialized) {
+  if (!initAttempted) {
+    return (
+      <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
+        {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
+        <div className="bg-slate-800 border border-slate-700 text-slate-200 px-4 py-3 rounded">
+          <p>Initializing PDF viewer...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (initAttempted && !workerInitialized) {
     return (
       <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
         {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
         <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
-          <p>Initializing PDF viewer...</p>
-          <p className="text-sm">If this persists, your browser may be blocking required scripts.</p>
+          <p>Could not initialize PDF viewer.</p>
+          <p className="text-sm">Error: {error || "Unknown initialization error"}</p>
+          <p className="text-sm mt-2">
+            If you're seeing CSP errors, make sure your browser allows the needed scripts.
+          </p>
         </div>
       </div>
     );

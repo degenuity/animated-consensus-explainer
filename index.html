@@ -4,14 +4,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.gpteng.co https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://raw.githubusercontent.com; connect-src 'self' https://raw.githubusercontent.com https://unpkg.com https://cdnjs.cloudflare.com wss: ws:; worker-src 'self' blob: https://cdnjs.cloudflare.com; frame-src 'self' blob:; object-src 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.gpteng.co https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://raw.githubusercontent.com; connect-src 'self' https://raw.githubusercontent.com https://unpkg.com https://cdnjs.cloudflare.com wss: ws:; worker-src 'self' blob: https://cdnjs.cloudflare.com https://unpkg.com; frame-src 'self' blob:; object-src 'none';">
     <title>X1 Research</title>
     
     <!-- Import Inter font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     
-    <!-- Directly load PDF.js worker script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js" crossorigin="anonymous"></script>
+    <!-- Preload PDF.js worker script -->
+    <link rel="preload" href="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js" as="script" crossorigin="anonymous">
     
     <style>
       body { 

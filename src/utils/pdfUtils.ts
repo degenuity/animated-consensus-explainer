@@ -11,6 +11,7 @@ let isWorkerInitialized = false;
  */
 export const initializePdfWorker = (): boolean => {
   if (isWorkerInitialized) {
+    console.log("Worker already initialized, skipping");
     return true;
   }
   
@@ -28,10 +29,20 @@ export const initializePdfWorker = (): boolean => {
       (pdfjs as any).GlobalWorkerOptions = {};
     }
     
-    // Set worker source from CDN
-    const workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+    // Set worker source from CDN with specific version that matches our package
+    const workerSrc = `https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`;
     pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
     console.log("PDF.js worker initialized with:", workerSrc);
+    
+    // Set additional options to avoid eval usage
+    if (pdfjs.disableWorker === undefined) {
+      (pdfjs as any).disableWorker = false;
+    }
+    
+    if (pdfjs.disableAutoFetch === undefined) {
+      (pdfjs as any).disableAutoFetch = true;
+    }
+    
     isWorkerInitialized = true;
     return true;
   } catch (error) {
