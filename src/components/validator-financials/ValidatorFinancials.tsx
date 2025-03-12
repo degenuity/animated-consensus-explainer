@@ -45,12 +45,12 @@ const ValidatorFinancials = () => {
             <NetworkUsageCostsBox />
           </div>
 
-          {/* Bottom Row - Even more vertical space */}
-          <div className="absolute left-[60px] top-[700px]" style={{ width: '380px' }}>
+          {/* Bottom Row - Adjusted to prevent overlap */}
+          <div className="absolute left-[5%] top-[700px]" style={{ width: '380px' }}>
             <BlockProductionEligibilityBox />
           </div>
           
-          <div className="absolute right-[60px] top-[700px]" style={{ width: '380px' }}>
+          <div className="absolute right-[5%] top-[700px]" style={{ width: '380px' }}>
             <ProfitabilityBox />
           </div>
 

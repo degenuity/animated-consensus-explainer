@@ -71,8 +71,8 @@ const ConnectingLines = () => (
       </div>
     </div>
 
-    {/* Internal Rewards to Block Production Eligibility */}
-    <div className="absolute top-[500px] left-[200px] h-[200px] w-[2px] bg-green-500/80">
+    {/* Internal Rewards to Block Production Eligibility - adjusted for new position */}
+    <div className="absolute top-[500px] left-[180px] h-[200px] w-[2px] bg-green-500/80">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-green-400"
         animate={{ 
@@ -87,8 +87,8 @@ const ConnectingLines = () => (
       />
     </div>
 
-    {/* Network Usage Costs to Profitability */}
-    <div className="absolute top-[500px] right-[200px] h-[200px] w-[2px] bg-green-500/80">
+    {/* Network Usage Costs to Profitability - adjusted for new position */}
+    <div className="absolute top-[500px] right-[180px] h-[200px] w-[2px] bg-green-500/80">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-green-400"
         animate={{ 
@@ -103,8 +103,8 @@ const ConnectingLines = () => (
       />
     </div>
     
-    {/* Total Stake to Block Production Eligibility - longer vertical line */}
-    <div className="absolute top-[200px] left-[350px] h-[500px] w-[2px] bg-blue-500/80">
+    {/* Total Stake to Block Production Eligibility - longer vertical line, adjusted */}
+    <div className="absolute top-[200px] left-[300px] h-[500px] w-[2px] bg-blue-500/80">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-blue-400"
         animate={{ 
@@ -127,7 +127,7 @@ const ConnectingLines = () => (
     </div>
     
     {/* 50% indicator for bottom path */}
-    <div className="absolute top-[550px] left-[370px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300">
+    <div className="absolute top-[550px] left-[320px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300">
       50%
     </div>
   </>
