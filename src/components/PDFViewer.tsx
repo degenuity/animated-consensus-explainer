@@ -1,6 +1,6 @@
 
 import React, { Suspense, useEffect, useState } from 'react';
-import { formatPdfUrl } from '@/utils/pdfUtils';
+import { formatPdfUrl, initializePdfWorker } from '@/utils/pdfUtils';
 import { PdfLoading } from './pdf/PdfLoading';
 
 // Lazy load the heavy PDF-related components
@@ -14,9 +14,22 @@ interface PDFViewerProps {
 const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [finalPdfUrl, setFinalPdfUrl] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [workerInitialized, setWorkerInitialized] = useState(false);
+
+  // Initialize PDF worker when component mounts
+  useEffect(() => {
+    console.log("Initializing PDF worker...");
+    const success = initializePdfWorker();
+    setWorkerInitialized(success);
+    if (!success) {
+      setError("Failed to initialize PDF viewer. Please check if JavaScript is fully enabled in your browser.");
+    }
+  }, []);
 
   // Format PDF URL and handle errors
   useEffect(() => {
+    if (!workerInitialized) return;
+    
     try {
       console.log("Formatting PDF URL:", pdfUrl);
       const formatted = formatPdfUrl(pdfUrl);
@@ -27,7 +40,19 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       console.error("Error formatting PDF URL:", err);
       setError(err instanceof Error ? err.message : 'Invalid PDF URL');
     }
-  }, [pdfUrl]);
+  }, [pdfUrl, workerInitialized]);
+
+  if (!workerInitialized) {
+    return (
+      <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
+        {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
+        <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
+          <p>Initializing PDF viewer...</p>
+          <p className="text-sm">If this persists, your browser may be blocking required scripts.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
@@ -40,7 +65,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
         </div>
       ) : (
         <Suspense fallback={<PdfLoading title={title} />}>
-          {finalPdfUrl && <LazyPdfDocument pdfUrl={finalPdfUrl} />}
+          {finalPdfUrl && workerInitialized && <LazyPdfDocument pdfUrl={finalPdfUrl} />}
         </Suspense>
       )}
     </div>

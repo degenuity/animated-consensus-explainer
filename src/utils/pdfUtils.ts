@@ -16,9 +16,16 @@ export const initializePdfWorker = (): boolean => {
   
   try {
     // Check if pdfjs is available
-    if (!pdfjs || !pdfjs.GlobalWorkerOptions) {
+    if (!pdfjs) {
       console.error("PDF.js library not properly loaded");
       return false;
+    }
+    
+    // Ensure GlobalWorkerOptions exists
+    if (!pdfjs.GlobalWorkerOptions) {
+      console.error("PDF.js GlobalWorkerOptions not available");
+      // Create it if it doesn't exist
+      (pdfjs as any).GlobalWorkerOptions = {};
     }
     
     // Set worker source from CDN
