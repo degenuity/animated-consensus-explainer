@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 const ConnectingLines = () => (
   <>
     {/* Inflation to Internal Rewards */}
-    <div className="absolute top-[150px] left-[180px] h-[100px] w-[2px] bg-blue-500/80">
+    <div className="absolute top-[150px] left-[180px] h-[70px] w-[2px] bg-blue-500/80">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-blue-400"
         animate={{ 
-          y: [0, 100, 0],
+          y: [0, 70, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -21,11 +21,11 @@ const ConnectingLines = () => (
     </div>
 
     {/* Deflation to Network Usage Costs */}
-    <div className="absolute top-[150px] right-[180px] h-[100px] w-[2px] bg-yellow-500/80">
+    <div className="absolute top-[150px] right-[180px] h-[70px] w-[2px] bg-yellow-500/80">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-yellow-400"
         animate={{ 
-          y: [0, 100, 0],
+          y: [0, 70, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -36,8 +36,8 @@ const ConnectingLines = () => (
       />
     </div>
 
-    {/* Total Stake to Internal Rewards - diagonal line */}
-    <div className="absolute top-[300px] left-[330px] w-[120px] h-[2px] bg-blue-500/80 transform -rotate-[25deg]">
+    {/* Total Stake to Internal Rewards - diagonal line from middle to left */}
+    <div className="absolute top-[400px] left-[280px] w-[120px] h-[2px] bg-blue-500/80 transform rotate-[35deg] origin-left">
       <motion.div 
         className="absolute top-0 left-0 h-full w-[20px] bg-blue-400"
         animate={{ 
@@ -52,8 +52,8 @@ const ConnectingLines = () => (
       />
     </div>
 
-    {/* Total Stake to Network Usage Costs - diagonal line */}
-    <div className="absolute top-[300px] right-[330px] w-[120px] h-[2px] bg-yellow-500/80 transform rotate-[25deg]">
+    {/* Total Stake to Network Usage Costs - diagonal line from middle to right */}
+    <div className="absolute top-[400px] right-[280px] w-[120px] h-[2px] bg-yellow-500/80 transform -rotate-[35deg] origin-right">
       <motion.div 
         className="absolute top-0 right-0 h-full w-[20px] bg-yellow-400"
         animate={{ 
@@ -101,11 +101,11 @@ const ConnectingLines = () => (
     </div>
     
     {/* Total Stake to Block Production Eligibility - vertical */}
-    <div className="absolute top-[420px] left-[50%] h-[280px] w-[2px] bg-blue-500/80 transform -translate-x-1/2">
+    <div className="absolute top-[470px] left-[50%] h-[230px] w-[2px] bg-blue-500/80 transform -translate-x-1/2">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-blue-400"
         animate={{ 
-          y: [0, 280, 0],
+          y: [0, 230, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -124,7 +124,17 @@ const ConnectingLines = () => (
     </div>
     
     {/* 50% indicator for bottom path */}
-    <div className="absolute top-[550px] left-[50%] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300 transform -translate-x-1/2">
+    <div className="absolute top-[580px] left-[50%] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300 transform -translate-x-1/2">
+      50%
+    </div>
+    
+    {/* 50% indicator for diagonal path to internal rewards */}
+    <div className="absolute top-[370px] left-[330px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300 transform rotate-[35deg]">
+      50%
+    </div>
+    
+    {/* 50% indicator for diagonal path to network costs */}
+    <div className="absolute top-[370px] right-[330px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300 transform -rotate-[35deg]">
       50%
     </div>
   </>

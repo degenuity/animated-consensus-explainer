@@ -32,20 +32,21 @@ const ValidatorFinancials = () => {
             <DeflationBox />
           </div>
           
-          {/* Middle Row - Three boxes */}
-          <div className="absolute left-[50px] top-[250px]" style={{ width: '280px' }}>
+          {/* Middle Row - Internal Rewards and Network Usage Costs */}
+          <div className="absolute left-[50px] top-[220px]" style={{ width: '280px' }}>
             <InternalRewardsBox />
           </div>
           
-          <div className="absolute left-[50%] top-[350px] transform -translate-x-1/2" style={{ width: '280px' }}>
-            <TotalStakeBox />
-          </div>
-          
-          <div className="absolute right-[50px] top-[250px]" style={{ width: '280px' }}>
+          <div className="absolute right-[50px] top-[220px]" style={{ width: '280px' }}>
             <NetworkUsageCostsBox />
           </div>
+          
+          {/* Total Stake - Moved down to prevent overlap */}
+          <div className="absolute left-[50%] top-[400px] transform -translate-x-1/2" style={{ width: '280px' }}>
+            <TotalStakeBox />
+          </div>
 
-          {/* Bottom Row - Adjusted to prevent overlap */}
+          {/* Bottom Row - Block Production Eligibility and Profitability */}
           <div className="absolute left-[5%] top-[700px]" style={{ width: '380px' }}>
             <BlockProductionEligibilityBox />
           </div>
