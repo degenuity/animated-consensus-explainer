@@ -24,14 +24,20 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
   labelPosition,
   animationDirection,
   animateMotion,
-  zIndex
+  zIndex = 1
 }) => {
   const { lineVariants, dotVariants } = useConnectionAnimation({
     animationIndex
   });
   
+  // Apply z-index using CSS style property
+  const groupStyle = {
+    zIndex: zIndex,
+    position: 'relative' as const, // TypeScript requires this
+  };
+  
   return (
-    <g style={{ zIndex: zIndex || 1 }}>
+    <g style={groupStyle}>
       <motion.path
         d={path}
         stroke={color}

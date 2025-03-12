@@ -16,8 +16,8 @@ const DiagramSVG = () => {
   
   // Sort connections by zIndex to ensure proper layering
   const sortedConnections = [...connectionPaths].sort((a, b) => {
-    const zIndexA = a.zIndex || 1;
-    const zIndexB = b.zIndex || 1;
+    const zIndexA = a.zIndex || 0;
+    const zIndexB = b.zIndex || 0;
     return zIndexA - zIndexB;
   });
   
@@ -49,10 +49,10 @@ const DiagramSVG = () => {
         viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
         preserveAspectRatio="xMidYMid meet"
       >
-        {/* Draw all connection lines first */}
-        {sortedConnections.map((connection, index) => (
+        {/* Draw first all background elements */}
+        {sortedConnections.filter(conn => !conn.zIndex || conn.zIndex < 10).map((connection, index) => (
           <ConnectionLine
-            key={`connection-${index}`}
+            key={`connection-background-${index}`}
             path={connection.path}
             color={connection.color}
             animationIndex={connection.animationIndex}
@@ -80,6 +80,22 @@ const DiagramSVG = () => {
             animationIndex={box.animationIndex}
             subitems={box.subitems}
             simpleStyle={box.simpleStyle}
+          />
+        ))}
+        
+        {/* Draw foreground connections (with higher z-index) above everything else */}
+        {sortedConnections.filter(conn => conn.zIndex && conn.zIndex >= 10).map((connection, index) => (
+          <ConnectionLine
+            key={`connection-foreground-${index}`}
+            path={connection.path}
+            color={connection.color}
+            animationIndex={connection.animationIndex}
+            dotPosition={connection.dotPosition}
+            label={connection.label}
+            labelPosition={connection.labelPosition}
+            animationDirection={connection.animationDirection}
+            animateMotion={connection.animateMotion}
+            zIndex={connection.zIndex}
           />
         ))}
         
