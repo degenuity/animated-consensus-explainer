@@ -96,17 +96,17 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                 <motion.div
                   className="absolute w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
                   animate={{ 
-                    x: [0, -x * 0.6], 
-                    y: [0, -y * 0.6],
-                    opacity: [0, 1, 0],
-                    scale: [0.5, 1, 0.5]
+                    x: [-x * 0.2, -x * 0.6], 
+                    y: [-y * 0.2, -y * 0.6],
+                    opacity: [1, 0],
+                    scale: [0.8, 1]
                   }}
                   transition={{
                     duration: 2.5,
                     repeat: Infinity,
                     delay: i * 0.3,
                     repeatDelay: 0,
-                    times: [0, 0.5, 1],
+                    times: [0, 1],
                     ease: "easeInOut"
                   }}
                 >
