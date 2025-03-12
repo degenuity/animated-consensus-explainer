@@ -10,7 +10,7 @@ const BlockProductionEligibilityBox = () => (
     transition={{ duration: 0.7, delay: 0.4 }}
     className="lg:col-span-5 lg:col-start-1"
   >
-    <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg">
+    <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg h-full">
       <div className="flex items-center mb-4">
         <Box className="h-5 w-5 text-blue-400 mr-2" />
         <span className="text-lg text-white">block production eligibility</span>

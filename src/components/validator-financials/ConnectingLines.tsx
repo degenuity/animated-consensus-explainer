@@ -4,8 +4,10 @@ import { motion } from "framer-motion";
 
 const ConnectingLines = () => (
   <>
+    {/* Adjusted positions for the connecting lines to match new layout */}
+    
     {/* Inflation to Internal Rewards */}
-    <div className="absolute top-[115px] left-[180px] w-[80px] h-[2px] bg-blue-500/60">
+    <div className="absolute top-[130px] left-[200px] w-[80px] h-[2px] bg-blue-500/60 rotate-45">
       <motion.div 
         className="absolute top-0 left-0 h-full w-[20px] bg-blue-400"
         animate={{ 
@@ -21,7 +23,7 @@ const ConnectingLines = () => (
     </div>
 
     {/* Total Stake to Internal Rewards */}
-    <div className="absolute top-[120px] left-[400px] w-[80px] h-[2px] bg-blue-500/60 rotate-45">
+    <div className="absolute top-[130px] left-[350px] w-[80px] h-[2px] bg-blue-500/60 rotate-90">
       <motion.div 
         className="absolute top-0 left-0 h-full w-[20px] bg-blue-400"
         animate={{ 
@@ -37,7 +39,7 @@ const ConnectingLines = () => (
     </div>
 
     {/* Base Fees to Deflation */}
-    <div className="absolute top-[250px] right-[220px] w-[60px] h-[2px] bg-yellow-500/60 rotate-45">
+    <div className="absolute top-[230px] right-[280px] w-[60px] h-[2px] bg-yellow-500/60 rotate-45">
       <motion.div 
         className="absolute top-0 left-0 h-full w-[20px] bg-yellow-400"
         animate={{ 
@@ -53,11 +55,11 @@ const ConnectingLines = () => (
     </div>
 
     {/* Internal Rewards to Block Production Eligibility */}
-    <div className="absolute top-[260px] left-[200px] h-[100px] w-[2px] bg-green-500/60">
+    <div className="absolute top-[260px] left-[180px] h-[80px] w-[2px] bg-green-500/60">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-green-400"
         animate={{ 
-          y: [0, 100, 0],
+          y: [0, 80, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -69,11 +71,11 @@ const ConnectingLines = () => (
     </div>
 
     {/* Total Stake to Block Production Eligibility */}
-    <div className="absolute top-[180px] left-[450px] h-[160px] w-[2px] bg-blue-500/60">
+    <div className="absolute top-[160px] left-[380px] h-[180px] w-[2px] bg-blue-500/60">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-blue-400"
         animate={{ 
-          y: [0, 160, 0],
+          y: [0, 180, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -85,11 +87,11 @@ const ConnectingLines = () => (
     </div>
 
     {/* Block Rewards to Profitability */}
-    <div className="absolute top-[290px] right-[300px] h-[80px] w-[2px] bg-green-500/60">
+    <div className="absolute top-[280px] right-[350px] h-[100px] w-[2px] bg-green-500/60">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-green-400"
         animate={{ 
-          y: [0, 80, 0],
+          y: [0, 100, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 

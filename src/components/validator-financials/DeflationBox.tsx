@@ -8,9 +8,9 @@ const DeflationBox = () => (
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, delay: 0.2 }}
-    className="lg:col-span-2 lg:col-start-11"
+    className="lg:col-span-3 lg:col-start-10"
   >
-    <div className="bg-yellow-500 text-white p-4 rounded-lg shadow-lg h-[100px] flex flex-col items-center justify-center">
+    <div className="bg-yellow-500 text-white p-4 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
       <TrendingDown className="mb-2 h-6 w-6" />
       <div className="text-xl font-semibold">Deflation</div>
       <div className="text-sm opacity-75">token burns</div>

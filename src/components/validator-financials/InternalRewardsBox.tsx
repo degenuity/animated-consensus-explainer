@@ -8,9 +8,9 @@ const InternalRewardsBox = () => (
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.7, delay: 0.1 }}
-    className="lg:col-span-3 lg:col-start-2"
+    className="lg:col-span-5 lg:col-start-1"
   >
-    <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg">
+    <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg h-full">
       <div className="flex items-center mb-3">
         <Database className="h-5 w-5 text-blue-400 mr-2" />
         <span className="text-lg text-white">internal rewards</span>

@@ -8,9 +8,9 @@ const TotalStakeBox = () => (
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, delay: 0.1 }}
-    className="lg:col-span-3 lg:col-start-5"
+    className="lg:col-span-4 lg:col-start-5"
   >
-    <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg">
+    <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg h-full">
       <div className="flex items-center mb-3">
         <Lock className="h-5 w-5 text-blue-400 mr-2" />
         <span className="text-lg text-white">total stake</span>

@@ -8,9 +8,9 @@ const NetworkUsageCostsBox = () => (
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.7, delay: 0.3 }}
-    className="lg:col-span-4 lg:col-start-8"
+    className="lg:col-span-5 lg:col-start-7"
   >
-    <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg">
+    <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg h-full">
       <div className="flex items-center mb-3">
         <Tag className="h-5 w-5 text-blue-400 mr-2" />
         <span className="text-lg text-white">network usage costs</span>

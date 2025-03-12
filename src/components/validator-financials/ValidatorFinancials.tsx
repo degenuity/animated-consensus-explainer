@@ -15,31 +15,31 @@ import OperationalCostsNote from './OperationalCostsNote';
 const ValidatorFinancials = () => {
   return (
     <motion.div 
-      className="w-full py-10 px-4 relative overflow-hidden"
+      className="w-full py-6 px-4 relative overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
       <Title />
 
-      <div className="relative w-full max-w-6xl mx-auto">
-        {/* Main Flow Chart Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Top Row */}
-          <div className="lg:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="relative w-full max-w-6xl mx-auto mt-4">
+        {/* Main Flow Chart Layout with adjusted proportions */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          {/* Top Row - adjusted column spans and positions */}
+          <div className="lg:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-4">
             <InflationBox />
             <TotalStakeBox />
             <DeflationBox />
           </div>
 
-          {/* Middle Row */}
-          <div className="lg:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+          {/* Middle Row - adjusted spacing and column spans */}
+          <div className="lg:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-4 mt-4">
             <InternalRewardsBox />
             <NetworkUsageCostsBox />
           </div>
 
-          {/* Bottom Row */}
-          <div className="lg:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+          {/* Bottom Row - adjusted spacing and column spans */}
+          <div className="lg:col-span-12 grid grid-cols-1 lg:grid-cols-12 gap-4 mt-4">
             <BlockProductionEligibilityBox />
             <ProfitabilityBox />
           </div>
