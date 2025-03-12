@@ -12,84 +12,54 @@ interface ComplexBoxProps {
 const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
   const { x, y, width, height, title, icon, color, animationIndex, subitems = [] } = boxProps;
   
+  // Process subitems to ensure consistent format
   const processedSubitems = subitems.map(item => {
     if (typeof item === 'string') {
-      return { text: item };
+      return { text: item, id: item.replace(/\s+/g, '-').toLowerCase() };
     }
     return item;
   });
 
-  let yOffset = 60;
-
-  const renderSubItemWithChildren = (item: SubItem, idx: number) => {
-    const currentYOffset = yOffset;
-    const { text, subItems } = item;
+  // Render function for subitems and their children
+  const renderItems = () => {
+    let currentY = 60; // Starting Y position after the title
+    const renderedItems: JSX.Element[] = [];
     
-    // Standard height for items
-    const itemHeight = 40;
-    
-    // Render main item
-    const mainItem = (
-      <SubItemRenderer 
-        item={item} 
-        index={idx} 
-        x={x} 
-        y={y} 
-        yOffset={currentYOffset} 
-        width={width} 
-      />
-    );
-    
-    yOffset += itemHeight + 10;
-
-    if (subItems && subItems.length > 0) {
-      return (
-        <React.Fragment key={`item-group-${idx}`}>
-          {mainItem}
-          {subItems.map((subItem, subIdx) => {
-            const subItemY = y + currentYOffset + 50 + subIdx * (itemHeight + 10);
-            
-            const subItemComponent = (
-              <motion.g
-                key={`subitem-${idx}-${subIdx}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5 + (idx + subIdx) * 0.1 }}
-              >
-                <rect
-                  x={x + 20}
-                  y={subItemY}
-                  width={width - 40}
-                  height={itemHeight}
-                  rx="4"
-                  fill="transparent"
-                  stroke="#10B981"
-                  strokeWidth="1"
-                />
-                <foreignObject 
-                  x={x + 20} 
-                  y={subItemY} 
-                  width={width - 40} 
-                  height={itemHeight}
-                >
-                  <div className="flex items-center justify-center h-full text-white">
-                    {subItem.text}
-                  </div>
-                </foreignObject>
-              </motion.g>
-            );
-            
-            if (subIdx === subItems.length - 1) {
-              yOffset = subItemY + itemHeight + 10 - y;
-            }
-            
-            return subItemComponent;
-          })}
-        </React.Fragment>
+    // Helper function to render an item and its children recursively
+    const renderItem = (item: SubItem, depth: number = 0, index: number) => {
+      const isHeader = depth === 0;
+      const paddingLeft = depth * 20; // Indent based on depth
+      
+      // Render the current item
+      renderedItems.push(
+        <SubItemRenderer 
+          key={`item-${item.id || index}`}
+          item={{...item, isHeader}}
+          index={index}
+          x={x + paddingLeft}
+          y={y}
+          yOffset={currentY}
+          width={width - paddingLeft}
+        />
       );
-    }
+      
+      // Update Y position for the next item
+      currentY += item.desc ? 45 : 40;
+      
+      // Render children if any
+      if (item.subItems && item.subItems.length > 0) {
+        item.subItems.forEach((subItem, subIndex) => {
+          renderItem(subItem, depth + 1, subIndex);
+        });
+      }
+    };
     
-    return mainItem;
+    // Process all top-level items
+    processedSubitems.forEach((item, index) => {
+      renderItem(item as SubItem, 0, index);
+    });
+    
+    return renderedItems;
   };
 
   return (
@@ -99,6 +69,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       initial="hidden"
       animate="visible"
     >
+      {/* Box container */}
       <rect
         x={x}
         y={y}
@@ -109,14 +80,17 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
         stroke="#1e293b"
         strokeWidth="1"
       />
+      
+      {/* Title bar */}
       <foreignObject x={x} y={y} width={width} height="50">
         <div className="flex items-center gap-2 p-3 border-b border-[#1e293b]">
           <BoxIcon icon={icon} />
-          <div className="text-white font-medium truncate">{title}</div>
+          <div className="text-white font-medium truncate" style={{ maxWidth: '100%' }}>{title}</div>
         </div>
       </foreignObject>
       
-      {processedSubitems.map((item, idx) => renderSubItemWithChildren(item as SubItem, idx))}
+      {/* Render all items */}
+      {renderItems()}
     </motion.g>
   );
 };

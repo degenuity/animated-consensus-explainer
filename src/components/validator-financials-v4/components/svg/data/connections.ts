@@ -1,3 +1,4 @@
+
 // Connection path definitions for the diagram
 
 export const connectionPaths = [

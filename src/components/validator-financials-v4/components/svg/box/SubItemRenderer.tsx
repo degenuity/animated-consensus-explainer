@@ -20,12 +20,28 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   yOffset,
   width
 }) => {
-  const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader } = item;
+  const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id } = item;
   const itemHeight = desc ? 45 : 40;
+  
+  // Determine border color based on item properties
+  const getBorderColor = () => {
+    if (itemColor) return itemColor;
+    if (isHeader) return "#EAB308";
+    if (isSubHeader) return "#10B981";
+    return "#3B82F6";
+  };
+  
+  // Determine text color based on item properties
+  const getTextColor = () => {
+    if (itemColor) return itemColor;
+    if (isHeader) return "text-amber-400 font-medium";
+    if (isSubHeader) return "text-white font-medium";
+    return "text-white";
+  };
   
   return (
     <motion.g
-      key={`subitem-${index}`}
+      key={`subitem-${id || index}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1.2 + index * 0.1 }}
@@ -36,8 +52,8 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         width={width - 20}
         height={itemHeight}
         rx="4"
-        fill={isHeader ? "transparent" : "transparent"}
-        stroke={itemColor ? itemColor : (isHeader ? "#EAB308" : isSubHeader ? "#10B981" : "#3B82F6")}
+        fill="transparent"
+        stroke={getBorderColor()}
         strokeWidth="1"
       />
       <foreignObject 
@@ -54,7 +70,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
             <div className="text-gray-400 text-xs">{desc}</div>
           </div>
         ) : (
-          <div className={`flex items-center h-full px-4 ${isHeader ? 'text-amber-400 font-medium' : isSubHeader ? 'text-white font-medium' : 'text-white'}`}>
+          <div className={`flex items-center h-full px-4 ${getTextColor()}`}>
             {text}
           </div>
         )}

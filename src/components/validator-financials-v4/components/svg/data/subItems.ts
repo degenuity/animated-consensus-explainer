@@ -1,3 +1,4 @@
+
 // Subitem definitions for different boxes
 
 export const internalRewardsSubitems = [
