@@ -1,3 +1,4 @@
+
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -11,7 +12,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      development: mode !== "production",
+      // Use the correct options for @vitejs/plugin-react-swc
       refresh: mode === "development",
     }),
     mode === 'development' && componentTagger(),

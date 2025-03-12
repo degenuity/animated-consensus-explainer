@@ -19,25 +19,22 @@ const SimpleBLSFallback = () => (
   </div>
 );
 
-// Use a more aggressive code-splitting strategy with smaller chunks
+// Fixed the type issue by properly handling the lazy loading
 const BLSStageOne = lazy(() => {
   console.log('Starting to load BLSStageOne');
-  // Add a small artificial delay to ensure DOM is ready
-  return new Promise(resolve => {
-    // Remove delay to improve loading time
-    import("@/components/consensus/bls/stages")
-      .then(module => {
-        console.log('BLSStageOne module loaded successfully');
-        resolve({ default: module.BLSStageOne });
-      })
-      .catch(err => {
-        console.error('Failed to load BLSStageOne:', err);
-        // Return a fallback component instead of throwing
-        resolve({ 
-          default: () => <div className="text-red-500 p-4">Failed to load visualization. Please refresh.</div> 
-        });
-      });
-  });
+  
+  return import("@/components/consensus/bls/stages")
+    .then(module => {
+      console.log('BLSStageOne module loaded successfully');
+      return { default: module.BLSStageOne };
+    })
+    .catch(err => {
+      console.error('Failed to load BLSStageOne:', err);
+      // Return a fallback component instead of throwing
+      return { 
+        default: () => <div className="text-red-500 p-4">Failed to load visualization. Please refresh.</div> 
+      };
+    });
 });
 
 // Use React.memo to prevent unnecessary re-renders
@@ -82,7 +79,7 @@ const Home = memo(() => {
               alt="X1 Logo" 
               className="h-7 w-auto" 
               loading="eager" 
-              fetchpriority="high"
+              fetchPriority="high"
               decoding="async"
             />
           </Link>
