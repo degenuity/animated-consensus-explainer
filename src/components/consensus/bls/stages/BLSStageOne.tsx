@@ -92,6 +92,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                   <User size={15} className="text-purple-400" />
                 </div>
                 
+                {/* Signature message box with "M" that animates from validator to relay node */}
                 <motion.div
                   className="absolute w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
                   initial={{ 
@@ -103,14 +104,15 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                   animate={{ 
                     x: [0, -x * 0.7],
                     y: [0, -y * 0.7],
-                    opacity: [0, 1, 0],
+                    opacity: [0, 1, 0],  // Explicit fade in, then fade out
                     scale: [0.7, 1, 0.7]
                   }}
                   transition={{
                     duration: 2,
                     repeat: Infinity,
                     delay: i * 0.3,
-                    repeatDelay: 1
+                    repeatDelay: 1,
+                    times: [0, 0.5, 1]  // Ensures opacity reaches peak at midpoint
                   }}
                 >
                   <span className="text-white font-bold text-xs">M</span>
