@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef, memo } from 'react';
 import { motion } from "framer-motion";
 import { User, Server } from "lucide-react";
+import { StatusMessage } from './components';
 
 interface BLSStageOneProps {
   activeSection: number;
@@ -127,6 +128,13 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
             </motion.div>
           );
         })}
+      </div>
+      
+      {/* Add the status message box at the bottom */}
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center">
+        <StatusMessage>
+          Each validator creates a signature <strong className="text-purple-400">σ<sub>i</sub></strong> on message M using their secret key
+        </StatusMessage>
       </div>
     </motion.div>
   );
