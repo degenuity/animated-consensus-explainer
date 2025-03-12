@@ -70,17 +70,11 @@ const Boxes: React.FC = () => {
           { 
             title: "block rewards", 
             fullWidth: true,
-            customColor: "green"
-          },
-          {
-            title: "priority fees",
-            fullWidth: true,
-            customColor: "green"
-          },
-          {
-            title: "MEV",
-            fullWidth: true,
-            customColor: "green"
+            customColor: "green",
+            subBoxes: [
+              { title: "priority fees", fullWidth: true, customColor: "green" },
+              { title: "MEV", fullWidth: true, customColor: "green" }
+            ]
           }
         ]}
       />
@@ -126,7 +120,7 @@ const Boxes: React.FC = () => {
 
       {/* Profitability Box - Right Position */}
       <BoxContainer
-        position="right-[15%] top-[370px]"
+        position="right-[15%] top-[450px]"
         iconType="profitability"
         title="profitability"
         color="59, 130, 246"

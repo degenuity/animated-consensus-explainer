@@ -61,12 +61,32 @@ export const connectionPaths = [
     dotPosition: { x: "515", y: "150" }
   },
   
-  // Network Costs to Deflation
+  // Base Fees to Block Rewards (Vertical down with 50% label)
   { 
-    path: "M 950 150 L 1010 150", 
+    path: "M 820 195 L 820 245", 
+    color: "#EAB308", 
+    animationIndex: 3,
+    dotPosition: { x: "820", y: "220" },
+    label: "50%",
+    labelPosition: { x: 797, y: 220 }
+  },
+  
+  // Base Fees to Deflation (horizontal right with 50% label)
+  { 
+    path: "M 880 170 L 1010 170", 
+    color: "#EAB308", 
+    animationIndex: 3,
+    dotPosition: { x: "945", y: "170" },
+    label: "50%",
+    labelPosition: { x: 945, y: 147 }
+  },
+  
+  // Network Costs to Total Stake
+  { 
+    path: "M 690 150 L 550 150", 
     color: "#F97316", 
     animationIndex: 2,
-    dotPosition: { x: "980", y: "150" }
+    dotPosition: { x: "620", y: "150" }
   },
   
   // Total Stake to Block Production
@@ -77,40 +97,20 @@ export const connectionPaths = [
     dotPosition: { x: "525", y: "300" }
   },
   
-  // Network Costs to Profitability
+  // Block Rewards to Profitability
   { 
-    path: "M 850 250 L 850 300 L 950 300 L 950 350", 
-    color: "#F97316", 
+    path: "M 820 350 L 820 425 L 900 425 L 900 450", 
+    color: "#10B981", 
     animationIndex: 5,
-    dotPosition: { x: "900", y: "300" }
+    dotPosition: { x: "860", y: "425" }
   },
   
   // Total Stake to Profitability
   { 
-    path: "M 625 250 L 625 300 L 950 300 L 950 350", 
+    path: "M 625 250 L 625 400 L 900 400 L 900 450", 
     color: "#3B82F6", 
     animationIndex: 6,
-    dotPosition: { x: "750", y: "300" }
-  },
-  
-  // Base Fees to Block Rewards (with 50% label)
-  { 
-    path: "M 820 195 L 820 245", 
-    color: "#EAB308", 
-    animationIndex: 3,
-    dotPosition: { x: "820", y: "220" },
-    label: "50%",
-    labelPosition: { x: 820, y: 220 }
-  },
-  
-  // Base Fees to Deflation (with 50% label)
-  { 
-    path: "M 930 170 L 1010 170", 
-    color: "#EAB308", 
-    animationIndex: 3,
-    dotPosition: { x: "970", y: "170" },
-    label: "50%",
-    labelPosition: { x: 970, y: 170 }
+    dotPosition: { x: "750", y: "400" }
   }
 ];
 
@@ -146,7 +146,7 @@ export const boxes = [
   {
     x: 550,
     y: 100,
-    width: 200,
+    width: 150,
     height: 150,
     title: "total stake",
     icon: "total-stake" as const,
@@ -157,10 +157,10 @@ export const boxes = [
   
   // Network Costs Box
   {
-    x: 790,
+    x: 740,
     y: 100,
-    width: 190,
-    height: 400,
+    width: 200,
+    height: 330,
     title: "network usage costs",
     icon: "network-costs" as const,
     color: "#F97316",
@@ -197,8 +197,8 @@ export const boxes = [
   
   // Profitability Box
   {
-    x: 850,
-    y: 350,
+    x: 750,
+    y: 450,
     width: 300,
     height: 165,
     title: "profitability",
