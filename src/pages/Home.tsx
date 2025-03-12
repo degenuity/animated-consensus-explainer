@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 const Home = () => {
   return (
@@ -27,7 +28,27 @@ const Home = () => {
           <h1 className="text-blue-400 text-2xl font-bold mb-5">
             X1 Research
           </h1>
-          <p className="font-blueprint">Welcome to X1 Research</p>
+          <p className="font-blueprint mb-8">Welcome to X1 Research</p>
+          
+          {/* Navigation buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/whitepaper">
+              <Button 
+                variant="outline" 
+                className="bg-transparent border border-blue-500 text-blue-400 hover:bg-blue-800 hover:text-white hover:border-transparent transition-all"
+              >
+                X1 Whitepaper
+              </Button>
+            </Link>
+            <Link to="/consensus">
+              <Button 
+                variant="outline" 
+                className="bg-transparent border border-blue-500 text-blue-400 hover:bg-blue-800 hover:text-white hover:border-transparent transition-all"
+              >
+                Consensus Explainer
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
