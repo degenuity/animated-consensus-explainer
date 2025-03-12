@@ -9,6 +9,7 @@ interface SubBox {
   fullWidth?: boolean;
   customColor?: 'yellow' | 'green' | 'red' | 'blue';
   hasAddIcon?: boolean;
+  subBoxes?: SubBox[]; // Adding support for nested subBoxes
 }
 
 interface BoxContainerProps {

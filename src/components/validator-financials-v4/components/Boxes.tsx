@@ -1,4 +1,3 @@
-
 import React from 'react';
 import BoxContainer from './BoxContainer';
 import { Percent } from 'lucide-react';
@@ -9,6 +8,7 @@ interface SubBox {
   fullWidth?: boolean;
   customColor?: 'yellow' | 'green' | 'red' | 'blue';
   hasAddIcon?: boolean;
+  subBoxes?: SubBox[];
 }
 
 const Boxes: React.FC = () => {
