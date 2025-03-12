@@ -125,7 +125,19 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
         })}
       </div>
       
-      {/* Removed the text that was here about validators sending messages */}
+      {/* Restored explanation text */}
+      <motion.div 
+        className="absolute bottom-0 left-0 right-0 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1 }}
+      >
+        <div className="bg-slate-800/80 backdrop-blur p-2 rounded-lg mx-auto inline-block mb-4">
+          <p className="text-sm text-slate-300">
+            Validators in the subcommittee sign the message and generate individual BLS signatures
+          </p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 };

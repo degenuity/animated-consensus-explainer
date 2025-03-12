@@ -13,6 +13,7 @@ interface ExpandableItemProps {
   setIsOpen?: (isOpen: boolean) => void;
   content?: React.ReactNode;
   index: number;
+  isActive?: boolean;
 }
 
 export const ExpandableItem: React.FC<ExpandableItemProps> = ({
@@ -23,7 +24,8 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
   isOpen, 
   setIsOpen, 
   content, 
-  index
+  index,
+  isActive = false
 }) => {
   // Get color classes based on color prop
   const getColorClasses = () => {
@@ -112,16 +114,16 @@ export const ExpandableItem: React.FC<ExpandableItemProps> = ({
       <motion.div 
         className={`w-3 h-3 rounded-full ${colorClasses.dot} mr-3`}
         animate={{ 
-          scale: [1, 1.5, 1],
-          boxShadow: [
+          scale: isActive ? [1, 1.5, 1] : 1,
+          boxShadow: isActive ? [
             `0 0 0px ${shadowValues[0]}`,
             `0 0 10px ${shadowValues[1]}`,
             `0 0 0px ${shadowValues[2]}`
-          ]
+          ] : "none"
         }}
         transition={{ 
           duration: 2, 
-          repeat: Infinity,
+          repeat: isActive ? Infinity : 0,
           delay: index * 0.3
         }}
       />

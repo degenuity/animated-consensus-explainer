@@ -25,6 +25,7 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
             description="From each validator where H(M) is the hash of the vote message and skᵢ is the validator's secret key" 
             expandable={false}
             index={0}
+            isActive={activeSection === 1 && activeFormula === 0}
           />
         </div>
         
@@ -65,6 +66,7 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
             description="Compressed proof of consensus" 
             expandable={false}
             index={1}
+            isActive={activeSection === 1 && activeFormula === 1}
           />
         </div>
         
@@ -102,6 +104,7 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
             description="Where pkᵢ are the public keys of the participating validators" 
             expandable={false}
             index={2}
+            isActive={activeSection === 1 && activeFormula === 2}
           />
         </div>
         
