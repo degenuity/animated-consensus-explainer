@@ -12,8 +12,8 @@ const InflationBox = () => (
   >
     <div className="bg-blue-500 text-white p-4 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
       <TrendingUp className="mb-2 h-6 w-6" />
-      <div className="text-xl font-semibold">Inflation</div>
-      <div className="text-sm opacity-75">token issuance</div>
+      <div className="text-2xl font-semibold">Inflation</div>
+      <div className="text-sm opacity-90">token issuance</div>
     </div>
   </motion.div>
 );

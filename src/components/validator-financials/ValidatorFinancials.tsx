@@ -15,59 +15,58 @@ import OperationalCostsNote from './OperationalCostsNote';
 const ValidatorFinancials = () => {
   return (
     <motion.div 
-      className="w-full py-6 px-4 relative overflow-hidden h-[800px]"
+      className="w-full relative overflow-hidden bg-[#0f1218] min-h-[800px] py-12"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <Title />
+      <div className="max-w-7xl mx-auto relative">
+        <Title />
 
-      <div className="relative w-full max-w-7xl mx-auto mt-8">
-        <div className="relative h-[650px]">
-          {/* First Row - More space between elements */}
-          <div className="absolute top-0 left-[50px] w-[180px]">
+        <div className="relative mx-auto" style={{ height: '750px' }}>
+          {/* First Row */}
+          <div className="absolute left-[100px] top-[80px]" style={{ width: '220px' }}>
             <InflationBox />
           </div>
           
-          <div className="absolute top-0 left-[400px] w-[220px]">
+          <div className="absolute left-[450px] top-[80px]" style={{ width: '240px' }}>
             <TotalStakeBox />
           </div>
           
-          <div className="absolute top-0 right-[50px] w-[180px]">
+          <div className="absolute right-[100px] top-[80px]" style={{ width: '220px' }}>
             <DeflationBox />
           </div>
 
-          {/* Second Row - Adjusted spacing */}
-          <div className="absolute top-[180px] left-[200px] w-[280px]">
+          {/* Second Row */}
+          <div className="absolute left-[180px] top-[280px]" style={{ width: '250px' }}>
             <InternalRewardsBox />
           </div>
           
-          <div className="absolute top-[160px] right-[120px] w-[280px]">
+          <div className="absolute right-[180px] top-[280px]" style={{ width: '250px' }}>
             <NetworkUsageCostsBox />
           </div>
 
-          {/* Bottom Row - Larger boxes with more space */}
-          <div className="absolute top-[400px] left-[100px] w-[400px]">
+          {/* Bottom Row */}
+          <div className="absolute left-[80px] top-[550px]" style={{ width: '400px' }}>
             <BlockProductionEligibilityBox />
           </div>
           
-          <div className="absolute top-[400px] right-[100px] w-[320px]">
+          <div className="absolute right-[80px] top-[550px]" style={{ width: '400px' }}>
             <ProfitabilityBox />
           </div>
 
+          {/* Connecting Lines */}
           <ConnectingLines />
           
-          {/* Adjusted operational costs note position */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-[600px]">
-            <OperationalCostsNote />
-          </div>
+          {/* Operational Costs Note - Positioned at the bottom */}
+          <OperationalCostsNote />
 
           {/* X1 Logo - Bottom right corner */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.7 }}
-            className="absolute bottom-4 right-4 text-3xl font-bold text-white/50"
+            className="absolute bottom-0 right-6 text-5xl font-bold text-gray-500/50"
           >
             X1
           </motion.div>

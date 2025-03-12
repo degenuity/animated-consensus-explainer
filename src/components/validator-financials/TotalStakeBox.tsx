@@ -13,7 +13,7 @@ const TotalStakeBox = () => (
     <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg h-full">
       <div className="flex items-center mb-3">
         <Lock className="h-5 w-5 text-blue-400 mr-2" />
-        <span className="text-lg text-white">total stake</span>
+        <span className="text-xl text-white">total stake</span>
       </div>
       
       <div className="space-y-2">

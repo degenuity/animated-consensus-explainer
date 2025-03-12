@@ -13,7 +13,7 @@ const BlockProductionEligibilityBox = () => (
     <div className="bg-gray-900/70 border border-gray-700 p-4 rounded-lg h-full">
       <div className="flex items-center mb-4">
         <Box className="h-5 w-5 text-blue-400 mr-2" />
-        <span className="text-lg text-white">block production eligibility</span>
+        <span className="text-xl text-white">block production eligibility</span>
       </div>
       
       <div className="grid grid-cols-3 gap-3">
