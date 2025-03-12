@@ -1,5 +1,5 @@
 
-import React, { lazy, Suspense, memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -38,8 +38,11 @@ BLSErrorFallback.displayName = 'BLSErrorFallback';
 const Home = memo(() => {
   const [isAnimationVisible, setIsAnimationVisible] = useState(false);
   
+  console.log('Home component rendered, initial animation visibility:', isAnimationVisible);
+  
   // Show animation only when in viewport and after initial content is loaded
   useEffect(() => {
+    console.log('Home useEffect running');
     // After initial render, check if page is visible
     if (document.visibilityState === 'visible') {
       console.log('Page is visible, preparing to show animation');
@@ -76,7 +79,7 @@ const Home = memo(() => {
               alt="X1 Logo" 
               className="h-7 w-auto" 
               loading="eager" 
-              fetchPriority="high"
+              fetchpriority="high"
               decoding="async"
             />
           </Link>
@@ -119,7 +122,7 @@ const Home = memo(() => {
             </Link>
           </div>
           
-          {/* Only load visualization when ready */}
+          {/* Always render the component, but with a fallback */}
           <div className="relative h-72 flex items-center justify-center overflow-visible">
             {isAnimationVisible ? (
               <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
