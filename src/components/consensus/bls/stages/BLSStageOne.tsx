@@ -38,28 +38,58 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
       className="absolute inset-0"
     >
       <div className="absolute inset-0 flex items-center justify-center">
-        <motion.div
-          className="absolute z-20"
-          initial={{ scale: 0.95 }}
-          animate={{ scale: [0.95, 1.05, 0.95] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <motion.div className="w-20 h-20 rounded-xl bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
-            <motion.div
-              className="flex flex-col items-center justify-center"
-              animate={{ opacity: [0.8, 1, 0.8] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <Server className="text-purple-400 mb-1" size={20} />
-              <motion.span className="text-xs font-bold text-purple-300">
-                {showX1Label ? "X1" : "Relay node"}
-              </motion.span>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+        {/* Message animation layer - lower z-index */}
+        <div className="absolute inset-0" style={{ zIndex: 10 }}>
+          {Array.from({ length: 10 }).map((_, i) => {
+            const angle = (i * 36) * (Math.PI / 180);
+            const radius = 120;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            
+            return (
+              <motion.div
+                key={`message-${i}`}
+                initial={{ opacity: 0 }}
+                animate={{ 
+                  opacity: 1,
+                  x, 
+                  y,
+                }}
+                transition={{ 
+                  delay: i * 0.1,
+                  duration: 0.5,
+                  type: "spring",
+                }}
+                className="absolute top-1/2 left-1/2"
+                style={{ marginLeft: -20, marginTop: -20 }}
+              >
+                <motion.div
+                  className="w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    opacity: [0, 1, 0], // Only appear right before movement
+                    scale: [0.5, 1, 0.5],
+                    x: [0, -x * 0.6], 
+                    y: [0, -y * 0.6],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    delay: i * 0.3 + 2, // 2 second delay before messages start appearing, after validators are positioned
+                    repeatDelay: 0,
+                    times: [0, 0.5, 1],
+                    ease: "easeInOut"
+                  }}
+                >
+                  <span className="text-white font-bold text-xs">M</span>
+                </motion.div>
+              </motion.div>
+            );
+          })}
+        </div>
 
-        {/* Render all 10 validators in a circle - on a higher z-index layer */}
-        <div className="absolute inset-0" style={{ zIndex: 30 }}>
+        {/* Validator layer - higher z-index */}
+        <div className="absolute inset-0" style={{ zIndex: 20 }}>
           {Array.from({ length: 10 }).map((_, i) => {
             const angle = (i * 36) * (Math.PI / 180);
             const radius = 120;
@@ -80,37 +110,12 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                   duration: 0.5,
                   type: "spring",
                 }}
-                className="absolute"
-                style={{ zIndex: 50 }}
+                className="absolute top-1/2 left-1/2"
+                style={{ marginLeft: -20, marginTop: -20 }}
               >
-                {/* Message boxes in a separate container with lower z-index */}
-                <div className="absolute" style={{ zIndex: 5 }}>
-                  <motion.div
-                    className="w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
-                    initial={{ opacity: 0 }}
-                    animate={{ 
-                      opacity: [0, 1, 0], // Only appear right before movement
-                      scale: [0.5, 1, 0.5],
-                      x: [0, -x * 0.6], 
-                      y: [0, -y * 0.6],
-                    }}
-                    transition={{
-                      duration: 2.5,
-                      repeat: Infinity,
-                      delay: i * 0.3 + 2, // 2 second delay before messages start appearing, after validators are positioned
-                      repeatDelay: 0,
-                      times: [0, 0.5, 1],
-                      ease: "easeInOut"
-                    }}
-                  >
-                    <span className="text-white font-bold text-xs">M</span>
-                  </motion.div>
-                </div>
-
                 <motion.div
                   className="flex flex-col items-center"
                   whileHover={{ scale: 1.1 }}
-                  style={{ zIndex: 60 }}
                 >
                   <div className="w-10 h-10 rounded-full bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-md">
                     <User size={15} className="text-purple-400" />
@@ -129,10 +134,31 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
             );
           })}
         </div>
+
+        {/* Relay Node - top-most layer */}
+        <motion.div
+          className="absolute z-30"
+          initial={{ scale: 0.95 }}
+          animate={{ scale: [0.95, 1.05, 0.95] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <motion.div className="w-20 h-20 rounded-xl bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+            <motion.div
+              className="flex flex-col items-center justify-center"
+              animate={{ opacity: [0.8, 1, 0.8] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Server className="text-purple-400 mb-1" size={20} />
+              <motion.span className="text-xs font-bold text-purple-300">
+                {showX1Label ? "X1" : "Relay node"}
+              </motion.span>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
       
       {/* Add the status message box at the bottom */}
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center" style={{ zIndex: 10 }}>
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center" style={{ zIndex: 40 }}>
         <StatusMessage>
           Each validator creates a signature <strong className="text-purple-400">σ<sub>i</sub></strong> on message M using their secret key
         </StatusMessage>
