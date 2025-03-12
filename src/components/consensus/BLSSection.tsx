@@ -116,12 +116,12 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                     From each validator where H(M) is the hash of the vote message and
                     sk<sub>i</sub> is the validator's secret key
                   </p>
+                  <p className="text-sm text-slate-300 mt-2">
+                    Each validator in a subcommittee generates a BLS signature
+                    σ<sub>i</sub> on the vote message M:
+                  </p>
                 </div>
               </div>
-              <p className="text-sm text-slate-300 mb-2">
-                Each validator in a subcommittee generates a BLS signature
-                σ<sub>i</sub> on the vote message M:
-              </p>
               <motion.div 
                 className="bg-slate-800 p-3 rounded-md my-2 flex justify-center"
                 animate={{
@@ -160,12 +160,12 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                   <p className="text-xs text-slate-300 mt-0.5">
                     Compressed proof of consensus
                   </p>
+                  <p className="text-sm text-slate-300 mt-2">
+                    The relay node aggregates all signatures within the 
+                    subcommittee which is then submitted to the leader:
+                  </p>
                 </div>
               </div>
-              <p className="text-sm text-slate-300 mb-2">
-                The relay node aggregates all signatures within the 
-                subcommittee which is then submitted to the leader:
-              </p>
               <motion.div 
                 className="bg-slate-800 p-3 rounded-md my-2 flex justify-center"
                 animate={{
@@ -204,12 +204,12 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                   <p className="text-xs text-slate-300 mt-0.5">
                     Where pk<sub>i</sub> are the public keys of the participating validators
                   </p>
+                  <p className="text-sm text-slate-300 mt-2">
+                    The leader verifies the aggregated signature in constant time
+                    using:
+                  </p>
                 </div>
               </div>
-              <p className="text-sm text-slate-300 mb-2">
-                The leader verifies the aggregated signature in constant time
-                using:
-              </p>
               <motion.div 
                 className="bg-slate-800 p-3 rounded-md my-2 flex justify-center"
                 animate={{
@@ -227,8 +227,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 </code>
               </motion.div>
             </motion.div>
-            
-            {/* Removed the toggle buttons from under the formulas */}
           </div>
           
           <div className="flex flex-col">
@@ -263,7 +261,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
             </div>
             
             <div className="flex justify-center mt-4 gap-2">
-              {/* Removed the chevron buttons but kept the dots */}
+              {/* Dots for stage selection */}
               {[0, 1, 2].map(idx => (
                 <button
                   key={idx}
