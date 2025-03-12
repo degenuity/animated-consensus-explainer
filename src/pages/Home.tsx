@@ -1,12 +1,17 @@
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
-import { BLSStageOne } from "@/components/consensus/bls/stages";
 
-const Home = () => {
+// Lazy load the BLS animation component
+const BLSStageOne = lazy(() => import("@/components/consensus/bls/stages").then(module => ({
+  default: module.BLSStageOne
+})));
+
+// Use React.memo to prevent unnecessary re-renders
+const Home = React.memo(() => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
       {/* Header with X1 Logo */}
@@ -17,6 +22,8 @@ const Home = () => {
               src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
               alt="X1 Logo" 
               className="h-7 w-auto" 
+              loading="eager" 
+              decoding="async"
             />
           </Link>
         </div>
@@ -59,12 +66,14 @@ const Home = () => {
           </div>
           
           <div className="relative h-72 flex items-center justify-center overflow-visible">
-            <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
+            <Suspense fallback={<div className="p-4 text-blue-300">Loading visualization...</div>}>
+              <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
+            </Suspense>
           </div>
         </div>
       </div>
     </div>
   );
-};
+});
 
 export default Home;

@@ -11,7 +11,10 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react(),
+    react({
+      // Add fast refresh options
+      fastRefresh: true,
+    }),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
@@ -19,33 +22,80 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    // Add mainFields to prioritize module resolution
     mainFields: ['module', 'jsnext:main', 'jsnext', 'main'],
   },
   build: {
     sourcemap: mode !== 'production',
     minify: mode === 'production',
-    // Increase the warning limit for large chunks
     chunkSizeWarningLimit: 2000,
+    // Optimize CSS
+    cssCodeSplit: true,
+    // Add terser options for better minification
+    terserOptions: {
+      compress: {
+        drop_console: mode === 'production',
+        drop_debugger: mode === 'production'
+      }
+    },
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom'],
-          // Important: Use individual component imports instead of directory
-          ui: ['@/components/ui/button', '@/components/ui/toast', '@/components/ui/toaster'],
-          pdf: ['react-pdf', 'pdfjs-dist'],
-        },
+        // Use deterministic chunk names
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+        // Optimize chunks for better caching
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+              return 'vendor-react';
+            } else if (id.includes('@radix-ui')) {
+              return 'vendor-radix';
+            } else if (id.includes('framer-motion')) {
+              return 'vendor-framer';
+            } else if (id.includes('lucide-react')) {
+              return 'vendor-lucide';
+            } else if (id.includes('recharts') || id.includes('d3')) {
+              return 'vendor-charts';
+            } else if (id.includes('react-pdf') || id.includes('pdfjs-dist')) {
+              return 'vendor-pdf';
+            }
+            return 'vendor-other';
+          }
+          // Split app code by feature area
+          if (id.includes('/components/consensus/')) {
+            return 'feature-consensus';
+          }
+          if (id.includes('/components/ui/')) {
+            return 'ui-components';
+          }
+        }
       },
     },
-    // Add rollup specific options
+    // Improve commonjs handling
     commonjsOptions: {
       include: [/node_modules/],
       transformMixedEsModules: true,
     },
   },
-  // Add optimizeDeps to better handle problematic dependencies
+  // Add optimizeDeps for better dependency optimization
   optimizeDeps: {
-    include: ['react-pdf', 'pdfjs-dist'],
+    include: [
+      'react-pdf', 
+      'pdfjs-dist', 
+      'framer-motion',
+      'react-router-dom',
+      'recharts'
+    ],
     exclude: [],
+    esbuildOptions: {
+      target: 'es2020'
+    }
+  },
+  // Add better CSS handling
+  css: {
+    devSourcemap: true,
+    preprocessorOptions: {
+      // Add any preprocessor options if needed
+    }
   }
 }));

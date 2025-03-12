@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, memo } from 'react';
 import { motion } from "framer-motion";
 import { User, Server } from "lucide-react";
 
@@ -9,7 +9,8 @@ interface BLSStageOneProps {
   showX1Label?: boolean;
 }
 
-export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeFormula, showX1Label = false }) => {
+// Memoize the component to prevent unnecessary re-renders
+export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = false }: BLSStageOneProps) => {
   const [innerKey, setInnerKey] = useState(0);
   const prevFormulaRef = useRef(activeFormula);
   
@@ -127,4 +128,7 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
       </div>
     </motion.div>
   );
-};
+});
+
+// Add displayName for better debugging
+BLSStageOne.displayName = 'BLSStageOne';
