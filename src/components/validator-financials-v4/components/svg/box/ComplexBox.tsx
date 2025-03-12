@@ -44,13 +44,37 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       const totalOperatorWidth = operatorItems.length * operatorWidth;
       const totalMargins = (horizontalItems.length - 1) * itemMargin;
       const remainingWidth = width - 20 - totalMargins - totalOperatorWidth;
-      const contentItemWidth = contentItems.length > 0 ? remainingWidth / contentItems.length : 0;
+      
+      // Allocate more width to the randomness box specifically to fit "protocol"
+      let contentItemWidths: number[] = [];
+      
+      if (contentItems.length > 0) {
+        // Base width calculation
+        const baseWidth = remainingWidth / contentItems.length;
+        
+        // Allocate widths, giving slightly more to the randomness box
+        contentItems.forEach(item => {
+          if (item.id === 'randomness') {
+            contentItemWidths.push(baseWidth * 1.15); // 15% more width for randomness
+          } else {
+            contentItemWidths.push(baseWidth * 0.925); // Slightly reduce others to compensate
+          }
+        });
+      }
       
       // Map of positions for each item
       let currentX = x + 10;
+      let itemIndex = 0;
       
       horizontalItems.forEach((item, index) => {
-        const itemWidth = item.isOperator ? operatorWidth : contentItemWidth;
+        let itemWidth: number;
+        
+        if (item.isOperator) {
+          itemWidth = operatorWidth;
+        } else {
+          itemWidth = contentItemWidths[itemIndex];
+          itemIndex++;
+        }
         
         renderedItems.push(
           <SubItemRenderer 
@@ -144,4 +168,3 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
 };
 
 export default ComplexBox;
-

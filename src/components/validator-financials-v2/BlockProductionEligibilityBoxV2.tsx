@@ -38,7 +38,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           className="border border-blue-500/70 bg-[#141b29] p-3 rounded col-span-1"
         >
           <div className="text-blue-400 text-sm font-medium">randomness</div>
-          <div className="text-xs text-gray-300 mt-1">ACP anti-collusion</div>
+          <div className="text-xs text-gray-300 mt-1">ACP anti-collusion protocol</div>
         </motion.div>
         
         <motion.div

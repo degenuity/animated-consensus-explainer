@@ -39,13 +39,13 @@ export const blockProductionSubitems = [
   {
     text: "×",
     id: "multiply-1",
-    color: "#0E7490", // Changed to a darker blue
+    color: "#0E7490", // Darker blue
     isHorizontal: true,
     isOperator: true
   },
   { 
     text: "randomness", 
-    desc: "ACP anti-collusion", // Modified to fit in fewer lines
+    desc: "ACP anti-collusion protocol", // Added "protocol" back
     id: "randomness",
     color: "#3B82F6",
     isHorizontal: true
@@ -53,12 +53,12 @@ export const blockProductionSubitems = [
   {
     text: "×",
     id: "multiply-2",
-    color: "#0E7490", // Changed to a darker blue
+    color: "#0E7490", // Darker blue
     isHorizontal: true,
     isOperator: true
   },
   { 
-    text: "performance", // Removed "/reputation"
+    text: "performance", // Kept as "performance" without "/reputation"
     desc: "from recorded history", 
     id: "performance-reputation",
     color: "#3B82F6",
