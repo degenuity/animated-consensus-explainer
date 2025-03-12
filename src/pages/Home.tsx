@@ -1,37 +1,45 @@
 
-import React, { lazy, Suspense, memo, useEffect } from 'react';
+import React, { lazy, Suspense, memo, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
 
-// Prefetch BLS animation component
-const BLSStageOne = lazy(() => 
-  import("@/components/consensus/bls/stages").then(module => ({
-    default: module.BLSStageOne
-  }))
-);
-
-// Simple loading spinner for the BLS animation
-const BLSFallback = () => (
+// Simplified fallback component for faster initial rendering
+const SimpleBLSFallback = () => (
   <div className="p-4 text-blue-300 flex flex-col items-center">
     <div className="w-8 h-8 border-2 border-blue-300 border-t-transparent rounded-full animate-spin mb-2"></div>
     <div>Loading visualization...</div>
   </div>
 );
 
+// Lazy load BLS animation with explicit loading indicator
+const BLSStageOne = lazy(() => {
+  console.log('Starting to load BLSStageOne');
+  return import("@/components/consensus/bls/stages")
+    .then(module => {
+      console.log('BLSStageOne module loaded successfully');
+      return { default: module.BLSStageOne };
+    })
+    .catch(err => {
+      console.error('Failed to load BLSStageOne:', err);
+      throw err;
+    });
+});
+
 // Use React.memo to prevent unnecessary re-renders
 const Home = memo(() => {
-  // Prefetch the BLS module on component mount
+  const [isAnimationVisible, setIsAnimationVisible] = useState(false);
+  
+  // Show animation only when in viewport
   useEffect(() => {
-    // Prefetch the BLS module after the page loads
-    const prefetchTimeout = setTimeout(() => {
-      import("@/components/consensus/bls/stages")
-        .then(() => console.log("BLS module prefetched"))
-        .catch(err => console.error("Failed to prefetch BLS module:", err));
-    }, 500); // Wait for 500ms after mount before prefetching
+    // After initial load, make animation visible
+    const timer = setTimeout(() => {
+      setIsAnimationVisible(true);
+      console.log('Animation visibility set to true');
+    }, 100); // Short delay to ensure other content loads first
     
-    return () => clearTimeout(prefetchTimeout);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -57,7 +65,7 @@ const Home = memo(() => {
             className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00C6FF] to-[#0072FF]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            transition={{ delay: 0.1, duration: 0.3 }}
           >
             X1 Research
           </motion.h1>
@@ -66,7 +74,7 @@ const Home = memo(() => {
             className="text-lg mb-8 text-gray-300"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.3 }}
           >
             Learn how X1 Blockchain's consensus mechanisms improve scalability and efficiency
           </motion.p>
@@ -87,11 +95,17 @@ const Home = memo(() => {
             </Link>
           </div>
           
-          <div className="relative h-72 flex items-center justify-center overflow-visible">
-            <Suspense fallback={<BLSFallback />}>
-              <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
-            </Suspense>
-          </div>
+          {isAnimationVisible ? (
+            <div className="relative h-72 flex items-center justify-center overflow-visible">
+              <Suspense fallback={<SimpleBLSFallback />}>
+                <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
+              </Suspense>
+            </div>
+          ) : (
+            <div className="relative h-72 flex items-center justify-center">
+              <SimpleBLSFallback />
+            </div>
+          )}
         </div>
       </div>
     </div>

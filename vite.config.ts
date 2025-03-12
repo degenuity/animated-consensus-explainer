@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -11,9 +10,21 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react(), // Using default react plugin settings
-    mode === 'development' &&
-    componentTagger(),
+    react({
+      // Optimize SWC options for faster initial load
+      swcOptions: {
+        jsc: {
+          transform: {
+            react: {
+              runtime: 'automatic',
+              development: mode !== 'production',
+              refresh: mode === 'development',
+            },
+          },
+        },
+      },
+    }),
+    mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -40,14 +51,56 @@ export default defineConfig(({ mode }) => ({
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
-        // Optimize chunks for better caching
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-ui': ['@radix-ui/react-toast', '@radix-ui/react-slot'],
-          'vendor-framer': ['framer-motion'],
-          'vendor-lucide': ['lucide-react'],
-          'vendor-pdf': ['react-pdf', 'pdfjs-dist'],
-          'vendor-charts': ['recharts'],
+        // Improve chunking strategy for better caching
+        manualChunks: (id) => {
+          // Core React functionality
+          if (id.includes('node_modules/react/') || 
+              id.includes('node_modules/react-dom/') ||
+              id.includes('node_modules/scheduler/')) {
+            return 'vendor-react-core';
+          }
+          
+          // React router
+          if (id.includes('node_modules/react-router') || 
+              id.includes('node_modules/@remix-run')) {
+            return 'vendor-router';
+          }
+          
+          // UI components
+          if (id.includes('node_modules/@radix-ui/')) {
+            return 'vendor-ui';
+          }
+          
+          // Animation libraries
+          if (id.includes('node_modules/framer-motion/')) {
+            return 'vendor-framer';
+          }
+          
+          // Icons
+          if (id.includes('node_modules/lucide-react/')) {
+            return 'vendor-lucide';
+          }
+          
+          // PDF related
+          if (id.includes('node_modules/react-pdf/') || 
+              id.includes('node_modules/pdfjs-dist/')) {
+            return 'vendor-pdf';
+          }
+          
+          // Charts
+          if (id.includes('node_modules/recharts/')) {
+            return 'vendor-charts';
+          }
+          
+          // Keep BLS related components in a separate chunk
+          if (id.includes('/components/consensus/bls/')) {
+            return 'feature-bls';
+          }
+          
+          // VRF related code
+          if (id.includes('/components/consensus/vrf/')) {
+            return 'feature-vrf';
+          }
         }
       },
     },
@@ -57,7 +110,7 @@ export default defineConfig(({ mode }) => ({
       transformMixedEsModules: true,
     },
   },
-  // Optimize dependency pre-bundling
+  // Optimize dependency pre-bundling with more specific settings
   optimizeDeps: {
     include: [
       'react', 
@@ -65,30 +118,29 @@ export default defineConfig(({ mode }) => ({
       'react-router-dom',
       'framer-motion',
       'lucide-react',
-      'react-pdf', 
-      'pdfjs-dist', 
-      'recharts'
+      'recharts',
+      '@radix-ui/react-toast'
     ],
     exclude: [],
     esbuildOptions: {
-      target: 'es2020'
+      target: 'es2020',
+      splitting: true,
+      minify: true,
+      legalComments: 'none'
     }
   },
   // Add better CSS handling
   css: {
     devSourcemap: true,
-    preprocessorOptions: {
-      // Add any preprocessor options if needed
+    modules: {
+      scopeBehaviour: 'local'
     }
-  },
-  // Set reasonable performance budgets
-  performance: {
-    hints: mode === 'production' ? 'warning' : false
   },
   // Important: set this to ensure faster builds
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' },
     legalComments: 'none',
-    target: ['es2020']
+    target: ['es2020'],
+    treeShaking: true
   }
 }));

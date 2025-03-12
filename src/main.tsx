@@ -45,11 +45,13 @@ import { Toaster } from '@/components/ui/toaster'
   
   // Log performance metrics
   if (window.performance) {
-    const perf = window.performance.getEntriesByType('navigation')[0]
     console.log(`App initialization time: ${performance.now()}ms`)
-    if (perf) {
-      console.log(`DOM Content Loaded: ${perf.domContentLoadedEventEnd - perf.fetchStart}ms`)
-      console.log(`DOM Complete: ${perf.domComplete - perf.fetchStart}ms`)
+    // Use proper type checking for Navigation timing
+    const navEntries = performance.getEntriesByType('navigation')
+    if (navEntries.length > 0) {
+      const navTiming = navEntries[0] as PerformanceNavigationTiming
+      console.log(`DOM Content Loaded: ${navTiming.domContentLoadedEventEnd - navTiming.fetchStart}ms`)
+      console.log(`DOM Complete: ${navTiming.domComplete - navTiming.fetchStart}ms`)
     }
   }
 })()
