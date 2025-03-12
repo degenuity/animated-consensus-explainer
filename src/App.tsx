@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import Whitepaper from "./pages/Whitepaper"
 import ConsensusExplainer from "./pages/ConsensusExplainer"
+import NotFound from "./pages/NotFound"
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/whitepaper" element={<Whitepaper />} />
         <Route path="/consensus" element={<ConsensusExplainer />} />
-        <Route path="*" element={<div>Page not found</div>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
