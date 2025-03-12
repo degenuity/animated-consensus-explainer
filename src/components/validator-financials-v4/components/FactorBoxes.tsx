@@ -17,18 +17,21 @@ const FactorBoxes: React.FC = () => {
           title="Stake Weight"
           description="Amount of XNT staked"
           color="blue"
+          index={0}
         />
         <div className="text-gray-500 mx-1">×</div>
         <FactorBox
           title="Randomness"
           description="ACP anti-collusion protocol"
           color="blue"
+          index={1}
         />
         <div className="text-gray-500 mx-1">×</div>
         <FactorBox
           title="Performance"
           description="From recorded history"
           color="blue"
+          index={2}
         />
       </motion.div>
 
@@ -43,12 +46,14 @@ const FactorBoxes: React.FC = () => {
           title="Operational Costs"
           description="Only cost is server"
           color="yellow"
+          index={0}
         />
         <div className="text-gray-500 mx-1">+</div>
         <FactorBox
           title="Total Rewards"
           description="Aggregate earnings"
           color="green"
+          index={1}
         />
       </motion.div>
     </>
