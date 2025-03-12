@@ -110,6 +110,16 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 repeatType: "reverse"
               }}
             >
+              <div className="flex items-start mb-3">
+                <div className="w-3 h-3 rounded-full bg-purple-500 mt-1.5 mr-3 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-medium text-white">Individual signatures (σ<sub>i</sub>)</p>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    From each validator where H(M) is the hash of the vote message and
+                    sk<sub>i</sub> is the validator's secret key
+                  </p>
+                </div>
+              </div>
               <p className="text-sm text-slate-300 mb-2">
                 Each validator in a subcommittee generates a BLS signature
                 σ<sub>i</sub> on the vote message M:
@@ -145,6 +155,15 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 repeatType: "reverse"
               }}
             >
+              <div className="flex items-start mb-3">
+                <div className="w-3 h-3 rounded-full bg-indigo-500 mt-1.5 mr-3 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-medium text-white">Aggregated signature (σ<sub>agg</sub>)</p>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    Compressed proof of consensus
+                  </p>
+                </div>
+              </div>
               <p className="text-sm text-slate-300 mb-2">
                 The relay node aggregates all signatures within the 
                 subcommittee which is then submitted to the leader:
@@ -180,6 +199,15 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 repeatType: "reverse"
               }}
             >
+              <div className="flex items-start mb-3">
+                <div className="w-3 h-3 rounded-full bg-red-500 mt-1.5 mr-3 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-medium text-white">Verification of aggregated signature</p>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    Where pk<sub>i</sub> are the public keys of the participating validators
+                  </p>
+                </div>
+              </div>
               <p className="text-sm text-slate-300 mb-2">
                 The leader verifies the aggregated signature in constant time
                 using:
