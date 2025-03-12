@@ -1,4 +1,3 @@
-
 import React, { lazy, Suspense, memo, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -26,25 +25,17 @@ const SimpleBLSFallback = () => (
   </div>
 );
 
-// Create a fallback component with the same props as BLSStageOne
-const BLSErrorFallback = (props: BLSStageOneProps) => (
+// Create a proper error fallback component that accepts the same props
+const BLSErrorFallback = memo((props: BLSStageOneProps) => (
   <div className="text-red-500 p-4">Failed to load visualization. Please refresh.</div>
-);
+));
 
-// Fixed lazy loading with proper typing
-const BLSStageOne = lazy(() => {
-  console.log('Starting to load BLSStageOne');
-  
-  return import("@/components/consensus/bls/stages")
-    .then(module => {
-      console.log('BLSStageOne module loaded successfully');
-      return { default: module.BLSStageOne };
-    })
-    .catch(err => {
-      console.error('Failed to load BLSStageOne:', err);
-      return { default: BLSErrorFallback };
-    });
-});
+BLSErrorFallback.displayName = 'BLSErrorFallback';
+
+// Use a simpler approach for lazy loading
+const BLSStageOne = lazy(() => import("@/components/consensus/bls/stages").then(module => ({ 
+  default: module.BLSStageOne 
+})));
 
 // Use React.memo to prevent unnecessary re-renders
 const Home = memo(() => {

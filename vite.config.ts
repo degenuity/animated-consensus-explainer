@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
@@ -15,8 +14,7 @@ export default defineConfig(({ mode }) => ({
       // Configure react-swc with proper options
       jsxImportSource: undefined,
       devTarget: "es2020",
-      plugins: [],
-      swcrc: true
+      plugins: []
     }),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
