@@ -1,4 +1,3 @@
-
 // Box definitions with positions, dimensions and content
 import { 
   internalRewardsSubitems, 
@@ -105,20 +104,5 @@ export const boxes = [
     animationIndex: 2,
     subitems: profitabilitySubitems,
     borderColor: "#3B82F6"
-  },
-  
-  // Explanation Box
-  {
-    x: 500,
-    y: 740,
-    width: 500,
-    height: 60,
-    title: "Minimal operational costs",
-    subtitle: "Voting transactions on X1 are free, keeping operational expenses at minimum.",
-    icon: "info" as const,
-    color: "59, 130, 246",
-    animationIndex: 3,
-    simpleStyle: true,
-    isExplanation: true
-  },
+  }
 ];
