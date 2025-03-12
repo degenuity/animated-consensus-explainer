@@ -86,7 +86,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                 transition={{
                   duration: 2.5,
                   repeat: Infinity,
-                  delay: i * 0.3,
+                  delay: i * 0.3 + 1, // Add 1 second delay before messages start appearing
                   repeatDelay: 0,
                   times: [0, 0.5, 1],
                   ease: "easeInOut"
