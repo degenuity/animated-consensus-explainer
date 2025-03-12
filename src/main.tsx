@@ -41,8 +41,6 @@ document.body.style.overflow = 'auto';
 document.body.style.backgroundColor = '#000';
 document.body.style.color = '#fff';
 
-// We're removing the PDF.js configuration from main.tsx as it's now handled in the component
-
 try {
   const rootElement = document.getElementById('root');
   if (rootElement) {

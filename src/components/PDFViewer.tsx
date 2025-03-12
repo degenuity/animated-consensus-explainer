@@ -1,24 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
-import { Document, Page } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { Button } from './ui/button';
 import { ChevronLeft, ChevronRight, Download, ZoomIn, ZoomOut } from 'lucide-react';
 
-// Import pdfjs separately to configure it
-import * as pdfjs from 'pdfjs-dist';
-
-// Configure PDF.js worker with CDN URL to avoid Node.js dependencies
-if (typeof window !== 'undefined' && !pdfjs.GlobalWorkerOptions.workerSrc) {
-  // Only set if not already set
-  try {
-    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
-    console.log('PDF.js worker set successfully in component');
-  } catch (error) {
-    console.error('Error setting PDF.js worker in component:', error);
-  }
-}
+// Explicitly configure PDF.js worker
+// This needs to happen before any PDF components are rendered
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 interface PDFViewerProps {
   pdfUrl: string;
@@ -32,27 +22,22 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [pdfError, setPdfError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [scale, setScale] = useState<number>(1.3);
-  const [pdfjsReady, setPdfjsReady] = useState<boolean>(false);
+  const [initialized, setInitialized] = useState<boolean>(false);
 
-  // Ensure PDF.js is initialized
+  // Initialize PDF.js worker
   useEffect(() => {
-    const initializePdfjs = async () => {
-      try {
-        // Ensure worker is set
-        if (!pdfjs.GlobalWorkerOptions.workerSrc) {
-          pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
-          console.log('PDF.js worker set in component useEffect');
-        }
-        setPdfjsReady(true);
-      } catch (error) {
-        console.error('Failed to initialize PDF.js:', error);
-        setPdfjsReady(false);
-        setPdfError(true);
-        setErrorMessage('PDF.js initialization failed');
+    try {
+      // Double-check worker configuration
+      if (!pdfjs.GlobalWorkerOptions.workerSrc) {
+        pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
       }
-    };
-
-    initializePdfjs();
+      console.log("PDF.js worker initialized:", pdfjs.GlobalWorkerOptions.workerSrc);
+      setInitialized(true);
+    } catch (error) {
+      console.error("Failed to initialize PDF.js worker:", error);
+      setPdfError(true);
+      setErrorMessage("Failed to initialize PDF viewer");
+    }
   }, []);
 
   // Reset loading state when PDF URL changes
@@ -101,8 +86,8 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       ? `${window.location.origin}${pdfUrl}`
       : pdfUrl;
 
-  // Show loading or error state if PDF.js is not ready
-  if (!pdfjsReady) {
+  // Show error state if PDF.js is not initialized
+  if (!initialized) {
     return (
       <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
         {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
