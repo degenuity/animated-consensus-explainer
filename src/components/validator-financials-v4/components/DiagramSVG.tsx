@@ -53,7 +53,7 @@ const DiagramSVG = () => {
             key={`connection-bg-${connection.id}-${index}`}
             path={connection.path}
             color={connection.color}
-            animationIndex={connection.animationIndex}
+            animationIndex={connection.animationIndex || index}
             dotPosition={connection.dotPosition}
             label={connection.label}
             labelPosition={connection.labelPosition}
@@ -102,7 +102,7 @@ const DiagramSVG = () => {
             key={`connection-fg-${connection.id}-${index}`}
             path={connection.path}
             color={connection.color}
-            animationIndex={connection.animationIndex}
+            animationIndex={connection.animationIndex || index}
             dotPosition={connection.dotPosition}
             label={connection.label}
             labelPosition={connection.labelPosition}
