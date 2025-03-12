@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -6,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import PDFViewer from "@/components/PDFViewer";
-import ValidatorFinancials from "@/components/ValidatorFinancials";
+import ValidatorFinancials from "@/components/validator-financials";
 
 const Whitepaper = () => {
   // Using the GitHub raw content URL for reliability on the live site
