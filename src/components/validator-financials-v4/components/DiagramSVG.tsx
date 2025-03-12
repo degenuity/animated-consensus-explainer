@@ -31,6 +31,8 @@ const DiagramSVG = () => {
             color={connection.color}
             animationIndex={connection.animationIndex}
             dotPosition={connection.dotPosition}
+            label={connection.label}
+            labelPosition={connection.labelPosition}
           />
         ))}
         
