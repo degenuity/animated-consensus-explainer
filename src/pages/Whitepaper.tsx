@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import PDFViewer from "@/components/PDFViewer";
+import ValidatorFinancials from "@/components/ValidatorFinancials";
 
 const Whitepaper = () => {
   // Using the GitHub raw content URL for reliability on the live site
@@ -69,32 +70,16 @@ const Whitepaper = () => {
           Models in this paper
         </motion.h2>
 
-        {/* VRF-like container */}
+        {/* X1 Validator Financials Model */}
         <motion.div
-          animate={{ scale: 1, opacity: 1 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
           <Card className="p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
-            <div className="relative h-80 flex items-center justify-center z-10">
-              <motion.div
-                className="z-10 text-white font-bold text-2xl bg-blue-500/20 backdrop-blur-sm px-6 py-3 rounded-full border border-blue-400/30"
-                animate={{
-                  scale: [0.95, 1.05, 0.95],
-                  textShadow: [
-                    "0 0 5px rgba(59, 130, 246, 0.3)",
-                    "0 0 10px rgba(59, 130, 246, 0.6)",
-                    "0 0 5px rgba(59, 130, 246, 0.3)"
-                  ]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                Content coming soon
-              </motion.div>
+            <div className="relative z-10">
+              <ValidatorFinancials />
             </div>
           </Card>
         </motion.div>
