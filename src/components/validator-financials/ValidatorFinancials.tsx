@@ -32,7 +32,7 @@ const ValidatorFinancials = () => {
             <DeflationBox />
           </div>
           
-          {/* Middle Row - Internal Rewards and Network Usage Costs */}
+          {/* Second Row - Internal Rewards and Network Usage Costs */}
           <div className="absolute left-[50px] top-[220px]" style={{ width: '280px' }}>
             <InternalRewardsBox />
           </div>
@@ -41,8 +41,8 @@ const ValidatorFinancials = () => {
             <NetworkUsageCostsBox />
           </div>
           
-          {/* Total Stake - Moved down to prevent overlap */}
-          <div className="absolute left-[50%] top-[400px] transform -translate-x-1/2" style={{ width: '280px' }}>
+          {/* Total Stake - Moved down further to prevent overlap */}
+          <div className="absolute left-[50%] top-[500px] transform -translate-x-1/2" style={{ width: '280px' }}>
             <TotalStakeBox />
           </div>
 

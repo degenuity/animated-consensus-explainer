@@ -37,11 +37,11 @@ const ConnectingLines = () => (
     </div>
 
     {/* Total Stake to Internal Rewards - diagonal line from middle to left */}
-    <div className="absolute top-[400px] left-[280px] w-[120px] h-[2px] bg-blue-500/80 transform rotate-[35deg] origin-left">
+    <div className="absolute top-[500px] left-[280px] w-[220px] h-[2px] bg-blue-500/80 transform rotate-[65deg] origin-left">
       <motion.div 
         className="absolute top-0 left-0 h-full w-[20px] bg-blue-400"
         animate={{ 
-          x: [0, 120, 0],
+          x: [0, 220, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -53,11 +53,11 @@ const ConnectingLines = () => (
     </div>
 
     {/* Total Stake to Network Usage Costs - diagonal line from middle to right */}
-    <div className="absolute top-[400px] right-[280px] w-[120px] h-[2px] bg-yellow-500/80 transform -rotate-[35deg] origin-right">
+    <div className="absolute top-[500px] right-[280px] w-[220px] h-[2px] bg-yellow-500/80 transform -rotate-[65deg] origin-right">
       <motion.div 
         className="absolute top-0 right-0 h-full w-[20px] bg-yellow-400"
         animate={{ 
-          x: [0, -120, 0],
+          x: [0, -220, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -101,11 +101,11 @@ const ConnectingLines = () => (
     </div>
     
     {/* Total Stake to Block Production Eligibility - vertical */}
-    <div className="absolute top-[470px] left-[50%] h-[230px] w-[2px] bg-blue-500/80 transform -translate-x-1/2">
+    <div className="absolute top-[570px] left-[50%] h-[130px] w-[2px] bg-blue-500/80 transform -translate-x-1/2">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-blue-400"
         animate={{ 
-          y: [0, 230, 0],
+          y: [0, 130, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
@@ -124,17 +124,17 @@ const ConnectingLines = () => (
     </div>
     
     {/* 50% indicator for bottom path */}
-    <div className="absolute top-[580px] left-[50%] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300 transform -translate-x-1/2">
+    <div className="absolute top-[640px] left-[50%] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300 transform -translate-x-1/2">
       50%
     </div>
     
     {/* 50% indicator for diagonal path to internal rewards */}
-    <div className="absolute top-[370px] left-[330px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300 transform rotate-[35deg]">
+    <div className="absolute top-[390px] left-[200px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300 transform rotate-[65deg]">
       50%
     </div>
     
     {/* 50% indicator for diagonal path to network costs */}
-    <div className="absolute top-[370px] right-[330px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300 transform -rotate-[35deg]">
+    <div className="absolute top-[390px] right-[200px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300 transform -rotate-[65deg]">
       50%
     </div>
   </>
