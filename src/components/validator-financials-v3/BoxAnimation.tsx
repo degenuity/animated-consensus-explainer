@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, BarChart3, PieChart, LineChart, ArrowRight, ArrowDown } from "lucide-react";
+import { TrendingUp, TrendingDown, BarChart3, PieChart, LineChart, ArrowRight, ArrowDown, Lock, Tag, Box, Percent } from "lucide-react";
 
 const BoxAnimation = () => {
   return (
@@ -17,8 +16,8 @@ const BoxAnimation = () => {
         >
           <div className="bg-blue-500 text-white p-6 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
             <TrendingUp className="mb-4 h-8 w-8" />
-            <div className="text-xl font-semibold">Blue Box</div>
-            <div className="text-sm opacity-90 mt-2">First Element</div>
+            <div className="text-xl font-semibold">inflation</div>
+            <div className="text-sm opacity-90 mt-2">token issuance</div>
           </div>
         </motion.div>
 
@@ -51,42 +50,123 @@ const BoxAnimation = () => {
           />
         </motion.div>
 
-        {/* Grey Box 1 */}
+        {/* Grey Box 1 - Internal Rewards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="w-32 h-32"
+          className="w-64 h-64"
         >
-          <div className="bg-gray-500 text-white p-4 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
-            <BarChart3 className="mb-2 h-6 w-6" />
-            <div className="text-sm font-semibold">Grey 1</div>
+          <div className="bg-gray-800/90 border border-gray-700 p-4 rounded-lg shadow-lg h-full">
+            <div className="flex items-center mb-3">
+              <BarChart3 className="h-5 w-5 text-blue-400 mr-2" />
+              <span className="text-xl text-white">internal rewards</span>
+            </div>
+            <div className="space-y-2">
+              <motion.div 
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
+                className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-sm text-white"
+              >
+                commission
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.4 }}
+                className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-sm text-white"
+              >
+                staking rewards
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.5 }}
+                className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-sm text-white"
+              >
+                voting rewards
+              </motion.div>
+            </div>
           </div>
         </motion.div>
 
-        {/* Grey Box 2 */}
+        {/* Grey Box 2 - Total Stake */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="w-32 h-32"
+          className="w-64 h-64"
         >
-          <div className="bg-gray-600 text-white p-4 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
-            <PieChart className="mb-2 h-6 w-6" />
-            <div className="text-sm font-semibold">Grey 2</div>
+          <div className="bg-gray-800/90 border border-gray-700 p-4 rounded-lg shadow-lg h-full">
+            <div className="flex items-center mb-3">
+              <Lock className="h-5 w-5 text-blue-400 mr-2" />
+              <span className="text-xl text-white">total stake</span>
+            </div>
+            <div className="space-y-2">
+              <motion.div 
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
+                className="border border-blue-500/70 bg-gray-800/50 p-2 rounded text-sm text-white"
+              >
+                delegated stake
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.4 }}
+                className="border border-blue-500/70 bg-gray-800/50 p-2 rounded text-sm text-white"
+              >
+                own stake
+              </motion.div>
+            </div>
           </div>
         </motion.div>
 
-        {/* Grey Box 3 */}
+        {/* Grey Box 3 - Network Usage Costs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="w-32 h-32"
+          className="w-64 h-64"
         >
-          <div className="bg-gray-700 text-white p-4 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
-            <LineChart className="mb-2 h-6 w-6" />
-            <div className="text-sm font-semibold">Grey 3</div>
+          <div className="bg-gray-800/90 border border-gray-700 p-4 rounded-lg shadow-lg h-full">
+            <div className="flex items-center mb-3">
+              <Tag className="h-5 w-5 text-blue-400 mr-2" />
+              <span className="text-xl text-white">network usage costs</span>
+            </div>
+            <div className="space-y-3">
+              <motion.div 
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.4 }}
+                className="border border-yellow-500/70 bg-gray-800/50 p-2 rounded text-sm text-white"
+              >
+                base fees
+              </motion.div>
+              <div className="bg-gray-800/80 border border-gray-700 p-3 rounded mt-2">
+                <div className="text-white mb-2">block rewards</div>
+                <div className="space-y-2">
+                  <motion.div 
+                    initial={{ opacity: 0, x: -5 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.6 }}
+                    className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-xs text-white"
+                  >
+                    priority fees
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, x: -5 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.7 }}
+                    className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-xs text-white"
+                  >
+                    MEV
+                  </motion.div>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
 
@@ -99,13 +179,13 @@ const BoxAnimation = () => {
         >
           <div className="bg-yellow-500 text-white p-6 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
             <TrendingDown className="mb-4 h-8 w-8" />
-            <div className="text-xl font-semibold">Yellow Box</div>
-            <div className="text-sm opacity-90 mt-2">Second Element</div>
+            <div className="text-xl font-semibold">deflation</div>
+            <div className="text-sm opacity-90 mt-2">token burns</div>
           </div>
         </motion.div>
       </div>
 
-      {/* Line with Arrow from Grey 1 to Pink Box 2 */}
+      {/* Lines connecting various elements */}
       <div className="relative w-full h-20">
         <motion.div 
           className="absolute left-[204px] top-[-115px] w-[2px] h-[120px] bg-gray-400"
@@ -156,38 +236,115 @@ const BoxAnimation = () => {
         </motion.div>
       </div>
 
-      {/* Bottom row with pink boxes */}
+      {/* Bottom row with box production and profitability */}
       <div className="flex justify-center gap-12 items-center">
-        {/* Pink Box 1 */}
+        {/* Block Production Box */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="w-48 h-40"
+          className="w-[380px]"
         >
-          <div className="bg-pink-500 text-white p-6 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
-            <BarChart3 className="mb-4 h-8 w-8" />
-            <div className="text-xl font-semibold">Pink Box 1</div>
-            <div className="text-sm opacity-90 mt-2">Additional Element</div>
+          <div className="bg-gray-800/90 border border-gray-700 p-6 rounded-lg shadow-lg">
+            <div className="flex items-center mb-4">
+              <Box className="h-5 w-5 text-blue-400 mr-2" />
+              <span className="text-xl text-white">block production eligibility</span>
+            </div>
+            
+            <div className="space-y-4">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.5 }}
+                className="border border-blue-500/70 bg-gray-800/50 p-3 rounded"
+              >
+                <div className="text-blue-400 text-sm font-medium">stake weight</div>
+                <div className="text-xs text-gray-300 mt-1">amount of XNT staked</div>
+              </motion.div>
+
+              <div className="flex gap-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.6 }}
+                  className="relative border border-blue-500/70 bg-gray-800/50 p-3 rounded flex-1"
+                >
+                  <div className="text-blue-400 text-sm font-medium">randomness</div>
+                  <div className="text-xs text-gray-300 mt-1">ACP anti-collusion protocol</div>
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold text-xl">
+                    ×
+                  </div>
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.7 }}
+                  className="relative border border-blue-500/70 bg-gray-800/50 p-3 rounded flex-1"
+                >
+                  <div className="text-blue-400 text-sm font-medium">performance/reputation</div>
+                  <div className="text-xs text-gray-300 mt-1">from recorded history</div>
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold text-xl">
+                    ×
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </motion.div>
 
-        {/* Pink Box 2 */}
+        {/* Profitability Box */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="w-48 h-40"
+          className="w-[380px]"
         >
-          <div className="bg-fuchsia-500 text-white p-6 rounded-lg shadow-lg h-full flex flex-col items-center justify-center">
-            <PieChart className="mb-4 h-8 w-8" />
-            <div className="text-xl font-semibold">Pink Box 2</div>
-            <div className="text-sm opacity-90 mt-2">Additional Element</div>
+          <div className="bg-gray-800/90 border border-gray-700 p-6 rounded-lg shadow-lg">
+            <div className="flex items-center mb-4">
+              <Percent className="h-5 w-5 text-blue-400 mr-2" />
+              <span className="text-xl text-white">profitability</span>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.6 }}
+                className="border border-yellow-500/70 bg-gray-800/50 p-3 rounded"
+              >
+                <div className="text-yellow-400 text-sm font-medium">operational costs</div>
+                <div className="text-xs text-gray-300 mt-1">only cost is server</div>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.7 }}
+                className="relative border border-green-500/70 bg-gray-800/50 p-3 rounded"
+              >
+                <div className="text-green-400 text-sm font-medium">total validator rewards</div>
+                <div className="text-xs text-gray-300 mt-1">aggregate</div>
+                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold text-xl">
+                  +
+                </div>
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Operational costs note */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1.0 }}
+        className="mt-8 max-w-md mx-auto bg-gray-800/90 border border-gray-700 p-4 rounded-lg"
+      >
+        <h3 className="text-white font-medium mb-2">Minimal operational costs</h3>
+        <p className="text-gray-300 text-sm">Voting transactions on X1 are free, keeping operational expenses at minimum.</p>
+      </motion.div>
     </div>
   );
 };
 
 export default BoxAnimation;
+
