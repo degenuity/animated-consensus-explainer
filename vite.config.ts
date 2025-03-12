@@ -11,17 +11,11 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      // Use correct options format for react-swc plugin
-      plugins: [
-        [
-          '@swc/plugin-transform-react-jsx',
-          {
-            runtime: 'automatic',
-            development: mode !== 'production',
-            refresh: mode === 'development',
-          }
-        ]
-      ]
+      // Use proper configuration format without referencing the missing plugin
+      jsxRuntime: "automatic",
+      devTarget: mode !== "production" ? "es2020" : undefined,
+      development: mode !== "production",
+      refresh: mode === "development",
     }),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
