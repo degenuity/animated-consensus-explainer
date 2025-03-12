@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from "framer-motion";
 import { User, Server } from "lucide-react";
@@ -11,6 +10,7 @@ interface BLSStageOneProps {
 export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeFormula }) => {
   const [innerKey, setInnerKey] = useState(0);
   const prevFormulaRef = useRef(activeFormula);
+  const isHomepage = window.location.pathname === '/';
   
   // Reset animation when component becomes active or when coming from Stage 3
   useEffect(() => {
@@ -48,7 +48,7 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
             >
               <Server className="text-purple-400 mb-1" size={20} />
               <motion.span className="text-xs font-bold text-purple-300">
-                Relay node
+                {isHomepage ? "X1" : "Relay node"}
               </motion.span>
             </motion.div>
           </motion.div>

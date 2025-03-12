@@ -8,6 +8,8 @@ interface StatusMessageProps {
 }
 
 export const StatusMessage: React.FC<StatusMessageProps> = ({ leaderReceived, showSuccessEffect }) => {
+  const isHomepage = window.location.pathname === '/';
+  
   return (
     <div className="absolute bottom-0 left-0 right-0 text-center py-4">
       <motion.div 
@@ -21,7 +23,7 @@ export const StatusMessage: React.FC<StatusMessageProps> = ({ leaderReceived, sh
           animate={{ opacity: [1, 0.4, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         />
-        Relay node sends aggregated "Agg" signature to leader
+        {isHomepage ? "X1" : "Relay node"} sends aggregated "Agg" signature to leader
         {leaderReceived && (
           <motion.span
             initial={{ opacity: 0 }}

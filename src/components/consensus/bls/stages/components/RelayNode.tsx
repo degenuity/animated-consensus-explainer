@@ -8,6 +8,8 @@ interface RelayNodeProps {
 }
 
 export const RelayNode: React.FC<RelayNodeProps> = ({ showSuccessEffect = false }) => {
+  const isHomepage = window.location.pathname === '/';
+  
   return (
     <div className="absolute inset-0 flex items-center justify-center" style={{ zIndex: 20 }}>
       <div className="relative">
@@ -42,7 +44,7 @@ export const RelayNode: React.FC<RelayNodeProps> = ({ showSuccessEffect = false 
           <motion.span
             className="text-indigo-400 font-bold text-xs mt-1"
           >
-            Relay node
+            {isHomepage ? "X1" : "Relay node"}
           </motion.span>
         </motion.div>
       </div>
