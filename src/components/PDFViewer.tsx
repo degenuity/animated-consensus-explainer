@@ -3,8 +3,19 @@ import React, { Suspense, useState, useEffect } from 'react';
 import { formatPdfUrl, initializePdfWorker } from '@/utils/pdfUtils';
 import { PdfLoading } from './pdf/PdfLoading';
 
-// Lazy load the heavy PDF-related components
-const LazyPdfDocument = React.lazy(() => import('./pdf/PdfDocument'));
+// Lazy load the heavy PDF-related components with error boundaries
+const LazyPdfDocument = React.lazy(() => 
+  import('./pdf/PdfDocument').catch(err => {
+    console.error("Failed to load PdfDocument component:", err);
+    // Return a minimal component that doesn't crash
+    return { default: () => (
+      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <p>Could not load PDF viewer component</p>
+        <p className="text-sm">Try opening the PDF directly instead</p>
+      </div>
+    )}
+  })
+);
 
 interface PDFViewerProps {
   pdfUrl: string;
@@ -17,31 +28,34 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [workerInitialized, setWorkerInitialized] = useState(false);
   const [initAttempted, setInitAttempted] = useState(false);
 
-  // Initialize PDF worker when component mounts - using a stable approach
+  // Initialize PDF worker when component mounts
   useEffect(() => {
     if (initAttempted) return;
     setInitAttempted(true);
     
     console.log("Initializing PDF worker from PDFViewer component...");
     
-    try {
-      // Initialize worker properly from the pdfjs module
-      const success = initializePdfWorker();
-      setWorkerInitialized(success);
-      
-      if (!success) {
-        setError("Failed to initialize PDF viewer. Please check if JavaScript is fully enabled in your browser.");
+    // Small delay to ensure React is fully loaded
+    const timer = setTimeout(() => {
+      try {
+        // Initialize worker
+        const success = initializePdfWorker();
+        setWorkerInitialized(success);
+        
+        if (!success) {
+          setError("Failed to initialize PDF viewer. Please check if JavaScript is fully enabled in your browser.");
+        }
+      } catch (err) {
+        console.error("Error during worker initialization:", err);
+        setError("PDF initialization error: " + (err instanceof Error ? err.message : String(err)));
       }
-    } catch (err) {
-      console.error("Error during worker initialization:", err);
-      setError("PDF initialization error: " + (err instanceof Error ? err.message : String(err)));
-    }
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, [initAttempted]);
 
   // Format PDF URL and handle errors
   useEffect(() => {
-    if (!workerInitialized) return;
-    
     try {
       console.log("Formatting PDF URL:", pdfUrl);
       const formatted = formatPdfUrl(pdfUrl);
@@ -52,7 +66,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       console.error("Error formatting PDF URL:", err);
       setError(err instanceof Error ? err.message : 'Invalid PDF URL');
     }
-  }, [pdfUrl, workerInitialized]);
+  }, [pdfUrl]);
 
   if (!initAttempted) {
     return (
@@ -75,12 +89,12 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
           <p className="text-sm mt-2">
             If you're seeing CSP errors, make sure your browser allows the needed scripts.
           </p>
-          <div className="mt-4">
+          <div className="mt-4 text-center">
             <a 
               href={pdfUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Open PDF directly
             </a>
@@ -98,12 +112,12 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded w-full">
           <p>Error loading PDF: {error}</p>
           <p className="text-sm">URL: {pdfUrl}</p>
-          <div className="mt-4">
+          <div className="mt-4 text-center">
             <a 
               href={pdfUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
+              className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Open PDF directly
             </a>
@@ -111,7 +125,7 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
         </div>
       ) : (
         <Suspense fallback={<PdfLoading title={title} />}>
-          {finalPdfUrl && workerInitialized && <LazyPdfDocument pdfUrl={finalPdfUrl} />}
+          {finalPdfUrl && <LazyPdfDocument pdfUrl={finalPdfUrl} />}
         </Suspense>
       )}
     </div>

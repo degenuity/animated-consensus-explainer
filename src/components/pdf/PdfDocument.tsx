@@ -1,6 +1,6 @@
 
-import React, { useEffect } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
+import React, { useEffect, useState } from 'react';
+import { Document, Page } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { usePdfViewer } from '@/hooks/usePdfViewer';
@@ -8,14 +8,13 @@ import { PdfError } from './PdfError';
 import { PdfControls } from './PdfControls';
 import { getDefaultPdfOptions } from '@/utils/pdfUtils';
 
-// DO NOT make pdfjs available globally - use proper imports instead
-// Ensure worker initialization happens through the proper channels
-
 interface PdfDocumentProps {
   pdfUrl: string;
 }
 
 const PdfDocument = ({ pdfUrl }: PdfDocumentProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+  
   const {
     numPages,
     pageNumber,
@@ -32,19 +31,18 @@ const PdfDocument = ({ pdfUrl }: PdfDocumentProps) => {
     zoomOut
   } = usePdfViewer(pdfUrl);
 
-  // Log component mounting for debugging
+  // Handle component mounting
   useEffect(() => {
     console.log("PdfDocument mounted with URL:", pdfUrl);
-    
-    // Check PDF.js worker status 
-    console.log("PDF.js worker status:", pdfjs.GlobalWorkerOptions.workerSrc || "Not set");
+    setIsMounted(true);
     
     return () => {
       console.log("PdfDocument unmounted");
+      setIsMounted(false);
     };
   }, [pdfUrl]);
 
-  if (!isReady) {
+  if (!isReady || !isMounted) {
     return (
       <div className="text-center py-8 bg-slate-50 rounded text-black">
         <p>Initializing PDF viewer...</p>

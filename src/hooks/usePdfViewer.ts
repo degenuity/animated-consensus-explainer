@@ -24,22 +24,27 @@ export const usePdfViewer = (pdfUrl: string) => {
     console.log("Initializing PDF.js worker from usePdfViewer hook");
     initAttempted.current = true;
     
-    try {
-      const success = initializePdfWorker();
-      setIsReady(success);
-      
-      if (success) {
-        console.log("PDF.js worker initialized successfully from hook");
-      } else {
-        console.error("Failed to initialize PDF.js worker");
+    // Delay initialization slightly to ensure React is fully loaded
+    const timer = setTimeout(() => {
+      try {
+        const success = initializePdfWorker();
+        setIsReady(success);
+        
+        if (success) {
+          console.log("PDF.js worker initialized successfully from hook");
+        } else {
+          console.error("Failed to initialize PDF.js worker");
+          setPdfError(true);
+          setErrorMessage("Failed to initialize PDF viewer");
+        }
+      } catch (error) {
+        console.error("Exception during PDF.js worker initialization:", error);
         setPdfError(true);
-        setErrorMessage("Failed to initialize PDF viewer");
+        setErrorMessage(`PDF initialization error: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
-    } catch (error) {
-      console.error("Exception during PDF.js worker initialization:", error);
-      setPdfError(true);
-      setErrorMessage(`PDF initialization error: ${error instanceof Error ? error.message : 'Unknown error'}`);
-    }
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   // Reset loading state when PDF URL changes

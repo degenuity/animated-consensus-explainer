@@ -1,4 +1,5 @@
 
+// We need to import pdfjs directly from react-pdf to ensure proper integration
 import { pdfjs } from 'react-pdf';
 
 // Module-level variable to track initialization state
@@ -16,15 +17,21 @@ export const initializePdfWorker = (): boolean => {
   }
   
   try {
-    console.log("Initializing PDF.js worker properly via pdfjs module import...");
+    console.log("Initializing PDF.js worker via react-pdf module...");
     
-    // Initialize worker using the properly imported pdfjs library
+    // Set worker source - ensure it matches the version in package.json
     const workerSrc = 'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
-    pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
-    console.log("PDF.js worker initialized with:", workerSrc);
     
-    isWorkerInitialized = true;
-    return true;
+    // Check if pdfjs.GlobalWorkerOptions exists before setting
+    if (pdfjs && pdfjs.GlobalWorkerOptions) {
+      pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
+      console.log("PDF.js worker initialized with:", workerSrc);
+      isWorkerInitialized = true;
+      return true;
+    } else {
+      console.error("pdfjs.GlobalWorkerOptions is undefined");
+      return false;
+    }
   } catch (error) {
     console.error("Failed to initialize PDF.js worker:", error);
     return false;
