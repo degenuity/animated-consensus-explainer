@@ -60,12 +60,12 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
 
   return (
     <motion.div 
-      className="w-full relative overflow-hidden bg-slate-900/50 rounded-xl min-h-[500px] flex items-center justify-center"
+      className="w-full relative overflow-hidden bg-slate-900/50 rounded-xl min-h-[700px] flex items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="max-w-7xl mx-auto px-4 py-8 relative">
+      <div className="max-w-7xl mx-auto px-4 py-8 relative w-full">
         <motion.h2
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
           X1 Validator Economics
         </motion.h2>
 
-        <div className="relative h-[400px] w-full">
+        <div className="relative h-[600px] w-full">
           <div className="absolute inset-0 flex items-center justify-center">
             <FinancialStageOne 
               key={`stage-one-${activeStage === 0 ? 'active' : 'inactive'}-${animationKey}`} 
