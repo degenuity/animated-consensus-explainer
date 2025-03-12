@@ -16,22 +16,38 @@ export const initializePdfWorker = (): boolean => {
   }
   
   try {
-    // Check if pdfjs is available
-    if (!pdfjs) {
-      console.error("PDF.js library not properly loaded");
-      return false;
-    }
+    console.log("PDF.js library status:", pdfjs ? "Available" : "Not available");
     
-    // Create GlobalWorkerOptions if it doesn't exist
-    if (!pdfjs.GlobalWorkerOptions) {
-      console.log("GlobalWorkerOptions not available, creating it");
-      (pdfjs as any).GlobalWorkerOptions = {};
+    // Direct assignment to the window object to ensure it's accessible
+    if (typeof window !== 'undefined') {
+      // Create a safety wrapper around pdfjs to avoid errors
+      if (!window.pdfjsLib) {
+        window.pdfjsLib = pdfjs || {};
+      }
+      
+      // Directly assign GlobalWorkerOptions to window.pdfjsLib
+      if (!window.pdfjsLib.GlobalWorkerOptions) {
+        window.pdfjsLib.GlobalWorkerOptions = {};
+      }
+      
+      // Set the worker source directly on the window object
+      const workerSrc = `https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`;
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
+      console.log("PDF.js worker initialized on window.pdfjsLib with:", workerSrc);
+      
+      // If pdfjs is available, also set it there
+      if (pdfjs) {
+        // Create GlobalWorkerOptions if needed
+        if (!pdfjs.GlobalWorkerOptions) {
+          console.log("pdfjs.GlobalWorkerOptions not available, creating it");
+          (pdfjs as any).GlobalWorkerOptions = {};
+        }
+        
+        // Set worker source
+        pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
+        console.log("PDF.js worker also initialized on imported pdfjs with:", workerSrc);
+      }
     }
-    
-    // Set worker source from CDN with specific version that matches our package
-    const workerSrc = `https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`;
-    pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
-    console.log("PDF.js worker initialized with:", workerSrc);
     
     isWorkerInitialized = true;
     return true;

@@ -17,23 +17,42 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [workerInitialized, setWorkerInitialized] = useState(false);
   const [initAttempted, setInitAttempted] = useState(false);
 
-  // Initialize PDF worker when component mounts
+  // Initialize PDF worker when component mounts - using setTimeout to ensure DOM is ready
   useEffect(() => {
     if (initAttempted) return;
     
-    console.log("Initializing PDF worker...");
-    try {
-      const success = initializePdfWorker();
-      setWorkerInitialized(success);
-      if (!success) {
-        setError("Failed to initialize PDF viewer. Please check if JavaScript is fully enabled in your browser.");
+    console.log("Starting PDF worker initialization...");
+    
+    // Use a small timeout to ensure window object is fully available
+    const initTimer = setTimeout(() => {
+      try {
+        // Attempt to add the PDF worker script directly to the page
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+        script.async = true;
+        script.onload = () => {
+          console.log("PDF.js worker script loaded successfully via script tag");
+        };
+        script.onerror = (e) => {
+          console.error("Error loading PDF.js worker script via tag:", e);
+        };
+        document.head.appendChild(script);
+        
+        // Also try the regular initialization
+        const success = initializePdfWorker();
+        setWorkerInitialized(success);
+        if (!success) {
+          setError("Failed to initialize PDF viewer. Please check if JavaScript is fully enabled in your browser.");
+        }
+      } catch (err) {
+        console.error("Error during worker initialization:", err);
+        setError("PDF initialization error: " + (err instanceof Error ? err.message : String(err)));
+      } finally {
+        setInitAttempted(true);
       }
-    } catch (err) {
-      console.error("Error during worker initialization:", err);
-      setError("PDF initialization error: " + (err instanceof Error ? err.message : String(err)));
-    } finally {
-      setInitAttempted(true);
-    }
+    }, 100); // Small delay to ensure DOM is ready
+    
+    return () => clearTimeout(initTimer);
   }, [initAttempted]);
 
   // Format PDF URL and handle errors

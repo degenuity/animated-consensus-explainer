@@ -37,7 +37,12 @@ const PdfDocument = ({ pdfUrl }: PdfDocumentProps) => {
   // Log component mounting for debugging
   useEffect(() => {
     console.log("PdfDocument mounted with URL:", pdfUrl);
-    console.log("PDF.js worker status:", pdfjs.GlobalWorkerOptions.workerSrc || "Not set");
+    
+    // Check PDF.js global status 
+    if (typeof window !== 'undefined') {
+      console.log("PDF.js worker status (window.pdfjsLib):", window.pdfjsLib?.GlobalWorkerOptions?.workerSrc || "Not set on window");
+      console.log("PDF.js worker status (imported pdfjs):", pdfjs?.GlobalWorkerOptions?.workerSrc || "Not set on imported pdfjs");
+    }
     
     return () => {
       console.log("PdfDocument unmounted");
