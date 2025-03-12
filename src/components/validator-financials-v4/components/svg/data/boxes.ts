@@ -93,12 +93,12 @@ export const boxes = [
     borderColor: "#3B82F6"
   },
   
-  // Profitability Box
+  // Profitability Box - increased width to match block production box width
   {
     x: 880,
     y: 500,
-    width: 280,
-    height: 180,
+    width: 350,  // Increased from 280 to 350 to provide more space for the boxes
+    height: 140,  // Reduced height from 180 to 140 to match the block production box
     title: "profitability",
     icon: "profitability" as const,
     color: "#3B82F6",
@@ -107,4 +107,3 @@ export const boxes = [
     borderColor: "#3B82F6"
   }
 ];
-
