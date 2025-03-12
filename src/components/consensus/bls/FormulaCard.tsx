@@ -79,7 +79,7 @@ export const FormulaCard: React.FC<FormulaCardProps> = ({
         <div className={`w-3 h-3 rounded-full ${colors.dot} mt-1.5 mr-3 flex-shrink-0`} />
         <div className="text-left">
           <p className="text-sm font-medium text-white" dangerouslySetInnerHTML={{ __html: title }} />
-          <p className="text-xs text-slate-300 mt-0.5" dangerouslySetInnerHTML={{ __html: description }} />
+          <p className="text-xs text-slate-400 mt-0.5" dangerouslySetInnerHTML={{ __html: description }} />
           <p className="text-xs text-slate-300 mt-2" dangerouslySetInnerHTML={{ __html: explanation }} />
         </div>
       </div>
