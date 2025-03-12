@@ -56,3 +56,18 @@ h1, h2, h3, p, a, button, span, div {
 .min-h-screen {
   min-height: 100vh !important;
 }
+
+/* Force text alignment */
+.text-left {
+  text-align: left !important;
+}
+
+/* Fix for expandable items and content within them */
+ul, ol, li {
+  text-align: left !important;
+}
+
+.Collapsible__contentInner, 
+.CollapsibleContent {
+  text-align: left !important;
+}
