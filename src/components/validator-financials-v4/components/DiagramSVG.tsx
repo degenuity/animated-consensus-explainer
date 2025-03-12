@@ -2,7 +2,8 @@
 import React from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { BoxComponent, ConnectionLine, ExplanationComponent, Logo } from './svg';
-import { viewBoxWidth, viewBoxHeight, boxes } from './svg/data';
+import { viewBoxWidth, viewBoxHeight } from './svg/data/constants';
+import { boxes } from './svg/data/boxes';
 import { connectionPaths } from './svg/data/connections';
 
 const DiagramSVG = () => {
@@ -34,72 +35,81 @@ const DiagramSVG = () => {
           }
         `}
       </style>
+      
+      {/* Create separate SVGs for each layer */}
+      {/* Background SVG - Contains all background connections and elements */}
       <svg
         width="100%"
         height="100%"
         viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
         preserveAspectRatio="xMidYMid meet"
+        className="absolute top-0 left-0"
       >
-        {/* Background layer */}
-        <g id="background-layer">
-          {/* Explanation and Logo */}
-          <ExplanationComponent />
-          <Logo />
-          
-          {/* Background Connections */}
-          {backgroundConnections.map((connection, index) => (
-            <ConnectionLine
-              key={`connection-bg-${connection.id}-${index}`}
-              path={connection.path}
-              color={connection.color}
-              animationIndex={connection.animationIndex}
-              dotPosition={connection.dotPosition}
-              label={connection.label}
-              labelPosition={connection.labelPosition}
-              animationDirection={connection.animationDirection}
-              animateMotion={connection.animateMotion}
-              id={connection.id}
-            />
-          ))}
-        </g>
+        <ExplanationComponent />
+        <Logo />
         
-        {/* Content Layer - Boxes */}
-        <g id="boxes-layer">
-          {boxes.map((box, index) => (
-            <BoxComponent
-              key={`box-${index}`}
-              x={box.x}
-              y={box.y}
-              width={box.width}
-              height={box.height}
-              title={box.title}
-              subtitle={box.subtitle}
-              icon={box.icon}
-              color={box.color}
-              animationIndex={box.animationIndex}
-              subitems={box.subitems}
-              simpleStyle={box.simpleStyle}
-            />
-          ))}
-        </g>
-        
-        {/* Foreground Layer - Lines that need to be on top */}
-        <g id="foreground-layer">
-          {foregroundConnections.map((connection, index) => (
-            <ConnectionLine
-              key={`connection-fg-${connection.id}-${index}`}
-              path={connection.path}
-              color={connection.color}
-              animationIndex={connection.animationIndex}
-              dotPosition={connection.dotPosition}
-              label={connection.label}
-              labelPosition={connection.labelPosition}
-              animationDirection={connection.animationDirection}
-              animateMotion={connection.animateMotion}
-              id={connection.id}
-            />
-          ))}
-        </g>
+        {backgroundConnections.map((connection, index) => (
+          <ConnectionLine
+            key={`connection-bg-${connection.id}-${index}`}
+            path={connection.path}
+            color={connection.color}
+            animationIndex={connection.animationIndex}
+            dotPosition={connection.dotPosition}
+            label={connection.label}
+            labelPosition={connection.labelPosition}
+            animationDirection={connection.animationDirection}
+            animateMotion={connection.animateMotion}
+          />
+        ))}
+      </svg>
+      
+      {/* Box Layer SVG - Contains all boxes */}
+      <svg
+        width="100%"
+        height="100%"
+        viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+        preserveAspectRatio="xMidYMid meet"
+        className="absolute top-0 left-0"
+      >
+        {boxes.map((box, index) => (
+          <BoxComponent
+            key={`box-${index}`}
+            x={box.x}
+            y={box.y}
+            width={box.width}
+            height={box.height}
+            title={box.title}
+            subtitle={box.subtitle}
+            icon={box.icon}
+            color={box.color}
+            animationIndex={box.animationIndex}
+            subitems={box.subitems}
+            simpleStyle={box.simpleStyle}
+          />
+        ))}
+      </svg>
+      
+      {/* Foreground SVG - Contains only the connections that need to be on top */}
+      <svg
+        width="100%"
+        height="100%"
+        viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+        preserveAspectRatio="xMidYMid meet"
+        className="absolute top-0 left-0"
+      >
+        {foregroundConnections.map((connection, index) => (
+          <ConnectionLine
+            key={`connection-fg-${connection.id}-${index}`}
+            path={connection.path}
+            color={connection.color}
+            animationIndex={connection.animationIndex}
+            dotPosition={connection.dotPosition}
+            label={connection.label}
+            labelPosition={connection.labelPosition}
+            animationDirection={connection.animationDirection}
+            animateMotion={connection.animateMotion}
+          />
+        ))}
       </svg>
     </div>
   );

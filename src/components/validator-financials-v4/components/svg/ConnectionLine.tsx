@@ -13,7 +13,6 @@ interface ConnectionSVGProps {
   animationDirection?: "right" | "left" | "up" | "down";
   animateMotion?: boolean;
   id?: string;
-  renderOrder?: "foreground" | "background";
 }
 
 const ConnectionLine: React.FC<ConnectionSVGProps> = ({ 
@@ -25,15 +24,14 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
   labelPosition,
   animationDirection,
   animateMotion,
-  id,
-  renderOrder
+  id
 }) => {
   const { lineVariants, dotVariants } = useConnectionAnimation({
     animationIndex
   });
   
   return (
-    <g data-id={id} data-render-order={renderOrder}>
+    <g data-id={id}>
       <motion.path
         d={path}
         stroke={color}
