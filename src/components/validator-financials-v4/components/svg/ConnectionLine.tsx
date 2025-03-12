@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useConnectionAnimation } from './hooks/useConnectionAnimation';
 
 interface ConnectionSVGProps {
   path: string;
@@ -19,32 +20,9 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
   label,
   labelPosition
 }) => {
-  // Animation variants for connecting lines
-  const lineVariants = {
-    hidden: { pathLength: 0, opacity: 0 },
-    visible: (i: number) => ({
-      pathLength: 1,
-      opacity: 1,
-      transition: {
-        pathLength: { delay: i * 0.3 + 0.5, duration: 0.7, ease: "easeInOut" },
-        opacity: { delay: i * 0.3 + 0.5, duration: 0.3 }
-      }
-    })
-  };
-  
-  // Animation variants for moving dots on lines
-  const dotVariants = {
-    hidden: { opacity: 0 },
-    visible: (i: number) => ({
-      opacity: [0, 1, 0],
-      transition: {
-        delay: i * 0.3 + 1.2,
-        duration: 2,
-        repeat: Infinity,
-        repeatDelay: 1
-      }
-    })
-  };
+  const { lineVariants, dotVariants } = useConnectionAnimation({
+    animationIndex
+  });
   
   return (
     <>
