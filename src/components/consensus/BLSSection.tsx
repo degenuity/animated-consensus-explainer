@@ -97,42 +97,110 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           <div className="bg-slate-900/50 p-4 rounded-lg text-white formulaDisplay">
-            {/* All Formulas displayed together */}
-            <div className="formula-container mb-6">
+            {/* Formula 1 - Individual Signatures */}
+            <motion.div 
+              className="formula-container mb-6"
+              animate={{
+                scale: activeFormula === 0 ? [1, 1.03, 1] : 1,
+                y: activeFormula === 0 ? [0, -3, 0] : 0
+              }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: activeFormula === 0 ? Infinity : 0,
+                repeatType: "reverse"
+              }}
+            >
               <p className="text-sm text-slate-300 mb-2">
                 Each validator in a subcommittee generates a BLS signature
                 σ<sub>i</sub> on the vote message M:
               </p>
-              <div className="bg-slate-800 p-3 rounded-md my-2 flex justify-center">
+              <motion.div 
+                className="bg-slate-800 p-3 rounded-md my-2 flex justify-center"
+                animate={{
+                  boxShadow: activeFormula === 0 ? 
+                    "0 0 10px rgba(168, 85, 247, 0.5)" : 
+                    "none",
+                  borderColor: activeFormula === 0 ? 
+                    "rgba(168, 85, 247, 0.8)" : 
+                    "transparent"
+                }}
+                style={{ borderWidth: "1px" }}
+              >
                 <code className="text-violet-400 font-mono">
                   σ<sub>i</sub>= H(M)<sup>sk<sub>i</sub></sup>
                 </code>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
             
-            <div className="formula-container mb-6">
+            {/* Formula 2 - Aggregated Signatures */}
+            <motion.div 
+              className="formula-container mb-6"
+              animate={{
+                scale: activeFormula === 1 ? [1, 1.03, 1] : 1,
+                y: activeFormula === 1 ? [0, -3, 0] : 0
+              }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: activeFormula === 1 ? Infinity : 0,
+                repeatType: "reverse"
+              }}
+            >
               <p className="text-sm text-slate-300 mb-2">
                 The relay node aggregates all signatures within the 
                 subcommittee which is then submitted to the leader:
               </p>
-              <div className="bg-slate-800 p-3 rounded-md my-2 flex justify-center">
+              <motion.div 
+                className="bg-slate-800 p-3 rounded-md my-2 flex justify-center"
+                animate={{
+                  boxShadow: activeFormula === 1 ? 
+                    "0 0 10px rgba(99, 102, 241, 0.5)" : 
+                    "none",
+                  borderColor: activeFormula === 1 ? 
+                    "rgba(99, 102, 241, 0.8)" : 
+                    "transparent"
+                }}
+                style={{ borderWidth: "1px" }}
+              >
                 <code className="text-violet-400 font-mono">
                   σ<sub>agg</sub>= ∏ σ<sub>i</sub>
                 </code>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
             
-            <div className="formula-container">
+            {/* Formula 3 - Verification */}
+            <motion.div 
+              className="formula-container"
+              animate={{
+                scale: activeFormula === 2 ? [1, 1.03, 1] : 1,
+                y: activeFormula === 2 ? [0, -3, 0] : 0
+              }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: activeFormula === 2 ? Infinity : 0,
+                repeatType: "reverse"
+              }}
+            >
               <p className="text-sm text-slate-300 mb-2">
                 The leader verifies the aggregated signature in constant time
                 using:
               </p>
-              <div className="bg-slate-800 p-3 rounded-md my-2 flex justify-center border border-red-500/20">
+              <motion.div 
+                className="bg-slate-800 p-3 rounded-md my-2 flex justify-center"
+                animate={{
+                  boxShadow: activeFormula === 2 ? 
+                    "0 0 10px rgba(239, 68, 68, 0.5)" : 
+                    "none",
+                  borderColor: activeFormula === 2 ? 
+                    "rgba(239, 68, 68, 0.8)" : 
+                    "transparent"
+                }}
+                style={{ borderWidth: "1px" }}
+              >
                 <code className="text-violet-400 font-mono">
                   e(σ<sub>agg</sub>,g)=e(H(M),∑pk<sub>i</sub>)
                 </code>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
             
             <div className="mt-6 space-y-4">
               <div className="flex items-center">
