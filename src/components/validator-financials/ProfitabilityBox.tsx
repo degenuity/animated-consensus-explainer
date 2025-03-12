@@ -17,15 +17,32 @@ const ProfitabilityBox = () => (
       </div>
       
       <div className="grid grid-cols-2 gap-3">
-        <div className="border border-yellow-500/70 bg-gray-800/50 p-3 rounded">
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.6 }}
+          className="border border-yellow-500/70 bg-gray-800/50 p-3 rounded"
+        >
           <div className="text-yellow-400 text-sm font-medium">operational costs</div>
           <div className="text-xs text-gray-300 mt-1">only cost is server</div>
-        </div>
-        <div className="relative border border-green-500/70 bg-gray-800/50 p-3 rounded">
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.7 }}
+          className="relative border border-green-500/70 bg-gray-800/50 p-3 rounded"
+        >
           <div className="text-green-400 text-sm font-medium">total validator rewards</div>
           <div className="text-xs text-gray-300 mt-1">aggregate</div>
-          <div className="absolute inset-0 flex items-center justify-center text-gray-500 font-bold opacity-20 text-xl">+</div>
-        </div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+            className="absolute inset-0 flex items-center justify-center text-gray-500 font-bold text-xl"
+          >
+            +
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   </motion.div>

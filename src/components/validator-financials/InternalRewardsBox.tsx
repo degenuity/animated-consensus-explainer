@@ -17,15 +17,30 @@ const InternalRewardsBox = () => (
       </div>
       
       <div className="space-y-2">
-        <div className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-sm text-white">
+        <motion.div 
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, delay: 0.3 }}
+          className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-sm text-white"
+        >
           commission
-        </div>
-        <div className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-sm text-white">
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, delay: 0.4 }}
+          className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-sm text-white"
+        >
           staking rewards
-        </div>
-        <div className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-sm text-white">
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3, delay: 0.5 }}
+          className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-sm text-white"
+        >
           voting rewards
-        </div>
+        </motion.div>
       </div>
     </div>
   </motion.div>

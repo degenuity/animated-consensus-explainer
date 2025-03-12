@@ -14,7 +14,12 @@ import OperationalCostsNote from './OperationalCostsNote';
 
 const ValidatorFinancials = () => {
   return (
-    <div className="w-full py-10 px-4 relative overflow-hidden">
+    <motion.div 
+      className="w-full py-10 px-4 relative overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <Title />
 
       <div className="relative w-full max-w-6xl mx-auto">
@@ -53,7 +58,7 @@ const ValidatorFinancials = () => {
           X1
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
