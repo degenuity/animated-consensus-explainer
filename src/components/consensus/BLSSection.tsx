@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { useIsMobile } from '@/hooks/use-mobile';
+import { BLSStageOne } from '@/components/consensus/bls/stages/BLSStageOne';
 
 interface BLSSectionProps {
   activeSection: number | null;
@@ -76,8 +77,12 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
             </p>
           </div>
           <div className="flex flex-col">
-            <div className="bg-slate-900/50 p-4 rounded-lg h-full flex items-center justify-center">
-              <p className="text-slate-300">BLS Visualization Placeholder</p>
+            <div className="bg-slate-900/50 p-4 rounded-lg h-full flex items-center justify-center relative overflow-hidden">
+              <BLSStageOne 
+                activeSection={activeSection || 0} 
+                activeFormula={activeFormula}
+                showX1Label={false} 
+              />
             </div>
             <div className="h-10"></div>
           </div>

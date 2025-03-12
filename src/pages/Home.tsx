@@ -6,18 +6,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
 import BLSTest from '@/components/BLSTest';
 
-// Enhanced placeholder with debugging information
-const SimplePlaceholder = () => (
-  <div className="p-4 bg-slate-800/50 rounded-lg text-blue-300 flex flex-col items-center justify-center h-full w-full">
-    <div className="w-10 h-10 border-2 border-blue-300 border-t-transparent rounded-full animate-spin mb-4"></div>
-    <div>Loading visualization...</div>
-  </div>
-);
-
 // Main home component - fully debugged
 const Home = () => {
-  const [isVisible, setIsVisible] = useState(true);
-  
   useEffect(() => {
     // Add event listeners to catch errors from child components
     const handleError = (event) => {
@@ -38,8 +28,6 @@ const Home = () => {
               src="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" 
               alt="X1 Logo" 
               className="h-7 w-auto" 
-              loading="eager" 
-              decoding="async"
             />
           </Link>
         </div>
@@ -81,13 +69,9 @@ const Home = () => {
             </Link>
           </div>
           
-          {/* Visualization container with debug wrapper */}
+          {/* Visualization container with BLSTest component */}
           <div className="relative h-72 flex items-center justify-center overflow-visible border border-purple-700 rounded-lg bg-slate-900/80">
-            {isVisible ? (
-              <BLSTest />
-            ) : (
-              <SimplePlaceholder />
-            )}
+            <BLSTest />
           </div>
         </div>
       </div>
