@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion } from "framer-motion";
 import { Validators } from './components/Validators';
@@ -81,8 +82,12 @@ export const BLSStageTwo: React.FC<BLSStageTwoProps> = ({ activeSection, activeF
         if (!mounted.current) return;
         setStageComplete(true);
         
-        const event = new CustomEvent('bls-stage-two-complete');
-        document.dispatchEvent(event);
+        try {
+          const event = new CustomEvent('bls-stage-two-complete');
+          document.dispatchEvent(event);
+        } catch (error) {
+          console.error("Failed to dispatch event:", error);
+        }
       }, 4000);
     }, 100);
   }, []);

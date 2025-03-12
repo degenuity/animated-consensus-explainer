@@ -10,6 +10,9 @@ console.log('Starting application...');
 // Global error handler
 window.addEventListener('error', (event) => {
   console.error('Global error:', event.error);
+  // Prevent black screen on errors
+  document.body.style.backgroundColor = '#000';
+  document.body.style.color = '#fff';
 });
 
 // Unhandled promise rejection handler
@@ -23,6 +26,17 @@ document.body.style.height = '100%';
 document.body.style.overflow = 'auto';
 document.body.style.backgroundColor = '#000';
 document.body.style.color = '#fff';
+
+// Set PDF.js worker source if needed
+try {
+  const pdfjsLib = window['pdfjs-dist/build/pdf'];
+  if (pdfjsLib && pdfjsLib.GlobalWorkerOptions) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    console.log('PDF.js worker configured');
+  }
+} catch (error) {
+  console.error('Error configuring PDF worker:', error);
+}
 
 try {
   const rootElement = document.getElementById('root');
