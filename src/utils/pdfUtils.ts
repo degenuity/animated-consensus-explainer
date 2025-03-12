@@ -34,14 +34,9 @@ export const initializePdfWorker = (): boolean => {
     pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
     console.log("PDF.js worker initialized with:", workerSrc);
     
-    // Set additional options to avoid eval usage
-    if (pdfjs.disableWorker === undefined) {
-      (pdfjs as any).disableWorker = false;
-    }
-    
-    if (pdfjs.disableAutoFetch === undefined) {
-      (pdfjs as any).disableAutoFetch = true;
-    }
+    // Set additional options via DocumentInitParameters (correct approach)
+    // Instead of setting on pdfjs directly, these will be used in the options
+    // when creating PDF documents
     
     isWorkerInitialized = true;
     return true;
@@ -61,4 +56,19 @@ export const formatPdfUrl = (pdfUrl: string): string => {
     : pdfUrl.startsWith('/') 
       ? `${window.location.origin}${pdfUrl}`
       : pdfUrl;
+};
+
+/**
+ * Get default PDF document options with CSP-friendly settings
+ */
+export const getDefaultPdfOptions = () => {
+  return {
+    cMapUrl: 'https://unpkg.com/pdfjs-dist@3.11.174/cmaps/',
+    cMapPacked: true,
+    standardFontDataUrl: 'https://unpkg.com/pdfjs-dist@3.11.174/standard_fonts/',
+    disableAutoFetch: true,
+    disableStream: false,
+    isEvalSupported: false, // Important: Tell PDF.js not to use eval
+    useSystemFonts: true
+  };
 };

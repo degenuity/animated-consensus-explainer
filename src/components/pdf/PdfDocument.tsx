@@ -6,6 +6,7 @@ import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { usePdfViewer } from '@/hooks/usePdfViewer';
 import { PdfError } from './PdfError';
 import { PdfControls } from './PdfControls';
+import { getDefaultPdfOptions } from '@/utils/pdfUtils';
 
 // Ensure PDF.js is available globally for debugging
 if (typeof window !== 'undefined') {
@@ -70,15 +71,7 @@ const PdfDocument = ({ pdfUrl }: PdfDocumentProps) => {
             onLoadError={onDocumentLoadError}
             loading={<div className="text-center py-8 text-black">Loading PDF...</div>}
             className="flex justify-center min-h-[40vh]"
-            options={{
-              cMapUrl: 'https://unpkg.com/pdfjs-dist@3.11.174/cmaps/',
-              cMapPacked: true,
-              standardFontDataUrl: 'https://unpkg.com/pdfjs-dist@3.11.174/standard_fonts/',
-              disableAutoFetch: true,
-              disableStream: false,
-              isEvalSupported: false, // Important: Tell PDF.js not to use eval
-              useSystemFonts: true
-            }}
+            options={getDefaultPdfOptions()}
           >
             {pdfError ? null : (
               <Page 
