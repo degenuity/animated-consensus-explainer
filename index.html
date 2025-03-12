@@ -6,22 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>X1 Research</title>
     <meta name="description" content="X1 Research - Learn how X1 Blockchain's consensus mechanisms improve scalability and efficiency" />
+    
+    <!-- High priority preloads -->
+    <link rel="preload" href="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" as="image" fetchpriority="high" />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+    <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" />
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+    
+    <!-- Preload critical JavaScript -->
+    <link rel="modulepreload" href="/src/main.tsx" />
+    
     <!-- Force disable caching -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/lovable-uploads/68ffce32-b088-4588-b3b8-c9bd0ce9ec73.png" as="image" fetchpriority="high" />
-    <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" />
-    <!-- Preload main JavaScript bundle -->
-    <link rel="modulepreload" href="/src/main.tsx" />
+    
     <style>
       @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
       .loading-spinner { width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #0072FF; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto; }
       .error-message { color: red; padding: 20px; margin-top: 20px; border: 1px solid red; border-radius: 4px; }
-      .app-loading { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(to bottom, #0f172a, #1e293b); color: white; }
+      .app-loading { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(to bottom, #0f172a, #1e293b); color: white; transition: opacity 0.3s ease; }
+      .fade-out { opacity: 0; }
     </style>
   </head>
 
@@ -47,18 +52,28 @@
       setTimeout(function() {
         const loadingTimeout = document.getElementById('loading-timeout');
         if (loadingTimeout) loadingTimeout.style.display = 'block';
-      }, 5000);
+      }, 3000); // Reduced from 5000 to 3000ms
 
       // Add performance monitoring
       window.addEventListener('load', function() {
         // Log when the page has fully loaded
-        console.log('Page fully loaded');
+        console.log('Page fully loaded at:', new Date().toISOString());
         
         // Report performance metrics if available
         if (window.performance) {
           const perfData = window.performance.timing;
           const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
           console.log('Page load time: ' + pageLoadTime + 'ms');
+          
+          // Report critical metrics
+          console.log('Time to first byte: ' + (perfData.responseStart - perfData.navigationStart) + 'ms');
+          console.log('DOM interactive: ' + (perfData.domInteractive - perfData.navigationStart) + 'ms');
+          console.log('DOM content loaded: ' + (perfData.domContentLoadedEventEnd - perfData.navigationStart) + 'ms');
+        }
+        
+        // Check if the document is loaded with a reasonable time
+        if (document.readyState === 'complete') {
+          console.log('Document ready state: complete');
         }
       });
     </script>

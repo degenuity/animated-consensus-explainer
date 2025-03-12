@@ -1,19 +1,39 @@
 
-import React, { lazy, Suspense, memo } from 'react';
+import React, { lazy, Suspense, memo, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
 
-// Lazy load the BLS animation component with a more aggressive splitting
+// Prefetch BLS animation component
 const BLSStageOne = lazy(() => 
   import("@/components/consensus/bls/stages").then(module => ({
     default: module.BLSStageOne
   }))
 );
 
+// Simple loading spinner for the BLS animation
+const BLSFallback = () => (
+  <div className="p-4 text-blue-300 flex flex-col items-center">
+    <div className="w-8 h-8 border-2 border-blue-300 border-t-transparent rounded-full animate-spin mb-2"></div>
+    <div>Loading visualization...</div>
+  </div>
+);
+
 // Use React.memo to prevent unnecessary re-renders
 const Home = memo(() => {
+  // Prefetch the BLS module on component mount
+  useEffect(() => {
+    // Prefetch the BLS module after the page loads
+    const prefetchTimeout = setTimeout(() => {
+      import("@/components/consensus/bls/stages")
+        .then(() => console.log("BLS module prefetched"))
+        .catch(err => console.error("Failed to prefetch BLS module:", err));
+    }, 500); // Wait for 500ms after mount before prefetching
+    
+    return () => clearTimeout(prefetchTimeout);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
       {/* Header with X1 Logo */}
@@ -68,7 +88,7 @@ const Home = memo(() => {
           </div>
           
           <div className="relative h-72 flex items-center justify-center overflow-visible">
-            <Suspense fallback={<div className="p-4 text-blue-300">Loading visualization...</div>}>
+            <Suspense fallback={<BLSFallback />}>
               <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
             </Suspense>
           </div>

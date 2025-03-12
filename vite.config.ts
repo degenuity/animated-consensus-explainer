@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react(),
+    react(), // Using default react plugin settings
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
@@ -41,32 +41,13 @@ export default defineConfig(({ mode }) => ({
         chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
         // Optimize chunks for better caching
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'vendor-react';
-            } else if (id.includes('react-router-dom')) {
-              return 'vendor-router';
-            } else if (id.includes('@radix-ui')) {
-              return 'vendor-radix';
-            } else if (id.includes('framer-motion')) {
-              return 'vendor-framer';
-            } else if (id.includes('lucide-react')) {
-              return 'vendor-lucide';
-            } else if (id.includes('recharts') || id.includes('d3')) {
-              return 'vendor-charts';
-            } else if (id.includes('react-pdf') || id.includes('pdfjs-dist')) {
-              return 'vendor-pdf';
-            }
-            return 'vendor-other';
-          }
-          // Split app code by feature area
-          if (id.includes('/components/consensus/')) {
-            return 'feature-consensus';
-          }
-          if (id.includes('/components/ui/')) {
-            return 'ui-components';
-          }
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-ui': ['@radix-ui/react-toast', '@radix-ui/react-slot'],
+          'vendor-framer': ['framer-motion'],
+          'vendor-lucide': ['lucide-react'],
+          'vendor-pdf': ['react-pdf', 'pdfjs-dist'],
+          'vendor-charts': ['recharts'],
         }
       },
     },
@@ -76,13 +57,14 @@ export default defineConfig(({ mode }) => ({
       transformMixedEsModules: true,
     },
   },
-  // Add optimizeDeps for better dependency optimization
+  // Optimize dependency pre-bundling
   optimizeDeps: {
     include: [
       'react', 
       'react-dom',
       'react-router-dom',
       'framer-motion',
+      'lucide-react',
       'react-pdf', 
       'pdfjs-dist', 
       'recharts'
@@ -98,5 +80,15 @@ export default defineConfig(({ mode }) => ({
     preprocessorOptions: {
       // Add any preprocessor options if needed
     }
+  },
+  // Set reasonable performance budgets
+  performance: {
+    hints: mode === 'production' ? 'warning' : false
+  },
+  // Important: set this to ensure faster builds
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
+    legalComments: 'none',
+    target: ['es2020']
   }
 }));

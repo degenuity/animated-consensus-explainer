@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import { 
   BLSStageOne, 
   BLSStageTwo, 
@@ -15,25 +15,28 @@ interface BLSVisualizationProps {
   setActiveFormula: (formula: number) => void;
 }
 
-export const BLSVisualization: React.FC<BLSVisualizationProps> = ({ 
+// Memoize the component to prevent unnecessary re-renders
+export const BLSVisualization = memo(({ 
   activeSection, 
   activeFormula,
   setActiveFormula
-}) => {
+}: BLSVisualizationProps) => {
+  console.log('BLSVisualization render with activeFormula:', activeFormula);
+  
+  // Memoize event handlers to prevent unnecessary recreations
+  const handleVerificationComplete = useCallback(() => {
+    // Ensure we transition to stage 1 (formula 0)
+    setActiveFormula(0);
+  }, [setActiveFormula]);
+  
+  const handleStageTwoComplete = useCallback(() => {
+    console.log("BLSVisualization: Received stage-two-complete event, moving to stage three");
+    // Move to stage three (formula 2)
+    setActiveFormula(2);
+  }, [setActiveFormula]);
+  
   // Listen for verification complete events
   useEffect(() => {
-    const handleVerificationComplete = () => {
-      // Ensure we transition to stage 1 (formula 0)
-      setActiveFormula(0);
-    };
-    
-    // New event listener for stage two complete
-    const handleStageTwoComplete = () => {
-      console.log("BLSVisualization: Received stage-two-complete event, moving to stage three");
-      // Move to stage three (formula 2)
-      setActiveFormula(2);
-    };
-    
     document.addEventListener('bls-verification-complete', handleVerificationComplete);
     document.addEventListener('bls-stage-two-complete', handleStageTwoComplete);
     
@@ -41,39 +44,48 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
       document.removeEventListener('bls-verification-complete', handleVerificationComplete);
       document.removeEventListener('bls-stage-two-complete', handleStageTwoComplete);
     };
-  }, [setActiveFormula]);
+  }, [handleVerificationComplete, handleStageTwoComplete]);
 
-  const handlePrevStage = () => {
+  const handlePrevStage = useCallback(() => {
     const newFormula = (activeFormula - 1 + 3) % 3;
     setActiveFormula(newFormula);
-  };
+  }, [activeFormula, setActiveFormula]);
   
-  const handleNextStage = () => {
+  const handleNextStage = useCallback(() => {
     const newFormula = (activeFormula + 1) % 3;
     setActiveFormula(newFormula);
-  };
+  }, [activeFormula, setActiveFormula]);
   
-  const handleSelectStage = (stage: number) => {
+  const handleSelectStage = useCallback((stage: number) => {
     setActiveFormula(stage);
-  };
+  }, [setActiveFormula]);
 
   return (
     <div className="relative h-80 sm:h-96 flex items-center justify-center">
-      <BLSStageOne 
-        key={`stage-one-${activeFormula === 0 ? 'active' : 'inactive'}`} 
-        activeSection={activeSection} 
-        activeFormula={activeFormula} 
-      />
-      <BLSStageTwo 
-        key={`stage-two-${activeFormula === 1 ? 'active' : 'inactive'}`}
-        activeSection={activeSection} 
-        activeFormula={activeFormula} 
-      />
-      <BLSStageThree 
-        key={`stage-three-${activeFormula === 2 ? 'active' : 'inactive'}`}
-        activeSection={activeSection} 
-        activeFormula={activeFormula} 
-      />
+      {activeFormula === 0 && (
+        <BLSStageOne
+          key={`stage-one-${activeFormula === 0 ? 'active' : 'inactive'}`}
+          activeSection={activeSection}
+          activeFormula={activeFormula}
+        />
+      )}
+      
+      {activeFormula === 1 && (
+        <BLSStageTwo
+          key={`stage-two-${activeFormula === 1 ? 'active' : 'inactive'}`}
+          activeSection={activeSection}
+          activeFormula={activeFormula}
+        />
+      )}
+      
+      {activeFormula === 2 && (
+        <BLSStageThree
+          key={`stage-three-${activeFormula === 2 ? 'active' : 'inactive'}`}
+          activeSection={activeSection}
+          activeFormula={activeFormula}
+        />
+      )}
+      
       <BLSIdleAnimation activeSection={activeSection} />
       
       {activeSection === 1 && (
@@ -117,4 +129,6 @@ export const BLSVisualization: React.FC<BLSVisualizationProps> = ({
       )}
     </div>
   );
-}
+});
+
+BLSVisualization.displayName = 'BLSVisualization';
