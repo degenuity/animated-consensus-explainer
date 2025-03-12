@@ -95,3 +95,4 @@ export const connectionPaths = [
     id: "block-rewards-to-total-validator-rewards",
     renderOrder: "foreground" as const // Changed to foreground to show above boxes
   }
+];
