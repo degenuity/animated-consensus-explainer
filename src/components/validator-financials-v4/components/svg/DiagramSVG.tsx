@@ -14,13 +14,6 @@ import { connectionPaths } from './data/connections';
 const DiagramSVG = () => {
   const isMobile = useIsMobile();
   
-  // Sort connections by zIndex to ensure proper layering
-  const sortedConnections = [...connectionPaths].sort((a, b) => {
-    const zIndexA = a.zIndex || 0;
-    const zIndexB = b.zIndex || 0;
-    return zIndexA - zIndexB;
-  });
-  
   return (
     <div className="w-full h-full relative">
       <style>
@@ -49,23 +42,30 @@ const DiagramSVG = () => {
         viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
         preserveAspectRatio="xMidYMid meet"
       >
-        {/* Draw first all background elements */}
-        {sortedConnections.filter(conn => !conn.zIndex || conn.zIndex < 10).map((connection, index) => (
-          <ConnectionLine
-            key={`connection-background-${index}`}
-            path={connection.path}
-            color={connection.color}
-            animationIndex={connection.animationIndex}
-            dotPosition={connection.dotPosition}
-            label={connection.label}
-            labelPosition={connection.labelPosition}
-            animationDirection={connection.animationDirection}
-            animateMotion={connection.animateMotion}
-            zIndex={connection.zIndex}
-          />
-        ))}
+        {/* Background layers and explanation */}
+        <ExplanationComponent />
+        <Logo />
         
-        {/* Draw all boxes */}
+        {/* Render the diagram in three distinct layers */}
+        
+        {/* Layer 1: First render all background connections (lines 1, 4, 5, 6, 7, 8) */}
+        {connectionPaths
+          .filter(conn => conn.id !== 'delegated-stake-to-commission' && conn.id !== 'own-stake-to-staking-rewards')
+          .map((connection, index) => (
+            <ConnectionLine
+              key={`connection-bg-${index}`}
+              path={connection.path}
+              color={connection.color}
+              animationIndex={connection.animationIndex}
+              dotPosition={connection.dotPosition}
+              label={connection.label}
+              labelPosition={connection.labelPosition}
+              animationDirection={connection.animationDirection}
+              animateMotion={connection.animateMotion}
+            />
+          ))}
+        
+        {/* Layer 2: Then render all boxes */}
         {boxes.map((box, index) => (
           <BoxComponent
             key={`box-${index}`}
@@ -83,27 +83,22 @@ const DiagramSVG = () => {
           />
         ))}
         
-        {/* Draw foreground connections (with higher z-index) above everything else */}
-        {sortedConnections.filter(conn => conn.zIndex && conn.zIndex >= 10).map((connection, index) => (
-          <ConnectionLine
-            key={`connection-foreground-${index}`}
-            path={connection.path}
-            color={connection.color}
-            animationIndex={connection.animationIndex}
-            dotPosition={connection.dotPosition}
-            label={connection.label}
-            labelPosition={connection.labelPosition}
-            animationDirection={connection.animationDirection}
-            animateMotion={connection.animateMotion}
-            zIndex={connection.zIndex}
-          />
-        ))}
-        
-        {/* Explanation Text */}
-        <ExplanationComponent />
-        
-        {/* X1 Logo */}
-        <Logo />
+        {/* Layer 3: Finally render the problematic connections on top of everything */}
+        {connectionPaths
+          .filter(conn => conn.id === 'delegated-stake-to-commission' || conn.id === 'own-stake-to-staking-rewards')
+          .map((connection, index) => (
+            <ConnectionLine
+              key={`connection-fg-${index}`}
+              path={connection.path}
+              color={connection.color}
+              animationIndex={connection.animationIndex}
+              dotPosition={connection.dotPosition}
+              label={connection.label}
+              labelPosition={connection.labelPosition}
+              animationDirection={connection.animationDirection}
+              animateMotion={connection.animateMotion}
+            />
+          ))}
       </svg>
     </div>
   );

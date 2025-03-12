@@ -12,7 +12,7 @@ interface ConnectionSVGProps {
   labelPosition?: { x: number; y: number };
   animationDirection?: "right" | "left" | "up" | "down";
   animateMotion?: boolean;
-  zIndex?: number;
+  id?: string;
 }
 
 const ConnectionLine: React.FC<ConnectionSVGProps> = ({ 
@@ -24,20 +24,14 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
   labelPosition,
   animationDirection,
   animateMotion,
-  zIndex = 1
+  id
 }) => {
   const { lineVariants, dotVariants } = useConnectionAnimation({
     animationIndex
   });
   
-  // Apply z-index using CSS style property
-  const groupStyle = {
-    zIndex: zIndex,
-    position: 'relative' as const, // TypeScript requires this
-  };
-  
   return (
-    <g style={groupStyle}>
+    <g>
       <motion.path
         d={path}
         stroke={color}
