@@ -1,8 +1,10 @@
+
 import React, { lazy, Suspense, memo, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
+import { BLSStageOne } from "@/components/consensus/bls/stages";
 
 // Type definition for the BLSStageOne component props
 interface BLSStageOneProps {
@@ -31,11 +33,6 @@ const BLSErrorFallback = memo((props: BLSStageOneProps) => (
 ));
 
 BLSErrorFallback.displayName = 'BLSErrorFallback';
-
-// Use a simpler approach for lazy loading
-const BLSStageOne = lazy(() => import("@/components/consensus/bls/stages").then(module => ({ 
-  default: module.BLSStageOne 
-})));
 
 // Use React.memo to prevent unnecessary re-renders
 const Home = memo(() => {
@@ -125,9 +122,7 @@ const Home = memo(() => {
           {/* Only load visualization when ready */}
           <div className="relative h-72 flex items-center justify-center overflow-visible">
             {isAnimationVisible ? (
-              <Suspense fallback={<SimpleBLSFallback />}>
-                <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
-              </Suspense>
+              <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
             ) : (
               <SimpleBLSFallback />
             )}
