@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import PDFViewer from "@/components/PDFViewer";
 import ValidatorFinancials from "@/components/validator-financials";
 import ValidatorFinancialsV2 from "@/components/validator-financials-v2";
+import { ValidatorFinancialsV3 } from "@/components/validator-financials-v3";
 
 const Whitepaper = () => {
   // Using the GitHub raw content URL for reliability on the live site
@@ -70,6 +71,20 @@ const Whitepaper = () => {
         >
           Models in this paper
         </motion.h2>
+
+        {/* New V3 Simple Animation */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
+        >
+          <Card className="p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
+            <div className="relative z-10">
+              <ValidatorFinancialsV3 />
+            </div>
+          </Card>
+        </motion.div>
 
         {/* X1 Validator Financials V2 Model */}
         <motion.div
