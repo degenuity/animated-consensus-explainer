@@ -7,9 +7,9 @@ const OperationalCostsNote = () => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.7, delay: 0.6 }}
-    className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-[600px] text-center"
+    className="w-full"
   >
-    <div className="bg-gray-900/70 border border-gray-700 p-3 rounded-lg inline-block w-full">
+    <div className="bg-gray-900/80 border border-gray-700 p-3 rounded-lg inline-block w-full">
       <div className="text-white font-medium text-lg mb-1">Minimal operational costs</div>
       <div className="text-sm text-gray-300">
         Voting transactions on X1 are free, keeping operational expenses at minimum.
