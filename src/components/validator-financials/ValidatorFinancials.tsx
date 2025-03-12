@@ -25,7 +25,7 @@ const ValidatorFinancials = () => {
 
         <div className="relative mx-auto" style={{ height: '900px' }}>
           {/* First Row - Main Boxes with wider spacing */}
-          <div className="absolute left-[90px] top-[100px]" style={{ width: '200px' }}>
+          <div className="absolute left-[70px] top-[100px]" style={{ width: '200px' }}>
             <InflationBox />
           </div>
           
@@ -33,25 +33,25 @@ const ValidatorFinancials = () => {
             <TotalStakeBox />
           </div>
           
-          <div className="absolute right-[90px] top-[100px]" style={{ width: '200px' }}>
+          <div className="absolute right-[70px] top-[100px]" style={{ width: '200px' }}>
             <DeflationBox />
           </div>
 
           {/* Second Row - Move down and space better */}
-          <div className="absolute left-[180px] top-[320px]" style={{ width: '280px' }}>
+          <div className="absolute left-[150px] top-[350px]" style={{ width: '280px' }}>
             <InternalRewardsBox />
           </div>
           
-          <div className="absolute right-[180px] top-[320px]" style={{ width: '280px' }}>
+          <div className="absolute right-[150px] top-[350px]" style={{ width: '280px' }}>
             <NetworkUsageCostsBox />
           </div>
 
           {/* Bottom Row - Increase vertical space and adjust width */}
-          <div className="absolute left-[120px] top-[580px]" style={{ width: '400px' }}>
+          <div className="absolute left-[75px] top-[600px]" style={{ width: '380px' }}>
             <BlockProductionEligibilityBox />
           </div>
           
-          <div className="absolute right-[120px] top-[580px]" style={{ width: '400px' }}>
+          <div className="absolute right-[75px] top-[600px]" style={{ width: '380px' }}>
             <ProfitabilityBox />
           </div>
 
@@ -59,7 +59,7 @@ const ValidatorFinancials = () => {
           <ConnectingLines />
           
           {/* Operational Costs Note - Positioned near the bottom right */}
-          <div className="absolute right-[180px] bottom-[20px]" style={{ width: '500px' }}>
+          <div className="absolute right-[75px] bottom-[50px]" style={{ width: '380px' }}>
             <OperationalCostsNote />
           </div>
 
