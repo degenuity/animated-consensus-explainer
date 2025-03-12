@@ -48,13 +48,13 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
               transition={{ duration: 0.8, type: "spring" }}
             >
               <motion.div 
-                className="w-52 h-44 bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
+                className="w-52 h-44 bg-[#1a2233] border border-[#2a3349] rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
                 animate={{ 
-                  boxShadow: ["0 0 0px rgba(37, 99, 235, 0)", "0 0 20px rgba(37, 99, 235, 0.5)", "0 0 0px rgba(37, 99, 235, 0)"]
+                  boxShadow: ["0 0 0px rgba(37, 99, 235, 0)", "0 0 20px rgba(37, 99, 235, 0.3)", "0 0 0px rgba(37, 99, 235, 0)"]
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                <TrendingUp size={32} className="text-white mb-2" />
+                <TrendingUp size={32} className="text-blue-400 mb-2" />
                 <motion.div 
                   className="text-lg font-bold text-white"
                   animate={{ scale: [1, 1.05, 1] }}
@@ -75,13 +75,13 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
               transition={{ duration: 0.8, delay: 0.3, type: "spring" }}
             >
               <motion.div 
-                className="w-52 h-44 bg-gradient-to-br from-amber-600 to-amber-400 rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
+                className="w-52 h-44 bg-[#1a2233] border border-[#2a3349] rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
                 animate={{ 
-                  boxShadow: ["0 0 0px rgba(217, 119, 6, 0)", "0 0 20px rgba(217, 119, 6, 0.5)", "0 0 0px rgba(217, 119, 6, 0)"]
+                  boxShadow: ["0 0 0px rgba(217, 119, 6, 0)", "0 0 20px rgba(217, 119, 6, 0.3)", "0 0 0px rgba(217, 119, 6, 0)"]
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                <TrendingDown size={32} className="text-white mb-2" />
+                <TrendingDown size={32} className="text-amber-400 mb-2" />
                 <motion.div 
                   className="text-lg font-bold text-white"
                   animate={{ scale: [1, 1.05, 1] }}
@@ -103,13 +103,13 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
               transition={{ duration: 0.5, delay: 0.6, type: "spring" }}
             >
               <motion.div 
-                className="w-52 h-48 bg-gradient-to-br from-violet-600 to-indigo-600 rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
+                className="w-52 h-48 bg-[#1a2233] border border-[#2a3349] rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
                 animate={{ 
-                  boxShadow: ["0 0 0px rgba(124, 58, 237, 0)", "0 0 20px rgba(124, 58, 237, 0.5)", "0 0 0px rgba(124, 58, 237, 0)"]
+                  boxShadow: ["0 0 0px rgba(124, 58, 237, 0)", "0 0 20px rgba(124, 58, 237, 0.3)", "0 0 0px rgba(124, 58, 237, 0)"]
                 }}
                 transition={{ duration: 2.5, repeat: Infinity }}
               >
-                <Database className="text-white mb-2" size={32} />
+                <Database className="text-indigo-400 mb-2" size={32} />
                 <div className="text-lg font-bold text-white">Total Stake</div>
                 <div className="text-sm text-white/80 mt-1">Validator Collateral</div>
                 <div className="text-xs text-white/70 mt-2 text-center">
@@ -126,13 +126,13 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
               transition={{ duration: 0.8, delay: 0.9, type: "spring" }}
             >
               <motion.div 
-                className="w-52 h-44 bg-gradient-to-br from-emerald-600 to-emerald-400 rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
+                className="w-52 h-44 bg-[#1a2233] border border-[#2a3349] rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
                 animate={{ 
-                  boxShadow: ["0 0 0px rgba(5, 150, 105, 0)", "0 0 20px rgba(5, 150, 105, 0.5)", "0 0 0px rgba(5, 150, 105, 0)"]
+                  boxShadow: ["0 0 0px rgba(5, 150, 105, 0)", "0 0 20px rgba(5, 150, 105, 0.3)", "0 0 0px rgba(5, 150, 105, 0)"]
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                <CircleDollarSign size={32} className="text-white mb-2" />
+                <CircleDollarSign size={32} className="text-emerald-400 mb-2" />
                 <div className="text-lg font-bold text-white">Internal Rewards</div>
                 <div className="text-xs text-white/80 mt-1 text-center">
                   Consensus participation rewards earned by validators
@@ -148,13 +148,13 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
               transition={{ duration: 0.8, delay: 0.9, type: "spring" }}
             >
               <motion.div 
-                className="w-52 h-44 bg-gradient-to-br from-orange-600 to-orange-400 rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
+                className="w-52 h-44 bg-[#1a2233] border border-[#2a3349] rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
                 animate={{ 
-                  boxShadow: ["0 0 0px rgba(234, 88, 12, 0)", "0 0 20px rgba(234, 88, 12, 0.5)", "0 0 0px rgba(234, 88, 12, 0)"]
+                  boxShadow: ["0 0 0px rgba(234, 88, 12, 0)", "0 0 20px rgba(234, 88, 12, 0.3)", "0 0 0px rgba(234, 88, 12, 0)"]
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                <ServerCrash size={32} className="text-white mb-2" />
+                <ServerCrash size={32} className="text-orange-400 mb-2" />
                 <div className="text-lg font-bold text-white">Network Costs</div>
                 <div className="text-xs text-white/80 mt-1 text-center">
                   Transaction processing and operational expenses
@@ -171,13 +171,13 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
               transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
             >
               <motion.div 
-                className="w-52 h-44 bg-gradient-to-br from-blue-600 to-blue-400 rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
+                className="w-52 h-44 bg-[#1a2233] border border-[#2a3349] rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
                 animate={{ 
-                  boxShadow: ["0 0 0px rgba(37, 99, 235, 0)", "0 0 20px rgba(37, 99, 235, 0.5)", "0 0 0px rgba(37, 99, 235, 0)"]
+                  boxShadow: ["0 0 0px rgba(37, 99, 235, 0)", "0 0 20px rgba(37, 99, 235, 0.3)", "0 0 0px rgba(37, 99, 235, 0)"]
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                <ShieldCheck size={32} className="text-white mb-2" />
+                <ShieldCheck size={32} className="text-blue-400 mb-2" />
                 <div className="text-lg font-bold text-white">Block Production</div>
                 <div className="text-xs text-white/80 mt-1 text-center">
                   Eligibility determined by stake level and network participation
@@ -193,13 +193,13 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
               transition={{ duration: 0.8, delay: 1.2, type: "spring" }}
             >
               <motion.div 
-                className="w-52 h-44 bg-gradient-to-br from-green-600 to-emerald-400 rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
+                className="w-52 h-44 bg-[#1a2233] border border-[#2a3349] rounded-xl flex flex-col items-center justify-center p-4 shadow-lg"
                 animate={{ 
-                  boxShadow: ["0 0 0px rgba(22, 163, 74, 0)", "0 0 20px rgba(22, 163, 74, 0.5)", "0 0 0px rgba(22, 163, 74, 0)"]
+                  boxShadow: ["0 0 0px rgba(22, 163, 74, 0)", "0 0 20px rgba(22, 163, 74, 0.3)", "0 0 0px rgba(22, 163, 74, 0)"]
                 }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
-                <DollarSign size={32} className="text-white mb-2" />
+                <DollarSign size={32} className="text-green-400 mb-2" />
                 <div className="text-lg font-bold text-white">Validator Profit</div>
                 <div className="text-xs text-white/80 mt-1 text-center">
                   Economic sustainability for network participants
@@ -474,7 +474,7 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
               transition={{ duration: 0.3, delay: 2.4 }}
             >
               <svg width="100%" height="100%" className="overflow-visible">
-                {/* Bezier curve path */}
+                {/* Define path for the curve */}
                 <path
                   d={`M 0,0 C 20,30 40,50 ${parseInt('5%') + 26},${86}`}
                   fill="none"
@@ -483,17 +483,24 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
                   strokeDasharray="4 2"
                 />
                 
-                {/* Animated circle */}
+                {/* Animated circle that follows the path */}
                 <motion.circle
+                  cx="0"
+                  cy="0"
                   r="4"
                   fill="#10B981"
-                >
-                  <motion.animateMotion
-                    path={`M 0,0 C 20,30 40,50 ${parseInt('5%') + 26},${86}`}
-                    dur="3s"
-                    repeatCount="indefinite"
-                  />
-                </motion.circle>
+                  animate={{
+                    offsetDistance: ["0%", "100%"]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                  style={{
+                    offsetPath: `path('M 0,0 C 20,30 40,50 ${parseInt('5%') + 26},${86}')`,
+                  }}
+                />
               </svg>
             </motion.div>
 
@@ -511,7 +518,7 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
               transition={{ duration: 0.3, delay: 2.4 }}
             >
               <svg width="100%" height="100%" className="overflow-visible">
-                {/* Bezier curve path */}
+                {/* Define path for the curve */}
                 <path
                   d={`M 0,0 C -20,30 -40,50 -${parseInt('5%') + 26},${86}`}
                   fill="none"
@@ -520,17 +527,24 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
                   strokeDasharray="4 2"
                 />
                 
-                {/* Animated circle */}
+                {/* Animated circle that follows the path */}
                 <motion.circle
+                  cx="0"
+                  cy="0"
                   r="4"
                   fill="#F97316"
-                >
-                  <motion.animateMotion
-                    path={`M 0,0 C -20,30 -40,50 -${parseInt('5%') + 26},${86}`}
-                    dur="3s"
-                    repeatCount="indefinite"
-                  />
-                </motion.circle>
+                  animate={{
+                    offsetDistance: ["0%", "100%"]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                  style={{
+                    offsetPath: `path('M 0,0 C -20,30 -40,50 -${parseInt('5%') + 26},${86}')`,
+                  }}
+                />
               </svg>
             </motion.div>
 
@@ -599,10 +613,10 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
 
             {/* Four small factor boxes at the bottom */}
             {[
-              { icon: <PercentSquare size={20} />, text: "APR Return", color: "from-blue-600 to-blue-400", left: "4%", top: "540px" },
-              { icon: <Clock size={20} />, text: "Uptime", color: "from-indigo-600 to-indigo-400", left: "30%", top: "540px" },
-              { icon: <Wallet size={20} />, text: "Costs", color: "from-purple-600 to-purple-400", left: "70%", top: "540px" },
-              { icon: <ShieldCheck size={20} />, text: "Security", color: "from-rose-600 to-rose-400", left: "95%", top: "540px" }
+              { icon: <PercentSquare size={20} />, text: "APR Return", color: "text-blue-400", left: "4%", top: "540px" },
+              { icon: <Clock size={20} />, text: "Uptime", color: "text-indigo-400", left: "30%", top: "540px" },
+              { icon: <Wallet size={20} />, text: "Costs", color: "text-purple-400", left: "70%", top: "540px" },
+              { icon: <ShieldCheck size={20} />, text: "Security", color: "text-rose-400", left: "95%", top: "540px" }
             ].map((factor, idx) => (
               <motion.div
                 key={`factor-${idx}`}
@@ -617,14 +631,14 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
                 transition={{ duration: 0.6, delay: 1.5 + idx * 0.2, type: "spring" }}
               >
                 <motion.div 
-                  className={`w-16 h-16 bg-gradient-to-br ${factor.color} rounded-lg flex flex-col items-center justify-center p-1 shadow-lg`}
+                  className="w-16 h-16 bg-[#1a2233] border border-[#2a3349] rounded-lg flex flex-col items-center justify-center p-1 shadow-lg"
                   whileHover={{ scale: 1.05 }}
                   animate={{ 
-                    boxShadow: ["0 0 0px rgba(124, 58, 237, 0)", "0 0 15px rgba(124, 58, 237, 0.3)", "0 0 0px rgba(124, 58, 237, 0)"]
+                    boxShadow: ["0 0 0px rgba(124, 58, 237, 0)", "0 0 15px rgba(124, 58, 237, 0.2)", "0 0 0px rgba(124, 58, 237, 0)"]
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <div className="text-white mb-1">{factor.icon}</div>
+                  <div className={`${factor.color} mb-1`}>{factor.icon}</div>
                   <div className="text-[10px] font-medium text-white text-center">{factor.text}</div>
                 </motion.div>
               </motion.div>
@@ -632,7 +646,7 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
 
             {/* Explanation text */}
             <motion.div
-              className="absolute left-1/2 bottom-4 transform -translate-x-1/2 bg-black/30 px-4 py-2 rounded-lg"
+              className="absolute left-1/2 bottom-4 transform -translate-x-1/2 bg-[#1a2233]/80 px-4 py-2 rounded-lg border border-[#2a3349]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 2.5 }}
