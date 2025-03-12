@@ -6,7 +6,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { BLSStageOne } from '@/components/consensus/bls/stages/BLSStageOne';
 import { BLSStageTwo } from '@/components/consensus/bls/stages/BLSStageTwo';
 import { BLSStageThree } from '@/components/consensus/bls/stages/BLSStageThree';
-import { ExpandableItem } from '@/components/consensus/ExpandableItem';
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface BLSSectionProps {
   activeSection: number | null;
@@ -71,6 +71,14 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
   }, []);
 
   const isActive = activeSection === 1 || isMobile;
+  
+  const goToPrevFormula = () => {
+    setActiveFormula(prev => (prev - 1 + 3) % 3);
+  };
+  
+  const goToNextFormula = () => {
+    setActiveFormula(prev => (prev + 1) % 3);
+  };
 
   return (
     <motion.div
@@ -89,37 +97,82 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           <div className="bg-slate-900/50 p-4 rounded-lg text-white">
-            <h3 className="text-lg font-medium mb-2">BLS Process</h3>
-            <p className="text-sm text-slate-300">
-              BLS signatures use bilinear pairings on elliptic curves for efficient verification.
-            </p>
+            {activeFormula === 0 && (
+              <>
+                <p className="text-sm text-slate-300 mb-4">
+                  Each validator in a subcommittee generates a BLS signature
+                  σ<sub>i</sub> on the vote message M:
+                </p>
+                <div className="bg-slate-800 p-3 rounded-md my-3 flex justify-center">
+                  <code className="text-violet-400 font-mono">
+                    σ<sub>i</sub>= H(M)<sup>sk<sub>i</sub></sup>
+                  </code>
+                </div>
+              </>
+            )}
             
-            <div className="mt-6 space-y-2">
-              <ExpandableItem
-                name="Individual Signatures"
-                color="purple-400"
-                description="Each validator signs independently"
-                expandable={false}
-                index={0}
-              />
+            {activeFormula === 1 && (
+              <>
+                <p className="text-sm text-slate-300 mb-4">
+                  The relay node aggregates all signatures within the 
+                  subcommittee which is then submitted to the leader:
+                </p>
+                <div className="bg-slate-800 p-3 rounded-md my-3 flex justify-center">
+                  <code className="text-violet-400 font-mono">
+                    σ<sub>agg</sub>= ∏ σ<sub>i</sub>
+                  </code>
+                </div>
+              </>
+            )}
+            
+            {activeFormula === 2 && (
+              <>
+                <p className="text-sm text-slate-300 mb-4">
+                  The leader verifies the aggregated signature in constant time
+                  using:
+                </p>
+                <div className="bg-slate-800 p-3 rounded-md my-3 flex justify-center border border-red-500/20">
+                  <code className="text-violet-400 font-mono">
+                    e(σ<sub>agg</sub>,g)=e(H(M),∑pk<sub>i</sub>)
+                  </code>
+                </div>
+              </>
+            )}
+            
+            <div className="mt-6 space-y-4">
+              <div className="flex items-center">
+                <div className={`w-3 h-3 rounded-full ${activeFormula === 0 ? 'bg-purple-500' : 'bg-purple-500/30'} mr-3`} />
+                <div>
+                  <p className="text-sm font-medium text-white">Individual signatures (σ<sub>i</sub>)</p>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    From each validator where H(M) is the hash of the vote message and
+                    sk<sub>i</sub> is the validator's secret key
+                  </p>
+                </div>
+              </div>
               
-              <ExpandableItem
-                name="Aggregated Signatures"
-                color="purple-400"
-                description="Signatures combined into single proof"
-                expandable={false}
-                index={1}
-              />
+              <div className="flex items-center">
+                <div className={`w-3 h-3 rounded-full ${activeFormula === 1 ? 'bg-indigo-500' : 'bg-indigo-500/30'} mr-3`} />
+                <div>
+                  <p className="text-sm font-medium text-white">Aggregated signature (σ<sub>agg</sub>)</p>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    Compressed proof of consensus
+                  </p>
+                </div>
+              </div>
               
-              <ExpandableItem
-                name="Verification of Aggregated Signatures"
-                color="purple-400"
-                description="Single verification for all signatures"
-                expandable={false}
-                index={2}
-              />
+              <div className="flex items-center">
+                <div className={`w-3 h-3 rounded-full ${activeFormula === 2 ? 'bg-red-500' : 'bg-red-500/30'} mr-3`} />
+                <div>
+                  <p className="text-sm font-medium text-white">Verification of aggregated signature</p>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    Where pk<sub>i</sub> are the public keys of the participating validators
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
+          
           <div className="flex flex-col">
             <div className="bg-slate-900/50 p-4 rounded-lg h-full flex items-center justify-center relative overflow-hidden">
               {activeFormula === 0 && (
@@ -147,16 +200,37 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 />
               )}
             </div>
-            <div className="flex justify-center mt-2 gap-2">
+            
+            <div className="flex justify-center mt-2 gap-1">
+              <button 
+                className="text-white/70 hover:text-white"
+                onClick={goToPrevFormula}
+              >
+                <ChevronLeft size={20} />
+              </button>
+              
               {[0, 1, 2].map(idx => (
                 <button
                   key={idx}
-                  className={`w-2 h-2 rounded-full ${
-                    activeFormula === idx ? 'bg-violet-500' : 'bg-slate-600'
+                  className={`w-3 h-3 rounded-full mx-1 ${
+                    activeFormula === idx 
+                      ? idx === 0 
+                        ? 'bg-purple-500' 
+                        : idx === 1 
+                          ? 'bg-indigo-500' 
+                          : 'bg-red-500'
+                      : 'bg-slate-600'
                   }`}
                   onClick={() => setActiveFormula(idx)}
                 ></button>
               ))}
+              
+              <button 
+                className="text-white/70 hover:text-white"
+                onClick={goToNextFormula}
+              >
+                <ChevronRight size={20} />
+              </button>
             </div>
           </div>
         </div>
