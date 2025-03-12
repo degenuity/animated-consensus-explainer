@@ -81,31 +81,9 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
               }}
               className="absolute z-20"
             >
-              <motion.div
-                className="flex flex-col items-center"
-                whileHover={{ scale: 1.1 }}
-              >
-                <div className="w-10 h-10 rounded-full bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-md">
-                  <User size={15} className="text-purple-400" />
-                </div>
-                
-                <motion.p 
-                  className="text-xs mt-2 text-purple-300 font-medium"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 + i * 0.05 }}
-                >
-                  σ<sub>{i+1}</sub>
-                </motion.p>
-              </motion.div>
-              
-              {/* Signature message box with "M" - positioned exactly at validator position */}
+              {/* Signature message box with "M" - positioned exactly at validator position but BEHIND it */}
               <motion.div
                 className="absolute z-10 w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
-                style={{
-                  top: "4px", // Slight positioning adjustment to center with the validator
-                  left: "1px"
-                }}
                 initial={{ opacity: 0 }}
                 animate={{ 
                   opacity: [0, 1, 0], // Only appear right before movement
@@ -123,6 +101,24 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                 }}
               >
                 <span className="text-white font-bold text-xs">M</span>
+              </motion.div>
+
+              <motion.div
+                className="flex flex-col items-center"
+                whileHover={{ scale: 1.1 }}
+              >
+                <div className="w-10 h-10 rounded-full bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-md">
+                  <User size={15} className="text-purple-400" />
+                </div>
+                
+                <motion.p 
+                  className="text-xs mt-2 text-purple-300 font-medium"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 + i * 0.05 }}
+                >
+                  σ<sub>{i+1}</sub>
+                </motion.p>
               </motion.div>
             </motion.div>
           );
