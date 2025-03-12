@@ -1,14 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import { Button } from './ui/button';
 import { ChevronLeft, ChevronRight, Download, ZoomIn, ZoomOut } from 'lucide-react';
 
-// Explicitly configure PDF.js worker
-// This needs to happen before any PDF components are rendered
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+// Initialize PDF.js worker - We'll do this in a useEffect hook inside the component
+// to ensure it runs in the client-side environment
 
 interface PDFViewerProps {
   pdfUrl: string;
@@ -23,21 +22,41 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [scale, setScale] = useState<number>(1.3);
   const [initialized, setInitialized] = useState<boolean>(false);
+  const workerInitialized = useRef(false);
 
   // Initialize PDF.js worker
   useEffect(() => {
-    try {
-      // Double-check worker configuration
-      if (!pdfjs.GlobalWorkerOptions.workerSrc) {
-        pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+    // Only run this once
+    if (workerInitialized.current) return;
+    
+    const initializeWorker = () => {
+      try {
+        if (typeof window !== 'undefined') {
+          const workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+          pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
+          console.log("PDF.js worker initialized:", pdfjs.GlobalWorkerOptions.workerSrc);
+          setInitialized(true);
+          workerInitialized.current = true;
+        }
+      } catch (error) {
+        console.error("Failed to initialize PDF.js worker:", error);
+        setPdfError(true);
+        setErrorMessage("Failed to initialize PDF viewer");
       }
-      console.log("PDF.js worker initialized:", pdfjs.GlobalWorkerOptions.workerSrc);
-      setInitialized(true);
-    } catch (error) {
-      console.error("Failed to initialize PDF.js worker:", error);
-      setPdfError(true);
-      setErrorMessage("Failed to initialize PDF viewer");
-    }
+    };
+
+    // Try to initialize immediately
+    initializeWorker();
+
+    // As a fallback, also try after a short delay to ensure all resources are loaded
+    const timeoutId = setTimeout(() => {
+      if (!workerInitialized.current) {
+        console.log("Retrying PDF.js worker initialization...");
+        initializeWorker();
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   // Reset loading state when PDF URL changes
@@ -92,8 +111,8 @@ const PDFViewer = ({ pdfUrl, title }: PDFViewerProps) => {
       <div className="flex flex-col items-center w-full max-w-4xl mx-auto">
         {title && <h2 className="text-2xl font-bold mb-4 text-center">{title}</h2>}
         <div className="bg-white rounded-lg shadow-lg p-3 w-full flex flex-col">
-          <div className="text-center text-red-500 py-8 bg-slate-50 rounded">
-            <p>PDF viewer initialization failed. Please refresh the page.</p>
+          <div className="text-center py-8 bg-slate-50 rounded">
+            <p>PDF viewer is initializing. Please wait...</p>
           </div>
         </div>
       </div>
