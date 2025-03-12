@@ -104,7 +104,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
               </motion.div>
 
               <motion.div
-                className="flex flex-col items-center"
+                className="flex flex-col items-center z-30" // Increased z-index to be higher than messages
                 whileHover={{ scale: 1.1 }}
               >
                 <div className="w-10 h-10 rounded-full bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-md">
