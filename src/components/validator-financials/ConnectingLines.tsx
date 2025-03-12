@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 const ConnectingLines = () => (
   <>
-    {/* Adjusted positions for the connecting lines to match reference image */}
+    {/* Connecting lines with absolute positioning for exact placement */}
     
     {/* Inflation to Internal Rewards */}
-    <div className="absolute top-[150px] left-[200px] w-[100px] h-[2px] bg-blue-500/60 rotate-[30deg]">
+    <div className="absolute top-[150px] left-[220px] w-[100px] h-[2px] bg-blue-500/60 rotate-[30deg]">
       <motion.div 
         className="absolute top-0 left-0 h-full w-[20px] bg-blue-400"
         animate={{ 
@@ -23,7 +23,7 @@ const ConnectingLines = () => (
     </div>
 
     {/* Total Stake to Internal Rewards */}
-    <div className="absolute top-[150px] left-[420px] w-[100px] h-[2px] bg-blue-500/60 rotate-[-30deg]">
+    <div className="absolute top-[150px] left-[400px] w-[100px] h-[2px] bg-blue-500/60 rotate-[-30deg]">
       <motion.div 
         className="absolute top-0 left-0 h-full w-[20px] bg-blue-400"
         animate={{ 
@@ -39,7 +39,7 @@ const ConnectingLines = () => (
     </div>
 
     {/* Base Fees to Deflation */}
-    <div className="absolute top-[230px] right-[200px] w-[80px] h-[2px] bg-yellow-500/60 rotate-[30deg]">
+    <div className="absolute top-[230px] right-[220px] w-[80px] h-[2px] bg-yellow-500/60 rotate-[30deg]">
       <motion.div 
         className="absolute top-0 left-0 h-full w-[20px] bg-yellow-400"
         animate={{ 
