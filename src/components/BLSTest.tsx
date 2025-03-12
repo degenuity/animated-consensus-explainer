@@ -1,44 +1,74 @@
 
 import React, { useState, useEffect } from 'react';
+import { Server, User } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-// Simple test component to safely render in place of BLSStageOne
+// Simple test component for BLS visualization
 const BLSTest = () => {
   const [isReady, setIsReady] = useState(false);
   
   useEffect(() => {
-    // Delay rendering the component slightly to ensure the DOM is fully ready
+    // Delay rendering the component to ensure the DOM is fully ready
     const timer = setTimeout(() => {
       setIsReady(true);
+      console.log('BLSTest component is ready');
     }, 100);
     
     return () => clearTimeout(timer);
   }, []);
+
+  if (!isReady) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="text-blue-300 animate-pulse">Loading visualization...</div>
+      </div>
+    );
+  }
   
   return (
-    <div className="p-4 border-2 border-blue-500 rounded-md min-h-[300px] relative">
-      <div className="absolute top-0 left-0 bg-blue-800 text-white text-xs px-2 py-1">
-        BLS Visualization
-      </div>
-      
-      <div className="flex items-center justify-center h-full">
-        {isReady ? (
-          <div className="text-center p-4">
-            <h3 className="text-xl text-blue-300 mb-2">BLS Signature Aggregation</h3>
-            <p className="text-blue-100 mb-4">
-              A cryptographic technique that allows multiple signatures to be combined into a single signature.
-            </p>
-            <div className="grid grid-cols-3 gap-2 mt-4">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-blue-900/50 p-2 rounded-md text-blue-200 text-sm">
-                  Node {i}
-                </div>
-              ))}
-            </div>
+    <div className="w-full h-full relative flex items-center justify-center">
+      {/* Central server node */}
+      <motion.div
+        className="z-10"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="w-16 h-16 rounded-xl bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
+          <div className="flex flex-col items-center justify-center">
+            <Server className="text-purple-400 mb-1" size={18} />
+            <span className="text-xs font-bold text-purple-300">Relay node</span>
           </div>
-        ) : (
-          <div className="text-yellow-300">Preparing visualization...</div>
-        )}
-      </div>
+        </div>
+      </motion.div>
+      
+      {/* Validator nodes in a circle */}
+      {Array.from({ length: 10 }).map((_, i) => {
+        const angle = (i * 36) * (Math.PI / 180);
+        const radius = 100;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        
+        return (
+          <motion.div
+            key={`validator-${i}`}
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1 + i * 0.05, duration: 0.3 }}
+            className="absolute"
+            style={{
+              transform: `translate(${x}px, ${y}px)`,
+            }}
+          >
+            <div className="flex flex-col items-center">
+              <div className="w-8 h-8 rounded-full bg-slate-800 border border-purple-500 flex items-center justify-center">
+                <User size={12} className="text-purple-400" />
+              </div>
+              <p className="text-xs mt-1 text-purple-300">σ{i+1}</p>
+            </div>
+          </motion.div>
+        );
+      })}
     </div>
   );
 };

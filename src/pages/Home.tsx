@@ -1,22 +1,35 @@
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
 import BLSTest from '@/components/BLSTest';
 
-// Main home component - fully debugged
+// Main home component
 const Home = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
+    // Mark component as loaded after a short delay to ensure proper rendering
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+      console.log('Home component marked as loaded');
+    }, 100);
+    
     // Add event listeners to catch errors from child components
-    const handleError = (event) => {
+    const handleError = (event: ErrorEvent) => {
       console.error('🔴 Error caught:', event.error);
     };
     
     window.addEventListener('error', handleError);
-    return () => window.removeEventListener('error', handleError);
+    return () => {
+      window.removeEventListener('error', handleError);
+      clearTimeout(timer);
+    };
   }, []);
+  
+  console.log('Home component rendering, isLoaded:', isLoaded);
   
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
@@ -71,7 +84,7 @@ const Home = () => {
           
           {/* Visualization container with BLSTest component */}
           <div className="relative h-72 flex items-center justify-center overflow-visible border border-purple-700 rounded-lg bg-slate-900/80">
-            <BLSTest />
+            {isLoaded && <BLSTest />}
           </div>
         </div>
       </div>

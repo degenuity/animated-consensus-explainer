@@ -25,6 +25,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
     }
   }, [activeSection, activeFormula]);
   
+  // Original condition: Only render when this is the active section OR formula
   if (activeSection !== 1 && activeFormula !== 0) return null;
   
   return (
@@ -56,7 +57,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
           </motion.div>
         </motion.div>
 
-        {/* Restored to 10 validators as per original design */}
+        {/* Render all 10 validators in a circle */}
         {Array.from({ length: 10 }).map((_, i) => {
           const angle = (i * 36) * (Math.PI / 180);
           const radius = 120;

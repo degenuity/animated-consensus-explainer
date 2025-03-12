@@ -21,13 +21,14 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (activeSection !== 1 && !isMobile) {
+    // Reset to initial state when section becomes active
+    if (activeSection === 1 || isMobile) {
       setActiveFormula(0);
-      return;
+      setAnimationKey(prev => prev + 1); // Force re-render of visualization
     }
     
-    // Auto-rotation is now only active when the section is not being interacted with
-    if (!isMobile) {
+    // Auto-rotation is now only active when the section is active
+    if (activeSection === 1 && !isMobile) {
       const formulaInterval = setInterval(() => {
         setActiveFormula(prev => (prev + 1) % 3);
       }, 5000);
@@ -53,6 +54,9 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
   }, []);
 
   const isActive = activeSection === 1 || isMobile;
+
+  // Add console logs to help debug
+  console.log('BLSSection rendering', { activeSection, activeFormula, animationKey, isActive });
 
   return (
     <motion.div
@@ -80,7 +84,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
             <div className="bg-slate-900/50 p-4 rounded-lg h-full flex items-center justify-center relative overflow-hidden">
               <BLSStageOne 
                 key={animationKey}
-                activeSection={activeSection || 0} 
+                activeSection={isActive ? 1 : 0}
                 activeFormula={activeFormula}
                 showX1Label={false} 
               />
