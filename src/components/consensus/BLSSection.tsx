@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -179,7 +178,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 }}
                 style={{ borderWidth: "1px" }}
               >
-                <code className="text-violet-400 font-mono">
+                <code className="text-indigo-500 font-mono">
                   σ<sub>agg</sub>= ∏ σ<sub>i</sub>
                 </code>
               </motion.div>
@@ -223,7 +222,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 }}
                 style={{ borderWidth: "1px" }}
               >
-                <code className="text-violet-400 font-mono">
+                <code className="text-red-500 font-mono">
                   e(σ<sub>agg</sub>,g)=e(H(M),∑pk<sub>i</sub>)
                 </code>
               </motion.div>
