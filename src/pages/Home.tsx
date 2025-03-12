@@ -5,6 +5,13 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
 
+// Type definition for the BLSStageOne component props
+interface BLSStageOneProps {
+  activeSection: number;
+  activeFormula: number;
+  showX1Label: boolean;
+}
+
 // Simplified and improved fallback component for faster initial rendering
 const SimpleBLSFallback = () => (
   <div className="p-4 text-blue-300 flex flex-col items-center">
@@ -19,7 +26,12 @@ const SimpleBLSFallback = () => (
   </div>
 );
 
-// Fixed the type issue by properly handling the lazy loading
+// Create a fallback component with the same props as BLSStageOne
+const BLSErrorFallback = (props: BLSStageOneProps) => (
+  <div className="text-red-500 p-4">Failed to load visualization. Please refresh.</div>
+);
+
+// Fixed lazy loading with proper typing
 const BLSStageOne = lazy(() => {
   console.log('Starting to load BLSStageOne');
   
@@ -30,10 +42,7 @@ const BLSStageOne = lazy(() => {
     })
     .catch(err => {
       console.error('Failed to load BLSStageOne:', err);
-      // Return a fallback component instead of throwing
-      return { 
-        default: () => <div className="text-red-500 p-4">Failed to load visualization. Please refresh.</div> 
-      };
+      return { default: BLSErrorFallback };
     });
 });
 

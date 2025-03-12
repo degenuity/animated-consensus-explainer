@@ -12,8 +12,11 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      // Use the correct options for @vitejs/plugin-react-swc
-      refresh: mode === "development",
+      // Configure react-swc with proper options
+      jsxImportSource: undefined,
+      devTarget: "es2020",
+      plugins: [],
+      swcrc: true
     }),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
