@@ -8,10 +8,10 @@ const Boxes: React.FC = () => {
     <>
       {/* Inflation box - with reduced width */}
       <BoxContainer
-        position="left-[8%] top-[80px]"
+        position="left-[5%] top-[130px]"
         iconType="inflation"
-        title="Inflation"
-        subtitle="Token Issuance"
+        title="inflation"
+        subtitle="token issuance"
         color="59, 130, 246"
         simpleStyle={true}
         animationDelay={0}
@@ -20,61 +20,61 @@ const Boxes: React.FC = () => {
 
       {/* Internal Rewards Box - Left */}
       <BoxContainer
-        position="left-[33%] top-[80px]"
+        position="left-[25%] top-[130px]"
         iconType="internal-rewards"
-        title="Internal Rewards"
+        title="internal rewards"
         color="52, 211, 153"
         animationDelay={0.2}
         subBoxes={[
-          { title: "Commission" },
-          { title: "Staking Rewards" },
-          { title: "Voting Rewards" }
+          { title: "commission" },
+          { title: "staking rewards" },
+          { title: "voting rewards" }
         ]}
       />
 
       {/* Total Stake Box - Center */}
       <BoxContainer
-        position="left-1/2 transform -translate-x-1/2 top-[80px]"
+        position="left-1/2 transform -translate-x-1/2 top-[130px]"
         iconType="total-stake"
-        title="Total Stake"
+        title="total stake"
         color="93, 174, 236"
         animationDelay={0.4}
         subBoxes={[
-          { title: "Validator Balance" },
-          { title: "Delegator Stakes" },
-          { title: "Network Share" }
+          { title: "validator balance" },
+          { title: "delegator stakes" },
+          { title: "network share" }
         ]}
       />
 
       {/* Network Usage Costs Box - Right */}
       <BoxContainer
-        position="right-[33%] top-[80px]"
+        position="right-[25%] top-[130px]"
         iconType="network-costs"
-        title="Network Costs"
+        title="network costs"
         color="249, 115, 22"
         animationDelay={0.2}
         subBoxes={[
-          { title: "Transaction Fees" },
-          { title: "Resource Usage" },
-          { title: "Operation Costs" }
+          { title: "transaction fees" },
+          { title: "resource usage" },
+          { title: "operation costs" }
         ]}
       />
 
       {/* Deflation box - with reduced width */}
       <BoxContainer
-        position="right-[8%] top-[80px]"
+        position="right-[5%] top-[130px]"
         iconType="deflation"
-        title="Deflation"
-        subtitle="Token Burns"
+        title="deflation"
+        subtitle="token burns"
         color="245, 158, 11"
         simpleStyle={true}
         animationDelay={0}
         className="w-[180px]" // Reduced width by ~30%
       />
 
-      {/* Block Production Box - Center */}
+      {/* Block Production Box - Left Position */}
       <BoxContainer
-        position="left-1/2 transform -translate-x-1/2 top-[350px]"
+        position="left-[30%] top-[420px]"
         iconType="block-production"
         title="block production eligibility"
         color="59, 130, 246"
@@ -99,9 +99,9 @@ const Boxes: React.FC = () => {
         useAlternativeStyle={true}
       />
 
-      {/* New Profitability Box */}
+      {/* Profitability Box - Right Position */}
       <BoxContainer
-        position="left-1/2 transform -translate-x-1/2 top-[570px]"
+        position="right-[30%] top-[420px]"
         iconType="profitability"
         title="profitability"
         color="59, 130, 246"

@@ -20,7 +20,7 @@ interface BoxContainerProps {
   animationDelay?: number;
   className?: string;
   simpleStyle?: boolean;
-  subBoxes?: (SubBox | string)[];
+  subBoxes?: SubBox[];
   useAlternativeStyle?: boolean;
 }
 
@@ -91,18 +91,7 @@ const BoxContainer: React.FC<BoxContainerProps> = ({
     }
   };
 
-  const renderSubBox = (box: SubBox | string, index: number) => {
-    if (typeof box === 'string') {
-      return (
-        <div 
-          key={index}
-          className="p-3 rounded bg-[#182235] border border-[#2c365a] text-white text-sm"
-        >
-          {box}
-        </div>
-      );
-    }
-
+  const renderSubBox = (box: SubBox, index: number) => {
     return (
       <div 
         key={index}
