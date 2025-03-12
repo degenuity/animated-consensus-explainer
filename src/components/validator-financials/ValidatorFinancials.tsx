@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from "framer-motion";
 import Title from './Title';
@@ -22,16 +23,25 @@ const ValidatorFinancials = () => {
         <Title />
 
         <div className="relative mx-auto" style={{ height: '1000px' }}>
-          {/* Top Row - Three boxes at same height */}
+          {/* Top Row - Inflation and Deflation*/}
           <div className="absolute left-[50px] top-[100px]" style={{ width: '280px' }}>
-            <InternalRewardsBox />
-          </div>
-          
-          <div className="absolute left-[50%] top-[100px] transform -translate-x-1/2" style={{ width: '280px' }}>
-            <TotalStakeBox />
+            <InflationBox />
           </div>
           
           <div className="absolute right-[50px] top-[100px]" style={{ width: '280px' }}>
+            <DeflationBox />
+          </div>
+          
+          {/* Middle Row - Three boxes */}
+          <div className="absolute left-[50px] top-[250px]" style={{ width: '280px' }}>
+            <InternalRewardsBox />
+          </div>
+          
+          <div className="absolute left-[50%] top-[350px] transform -translate-x-1/2" style={{ width: '280px' }}>
+            <TotalStakeBox />
+          </div>
+          
+          <div className="absolute right-[50px] top-[250px]" style={{ width: '280px' }}>
             <NetworkUsageCostsBox />
           </div>
 
