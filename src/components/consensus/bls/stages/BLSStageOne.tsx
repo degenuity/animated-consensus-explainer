@@ -59,74 +59,80 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
         </motion.div>
 
         {/* Render all 10 validators in a circle - on a higher z-index layer */}
-        {Array.from({ length: 10 }).map((_, i) => {
-          const angle = (i * 36) * (Math.PI / 180);
-          const radius = 120;
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
-          
-          return (
-            <motion.div
-              key={`validator-${i}`}
-              initial={{ opacity: 0, x: 0, y: 0 }}
-              animate={{ 
-                opacity: 1,
-                x, 
-                y,
-              }}
-              transition={{ 
-                delay: i * 0.1,
-                duration: 0.5,
-                type: "spring",
-              }}
-              className="absolute z-30"
-            >
-              {/* Signature message box with "M" - positioned exactly at validator position but BEHIND it */}
+        <div className="absolute inset-0" style={{ zIndex: 30 }}>
+          {Array.from({ length: 10 }).map((_, i) => {
+            const angle = (i * 36) * (Math.PI / 180);
+            const radius = 120;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            
+            return (
               <motion.div
-                className="absolute z-10 w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
-                initial={{ opacity: 0 }}
+                key={`validator-${i}`}
+                initial={{ opacity: 0, x: 0, y: 0 }}
                 animate={{ 
-                  opacity: [0, 1, 0], // Only appear right before movement
-                  scale: [0.5, 1, 0.5],
-                  x: [0, -x * 0.6], 
-                  y: [0, -y * 0.6],
+                  opacity: 1,
+                  x, 
+                  y,
                 }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  delay: i * 0.3 + 2, // 2 second delay before messages start appearing, after validators are positioned
-                  repeatDelay: 0,
-                  times: [0, 0.5, 1],
-                  ease: "easeInOut"
+                transition={{ 
+                  delay: i * 0.1,
+                  duration: 0.5,
+                  type: "spring",
                 }}
+                className="absolute"
+                style={{ zIndex: 50 }}
               >
-                <span className="text-white font-bold text-xs">M</span>
-              </motion.div>
-
-              <motion.div
-                className="flex flex-col items-center z-100" // Extremely high z-index to ensure it's above messages
-                whileHover={{ scale: 1.1 }}
-              >
-                <div className="w-10 h-10 rounded-full bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-md">
-                  <User size={15} className="text-purple-400" />
+                {/* Message boxes in a separate container with lower z-index */}
+                <div className="absolute" style={{ zIndex: 5 }}>
+                  <motion.div
+                    className="w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
+                    initial={{ opacity: 0 }}
+                    animate={{ 
+                      opacity: [0, 1, 0], // Only appear right before movement
+                      scale: [0.5, 1, 0.5],
+                      x: [0, -x * 0.6], 
+                      y: [0, -y * 0.6],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      delay: i * 0.3 + 2, // 2 second delay before messages start appearing, after validators are positioned
+                      repeatDelay: 0,
+                      times: [0, 0.5, 1],
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <span className="text-white font-bold text-xs">M</span>
+                  </motion.div>
                 </div>
-                
-                <motion.p 
-                  className="text-xs mt-2 text-purple-300 font-medium"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 + i * 0.05 }}
+
+                <motion.div
+                  className="flex flex-col items-center"
+                  whileHover={{ scale: 1.1 }}
+                  style={{ zIndex: 60 }}
                 >
-                  σ<sub>{i+1}</sub>
-                </motion.p>
+                  <div className="w-10 h-10 rounded-full bg-slate-800 border-2 border-purple-500 flex items-center justify-center shadow-md">
+                    <User size={15} className="text-purple-400" />
+                  </div>
+                  
+                  <motion.p 
+                    className="text-xs mt-2 text-purple-300 font-medium"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 + i * 0.05 }}
+                  >
+                    σ<sub>{i+1}</sub>
+                  </motion.p>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
       
       {/* Add the status message box at the bottom */}
-      <div className="absolute bottom-4 left-0 right-0 flex justify-center">
+      <div className="absolute bottom-4 left-0 right-0 flex justify-center" style={{ zIndex: 10 }}>
         <StatusMessage>
           Each validator creates a signature <strong className="text-purple-400">σ<sub>i</sub></strong> on message M using their secret key
         </StatusMessage>
