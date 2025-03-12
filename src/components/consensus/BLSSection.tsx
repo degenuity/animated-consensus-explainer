@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -231,36 +230,22 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
             </motion.div>
             
             <div className="mt-6 space-y-4">
-              <div className="flex items-center">
-                <div className={`w-3 h-3 rounded-full ${activeFormula === 0 ? 'bg-purple-500' : 'bg-purple-500/30'} mr-3`} />
-                <div>
-                  <p className="text-sm font-medium text-white">Individual signatures (σ<sub>i</sub>)</p>
-                  <p className="text-xs text-slate-300 mt-0.5">
-                    From each validator where H(M) is the hash of the vote message and
-                    sk<sub>i</sub> is the validator's secret key
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-center">
-                <div className={`w-3 h-3 rounded-full ${activeFormula === 1 ? 'bg-indigo-500' : 'bg-indigo-500/30'} mr-3`} />
-                <div>
-                  <p className="text-sm font-medium text-white">Aggregated signature (σ<sub>agg</sub>)</p>
-                  <p className="text-xs text-slate-300 mt-0.5">
-                    Compressed proof of consensus
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-center">
-                <div className={`w-3 h-3 rounded-full ${activeFormula === 2 ? 'bg-red-500' : 'bg-red-500/30'} mr-3`} />
-                <div>
-                  <p className="text-sm font-medium text-white">Verification of aggregated signature</p>
-                  <p className="text-xs text-slate-300 mt-0.5">
-                    Where pk<sub>i</sub> are the public keys of the participating validators
-                  </p>
-                </div>
-              </div>
+              {[0, 1, 2].map(idx => (
+                <button
+                  key={idx}
+                  className={`w-3 h-3 rounded-full mr-2 ${
+                    activeFormula === idx 
+                      ? idx === 0 
+                        ? 'bg-purple-500' 
+                        : idx === 1 
+                          ? 'bg-indigo-500' 
+                          : 'bg-red-500'
+                      : 'bg-slate-600'
+                  }`}
+                  onClick={() => setActiveFormula(idx)}
+                  aria-label={`Stage ${idx + 1}`}
+                ></button>
+              ))}
             </div>
           </div>
           
