@@ -98,7 +98,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           <div className="bg-slate-900/50 p-4 rounded-lg text-white">
             {activeFormula === 0 && (
-              <>
+              <div key="formula-0" className="formula-container">
                 <p className="text-sm text-slate-300 mb-4">
                   Each validator in a subcommittee generates a BLS signature
                   σ<sub>i</sub> on the vote message M:
@@ -108,11 +108,11 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                     σ<sub>i</sub>= H(M)<sup>sk<sub>i</sub></sup>
                   </code>
                 </div>
-              </>
+              </div>
             )}
             
             {activeFormula === 1 && (
-              <>
+              <div key="formula-1" className="formula-container">
                 <p className="text-sm text-slate-300 mb-4">
                   The relay node aggregates all signatures within the 
                   subcommittee which is then submitted to the leader:
@@ -122,11 +122,11 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                     σ<sub>agg</sub>= ∏ σ<sub>i</sub>
                   </code>
                 </div>
-              </>
+              </div>
             )}
             
             {activeFormula === 2 && (
-              <>
+              <div key="formula-2" className="formula-container">
                 <p className="text-sm text-slate-300 mb-4">
                   The leader verifies the aggregated signature in constant time
                   using:
@@ -136,7 +136,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                     e(σ<sub>agg</sub>,g)=e(H(M),∑pk<sub>i</sub>)
                   </code>
                 </div>
-              </>
+              </div>
             )}
             
             <div className="mt-6 space-y-4">
@@ -201,10 +201,11 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               )}
             </div>
             
-            <div className="flex justify-center mt-2 gap-1">
+            <div className="flex justify-center mt-4 gap-2">
               <button 
-                className="text-white/70 hover:text-white"
+                className="text-white/70 hover:text-white bg-slate-800/50 p-1 rounded-full"
                 onClick={goToPrevFormula}
+                aria-label="Previous formula"
               >
                 <ChevronLeft size={20} />
               </button>
@@ -222,12 +223,14 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                       : 'bg-slate-600'
                   }`}
                   onClick={() => setActiveFormula(idx)}
+                  aria-label={`Formula ${idx + 1}`}
                 ></button>
               ))}
               
               <button 
-                className="text-white/70 hover:text-white"
+                className="text-white/70 hover:text-white bg-slate-800/50 p-1 rounded-full"
                 onClick={goToNextFormula}
+                aria-label="Next formula"
               >
                 <ChevronRight size={20} />
               </button>
