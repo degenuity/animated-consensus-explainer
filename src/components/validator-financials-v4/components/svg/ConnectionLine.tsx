@@ -11,6 +11,7 @@ interface ConnectionSVGProps {
   label?: string;
   labelPosition?: { x: number; y: number };
   animationDirection?: "right" | "left" | "up" | "down";
+  animateMotion?: boolean;
 }
 
 const ConnectionLine: React.FC<ConnectionSVGProps> = ({ 
@@ -20,7 +21,8 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
   dotPosition,
   label,
   labelPosition,
-  animationDirection
+  animationDirection,
+  animateMotion
 }) => {
   const { lineVariants, dotVariants } = useConnectionAnimation({
     animationIndex
@@ -39,7 +41,7 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
         animate="visible"
       />
       
-      {dotPosition && (
+      {dotPosition && !animateMotion && (
         <motion.circle
           cx={dotPosition.x}
           cy={dotPosition.y}
@@ -53,6 +55,39 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
             animation: `moveDot${animationDirection.charAt(0).toUpperCase() + animationDirection.slice(1)} 3s linear infinite`
           } : undefined}
         />
+      )}
+      
+      {animateMotion && (
+        <motion.circle
+          r="5"
+          fill={color}
+          custom={animationIndex}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ 
+            delay: animationIndex * 0.3 + 0.5,
+            duration: 0.3
+          }}
+        >
+          <animateMotion
+            path={path}
+            dur="1.5s"
+            repeatCount="indefinite"
+            rotate="auto"
+          />
+          <animate
+            attributeName="r"
+            values="3;5;3"
+            dur="0.8s"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="opacity"
+            values="0.7;1;0.7"
+            dur="0.8s"
+            repeatCount="indefinite"
+          />
+        </motion.circle>
       )}
       
       {label && labelPosition && (

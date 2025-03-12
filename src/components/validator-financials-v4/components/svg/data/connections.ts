@@ -6,7 +6,8 @@ export const connectionPaths = [
     color: "#3B82F6", 
     animationIndex: 0,
     dotPosition: { x: "285", y: "290" },
-    animationDirection: "right"
+    animationDirection: "right" as const,
+    animateMotion: true
   },
   
   // Line 2: Delegated Stake to Commission
