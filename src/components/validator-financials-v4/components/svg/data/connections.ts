@@ -4,69 +4,77 @@
 export const connectionPaths = [
   // Inflation to Internal Rewards
   { 
-    path: "M 190 150 L 280 150", 
+    path: "M 250 280 L 320 280", 
     color: "#3B82F6", 
     animationIndex: 0,
-    dotPosition: { x: "235", y: "150" }
+    dotPosition: { x: "285", y: "280" }
   },
   
-  // Internal Rewards to Total Stake
+  // Internal Rewards to Block Production
   { 
-    path: "M 480 150 L 550 150", 
+    path: "M 375 360 L 375 500", 
     color: "#10B981", 
     animationIndex: 1,
-    dotPosition: { x: "515", y: "150" }
+    dotPosition: { x: "375", y: "430" }
   },
   
-  // Base Fees to Block Rewards (Vertical down with 50% label)
+  // Total Stake to Internal Rewards
   { 
-    path: "M 820 220 L 820 270", 
-    color: "#EAB308", 
-    animationIndex: 3,
-    dotPosition: { x: "820", y: "245" },
-    label: "50%",
-    labelPosition: { x: 797, y: 245 }
-  },
-  
-  // Base Fees to Deflation (horizontal right with 50% label)
-  { 
-    path: "M 880 195 L 1010 195", 
-    color: "#EAB308", 
-    animationIndex: 3,
-    dotPosition: { x: "945", y: "195" },
-    label: "50%",
-    labelPosition: { x: 945, y: 172 }
-  },
-  
-  // Network Costs to Total Stake
-  { 
-    path: "M 690 150 L 550 150", 
-    color: "#F97316", 
+    path: "M 650 250 L 580 250", 
+    color: "#3B82F6", 
     animationIndex: 2,
-    dotPosition: { x: "620", y: "150" }
+    dotPosition: { x: "615", y: "250" }
   },
   
   // Total Stake to Block Production
   { 
-    path: "M 625 250 L 625 300 L 400 300 L 400 350", 
+    path: "M 780 320 L 780 420 L 530 420 L 530 500", 
     color: "#3B82F6", 
+    animationIndex: 3,
+    dotPosition: { x: "650", y: "420" }
+  },
+  
+  // Base Fees to Block Rewards (50% vertical down)
+  { 
+    path: "M 1090 210 L 1090 255", 
+    color: "#EAB308", 
     animationIndex: 4,
-    dotPosition: { x: "525", y: "300" }
+    dotPosition: { x: "1090", y: "230" },
+    label: "50%",
+    labelPosition: { x: 1070, y: 230 }
+  },
+  
+  // Base Fees to Deflation (50% horizontal right)
+  { 
+    path: "M 1190 175 L 1250 280", 
+    color: "#EAB308", 
+    animationIndex: 5,
+    dotPosition: { x: "1220", y: "230" },
+    label: "50%",
+    labelPosition: { x: 1220, y: 200 }
   },
   
   // Block Rewards to Profitability
   { 
-    path: "M 820 350 L 820 425 L 900 425 L 900 450", 
+    path: "M 1090 340 L 1090 430 L 990 430 L 990 500", 
     color: "#10B981", 
-    animationIndex: 5,
-    dotPosition: { x: "860", y: "425" }
+    animationIndex: 6,
+    dotPosition: { x: "1040", y: "430" }
   },
   
   // Total Stake to Profitability
   { 
-    path: "M 625 250 L 625 400 L 900 400 L 900 450", 
+    path: "M 780 320 L 780 430 L 950 430 L 950 500", 
     color: "#3B82F6", 
-    animationIndex: 6,
-    dotPosition: { x: "750", y: "400" }
+    animationIndex: 7,
+    dotPosition: { x: "870", y: "430" }
+  },
+  
+  // Operational Costs to Explanation
+  { 
+    path: "M 880 600 L 750 600 L 750 740", 
+    color: "#F97316", 
+    animationIndex: 8,
+    dotPosition: { x: "750", y: "670" }
   }
 ];

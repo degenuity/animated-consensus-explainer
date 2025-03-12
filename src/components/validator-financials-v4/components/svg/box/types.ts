@@ -18,12 +18,14 @@ export interface BoxProps {
   width: number;
   height: number;
   title: string;
-  icon: 'inflation' | 'deflation' | 'internal-rewards' | 'total-stake' | 'network-costs' | 'block-production' | 'block-rewards' | 'profitability';
+  icon: 'inflation' | 'deflation' | 'internal-rewards' | 'total-stake' | 'network-costs' | 'block-production' | 'block-rewards' | 'profitability' | 'info';
   subtitle?: string;
   color: string;
   animationIndex: number;
   subitems?: (string | SubItem)[];
   simpleStyle?: boolean;
+  borderColor?: string;
+  isExplanation?: boolean;
 }
 
 export const boxVariants = {

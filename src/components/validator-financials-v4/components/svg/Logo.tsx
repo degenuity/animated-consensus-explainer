@@ -7,16 +7,14 @@ const Logo: React.FC = () => {
     <motion.g
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 3.5 }}
+      transition={{ delay: 3 }}
     >
       <text
-        x="1150"
-        y="780"
-        fill="#ffffff"
-        fontSize="48"
+        x="1420"
+        y="820"
+        fontSize="40"
         fontWeight="bold"
-        fontFamily="sans-serif"
-        opacity="0.2"
+        fill="rgba(255, 255, 255, 0.15)"
       >
         X1
       </text>

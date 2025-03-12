@@ -21,23 +21,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   width
 }) => {
   const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id } = item;
-  const itemHeight = desc ? 45 : 40;
-  
-  // Determine border color based on item properties
-  const getBorderColor = () => {
-    if (itemColor) return itemColor;
-    if (isHeader) return "#EAB308";
-    if (isSubHeader) return "#10B981";
-    return "#3B82F6";
-  };
-  
-  // Determine text color based on item properties
-  const getTextColor = () => {
-    if (itemColor) return itemColor;
-    if (isHeader) return "text-amber-400 font-medium";
-    if (isSubHeader) return "text-white font-medium";
-    return "text-white";
-  };
+  const itemHeight = desc ? 50 : 40;
   
   return (
     <motion.g
@@ -53,8 +37,8 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         height={itemHeight}
         rx="4"
         fill="transparent"
-        stroke={getBorderColor()}
-        strokeWidth="1"
+        stroke={itemColor || "#3B82F6"}
+        strokeWidth="1.5"
       />
       <foreignObject 
         x={x + 10} 
@@ -65,13 +49,13 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         <div className="flex flex-col justify-center h-full px-4">
           {desc ? (
             <>
-              <div className={`text-sm ${itemColor ? '' : 'text-blue-400'}`} style={itemColor ? { color: itemColor } : {}}>
+              <div className="text-sm font-medium" style={{ color: itemColor || "#3B82F6" }}>
                 {text}
               </div>
-              <div className="text-gray-400 text-xs">{desc}</div>
+              <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>
           ) : (
-            <div className={`flex items-center h-full ${getTextColor()}`} style={itemColor ? { color: itemColor } : {}}>
+            <div className="flex items-center h-full font-medium" style={{ color: itemColor || "#3B82F6" }}>
               {text}
             </div>
           )}
@@ -80,12 +64,12 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
       
       {hasPlus && (
         <foreignObject 
-          x={x + width - 30}
+          x={x + width - 40}
           y={y + yOffset + (itemHeight/2) - 10}
           width="20" 
           height="20"
         >
-          <div className="flex items-center justify-center h-full text-gray-400">+</div>
+          <div className="flex items-center justify-center h-full text-gray-400 text-lg">+</div>
         </foreignObject>
       )}
     </motion.g>

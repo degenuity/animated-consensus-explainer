@@ -11,94 +11,114 @@ import {
 export const boxes = [
   // Inflation Box
   {
-    x: 40,
-    y: 100,
+    x: 100,
+    y: 240,
     width: 150,
     height: 100,
     title: "inflation",
     subtitle: "token issuance",
     icon: "inflation" as const,
-    color: "12, 132, 199",
+    color: "0, 149, 255",
     animationIndex: 0,
     simpleStyle: true
   },
   
   // Internal Rewards Box
   {
-    x: 280,
-    y: 100,
-    width: 200,
-    height: 230,
+    x: 320,
+    y: 180,
+    width: 260,
+    height: 180,
     title: "internal rewards",
     icon: "internal-rewards" as const,
     color: "#10B981",
     animationIndex: 1,
-    subitems: internalRewardsSubitems
+    subitems: internalRewardsSubitems,
+    borderColor: "#10B981"
   },
   
   // Total Stake Box
   {
-    x: 550,
-    y: 100,
-    width: 150,
-    height: 150,
+    x: 650,
+    y: 180,
+    width: 260,
+    height: 140,
     title: "total stake",
     icon: "total-stake" as const,
     color: "#3B82F6",
     animationIndex: 1,
-    subitems: totalStakeSubitems
+    subitems: totalStakeSubitems,
+    borderColor: "#3B82F6"
   },
   
-  // Network Costs Box - increased width
+  // Network Costs Box
   {
-    x: 740,
-    y: 100,
-    width: 200,
-    height: 330,
+    x: 950,
+    y: 120,
+    width: 280,
+    height: 270,
     title: "network usage costs",
     icon: "network-costs" as const,
     color: "#F97316",
     animationIndex: 1,
-    subitems: networkCostsSubitems
+    subitems: networkCostsSubitems,
+    borderColor: "#F97316"
   },
   
   // Deflation Box
   {
-    x: 1010,
-    y: 125,
+    x: 1250,
+    y: 240,
     width: 150,
     height: 100,
     title: "deflation",
     subtitle: "token burns",
     icon: "deflation" as const,
-    color: "234, 179, 8",
+    color: "255, 187, 0",
     animationIndex: 0,
     simpleStyle: true
   },
   
   // Block Production Box
   {
-    x: 250,
-    y: 350,
-    width: 300,
-    height: 230,
+    x: 320,
+    y: 500,
+    width: 420,
+    height: 180,
     title: "block production eligibility",
     icon: "block-production" as const,
     color: "#3B82F6",
     animationIndex: 2,
-    subitems: blockProductionSubitems
+    subitems: blockProductionSubitems,
+    borderColor: "#3B82F6"
   },
   
   // Profitability Box
   {
-    x: 750,
-    y: 450,
-    width: 300,
-    height: 165,
+    x: 880,
+    y: 500,
+    width: 280,
+    height: 180,
     title: "profitability",
     icon: "profitability" as const,
     color: "#3B82F6",
     animationIndex: 2,
-    subitems: profitabilitySubitems
+    subitems: profitabilitySubitems,
+    borderColor: "#3B82F6"
+  },
+  
+  // Explanation Box
+  {
+    x: 500,
+    y: 740,
+    width: 500,
+    height: 60,
+    title: "Minimal operational costs",
+    subtitle: "Voting transactions on X1 are free, keeping operational expenses at minimum.",
+    icon: "info" as const,
+    color: "59, 130, 246",
+    animationIndex: 3,
+    simpleStyle: true,
+    isExplanation: true
   },
 ];

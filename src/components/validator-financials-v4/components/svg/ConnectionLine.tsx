@@ -41,7 +41,7 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
         <motion.circle
           cx={dotPosition.x}
           cy={dotPosition.y}
-          r="4"
+          r="5"
           fill={color}
           custom={animationIndex}
           variants={dotVariants}
@@ -58,7 +58,7 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
             r="15"
             fill="#1f2937"
             stroke={color}
-            strokeWidth="1"
+            strokeWidth="1.5"
             opacity="0.9"
           />
           <text
@@ -68,7 +68,7 @@ const ConnectionLine: React.FC<ConnectionSVGProps> = ({
             dominantBaseline="middle"
             fill="white"
             fontSize="12"
-            fontWeight="500"
+            fontWeight="600"
           >
             {label}
           </text>

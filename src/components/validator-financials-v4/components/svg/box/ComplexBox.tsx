@@ -10,7 +10,7 @@ interface ComplexBoxProps {
 }
 
 const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
-  const { x, y, width, height, title, icon, color, animationIndex, subitems = [] } = boxProps;
+  const { x, y, width, height, title, icon, color, animationIndex, subitems = [], borderColor } = boxProps;
   
   // Process subitems to ensure consistent format
   const processedSubitems = subitems.map(item => {
@@ -26,14 +26,15 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
     
     const renderItem = (item: SubItem, depth: number = 0, index: number) => {
       const isHeader = depth === 0;
-      const paddingLeft = depth * 20; // Indent based on depth
-      const itemHeight = item.desc ? 45 : 40;
+      const isSubHeader = depth === 1;
+      const paddingLeft = depth * 10; // Indent based on depth
+      const itemHeight = item.desc ? 50 : 40;
       
       // Add the current item
       renderedItems.push(
         <SubItemRenderer 
           key={`item-${item.id || index}`}
-          item={{...item, isHeader}}
+          item={{...item, isHeader, isSubHeader}}
           index={index}
           x={x + paddingLeft}
           y={y}
@@ -83,7 +84,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       <foreignObject x={x} y={y} width={width} height="50">
         <div className="flex items-center gap-2 p-3 border-b border-[#1e293b]">
           <BoxIcon icon={icon} />
-          <div className="text-white font-medium truncate" style={{ maxWidth: width - 50 }}>{title}</div>
+          <div className="text-white font-medium">{title}</div>
         </div>
       </foreignObject>
       
