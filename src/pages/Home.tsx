@@ -12,26 +12,58 @@ const Home = () => {
       {/* Blue Laser Background Effect */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-[#0A0F1B]">
-          {/* Bright Blue Laser */}
+          {/* Primary Lasers */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: [0.7, 0.9, 0.7] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-0 right-[30%] w-[3px] h-full bg-[#33C3F0] rotate-[20deg] blur-[2px] shadow-[0_0_15px_5px_rgba(51,195,240,0.5)]"
+            className="absolute top-0 left-[25%] w-[2px] h-[120%] bg-[#33C3F0] rotate-[60deg] blur-[3px] shadow-[0_0_15px_5px_rgba(51,195,240,0.5)]"
           />
-          {/* Secondary Lasers */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute top-0 right-[10%] w-[2px] h-full bg-[#1EAEDB] rotate-[30deg] blur-[3px] shadow-[0_0_10px_3px_rgba(30,174,219,0.4)]"
+            animate={{ opacity: [0.6, 0.8, 0.6] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+            className="absolute top-0 left-[40%] w-[2px] h-[120%] bg-[#33C3F0] rotate-[70deg] blur-[3px] shadow-[0_0_15px_5px_rgba(51,195,240,0.5)]"
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.5, 0.7, 0.5] }}
+            transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+            className="absolute top-0 left-[55%] w-[1.5px] h-[120%] bg-[#33C3F0] rotate-[65deg] blur-[3px] shadow-[0_0_12px_4px_rgba(51,195,240,0.5)]"
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.6, 0.8, 0.6] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+            className="absolute top-0 left-[70%] w-[2px] h-[120%] bg-[#33C3F0] rotate-[75deg] blur-[3px] shadow-[0_0_15px_5px_rgba(51,195,240,0.5)]"
+          />
+          
+          {/* Secondary Lasers (thinner and lighter) */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+            className="absolute top-0 left-[10%] w-[1px] h-[120%] bg-[#1EAEDB] rotate-[62deg] blur-[2px] shadow-[0_0_10px_3px_rgba(30,174,219,0.4)]"
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+            className="absolute top-0 left-[32%] w-[1px] h-[120%] bg-[#1EAEDB] rotate-[67deg] blur-[2px] shadow-[0_0_10px_3px_rgba(30,174,219,0.4)]"
           />
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: [0.2, 0.4, 0.2] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="absolute top-0 right-[60%] w-[1px] h-full bg-[#0FA0CE] rotate-[15deg] blur-[2px] shadow-[0_0_8px_2px_rgba(15,160,206,0.3)]"
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+            className="absolute top-0 left-[62%] w-[1px] h-[120%] bg-[#0FA0CE] rotate-[68deg] blur-[2px] shadow-[0_0_8px_2px_rgba(15,160,206,0.3)]"
           />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0.2, 0.4, 0.2] }}
+            transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 1.1 }}
+            className="absolute top-0 left-[82%] w-[1px] h-[120%] bg-[#0FA0CE] rotate-[72deg] blur-[2px] shadow-[0_0_8px_2px_rgba(15,160,206,0.3)]"
+          />
+          
           {/* Background Geometric Shapes */}
           <div className="absolute inset-0 opacity-[0.15] bg-[url('/lovable-uploads/f1a18c33-470c-4dee-b393-1d339754f763.png')] bg-cover bg-center" />
         </div>
