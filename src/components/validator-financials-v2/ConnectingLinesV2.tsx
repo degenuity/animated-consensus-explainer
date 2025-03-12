@@ -112,7 +112,7 @@ const ConnectingLinesV2 = () => {
       </svg>
       
       {/* 50% indicator for Network Usage to Block Rewards */}
-      <div className="absolute" style={{ top: '230px', left: '655px' }} className="bg-[#0f1218] border border-gray-800 rounded-full px-2 py-0.5 text-xs text-gray-300">
+      <div className="absolute bg-[#0f1218] border border-gray-800 rounded-full px-2 py-0.5 text-xs text-gray-300" style={{ top: '230px', left: '655px' }}>
         50%
       </div>
 
@@ -217,13 +217,13 @@ const ConnectingLinesV2 = () => {
       </svg>
 
       {/* Multiplication sign between Stake Weight and Randomness */}
-      <div className="absolute" style={{ top: '593px', left: '420px' }} className="text-gray-500 text-xl">×</div>
+      <div className="text-gray-500 text-xl" style={{ position: 'absolute', top: '593px', left: '420px' }}>×</div>
 
       {/* Multiplication sign between Randomness and Performance */}
-      <div className="absolute" style={{ top: '593px', left: '580px' }} className="text-gray-500 text-xl">×</div>
+      <div className="text-gray-500 text-xl" style={{ position: 'absolute', top: '593px', left: '580px' }}>×</div>
 
       {/* Plus sign for Profitability */}
-      <div className="absolute" style={{ top: '630px', left: '830px' }} className="text-gray-500 text-xl">+</div>
+      <div className="text-gray-500 text-xl" style={{ position: 'absolute', top: '630px', left: '830px' }}>+</div>
     </>
   );
 };
