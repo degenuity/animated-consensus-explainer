@@ -8,3 +8,8 @@
 [build]
   publish = "dist"
   command = "npm run build"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "script-src 'self' 'unsafe-eval' https://cdn.gpteng.co; object-src 'none';"
