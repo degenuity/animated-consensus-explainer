@@ -30,10 +30,10 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="max-w-7xl mx-auto px-4 py-12 relative w-full">
+      <div className="max-w-7xl mx-auto px-4 py-8 relative w-full">
         <Title />
 
-        <div className="relative h-[650px] w-full">
+        <div className="relative h-[700px] w-full">
           <div className="absolute inset-0">
             {/* Render all main boxes */}
             <Boxes />

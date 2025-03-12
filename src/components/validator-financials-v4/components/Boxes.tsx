@@ -8,7 +8,7 @@ const Boxes: React.FC = () => {
     <>
       {/* Inflation box - with reduced width */}
       <BoxContainer
-        position="left-[5%] top-[130px]"
+        position="left-[5%] top-[80px]"
         iconType="inflation"
         title="inflation"
         subtitle="token issuance"
@@ -20,7 +20,7 @@ const Boxes: React.FC = () => {
 
       {/* Internal Rewards Box - Left */}
       <BoxContainer
-        position="left-[25%] top-[130px]"
+        position="left-[25%] top-[80px]"
         iconType="internal-rewards"
         title="internal rewards"
         color="52, 211, 153"
@@ -34,7 +34,7 @@ const Boxes: React.FC = () => {
 
       {/* Total Stake Box - Center */}
       <BoxContainer
-        position="left-1/2 transform -translate-x-1/2 top-[130px]"
+        position="left-1/2 transform -translate-x-1/2 top-[80px]"
         iconType="total-stake"
         title="total stake"
         color="93, 174, 236"
@@ -48,7 +48,7 @@ const Boxes: React.FC = () => {
 
       {/* Network Usage Costs Box - Right */}
       <BoxContainer
-        position="right-[25%] top-[130px]"
+        position="right-[25%] top-[80px]"
         iconType="network-costs"
         title="network costs"
         color="249, 115, 22"
@@ -62,7 +62,7 @@ const Boxes: React.FC = () => {
 
       {/* Deflation box - with reduced width */}
       <BoxContainer
-        position="right-[5%] top-[130px]"
+        position="right-[5%] top-[80px]"
         iconType="deflation"
         title="deflation"
         subtitle="token burns"
@@ -72,9 +72,9 @@ const Boxes: React.FC = () => {
         className="w-[180px]" // Reduced width by ~30%
       />
 
-      {/* Block Production Box - Left Position */}
+      {/* Block Production Box - Left Position (positioned lower to avoid overlap) */}
       <BoxContainer
-        position="left-[30%] top-[420px]"
+        position="left-[20%] top-[370px]"
         iconType="block-production"
         title="block production eligibility"
         color="59, 130, 246"
@@ -99,9 +99,9 @@ const Boxes: React.FC = () => {
         useAlternativeStyle={true}
       />
 
-      {/* Profitability Box - Right Position */}
+      {/* Profitability Box - Right Position (positioned to avoid overlap) */}
       <BoxContainer
-        position="right-[30%] top-[420px]"
+        position="right-[20%] top-[370px]"
         iconType="profitability"
         title="profitability"
         color="59, 130, 246"
