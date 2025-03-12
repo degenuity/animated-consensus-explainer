@@ -4,7 +4,7 @@ import { CircleDollarSign, TrendingUp, TrendingDown, Database, ServerCrash, Shie
 
 interface SubBox {
   title: string;
-  description: string;
+  description?: string;
   fullWidth?: boolean;
 }
 
@@ -17,7 +17,7 @@ interface BoxContainerProps {
   animationDelay?: number;
   className?: string;
   simpleStyle?: boolean;
-  subBoxes?: SubBox[];
+  subBoxes?: (SubBox | string)[];
   useAlternativeStyle?: boolean;
 }
 
@@ -54,6 +54,30 @@ const BoxContainer: React.FC<BoxContainerProps> = ({
     }
   };
 
+  const renderSubBox = (box: SubBox | string, index: number) => {
+    if (typeof box === 'string') {
+      return (
+        <div 
+          key={index}
+          className="p-3 rounded bg-[#182235] border border-[#2c365a] text-white text-sm"
+        >
+          {box}
+        </div>
+      );
+    }
+
+    return (
+      <div 
+        key={index}
+        className={`p-4 rounded bg-[#1a1f31] border border-blue-500/20 
+          ${box.fullWidth ? 'col-span-2' : 'col-span-1'}`}
+      >
+        <div className="text-blue-400 text-lg mb-2">{box.title}</div>
+        {box.description && <div className="text-gray-400 text-sm">{box.description}</div>}
+      </div>
+    );
+  };
+
   if (useAlternativeStyle) {
     return (
       <motion.div
@@ -71,16 +95,7 @@ const BoxContainer: React.FC<BoxContainerProps> = ({
           </div>
           
           <div className="p-4 grid grid-cols-2 gap-4">
-            {subBoxes.map((box, index) => (
-              <div 
-                key={index}
-                className={`p-4 rounded bg-[#1a1f31] border border-blue-500/20 
-                  ${box.fullWidth ? 'col-span-2' : 'col-span-1'}`}
-              >
-                <div className="text-blue-400 text-lg mb-2">{box.title}</div>
-                <div className="text-gray-400 text-sm">{box.description}</div>
-              </div>
-            ))}
+            {subBoxes.map((box, index) => renderSubBox(box, index))}
           </div>
         </div>
       </motion.div>
@@ -119,14 +134,7 @@ const BoxContainer: React.FC<BoxContainerProps> = ({
             </div>
             
             <div className="p-4 space-y-2">
-              {subBoxes.map((text, index) => (
-                <div 
-                  key={index}
-                  className="p-3 rounded bg-[#182235] border border-[#2c365a] text-white text-sm"
-                >
-                  {text}
-                </div>
-              ))}
+              {subBoxes.map((box, index) => renderSubBox(box, index))}
             </div>
           </>
         )}

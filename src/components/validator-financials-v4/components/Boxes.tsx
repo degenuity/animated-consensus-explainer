@@ -24,9 +24,9 @@ const Boxes: React.FC = () => {
         color="52, 211, 153"
         animationDelay={0.2}
         subBoxes={[
-          "Commission",
-          "Staking Rewards",
-          "Voting Rewards"
+          { title: "Commission" },
+          { title: "Staking Rewards" },
+          { title: "Voting Rewards" }
         ]}
       />
 
@@ -38,9 +38,9 @@ const Boxes: React.FC = () => {
         color="93, 174, 236"
         animationDelay={0.4}
         subBoxes={[
-          "Validator Balance",
-          "Delegator Stakes",
-          "Network Share"
+          { title: "Validator Balance" },
+          { title: "Delegator Stakes" },
+          { title: "Network Share" }
         ]}
       />
 
@@ -52,9 +52,9 @@ const Boxes: React.FC = () => {
         color="249, 115, 22"
         animationDelay={0.2}
         subBoxes={[
-          "Transaction Fees",
-          "Resource Usage",
-          "Operation Costs"
+          { title: "Transaction Fees" },
+          { title: "Resource Usage" },
+          { title: "Operation Costs" }
         ]}
       />
 
