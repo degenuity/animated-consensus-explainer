@@ -11,7 +11,7 @@ const BlockProductionEligibilityBoxV2 = () => {
         <span className="text-xl text-white">block production eligibility</span>
       </div>
       
-      <div className="grid grid-cols-5 gap-2 px-4">
+      <div className="grid grid-cols-5 gap-2 px-6 py-4">
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
