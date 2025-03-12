@@ -170,27 +170,33 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
           
           <div className="flex flex-col">
             <div className="bg-slate-900/50 p-4 rounded-lg h-full flex items-center justify-center relative overflow-hidden">
-              {/* Animation Stage One */}
-              <BLSStageOne 
-                key={`stage-one-${animationKey}`}
-                activeSection={isActive ? 1 : 0}
-                activeFormula={activeFormula}
-                showX1Label={false} 
-              />
+              {/* Animation Stage One - Only visible when activeFormula is 0 */}
+              {activeFormula === 0 && (
+                <BLSStageOne 
+                  key={`stage-one-${animationKey}`}
+                  activeSection={isActive ? 1 : 0}
+                  activeFormula={activeFormula}
+                  showX1Label={false} 
+                />
+              )}
               
-              {/* Animation Stage Two */}
-              <BLSStageTwo
-                key={`stage-two-${animationKey}`}
-                activeSection={isActive ? 1 : 0}
-                activeFormula={activeFormula}
-              />
+              {/* Animation Stage Two - Only visible when activeFormula is 1 */}
+              {activeFormula === 1 && (
+                <BLSStageTwo
+                  key={`stage-two-${animationKey}`}
+                  activeSection={isActive ? 1 : 0}
+                  activeFormula={activeFormula}
+                />
+              )}
               
-              {/* Animation Stage Three */}
-              <BLSStageThree
-                key={`stage-three-${animationKey}`}
-                activeSection={isActive ? 1 : 0}
-                activeFormula={activeFormula}
-              />
+              {/* Animation Stage Three - Only visible when activeFormula is 2 */}
+              {activeFormula === 2 && (
+                <BLSStageThree
+                  key={`stage-three-${animationKey}`}
+                  activeSection={isActive ? 1 : 0}
+                  activeFormula={activeFormula}
+                />
+              )}
             </div>
             
             <div className="flex justify-center mt-4 gap-2">
