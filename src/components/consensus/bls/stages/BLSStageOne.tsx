@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from "framer-motion";
 import { User, Server } from "lucide-react";
@@ -125,15 +124,14 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
         })}
       </div>
       
-      {/* Restored explanation text */}
       <motion.div 
-        className="absolute bottom-0 left-0 right-0 text-center"
+        className="absolute bottom-6 left-0 right-0 flex justify-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
       >
-        <div className="bg-slate-800/80 backdrop-blur p-2 rounded-lg mx-auto inline-block mb-4">
-          <p className="text-sm text-slate-300">
+        <div className="bg-slate-800/90 backdrop-blur-sm px-4 py-2 rounded-lg mx-auto inline-block">
+          <p className="text-sm text-slate-200 font-medium">
             Validators in the subcommittee sign the message and generate individual BLS signatures
           </p>
         </div>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from "framer-motion";
 import { BLSFormulaAnimation } from './BLSFormulaAnimation';
@@ -22,7 +21,7 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
           <ExpandableItem 
             name="Individual signatures (σᵢ)" 
             color="purple-400" 
-            description="From each validator where H(M) is the hash of the vote message and skᵢ is the validator's secret key" 
+            description="From each validator where H(M) is the hash of the vote message and skᵢ is the validator's secret key. Each validator in a subcommittee generates a BLS signature σᵢ on the vote message M." 
             expandable={false}
             index={0}
             isActive={activeSection === 1 && activeFormula === 0}
