@@ -18,6 +18,16 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
         transition={{ delay: 0.3 }}
         className="p-4 bg-slate-700/50 rounded-lg border border-violet-500/20"
       >
+        <div className="mb-4">
+          <ExpandableItem 
+            name="Individual signatures (σᵢ)" 
+            color="purple-400" 
+            description="From each validator where H(M) is the hash of the vote message and skᵢ is the validator's secret key" 
+            expandable={false}
+            index={0}
+          />
+        </div>
+        
         <p className="text-sm text-slate-300 mb-3">
           Each validator in a subcommittee generates a BLS signature 
           <span className="inline-flex items-baseline mx-1">σ<sub className="text-xs">i</sub></span>
@@ -48,13 +58,13 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
           }
         />
         
-        <div className="mt-2 mb-4">
+        <div className="mt-6 mb-4">
           <ExpandableItem 
-            name="Individual signatures (σᵢ)" 
-            color="purple-400" 
-            description="From each validator where H(M) is the hash of the vote message and skᵢ is the validator's secret key" 
+            name="Aggregated signature (σₐgg)" 
+            color="indigo-400" 
+            description="Compressed proof of consensus" 
             expandable={false}
-            index={0}
+            index={1}
           />
         </div>
         
@@ -85,13 +95,13 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
           }
         />
         
-        <div className="mt-2 mb-4">
+        <div className="mt-6 mb-4">
           <ExpandableItem 
-            name="Aggregated signature (σₐgg)" 
-            color="indigo-400" 
-            description="Compressed proof of consensus" 
+            name="Verification of aggregated signature" 
+            color="red-400" 
+            description="Where pkᵢ are the public keys of the participating validators" 
             expandable={false}
-            index={1}
+            index={2}
           />
         </div>
         
@@ -124,16 +134,6 @@ export const BLSFormulas: React.FC<BLSFormulasProps> = ({ activeSection, activeF
             </motion.span>
           }
         />
-        
-        <div className="mt-2">
-          <ExpandableItem 
-            name="Verification of aggregated signature" 
-            color="red-400" 
-            description="Where pkᵢ are the public keys of the participating validators" 
-            expandable={false}
-            index={2}
-          />
-        </div>
       </motion.div>
     </div>
   );
