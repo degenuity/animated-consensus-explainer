@@ -10,7 +10,6 @@ import NetworkUsageCostsBox from './NetworkUsageCostsBox';
 import BlockProductionEligibilityBox from './BlockProductionEligibilityBox';
 import ProfitabilityBox from './ProfitabilityBox';
 import ConnectingLines from './ConnectingLines';
-import OperationalCostsNote from './OperationalCostsNote';
 
 const ValidatorFinancials = () => {
   return (
@@ -57,11 +56,6 @@ const ValidatorFinancials = () => {
 
           {/* Connecting Lines */}
           <ConnectingLines />
-          
-          {/* Operational Costs Note - Bottom of the diagram */}
-          <div className="absolute left-[50%] bottom-[30px] transform -translate-x-1/2" style={{ width: '500px' }}>
-            <OperationalCostsNote />
-          </div>
 
           {/* X1 Logo - Bottom right corner */}
           <motion.div
