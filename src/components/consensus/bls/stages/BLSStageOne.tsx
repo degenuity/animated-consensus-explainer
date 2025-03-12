@@ -92,12 +92,13 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                   <User size={15} className="text-purple-400" />
                 </div>
                 
-                {/* Signature message box with "M" */}
+                {/* Signature message box with "M" - now starting from under the validators */}
                 <motion.div
                   className="absolute w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
+                  initial={{ y: 20, x: 0 }}
                   animate={{ 
                     x: [0, -x * 0.6], 
-                    y: [0, -y * 0.6],
+                    y: [20, -y * 0.6],
                     opacity: [0, 1, 0],
                     scale: [0.5, 1, 0.5]
                   }}
