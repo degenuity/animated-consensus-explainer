@@ -30,15 +30,15 @@ const ConnectingLinesV2 = () => {
   return (
     <>
       {/* Inflation to Internal Rewards */}
-      <svg className="absolute top-[170px] left-[230px]" width="60" height="4" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="2" x2="60" y2="2" stroke="#3B82F6" strokeWidth="2" />
+      <svg className="absolute top-[120px] left-[250px]" width="80" height="4" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="2" x2="80" y2="2" stroke="#3B82F6" strokeWidth="2" />
         <motion.circle 
-          cx="30" 
+          cx="40" 
           cy="2" 
           r="3" 
           fill="#3B82F6" 
           animate={{ 
-            x: [-30, 30, -30],
+            x: [-40, 40, -40],
             opacity: [0, 1, 0]
           }}
           transition={{ 
@@ -49,16 +49,16 @@ const ConnectingLinesV2 = () => {
         />
       </svg>
 
-      {/* Deflation to Network Usage Costs (50%) */}
-      <svg className="absolute top-[170px] right-[240px]" width="60" height="4" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="2" x2="60" y2="2" stroke="#EAB308" strokeWidth="2" />
+      {/* Deflation to Network Usage Costs */}
+      <svg className="absolute top-[100px] right-[240px]" width="80" height="4" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="2" x2="80" y2="2" stroke="#EAB308" strokeWidth="2" />
         <motion.circle 
-          cx="30" 
+          cx="40" 
           cy="2" 
           r="3" 
           fill="#EAB308" 
           animate={{ 
-            x: [30, -30, 30],
+            x: [40, -40, 40],
             opacity: [0, 1, 0]
           }}
           transition={{ 
@@ -69,60 +69,21 @@ const ConnectingLinesV2 = () => {
         />
       </svg>
 
-      {/* 50% indicator near deflation */}
-      <div className="absolute top-[200px] right-[280px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300">
+      {/* 50% indicator near Network Usage Costs */}
+      <div className="absolute top-[130px] right-[400px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300">
         50%
       </div>
 
-      {/* Total Stake to Internal Rewards (left arrows) */}
-      <svg className="absolute top-[240px] left-[490px]" width="60" height="4" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="2" x2="60" y2="2" stroke="#3B82F6" strokeWidth="2" />
-        <motion.circle 
-          cx="30" 
-          cy="2" 
-          r="3" 
-          fill="#3B82F6" 
-          animate={{ 
-            x: [30, -30, 30],
-            opacity: [0, 1, 0]
-          }}
-          transition={{ 
-            duration: 2,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      </svg>
-
-      <svg className="absolute top-[290px] left-[490px]" width="60" height="4" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="2" x2="60" y2="2" stroke="#3B82F6" strokeWidth="2" />
-        <motion.circle 
-          cx="30" 
-          cy="2" 
-          r="3" 
-          fill="#3B82F6" 
-          animate={{ 
-            x: [30, -30, 30],
-            opacity: [0, 1, 0]
-          }}
-          transition={{ 
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      </svg>
-
-      {/* Total Stake to Block Production Eligibility (vertical) */}
-      <svg className="absolute top-[310px] left-[630px]" width="4" height="190" xmlns="http://www.w3.org/2000/svg">
-        <line x1="2" y1="0" x2="2" y2="190" stroke="#3B82F6" strokeWidth="2" />
+      {/* Total Stake to Profitability (Blue Vertical Line to Bottom) */}
+      <svg className="absolute top-[300px] right-[320px]" width="4" height="300" xmlns="http://www.w3.org/2000/svg">
+        <line x1="2" y1="0" x2="2" y2="300" stroke="#3B82F6" strokeWidth="2" />
         <motion.circle 
           cx="2" 
-          cy="95" 
+          cy="150" 
           r="3" 
           fill="#3B82F6" 
           animate={{ 
-            y: [-95, 95, -95],
+            y: [-150, 150, -150],
             opacity: [0, 1, 0]
           }}
           transition={{ 
@@ -133,16 +94,16 @@ const ConnectingLinesV2 = () => {
         />
       </svg>
 
-      {/* Internal Rewards to Block Production Eligibility (vertical) */}
-      <svg className="absolute top-[350px] left-[380px]" width="4" height="150" xmlns="http://www.w3.org/2000/svg">
-        <line x1="2" y1="0" x2="2" y2="150" stroke="#10B981" strokeWidth="2" />
+      {/* Internal Rewards to Profitability (Green Vertical Line) */}
+      <svg className="absolute top-[300px] left-[400px]" width="4" height="300" xmlns="http://www.w3.org/2000/svg">
+        <line x1="2" y1="0" x2="2" y2="300" stroke="#10B981" strokeWidth="2" />
         <motion.circle 
           cx="2" 
-          cy="75" 
+          cy="150" 
           r="3" 
           fill="#10B981" 
           animate={{ 
-            y: [-75, 75, -75],
+            y: [-150, 150, -150],
             opacity: [0, 1, 0]
           }}
           transition={{ 
@@ -153,16 +114,16 @@ const ConnectingLinesV2 = () => {
         />
       </svg>
 
-      {/* Network Usage Costs to Profitability (vertical) */}
-      <svg className="absolute top-[350px] right-[320px]" width="4" height="150" xmlns="http://www.w3.org/2000/svg">
-        <line x1="2" y1="0" x2="2" y2="150" stroke="#10B981" strokeWidth="2" />
+      {/* Network Usage Costs Block Rewards to Profitability (Green Vertical Line) */}
+      <svg className="absolute top-[350px] right-[370px]" width="4" height="250" xmlns="http://www.w3.org/2000/svg">
+        <line x1="2" y1="0" x2="2" y2="250" stroke="#10B981" strokeWidth="2" />
         <motion.circle 
           cx="2" 
-          cy="75" 
+          cy="125" 
           r="3" 
           fill="#10B981" 
           animate={{ 
-            y: [-75, 75, -75],
+            y: [-125, 125, -125],
             opacity: [0, 1, 0]
           }}
           transition={{ 
@@ -173,16 +134,21 @@ const ConnectingLinesV2 = () => {
         />
       </svg>
 
-      {/* Network Costs to Operational Costs (vertical) */}
-      <svg className="absolute top-[600px] right-[370px]" width="4" height="50" xmlns="http://www.w3.org/2000/svg">
-        <line x1="2" y1="0" x2="2" y2="50" stroke="#EAB308" strokeWidth="2" />
+      {/* Network Usage 50% indicator at bottom */}
+      <div className="absolute top-[470px] right-[380px] bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300">
+        50%
+      </div>
+
+      {/* Operational Costs to Note (vertical) */}
+      <svg className="absolute top-[700px] left-[50%]" width="4" height="80" xmlns="http://www.w3.org/2000/svg">
+        <line x1="2" y1="0" x2="2" y2="80" stroke="#EAB308" strokeWidth="2" />
         <motion.circle 
           cx="2" 
-          cy="25" 
+          cy="40" 
           r="3" 
           fill="#EAB308" 
           animate={{ 
-            y: [-25, 25, -25],
+            y: [-40, 40, -40],
             opacity: [0, 1, 0]
           }}
           transition={{ 

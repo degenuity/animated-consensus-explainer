@@ -11,12 +11,12 @@ const NetworkUsageCostsBoxV2 = () => {
         <span className="text-xl text-white">network usage costs</span>
       </div>
       
-      <div className="space-y-3">
+      <div className="space-y-4">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="border border-yellow-500/70 bg-[#141b29] p-2 rounded text-sm text-white"
+          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded text-sm text-white"
         >
           base fees
         </motion.div>
@@ -47,9 +47,6 @@ const NetworkUsageCostsBoxV2 = () => {
                 MEV
               </motion.div>
             </div>
-          </div>
-          <div className="absolute -bottom-6 right-1/2 transform translate-x-1/2 bg-gray-500/30 rounded-full px-2 py-0.5 text-xs text-gray-300">
-            50%
           </div>
         </motion.div>
       </div>

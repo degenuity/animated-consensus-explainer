@@ -11,7 +11,16 @@ const ProfitabilityBoxV2 = () => {
         <span className="text-xl text-white">profitability</span>
       </div>
       
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-3 gap-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.6 }}
+          className="border border-blue-500/70 bg-[#141b29] p-3 rounded"
+        >
+          <div className="text-blue-400 text-sm font-medium">stake weight</div>
+          <div className="text-xs text-gray-300 mt-1">amount of XNT staked</div>
+        </motion.div>
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

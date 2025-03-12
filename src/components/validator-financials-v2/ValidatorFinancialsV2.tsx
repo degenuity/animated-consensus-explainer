@@ -23,11 +23,11 @@ const ValidatorFinancialsV2 = () => {
       <div className="max-w-7xl mx-auto relative">
         <TitleV2 />
 
-        <div className="relative mx-auto" style={{ height: '800px' }}>
+        <div className="relative mx-auto" style={{ height: '900px' }}>
           {/* Inflation Box (Left Top) */}
           <motion.div 
-            className="absolute left-[50px] top-[150px]" 
-            style={{ width: '180px' }}
+            className="absolute left-[50px] top-[80px]" 
+            style={{ width: '200px' }}
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -37,8 +37,8 @@ const ValidatorFinancialsV2 = () => {
           
           {/* Deflation Box (Right Top) */}
           <motion.div 
-            className="absolute right-[50px] top-[150px]" 
-            style={{ width: '180px' }}
+            className="absolute right-[50px] top-[80px]" 
+            style={{ width: '200px' }}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -46,31 +46,9 @@ const ValidatorFinancialsV2 = () => {
             <DeflationBoxV2 />
           </motion.div>
           
-          {/* Internal Rewards (Left Middle) */}
+          {/* Network Usage Costs (Right Upper Middle) */}
           <motion.div 
-            className="absolute left-[270px] top-[210px]" 
-            style={{ width: '220px' }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <InternalRewardsBoxV2 />
-          </motion.div>
-          
-          {/* Total Stake (Center) */}
-          <motion.div 
-            className="absolute left-[520px] top-[210px]" 
-            style={{ width: '220px' }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <TotalStakeBoxV2 />
-          </motion.div>
-          
-          {/* Network Usage Costs (Right Middle) */}
-          <motion.div 
-            className="absolute right-[200px] top-[150px]" 
+            className="absolute right-[300px] top-[80px]" 
             style={{ width: '240px' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,9 +57,31 @@ const ValidatorFinancialsV2 = () => {
             <NetworkUsageCostsBoxV2 />
           </motion.div>
           
+          {/* Total Stake (Center Right) */}
+          <motion.div 
+            className="absolute right-[270px] top-[180px]" 
+            style={{ width: '220px' }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <TotalStakeBoxV2 />
+          </motion.div>
+          
+          {/* Internal Rewards (Left Middle) */}
+          <motion.div 
+            className="absolute left-[300px] top-[180px]" 
+            style={{ width: '220px' }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <InternalRewardsBoxV2 />
+          </motion.div>
+          
           {/* Block Production Eligibility (Bottom Left) */}
           <motion.div 
-            className="absolute left-[210px] top-[500px]" 
+            className="absolute left-[280px] top-[600px]" 
             style={{ width: '430px' }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -90,9 +90,9 @@ const ValidatorFinancialsV2 = () => {
             <BlockProductionEligibilityBoxV2 />
           </motion.div>
           
-          {/* Profitability (Bottom Right) */}
+          {/* Profitability (Bottom Center) */}
           <motion.div 
-            className="absolute right-[210px] top-[500px]" 
+            className="absolute left-[50%] top-[600px] -translate-x-1/2" 
             style={{ width: '330px' }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -103,8 +103,8 @@ const ValidatorFinancialsV2 = () => {
           
           {/* Operational Costs Note (Bottom) */}
           <motion.div 
-            className="absolute right-[290px] top-[650px]" 
-            style={{ width: '340px' }}
+            className="absolute left-[50%] top-[780px] -translate-x-1/2" 
+            style={{ width: '540px' }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.2 }}
