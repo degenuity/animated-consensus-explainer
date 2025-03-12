@@ -54,7 +54,7 @@ const Home = () => {
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <Button className="bg-gradient-to-r from-[#FF5F6D] to-[#FFC371] hover:from-[#FF7080] hover:to-[#FFCF85] text-black font-semibold rounded-full px-8 py-6 text-lg w-full shadow-lg shadow-orange-900/30 flex items-center justify-center">
+              <Button className="bg-gradient-to-r from-[#6E59A5] to-[#9b87f5] hover:from-[#7E69AB] hover:to-[#A996FF] text-white font-medium rounded-full px-8 py-6 text-lg w-full shadow-lg shadow-indigo-900/30 flex items-center justify-center">
                 VRF-based Subcommitees and BLS Aggregation
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
