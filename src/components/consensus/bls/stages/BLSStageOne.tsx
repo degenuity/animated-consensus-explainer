@@ -104,7 +104,7 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                   animate={{ 
                     x: [0, -x * 0.7],
                     y: [0, -y * 0.7],
-                    opacity: [0, 1, 0],  // Explicit fade in, then fade out
+                    opacity: [0, 1, 0],
                     scale: [0.7, 1, 0.7]
                   }}
                   transition={{
@@ -112,7 +112,8 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                     repeat: Infinity,
                     delay: i * 0.3,
                     repeatDelay: 1,
-                    times: [0, 0.5, 1]  // Ensures opacity reaches peak at midpoint
+                    times: [0, 0.5, 1],
+                    ease: "easeInOut"
                   }}
                 >
                   <span className="text-white font-bold text-xs">M</span>
