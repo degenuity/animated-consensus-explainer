@@ -5,8 +5,11 @@ import Home from "./pages/Home"
 import Whitepaper from "./pages/Whitepaper"
 import ConsensusExplainer from "./pages/ConsensusExplainer"
 import NotFound from "./pages/NotFound"
+import "./App.css" // Make sure CSS is loaded
 
 function App() {
+  console.log("App is rendering"); // Debug log
+  
   return (
     <BrowserRouter>
       <Routes>
