@@ -30,7 +30,7 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
         <Title />
         
         <div className="relative w-full h-[700px] md:h-[800px] flex items-center justify-center">
-          <DiagramSVG />
+          <DiagramSVG key={animationKey} />
         </div>
       </div>
     </motion.div>

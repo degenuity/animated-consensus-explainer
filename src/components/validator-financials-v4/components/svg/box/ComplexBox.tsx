@@ -20,17 +20,16 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
     return item;
   });
 
-  // Render function for subitems and their children
   const renderItems = () => {
-    let currentY = 60; // Starting Y position after the title
     const renderedItems: JSX.Element[] = [];
+    let yOffset = 50; // Start after title
     
-    // Helper function to render an item and its children recursively
     const renderItem = (item: SubItem, depth: number = 0, index: number) => {
       const isHeader = depth === 0;
       const paddingLeft = depth * 20; // Indent based on depth
+      const itemHeight = item.desc ? 45 : 40;
       
-      // Render the current item
+      // Add the current item
       renderedItems.push(
         <SubItemRenderer 
           key={`item-${item.id || index}`}
@@ -38,13 +37,12 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
           index={index}
           x={x + paddingLeft}
           y={y}
-          yOffset={currentY}
+          yOffset={yOffset}
           width={width - paddingLeft}
         />
       );
       
-      // Update Y position for the next item
-      currentY += item.desc ? 45 : 40;
+      yOffset += itemHeight;
       
       // Render children if any
       if (item.subItems && item.subItems.length > 0) {
@@ -85,7 +83,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       <foreignObject x={x} y={y} width={width} height="50">
         <div className="flex items-center gap-2 p-3 border-b border-[#1e293b]">
           <BoxIcon icon={icon} />
-          <div className="text-white font-medium truncate" style={{ maxWidth: '100%' }}>{title}</div>
+          <div className="text-white font-medium truncate" style={{ maxWidth: width - 50 }}>{title}</div>
         </div>
       </foreignObject>
       

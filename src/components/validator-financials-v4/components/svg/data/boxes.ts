@@ -49,7 +49,7 @@ export const boxes = [
     subitems: totalStakeSubitems
   },
   
-  // Network Costs Box
+  // Network Costs Box - increased width
   {
     x: 740,
     y: 100,

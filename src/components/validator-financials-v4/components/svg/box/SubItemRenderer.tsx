@@ -62,24 +62,26 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         width={width - 20} 
         height={itemHeight}
       >
-        {desc ? (
-          <div className="flex flex-col justify-center h-full px-4">
-            <div className={`text-sm ${itemColor ? '' : 'text-blue-400'}`} style={itemColor ? { color: itemColor } : {}}>
+        <div className="flex flex-col justify-center h-full px-4">
+          {desc ? (
+            <>
+              <div className={`text-sm ${itemColor ? '' : 'text-blue-400'}`} style={itemColor ? { color: itemColor } : {}}>
+                {text}
+              </div>
+              <div className="text-gray-400 text-xs">{desc}</div>
+            </>
+          ) : (
+            <div className={`flex items-center h-full ${getTextColor()}`} style={itemColor ? { color: itemColor } : {}}>
               {text}
             </div>
-            <div className="text-gray-400 text-xs">{desc}</div>
-          </div>
-        ) : (
-          <div className={`flex items-center h-full px-4 ${getTextColor()}`}>
-            {text}
-          </div>
-        )}
+          )}
+        </div>
       </foreignObject>
       
       {hasPlus && (
         <foreignObject 
-          x={x + width / 2}
-          y={y + yOffset + 20}
+          x={x + width - 30}
+          y={y + yOffset + (itemHeight/2) - 10}
           width="20" 
           height="20"
         >
