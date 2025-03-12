@@ -7,7 +7,15 @@ import { Button } from './ui/button';
 import { ChevronLeft, ChevronRight, Download, ZoomIn, ZoomOut } from 'lucide-react';
 
 // Configure PDF.js worker with CDN URL to avoid Node.js dependencies
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+try {
+  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+} catch (error) {
+  console.error('Error setting PDF.js worker in component:', error);
+  // Try the global configuration function if direct configuration fails
+  if (window.configurePdfjs) {
+    window.configurePdfjs(pdfjs);
+  }
+}
 
 interface PDFViewerProps {
   pdfUrl: string;
