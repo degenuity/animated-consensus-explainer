@@ -23,7 +23,7 @@ const ValidatorFinancials = () => {
         <Title />
 
         <div className="relative mx-auto" style={{ height: '1000px' }}>
-          {/* Top Row - Inflation and Deflation*/}
+          {/* First Row - Inflation and Deflation */}
           <div className="absolute left-[50px] top-[100px]" style={{ width: '280px' }}>
             <InflationBox />
           </div>
@@ -32,18 +32,18 @@ const ValidatorFinancials = () => {
             <DeflationBox />
           </div>
           
-          {/* Second Row - Internal Rewards and Network Usage Costs */}
-          <div className="absolute left-[50px] top-[220px]" style={{ width: '280px' }}>
+          {/* Second Row - Total Stake in center */}
+          <div className="absolute left-[50%] top-[220px] transform -translate-x-1/2" style={{ width: '280px' }}>
+            <TotalStakeBox />
+          </div>
+          
+          {/* Third Row - Internal Rewards and Network Usage Costs */}
+          <div className="absolute left-[50px] top-[370px]" style={{ width: '280px' }}>
             <InternalRewardsBox />
           </div>
           
-          <div className="absolute right-[50px] top-[220px]" style={{ width: '280px' }}>
+          <div className="absolute right-[50px] top-[370px]" style={{ width: '280px' }}>
             <NetworkUsageCostsBox />
-          </div>
-          
-          {/* Total Stake - Moved down further to prevent overlap */}
-          <div className="absolute left-[50%] top-[500px] transform -translate-x-1/2" style={{ width: '280px' }}>
-            <TotalStakeBox />
           </div>
 
           {/* Bottom Row - Block Production Eligibility and Profitability */}
