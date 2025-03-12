@@ -24,7 +24,7 @@ const ValidatorFinancialsV2 = () => {
         <TitleV2 />
 
         <div className="relative mx-auto" style={{ height: '800px' }}>
-          {/* Inflation Box (Left Side) */}
+          {/* Inflation Box (Left Top) */}
           <motion.div 
             className="absolute left-[50px] top-[150px]" 
             style={{ width: '180px' }}
@@ -35,7 +35,7 @@ const ValidatorFinancialsV2 = () => {
             <InflationBoxV2 />
           </motion.div>
           
-          {/* Deflation Box (Right Side) */}
+          {/* Deflation Box (Right Top) */}
           <motion.div 
             className="absolute right-[50px] top-[150px]" 
             style={{ width: '180px' }}
@@ -112,7 +112,7 @@ const ValidatorFinancialsV2 = () => {
             <OperationalCostsNoteV2 />
           </motion.div>
 
-          {/* Connecting Lines */}
+          {/* Connecting Lines with animations */}
           <ConnectingLinesV2 />
 
           {/* X1 Logo */}
