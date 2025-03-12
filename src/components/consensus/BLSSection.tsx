@@ -18,17 +18,15 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
   setIsVoteReductionOpen
 }) => {
   const [activeFormula, setActiveFormula] = useState(0);
-  const [animationKey, setAnimationKey] = useState(0); // For resetting animations
+  const [animationKey, setAnimationKey] = useState(0);
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    // Reset to initial state when section becomes active
     if (activeSection === 1 || isMobile) {
       setActiveFormula(0);
-      setAnimationKey(prev => prev + 1); // Force re-render of visualization
+      setAnimationKey(prev => prev + 1);
     }
     
-    // Auto-rotation is now only active when the section is active
     if (activeSection === 1 && !isMobile) {
       const formulaInterval = setInterval(() => {
         setActiveFormula(prev => (prev + 1) % 3);
@@ -38,12 +36,9 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     }
   }, [activeSection, isMobile]);
   
-  // Listen for the verification completion event to restart animation
   useEffect(() => {
     const handleVerificationComplete = () => {
-      // Reset to Stage 1
       setActiveFormula(0);
-      // Force re-render of the visualization by updating the key
       setAnimationKey(prevKey => prevKey + 1);
     };
     
@@ -54,10 +49,8 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
     };
   }, []);
 
-  // Listen for stage two completion
   useEffect(() => {
     const handleStageTwoComplete = () => {
-      // Move to Stage 3
       setActiveFormula(2);
     };
     
@@ -95,7 +88,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
           <div className="bg-slate-900/50 p-4 rounded-lg text-white formulaDisplay">
-            {/* Formula 1 - Individual Signatures */}
             <motion.div 
               className="formula-container mb-6"
               animate={{
@@ -114,9 +106,9 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                   <p className="text-sm font-medium text-white">Individual signatures (σ<sub>i</sub>)</p>
                   <p className="text-xs text-slate-300 mt-0.5">
                     From each validator where H(M) is the hash of the vote message and
-                    sk<sub>i</sub> is the validator's secret key
+                    sk<sub>i</sub> is the validator's secret key.
                   </p>
-                  <p className="text-sm text-slate-300 mt-2">
+                  <p className="text-xs text-slate-300 mt-2">
                     Each validator in a subcommittee generates a BLS signature
                     σ<sub>i</sub> on the vote message M:
                   </p>
@@ -140,7 +132,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               </motion.div>
             </motion.div>
             
-            {/* Formula 2 - Aggregated Signatures */}
             <motion.div 
               className="formula-container mb-6"
               animate={{
@@ -158,9 +149,9 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 <div>
                   <p className="text-sm font-medium text-white">Aggregated signature (σ<sub>agg</sub>)</p>
                   <p className="text-xs text-slate-300 mt-0.5">
-                    Compressed proof of consensus
+                    Compressed proof of consensus.
                   </p>
-                  <p className="text-sm text-slate-300 mt-2">
+                  <p className="text-xs text-slate-300 mt-2">
                     The relay node aggregates all signatures within the 
                     subcommittee which is then submitted to the leader:
                   </p>
@@ -184,7 +175,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               </motion.div>
             </motion.div>
             
-            {/* Formula 3 - Verification */}
             <motion.div 
               className="formula-container"
               animate={{
@@ -202,9 +192,9 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 <div>
                   <p className="text-sm font-medium text-white">Verification of aggregated signature</p>
                   <p className="text-xs text-slate-300 mt-0.5">
-                    Where pk<sub>i</sub> are the public keys of the participating validators
+                    Where pk<sub>i</sub> are the public keys of the participating validators.
                   </p>
-                  <p className="text-sm text-slate-300 mt-2">
+                  <p className="text-xs text-slate-300 mt-2">
                     The leader verifies the aggregated signature in constant time
                     using:
                   </p>
@@ -231,7 +221,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
           
           <div className="flex flex-col">
             <div className="bg-slate-900/50 p-4 rounded-lg h-full flex items-center justify-center relative overflow-hidden">
-              {/* Animation Stage One - Only visible when activeFormula is 0 */}
               {activeFormula === 0 && (
                 <BLSStageOne 
                   key={`stage-one-${animationKey}`}
@@ -241,7 +230,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 />
               )}
               
-              {/* Animation Stage Two - Only visible when activeFormula is 1 */}
               {activeFormula === 1 && (
                 <BLSStageTwo
                   key={`stage-two-${animationKey}`}
@@ -250,7 +238,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                 />
               )}
               
-              {/* Animation Stage Three - Only visible when activeFormula is 2 */}
               {activeFormula === 2 && (
                 <BLSStageThree
                   key={`stage-three-${animationKey}`}
@@ -261,7 +248,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
             </div>
             
             <div className="flex justify-center mt-4 gap-2">
-              {/* Dots for stage selection */}
               {[0, 1, 2].map(idx => (
                 <button
                   key={idx}
