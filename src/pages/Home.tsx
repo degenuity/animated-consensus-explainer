@@ -35,41 +35,22 @@ const BLSErrorFallback = memo((props: BLSStageOneProps) => (
 BLSErrorFallback.displayName = 'BLSErrorFallback';
 
 // Use React.memo to prevent unnecessary re-renders
-const Home = memo(() => {
+const Home = () => {
+  console.log('Home component rendering started');
   const [isAnimationVisible, setIsAnimationVisible] = useState(false);
   
-  console.log('Home component rendered, initial animation visibility:', isAnimationVisible);
+  console.log('Home component rendered, isAnimationVisible:', isAnimationVisible);
   
-  // Show animation only when in viewport and after initial content is loaded
+  // Set animation visibility immediately for debugging
   useEffect(() => {
-    console.log('Home useEffect running');
-    // After initial render, check if page is visible
-    if (document.visibilityState === 'visible') {
-      console.log('Page is visible, preparing to show animation');
-      // Load main content first, then animation later
-      const timer = setTimeout(() => {
-        setIsAnimationVisible(true);
-        console.log('Animation visibility set to true');
-      }, 100);
-      
-      return () => clearTimeout(timer);
-    } else {
-      // If page is hidden (tab not active), delay animation more
-      const visibilityHandler = () => {
-        if (document.visibilityState === 'visible' && !isAnimationVisible) {
-          setIsAnimationVisible(true);
-          console.log('Animation visibility set to true after tab became active');
-          document.removeEventListener('visibilitychange', visibilityHandler);
-        }
-      };
-      
-      document.addEventListener('visibilitychange', visibilityHandler);
-      return () => document.removeEventListener('visibilitychange', visibilityHandler);
-    }
-  }, [isAnimationVisible]);
+    console.log('Home useEffect running to set animation visibility');
+    setIsAnimationVisible(true);
+    console.log('Animation visibility set to true');
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      {console.log('Home component rendering JSX')}
       {/* Header with X1 Logo */}
       <header className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between mb-8">
@@ -122,10 +103,14 @@ const Home = memo(() => {
             </Link>
           </div>
           
+          {console.log('Rendering BLS visualization section, isAnimationVisible:', isAnimationVisible)}
           {/* Always render the component, but with a fallback */}
           <div className="relative h-72 flex items-center justify-center overflow-visible">
             {isAnimationVisible ? (
-              <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
+              <div>
+                {console.log('Rendering BLSStageOne component')}
+                <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
+              </div>
             ) : (
               <SimpleBLSFallback />
             )}
@@ -134,6 +119,6 @@ const Home = memo(() => {
       </div>
     </div>
   );
-});
+};
 
-export default Home;
+export default memo(Home);
