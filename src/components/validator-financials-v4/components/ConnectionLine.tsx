@@ -119,7 +119,7 @@ const ConnectionLine: React.FC<ConnectionLineProps> = ({
             delay
           }}
           style={{
-            offsetPath: `path('M 0,0 C ${curveDirection === 'right' ? '20,30 40,50' : '-20,30 -40,50'} ${curveDirection === 'right' ? `calc(${to.left} - ${from.left}),calc(${to.top} - ${from.top})` : `calc(${from.left} - ${to.left}),calc(${to.top} - ${from.top})}')`,
+            offsetPath: `path('M 0,0 C ${curveDirection === 'right' ? '20,30 40,50' : '-20,30 -40,50'} ${curveDirection === 'right' ? `calc(${to.left} - ${from.left}),calc(${to.top} - ${from.top})` : `calc(${from.left} - ${to.left}),calc(${to.top} - ${from.top})`}')`
           }}
         />
       </svg>
