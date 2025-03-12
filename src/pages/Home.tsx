@@ -6,67 +6,34 @@ import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
 import { BLSStageOne } from "@/components/consensus/bls/stages";
 
-// Type definition for the BLSStageOne component props
-interface BLSStageOneProps {
-  activeSection: number;
-  activeFormula: number;
-  showX1Label: boolean;
-}
-
-// Simplified and improved fallback component for faster initial rendering
-const SimpleBLSFallback = () => (
-  <div className="p-4 text-blue-300 flex flex-col items-center">
-    <div className="animate-pulse flex space-x-4">
-      <div className="flex-1 space-y-4 py-1">
-        <div className="h-4 bg-blue-400/20 rounded w-3/4 mx-auto"></div>
-        <div className="h-4 bg-blue-400/20 rounded w-1/2 mx-auto"></div>
-        <div className="h-4 bg-blue-400/20 rounded w-5/6 mx-auto"></div>
-      </div>
-    </div>
-    <div className="mt-2">Preparing visualization...</div>
+// Simple placeholder for when BLSStageOne is not ready
+const SimplePlaceholder = () => (
+  <div className="p-4 bg-slate-800/50 rounded-lg text-blue-300 flex flex-col items-center justify-center h-full w-full">
+    <div className="w-10 h-10 border-2 border-blue-300 border-t-transparent rounded-full animate-spin mb-4"></div>
+    <div>Loading visualization...</div>
   </div>
 );
 
-// Create a proper error fallback component that accepts the same props
-const BLSErrorFallback = memo((props: BLSStageOneProps) => (
-  <div className="text-red-500 p-4">Failed to load visualization. Please refresh.</div>
-));
-
-BLSErrorFallback.displayName = 'BLSErrorFallback';
-
-// Use React.memo to prevent unnecessary re-renders
+// Main home component - simplified to ensure reliability
 const Home = () => {
-  console.log('Home component rendering started');
-  const [isAnimationVisible, setIsAnimationVisible] = useState(false);
+  // Always show visualization after initial render
+  const [isVisible, setIsVisible] = useState(false);
   
-  console.log('Home component rendered, isAnimationVisible:', isAnimationVisible);
-  
-  // Set animation visibility immediately for debugging
+  // Set visibility with a slight delay to ensure everything is loaded
   useEffect(() => {
-    console.log('Home useEffect running to set animation visibility');
-    setIsAnimationVisible(true);
-    console.log('Animation visibility set to true');
+    console.log('Setting visibility timeout');
+    const timer = setTimeout(() => {
+      console.log('Setting visualization to visible');
+      setIsVisible(true);
+    }, 500);
+    
+    return () => clearTimeout(timer);
   }, []);
-
-  // Use a function for logging rather than embedding console.log directly in JSX
-  const logRenderingStart = () => {
-    console.log('Home component rendering JSX');
-    return null;
-  };
-
-  const logBLSSection = () => {
-    console.log('Rendering BLS visualization section, isAnimationVisible:', isAnimationVisible);
-    return null;
-  };
-
-  const logBLSStageOne = () => {
-    console.log('Rendering BLSStageOne component');
-    return null;
-  };
-
+  
+  console.log('Home rendering, visibility:', isVisible);
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
-      {logRenderingStart()}
       {/* Header with X1 Logo */}
       <header className="container mx-auto px-4 py-6">
         <div className="flex items-center justify-between mb-8">
@@ -119,16 +86,16 @@ const Home = () => {
             </Link>
           </div>
           
-          {logBLSSection()}
-          {/* Always render the component, but with a fallback */}
-          <div className="relative h-72 flex items-center justify-center overflow-visible">
-            {isAnimationVisible ? (
-              <div>
-                {logBLSStageOne()}
-                <BLSStageOne activeSection={1} activeFormula={0} showX1Label={true} />
-              </div>
+          {/* Visualization container */}
+          <div className="relative h-72 flex items-center justify-center overflow-visible border border-slate-700/30 rounded-lg bg-slate-900/50">
+            {isVisible ? (
+              <BLSStageOne 
+                activeSection={1} 
+                activeFormula={0} 
+                showX1Label={true} 
+              />
             ) : (
-              <SimpleBLSFallback />
+              <SimplePlaceholder />
             )}
           </div>
         </div>
