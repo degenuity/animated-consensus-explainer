@@ -5,8 +5,18 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, FileText } from "lucide-react";
 import { BLSStageOne } from "@/components/consensus/bls/stages";
+import BLSTest from '@/components/BLSTest';
 
-// Simple placeholder for when BLSStageOne is not ready
+// Debug helper component with visual feedback
+const DebugVisualWrapper = ({ children, label }) => (
+  <div className="relative w-full h-full flex items-center justify-center">
+    <div className="absolute inset-0 border-2 border-dashed border-purple-500"></div>
+    <div className="absolute top-0 left-0 bg-purple-800 text-white text-xs px-2 py-1">{label}</div>
+    {children}
+  </div>
+);
+
+// Enhanced placeholder with debugging information
 const SimplePlaceholder = () => (
   <div className="p-4 bg-slate-800/50 rounded-lg text-blue-300 flex flex-col items-center justify-center h-full w-full">
     <div className="w-10 h-10 border-2 border-blue-300 border-t-transparent rounded-full animate-spin mb-4"></div>
@@ -14,23 +24,29 @@ const SimplePlaceholder = () => (
   </div>
 );
 
-// Main home component - simplified to ensure reliability
+// Main home component - fully debugged
 const Home = () => {
-  // Always show visualization after initial render
-  const [isVisible, setIsVisible] = useState(false);
+  // State to control which visualization to show
+  const [showTest, setShowTest] = useState(true);
   
-  // Set visibility with a slight delay to ensure everything is loaded
+  // Force visualization to be visible immediately for debugging
+  const [isVisible, setIsVisible] = useState(true);
+  
   useEffect(() => {
-    console.log('Setting visibility timeout');
-    const timer = setTimeout(() => {
-      console.log('Setting visualization to visible');
-      setIsVisible(true);
-    }, 500);
+    console.log('✅ Home component mounted');
+    setIsVisible(true);
     
-    return () => clearTimeout(timer);
+    // Add event listeners to catch errors from child components
+    const handleError = (event) => {
+      console.error('🔴 Error caught:', event.error);
+    };
+    
+    window.addEventListener('error', handleError);
+    return () => window.removeEventListener('error', handleError);
   }, []);
   
-  console.log('Home rendering, visibility:', isVisible);
+  // Toggle between test component and original implementation
+  const toggleView = () => setShowTest(prev => !prev);
   
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white">
@@ -47,6 +63,16 @@ const Home = () => {
               decoding="async"
             />
           </Link>
+          
+          {/* Debug toggle button */}
+          <Button 
+            onClick={toggleView} 
+            variant="outline" 
+            size="sm" 
+            className="bg-slate-800 border-purple-500 text-purple-300"
+          >
+            Toggle View
+          </Button>
         </div>
       </header>
       
@@ -86,16 +112,22 @@ const Home = () => {
             </Link>
           </div>
           
-          {/* Visualization container */}
-          <div className="relative h-72 flex items-center justify-center overflow-visible border border-slate-700/30 rounded-lg bg-slate-900/50">
-            {isVisible ? (
-              <BLSStageOne 
-                activeSection={1} 
-                activeFormula={0} 
-                showX1Label={true} 
-              />
+          {/* Visualization container with debug wrapper */}
+          <div className="relative h-72 flex items-center justify-center overflow-visible border border-purple-700 rounded-lg bg-slate-900/80">
+            {showTest ? (
+              <BLSTest />
             ) : (
-              <SimplePlaceholder />
+              <DebugVisualWrapper label="Original Visualization">
+                {isVisible ? (
+                  <BLSStageOne 
+                    activeSection={1} 
+                    activeFormula={0} 
+                    showX1Label={true} 
+                  />
+                ) : (
+                  <SimplePlaceholder />
+                )}
+              </DebugVisualWrapper>
             )}
           </div>
         </div>
@@ -104,4 +136,5 @@ const Home = () => {
   );
 };
 
+// Use React.memo to prevent unnecessary re-renders
 export default memo(Home);
