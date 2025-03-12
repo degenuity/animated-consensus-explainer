@@ -102,15 +102,15 @@ export const BLSStageOne = memo(({ activeSection, activeFormula, showX1Label = f
                 </motion.p>
               </motion.div>
               
-              {/* Signature message box with "M" - exactly positioned at the validator position initially */}
+              {/* Signature message box with "M" - now positioned at validator position and appears just before movement */}
               <motion.div
                 className="absolute z-10 w-8 h-8 rounded-md bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/30"
-                initial={{ opacity: 0 }}
+                initial={{ opacity: 0, x: 0, y: 0 }} // Start at exact validator position
                 animate={{ 
+                  opacity: [0, 1, 0], // Only appear right before movement
+                  scale: [0.5, 1, 0.5],
                   x: [0, -x * 0.6], 
                   y: [0, -y * 0.6],
-                  opacity: [0, 1, 0],
-                  scale: [0.5, 1, 0.5]
                 }}
                 transition={{
                   duration: 2.5,
