@@ -11,18 +11,17 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      // Optimize SWC options for faster initial load
-      swcOptions: {
-        jsc: {
-          transform: {
-            react: {
-              runtime: 'automatic',
-              development: mode !== 'production',
-              refresh: mode === 'development',
-            },
-          },
-        },
-      },
+      // Use correct options format for react-swc plugin
+      plugins: [
+        [
+          '@swc/plugin-transform-react-jsx',
+          {
+            runtime: 'automatic',
+            development: mode !== 'production',
+            refresh: mode === 'development',
+          }
+        ]
+      ]
     }),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
@@ -38,13 +37,6 @@ export default defineConfig(({ mode }) => ({
     chunkSizeWarningLimit: 2000,
     // Optimize CSS
     cssCodeSplit: true,
-    // Add terser options for better minification
-    terserOptions: {
-      compress: {
-        drop_console: mode === 'production',
-        drop_debugger: mode === 'production'
-      }
-    },
     rollupOptions: {
       output: {
         // Use deterministic chunk names
