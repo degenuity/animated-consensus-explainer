@@ -1,16 +1,19 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CircleDollarSign, TrendingUp, TrendingDown, Database, ServerCrash, ShieldCheck, Box } from 'lucide-react';
+import { CircleDollarSign, TrendingUp, TrendingDown, Database, ServerCrash, ShieldCheck, Box, Percent, PlusIcon } from 'lucide-react';
 
 interface SubBox {
   title: string;
   description?: string;
   fullWidth?: boolean;
+  customColor?: 'yellow' | 'green' | 'red' | 'blue';
+  hasAddIcon?: boolean;
 }
 
 interface BoxContainerProps {
   position: string;
-  iconType: 'inflation' | 'internal-rewards' | 'total-stake' | 'network-costs' | 'deflation' | 'block-production';
+  iconType: 'inflation' | 'internal-rewards' | 'total-stake' | 'network-costs' | 'deflation' | 'block-production' | 'profitability';
   title: string;
   subtitle?: string;
   color: string;
@@ -47,10 +50,44 @@ const BoxContainer: React.FC<BoxContainerProps> = ({
         return <ServerCrash size={28} className="text-orange-400" />;
       case 'deflation':
         return <TrendingDown size={28} className="text-amber-400" />;
-      case 'block-production':
-        return <ShieldCheck size={28} className="text-blue-400" />;
+      case 'profitability':
+        return <Percent size={28} className="text-blue-400" />;
       default:
         return <CircleDollarSign size={28} className="text-emerald-400" />;
+    }
+  };
+
+  const getColorClass = (customColor?: string) => {
+    if (!customColor) return 'border-blue-500/20 bg-[#1a1f31]';
+    
+    switch (customColor) {
+      case 'yellow':
+        return 'border-yellow-500/30 bg-[#1d1a12]';
+      case 'green':
+        return 'border-green-500/30 bg-[#101d10]';
+      case 'red':
+        return 'border-red-500/30 bg-[#1d1212]';
+      case 'blue':
+        return 'border-blue-500/20 bg-[#1a1f31]';
+      default:
+        return 'border-blue-500/20 bg-[#1a1f31]';
+    }
+  };
+
+  const getTextColorClass = (customColor?: string) => {
+    if (!customColor) return 'text-blue-400';
+    
+    switch (customColor) {
+      case 'yellow':
+        return 'text-yellow-400';
+      case 'green':
+        return 'text-green-400';
+      case 'red':
+        return 'text-red-400';
+      case 'blue':
+        return 'text-blue-400';
+      default:
+        return 'text-blue-400';
     }
   };
 
@@ -69,10 +106,13 @@ const BoxContainer: React.FC<BoxContainerProps> = ({
     return (
       <div 
         key={index}
-        className={`p-4 rounded bg-[#1a1f31] border border-blue-500/20 
+        className={`p-4 rounded border ${getColorClass(box.customColor)} 
           ${box.fullWidth ? 'col-span-2' : 'col-span-1'}`}
       >
-        <div className="text-blue-400 text-lg mb-2">{box.title}</div>
+        <div className={`${getTextColorClass(box.customColor)} text-lg mb-2 flex items-center`}>
+          {box.title}
+          {box.hasAddIcon && <PlusIcon size={16} className="ml-2 text-gray-400" />}
+        </div>
         {box.description && <div className="text-gray-400 text-sm">{box.description}</div>}
       </div>
     );

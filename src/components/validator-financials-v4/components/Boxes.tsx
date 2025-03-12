@@ -1,19 +1,21 @@
 
 import React from 'react';
 import BoxContainer from './BoxContainer';
+import { Percent } from 'lucide-react';
 
 const Boxes: React.FC = () => {
   return (
     <>
-      {/* Inflation box */}
+      {/* Inflation box - with reduced width */}
       <BoxContainer
-        position="left-[5%] top-[80px]"
+        position="left-[8%] top-[80px]"
         iconType="inflation"
         title="Inflation"
         subtitle="Token Issuance"
         color="59, 130, 246"
         simpleStyle={true}
         animationDelay={0}
+        className="w-[180px]" // Reduced width by ~30%
       />
 
       {/* Internal Rewards Box - Left */}
@@ -58,18 +60,19 @@ const Boxes: React.FC = () => {
         ]}
       />
 
-      {/* Deflation box */}
+      {/* Deflation box - with reduced width */}
       <BoxContainer
-        position="right-[5%] top-[80px]"
+        position="right-[8%] top-[80px]"
         iconType="deflation"
         title="Deflation"
         subtitle="Token Burns"
         color="245, 158, 11"
         simpleStyle={true}
         animationDelay={0}
+        className="w-[180px]" // Reduced width by ~30%
       />
 
-      {/* Block Production Box - Center Bottom */}
+      {/* Block Production Box - Center */}
       <BoxContainer
         position="left-1/2 transform -translate-x-1/2 top-[350px]"
         iconType="block-production"
@@ -94,6 +97,31 @@ const Boxes: React.FC = () => {
           }
         ]}
         useAlternativeStyle={true}
+      />
+
+      {/* New Profitability Box */}
+      <BoxContainer
+        position="left-1/2 transform -translate-x-1/2 top-[570px]"
+        iconType="profitability"
+        title="profitability"
+        color="59, 130, 246"
+        animationDelay={1.0}
+        useAlternativeStyle={true}
+        subBoxes={[
+          {
+            title: "operational costs",
+            description: "only cost is server",
+            fullWidth: false,
+            customColor: "yellow"
+          },
+          {
+            title: "total validator rewards",
+            description: "aggregate",
+            fullWidth: false,
+            customColor: "green",
+            hasAddIcon: true
+          },
+        ]}
       />
     </>
   );
