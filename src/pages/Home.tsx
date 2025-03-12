@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-slate-900 text-white relative font-blueprint blueprint-bg">
+    <div className="min-h-screen bg-slate-900 text-white relative blueprint-bg blueprint-grid">
       {/* Logo in top left corner */}
-      <div className="absolute top-4 left-4 z-10">
+      <div className="absolute top-4 left-4 z-20">
         <Link to="/">
           <img 
             src="/lovable-uploads/bb1906db-aeaf-4ee3-9840-6bc142086f04.png" 
