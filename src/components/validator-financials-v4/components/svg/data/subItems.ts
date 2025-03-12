@@ -16,7 +16,7 @@ export const networkCostsSubitems = [
   },
   { 
     text: "block rewards", 
-    isSubHeader: true,
+    isHeader: true,
     id: "block-rewards",
     subItems: [
       { text: "priority fees", id: "priority-fees" },

@@ -25,7 +25,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
 
   // Render subitem and its children if any
   const renderSubItemWithChildren = (item: SubItem, idx: number) => {
-    const { text, isSubHeader, subItems } = item;
+    const { text, isHeader, subItems } = item;
     
     // Render main item
     const mainItem = <SubItemRenderer 
@@ -47,17 +47,17 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
         <React.Fragment key={`item-group-${idx}`}>
           {mainItem}
           
-          {/* Render subheader */}
-          {isSubHeader && (
+          {/* Render block rewards header */}
+          {isHeader && text === "block rewards" && (
             <motion.g
-              key={`subheader-${idx}`}
+              key={`header-${idx}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.3 + idx * 0.1 }}
             >
               <rect
                 x={x + 20}
-                y={y + yOffset}
+                y={y + currentYOffset + 50}
                 width={width - 40}
                 height={45}
                 rx="4"
@@ -67,7 +67,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
               />
               <foreignObject 
                 x={x + 20} 
-                y={y + yOffset} 
+                y={y + currentYOffset + 50} 
                 width={width - 40} 
                 height={45}
               >
@@ -78,12 +78,10 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
             </motion.g>
           )}
           
-          {/* Update offset for block rewards box */}
-          {isSubHeader && (yOffset += 55)}
-          
           {/* Render subitems with proper styling */}
           {subItems.map((subItem, subIdx) => {
             const subItemHeight = 40;
+            const subItemY = y + currentYOffset + (isHeader ? 105 : 50) + subIdx * (subItemHeight + 10);
             
             const subItemComponent = (
               <motion.g
@@ -94,7 +92,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
               >
                 <rect
                   x={x + 20}
-                  y={y + yOffset}
+                  y={subItemY}
                   width={width - 40}
                   height={subItemHeight}
                   rx="4"
@@ -104,7 +102,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
                 />
                 <foreignObject 
                   x={x + 20} 
-                  y={y + yOffset} 
+                  y={subItemY} 
                   width={width - 40} 
                   height={subItemHeight}
                 >
@@ -115,8 +113,10 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
               </motion.g>
             );
             
-            // Update y offset for next item
-            yOffset += subItemHeight + 10;
+            // Update y offset for next item group
+            if (subIdx === subItems.length - 1) {
+              yOffset = subItemY + subItemHeight + 10 - y;
+            }
             
             return subItemComponent;
           })}
@@ -147,7 +147,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       <foreignObject x={x} y={y} width={width} height="50">
         <div className="flex items-center gap-2 p-3 border-b border-[#1e293b]">
           <BoxIcon icon={icon} />
-          <div className="text-white font-medium">{title}</div>
+          <div className="text-white font-medium whitespace-nowrap">{title}</div>
         </div>
       </foreignObject>
       

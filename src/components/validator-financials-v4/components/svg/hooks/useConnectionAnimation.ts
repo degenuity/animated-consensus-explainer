@@ -1,5 +1,5 @@
 
-import { MotionProps } from 'framer-motion';
+import { MotionProps, Variant, Variants } from 'framer-motion';
 
 export interface AnimationConfig {
   animationIndex: number;
@@ -16,17 +16,11 @@ export function useConnectionAnimation({
   dotAnimationDuration = 2,
   pathAnimationDuration = 0.7
 }: AnimationConfig): {
-  lineVariants: {
-    hidden: MotionProps['initial'];
-    visible: (i: number) => MotionProps['animate'];
-  };
-  dotVariants: {
-    hidden: MotionProps['initial'];
-    visible: (i: number) => MotionProps['animate'];
-  };
+  lineVariants: Variants;
+  dotVariants: Variants;
 } {
   // Animation variants for connecting lines
-  const lineVariants = {
+  const lineVariants: Variants = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: (i: number) => ({
       pathLength: 1,
@@ -46,7 +40,7 @@ export function useConnectionAnimation({
   };
   
   // Animation variants for moving dots on lines
-  const dotVariants = {
+  const dotVariants: Variants = {
     hidden: { opacity: 0 },
     visible: (i: number) => ({
       opacity: [0, 1, 0],
