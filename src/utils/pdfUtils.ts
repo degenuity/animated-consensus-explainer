@@ -22,10 +22,9 @@ export const initializePdfWorker = (): boolean => {
       return false;
     }
     
-    // Ensure GlobalWorkerOptions exists
+    // Create GlobalWorkerOptions if it doesn't exist
     if (!pdfjs.GlobalWorkerOptions) {
-      console.error("PDF.js GlobalWorkerOptions not available");
-      // Create it if it doesn't exist
+      console.log("GlobalWorkerOptions not available, creating it");
       (pdfjs as any).GlobalWorkerOptions = {};
     }
     
@@ -33,10 +32,6 @@ export const initializePdfWorker = (): boolean => {
     const workerSrc = `https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`;
     pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
     console.log("PDF.js worker initialized with:", workerSrc);
-    
-    // Set additional options via DocumentInitParameters (correct approach)
-    // Instead of setting on pdfjs directly, these will be used in the options
-    // when creating PDF documents
     
     isWorkerInitialized = true;
     return true;
