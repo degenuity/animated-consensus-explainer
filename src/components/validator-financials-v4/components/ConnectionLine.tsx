@@ -88,15 +88,14 @@ const ConnectionLine: React.FC<ConnectionLineProps> = ({
       style={{
         top: from.top,
         left: from.left,
-        width: '100px',  // This will be ignored as we use SVG path
-        height: '100px', // This will be ignored as we use SVG path
+        width: '100px',
+        height: '100px',
       }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay }}
     >
       <svg width="100%" height="100%" className="overflow-visible" style={{ position: 'absolute', top: 0, left: 0 }}>
-        {/* Define path for the curve - this is approximated */}
         <path
           d={`M 0,0 C ${curveDirection === 'right' ? '20,30 40,50' : '-20,30 -40,50'} ${curveDirection === 'right' ? `calc(${to.left} - ${from.left}),calc(${to.top} - ${from.top})` : `calc(${from.left} - ${to.left}),calc(${to.top} - ${from.top})`}`}
           fill="none"
@@ -105,7 +104,6 @@ const ConnectionLine: React.FC<ConnectionLineProps> = ({
           strokeDasharray="4 2"
         />
         
-        {/* Animated circle that follows the path */}
         <motion.circle
           cx="0"
           cy="0"
