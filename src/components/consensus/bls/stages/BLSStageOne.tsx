@@ -48,7 +48,7 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
             >
               <Server className="text-purple-400 mb-1" size={20} />
               <motion.span className="text-xs font-bold text-purple-300">
-                X1
+                Relay node
               </motion.span>
             </motion.div>
           </motion.div>
@@ -125,7 +125,7 @@ export const BLSStageOne: React.FC<BLSStageOneProps> = ({ activeSection, activeF
         })}
       </div>
       
-      <div className="absolute bottom-2 left-0 right-0 text-center">
+      <div className="absolute bottom-4 left-0 right-0 text-center">
         <motion.div 
           className="text-xs text-purple-300 font-medium bg-slate-800/70 mx-auto rounded-full px-3 py-1 inline-block border border-purple-500/30"
           initial={{ opacity: 0, y: 10 }}
