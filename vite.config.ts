@@ -11,9 +11,7 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
   },
   plugins: [
-    react({
-      // Remove the fastRefresh property as it's not a valid option
-    }),
+    react(),
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
@@ -45,8 +43,10 @@ export default defineConfig(({ mode }) => ({
         // Optimize chunks for better caching
         manualChunks: (id) => {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+            if (id.includes('react') || id.includes('react-dom')) {
               return 'vendor-react';
+            } else if (id.includes('react-router-dom')) {
+              return 'vendor-router';
             } else if (id.includes('@radix-ui')) {
               return 'vendor-radix';
             } else if (id.includes('framer-motion')) {
@@ -79,10 +79,12 @@ export default defineConfig(({ mode }) => ({
   // Add optimizeDeps for better dependency optimization
   optimizeDeps: {
     include: [
+      'react', 
+      'react-dom',
+      'react-router-dom',
+      'framer-motion',
       'react-pdf', 
       'pdfjs-dist', 
-      'framer-motion',
-      'react-router-dom',
       'recharts'
     ],
     exclude: [],
