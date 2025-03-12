@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, BarChart3, PieChart, LineChart, ArrowRight } from "lucide-react";
+import { TrendingUp, TrendingDown, BarChart3, PieChart, LineChart, ArrowRight, ArrowDown } from "lucide-react";
 
 const BoxAnimation = () => {
   return (
@@ -102,6 +102,57 @@ const BoxAnimation = () => {
             <div className="text-xl font-semibold">Yellow Box</div>
             <div className="text-sm opacity-90 mt-2">Second Element</div>
           </div>
+        </motion.div>
+      </div>
+
+      {/* Line with Arrow from Grey 1 to Pink Box 2 */}
+      <div className="relative w-full h-20">
+        <motion.div 
+          className="absolute left-[204px] top-[-115px] w-[2px] h-[120px] bg-gray-400"
+          initial={{ height: 0 }}
+          animate={{ height: 120 }}
+          transition={{ duration: 0.8, delay: 1.0 }}
+        >
+          <motion.div 
+            className="absolute left-0 top-0 w-full h-[10px] bg-gray-300"
+            animate={{ 
+              y: [0, 120, 0],
+              opacity: [0, 1, 0]
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        </motion.div>
+        
+        <motion.div 
+          className="absolute left-[204px] top-[5px] w-[170px] h-[2px] bg-gray-400"
+          initial={{ width: 0 }}
+          animate={{ width: 170 }}
+          transition={{ duration: 0.8, delay: 1.8 }}
+        >
+          <motion.div 
+            className="absolute right-0 top-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.4 }}
+          >
+            <ArrowRight className="text-gray-400 h-4 w-4" style={{ transform: 'translateX(50%) translateY(-25%)' }} />
+          </motion.div>
+          <motion.div 
+            className="absolute top-0 left-0 h-full w-[10px] bg-gray-300"
+            animate={{ 
+              x: [0, 170, 0],
+              opacity: [0, 1, 0]
+            }}
+            transition={{ 
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
         </motion.div>
       </div>
 
