@@ -21,7 +21,10 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
   if (renderAsDefinition) {
     return (
       <defs>
-        <ConnectionDefinition {...restProps} />
+        <ConnectionDefinition 
+          {...restProps}
+          animationIndex={animationIndex} // Pass animationIndex explicitly
+        />
       </defs>
     );
   }
