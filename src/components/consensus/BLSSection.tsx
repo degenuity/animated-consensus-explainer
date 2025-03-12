@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
@@ -5,7 +6,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { BLSStageOne } from '@/components/consensus/bls/stages/BLSStageOne';
 import { BLSStageTwo } from '@/components/consensus/bls/stages/BLSStageTwo';
 import { BLSStageThree } from '@/components/consensus/bls/stages/BLSStageThree';
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface BLSSectionProps {
   activeSection: number | null;
@@ -229,24 +229,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
               </motion.div>
             </motion.div>
             
-            <div className="mt-6 space-y-4">
-              {[0, 1, 2].map(idx => (
-                <button
-                  key={idx}
-                  className={`w-3 h-3 rounded-full mr-2 ${
-                    activeFormula === idx 
-                      ? idx === 0 
-                        ? 'bg-purple-500' 
-                        : idx === 1 
-                          ? 'bg-indigo-500' 
-                          : 'bg-red-500'
-                      : 'bg-slate-600'
-                  }`}
-                  onClick={() => setActiveFormula(idx)}
-                  aria-label={`Stage ${idx + 1}`}
-                ></button>
-              ))}
-            </div>
+            {/* Removed the toggle buttons from under the formulas */}
           </div>
           
           <div className="flex flex-col">
@@ -281,14 +264,7 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
             </div>
             
             <div className="flex justify-center mt-4 gap-2">
-              <button 
-                className="text-white/70 hover:text-white bg-slate-800/50 p-1 rounded-full"
-                onClick={goToPrevFormula}
-                aria-label="Previous stage"
-              >
-                <ChevronLeft size={20} />
-              </button>
-              
+              {/* Removed the chevron buttons but kept the dots */}
               {[0, 1, 2].map(idx => (
                 <button
                   key={idx}
@@ -305,14 +281,6 @@ export const BLSSection: React.FC<BLSSectionProps> = ({
                   aria-label={`Stage ${idx + 1}`}
                 ></button>
               ))}
-              
-              <button 
-                className="text-white/70 hover:text-white bg-slate-800/50 p-1 rounded-full"
-                onClick={goToNextFormula}
-                aria-label="Next stage"
-              >
-                <ChevronRight size={20} />
-              </button>
             </div>
           </div>
         </div>
