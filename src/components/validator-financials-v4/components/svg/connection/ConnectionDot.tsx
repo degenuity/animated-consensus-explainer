@@ -31,19 +31,20 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   }
   
   if (animated && path) {
-    // Check if the path starts with M 0 0 or similar origin point patterns
-    // This prevents the rogue dot that appears at (0,0)
-    const isPathStartingAtOrigin = path.match(/M\s+0\s+0/) || path.match(/M\s+0,\s*0/);
-    if (isPathStartingAtOrigin) {
-      console.warn('Skipping dot with path starting at origin:', path);
+    // Ensure the path doesn't include (0,0) coordinates as starting points
+    // to prevent rogue dots at the origin
+    if (path.includes("M 0 0") || path.includes("M 0,0") || path.startsWith("M0,0") || path.startsWith("M0 0")) {
+      console.warn('Skipping dot rendering with path starting at origin:', path);
       return null;
     }
     
     return (
       <g>
+        {/* The main animated dot */}
         <circle
           r={radius}
           fill={color}
+          style={{ transform: 'translateZ(0)' }} // Force hardware acceleration
         >
           <animateMotion
             path={path}
@@ -65,10 +66,12 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
           />
         </circle>
         
+        {/* Secondary dot with slight offset for visual effect */}
         <circle
           r={radius * 0.8}
           fill={color}
           opacity="0.6"
+          style={{ transform: 'translateZ(0)' }} // Force hardware acceleration
         >
           <animateMotion
             path={path}
@@ -83,6 +86,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     );
   }
   
+  // Static dot rendering
   return (
     <circle
       cx={cx}

@@ -96,7 +96,17 @@ export const connectionPaths = [
     id: "own-stake-to-staking-rewards", 
     renderOrder: "foreground" as const,
     animationDuration: 1.8
-  }
+  },
   
-  // Removed: Base Fee right side to Deflation connection that was causing the rogue dot
+  // Base Fee right side to Deflation
+  { 
+    path: "M 1208 190 L 1300 240", 
+    color: "#EAB308", 
+    animationIndex: 12,
+    animateMotion: true,
+    dotPosition: { x: "1254", y: "215" },
+    id: "base-fee-right-to-deflation",
+    renderOrder: "foreground" as const,
+    animationDuration: 1.8
+  }
 ];
