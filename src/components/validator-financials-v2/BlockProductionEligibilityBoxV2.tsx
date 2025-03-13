@@ -11,7 +11,9 @@ const BlockProductionEligibilityBoxV2 = () => {
         <span className="text-xl text-white">block production eligibility</span>
       </div>
       
-      <div className="grid grid-cols-5 gap-2 px-6 py-4">
+      {/* Using grid with explicit gap between elements */}
+      <div className="grid grid-cols-5 gap-6 px-6 py-4">
+        {/* First column */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -22,6 +24,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           <div className="text-xs text-gray-300 mt-1">amount of XNT staked</div>
         </motion.div>
 
+        {/* First operator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -31,6 +34,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           <span className="text-[#0E7490] text-2xl font-normal">×</span>
         </motion.div>
 
+        {/* Second column */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,6 +45,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           <div className="text-xs text-gray-300 mt-1">ACP anti-collusion protocol</div>
         </motion.div>
         
+        {/* Second operator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -50,6 +55,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           <span className="text-[#0E7490] text-2xl font-normal">×</span>
         </motion.div>
         
+        {/* Third column */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

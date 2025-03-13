@@ -11,7 +11,9 @@ const ProfitabilityBoxV2 = () => {
         <span className="text-xl text-white">profitability</span>
       </div>
       
-      <div className="grid grid-cols-3 gap-6">
+      {/* Using grid with explicit gap between elements */}
+      <div className="grid grid-cols-3 gap-8 px-6 py-4">
+        {/* First column */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -22,6 +24,7 @@ const ProfitabilityBoxV2 = () => {
           <div className="text-xs text-gray-300 mt-1">only cost is server</div>
         </motion.div>
         
+        {/* Middle column with operator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -31,6 +34,7 @@ const ProfitabilityBoxV2 = () => {
           <span className="text-[#8E9196] text-2xl font-normal">+</span>
         </motion.div>
         
+        {/* Third column */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

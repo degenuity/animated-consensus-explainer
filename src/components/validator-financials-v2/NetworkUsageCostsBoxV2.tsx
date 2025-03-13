@@ -6,21 +6,26 @@ import { Tag } from "lucide-react";
 const NetworkUsageCostsBoxV2 = () => {
   return (
     <div className="bg-[#1a2233] border border-[#2a3349] p-4 rounded-lg">
+      {/* Title section */}
       <div className="flex items-center justify-center mb-3">
         <Tag className="h-5 w-5 text-blue-400 mr-2" />
         <span className="text-xl text-white">network usage costs</span>
       </div>
       
-      <div className="flex flex-col px-4 py-3 space-y-6">
+      {/* Content section */}
+      <div className="px-4 py-3">
+        {/* First item with spacing after it */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.4 }}
           className="border border-yellow-500/70 bg-[#141b29] p-3 rounded text-sm text-white"
+          style={{ marginBottom: '24px' }}
         >
           base fees
         </motion.div>
         
+        {/* Block rewards container */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -29,15 +34,20 @@ const NetworkUsageCostsBoxV2 = () => {
         >
           <div className="bg-[#141b29] border border-[#2a3349] p-3 rounded">
             <div className="text-white mb-2">block rewards</div>
-            <div className="flex flex-col px-2 py-2 space-y-6">
+            
+            <div className="px-2 py-2">
+              {/* First nested item with spacing after it */}
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, delay: 0.6 }}
                 className="border border-green-500/70 bg-[#101620] p-2 rounded text-xs text-white"
+                style={{ marginBottom: '24px' }}
               >
                 priority fees
               </motion.div>
+              
+              {/* Second nested item */}
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
