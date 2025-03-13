@@ -1,46 +1,41 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { SubItem } from '../types';
 
 interface OperatorSymbolProps {
-  symbol: string;
-  x: number;
+  item: SubItem;
+  index: number;
+  adjustedX: number;
   y: number;
-  width: number;
-  height: number;
-  color?: string;
-  id?: string;
+  yOffset: number;
+  adjustedWidth: number;
+  itemHeight: number;
 }
 
 const OperatorSymbol: React.FC<OperatorSymbolProps> = ({
-  symbol,
-  x,
+  item,
+  index,
+  adjustedX,
   y,
-  width,
-  height,
-  color = "#0E7490",
-  id
+  yOffset,
+  adjustedWidth,
+  itemHeight
 }) => {
-  console.log(`Rendering operator symbol '${symbol}' at x=${x}, width=${width}`);
-  
   return (
     <motion.g
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 1.5 }}
-      data-operator-id={id}
+      transition={{ delay: 1.2 + index * 0.1 }}
     >
       <foreignObject 
-        x={x} 
-        y={y} 
-        width={width} 
-        height={height}
+        x={adjustedX} 
+        y={y + yOffset} 
+        width={adjustedWidth} 
+        height={itemHeight}
       >
-        <div 
-          className="flex items-center justify-center h-full text-xl"
-          style={{ color }}
-        >
-          {symbol}
+        <div className="flex flex-col justify-center h-full text-center">
+          <div className="text-2xl font-normal" style={{ color: item.color || "#0E7490" }}>{item.text}</div>
         </div>
       </foreignObject>
     </motion.g>
