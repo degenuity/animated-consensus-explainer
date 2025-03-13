@@ -19,7 +19,7 @@ const NetworkUsageCostsBoxV2 = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-10"
+          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-5"
         >
           base fees
         </motion.div>
@@ -31,16 +31,16 @@ const NetworkUsageCostsBoxV2 = () => {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="relative"
         >
-          <div className="bg-[#141b29] border border-[#2a3349] p-3 rounded">
-            <div className="text-white mb-6">block rewards</div>
+          <div className="bg-[#141b29] border border-blue-500/70 p-3 rounded">
+            <div className="text-white font-medium mb-5">block rewards</div>
             
-            <div className="px-2 py-2 flex flex-col">
+            <div className="px-5 py-2 flex flex-col space-y-4">
               {/* First nested item */}
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, delay: 0.6 }}
-                className="border border-green-500/70 bg-[#101620] p-2 rounded text-xs text-white mb-10"
+                className="border border-green-500/70 bg-[#101620] p-2 rounded text-xs text-white"
               >
                 priority fees
               </motion.div>

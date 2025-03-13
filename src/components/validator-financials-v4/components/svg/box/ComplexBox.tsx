@@ -110,11 +110,22 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
     }
     
     // Standard vertical layout (for non-horizontal items)
-    const renderItem = (item: SubItem, depth: number = 0, index: number) => {
+    const renderItem = (item: SubItem, depth: number = 0, index: number, parentItem?: SubItem) => {
       const isHeader = depth === 0;
       const isSubHeader = depth === 1;
       const paddingLeft = depth * 10; // Indent based on depth
-      const itemHeight = item.desc ? 50 : 40;
+      
+      // Adjust item height based on whether it's the block rewards parent that contains children
+      const hasChildren = item.subItems && item.subItems.length > 0;
+      const isBlockRewards = item.id === 'block-rewards';
+      
+      // Give more height to block rewards to fit its children
+      const itemHeight = isBlockRewards && hasChildren 
+        ? 140  // Height to accommodate child items
+        : (item.desc ? 50 : 40);
+      
+      // Special handling for network costs box and block rewards
+      const isNetworkCosts = title === "network usage costs";
       
       // Add the current item
       renderedItems.push(
@@ -126,17 +137,56 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
           y={y}
           yOffset={yOffset}
           width={width - paddingLeft}
+          height={itemHeight}
+          isNested={!!parentItem}
         />
       );
       
-      // Increase spacing between items
-      yOffset += itemHeight + 18; // Increased spacing between items from 15px to 18px
-      
-      // Render children if any
-      if (item.subItems && item.subItems.length > 0) {
-        item.subItems.forEach((subItem, subIndex) => {
-          renderItem(subItem, depth + 1, subIndex);
+      // Move down for the next item or child items
+      const itemSpacing = 18; // Increased spacing between items
+
+      // If this is block rewards with children, process children specially
+      if (isBlockRewards && hasChildren) {
+        // Space for children inside block rewards
+        const childYStart = yOffset + 60; // Start position inside block rewards
+        const childSpacing = 16; // Spacing between child items
+        let childY = childYStart;
+        
+        item.subItems?.forEach((subItem, subIndex) => {
+          // Calculate width and position for child item (priority fees and MEV)
+          const childItemHeight = 40;
+          const childItemWidth = width - paddingLeft - 40; // Less width than parent, with padding
+          const childItemX = x + paddingLeft + 20; // Indented from parent
+          
+          renderedItems.push(
+            <SubItemRenderer 
+              key={`child-${subItem.id || subIndex}`}
+              item={{...subItem, isHeader: false, isSubHeader: true}}
+              index={subIndex}
+              x={childItemX}
+              y={y}
+              yOffset={childY}
+              width={childItemWidth}
+              height={childItemHeight}
+              isNested={true}
+            />
+          );
+          
+          // Move down for next child
+          childY += childItemHeight + childSpacing;
         });
+        
+        yOffset += itemHeight + itemSpacing;
+      } else {
+        // Normal item without children
+        yOffset += itemHeight + itemSpacing;
+        
+        // Don't process children for network costs box as we handle them specially
+        if (!isNetworkCosts && item.subItems && item.subItems.length > 0) {
+          item.subItems.forEach((subItem, subIndex) => {
+            renderItem(subItem, depth + 1, subIndex, item);
+          });
+        }
       }
     };
     

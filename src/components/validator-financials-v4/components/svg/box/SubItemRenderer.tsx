@@ -11,6 +11,7 @@ interface SubItemRendererProps {
   yOffset: number;
   width: number;
   height?: number;
+  isNested?: boolean;
 }
 
 const SubItemRenderer: React.FC<SubItemRendererProps> = ({
@@ -20,17 +21,18 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   y,
   yOffset,
   width,
-  height
+  height,
+  isNested = false
 }) => {
   const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id, isHorizontal, isOperator } = item;
   const itemHeight = height || (desc ? 50 : 40);
   
-  // Even smaller padding for horizontal items (reduced from 3px to 2px)
+  // Even smaller padding for horizontal items
   const horizontalPadding = isHorizontal ? 2 : 12;
   const adjustedWidth = width - (horizontalPadding * 2);
   const adjustedX = x + horizontalPadding;
   
-  // For operator symbols, use even less space (reduced width from 20px to 15px)
+  // For operator symbols, use minimal space
   if (isOperator) {
     return (
       <motion.g
@@ -53,6 +55,11 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
     );
   }
   
+  // Adjust stroke color for nested items to match parent's color when in network costs box
+  const strokeColor = isNested && id && (id === "priority-fees" || id === "mev") 
+    ? "#10B981" 
+    : itemColor || "#3B82F6";
+
   return (
     <motion.g
       key={`subitem-${id || index}`}
@@ -67,7 +74,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         height={itemHeight}
         rx="4"
         fill="transparent"
-        stroke={itemColor || "#3B82F6"}
+        stroke={strokeColor}
         strokeWidth="1.5"
       />
       <foreignObject 
@@ -79,13 +86,13 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         <div className="flex flex-col justify-center h-full px-3">
           {desc ? (
             <>
-              <div className="text-sm font-medium" style={{ color: itemColor || "#3B82F6" }}>
+              <div className="text-sm font-medium" style={{ color: strokeColor }}>
                 {text}
               </div>
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>
           ) : (
-            <div className="flex items-center h-full font-medium" style={{ color: itemColor || "#3B82F6" }}>
+            <div className="flex items-center h-full font-medium" style={{ color: strokeColor }}>
               {text}
             </div>
           )}
