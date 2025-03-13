@@ -39,10 +39,10 @@ export const connectionPaths = [
   
   // Line 4: Total Stake to Stake Weight - Direct line to stake weight box top center
   { 
-    path: "M 780 340 L 780 465 L 585 465 L 585 550", 
+    path: "M 780 340 L 780 465 L 705 465 L 705 550", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "650", y: "465" },
+    dotPosition: { x: "705", y: "500" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
