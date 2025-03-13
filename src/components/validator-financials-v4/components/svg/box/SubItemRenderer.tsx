@@ -25,12 +25,12 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id, isHorizontal, isOperator } = item;
   const itemHeight = height || (desc ? 50 : 40);
   
-  // Reduce horizontal padding for horizontal items to fit more content
-  const horizontalPadding = isHorizontal ? 3 : 12; // Reduced padding for horizontal items from 5px to 3px
+  // Even smaller padding for horizontal items (reduced from 3px to 2px)
+  const horizontalPadding = isHorizontal ? 2 : 12;
   const adjustedWidth = width - (horizontalPadding * 2);
   const adjustedX = x + horizontalPadding;
   
-  // For operator symbols (×), use a different style
+  // For operator symbols, use even less space (reduced width from 20px to 15px)
   if (isOperator) {
     return (
       <motion.g

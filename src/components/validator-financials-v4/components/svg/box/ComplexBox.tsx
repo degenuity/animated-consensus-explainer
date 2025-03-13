@@ -32,14 +32,14 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       const horizontalItems = processedSubitems as SubItem[];
       
       // Calculate item width with some margin between items
-      const itemMargin = 20; // Margin between items
+      const itemMargin = 16; // Reduced margin from 20px to 16px
       
       // Filter out operator items to calculate widths for content items
       const contentItems = horizontalItems.filter(item => !item.isOperator);
       const operatorItems = horizontalItems.filter(item => item.isOperator);
       
       // Further reduce operator width to make more room for content boxes
-      const operatorWidth = 20; // Reduced from 25 to 20px for operator symbols
+      const operatorWidth = 15; // Reduced from 20px to 15px for operator symbols
       const totalOperatorWidth = operatorItems.length * operatorWidth;
       const totalMargins = (horizontalItems.length - 1) * itemMargin;
       const remainingWidth = width - 20 - totalMargins - totalOperatorWidth;
@@ -55,14 +55,19 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
         if (width === 530) {
           contentItems.forEach(item => {
             if (item.id === 'randomness') {
-              contentItemWidths.push(baseWidth * 1.0); // Equal width for randomness (reduced from 1.15)
+              contentItemWidths.push(baseWidth * 0.9); // Reduced from 1.0 to 0.9
             } else if (item.id === 'stake-weight') {
-              contentItemWidths.push(baseWidth * 1.15); // 15% more width for stake weight (reduced from 25%)
+              contentItemWidths.push(baseWidth * 1.1); // Reduced from 1.15 to 1.1
             } else if (item.id === 'performance-reputation') {
-              contentItemWidths.push(baseWidth * 1.15); // 15% more width for performance (reduced from 25%)
+              contentItemWidths.push(baseWidth * 1.0); // Reduced from 1.15 to 1.0
             } else {
-              contentItemWidths.push(baseWidth * 0.8); // Increased to balance
+              contentItemWidths.push(baseWidth * 0.8); // Kept the same
             }
+          });
+        } else if (width === 350) {
+          // For profitability box (350px width), use even distribution
+          contentItems.forEach(() => {
+            contentItemWidths.push(baseWidth);
           });
         } else {
           // For other boxes, keep previous allocation
