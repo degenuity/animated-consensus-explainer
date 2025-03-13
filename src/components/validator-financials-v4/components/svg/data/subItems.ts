@@ -16,10 +16,11 @@ export const networkCostsSubitems = [
   { 
     text: "block rewards",
     id: "block-rewards",
-    color: "#8E9196",  // Changed from blue to gray
+    color: "#8E9196",  // Gray color
+    position: { y: 50 }, // Adding a position property with extra vertical spacing
     subItems: [
-      { text: "priority fees", id: "priority-fees", color: "#10B981" },  // Changed to green
-      { text: "mev", id: "mev", color: "#10B981" }  // Changed to green
+      { text: "priority fees", id: "priority-fees", color: "#10B981" },
+      { text: "mev", id: "mev", color: "#10B981" }
     ]
   }
 ];

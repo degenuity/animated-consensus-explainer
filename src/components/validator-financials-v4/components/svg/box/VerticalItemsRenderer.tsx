@@ -34,6 +34,11 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
     const isBlockRewards = item.id === 'block-rewards';
     const isNetworkCosts = boxTitle === "network usage costs";
     
+    // Apply custom vertical position if specified
+    if (item.position && item.position.y) {
+      yOffset += item.position.y;
+    }
+    
     // Special handling for block rewards with children
     if (isBlockRewards && hasChildren) {
       // Add the block rewards parent item
@@ -46,13 +51,13 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
           y={y}
           yOffset={yOffset}
           width={width - 10} // Added padding of 10px to ensure items stay inside
-          height={160} // Increased height for block rewards
+          height={160} // Height for block rewards
           isNested={false}
         />
       );
       
       // Handle nested items separately
-      const childYStart = yOffset + 40; // Leave more space from the block rewards title
+      const childYStart = yOffset + 40; // Leave space from the block rewards title
       NestedItemsRenderer({
         parentItem: item,
         x,

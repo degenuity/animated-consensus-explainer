@@ -36,7 +36,7 @@ export const connectionPaths = [
     renderOrder: "foreground" as const
   },
   
-  // Line 4: Total Stake to Stake Weight - UPDATED to point specifically to Stake Weight
+  // Line 4: Total Stake to Stake Weight
   { 
     path: "M 780 320 L 780 420 L 380 420 L 380 500", 
     color: "#3B82F6", 
@@ -46,7 +46,7 @@ export const connectionPaths = [
     animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
     renderOrder: "background" as const,
-    animationDuration: 3, // Added longer duration to slow down the animation
+    animationDuration: 3
   },
   
   // Line 5: Base Fee to Deflation
@@ -73,19 +73,19 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // NEW Line: Base Fees bottom to Block Rewards - UPDATED renderOrder to foreground
+  // NEW Line: Base Fees bottom to Block Rewards - UPDATED position and path
   { 
-    path: "M 1010 200 L 1010 255", 
+    path: "M 1090 210 L 1090 285", 
     color: "#EAB308", 
     animationIndex: 8,
-    dotPosition: { x: "1010", y: "227" },
+    dotPosition: { x: "1090", y: "247" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "base-fees-bottom-to-block-rewards",
-    renderOrder: "foreground" as const  // Changed from "background" to "foreground"
+    renderOrder: "foreground" as const
   },
   
-  // Line 7: Internal Rewards to Total Validator Rewards - UPDATED to start from the bottom of the internal rewards box
+  // Line 7: Internal Rewards to Total Validator Rewards
   { 
     path: "M 450 400 L 450 430 L 945 430 L 945 500", 
     color: "#10B981", 
@@ -95,7 +95,7 @@ export const connectionPaths = [
     animationDirection: "right" as const,
     id: "internal-rewards-to-total-validator-rewards",
     renderOrder: "foreground" as const,
-    animationDuration: 3,
+    animationDuration: 3
   },
   
   // Line 8: Block Rewards to Total Validator Rewards

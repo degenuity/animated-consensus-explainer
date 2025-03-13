@@ -1,4 +1,3 @@
-
 // Box definitions with positions, dimensions and content
 import { 
   internalRewardsSubitems, 
@@ -28,7 +27,7 @@ export const boxes = [
     x: 320,
     y: 180,
     width: 260,
-    height: 220, // Increased height from 180 to 220 to fit all subitems
+    height: 220,
     title: "internal rewards",
     icon: "internal-rewards" as const,
     color: "#10B981",
@@ -42,7 +41,7 @@ export const boxes = [
     x: 650,
     y: 180,
     width: 260,
-    height: 160, // Reduced height from 180 to 160 for more appropriate sizing
+    height: 160,
     title: "total stake",
     icon: "total-stake" as const,
     color: "#3B82F6",
@@ -51,12 +50,12 @@ export const boxes = [
     borderColor: "#3B82F6"
   },
   
-  // Network Costs Box - increased height for block rewards
+  // Network Costs Box - increased height for more spacing between base fees and block rewards
   {
     x: 950,
     y: 120,
     width: 280,
-    height: 350, // Adjusted height to accommodate the redesigned block rewards
+    height: 380,
     title: "network usage costs",
     icon: "network-costs" as const,
     color: "#F97316",
@@ -79,11 +78,11 @@ export const boxes = [
     simpleStyle: true
   },
   
-  // Block Production Box - adjusted to 530px width
+  // Block Production Box
   {
     x: 320,
     y: 500,
-    width: 530, // Fixed to 530px as requested (reduced from 550)
+    width: 530,
     height: 140,
     title: "block production eligibility",
     icon: "block-production" as const,
@@ -93,7 +92,7 @@ export const boxes = [
     borderColor: "#3B82F6"
   },
   
-  // Profitability Box - increased width to match block production box width
+  // Profitability Box
   {
     x: 880,
     y: 500,
