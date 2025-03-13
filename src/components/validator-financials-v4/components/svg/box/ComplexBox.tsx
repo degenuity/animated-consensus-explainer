@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import BoxIcon from './BoxIcon';
@@ -55,13 +56,13 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
         if (width === 530) {
           contentItems.forEach(item => {
             if (item.id === 'randomness') {
-              contentItemWidths.push(baseWidth * 1.2); // 20% more width for randomness (reduced from 30%)
+              contentItemWidths.push(baseWidth * 1.15); // 15% more width for randomness (reduced from 20%)
             } else if (item.id === 'stake-weight') {
-              contentItemWidths.push(baseWidth * 1.3); // 30% more width for stake weight (reduced from 50%)
+              contentItemWidths.push(baseWidth * 1.25); // 25% more width for stake weight (reduced from 30%)
             } else if (item.id === 'performance-reputation') {
-              contentItemWidths.push(baseWidth * 1.3); // 30% more width for performance (reduced from 50%)
+              contentItemWidths.push(baseWidth * 1.25); // 25% more width for performance (reduced from 30%)
             } else {
-              contentItemWidths.push(baseWidth * 0.7); // Less reduction for others (increased from 0.5)
+              contentItemWidths.push(baseWidth * 0.75); // Increased from 0.7 to balance
             }
           });
         } else {
