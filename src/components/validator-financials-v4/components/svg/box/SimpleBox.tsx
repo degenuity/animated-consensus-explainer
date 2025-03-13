@@ -32,7 +32,11 @@ const SimpleBox: React.FC<SimpleBoxProps> = ({ boxProps }) => {
         <div className="flex flex-col items-center justify-center text-white h-full p-2 overflow-visible">
           {!isExplanation && <BoxIcon icon={icon} size={24} className="mb-1" />}
           <div className="text-base sm:text-lg font-semibold text-center capitalize">{title}</div>
-          {subtitle && <div className="text-xs leading-tight opacity-90 text-center mt-1 px-1 w-full break-words">{subtitle}</div>}
+          {subtitle && (
+            <div className="text-xs sm:text-xs leading-tight opacity-90 text-center mt-1 px-1 w-full break-words">
+              {subtitle}
+            </div>
+          )}
         </div>
       </foreignObject>
     </motion.g>
