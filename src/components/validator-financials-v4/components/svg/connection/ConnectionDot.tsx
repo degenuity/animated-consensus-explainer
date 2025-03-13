@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface ConnectionDotProps {
   path?: string;
@@ -20,43 +20,85 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animated = false,
   animationDuration = 1.5
 }) => {  
-  // SAFETY CHECK 1: Don't render anything if required props are missing
-  if (animated && !path) {
-    console.log("Skipping animated dot - missing path");
-    return null;
-  }
+  // Create a ref for the circle element to monitor it
+  const circleRef = useRef<SVGCircleElement | null>(null);
   
-  // SAFETY CHECK 2: For static dots, don't render if coordinates are missing
-  if (!animated && (!cx || !cy)) {
-    console.log("Skipping static dot - missing coordinates");
-    return null;
-  }
+  // EXTREME SAFETY CHECK 1: Log all dot rendering attempts for debugging
+  console.log("CONNECTION DOT RENDER ATTEMPT:", { 
+    path, 
+    color, 
+    cx, 
+    cy, 
+    animated,
+    time: new Date().toISOString()
+  });
   
-  // SAFETY CHECK 3: Block any dots in the top-left danger zone (expanded area)
-  // This is a failsafe to prevent any dots from appearing in the top-left corner
+  // EXTREME SAFETY CHECK 2: Block ANY dots in a much larger danger zone (entire top-left quadrant)
+  const dangerZoneSize = 200; // Expanded from 100 to 200 for maximum safety
+  
   if (cx && cy) {
     const numCx = parseFloat(cx);
     const numCy = parseFloat(cy);
     
-    if (numCx < 100 && numCy < 100) {
-      console.log("BLOCKED DOT IN TOP-LEFT ZONE:", { cx, cy, color });
-      return null; // Absolutely no rendering in the expanded danger zone
+    if (numCx < dangerZoneSize && numCy < dangerZoneSize) {
+      console.error("BLOCKED DOT IN EXPANDED DANGER ZONE:", { cx, cy, color });
+      return null; // Block rendering entirely
     }
   }
   
-  // Only render animated dots if they have a valid path
-  if (animated && path) {
-    // SAFETY CHECK 4: Don't allow any animations that could position dots in the corner
-    // This is a double-failsafe since we're already blocking by coordinates above
-    if (path.includes("M 0") || path.includes("M0") || 
-        (path.includes("L 0") && path.includes("0 0"))) {
-      console.log("BLOCKED ANIMATION PATH WITH TOP-LEFT COORDINATES:", path);
-      return null;
+  // EXTREME SAFETY CHECK 3: Don't render ANY animated dots if they have an undefined or suspicious path
+  if (animated && (!path || path.includes("M 0") || path.includes("M0") || 
+      path.includes("L 0,0") || path.includes("0,0"))) {
+    console.error("BLOCKED SUSPICIOUS ANIMATION PATH:", path);
+    return null;
+  }
+  
+  // Monitor the DOM element for position after rendering
+  useEffect(() => {
+    if (circleRef.current) {
+      const position = circleRef.current.getBoundingClientRect();
+      
+      // If this dot appears in the top-left corner after rendering, remove it
+      if (position.x < dangerZoneSize && position.y < dangerZoneSize) {
+        console.error("POST-RENDER DOT IN DANGER ZONE! REMOVING:", {
+          element: circleRef.current,
+          position
+        });
+        
+        // Remove the element from the DOM entirely
+        circleRef.current.remove();
+      }
     }
     
+    // Also add a broader DOM check to catch any rogue circles that might be created elsewhere
+    setTimeout(() => {
+      const allCircles = document.querySelectorAll('circle');
+      allCircles.forEach(circle => {
+        const cx = parseFloat(circle.getAttribute('cx') || '1000');
+        const cy = parseFloat(circle.getAttribute('cy') || '1000');
+        
+        // Get actual screen position
+        const rect = circle.getBoundingClientRect();
+        
+        if ((cx < dangerZoneSize && cy < dangerZoneSize) || 
+            (rect.left < dangerZoneSize && rect.top < dangerZoneSize)) {
+          console.error("FOUND AND REMOVING ROGUE DOT:", {
+            element: circle,
+            cx, cy,
+            position: rect
+          });
+          circle.remove();
+        }
+      });
+    }, 300);
+  }, []);
+  
+  // Only render animated dots if they have a valid path and aren't in the danger zone
+  if (animated && path) {
     return (
       <g>
         <circle
+          ref={circleRef}
           r={radius}
           fill={color}
         >
@@ -98,13 +140,19 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     );
   }
   
-  // For static dots, we've already filtered out any in the danger zone
-  return (
-    <circle
-      cx={cx}
-      cy={cy}
-      r={radius}
-      fill={color}
-    />
-  );
+  // For static dots, only render if we have valid coordinates outside danger zone
+  if (cx && cy) {
+    return (
+      <circle
+        ref={circleRef}
+        cx={cx}
+        cy={cy}
+        r={radius}
+        fill={color}
+      />
+    );
+  }
+  
+  // Default case - don't render anything
+  return null;
 };

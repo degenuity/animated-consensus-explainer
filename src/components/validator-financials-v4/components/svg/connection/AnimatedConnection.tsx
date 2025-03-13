@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ConnectionLabel } from './ConnectionLabel';
 import { ConnectionDot } from './ConnectionDot';
@@ -23,16 +23,71 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   dotVariants,
   animationDuration
 }) => {
-  // Skip rendering if path is missing
-  if (!path) return null;
-  
-  // For debugging - add console output to identify any unexpected renders
-  if (dotPosition && (parseFloat(dotPosition.x) < 50 && parseFloat(dotPosition.y) < 50)) {
-    console.log('WARNING: Attempt to render dot in top-left corner:', { path, color, dotPosition });
+  // Safety check 1: Skip rendering if path is missing
+  if (!path) {
+    console.log("Skipping AnimatedConnection - missing path");
+    return null;
   }
   
+  // Safety check 2: Never render dots in the danger zone 
+  if (dotPosition) {
+    const x = parseFloat(dotPosition.x);
+    const y = parseFloat(dotPosition.y);
+    
+    if (x < 200 && y < 200) {
+      console.error("AnimatedConnection: Blocked dot in danger zone", {
+        x, y, color, path
+      });
+      
+      // Create a safe version without the dot
+      const safeDotPosition = undefined;
+      
+      return (
+        <g>
+          <motion.path
+            d={path}
+            stroke={color}
+            strokeWidth="2"
+            fill="none"
+            custom={animationIndex}
+            variants={lineVariants}
+            initial="hidden"
+            animate="visible"
+          />
+          
+          {label && labelPosition && (
+            <ConnectionLabel 
+              label={label} 
+              position={labelPosition} 
+              color={color} 
+            />
+          )}
+        </g>
+      );
+    }
+  }
+  
+  const containerRef = useRef<SVGGElement>(null);
+  
+  // Inspect children after render to find and remove any rogue dots
+  useEffect(() => {
+    if (containerRef.current) {
+      const circles = containerRef.current.querySelectorAll('circle');
+      circles.forEach(circle => {
+        const cx = parseFloat(circle.getAttribute('cx') || '1000');
+        const cy = parseFloat(circle.getAttribute('cy') || '1000');
+        
+        if (cx < 200 && cy < 200) {
+          console.error("POST-RENDER: Found and removing dot in danger zone", { cx, cy });
+          circle.remove();
+        }
+      });
+    }
+  }, []);
+  
+  // Standard render with all safety checks in place
   return (
-    <g>
+    <g ref={containerRef}>
       <motion.path
         d={path}
         stroke={color}
@@ -44,7 +99,8 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         animate="visible"
       />
       
-      {dotPosition && !animateMotion && (
+      {dotPosition && !animateMotion && dotPosition.x && parseFloat(dotPosition.x) >= 200 && 
+       dotPosition.y && parseFloat(dotPosition.y) >= 200 && (
         <motion.circle
           cx={dotPosition.x}
           cy={dotPosition.y}
@@ -60,7 +116,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         />
       )}
       
-      {animateMotion && path && (
+      {animateMotion && path && !path.includes("M 0") && !path.includes("0,0") && (
         <motion.g
           custom={animationIndex}
           initial={{ opacity: 0 }}
