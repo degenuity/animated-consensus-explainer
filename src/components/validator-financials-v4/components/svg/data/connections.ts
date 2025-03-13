@@ -1,4 +1,3 @@
-
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -98,6 +97,17 @@ export const connectionPaths = [
     id: "block-rewards-to-total-validator-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 2
+  },
+  
+  // NEW LINE: Internal Rewards to Total Validator Rewards
+  { 
+    path: "M 450 340 L 450 450 L 1020 450 L 1020 550", 
+    color: "#10B981", 
+    animationIndex: 9,
+    animateMotion: true,
+    dotPosition: { x: "735", y: "450" },
+    id: "internal-rewards-to-total-validator-rewards",
+    renderOrder: "foreground" as const,
+    animationDuration: 2.5
   }
 ];
-
