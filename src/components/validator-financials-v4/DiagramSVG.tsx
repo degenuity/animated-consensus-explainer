@@ -4,10 +4,8 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
   ConnectionLine,
-  // ExplanationComponent removed from here
-  // Logo completely removed from here
 } from './components/svg';
-import { viewBoxWidth, viewBoxHeight, zoomedViewBox } from './components/svg/data/constants';
+import { desktopViewBox, zoomedViewBox } from './components/svg/data/constants';
 import { boxes } from './components/svg/data/boxes';
 import { connectionPaths } from './components/svg/data/connections';
 import { useDiagramDebug } from './hooks/useDiagramDebug';
@@ -20,8 +18,9 @@ const DiagramSVG = () => {
   const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
   const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
   
-  // Mobile-optimized padding to prevent cropping
-  const containerClass = isMobile ? "w-full h-full relative px-3" : "w-full h-full relative px-6";
+  // Using scaled padding for different screen sizes
+  // This prevents cropping at all viewport sizes
+  const containerClass = "w-full h-full relative overflow-visible px-2 sm:px-4 md:px-6 lg:px-8";
   
   return (
     <div className={containerClass}>
@@ -50,7 +49,7 @@ const DiagramSVG = () => {
       <svg
         width="100%"
         height="100%"
-        viewBox={isMobile ? zoomedViewBox : `0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+        viewBox={isMobile ? zoomedViewBox : desktopViewBox}
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
@@ -72,7 +71,7 @@ const DiagramSVG = () => {
         ref={svgRef}
         width="100%"
         height="100%"
-        viewBox={isMobile ? zoomedViewBox : `0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+        viewBox={isMobile ? zoomedViewBox : desktopViewBox}
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
@@ -89,7 +88,7 @@ const DiagramSVG = () => {
       <svg
         width="100%"
         height="100%"
-        viewBox={isMobile ? zoomedViewBox : `0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+        viewBox={isMobile ? zoomedViewBox : desktopViewBox}
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >

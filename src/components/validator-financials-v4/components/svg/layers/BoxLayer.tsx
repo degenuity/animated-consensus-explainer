@@ -1,20 +1,23 @@
 
 import React, { forwardRef } from 'react';
-import { zoomedViewBox } from '../data/constants';
+import { zoomedViewBox, desktopViewBox } from '../data/constants';
 import { BoxComponent } from '../box';
 import { Box } from '../box/types';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface BoxLayerProps {
   boxes: Box[];
 }
 
 const BoxLayer = forwardRef<SVGSVGElement, BoxLayerProps>(({ boxes }, ref) => {
+  const isMobile = useIsMobile();
+  
   return (
     <svg
       ref={ref}
       width="100%"
       height="100%"
-      viewBox={zoomedViewBox}
+      viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
       className="absolute top-0 left-0"
     >

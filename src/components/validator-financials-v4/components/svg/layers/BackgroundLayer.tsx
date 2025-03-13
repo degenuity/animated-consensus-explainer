@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { zoomedViewBox } from '../data/constants';
+import { zoomedViewBox, desktopViewBox } from '../data/constants';
 import { connectionPaths } from '../data/connections';
 import ConnectionLine from '../connection/ConnectionLine';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface BackgroundLayerProps {
   connectionPaths: typeof connectionPaths;
@@ -11,12 +12,13 @@ interface BackgroundLayerProps {
 const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) => {
   // Filter connections that should be rendered in the background
   const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
+  const isMobile = useIsMobile();
   
   return (
     <svg
       width="100%"
       height="100%"
-      viewBox={zoomedViewBox}
+      viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
       className="absolute top-0 left-0"
     >

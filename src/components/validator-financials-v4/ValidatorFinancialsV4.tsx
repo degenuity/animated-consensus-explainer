@@ -21,7 +21,7 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
 
   return (
     <motion.div 
-      className="w-full relative overflow-hidden bg-[#0d111c] rounded-xl min-h-[400px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[520px] flex flex-col items-center justify-start"
+      className="w-full relative overflow-visible bg-[#0d111c] rounded-xl min-h-[400px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[520px] flex flex-col items-center justify-start"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -29,7 +29,8 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
       <div className="max-w-7xl mx-auto px-0 py-1 sm:py-2 md:py-3 relative w-full flex flex-col items-center">
         <Title />
         
-        <div className="relative w-full h-[370px] sm:h-[410px] md:h-[440px] lg:h-[480px] flex items-center justify-center overflow-visible">
+        {/* Added overflow-visible and increased horizontal margins */}
+        <div className="relative w-[95%] max-w-full mx-auto overflow-visible h-[370px] sm:h-[410px] md:h-[440px] lg:h-[480px] flex items-center justify-center">
           <DiagramSVG key={animationKey} />
         </div>
       </div>
