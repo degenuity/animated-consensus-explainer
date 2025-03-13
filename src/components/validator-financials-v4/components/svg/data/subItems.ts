@@ -23,13 +23,13 @@ export const networkCostsSubitems = [
         text: "priority fees", 
         id: "priority-fees", 
         color: "#10B981",
-        position: { y: 75 } // Increased from 55 to 75px (+20px)
+        position: { y: 95 } // Increased from 75 to 95px (+20px)
       },
       { 
         text: "mev", 
         id: "mev", 
         color: "#10B981",
-        position: { y: 95 } // Increased from 75 to 95px (+20px)
+        position: { y: 115 } // Increased from 95 to 115px (+20px)
       }
     ]
   }
