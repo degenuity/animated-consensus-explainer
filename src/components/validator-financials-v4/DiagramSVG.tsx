@@ -4,7 +4,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
   ConnectionLine,
-  ExplanationComponent,
+  // ExplanationComponent removed from here
   Logo
 } from './components/svg';
 import { viewBoxWidth, viewBoxHeight } from './components/svg/data/constants';
@@ -135,7 +135,7 @@ const DiagramSVG = () => {
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
-        <ExplanationComponent />
+        {/* ExplanationComponent removed from here */}
         <Logo />
         
         {backgroundConnections.map((connection, index) => (
