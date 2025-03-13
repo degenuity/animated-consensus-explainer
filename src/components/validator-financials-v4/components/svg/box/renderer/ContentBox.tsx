@@ -35,8 +35,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const isBlockRewards = id === "block-rewards";
   const isPriorityFeeOrMEV = id === "priority-fees" || id === "mev";
   
-  // Explicitly override font size for block rewards to be smaller
-  // Force text-xs for block rewards regardless of other conditions
+  // Explicitly use 'text-xs' for block rewards
   const textSize = isBlockRewards ? "text-xs" : (isNested ? "text-sm" : "text-sm");
   const fontWeight = "font-medium";
   
@@ -75,14 +74,14 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         <div className={`flex flex-col ${verticalAlignment} h-full px-3 ${textAlign}`}>
           {desc ? (
             <>
-              <div className={`${isBlockRewards ? 'text-xs' : textSize} ${fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
+              <div className={`${isBlockRewards ? 'text-xs font-normal' : textSize + ' ' + fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
                 {text}
               </div>
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>
           ) : (
             <div 
-              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${fontWeight} ${isBlockRewards ? 'text-xs' : textSize} justify-start`} 
+              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${isBlockRewards ? 'text-xs font-normal' : textSize + ' ' + fontWeight} justify-start`} 
               style={{ color: isBlockRewards ? 'white' : strokeColor }}
             >
               {text}
