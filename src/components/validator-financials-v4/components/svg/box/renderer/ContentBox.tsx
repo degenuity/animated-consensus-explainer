@@ -44,7 +44,10 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   
   // Special styling for block rewards
   const textColor = isBlockRewards ? "text-white" : `text-${strokeColor}`;
+  // Position the block rewards text in the upper left instead of center
   const verticalAlignment = isBlockRewards ? "items-start pt-3" : "justify-center";
+  // Adjust the padding for block rewards to maintain spacing at the top
+  const paddingTop = isBlockRewards ? "pt-3" : "";
 
   return (
     <motion.g
@@ -78,7 +81,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
             </>
           ) : (
             <div 
-              className={`flex items-center h-full ${fontWeight} ${fontSize} ${isHorizontal ? 'justify-center' : 'justify-start'}`} 
+              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${fontWeight} ${fontSize} ${isHorizontal ? 'justify-center' : 'justify-start'}`} 
               style={{ color: isBlockRewards ? 'white' : strokeColor }}
             >
               {text}
