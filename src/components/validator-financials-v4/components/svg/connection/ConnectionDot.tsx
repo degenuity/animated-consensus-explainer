@@ -25,6 +25,11 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     console.log("ConnectionDot for block-rewards-to-profitability with:", { animated, animationDuration });
   }
   
+  // Log the base-fee-bottom-to-block-rewards path to diagnose issue
+  if (path === "M 1090 200 L 1090 230") {
+    console.log("Rendering base-fee-bottom connection with:", { animated, animationDuration });
+  }
+  
   if (animated && path) {
     return (
       <g>

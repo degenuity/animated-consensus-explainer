@@ -86,7 +86,7 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Base Fee bottom to Block Rewards center - Now in foreground
+  // Base Fee bottom to Block Rewards center - Now in foreground, with adjusted path
   { 
     path: "M 1090 200 L 1090 230", 
     color: "#EAB308", 
@@ -94,10 +94,11 @@ export const connectionPaths = [
     animateMotion: true,
     dotPosition: { x: "1090", y: "215" },
     id: "base-fee-bottom-to-block-rewards",
-    renderOrder: "foreground" as const, // Changed from background to foreground
+    renderOrder: "foreground" as const,
     animationDuration: 1.5
   }
   
   // Removed: Internal Rewards to Total Validator Rewards line
   // Removed: Any connection from Block Rewards to Total Validator Rewards
 ];
+
