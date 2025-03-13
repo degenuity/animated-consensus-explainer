@@ -66,7 +66,9 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   // Adjust text styles based on the element role
   const fontSize = isNested ? "text-sm" : (isBlockRewards ? "text-lg" : "text-sm");
   const fontWeight = isBlockRewards ? "font-medium" : "font-medium";
-  const textAlign = isBlockRewards || isNested ? "text-center" : "";
+  
+  // Set text alignment - left align block rewards and nested items, center align horizontal items
+  const textAlign = isHorizontal ? "text-center" : "text-left";
 
   return (
     <motion.g
@@ -100,7 +102,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>
           ) : (
-            <div className={`flex items-center h-full ${fontWeight} ${fontSize} ${textAlign ? 'justify-center' : ''}`} style={{ color: strokeColor }}>
+            <div className={`flex items-center h-full ${fontWeight} ${fontSize} ${isHorizontal ? 'justify-center' : ''}`} style={{ color: strokeColor }}>
               {text}
             </div>
           )}

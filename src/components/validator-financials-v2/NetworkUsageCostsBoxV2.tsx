@@ -19,7 +19,7 @@ const NetworkUsageCostsBoxV2 = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded text-sm text-white text-center"
+          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded text-sm text-white text-left"
         >
           base fees
         </motion.div>
@@ -31,27 +31,27 @@ const NetworkUsageCostsBoxV2 = () => {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="border border-blue-500/70 bg-[#141b29] p-4 rounded"
         >
-          {/* Block rewards title */}
-          <div className="text-white text-lg text-center mb-4">block rewards</div>
+          {/* Block rewards title - now left-aligned */}
+          <div className="text-white text-lg text-left mb-4">block rewards</div>
             
           {/* Block rewards content items */}
           <div className="flex flex-col space-y-3">
-            {/* Priority fees */}
+            {/* Priority fees - text left-aligned */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.6 }}
-              className="border border-green-500/70 bg-[#101620] p-2 rounded text-sm text-white text-center"
+              className="border border-green-500/70 bg-[#101620] p-2 rounded text-sm text-white text-left"
             >
               priority fees
             </motion.div>
               
-            {/* MEV */}
+            {/* MEV - text left-aligned */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.7 }}
-              className="border border-green-500/70 bg-[#101620] p-2 rounded text-sm text-white text-center"
+              className="border border-green-500/70 bg-[#101620] p-2 rounded text-sm text-white text-left"
             >
               MEV
             </motion.div>
