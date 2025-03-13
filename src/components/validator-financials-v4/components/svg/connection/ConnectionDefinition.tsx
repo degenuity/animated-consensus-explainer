@@ -4,9 +4,6 @@ import { AnimatedConnection } from './AnimatedConnection';
 import { useConnectionAnimation } from '../hooks/useConnectionAnimation';
 import { ConnectionProps } from './types';
 
-/**
- * ConnectionDefinition renders a connection as an SVG definition that can be referenced elsewhere.
- */
 export const ConnectionDefinition: React.FC<ConnectionProps> = (props) => {
   const { lineVariants, dotVariants } = useConnectionAnimation({
     animationIndex: props.animationIndex || 0

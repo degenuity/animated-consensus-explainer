@@ -8,10 +8,6 @@ interface SimpleBoxProps {
   boxProps: BoxProps;
 }
 
-/**
- * SimpleBox renders basic boxes without complex subitems,
- * like Inflation and Deflation boxes.
- */
 const SimpleBox: React.FC<SimpleBoxProps> = ({ boxProps }) => {
   const { x, y, width, height, title, icon, subtitle, color, animationIndex, isExplanation } = boxProps;
   
@@ -21,7 +17,6 @@ const SimpleBox: React.FC<SimpleBoxProps> = ({ boxProps }) => {
       variants={boxVariants}
       initial="hidden"
       animate="visible"
-      data-id={title.replace(/\s+/g, '-')}
     >
       <rect
         x={x}
