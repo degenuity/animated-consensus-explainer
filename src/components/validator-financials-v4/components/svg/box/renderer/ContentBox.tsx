@@ -67,6 +67,21 @@ const ContentBox: React.FC<ContentBoxProps> = ({
     `);
   }
   
+  // Enhanced logging for base fees
+  if (isBaseFees) {
+    console.log(`BASE FEES BOX EXACT COORDINATES: 
+      id: ${id}
+      x: ${adjustedX}
+      y: ${y + yOffset}
+      width: ${adjustedWidth}
+      height: ${itemHeight}
+      right-edge: ${adjustedX + adjustedWidth}
+      right-center: (${adjustedX + adjustedWidth}, ${y + yOffset + itemHeight/2})
+      center: (${adjustedX + adjustedWidth/2}, ${y + yOffset + itemHeight/2})
+      bottom: ${y + yOffset + itemHeight}
+    `);
+  }
+  
   // Detailed logging for the boxes we're interested in
   if (isTotalValidatorRewards) {
     console.log(`TOTAL VALIDATOR REWARDS BOX: 
@@ -94,7 +109,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   
   // Log base fees box coordinates for debugging
   if (isBaseFees) {
-    console.log(`Base fees box: x=${adjustedX}, y=${y + yOffset}, height=${itemHeight}, bottom=${y + yOffset + itemHeight}`);
+    console.log(`Base fees box: x=${adjustedX}, y=${y + yOffset}, width=${adjustedWidth}, height=${itemHeight}, bottom=${y + yOffset + itemHeight}, right-edge=${adjustedX + adjustedWidth}`);
   }
   
   // Log block rewards box coordinates for debugging
@@ -178,4 +193,3 @@ const ContentBox: React.FC<ContentBoxProps> = ({
 };
 
 export default ContentBox;
-

@@ -105,9 +105,9 @@ export const connectionPaths = [
   },
   
   // Base Fee right side to Deflation
-  // Based on the console logs and the screenshot, the base fees box starts at x=962
-  // The width is approximately 226px (similar to other boxes in the same layout)
-  // So the right edge should be around x=1188
+  // From the console logs, we know the base fees box starts at x=962
+  // And from the NetworkCostsSubitems, we can determine the width is 226px
+  // So the right edge is at 962 + 226 = 1188
   { 
     path: "M 1188 190 L 1300 240", 
     color: "#EAB308", 
