@@ -11,7 +11,7 @@ const NetworkUsageCostsBoxV2 = () => {
         <span className="text-xl text-white">network usage costs</span>
       </div>
       
-      <div className="grid grid-cols-1 gap-2 px-4 py-3">
+      <div className="flex flex-col space-y-4 px-4 py-3">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -29,7 +29,7 @@ const NetworkUsageCostsBoxV2 = () => {
         >
           <div className="bg-[#141b29] border border-[#2a3349] p-3 rounded">
             <div className="text-white mb-2">block rewards</div>
-            <div className="grid grid-cols-1 gap-2 px-2 py-2">
+            <div className="flex flex-col space-y-3 px-2 py-2">
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
