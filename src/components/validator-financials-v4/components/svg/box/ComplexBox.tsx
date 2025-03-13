@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import BoxIcon from './BoxIcon';
@@ -52,18 +51,33 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
         // Base width calculation - this is our starting point
         const baseWidth = remainingWidth / contentItems.length;
         
-        // Allocate widths, giving more to stake weight, randomness, and performance
-        contentItems.forEach(item => {
-          if (item.id === 'randomness') {
-            contentItemWidths.push(baseWidth * 1.3); // 30% more width for randomness
-          } else if (item.id === 'stake-weight') {
-            contentItemWidths.push(baseWidth * 1.5); // 50% more width for stake weight
-          } else if (item.id === 'performance-reputation') {
-            contentItemWidths.push(baseWidth * 1.5); // 50% more width for performance
-          } else {
-            contentItemWidths.push(baseWidth * 0.5); // Significantly reduce others to compensate
-          }
-        });
+        // For block production box (530px width), adjust the ratios
+        if (width === 530) {
+          contentItems.forEach(item => {
+            if (item.id === 'randomness') {
+              contentItemWidths.push(baseWidth * 1.2); // 20% more width for randomness (reduced from 30%)
+            } else if (item.id === 'stake-weight') {
+              contentItemWidths.push(baseWidth * 1.3); // 30% more width for stake weight (reduced from 50%)
+            } else if (item.id === 'performance-reputation') {
+              contentItemWidths.push(baseWidth * 1.3); // 30% more width for performance (reduced from 50%)
+            } else {
+              contentItemWidths.push(baseWidth * 0.7); // Less reduction for others (increased from 0.5)
+            }
+          });
+        } else {
+          // For other boxes, keep previous allocation
+          contentItems.forEach(item => {
+            if (item.id === 'randomness') {
+              contentItemWidths.push(baseWidth * 1.3); // 30% more width for randomness
+            } else if (item.id === 'stake-weight') {
+              contentItemWidths.push(baseWidth * 1.5); // 50% more width for stake weight
+            } else if (item.id === 'performance-reputation') {
+              contentItemWidths.push(baseWidth * 1.5); // 50% more width for performance
+            } else {
+              contentItemWidths.push(baseWidth * 0.5); // Significantly reduce others to compensate
+            }
+          });
+        }
       }
       
       // Map of positions for each item
