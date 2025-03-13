@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BoxProps } from './box/types';
 import SimpleBox from './box/SimpleBox';
 import ComplexBox from './box/ComplexBox';
@@ -9,89 +9,145 @@ import ComplexBox from './box/ComplexBox';
  * in the validator financials diagram.
  */
 const BoxComponent: React.FC<BoxProps> = (props) => {
-  // Special handling for the Block Production box to identify its subitems
-  if (props.title === "block production eligibility" && props.subitems) {
-    // Get more detailed position information for the stake weight box
-    const stakeWeightItem = props.subitems.find(item => item.id === "stake-weight");
-    if (stakeWeightItem) {
-      // Calculate approximate center position
-      const boxLeft = props.x;
-      const boxWidth = props.width;
-      const itemCount = props.subitems.filter(i => !i.isOperator).length;
-      const operatorCount = props.subitems.filter(i => i.isOperator).length;
+  // Create a ref to measure the box
+  const boxRef = useRef<SVGGElement>(null);
+  
+  useEffect(() => {
+    // Special case for the block production eligibility box and its subitems
+    if (props.title === "block production eligibility" && props.subitems) {
+      // Get coordinates for all the boxes in block production
+      const performanceItem = props.subitems.find(item => item.id === "performance-reputation");
+      const randomnessItem = props.subitems.find(item => item.id === "randomness");
+      const stakeWeightItem = props.subitems.find(item => item.id === "stake-weight");
       
-      // Get item index
-      const contentItems = props.subitems.filter(i => !i.isOperator);
-      const stakeWeightIndex = contentItems.findIndex(i => i.id === "stake-weight");
-      
-      // Approximate position calculation
-      const totalItemWidth = boxWidth - 20; // 10px padding on each side
-      const totalMargins = (props.subitems.length - 1) * 16; // 16px margins
-      const operatorWidth = operatorCount * 15; // 15px for each operator
-      const remainingWidth = totalItemWidth - totalMargins - operatorWidth;
-      
-      // Approximate position of stake weight center
-      const itemWidthBase = remainingWidth / contentItems.length;
-      const leftItems = contentItems.slice(0, stakeWeightIndex);
-      const rightItems = contentItems.slice(stakeWeightIndex + 1);
-      
-      let approximateCenter = boxLeft + 10; // Start with left padding
-      
-      // Add width of left items
-      leftItems.forEach((_, i) => {
-        // Add item width plus margin
-        approximateCenter += itemWidthBase + 16;
-      });
-      
-      // Add operators before stake weight
-      const operatorsBefore = props.subitems.filter((item, idx) => 
-        item.isOperator && idx < props.subitems.findIndex(i => i.id === "stake-weight")
-      ).length;
-      
-      approximateCenter += operatorsBefore * (15 + 16); // operator width + margin
-      
-      // Add half of stake weight width
-      approximateCenter += itemWidthBase * 1.1 / 2; // Using the 1.1 factor from HorizontalItemsRenderer
-      
-      console.log("Detailed stake weight box positioning:", {
-        boxTitle: props.title,
-        boxX: props.x,
-        boxY: props.y,
-        boxWidth: props.width,
-        stakeWeightItem,
-        approximateCenterX: approximateCenter,
-        approximateCenterY: props.y + 50, // Top of box + title bar height
-        itemWidths: {
-          base: itemWidthBase,
-          performance: itemWidthBase * 1.0,
-          randomness: itemWidthBase * 0.9,
-          stakeWeight: itemWidthBase * 1.1
-        },
-        subitems: props.subitems?.map(item => ({
-          id: item.id,
-          text: item.text,
-          isOperator: item.isOperator
-        }))
-      });
+      if (performanceItem && randomnessItem && stakeWeightItem) {
+        // Calculate approximate positions of boxes within the block production container
+        // Using the HorizontalItemsRenderer's logic as reference
+        const contentItems = props.subitems.filter(item => !item.isOperator);
+        const operatorItems = props.subitems.filter(item => item.isOperator);
+        
+        const boxLeft = props.x;
+        const boxWidth = props.width;
+        
+        // These values should match what's in HorizontalItemsRenderer.tsx
+        const operatorWidth = 15;
+        const itemMargin = 16;
+        const totalOperatorWidth = operatorItems.length * operatorWidth;
+        const totalMargins = (props.subitems.length - 1) * itemMargin;
+        const remainingWidth = boxWidth - 20 - totalOperatorWidth - totalMargins;
+        
+        // Calculate widths based on the ratios used in HorizontalItemsRenderer
+        const baseWidth = remainingWidth / contentItems.length;
+        const performanceWidth = baseWidth * 1.0;
+        const randomnessWidth = baseWidth * 0.9;
+        const stakeWeightWidth = baseWidth * 1.1;
+        
+        // Calculate x positions for content items
+        let currentX = boxLeft + 10; // Start with left padding
+        let xPositions = {
+          performance: 0,
+          randomness: 0,
+          stakeWeight: 0
+        };
+        
+        for (let i = 0; i < props.subitems.length; i++) {
+          const item = props.subitems[i];
+          let itemWidth = item.isOperator ? operatorWidth : 
+                          item.id === "performance-reputation" ? performanceWidth :
+                          item.id === "randomness" ? randomnessWidth :
+                          item.id === "stake-weight" ? stakeWeightWidth : baseWidth;
+          
+          // Store center positions
+          if (item.id === "performance-reputation") {
+            xPositions.performance = currentX + itemWidth / 2;
+          } else if (item.id === "randomness") {
+            xPositions.randomness = currentX + itemWidth / 2;
+          } else if (item.id === "stake-weight") {
+            xPositions.stakeWeight = currentX + itemWidth / 2;
+          }
+          
+          // Update for next item
+          currentX += itemWidth + itemMargin;
+        }
+        
+        // Log the calculated center positions
+        console.log("EXACT CENTER COORDINATES OF BLOCK PRODUCTION BOXES:", {
+          boxTitle: props.title,
+          boxPosition: { x: props.x, y: props.y },
+          boxDimensions: { width: props.width, height: props.height },
+          centerPositions: {
+            performance: { x: xPositions.performance, y: props.y + 70 }, // 70 = yOffset(50) + height/2
+            randomness: { x: xPositions.randomness, y: props.y + 70 },
+            stakeWeight: { x: xPositions.stakeWeight, y: props.y + 70 }
+          },
+          topCenterPositions: {
+            performance: { x: xPositions.performance, y: props.y + 50 }, // 50 = yOffset for items
+            randomness: { x: xPositions.randomness, y: props.y + 50 },
+            stakeWeight: { x: xPositions.stakeWeight, y: props.y + 50 }
+          }
+        });
+      }
     }
     
-    // Standard logging
-    console.log("Block Production Box:", {
-      title: props.title,
-      x: props.x,
-      y: props.y,
-      width: props.width,
-      height: props.height,
-      subitems: props.subitems?.map(item => ({
-        id: item.id,
-        text: item.text,
-        // Approximate position calculation based on box position and layout
-        position: item.id === "performance" ? "left" : 
-                 item.id === "randomness" ? "middle" : 
-                 item.id === "stake-weight" ? "right" : "unknown"
-      }))
-    });
-  }
+    // For profitability box to get total validator rewards and operational costs positions
+    if (props.title === "profitability" && props.subitems) {
+      const validatorRewardsItem = props.subitems.find(item => item.id === "total-validator-rewards");
+      const operationalCostsItem = props.subitems.find(item => item.id === "operational-costs");
+      
+      if (validatorRewardsItem && operationalCostsItem) {
+        // Calculate approximate center positions
+        const boxLeft = props.x;
+        const boxWidth = props.width;
+        
+        // These should match the values in HorizontalItemsRenderer
+        const contentItems = props.subitems.filter(item => !item.isOperator);
+        const operatorItems = props.subitems.filter(item => item.isOperator);
+        
+        const operatorWidth = 15;
+        const itemMargin = 16;
+        const totalOperatorWidth = operatorItems.length * operatorWidth;
+        const totalMargins = (props.subitems.length - 1) * itemMargin;
+        const remainingWidth = boxWidth - 20 - totalOperatorWidth - totalMargins;
+        
+        // Equal width for profitability box items
+        const itemWidth = remainingWidth / contentItems.length;
+        
+        // Calculate positions
+        let currentX = boxLeft + 10; // Start with left padding
+        let xPositions = {
+          validatorRewards: 0,
+          operationalCosts: 0
+        };
+        
+        for (let i = 0; i < props.subitems.length; i++) {
+          const item = props.subitems[i];
+          const width = item.isOperator ? operatorWidth : itemWidth;
+          
+          if (item.id === "total-validator-rewards") {
+            xPositions.validatorRewards = currentX + width / 2;
+          } else if (item.id === "operational-costs") {
+            xPositions.operationalCosts = currentX + width / 2;
+          }
+          
+          currentX += width + itemMargin;
+        }
+        
+        console.log("EXACT CENTER COORDINATES OF PROFITABILITY BOXES:", {
+          boxTitle: props.title,
+          boxPosition: { x: props.x, y: props.y },
+          boxDimensions: { width: props.width, height: props.height },
+          centerPositions: {
+            validatorRewards: { x: xPositions.validatorRewards, y: props.y + 70 },
+            operationalCosts: { x: xPositions.operationalCosts, y: props.y + 70 }
+          },
+          topCenterPositions: {
+            validatorRewards: { x: xPositions.validatorRewards, y: props.y + 50 },
+            operationalCosts: { x: xPositions.operationalCosts, y: props.y + 50 }
+          }
+        });
+      }
+    }
+  }, [props.title, props.subitems, props.x, props.y, props.width, props.height]);
   
   // Use the simple box style for boxes like Inflation and Deflation
   if (props.simpleStyle) {
@@ -99,7 +155,7 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
   }
   
   // Use complex box for boxes with subitems
-  return <ComplexBox boxProps={props} />;
+  return <g ref={boxRef}><ComplexBox boxProps={props} /></g>;
 };
 
 export default BoxComponent;

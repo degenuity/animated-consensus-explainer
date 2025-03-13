@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface ConnectionDotProps {
   path?: string;
@@ -21,29 +21,46 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animationDuration = 1.5
 }) => {
   // Enhanced debugging for the stake weight path
-  if (path?.includes("total-stake-to-stake-weight")) {
-    console.log("Stake weight path details:", { 
-      path,
-      endPoint: "735,550",
-      animated, 
-      animationDuration,
-      coordinates: path.split(/[ML]\s*/).filter(Boolean).map(coord => {
-        const [x, y] = coord.trim().split(/\s+/).map(Number);
-        return { x, y };
-      })
-    });
-  }
+  useEffect(() => {
+    if (path?.includes("total-stake-to-stake-weight")) {
+      console.log("Stake weight path detailed analysis:", { 
+        path,
+        pathType: typeof path,
+        pathSegments: path.split(/[ML]\s*/).filter(Boolean),
+        endPoint: path.split(/[ML]\s*/).filter(Boolean).pop(),
+        animated, 
+        animationDuration
+      });
+    }
+  }, [path, animated, animationDuration]);
   
-  if (path?.includes("block-production")) {
-    console.log("Block production box connection:", {
-      path,
-      boxPositions: {
-        performance: "Left box - approximately at x=385, y=550",
-        randomness: "Middle box - approximately at x=585, y=550",
-        stakeWeight: "Right box - approximately at x=735, y=550"
+  // Debug the path coordinates more precisely
+  useEffect(() => {
+    if (path) {
+      const segments = path.split(/([ML])\s*/).filter(Boolean);
+      const coordinates = [];
+      let currentCommand = '';
+      
+      // Parse the path to extract exact coordinates
+      for (let i = 0; i < segments.length; i++) {
+        if (segments[i] === 'M' || segments[i] === 'L') {
+          currentCommand = segments[i];
+        } else if (currentCommand) {
+          const [x, y] = segments[i].trim().split(/\s+/);
+          coordinates.push({ command: currentCommand, x: parseFloat(x), y: parseFloat(y) });
+        }
       }
-    });
-  }
+      
+      if (path.includes("total-stake-to-stake-weight") || path.includes("block-production")) {
+        console.log("Detailed path analysis:", {
+          pathId: path.includes("stake-weight") ? "total-stake-to-stake-weight" : "block-production",
+          segments,
+          coordinates,
+          lastPoint: coordinates.length > 0 ? coordinates[coordinates.length - 1] : null
+        });
+      }
+    }
+  }, [path]);
   
   if (animated && path) {
     return (
