@@ -75,22 +75,13 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     );
   }
   
-  // For static dots, check if it's in the top-left corner
-  // If so, make it match the background color instead of filtering it out
+  // Completely filter out any dots that appear in the top-left region
   if (cx && cy) {
     const numCx = parseFloat(cx);
     const numCy = parseFloat(cy);
     
-    // For dots in the top-left corner region, render them with background color
     if (numCx < 50 && numCy < 50) {
-      return (
-        <circle
-          cx={cx}
-          cy={cy}
-          r={radius}
-          fill="#0d111c" // Match the diagram background color
-        />
-      );
+      return null; // Don't render anything in the top-left corner
     }
   }
   
