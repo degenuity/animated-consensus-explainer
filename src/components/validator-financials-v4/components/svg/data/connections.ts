@@ -34,8 +34,6 @@ export const connectionPaths = [
     color: "#EAB308", 
     animationIndex: 5,
     dotPosition: { x: "1090", y: "205" },
-    label: "50%",
-    labelPosition: { x: 1070, y: 205 },
     id: "base-fees-to-block-rewards",
     renderOrder: "background" as const
   },
@@ -107,13 +105,15 @@ export const connectionPaths = [
   },
   
   // Base Fee right side to Deflation
-  // Updated to go from the point visible in the image to top center of Deflation box
+  // Based on the console logs and the screenshot, the base fees box starts at x=962
+  // The width is approximately 226px (similar to other boxes in the same layout)
+  // So the right edge should be around x=1188
   { 
-    path: "M 1125 155 L 1300 240", 
+    path: "M 1188 190 L 1300 240", 
     color: "#EAB308", 
     animationIndex: 12,
     animateMotion: true,
-    dotPosition: { x: "1212", y: "198" },
+    dotPosition: { x: "1240", y: "215" },
     id: "base-fee-right-to-deflation",
     renderOrder: "foreground" as const,
     animationDuration: 1.8
