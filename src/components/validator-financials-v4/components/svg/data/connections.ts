@@ -1,3 +1,4 @@
+
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -73,6 +74,18 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
+  // NEW Line: Base Fees bottom to Block Rewards
+  { 
+    path: "M 1010 200 L 1010 255", 
+    color: "#EAB308", 
+    animationIndex: 8,
+    dotPosition: { x: "1010", y: "227" },
+    animateMotion: true,
+    animationDirection: "down" as const,
+    id: "base-fees-bottom-to-block-rewards",
+    renderOrder: "background" as const
+  },
+  
   // Line 7: Internal Rewards to Total Validator Rewards - UPDATED to start from the bottom of the internal rewards box
   { 
     path: "M 450 400 L 450 430 L 945 430 L 945 500", 
@@ -96,3 +109,4 @@ export const connectionPaths = [
     renderOrder: "foreground" as const
   }
 ];
+
