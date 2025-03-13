@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
@@ -7,7 +7,7 @@ import {
   // ExplanationComponent removed from here
   // Logo completely removed from here
 } from './components/svg';
-import { viewBoxWidth, viewBoxHeight } from './components/svg/data/constants';
+import { viewBoxWidth, viewBoxHeight, zoomedViewBox } from './components/svg/data/constants';
 import { boxes } from './components/svg/data/boxes';
 import { connectionPaths } from './components/svg/data/connections';
 import { useDiagramDebug } from './hooks/useDiagramDebug';
@@ -20,8 +20,11 @@ const DiagramSVG = () => {
   const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
   const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
   
+  // Mobile-optimized padding to prevent cropping
+  const containerClass = isMobile ? "w-full h-full relative px-3" : "w-full h-full relative px-6";
+  
   return (
-    <div className="w-full h-full relative px-6">
+    <div className={containerClass}>
       <style>
         {`
           @keyframes moveDotRight {
@@ -47,12 +50,10 @@ const DiagramSVG = () => {
       <svg
         width="100%"
         height="100%"
-        viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+        viewBox={isMobile ? zoomedViewBox : `0 0 ${viewBoxWidth} ${viewBoxHeight}`}
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
-        {/* Both ExplanationComponent and Logo completely removed from here */}
-        
         {backgroundConnections.map((connection, index) => (
           <ConnectionLine
             key={`connection-bg-${connection.id}-${index}`}
@@ -71,7 +72,7 @@ const DiagramSVG = () => {
         ref={svgRef}
         width="100%"
         height="100%"
-        viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+        viewBox={isMobile ? zoomedViewBox : `0 0 ${viewBoxWidth} ${viewBoxHeight}`}
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
@@ -88,7 +89,7 @@ const DiagramSVG = () => {
       <svg
         width="100%"
         height="100%"
-        viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+        viewBox={isMobile ? zoomedViewBox : `0 0 ${viewBoxWidth} ${viewBoxHeight}`}
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
