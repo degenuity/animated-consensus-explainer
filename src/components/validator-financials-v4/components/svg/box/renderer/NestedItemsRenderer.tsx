@@ -28,8 +28,12 @@ const NestedItemsRenderer = ({
   const childSpacing = isBlockRewards ? 15 : 20; // Reduced spacing for block rewards items
   let childY = yOffset;
   
+  console.log(`NestedItemsRenderer for ${parentItem.id}, isBlockRewards: ${isBlockRewards}`);
+  
   // Handle special case for block rewards items
   if (isBlockRewards && parentItem.subItems) {
+    console.log(`Rendering block rewards children: ${parentItem.subItems.length}`);
+    
     parentItem.subItems.forEach((subItem, subIndex) => {
       // Calculate position and size for child items (priority fees and MEV)
       const childItemHeight = 40; // Standard height for all items
@@ -38,6 +42,7 @@ const NestedItemsRenderer = ({
       
       // Add extra spacing based on position property
       const extraSpacing = subItem.position?.y || 0;
+      console.log(`Child item ${subItem.id} with extraSpacing: ${extraSpacing}`);
       
       renderedItems.push(
         <SubItemRenderer 

@@ -23,6 +23,8 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
   renderedItems,
   setYOffset
 }) => {
+  console.log(`VerticalItemsRenderer for box: ${boxTitle} with ${items.length} items`);
+  
   // Start vertical position for the first item (after title)
   let yOffset = 50;
   
@@ -33,6 +35,8 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
     const hasChildren = item.subItems && item.subItems.length > 0;
     const isBlockRewards = item.id === 'block-rewards';
     const isNetworkCosts = boxTitle === "network usage costs";
+    
+    console.log(`Processing item: ${item.id}, isBlockRewards: ${isBlockRewards}`);
     
     // Apply custom vertical position if specified
     if (item.position && item.position.y) {
@@ -45,6 +49,9 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
       const childItems = item.subItems || [];
       const childrenHeight = childItems.length * 40 + (childItems.length - 1) * 15; // height + reduced spacing
       const additionalSpacing = childItems.reduce((acc, child) => acc + (child.position?.y || 0), 0);
+      
+      console.log(`Block rewards container with additionalSpacing: ${additionalSpacing}`);
+      
       // Reduce the container height by 20px (10px from top and 10px from bottom)
       const containerHeight = 40 + childrenHeight + additionalSpacing - 10; // Reduced by 20px
       

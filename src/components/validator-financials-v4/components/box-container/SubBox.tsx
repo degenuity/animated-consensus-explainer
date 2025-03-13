@@ -20,6 +20,8 @@ const SubBoxRenderer: React.FC<SubBoxRendererProps> = ({ box, index }) => {
   // Special case for block rewards in network costs
   const isBlockRewards = box.title === "block rewards";
   
+  console.log(`SubBoxRenderer for: ${box.title}, isBlockRewards: ${isBlockRewards}`);
+  
   const getColorClass = (customColor?: string) => {
     if (!customColor) return 'border-blue-500/20 bg-[#1a1f31]';
     

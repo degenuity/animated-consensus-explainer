@@ -31,23 +31,26 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   // Use the item's color directly
   const strokeColor = item.color || "#3B82F6";
   
-  // Determine if this is the block rewards parent or a nested item
+  // Check if this is the block rewards parent or a nested item
   const isBlockRewards = id === "block-rewards";
   const isPriorityFeeOrMEV = id === "priority-fees" || id === "mev";
   
-  // Always use text-xs for block rewards to match network usage costs
+  // Force block rewards to have xs text
   const textSize = isBlockRewards ? "text-xs" : (isNested ? "text-sm" : "text-sm");
+  // Remove font weight for block rewards
   const fontWeight = isBlockRewards ? "" : "font-medium";
   
   // Always left-align text regardless of whether it's horizontal or not
   const textAlign = "text-left";
   
-  // Special styling for block rewards
-  const textColor = isBlockRewards ? "text-white" : `text-${strokeColor}`;
+  // Special styling for block rewards - force it to have white text without overrides
+  const textColor = isBlockRewards ? "text-white !important" : `text-${strokeColor}`;
   // Position the block rewards text in the upper left instead of center
   const verticalAlignment = isBlockRewards ? "items-start" : "justify-center";
-  // Adjust the padding for block rewards to align it with "network usage costs"
+  // Add padding to align text properly
   const paddingTop = isBlockRewards ? "pt-2" : "";
+
+  console.log(`Rendering ContentBox for: ${id} with color: ${strokeColor} and textSize: ${textSize}`);
 
   return (
     <motion.g
@@ -74,14 +77,14 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         <div className={`flex flex-col ${verticalAlignment} h-full px-3 ${textAlign}`}>
           {desc ? (
             <>
-              <div className={`${isBlockRewards ? 'text-xs' : textSize} ${fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
+              <div className={`${textSize} ${fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
                 {text}
               </div>
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>
           ) : (
             <div 
-              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${isBlockRewards ? 'text-xs' : textSize} ${fontWeight} justify-start`} 
+              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${textSize} ${fontWeight} justify-start`} 
               style={{ color: isBlockRewards ? 'white' : strokeColor }}
             >
               {text}

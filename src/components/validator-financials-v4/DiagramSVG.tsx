@@ -18,8 +18,9 @@ const DiagramSVG = () => {
   const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
   const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
   
-  // Add logging to verify rendering
+  // Add more detailed logging to verify rendering
   console.log('DiagramSVG rendering, boxes:', boxes.length);
+  console.log('Network costs box:', boxes.find(box => box.title === "network usage costs"));
   
   return (
     <div className="w-full h-full relative px-6">
