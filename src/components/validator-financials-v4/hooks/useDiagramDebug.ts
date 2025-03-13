@@ -8,6 +8,8 @@ export const useDiagramDebug = () => {
 
   useEffect(() => {
     if (svgRef.current) {
+      console.log("DiagramSVG mounted - checking for block production boxes");
+      
       // Find the total stake box
       const totalStakeBox = boxes.find(box => box.title === "total stake");
       if (totalStakeBox) {

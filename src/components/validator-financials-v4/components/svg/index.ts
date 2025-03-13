@@ -2,9 +2,6 @@
 // Export components
 export { default as BoxComponent } from './box/BoxComponent';
 export { default as ConnectionLine } from './connection/ConnectionLine';
-// ExplanationComponent export removed
-// Logo export removed
-
 // Export diagram data
 export * from './data/constants';
 export * from './data/boxes';

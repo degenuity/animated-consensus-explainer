@@ -21,17 +21,7 @@ const BoxLayer = forwardRef<SVGSVGElement, BoxLayerProps>(({ boxes }, ref) => {
       {boxes.map((box, index) => (
         <BoxComponent
           key={`box-${index}`}
-          x={box.x}
-          y={box.y}
-          width={box.width}
-          height={box.height}
-          title={box.title}
-          subtitle={box.subtitle}
-          icon={box.icon}
-          color={box.color}
-          animationIndex={box.animationIndex}
-          subitems={box.subitems}
-          simpleStyle={box.simpleStyle}
+          {...box}
           data-id={box.title.replace(/\s+/g, '-')}
         />
       ))}
