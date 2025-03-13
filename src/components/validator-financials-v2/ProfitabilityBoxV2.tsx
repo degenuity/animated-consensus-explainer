@@ -18,11 +18,11 @@ const ProfitabilityBoxV2 = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.6 }}
-          className="border border-green-500/70 bg-[#141b29] p-3 rounded col-span-1"
-          style={{ width: "120%" }} // Increased width by 20%
+          className="border border-green-500/70 bg-[#141b29] p-4 rounded col-span-1"
+          style={{ width: "130%" }} // Increased width from 120% to 130%
         >
-          <div className="text-green-400 text-sm font-medium">total validator rewards</div>
-          <div className="text-xs text-gray-300 mt-1">aggregate</div>
+          <div className="text-green-400 text-sm font-medium px-2">total validator rewards</div>
+          <div className="text-xs text-gray-300 mt-1 px-2">aggregate</div>
         </motion.div>
         
         {/* Middle column with operator - Changed from + to - */}
@@ -40,11 +40,11 @@ const ProfitabilityBoxV2 = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.7 }}
-          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded col-span-1"
-          style={{ width: "120%" }} // Increased width by 20%
+          className="border border-yellow-500/70 bg-[#141b29] p-4 rounded col-span-1"
+          style={{ width: "130%" }} // Increased width from 120% to 130%
         >
-          <div className="text-yellow-400 text-sm font-medium">operational costs</div>
-          <div className="text-xs text-gray-300 mt-1">only cost is server</div>
+          <div className="text-yellow-400 text-sm font-medium px-2">operational costs</div>
+          <div className="text-xs text-gray-300 mt-1 px-2">only cost is server</div>
         </motion.div>
       </div>
     </div>

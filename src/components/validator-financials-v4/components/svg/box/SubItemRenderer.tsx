@@ -26,8 +26,8 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   const itemHeight = height || (desc ? 50 : 40);
   
   // Add horizontal padding for ALL items (not just horizontal ones)
-  // Increased from 5px to 12px for more visible side margins
-  const horizontalPadding = isHorizontal ? 5 : 12;
+  // Increased from 12px to 15px for more visible side margins
+  const horizontalPadding = isHorizontal ? 10 : 15;
   const adjustedWidth = width - (horizontalPadding * 2);
   const adjustedX = x + horizontalPadding;
   
@@ -77,7 +77,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         width={adjustedWidth} 
         height={itemHeight}
       >
-        <div className="flex flex-col justify-center h-full px-4">
+        <div className="flex flex-col justify-center h-full px-6">
           {desc ? (
             <>
               <div className="text-sm font-medium" style={{ color: itemColor || "#3B82F6" }}>
@@ -108,4 +108,3 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
 };
 
 export default SubItemRenderer;
-

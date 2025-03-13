@@ -83,7 +83,7 @@ export const boxes = [
   {
     x: 320,
     y: 500,
-    width: 520,
+    width: 550, // Increased width from 520 to 550
     height: 140,
     title: "block production eligibility",
     icon: "block-production" as const,
@@ -97,7 +97,7 @@ export const boxes = [
   {
     x: 880,
     y: 500,
-    width: 350,
+    width: 380, // Increased width from 350 to 380
     height: 140,
     title: "profitability",
     icon: "profitability" as const,
