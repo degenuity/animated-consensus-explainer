@@ -43,7 +43,7 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
     if (isBlockRewards && hasChildren) {
       // Calculate total height for block rewards container
       const childItems = item.subItems || [];
-      const childrenHeight = childItems.length * 40 + (childItems.length - 1) * 20; // height + spacing
+      const childrenHeight = childItems.length * 40 + (childItems.length - 1) * 15; // height + reduced spacing
       const additionalSpacing = childItems.reduce((acc, child) => acc + (child.position?.y || 0), 0);
       // Reduce the container height by making bottom padding smaller (10px instead of 20px)
       const containerHeight = 40 + childrenHeight + additionalSpacing + 10; 
