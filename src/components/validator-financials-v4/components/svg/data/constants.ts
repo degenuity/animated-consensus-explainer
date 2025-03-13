@@ -16,7 +16,8 @@ export const centerY = viewBoxHeight / 2;
 
 // Calculate the new origin point for the zoomed viewBox
 export const viewBoxX = centerX - (zoomedViewBoxWidth / 2);
-export const viewBoxY = centerY - (zoomedViewBoxHeight / 2) - 40; // Shifted up by 40 units to reduce whitespace
+// Adjusted to shift up more on smaller screens
+export const viewBoxY = centerY - (zoomedViewBoxHeight / 2) - 50; // Increased vertical adjustment
 
 // Final viewBox string with offset to center the content
 export const zoomedViewBox = `${viewBoxX} ${viewBoxY} ${zoomedViewBoxWidth} ${zoomedViewBoxHeight}`;
