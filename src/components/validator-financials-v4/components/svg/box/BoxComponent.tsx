@@ -8,6 +8,7 @@ import { BoxProps } from './types';
 const BoxComponent: React.FC<BoxProps> = (props) => {
   const boxRef = useRef<SVGGElement>(null);
   const [isHighlighted, setIsHighlighted] = useState(false);
+  const [isBumped, setIsBumped] = useState(false);
   
   useEffect(() => {
     const handleDotCollision = (event: CustomEvent) => {
@@ -18,11 +19,15 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
           (props.subitems && props.subitems.some(item => 
             typeof item !== 'string' && item.id === targetId))) {
         
+        // Trigger bump animation
+        setIsBumped(true);
+        
         // Highlight the box
         setIsHighlighted(true);
         
         // Reset after animation duration
         setTimeout(() => {
+          setIsBumped(false);
           setIsHighlighted(false);
         }, 300);
       }
@@ -60,13 +65,21 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
       ref={boxRef}
       data-id={props.title.replace(/\s+/g, '-')}
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      animate={{ 
+        opacity: 1,
+        scale: isBumped ? [1, 1.03, 1] : 1
+      }}
       transition={{ 
-        duration: 0.3, 
-        delay: props.animationIndex ? props.animationIndex * 0.1 : 0
+        duration: isBumped ? 0.3 : 0.3, 
+        delay: props.animationIndex ? props.animationIndex * 0.1 : 0,
+        scale: {
+          duration: 0.3,
+          ease: "easeInOut"
+        }
       }}
       style={{
-        filter
+        filter,
+        transformOrigin: 'center center'
       }}
     >
       {isComplex ? (

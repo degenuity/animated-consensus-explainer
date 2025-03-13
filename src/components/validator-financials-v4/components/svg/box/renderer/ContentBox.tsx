@@ -28,6 +28,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
 }) => {
   const { text, desc, id, isHorizontal } = item;
   const [isHighlighted, setIsHighlighted] = useState(false);
+  const [isBumped, setIsBumped] = useState(false);
   
   // Use the item's color directly
   const strokeColor = item.color || "#3B82F6";
@@ -58,10 +59,15 @@ const ContentBox: React.FC<ContentBoxProps> = ({
     const handleDotCollision = (event: CustomEvent) => {
       // Check if this box's ID matches the target in the event
       if (event.detail.targetId === id) {
-        // Trigger highlight animation
+        // Trigger bump and highlight animations
+        setIsBumped(true);
         setIsHighlighted(true);
+        
         // Reset after animation completes
-        setTimeout(() => setIsHighlighted(false), 600);
+        setTimeout(() => {
+          setIsBumped(false);
+          setIsHighlighted(false);
+        }, 600);
       }
     };
 
@@ -185,9 +191,21 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   return (
     <motion.g
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1.2 + index * 0.1 }}
+      animate={{ 
+        opacity: 1,
+        scale: isBumped ? [1, 1.05, 1] : 1
+      }}
+      transition={{ 
+        delay: 1.2 + index * 0.1,
+        scale: {
+          duration: 0.3,
+          ease: "easeInOut"
+        }
+      }}
       data-item-id={id}
+      style={{
+        transformOrigin: 'center'
+      }}
     >
       <rect
         x={adjustedX}

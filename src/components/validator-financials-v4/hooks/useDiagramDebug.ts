@@ -17,6 +17,17 @@ export const useDiagramDebug = () => {
         height: svgRect.height,
         viewBox: `0 0 ${viewBoxWidth} ${viewBoxHeight}`
       });
+      
+      // Debug collision events
+      const handleDotCollision = (event: CustomEvent) => {
+        console.log('🔵 Dot collision detected:', event.detail);
+      };
+      
+      window.addEventListener('dotCollision', handleDotCollision as EventListener);
+      
+      return () => {
+        window.removeEventListener('dotCollision', handleDotCollision as EventListener);
+      };
     }
   }, []);
   

@@ -59,10 +59,14 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
         detail: { 
           targetId: target,
           dotColor: color,
-          sourceId: id
+          sourceId: id,
+          timestamp: Date.now() // Add timestamp to ensure uniqueness
         }
       });
       window.dispatchEvent(collisionEvent);
+      
+      // Log collision for debugging
+      console.log(`🔵 Dot reached destination: ${target} from ${id || 'unknown'}`);
     };
     
     // Add event listeners
