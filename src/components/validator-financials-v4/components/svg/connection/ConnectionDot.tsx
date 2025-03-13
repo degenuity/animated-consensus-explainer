@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface ConnectionDotProps {
@@ -23,7 +24,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   if (path?.includes("total-stake-to-stake-weight")) {
     console.log("Stake weight path details:", { 
       path,
-      endPoint: "710,550",
+      endPoint: "735,550",
       animated, 
       animationDuration,
       coordinates: path.split(/[ML]\s*/).filter(Boolean).map(coord => {
@@ -39,7 +40,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
       boxPositions: {
         performance: "Left box - approximately at x=385, y=550",
         randomness: "Middle box - approximately at x=585, y=550",
-        stakeWeight: "Right box - approximately at x=710, y=550"
+        stakeWeight: "Right box - approximately at x=735, y=550"
       }
     });
   }
