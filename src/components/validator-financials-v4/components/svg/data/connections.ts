@@ -99,16 +99,13 @@ export const connectionPaths = [
     animationDuration: 3
   },
   
-  // NEW Line 8: Block Rewards to Total Validator Rewards (replacing the previous line)
+  // Line 8: Block Rewards to Total Validator Rewards
   { 
-    path: "M 1090 330 L 1090 430 L 945 430 L 945 500", 
+    path: "M 1090 340 L 1090 430 L 945 430 L 945 500", 
     color: "#10B981", 
     animationIndex: 7,
-    dotPosition: { x: "1020", y: "430" },
-    animateMotion: true,
-    animationDirection: "left" as const,
+    dotPosition: { x: "1040", y: "430" },
     id: "block-rewards-to-total-validator-rewards",
-    renderOrder: "foreground" as const,
-    animationDuration: 2.5
+    renderOrder: "foreground" as const
   }
 ];

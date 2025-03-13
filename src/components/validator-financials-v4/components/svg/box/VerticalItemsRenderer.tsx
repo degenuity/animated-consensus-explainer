@@ -48,11 +48,11 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
       // Reduce the container height by 20px (10px from top and 10px from bottom)
       const containerHeight = 40 + childrenHeight + additionalSpacing - 10; // Reduced by 20px
       
-      // Add the block rewards parent item with smaller text size
+      // Add the block rewards parent item
       renderedItems.push(
         <SubItemRenderer 
           key={`item-${item.id || index}`}
-          item={{...item, isHeader: true, smallerText: true}} // Added smallerText flag
+          item={{...item, isHeader: true}}
           index={index}
           x={x}
           y={y}
