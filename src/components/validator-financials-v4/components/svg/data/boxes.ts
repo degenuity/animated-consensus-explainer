@@ -1,3 +1,4 @@
+
 // Box definitions with positions, dimensions and content
 import { 
   internalRewardsSubitems, 
@@ -50,12 +51,12 @@ export const boxes = [
     borderColor: "#3B82F6"
   },
   
-  // Network Costs Box - increased height for more spacing between base fees and block rewards
+  // Network Costs Box - adjusted height to create better spacing
   {
     x: 950,
     y: 120,
     width: 280,
-    height: 380,
+    height: 350, // Reduced height from 380 to 350 to tighten the spacing
     title: "network usage costs",
     icon: "network-costs" as const,
     color: "#F97316",

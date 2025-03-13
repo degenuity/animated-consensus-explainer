@@ -74,12 +74,12 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // NEW Line: Base Fees bottom to Block Rewards - UPDATED position and path
+  // NEW Line: Base Fees bottom to Block Rewards - adjusted with reduced distance
   { 
-    path: "M 1090 210 L 1090 280", // Modified to end exactly at block rewards top line
+    path: "M 1090 210 L 1090 260", // Modified to reflect the adjusted distance between boxes
     color: "#EAB308", 
     animationIndex: 8,
-    dotPosition: { x: "1090", y: "245" },
+    dotPosition: { x: "1090", y: "235" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "base-fees-bottom-to-block-rewards",

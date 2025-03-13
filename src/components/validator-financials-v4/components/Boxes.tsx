@@ -64,6 +64,7 @@ const Boxes: React.FC = () => {
         title="network costs"
         color="249, 115, 22"
         animationDelay={0.2}
+        className="h-[350px]" // Added explicit height to match the SVG version update
         subBoxes={[
           { 
             title: "base fees", 

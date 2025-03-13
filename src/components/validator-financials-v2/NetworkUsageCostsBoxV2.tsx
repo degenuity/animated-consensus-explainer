@@ -13,7 +13,7 @@ const NetworkUsageCostsBoxV2 = () => {
       </div>
       
       {/* Content section */}
-      <div className="px-4 py-3 flex flex-col space-y-6">
+      <div className="px-4 py-3 flex flex-col space-y-4"> {/* Reduced space-y from 6 to 4 */}
         {/* Base fees item */}
         <motion.div 
           initial={{ opacity: 0 }}
