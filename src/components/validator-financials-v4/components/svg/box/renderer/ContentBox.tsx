@@ -1,14 +1,10 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { SubItem } from '../types';
-import { PlusIcon } from 'lucide-react';
 
 interface ContentBoxProps {
-  item: SubItem & { 
-    isHeader?: boolean; 
-    isSubHeader?: boolean;
-    smallerText?: boolean;
-  };
+  item: SubItem;
   index: number;
   adjustedX: number;
   y: number;
@@ -30,44 +26,81 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   isNested,
   hasPlus
 }) => {
-  // Determine text size based on properties
-  const getTextSize = () => {
-    if (item.smallerText) return 'text-sm';
-    if (item.isHeader) return 'text-lg';
-    return 'text-sm';
-  };
-
-  const textColor = item.color ? `text-[${item.color}]` : `text-white`;
-  const borderColor = item.color ? `border-[${item.color}]` : 'border-blue-500/20';
+  const { text, desc, id, isHorizontal } = item;
   
+  // Use the item's color directly
+  const strokeColor = item.color || "#3B82F6";
+  
+  // Determine if this is the block rewards parent or a nested item
+  const isBlockRewards = id === "block-rewards";
+  const isPriorityFeeOrMEV = id === "priority-fees" || id === "mev";
+  
+  // Adjust text styles based on the element role
+  const fontSize = isNested ? "text-sm" : (isBlockRewards ? "text-lg" : "text-sm");
+  const fontWeight = "font-medium";
+  
+  // Always left-align text regardless of whether it's horizontal or not
+  const textAlign = "text-left";
+  
+  // Special styling for block rewards
+  const textColor = isBlockRewards ? "text-white" : `text-${strokeColor}`;
+  // Position the block rewards text in the upper left instead of center
+  const verticalAlignment = isBlockRewards ? "items-start" : "justify-center";
+  // Adjust the padding for block rewards to align it with "network usage costs"
+  const paddingTop = isBlockRewards ? "pt-2" : "";
+
   return (
-    <foreignObject 
-      key={`content-${index}`}
-      x={adjustedX}
-      y={y + yOffset}
-      width={adjustedWidth}
-      height={itemHeight}
+    <motion.g
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.2 + index * 0.1 }}
     >
-      <div 
-        className={`h-full w-full flex flex-col justify-center px-3 py-2 
-          border ${borderColor} bg-[#141824] rounded 
-          ${isNested ? 'bg-opacity-70' : ''}`}
+      <rect
+        x={adjustedX}
+        y={y + yOffset}
+        width={adjustedWidth}
+        height={itemHeight}
+        rx="4"
+        fill="transparent"
+        stroke={strokeColor}
+        strokeWidth="1.5"
+      />
+      <foreignObject 
+        x={adjustedX} 
+        y={y + yOffset} 
+        width={adjustedWidth} 
+        height={itemHeight}
       >
-        <div className={`flex items-center ${item.isHeader ? 'mb-0.5' : ''}`}>
-          <div className={`${getTextSize()} ${textColor} font-medium`}>
-            {item.text}
-          </div>
-          {hasPlus && (
-            <PlusIcon className="ml-1 h-4 w-4 text-gray-400" />
+        <div className={`flex flex-col ${verticalAlignment} h-full px-3 ${textAlign}`}>
+          {desc ? (
+            <>
+              <div className={`${fontSize} ${fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
+                {text}
+              </div>
+              <div className="text-gray-400 text-xs mt-1">{desc}</div>
+            </>
+          ) : (
+            <div 
+              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${fontWeight} ${fontSize} justify-start`} 
+              style={{ color: isBlockRewards ? 'white' : strokeColor }}
+            >
+              {text}
+            </div>
           )}
         </div>
-        {item.desc && (
-          <div className="text-xs text-gray-400 mt-1">
-            {item.desc}
-          </div>
-        )}
-      </div>
-    </foreignObject>
+      </foreignObject>
+      
+      {hasPlus && (
+        <foreignObject 
+          x={adjustedX + adjustedWidth - 40}
+          y={y + yOffset + (itemHeight/2) - 10}
+          width="20" 
+          height="20"
+        >
+          <div className="flex items-center justify-center h-full text-gray-400 text-lg">+</div>
+        </foreignObject>
+      )}
+    </motion.g>
   );
 };
 
