@@ -20,7 +20,7 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
   animationIndex = 0,
   dotPosition,
   animationDirection,
-  animateMotion,
+  animateMotion = true, // Default to true to ensure dots are always animated
   id,
   targetBoxId,
   animationDuration = 1.5
@@ -48,7 +48,7 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
   };
   
   useEffect(() => {
-    if (!dotRef.current || !animateMotion) return;
+    if (!dotRef.current) return;
     
     const target = getTargetBoxId();
     if (!target) return;
@@ -75,53 +75,39 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
         dotElement.removeEventListener('animationiteration', handleAnimationIteration);
       }
     };
-  }, [animateMotion, color, id]);
+  }, [color, id]);
   
-  if (animateMotion) {
-    return (
-      <g>
-        <path
-          d={path}
-          fill="none"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeDasharray="4 2"
-          opacity="0.6"
-          ref={pathRef}
-        />
-        
-        <motion.circle
-          ref={dotRef}
-          r="4"
-          fill={color}
-          animate={{
-            offsetDistance: ["0%", "100%"]
-          }}
-          transition={{ 
-            duration: animationDuration,
-            repeat: Infinity,
-            ease: "linear",
-            delay: animationIndex * 0.1
-          }}
-          style={{
-            offsetPath: `path('${path}')`,
-            zIndex: 100
-          }}
-        />
-      </g>
-    );
-  }
-  
-  // For static connection lines (no animation)
   return (
-    <path
-      d={path}
-      fill="none"
-      stroke={color}
-      strokeWidth="1.5"
-      strokeDasharray="4 2"
-      opacity="0.8"
-    />
+    <g>
+      <path
+        d={path}
+        fill="none"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeDasharray="4 2"
+        opacity="0.6"
+        ref={pathRef}
+      />
+      
+      <motion.circle
+        ref={dotRef}
+        r="4"
+        fill={color}
+        animate={{
+          offsetDistance: ["0%", "100%"]
+        }}
+        transition={{ 
+          duration: animationDuration,
+          repeat: Infinity,
+          ease: "linear",
+          delay: animationIndex * 0.1
+        }}
+        style={{
+          offsetPath: `path('${path}')`,
+          zIndex: 100
+        }}
+      />
+    </g>
   );
 };
 

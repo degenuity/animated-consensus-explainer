@@ -1,11 +1,10 @@
 
 import React from 'react';
 import { zoomedViewBox } from '../data/constants';
-import { connectionPaths } from '../data/connections';
 import ConnectionLine from '../connection/ConnectionLine';
 
 interface BackgroundLayerProps {
-  connectionPaths: typeof connectionPaths;
+  connectionPaths: any[];
 }
 
 const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) => {
@@ -25,6 +24,7 @@ const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) =>
           key={`connection-bg-${connection.id}-${index}`}
           {...connection}
           animationIndex={connection.animationIndex || index}
+          animateMotion={true}
         />
       ))}
     </svg>

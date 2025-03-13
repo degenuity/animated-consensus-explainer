@@ -1,11 +1,10 @@
 
 import React from 'react';
 import { zoomedViewBox } from '../data/constants';
-import { connectionPaths } from '../data/connections';
 import ConnectionLine from '../connection/ConnectionLine';
 
 interface ForegroundLayerProps {
-  connectionPaths: typeof connectionPaths;
+  connectionPaths: any[];
 }
 
 const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) => {
@@ -25,6 +24,7 @@ const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) =>
           key={`connection-fg-${connection.id}-${index}`}
           {...connection}
           animationIndex={connection.animationIndex || index}
+          animateMotion={true}
         />
       ))}
     </svg>
