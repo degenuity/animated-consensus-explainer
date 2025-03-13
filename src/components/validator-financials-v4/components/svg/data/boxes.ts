@@ -11,7 +11,7 @@ import {
 export const boxes = [
   // Inflation Box
   {
-    x: 100,  // Reverted back to original position
+    x: 100,
     y: 240,
     width: 150,
     height: 100,
@@ -23,10 +23,10 @@ export const boxes = [
     simpleStyle: true
   },
   
-  // Internal Rewards Box - Reduced height from 220 to 160
+  // Internal Rewards Box - Aligned with Inflation's center Y value (240 + 100/2 = 290)
   {
     x: 320,
-    y: 180,
+    y: 210, // Adjusted from 180 to 210 to center at Inflation's Y center (290 - 160/2 = 210)
     width: 260,
     height: 160,
     title: "internal rewards",
@@ -37,10 +37,10 @@ export const boxes = [
     borderColor: "#10B981"
   },
   
-  // Total Stake Box - Aligned with center of stake weight box
+  // Total Stake Box - Also aligned with Inflation's center Y value
   {
-    x: 635, // Centered at approximately 763.7 (635 + 260/2 = 765)
-    y: 180,
+    x: 635,
+    y: 210, // Adjusted from 180 to 210 to center at Inflation's Y center (290 - 160/2 = 210)
     width: 260,
     height: 160,
     title: "total stake",
@@ -67,7 +67,7 @@ export const boxes = [
   
   // Deflation Box
   {
-    x: 1250, // Reverted back to original position
+    x: 1250,
     y: 240,
     width: 150,
     height: 100,

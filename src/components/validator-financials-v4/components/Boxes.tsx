@@ -1,3 +1,4 @@
+
 import React from 'react';
 import BoxContainer from './BoxContainer';
 import { Percent } from 'lucide-react';
@@ -26,9 +27,9 @@ const Boxes: React.FC = () => {
         className="w-[160px]" // Reduced width further
       />
 
-      {/* Internal Rewards Box - Left */}
+      {/* Internal Rewards Box - Left - Adjusted top position to align center with Inflation */}
       <BoxContainer
-        position="left-[26%] top-[80px]"
+        position="left-[26%] top-[50px]" // Adjusted from top-[80px] to top-[50px]
         iconType="internal-rewards"
         title="internal rewards"
         color="52, 211, 153"
@@ -40,9 +41,9 @@ const Boxes: React.FC = () => {
         ]}
       />
 
-      {/* Total Stake Box - Center */}
+      {/* Total Stake Box - Center - Adjusted top position to align center with Inflation */}
       <BoxContainer
-        position="left-1/2 transform -translate-x-1/2 top-[80px]"
+        position="left-1/2 transform -translate-x-1/2 top-[50px]" // Adjusted from top-[80px] to top-[50px]
         iconType="total-stake"
         title="total stake"
         color="93, 174, 236"

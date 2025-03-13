@@ -30,9 +30,9 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     return null;
   }
   
+  // Ensure the path doesn't include (0,0) coordinates as starting points
+  // to prevent rogue dots at the origin
   if (animated && path) {
-    // Ensure the path doesn't include (0,0) coordinates as starting points
-    // to prevent rogue dots at the origin
     if (path.includes("M 0 0") || path.includes("M 0,0") || path.startsWith("M0,0") || path.startsWith("M0 0")) {
       console.warn('Skipping dot rendering with path starting at origin:', path);
       return null;

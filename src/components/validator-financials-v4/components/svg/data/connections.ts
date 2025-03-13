@@ -1,7 +1,7 @@
 
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
-  // Line 1: Inflation to Internal Rewards
+  // Line 1: Inflation to Internal Rewards - Updated Y to match new center points (290)
   { 
     path: "M 250 290 L 320 290", 
     color: "#3B82F6", 
@@ -15,7 +15,7 @@ export const connectionPaths = [
   
   // Line 4: Total Stake to Stake Weight - Updated coordinates to match new Total Stake position
   { 
-    path: "M 765 340 L 765 465 L 765 550", 
+    path: "M 765 370 L 765 465 L 765 550", // Updated starting Y from 340 to 370 (210 + 160 = 370)
     color: "#3B82F6", 
     animationIndex: 3,
     dotPosition: { x: "765", y: "530" },
@@ -60,9 +60,9 @@ export const connectionPaths = [
     animationDuration: 2
   },
   
-  // Internal Rewards to Total Validator Rewards
+  // Internal Rewards to Total Validator Rewards - Updated starting Y to match new Internal Rewards box position
   { 
-    path: "M 450 340 L 450 450 L 1020 450 L 1020 550", 
+    path: "M 450 370 L 450 450 L 1020 450 L 1020 550", // Updated from 340 to 370 (210 + 160 = 370)
     color: "#10B981", 
     animationIndex: 9,
     animateMotion: true,
@@ -72,26 +72,26 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Updated coordinates for new Total Stake position
+  // Delegated Stake to Commission - Updated Y values for new boxes
   { 
-    path: "M 635 250 L 558 250", 
+    path: "M 635 280 L 558 280", // Updated from 250 to 280 to align with the center of the subitems
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
-    dotPosition: { x: "595", y: "250" },
+    dotPosition: { x: "595", y: "280" },
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
     animationDuration: 1.8
   },
   
-  // Own Stake to Staking Rewards - Updated coordinates for new Total Stake position
+  // Own Stake to Staking Rewards - Updated Y values for new boxes
   { 
-    path: "M 635 310 L 558 310", 
+    path: "M 635 340 L 558 340", // Updated from 310 to 340 to align with the center of the subitems
     color: "#0EA5E9", 
     animationIndex: 11,
     animateMotion: true,
-    dotPosition: { x: "595", y: "310" },
+    dotPosition: { x: "595", y: "340" },
     animationDirection: "left" as const,
     id: "own-stake-to-staking-rewards", 
     renderOrder: "foreground" as const,

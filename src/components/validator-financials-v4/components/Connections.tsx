@@ -5,7 +5,7 @@ import ConnectionLine from './ConnectionLine';
 const Connections: React.FC = () => {
   return (
     <>
-      {/* Inflation to Internal Rewards */}
+      {/* Inflation to Internal Rewards - kept at 115px which is the relative center */}
       <ConnectionLine 
         from={{ top: '115px', left: 'calc(2% + 160px)' }}
         to={{ top: '115px', left: 'calc(26% - 20px)' }}
@@ -13,7 +13,7 @@ const Connections: React.FC = () => {
         delay={1.5}
       />
 
-      {/* Internal Rewards to Total Stake */}
+      {/* Internal Rewards to Total Stake - kept at 115px which is the relative center */}
       <ConnectionLine 
         from={{ top: '115px', left: 'calc(26% + 128px)' }}
         to={{ top: '115px', left: 'calc(50% - 128px)' }}
@@ -21,7 +21,7 @@ const Connections: React.FC = () => {
         delay={1.6}
       />
 
-      {/* Network Costs to Total Stake */}
+      {/* Network Costs to Total Stake - kept at 115px which is the relative center */}
       <ConnectionLine 
         from={{ top: '115px', left: 'calc(74% - 128px)' }}
         to={{ top: '115px', left: 'calc(50% + 128px)' }}
@@ -29,7 +29,7 @@ const Connections: React.FC = () => {
         delay={1.7}
       />
 
-      {/* Deflation to Network Costs */}
+      {/* Deflation to Network Costs - kept at 115px which is the relative center */}
       <ConnectionLine 
         from={{ top: '115px', left: 'calc(98% - 160px)' }}
         to={{ top: '115px', left: 'calc(74% + 20px)' }}
@@ -37,17 +37,17 @@ const Connections: React.FC = () => {
         delay={1.8}
       />
 
-      {/* Total Stake to Block Production */}
+      {/* Total Stake to Block Production - Updated to start from the new Total Stake box position */}
       <ConnectionLine 
-        from={{ top: '170px', left: 'calc(45% - 30px)' }}
+        from={{ top: '185px', left: 'calc(45% - 30px)' }} // Adjusted from 170px to 185px
         to={{ top: '370px', left: 'calc(15% + 100px)' }}
         color="#8B5CF6"
         delay={2.1}
       />
 
-      {/* Total Stake to Profitability */}
+      {/* Total Stake to Profitability - Updated to start from the new Total Stake box position */}
       <ConnectionLine 
-        from={{ top: '170px', left: 'calc(55% + 30px)' }}
+        from={{ top: '185px', left: 'calc(55% + 30px)' }} // Adjusted from 170px to 185px
         to={{ top: '370px', left: 'calc(85% - 100px)' }}
         color="#8B5CF6"
         delay={2.2}
