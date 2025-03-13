@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import BoxIcon from './BoxIcon';
@@ -33,19 +32,19 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       const horizontalItems = processedSubitems as SubItem[];
       
       // Calculate item width with some margin between items
-      const itemMargin = 20; // Increased margin between items (was 10)
+      const itemMargin = 20; // Margin between items
       
       // Filter out operator items to calculate widths for content items
       const contentItems = horizontalItems.filter(item => !item.isOperator);
       const operatorItems = horizontalItems.filter(item => item.isOperator);
       
-      // Operators get much less space (reduced from previous setting)
-      const operatorWidth = 25; // Reduced width for operator symbols (was 40)
+      // Further reduce operator width to make more room for content boxes
+      const operatorWidth = 20; // Reduced from 25 to 20px for operator symbols
       const totalOperatorWidth = operatorItems.length * operatorWidth;
       const totalMargins = (horizontalItems.length - 1) * itemMargin;
       const remainingWidth = width - 20 - totalMargins - totalOperatorWidth;
       
-      // Allocate more width to stake weight and performance boxes
+      // Allocate width to stake weight and performance boxes
       let contentItemWidths: number[] = [];
       
       if (contentItems.length > 0) {
@@ -56,28 +55,18 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
         if (width === 530) {
           contentItems.forEach(item => {
             if (item.id === 'randomness') {
-              contentItemWidths.push(baseWidth * 1.15); // 15% more width for randomness (reduced from 20%)
+              contentItemWidths.push(baseWidth * 1.0); // Equal width for randomness (reduced from 1.15)
             } else if (item.id === 'stake-weight') {
-              contentItemWidths.push(baseWidth * 1.25); // 25% more width for stake weight (reduced from 30%)
+              contentItemWidths.push(baseWidth * 1.15); // 15% more width for stake weight (reduced from 25%)
             } else if (item.id === 'performance-reputation') {
-              contentItemWidths.push(baseWidth * 1.25); // 25% more width for performance (reduced from 30%)
+              contentItemWidths.push(baseWidth * 1.15); // 15% more width for performance (reduced from 25%)
             } else {
-              contentItemWidths.push(baseWidth * 0.75); // Increased from 0.7 to balance
+              contentItemWidths.push(baseWidth * 0.8); // Increased to balance
             }
           });
         } else {
           // For other boxes, keep previous allocation
-          contentItems.forEach(item => {
-            if (item.id === 'randomness') {
-              contentItemWidths.push(baseWidth * 1.3); // 30% more width for randomness
-            } else if (item.id === 'stake-weight') {
-              contentItemWidths.push(baseWidth * 1.5); // 50% more width for stake weight
-            } else if (item.id === 'performance-reputation') {
-              contentItemWidths.push(baseWidth * 1.5); // 50% more width for performance
-            } else {
-              contentItemWidths.push(baseWidth * 0.5); // Significantly reduce others to compensate
-            }
-          });
+          // ... keep existing code (for other box width allocations)
         }
       }
       

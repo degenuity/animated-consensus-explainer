@@ -25,9 +25,8 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id, isHorizontal, isOperator } = item;
   const itemHeight = height || (desc ? 50 : 40);
   
-  // Add horizontal padding for ALL items (not just horizontal ones)
-  // Increased from 5px to 12px for more visible side margins
-  const horizontalPadding = isHorizontal ? 5 : 12;
+  // Reduce horizontal padding for horizontal items to fit more content
+  const horizontalPadding = isHorizontal ? 3 : 12; // Reduced padding for horizontal items from 5px to 3px
   const adjustedWidth = width - (horizontalPadding * 2);
   const adjustedX = x + horizontalPadding;
   
@@ -47,7 +46,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
           height={itemHeight}
         >
           <div className="flex flex-col justify-center h-full text-center">
-            <div className="text-3xl font-normal" style={{ color: itemColor || "#0E7490" }}>{text}</div>
+            <div className="text-2xl font-normal" style={{ color: itemColor || "#0E7490" }}>{text}</div>
           </div>
         </foreignObject>
       </motion.g>
@@ -77,7 +76,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         width={adjustedWidth} 
         height={itemHeight}
       >
-        <div className="flex flex-col justify-center h-full px-4">
+        <div className="flex flex-col justify-center h-full px-3">
           {desc ? (
             <>
               <div className="text-sm font-medium" style={{ color: itemColor || "#3B82F6" }}>
