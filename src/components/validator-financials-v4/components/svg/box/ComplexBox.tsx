@@ -33,14 +33,14 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       const horizontalItems = processedSubitems as SubItem[];
       
       // Calculate item width with some margin between items
-      const itemMargin = 10; // 10px margin between items
+      const itemMargin = 20; // Increased margin between items (was 10)
       
       // Filter out operator items to calculate widths for content items
       const contentItems = horizontalItems.filter(item => !item.isOperator);
       const operatorItems = horizontalItems.filter(item => item.isOperator);
       
       // Operators get less space than content items
-      const operatorWidth = 30; // Fixed width for operator symbols
+      const operatorWidth = 40; // Increased width for operator symbols (was 30)
       const totalOperatorWidth = operatorItems.length * operatorWidth;
       const totalMargins = (horizontalItems.length - 1) * itemMargin;
       const remainingWidth = width - 20 - totalMargins - totalOperatorWidth;
@@ -116,7 +116,8 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
         />
       );
       
-      yOffset += itemHeight;
+      // Increase spacing between items
+      yOffset += itemHeight + 15; // Added 15px extra spacing between items
       
       // Render children if any
       if (item.subItems && item.subItems.length > 0) {

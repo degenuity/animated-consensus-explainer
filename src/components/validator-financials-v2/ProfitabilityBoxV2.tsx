@@ -11,8 +11,8 @@ const ProfitabilityBoxV2 = () => {
         <span className="text-xl text-white">profitability</span>
       </div>
       
-      {/* Using grid with larger gap for more spacing */}
-      <div className="grid grid-cols-3 gap-12 px-6 py-4">
+      {/* Using grid with dramatically larger gap for more spacing */}
+      <div className="grid grid-cols-3 gap-16 px-6 py-4">
         {/* First column */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
@@ -31,7 +31,7 @@ const ProfitabilityBoxV2 = () => {
           transition={{ duration: 0.3, delay: 0.65 }}
           className="flex items-center justify-center"
         >
-          <span className="text-[#8E9196] text-2xl font-normal">+</span>
+          <span className="text-[#8E9196] text-3xl font-normal">+</span>
         </motion.div>
         
         {/* Third column */}

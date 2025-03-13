@@ -11,8 +11,8 @@ const BlockProductionEligibilityBoxV2 = () => {
         <span className="text-xl text-white">block production eligibility</span>
       </div>
       
-      {/* Using grid with larger gap for more spacing */}
-      <div className="grid grid-cols-5 gap-8 px-6 py-4">
+      {/* Using grid with dramatically larger gap for more spacing */}
+      <div className="grid grid-cols-5 gap-12 px-6 py-4">
         {/* First column */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
@@ -31,7 +31,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           transition={{ duration: 0.3, delay: 0.55 }}
           className="flex items-center justify-center"
         >
-          <span className="text-[#0E7490] text-2xl font-normal">×</span>
+          <span className="text-[#0E7490] text-3xl font-normal">×</span>
         </motion.div>
 
         {/* Second column */}
@@ -52,7 +52,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           transition={{ duration: 0.3, delay: 0.65 }}
           className="flex items-center justify-center"
         >
-          <span className="text-[#0E7490] text-2xl font-normal">×</span>
+          <span className="text-[#0E7490] text-3xl font-normal">×</span>
         </motion.div>
         
         {/* Third column */}

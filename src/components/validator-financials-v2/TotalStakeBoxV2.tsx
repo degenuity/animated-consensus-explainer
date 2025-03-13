@@ -12,14 +12,14 @@ const TotalStakeBoxV2 = () => {
         <span className="text-xl text-white">total stake</span>
       </div>
       
-      {/* Content section */}
-      <div className="px-4 py-3 flex flex-col space-y-6">
+      {/* Content section with significantly increased spacing */}
+      <div className="px-4 py-3 flex flex-col">
         {/* First item */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.3 }}
-          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white"
+          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-10"
         >
           delegated stake
         </motion.div>
