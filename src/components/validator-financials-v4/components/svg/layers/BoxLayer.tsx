@@ -19,7 +19,7 @@ const BoxLayer = forwardRef<SVGSVGElement, BoxLayerProps>(({ boxes }, ref) => {
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0"
+      className="absolute top-0 left-0 overflow-visible"
     >
       {boxes.map((box, index) => (
         <BoxComponent

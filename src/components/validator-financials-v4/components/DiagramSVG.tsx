@@ -11,8 +11,10 @@ const DiagramSVG = () => {
   const isMobile = useIsMobile();
   const svgRef = useDiagramDebug();
   
-  // Use mobile-specific classes to prevent cropping with responsive scaling
-  const containerClass = "w-full h-full relative overflow-visible px-1 sm:px-2 md:px-3 lg:px-4";
+  // Use responsive classes based on device type
+  const containerClass = isMobile 
+    ? "w-full h-full relative overflow-visible"  // Mobile - ensure overflow visibility
+    : "w-full h-full relative"; // Desktop - standard display
   
   return (
     <div className={containerClass}>

@@ -26,11 +26,17 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="max-w-7xl mx-auto px-0 py-1 sm:py-2 md:py-3 relative w-full flex flex-col items-center">
+      <div className="max-w-7xl mx-auto px-0 py-1 sm:py-2 md:py-3 relative w-full flex flex-col items-center overflow-visible">
         <Title />
         
-        {/* Added overflow-visible and increased horizontal margins */}
-        <div className="relative w-[95%] max-w-full mx-auto overflow-visible h-[370px] sm:h-[410px] md:h-[440px] lg:h-[480px] flex items-center justify-center">
+        {/* CRITICAL: Make sure the entire diagram container is visible and properly sized */}
+        <div className={`
+          relative w-full max-w-full mx-auto 
+          overflow-visible 
+          h-[370px] sm:h-[410px] md:h-[440px] lg:h-[480px] 
+          flex items-center justify-center
+          ${isMobile ? 'px-10' : 'px-2'}
+        `}>
           <DiagramSVG key={animationKey} />
         </div>
       </div>

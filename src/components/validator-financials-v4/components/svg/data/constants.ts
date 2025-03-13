@@ -3,30 +3,21 @@
 export const viewBoxWidth = 1500;
 export const viewBoxHeight = 850;
 
-// Mobile zoom factor
-export const mobileFactor = 1.4; // Keeping this perfect zoom factor for mobile
+// Desktop viewBox with NO padding to ensure full zoom on desktop
+export const desktopViewBox = `0 0 ${viewBoxWidth} ${viewBoxHeight}`;
 
-// Calculate dimensions needed to ensure no cropping
-export const mobileViewBoxWidth = viewBoxWidth / mobileFactor;
-export const mobileViewBoxHeight = viewBoxHeight / mobileFactor;
+// Mobile specific settings
+// For mobile, we need to:
+// 1. Show the ENTIRE diagram with no cropping
+// 2. Calculate a viewBox that ensures all elements are visible
 
-// Set safe margins to prevent ANY cropping
-// These values ensure the diagram is centered and has sufficient margins
-export const safeMarginX = 100;
-export const safeMarginY = 100;
+// Calculate mobile viewBox with extreme safety margins to prevent ANY cropping
+export const mobileViewBoxWidth = viewBoxWidth + 300; // Much wider to show EVERYTHING
+export const mobileViewBoxHeight = viewBoxHeight + 100;
 
-// Calculate viewBox coordinates with safety margins
-// Center point calculations
-export const centerX = viewBoxWidth / 2;
-export const centerY = viewBoxHeight / 2;
+// Position the mobile viewBox to be centered but shifted slightly to improve visibility
+export const mobileViewBoxX = -150; // Start 150px to the left of diagram
+export const mobileViewBoxY = -50;  // Start 50px above diagram
 
-// Calculate mobile viewBox start coordinates with safety margins
-// The extra offset values ensure inflation/deflation boxes aren't cropped
-export const mobileViewBoxX = centerX - (mobileViewBoxWidth / 2) - 50; // Extra left margin
-export const mobileViewBoxY = centerY - (mobileViewBoxHeight / 2) - 50; // Extra top margin
-
-// Final mobile viewBox with safety margins
-export const zoomedViewBox = `${mobileViewBoxX} ${mobileViewBoxY} ${mobileViewBoxWidth + safeMarginX} ${mobileViewBoxHeight + safeMarginY}`;
-
-// Desktop viewBox with safety margins to ensure no cropping
-export const desktopViewBox = `-50 -50 ${viewBoxWidth + 100} ${viewBoxHeight + 100}`;
+// Final mobile viewBox with VERY generous margins
+export const zoomedViewBox = `${mobileViewBoxX} ${mobileViewBoxY} ${mobileViewBoxWidth} ${mobileViewBoxHeight}`;
