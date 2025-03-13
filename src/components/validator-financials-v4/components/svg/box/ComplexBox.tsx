@@ -117,7 +117,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       );
       
       // Increase spacing between items
-      yOffset += itemHeight + 15; // Added 15px extra spacing between items
+      yOffset += itemHeight + 18; // Increased spacing between items from 15px to 18px
       
       // Render children if any
       if (item.subItems && item.subItems.length > 0) {

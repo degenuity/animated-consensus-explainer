@@ -28,7 +28,7 @@ export const boxes = [
     x: 320,
     y: 180,
     width: 260,
-    height: 180,
+    height: 220, // Increased height from 180 to 220 to fit all subitems
     title: "internal rewards",
     icon: "internal-rewards" as const,
     color: "#10B981",
@@ -83,7 +83,7 @@ export const boxes = [
   {
     x: 320,
     y: 500,
-    width: 520,  // Increased width from 460 to 520 to accommodate operators
+    width: 520,
     height: 140,
     title: "block production eligibility",
     icon: "block-production" as const,
@@ -97,8 +97,8 @@ export const boxes = [
   {
     x: 880,
     y: 500,
-    width: 350,  // Increased from 280 to 350 to provide more space for the boxes
-    height: 140,  // Reduced height from 180 to 140 to match the block production box
+    width: 350,
+    height: 140,
     title: "profitability",
     icon: "profitability" as const,
     color: "#3B82F6",

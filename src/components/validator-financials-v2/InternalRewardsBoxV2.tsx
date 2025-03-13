@@ -19,7 +19,7 @@ const InternalRewardsBoxV2 = () => {
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3, delay: 0.3 }}
-          className="border border-green-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-10"
+          className="border border-green-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
         >
           commission
         </motion.div>
@@ -29,7 +29,7 @@ const InternalRewardsBoxV2 = () => {
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="border border-green-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-10"
+          className="border border-green-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
         >
           staking rewards
         </motion.div>
