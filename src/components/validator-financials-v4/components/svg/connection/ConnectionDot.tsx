@@ -31,6 +31,14 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   }
   
   if (animated && path) {
+    // Check if the path starts with M 0 0 or similar origin point patterns
+    // This prevents the rogue dot that appears at (0,0)
+    const isPathStartingAtOrigin = path.match(/M\s+0\s+0/) || path.match(/M\s+0,\s*0/);
+    if (isPathStartingAtOrigin) {
+      console.warn('Skipping dot with path starting at origin:', path);
+      return null;
+    }
+    
     return (
       <g>
         <circle
