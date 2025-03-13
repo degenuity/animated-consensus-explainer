@@ -23,22 +23,18 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
     <motion.div 
       className="w-full relative overflow-visible bg-[#0d111c] rounded-xl flex flex-col items-center justify-start"
       style={{
-        minHeight: 'min(650px, 90vh)', // Dynamic scaling with viewport height
-        maxHeight: 'max(450px, 90vh)'  // Ensures minimum height on small screens
+        height: isMobile ? '500px' : '650px', // Fixed heights based on device size
       }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="max-w-7xl mx-auto w-full py-1 sm:py-2 md:py-3 relative flex flex-col items-center overflow-visible">
+      <div className="max-w-7xl mx-auto w-full py-1 sm:py-2 md:py-3 relative flex flex-col items-center overflow-visible h-full">
         <Title />
         
-        {/* Diagram container with responsive height */}
+        {/* Diagram container taking remaining height */}
         <div 
-          className="relative w-full overflow-visible flex items-center justify-center"
-          style={{
-            height: isMobile ? 'min(450px, 80vh)' : 'min(600px, 85vh)'
-          }}
+          className="relative w-full overflow-visible flex items-center justify-center flex-1"
         >
           <DiagramSVG key={animationKey} />
         </div>

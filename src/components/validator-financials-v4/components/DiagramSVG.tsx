@@ -13,7 +13,7 @@ const DiagramSVG = () => {
   const containerClasses = [
     "w-full h-full relative", 
     "overflow-visible", // Essential to prevent cropping
-    "p-0" // No padding to maximize diagram size
+    "flex items-center justify-center" // Center the diagram in available space
   ].join(" ");
   
   return (
