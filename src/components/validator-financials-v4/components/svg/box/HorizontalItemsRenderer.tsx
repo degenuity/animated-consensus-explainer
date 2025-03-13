@@ -50,11 +50,11 @@ const HorizontalItemsRenderer: React.FC<HorizontalItemsRendererProps> = ({
       
       contentItems.forEach(item => {
         if (item.id === 'randomness') {
-          contentItemWidths.push(baseWidth * 0.9);
+          contentItemWidths.push(baseWidth * 1.0); // Increased from 0.9 to 1.0 to prevent text wrapping
         } else if (item.id === 'stake-weight') {
-          contentItemWidths.push(baseWidth * 1.1);
+          contentItemWidths.push(baseWidth * 1.05); // Slightly reduced from 1.1 to 1.05 to compensate
         } else if (item.id === 'performance-reputation') {
-          contentItemWidths.push(baseWidth * 1.0);
+          contentItemWidths.push(baseWidth * 0.95); // Slightly reduced from 1.0 to 0.95 to compensate
         } else {
           contentItemWidths.push(baseWidth * 0.8);
         }
