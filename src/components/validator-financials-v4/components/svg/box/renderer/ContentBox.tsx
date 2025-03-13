@@ -34,6 +34,17 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   // Check if this is the block rewards parent or a nested item
   const isBlockRewards = id === "block-rewards";
   const isPriorityFeeOrMEV = id === "priority-fees" || id === "mev";
+  const isBaseFees = id === "base-fees";
+  
+  // Log base fees box coordinates for debugging
+  if (isBaseFees) {
+    console.log(`Base fees box: x=${adjustedX}, y=${y + yOffset}, height=${itemHeight}, bottom=${y + yOffset + itemHeight}`);
+  }
+  
+  // Log block rewards box coordinates for debugging
+  if (isBlockRewards) {
+    console.log(`Block rewards box: x=${adjustedX}, y=${y + yOffset}, height=${itemHeight}, top=${y + yOffset}`);
+  }
   
   // Make the block rewards text size match other header sizes - changed from xs to sm
   const textSize = isBlockRewards ? "text-sm" : (isNested ? "text-sm" : "text-sm");

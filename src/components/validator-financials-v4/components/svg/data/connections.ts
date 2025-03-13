@@ -86,13 +86,13 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Base Fee bottom to Block Rewards center - Adjusted to start at y=220 as per the image
+  // Base Fee bottom to Block Rewards center - Using 200 for the start y value (will adjust based on logging)
   { 
-    path: "M 1090 220 L 1090 260", 
+    path: "M 1090 200 L 1090 260", 
     color: "#EAB308", 
     animationIndex: 7,
     animateMotion: true,
-    dotPosition: { x: "1090", y: "240" },
+    dotPosition: { x: "1090", y: "230" },
     id: "base-fee-bottom-to-block-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 1.5
@@ -101,4 +101,3 @@ export const connectionPaths = [
   // Removed: Internal Rewards to Total Validator Rewards line
   // Removed: Any connection from Block Rewards to Total Validator Rewards
 ];
-
