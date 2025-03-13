@@ -52,12 +52,12 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
         // Base width calculation
         const baseWidth = remainingWidth / contentItems.length;
         
-        // Allocate widths, giving slightly more to the randomness box
+        // Allocate widths, giving significantly more to the randomness box
         contentItems.forEach(item => {
           if (item.id === 'randomness') {
-            contentItemWidths.push(baseWidth * 1.15); // 15% more width for randomness
+            contentItemWidths.push(baseWidth * 1.3); // 30% more width for randomness (increased from 15% to 30%)
           } else {
-            contentItemWidths.push(baseWidth * 0.925); // Slightly reduce others to compensate
+            contentItemWidths.push(baseWidth * 0.875); // Further reduce others to compensate (was 0.925)
           }
         });
       }

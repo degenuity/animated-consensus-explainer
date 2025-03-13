@@ -79,11 +79,11 @@ export const boxes = [
     simpleStyle: true
   },
   
-  // Block Production Box - increased width to accommodate operators and padding
+  // Block Production Box - increased width to accommodate wider randomness box
   {
     x: 320,
     y: 500,
-    width: 520,
+    width: 550, // Increased from 520 to 550 for more space
     height: 140,
     title: "block production eligibility",
     icon: "block-production" as const,
