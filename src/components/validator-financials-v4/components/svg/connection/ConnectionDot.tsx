@@ -17,10 +17,19 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   cx, 
   cy, 
   radius = 5,
-  animated = true,
+  animated = false,
   animationDuration = 1.5
 }) => {  
-  // For animated dots with paths
+  // Don't render anything if the path is missing when required
+  if (animated && !path) {
+    return null;
+  }
+  
+  // For static dots, don't render if coordinates are missing
+  if (!animated && (!cx || !cy)) {
+    return null;
+  }
+  
   if (animated && path) {
     return (
       <g>
@@ -36,7 +45,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
           />
           <animate
             attributeName="r"
-            values={`${radius * 0.6};${radius * 1.2};${radius * 0.6}`}
+            values="3;6;3"
             dur="0.8s"
             repeatCount="indefinite"
           />
@@ -48,7 +57,6 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
           />
         </circle>
         
-        {/* Adding a second trailing dot for visual effect */}
         <circle
           r={radius * 0.8}
           fill={color}
@@ -67,18 +75,12 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     );
   }
   
-  // For static dots
-  if (cx && cy) {
-    return (
-      <circle
-        cx={cx}
-        cy={cy}
-        r={radius}
-        fill={color}
-      />
-    );
-  }
-  
-  // If we have no valid parameters, return null
-  return null;
+  return (
+    <circle
+      cx={cx}
+      cy={cy}
+      r={radius}
+      fill={color}
+    />
+  );
 };

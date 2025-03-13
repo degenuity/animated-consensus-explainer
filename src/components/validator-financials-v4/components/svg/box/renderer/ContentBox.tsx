@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { SubItem } from '../types';
 
@@ -27,7 +27,6 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   hasPlus
 }) => {
   const { text, desc, id, isHorizontal } = item;
-  const [isHighlighted, setIsHighlighted] = useState(false);
   
   // Use the item's color directly
   const strokeColor = item.color || "#3B82F6";
@@ -51,37 +50,6 @@ const ContentBox: React.FC<ContentBoxProps> = ({
     isOwnStake || 
     isPriorityFeeOrMEV || 
     isBaseFees;
-  
-  // Listen to global events for dot collisions
-  useEffect(() => {
-    // Debug log
-    console.log(`ContentBox mounted: ${id}`);
-    
-    // Define a custom event listener for dot collisions
-    const handleDotCollision = (event: CustomEvent) => {
-      // Check if this box's ID matches the target in the event
-      if (event.detail.targetId === id) {
-        // Debug log for matched collision
-        console.log(`✨ HIGHLIGHT TRIGGERED for item: ${id}, color: ${strokeColor}`);
-        
-        // Trigger highlight animation
-        setIsHighlighted(true);
-        
-        // Reset after animation completes
-        setTimeout(() => {
-          setIsHighlighted(false);
-        }, 500); // Slightly shorter duration
-      }
-    };
-
-    // Add event listener
-    window.addEventListener('dotCollision', handleDotCollision as EventListener);
-    
-    // Clean up
-    return () => {
-      window.removeEventListener('dotCollision', handleDotCollision as EventListener);
-    };
-  }, [id, strokeColor]);
   
   // Special logging for commission box
   if (isCommission) {
@@ -178,39 +146,17 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   // Add padding to align text properly
   const paddingTop = isBlockRewards ? "pt-2" : "";
 
-  console.log(`Rendering ContentBox for: ${id} with color: ${strokeColor}, yOffset: ${yOffset}`);
-
-  // Define more subtle highlight animation colors
-  const getHighlightColor = () => {
-    if (strokeColor.includes('10B981')) return "#0D9488"; // More subtle teal for green boxes
-    if (strokeColor.includes('3B82F6')) return "#6366F1"; // More subtle indigo for blue boxes
-    if (strokeColor.includes('EAB308')) return "#F59E0B"; // More subtle amber for yellow boxes
-    return "#C026D3"; // More subtle violet/purple fallback
-  };
-
-  // Fix: Define the displayText variable using the text from the item
-  // For MEV we want to display it in uppercase
+  // Display "MEV" in uppercase for the MEV box
   const displayText = id === "mev" ? "MEV" : text;
+
+  console.log(`Rendering ContentBox for: ${id} with color: ${strokeColor}, yOffset: ${yOffset}`);
 
   return (
     <motion.g
       initial={{ opacity: 0 }}
-      animate={{ 
-        opacity: 1,
-        scale: isHighlighted ? [1, 1.01, 1] : 1 // Much more subtle scale effect
-      }}
-      transition={{ 
-        delay: 1.2 + index * 0.1,
-        scale: {
-          duration: 0.3, // Shorter duration
-          ease: "easeInOut",
-          times: [0, 0.5, 1]
-        }
-      }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.2 + index * 0.1 }}
       data-item-id={id}
-      style={{
-        transformOrigin: 'center'
-      }}
     >
       <rect
         x={adjustedX}
@@ -219,16 +165,10 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         height={itemHeight}
         rx="4"
         fill="transparent"
-        stroke={isHighlighted ? getHighlightColor() : strokeColor}
-        strokeWidth={isHighlighted ? "1.8" : "1.5"} // More subtle width difference
+        stroke={strokeColor}
+        strokeWidth="1.5"
         data-item-rect={id}
-        // Add subtle animation when highlighted
-        style={{
-          transition: 'stroke 0.2s ease, stroke-width 0.2s ease',
-          filter: isHighlighted ? 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.25))' : 'none' // Much more subtle glow
-        }}
       />
-      
       <foreignObject 
         x={adjustedX} 
         y={y + yOffset} 
@@ -240,7 +180,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
           {desc ? (
             <>
               <div className={`${textSize} ${fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
-                {displayText}
+                {id === "mev" ? "MEV" : text}
               </div>
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>

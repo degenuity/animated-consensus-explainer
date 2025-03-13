@@ -1,10 +1,11 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
   ConnectionLine,
 } from '.';
+// Removed ExplanationComponent import
+// Removed Logo import completely
 
 import { viewBoxWidth, viewBoxHeight } from './data/constants';
 import { boxes } from './data/boxes';
@@ -14,29 +15,103 @@ const DiagramSVG = () => {
   const isMobile = useIsMobile();
   const svgRef = useRef<SVGSVGElement>(null);
   
-  // Enhanced useEffect for debugging all box positions and monitoring collision events
+  // Enhanced useEffect for debugging all box positions
   useEffect(() => {
     if (svgRef.current) {
-      console.log("DiagramSVG mounted - debugging enabled");
+      console.log("DiagramSVG mounted - checking for block production boxes");
       
-      // Log SVG dimensions for debugging
-      const svgRect = svgRef.current.getBoundingClientRect();
-      console.log("SVG dimensions:", {
-        width: svgRect.width,
-        height: svgRect.height,
-        viewBox: `0 0 ${viewBoxWidth} ${viewBoxHeight}`
-      });
+      // Look for all subitems to identify stake weight and randomness
+      const allGroups = svgRef.current.querySelectorAll('g');
       
-      // Add global listener for all collision events to debug
-      const handleAnyCollision = (event: CustomEvent) => {
-        console.log("🎯 Global collision detected:", event.detail);
-      };
+      // Find all items specifically in block production
+      const blockProductionGroup = Array.from(allGroups).find(g => 
+        g.getAttribute('data-id') === 'block-production-eligibility'
+      );
       
-      window.addEventListener('dotCollision', handleAnyCollision as EventListener);
+      if (blockProductionGroup) {
+        console.log("Found block production group:", blockProductionGroup);
+        
+        // Try to find the stake weight and randomness boxes
+        const stakeWeightBox = blockProductionGroup.querySelector('[data-item-id="stake-weight"]');
+        const randomnessBox = blockProductionGroup.querySelector('[data-item-id="randomness"]');
+        
+        if (stakeWeightBox) {
+          const stakeWeightRect = stakeWeightBox.getBoundingClientRect();
+          const svgRect = svgRef.current.getBoundingClientRect();
+          
+          // Calculate relative position within SVG
+          const relativeX = stakeWeightRect.left - svgRect.left;
+          const relativeY = stakeWeightRect.top - svgRect.top;
+          
+          // Calculate the SVG coordinate based on viewBox
+          const svgX = (relativeX / svgRect.width) * viewBoxWidth;
+          const svgY = (relativeY / svgRect.height) * viewBoxHeight;
+          
+          console.log('STAKE WEIGHT BOX COORDS:', {
+            id: 'stake-weight',
+            clientRect: {
+              top: stakeWeightRect.top,
+              left: stakeWeightRect.left,
+              width: stakeWeightRect.width,
+              height: stakeWeightRect.height
+            },
+            svgCoordinates: {
+              x: svgX,
+              y: svgY,
+              centerX: svgX + (stakeWeightRect.width / svgRect.width) * viewBoxWidth / 2
+            }
+          });
+        } else {
+          console.log("Stake weight box not found in DOM");
+        }
+        
+        if (randomnessBox) {
+          const randomnessRect = randomnessBox.getBoundingClientRect();
+          const svgRect = svgRef.current.getBoundingClientRect();
+          
+          // Calculate relative position within SVG
+          const relativeX = randomnessRect.left - svgRect.left;
+          const relativeY = randomnessRect.top - svgRect.top;
+          
+          // Calculate the SVG coordinate based on viewBox
+          const svgX = (relativeX / svgRect.width) * viewBoxWidth;
+          const svgY = (relativeY / svgRect.height) * viewBoxHeight;
+          
+          console.log('RANDOMNESS BOX COORDS:', {
+            id: 'randomness',
+            clientRect: {
+              top: randomnessRect.top,
+              left: randomnessRect.left,
+              width: randomnessRect.width,
+              height: randomnessRect.height
+            },
+            svgCoordinates: {
+              x: svgX,
+              y: svgY,
+              centerX: svgX + (randomnessRect.width / svgRect.width) * viewBoxWidth / 2
+            }
+          });
+        } else {
+          console.log("Randomness box not found in DOM");
+        }
+      }
       
-      return () => {
-        window.removeEventListener('dotCollision', handleAnyCollision as EventListener);
-      };
+      // Find exact positions of all boxes in the block production section
+      const blockProductionBox = boxes.find(box => box.title === "block production eligibility");
+      if (blockProductionBox && blockProductionBox.subitems) {
+        console.log("Block production box definition:", {
+          position: { x: blockProductionBox.x, y: blockProductionBox.y },
+          dimensions: { width: blockProductionBox.width, height: blockProductionBox.height },
+          subitems: blockProductionBox.subitems.map(item => {
+            if (typeof item === 'string') return item;
+            return {
+              id: item.id,
+              text: item.text,
+              isOperator: item.isOperator
+            };
+          })
+        });
+      }
     }
   }, []);
   
@@ -64,12 +139,6 @@ const DiagramSVG = () => {
             0% { transform: translateY(-20px); }
             100% { transform: translateY(20px); }
           }
-          
-          /* Add pulse animation for debug purposes */
-          @keyframes pulse-highlight {
-            0%, 100% { stroke-width: 1.5; filter: none; }
-            50% { stroke-width: 3; filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)); }
-          }
         `}
       </style>
       
@@ -86,8 +155,10 @@ const DiagramSVG = () => {
             key={`connection-bg-${connection.id}-${index}`}
             {...connection}
             animationIndex={connection.animationIndex || index}
-            animateMotion={connection.animateMotion !== false} // Ensure true by default
-            animationDuration={connection.animationDuration || 1.5}
+            dotPosition={connection.dotPosition}
+            animationDirection={connection.animationDirection}
+            animateMotion={connection.animateMotion}
+            animationDuration={connection.animationDuration}
           />
         ))}
       </svg>
@@ -106,7 +177,6 @@ const DiagramSVG = () => {
             key={`box-${index}`}
             {...box}
             data-id={box.title.replace(/\s+/g, '-')}
-            animationIndex={index}
           />
         ))}
       </svg>
@@ -124,8 +194,10 @@ const DiagramSVG = () => {
             key={`connection-fg-${connection.id}-${index}`}
             {...connection}
             animationIndex={connection.animationIndex || index}
-            animateMotion={connection.animateMotion !== false} // Ensure true by default
-            animationDuration={connection.animationDuration || 1.5}
+            dotPosition={connection.dotPosition}
+            animationDirection={connection.animationDirection}
+            animateMotion={connection.animateMotion}
+            animationDuration={connection.animationDuration}
           />
         ))}
       </svg>
