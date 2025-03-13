@@ -88,13 +88,13 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - UPDATED with exact coordinates from debug logs
+  // Delegated Stake to Commission - Updated based on the screenshot
   { 
-    path: "M 650 290 L 450 290", 
+    path: "M 650 250 L 450 250", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
-    dotPosition: { x: "550", y: "290" },
+    dotPosition: { x: "550", y: "250" },
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
