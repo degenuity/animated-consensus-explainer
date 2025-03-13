@@ -14,6 +14,9 @@ export const useDiagramDebug = () => {
       const totalStakeBox = boxes.find(box => box.title === "total stake");
       if (totalStakeBox) {
         console.log("Total stake box definition:", totalStakeBox);
+        // Calculate and log the center X position
+        const centerX = totalStakeBox.x + (totalStakeBox.width / 2);
+        console.log(`Total stake box center X: ${centerX}`);
       }
 
       // Try to find all subitems within boxes
@@ -56,36 +59,50 @@ export const useDiagramDebug = () => {
               }
             }
           });
-        } else {
-          console.log("Delegated stake element not found, searching in all groups...");
+        }
+        
+        // Look for stake weight specifically
+        const stakeWeightElement = svgRef.current.querySelector('[data-item-id="stake-weight"]');
+        if (stakeWeightElement) {
+          const rect = stakeWeightElement.getBoundingClientRect();
+          const svgRect = svgRef.current.getBoundingClientRect();
           
-          // Search through all groups to find anything with delegated stake
-          allGroups.forEach(group => {
-            const text = group.textContent || '';
-            if (text.toLowerCase().includes('delegated stake')) {
-              console.log("Found possible delegated stake container:", group);
-              const rect = group.getBoundingClientRect();
-              const svgRect = svgRef.current.getBoundingClientRect();
-              
-              // Calculate relative position
-              const relativeX = rect.left - svgRect.left;
-              const relativeY = rect.top - svgRect.top;
-              
-              // Calculate the SVG coordinate
-              const svgX = (relativeX / svgRect.width) * viewBoxWidth;
-              const svgY = (relativeY / svgRect.height) * viewBoxHeight;
-              
-              console.log('Possible delegated stake position:', {
-                text: text,
-                svgCoordinates: {
-                  x: svgX,
-                  y: svgY,
-                  width: (rect.width / svgRect.width) * viewBoxWidth,
-                  height: (rect.height / svgRect.height) * viewBoxHeight
-                }
-              });
+          // Calculate relative position within SVG
+          const relativeX = rect.left - svgRect.left;
+          const relativeY = rect.top - svgRect.top;
+          
+          // Calculate the SVG coordinate
+          const svgWidth = svgRect.width;
+          const svgHeight = svgRect.height;
+          
+          const svgX = (relativeX / svgWidth) * viewBoxWidth;
+          const svgY = (relativeY / svgHeight) * viewBoxHeight;
+          
+          // Calculate center X position
+          const centerX = svgX + ((rect.width / svgWidth) * viewBoxWidth) / 2;
+          
+          console.log('STAKE WEIGHT EXACT COORDINATES:', {
+            id: 'stake-weight',
+            clientRect: {
+              top: rect.top,
+              left: rect.left,
+              width: rect.width,
+              height: rect.height
+            },
+            svgCoordinates: {
+              x: svgX,
+              y: svgY,
+              width: (rect.width / svgWidth) * viewBoxWidth,
+              height: (rect.height / svgHeight) * viewBoxHeight,
+              centerX: centerX,
+              topCenter: {
+                x: centerX,
+                y: svgY
+              }
             }
           });
+        } else {
+          console.log("Stake weight element not found, searching in all groups...");
         }
       }, 500);
     }

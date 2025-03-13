@@ -37,9 +37,9 @@ export const boxes = [
     borderColor: "#10B981"
   },
   
-  // Total Stake Box - Moved to the left to align with stake weight box
+  // Total Stake Box - Aligned with center of stake weight box
   {
-    x: 585, // Modified from 650 to 585 to align with stake weight box
+    x: 635, // Centered at approximately 763.7 (635 + 260/2 = 765)
     y: 180,
     width: 260,
     height: 160,
