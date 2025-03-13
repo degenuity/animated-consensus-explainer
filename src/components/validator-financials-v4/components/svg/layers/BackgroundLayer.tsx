@@ -33,8 +33,6 @@ const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) =>
           color={connection.color}
           animationIndex={connection.animationIndex || index}
           dotPosition={connection.dotPosition}
-          label={connection.label}
-          labelPosition={connection.labelPosition}
           animationDirection={connection.animationDirection}
           animateMotion={connection.animateMotion}
           animationDuration={connection.animationDuration}
