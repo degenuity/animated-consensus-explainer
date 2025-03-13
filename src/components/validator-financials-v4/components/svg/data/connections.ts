@@ -39,10 +39,10 @@ export const connectionPaths = [
   
   // Line 4: Total Stake to Stake Weight - Updated with precise coordinates
   { 
-    path: "M 700 350 L 700 520 L 450 520", 
+    path: "M 713 350 L 713 385 L 206 412", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "570", y: "520" },
+    dotPosition: { x: "450", y: "400" },
     animateMotion: true,
     animationDirection: "left" as const,
     id: "total-stake-to-stake-weight",

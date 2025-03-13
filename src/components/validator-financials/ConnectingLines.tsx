@@ -115,8 +115,8 @@ const ConnectingLines = () => (
       />
     </div>
 
-    {/* Total Stake to Block Production Eligibility - vertical */}
-    <div className="absolute top-[570px] left-[50%] h-[130px] w-[2px] bg-blue-500/80 transform -translate-x-1/2">
+    {/* Total Stake to Block Production Eligibility - vertical - Updated with exact coordinates */}
+    <div className="absolute top-[380px] left-[713px] h-[130px] w-[2px] bg-blue-500/80 transform -translate-x-1/2">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-blue-400"
         animate={{ 
