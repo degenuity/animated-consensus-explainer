@@ -3,7 +3,7 @@ import React from 'react';
 import { viewBoxWidth, viewBoxHeight } from '../data/constants';
 import { connectionPaths } from '../data/connections';
 import ConnectionLine from '../connection/ConnectionLine';
-import Logo from '../Logo';
+// Logo import removed
 
 interface BackgroundLayerProps {
   connectionPaths: typeof connectionPaths;
@@ -21,7 +21,7 @@ const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) =>
       preserveAspectRatio="xMidYMid meet"
       className="absolute top-0 left-0"
     >
-      <Logo />
+      {/* Logo component removed */}
       
       {backgroundConnections.map((connection, index) => (
         <ConnectionLine

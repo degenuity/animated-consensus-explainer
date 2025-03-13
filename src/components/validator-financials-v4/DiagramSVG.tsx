@@ -1,11 +1,10 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
   ConnectionLine,
   // ExplanationComponent removed from here
-  Logo
+  // Logo removed from here
 } from './components/svg';
 import { viewBoxWidth, viewBoxHeight } from './components/svg/data/constants';
 import { boxes } from './components/svg/data/boxes';
@@ -126,7 +125,6 @@ const DiagramSVG = () => {
         `}
       </style>
       
-      {/* Create separate SVGs for each layer */}
       {/* Background SVG - Contains all background connections and elements */}
       <svg
         width="100%"
@@ -135,8 +133,7 @@ const DiagramSVG = () => {
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
-        {/* ExplanationComponent removed from here */}
-        <Logo />
+        {/* Both ExplanationComponent and Logo removed from here */}
         
         {backgroundConnections.map((connection, index) => (
           <ConnectionLine

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
@@ -6,7 +5,8 @@ import {
   ConnectionLine,
 } from '.';
 // Removed ExplanationComponent import
-import Logo from './Logo';
+// Removed Logo import
+
 import { viewBoxWidth, viewBoxHeight } from './data/constants';
 import { boxes } from './data/boxes';
 import { connectionPaths } from './data/connections';
@@ -150,9 +150,6 @@ const DiagramSVG = () => {
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
-        {/* Removed ExplanationComponent here */}
-        <Logo />
-        
         {backgroundConnections.map((connection, index) => (
           <ConnectionLine
             key={`connection-bg-${connection.id}-${index}`}
