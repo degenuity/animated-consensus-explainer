@@ -25,10 +25,11 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   const { text, desc, color: itemColor, hasPlus, isHeader, isSubHeader, id, isHorizontal, isOperator } = item;
   const itemHeight = height || (desc ? 50 : 40);
   
-  // Add horizontal padding when items are displayed horizontally
-  const horizontalPadding = isHorizontal ? 5 : 0;
-  const adjustedWidth = isHorizontal ? width - (horizontalPadding * 2) : width;
-  const adjustedX = isHorizontal ? x + horizontalPadding : x;
+  // Add horizontal padding for ALL items (not just horizontal ones)
+  // Increased from 5px to 12px for more visible side margins
+  const horizontalPadding = isHorizontal ? 5 : 12;
+  const adjustedWidth = width - (horizontalPadding * 2);
+  const adjustedX = x + horizontalPadding;
   
   // For operator symbols (×), use a different style
   if (isOperator) {
@@ -107,3 +108,4 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
 };
 
 export default SubItemRenderer;
+
