@@ -80,19 +80,19 @@ export const connectionPaths = [
     color: "#F97316", 
     animationIndex: 6,
     animateMotion: true,
-    dotPosition: { x: "1020", y: "495" }, // Added explicit dot position
+    dotPosition: { x: "1020", y: "495" }, 
     id: "block-rewards-to-profitability",
     renderOrder: "background" as const,
     animationDuration: 2.5
   },
   
-  // Base Fee bottom to Block Rewards center - Now in foreground, with adjusted path
+  // Base Fee bottom to Block Rewards center - Now with corrected path
   { 
-    path: "M 1090 200 L 1090 230", 
+    path: "M 1090 200 L 1090 260", 
     color: "#EAB308", 
     animationIndex: 7,
     animateMotion: true,
-    dotPosition: { x: "1090", y: "215" },
+    dotPosition: { x: "1090", y: "230" },
     id: "base-fee-bottom-to-block-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 1.5

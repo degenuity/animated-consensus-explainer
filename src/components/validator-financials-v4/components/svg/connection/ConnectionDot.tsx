@@ -20,14 +20,9 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animated = false,
   animationDuration = 1.5
 }) => {
-  // Add logging for the block-rewards-to-profitability path
-  if (path === "M 1090 320 L 1090 420 L 950 570") {
-    console.log("ConnectionDot for block-rewards-to-profitability with:", { animated, animationDuration });
-  }
-  
-  // Log the base-fee-bottom-to-block-rewards path to diagnose issue
-  if (path === "M 1090 200 L 1090 230") {
-    console.log("Rendering base-fee-bottom connection with:", { animated, animationDuration });
+  // Add logging for the specific base-fee-bottom-to-block-rewards path
+  if (path === "M 1090 200 L 1090 260") {
+    console.log("ConnectionDot for base-fee-bottom-to-block-rewards with:", { animated, animationDuration, path });
   }
   
   if (animated && path) {
