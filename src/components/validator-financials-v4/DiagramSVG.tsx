@@ -27,21 +27,28 @@ const DiagramSVG = () => {
         const relativeX = rect.left - svgRect.left;
         const relativeY = rect.top - svgRect.top;
         
+        // Calculate the SVG coordinate based on viewBox and client rect
+        const svgWidth = svgRect.width;
+        const svgHeight = svgRect.height;
+        
+        const svgX = (relativeX / svgWidth) * viewBoxWidth;
+        const svgY = (relativeY / svgHeight) * viewBoxHeight;
+        
         console.log('Stake weight box exact coordinates:', {
           id: 'stake-weight',
           svgViewBox: { width: viewBoxWidth, height: viewBoxHeight },
-          domRect: {
+          clientRect: {
             top: rect.top,
             left: rect.left,
             width: rect.width,
             height: rect.height
           },
-          svgRelative: {
-            x: relativeX,
-            y: relativeY,
+          svgCoordinates: {
+            x: svgX,
+            y: svgY,
             topCenter: {
-              x: relativeX + rect.width / 2,
-              y: relativeY
+              x: svgX + (rect.width / svgWidth) * viewBoxWidth / 2,
+              y: svgY
             }
           }
         });

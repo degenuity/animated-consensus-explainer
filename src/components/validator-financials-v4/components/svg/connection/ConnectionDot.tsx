@@ -26,9 +26,11 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
       path, 
       animated, 
       animationDuration,
-      coordinates: path.split(" ")
-        .filter(part => part.match(/^\d+/))
-        .map(coord => parseInt(coord))
+      // Parse path to extract coordinates
+      coordinates: path.split(/[ML]\s*/).filter(Boolean).map(coord => {
+        const [x, y] = coord.trim().split(/\s+/).map(Number);
+        return { x, y };
+      })
     });
   }
   

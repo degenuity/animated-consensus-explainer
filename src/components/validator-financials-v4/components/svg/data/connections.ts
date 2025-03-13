@@ -37,12 +37,12 @@ export const connectionPaths = [
     renderOrder: "foreground" as const
   },
   
-  // Line 4: Total Stake to Stake Weight - Direct line to stake weight box (exact coordinates)
+  // Line 4: Total Stake to Stake Weight - Direct line to stake weight box top center
   { 
-    path: "M 780 340 L 780 465 L 722 465", 
+    path: "M 780 340 L 780 465 L 585 465 L 585 550", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "750", y: "465" },
+    dotPosition: { x: "650", y: "465" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
@@ -88,7 +88,7 @@ export const connectionPaths = [
   
   // Block Rewards to Total Validator Rewards
   { 
-    path: "M 1090 410 L 1090 450 L 1019.5 450 L 1019.5 550", 
+    path: "M 1090 410 L 1090 450 L 960.75 450 L 960.75 550", 
     color: "#10B981", 
     animationIndex: 8,
     animateMotion: true,
@@ -100,7 +100,7 @@ export const connectionPaths = [
   
   // Connection from Internal Rewards to Total Validator Rewards
   { 
-    path: "M 450 300 L 550 450 L 850 450 L 1019.5 450 L 1019.5 550", 
+    path: "M 450 300 L 550 450 L 850 450 L 960.75 450 L 960.75 550", 
     color: "#10B981", 
     animationIndex: 9,
     animateMotion: true,
