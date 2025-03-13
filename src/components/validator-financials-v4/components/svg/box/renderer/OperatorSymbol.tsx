@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { SubItem } from '../types';
 
-interface OperatorSymbolProps {
+export interface OperatorSymbolProps {
   item: SubItem;
   index: number;
   adjustedX: number;
@@ -22,6 +22,9 @@ const OperatorSymbol: React.FC<OperatorSymbolProps> = ({
   adjustedWidth,
   itemHeight
 }) => {
+  // Debug log to understand dimensions
+  console.log(`Rendering operator symbol: ${item.id || 'unnamed'} with width: ${adjustedWidth}, text: ${item.text}`);
+  
   return (
     <motion.g
       initial={{ opacity: 0 }}
@@ -34,8 +37,21 @@ const OperatorSymbol: React.FC<OperatorSymbolProps> = ({
         width={adjustedWidth} 
         height={itemHeight}
       >
-        <div className="flex flex-col justify-center h-full text-center">
-          <div className="text-2xl font-normal" style={{ color: item.color || "#0E7490" }}>{item.text}</div>
+        <div 
+          className="flex flex-col justify-center h-full text-center"
+          style={{ overflow: 'visible' }} // Prevent div from cropping content
+        >
+          <div 
+            className="text-2xl font-normal" 
+            style={{ 
+              color: item.color || "#0E7490",
+              position: 'relative', // Position relatively for z-index to work
+              zIndex: 10, // Ensure operator is above other elements
+              transform: 'scale(1.1)', // Make the operator slightly larger
+            }}
+          >
+            {item.text}
+          </div>
         </div>
       </foreignObject>
     </motion.g>
