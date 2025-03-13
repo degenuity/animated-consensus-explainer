@@ -42,7 +42,7 @@ const NestedItemsRenderer = ({
       renderedItems.push(
         <SubItemRenderer 
           key={`child-${subItem.id || subIndex}-${index}`}
-          item={{...subItem, isHeader: false, isSubHeader: false}}
+          item={{...subItem, isHeader: false, isSubHeader: false, smallerText: isBlockRewards}}
           index={subIndex}
           x={childItemX}
           y={y}

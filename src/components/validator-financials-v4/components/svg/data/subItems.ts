@@ -18,6 +18,7 @@ export const networkCostsSubitems = [
     id: "block-rewards",
     color: "#8E9196",  // Gray color
     position: { y: 30 }, // Spacing between base fees and block rewards
+    smallerText: true, // Adding smaller text property to match network usage costs
     subItems: [
       { 
         text: "priority fees", 

@@ -5,7 +5,11 @@ import OperatorSymbol from './renderer/OperatorSymbol';
 import ContentBox from './renderer/ContentBox';
 
 interface SubItemRendererProps {
-  item: SubItem;
+  item: SubItem & { 
+    isHeader?: boolean;
+    isSubHeader?: boolean;
+    smallerText?: boolean;
+  };
   index: number;
   x: number;
   y: number;
