@@ -23,7 +23,7 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
     <motion.div 
       className="w-full relative overflow-visible bg-[#0d111c] rounded-xl flex flex-col items-center justify-start"
       style={{
-        height: isMobile ? '500px' : '650px', // Fixed heights based on device size
+        height: isMobile ? '400px' : '650px', // Reduced mobile height to 400px
       }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
