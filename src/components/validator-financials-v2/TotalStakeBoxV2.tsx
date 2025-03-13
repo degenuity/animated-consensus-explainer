@@ -19,7 +19,7 @@ const TotalStakeBoxV2 = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.3 }}
-          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-12"
+          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
         >
           delegated stake
         </motion.div>
@@ -29,7 +29,7 @@ const TotalStakeBoxV2 = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-12"
+          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
         >
           own stake
         </motion.div>
