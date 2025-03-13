@@ -25,14 +25,14 @@ const NestedItemsRenderer = ({
   index
 }: NestedItemsRendererProps) => {
   const isBlockRewards = parentItem.id === 'block-rewards';
-  const childSpacing = 20; // Spacing between child items
+  const childSpacing = 15; // Reduced spacing between child items from 20 to 15
   let childY = yOffset;
   
   // Handle special case for block rewards items
   if (isBlockRewards && parentItem.subItems) {
     parentItem.subItems.forEach((subItem, subIndex) => {
       // Calculate position and size for child items (priority fees and MEV)
-      const childItemHeight = 40;
+      const childItemHeight = 30; // Reduced height from 40 to 30
       const childItemWidth = width - 40; // Less width than parent, with some padding
       const childItemX = x + 20; // Indented from parent
       

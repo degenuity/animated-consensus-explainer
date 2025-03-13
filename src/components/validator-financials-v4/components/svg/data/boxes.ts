@@ -51,12 +51,12 @@ export const boxes = [
     borderColor: "#3B82F6"
   },
   
-  // Network Costs Box - adjusted height to create better spacing
+  // Network Costs Box - further reduced height for better spacing
   {
     x: 950,
     y: 120,
     width: 280,
-    height: 350, // Reduced height from 380 to 350 to tighten the spacing
+    height: 300, // Further reduced height from 350 to 300
     title: "network usage costs",
     icon: "network-costs" as const,
     color: "#F97316",

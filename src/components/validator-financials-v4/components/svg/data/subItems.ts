@@ -17,7 +17,7 @@ export const networkCostsSubitems = [
     text: "block rewards",
     id: "block-rewards",
     color: "#8E9196",  // Gray color
-    position: { y: 50 }, // Adding a position property with extra vertical spacing
+    position: { y: 30 }, // Reduced vertical spacing from 50 to 30
     subItems: [
       { text: "priority fees", id: "priority-fees", color: "#10B981" },
       { text: "mev", id: "mev", color: "#10B981" }

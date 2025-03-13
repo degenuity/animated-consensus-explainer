@@ -64,22 +64,22 @@ export const connectionPaths = [
   
   // Line 6: Base Fees to Block Rewards
   { 
-    path: "M 1090 180 L 1090 255", 
+    path: "M 1090 180 L 1090 230", 
     color: "#EAB308", 
     animationIndex: 5,
-    dotPosition: { x: "1090", y: "217" },
+    dotPosition: { x: "1090", y: "205" },
     label: "50%",
-    labelPosition: { x: 1070, y: 217 },
+    labelPosition: { x: 1070, y: 205 },
     id: "base-fees-to-block-rewards",
     renderOrder: "background" as const
   },
   
   // NEW Line: Base Fees bottom to Block Rewards - adjusted with reduced distance
   { 
-    path: "M 1090 210 L 1090 260", // Modified to reflect the adjusted distance between boxes
+    path: "M 1090 210 L 1090 232", // Further adjusted to touch the top of block rewards exactly
     color: "#EAB308", 
     animationIndex: 8,
-    dotPosition: { x: "1090", y: "235" },
+    dotPosition: { x: "1090", y: "220" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "base-fees-bottom-to-block-rewards",

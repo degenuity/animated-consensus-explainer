@@ -13,7 +13,7 @@ const NetworkUsageCostsBoxV2 = () => {
       </div>
       
       {/* Content section */}
-      <div className="px-4 py-3 flex flex-col space-y-4"> {/* Reduced space-y from 6 to 4 */}
+      <div className="px-4 py-3 flex flex-col space-y-3"> {/* Further reduced space-y from 4 to 3 */}
         {/* Base fees item */}
         <motion.div 
           initial={{ opacity: 0 }}
@@ -32,10 +32,12 @@ const NetworkUsageCostsBoxV2 = () => {
           className="border border-blue-500/70 bg-[#141b29] p-4 rounded"
         >
           {/* Block rewards title - now left-aligned */}
-          <div className="text-white text-lg text-left mb-4">block rewards</div>
+          <div className="text-white text-lg text-left mb-3"> {/* Reduced margin-bottom from 4 to 3 */}
+            block rewards
+          </div>
             
           {/* Block rewards content items */}
-          <div className="flex flex-col space-y-3">
+          <div className="flex flex-col space-y-2"> {/* Reduced space-y from 3 to 2 */}
             {/* Priority fees - text left-aligned */}
             <motion.div 
               initial={{ opacity: 0 }}

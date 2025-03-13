@@ -51,7 +51,7 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
           y={y}
           yOffset={yOffset}
           width={width - 10} // Added padding of 10px to ensure items stay inside
-          height={145} // Reduced height from 160 to 145 for block rewards
+          height={120} // Further reduced height from 145 to 120 for block rewards
           isNested={false}
         />
       );
@@ -70,7 +70,7 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
       });
       
       // Move down past the block rewards section
-      yOffset += 145 + 20; // Item height + spacing (reduced from 160)
+      yOffset += 120 + 20; // Item height + spacing (further reduced from 145)
     } else if (!isNetworkCosts && item.subItems && item.subItems.length > 0) {
       // Regular parent item with children (but not network costs)
       renderedItems.push(
