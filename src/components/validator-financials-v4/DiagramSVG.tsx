@@ -22,7 +22,7 @@ const DiagramSVG = () => {
   console.log('DiagramSVG rendering, boxes:', boxes.length);
   
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full relative px-6">
       <style>
         {`
           @keyframes moveDotRight {
