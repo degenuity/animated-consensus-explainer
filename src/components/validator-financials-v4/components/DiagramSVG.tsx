@@ -12,7 +12,7 @@ const DiagramSVG = () => {
   const svgRef = useDiagramDebug();
   
   return (
-    <div className="w-full h-full relative px-4 sm:px-3 md:px-2">
+    <div className="w-full h-full relative px-1 sm:px-1 md:px-0">
       <AnimationStyleProvider />
       
       {/* Background Layer - Contains all background connections and elements */}
