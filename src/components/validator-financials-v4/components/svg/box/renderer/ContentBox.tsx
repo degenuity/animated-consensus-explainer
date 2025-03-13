@@ -35,9 +35,9 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const isBlockRewards = id === "block-rewards";
   const isPriorityFeeOrMEV = id === "priority-fees" || id === "mev";
   
-  // Explicitly make block rewards font smaller to match other boxes
-  // Use text-xs for block rewards to match header sizes of other boxes
-  const fontSize = isBlockRewards ? "text-xs" : (isNested ? "text-sm" : "text-sm");
+  // Explicitly override font size for block rewards to be smaller
+  // Force text-xs for block rewards regardless of other conditions
+  const textSize = isBlockRewards ? "text-xs" : (isNested ? "text-sm" : "text-sm");
   const fontWeight = "font-medium";
   
   // Always left-align text regardless of whether it's horizontal or not
@@ -75,14 +75,14 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         <div className={`flex flex-col ${verticalAlignment} h-full px-3 ${textAlign}`}>
           {desc ? (
             <>
-              <div className={`${fontSize} ${fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
+              <div className={`${isBlockRewards ? 'text-xs' : textSize} ${fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
                 {text}
               </div>
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>
           ) : (
             <div 
-              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${fontWeight} ${fontSize} justify-start`} 
+              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${fontWeight} ${isBlockRewards ? 'text-xs' : textSize} justify-start`} 
               style={{ color: isBlockRewards ? 'white' : strokeColor }}
             >
               {text}
