@@ -88,19 +88,16 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - UPDATED
-  // Based on in-depth analysis of coordinates, delegated stake box is a subitem within the total stake box
-  // Exact coordinates to be updated after debugging
+  // Delegated Stake to Commission - UPDATED with exact coordinates from debug logs
   { 
-    path: "M 650 260 L 450 260", 
+    path: "M 650 290 L 450 290", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
-    dotPosition: { x: "550", y: "260" },
+    dotPosition: { x: "550", y: "290" },
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
-    animationDuration: 1.8,
-    renderAsDefinition: false
+    animationDuration: 1.8
   }
 ];
