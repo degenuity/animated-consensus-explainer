@@ -20,13 +20,15 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animated = false,
   animationDuration = 1.5
 }) => {
-  // Enhanced logging specifically for the stake weight path
+  // Enhanced debugging for the stake weight path
   if (path?.includes("total-stake-to-stake-weight")) {
-    console.log("Rendering stake weight path with:", { 
+    console.log("Stake weight path details:", { 
       path, 
       animated, 
       animationDuration,
-      endPosition: path.split("C").pop() // Log the end coordinates
+      coordinates: path.split(" ")
+        .filter(part => part.match(/^\d+/))
+        .map(coord => parseInt(coord))
     });
   }
   

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
@@ -13,14 +13,45 @@ import { connectionPaths } from './components/svg/data/connections';
 
 const DiagramSVG = () => {
   const isMobile = useIsMobile();
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  // Use effect to log the exact coordinates of the stake weight box for debugging
+  useEffect(() => {
+    if (svgRef.current) {
+      const stakeWeightElement = svgRef.current.querySelector('[data-id="stake-weight"]');
+      if (stakeWeightElement) {
+        const rect = stakeWeightElement.getBoundingClientRect();
+        const svgRect = svgRef.current.getBoundingClientRect();
+        
+        // Calculate relative position within SVG
+        const relativeX = rect.left - svgRect.left;
+        const relativeY = rect.top - svgRect.top;
+        
+        console.log('Stake weight box exact coordinates:', {
+          id: 'stake-weight',
+          svgViewBox: { width: viewBoxWidth, height: viewBoxHeight },
+          domRect: {
+            top: rect.top,
+            left: rect.left,
+            width: rect.width,
+            height: rect.height
+          },
+          svgRelative: {
+            x: relativeX,
+            y: relativeY,
+            topCenter: {
+              x: relativeX + rect.width / 2,
+              y: relativeY
+            }
+          }
+        });
+      }
+    }
+  }, []);
 
   // Separate connections by rendering order
   const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
   const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
-  
-  // Add more detailed logging to verify rendering
-  console.log('DiagramSVG rendering, boxes:', boxes.length);
-  console.log('Network costs box:', boxes.find(box => box.title === "network usage costs"));
   
   return (
     <div className="w-full h-full relative px-6">
@@ -76,6 +107,7 @@ const DiagramSVG = () => {
       
       {/* Box Layer SVG - Contains all boxes */}
       <svg
+        ref={svgRef}
         width="100%"
         height="100%"
         viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
@@ -96,6 +128,7 @@ const DiagramSVG = () => {
             animationIndex={box.animationIndex}
             subitems={box.subitems}
             simpleStyle={box.simpleStyle}
+            data-id={box.title}
           />
         ))}
       </svg>

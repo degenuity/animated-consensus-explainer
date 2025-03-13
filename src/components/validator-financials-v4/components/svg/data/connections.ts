@@ -37,17 +37,17 @@ export const connectionPaths = [
     renderOrder: "foreground" as const
   },
   
-  // Line 4: Total Stake to Stake Weight - Using precise stake weight coordinates
+  // Line 4: Total Stake to Stake Weight - Direct line to stake weight box (exact coordinates)
   { 
-    path: "M 780 340 L 780 490 C 780 520, 600 550, 430 570", 
+    path: "M 780 340 L 780 465 L 722 465", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "600", y: "540" },
+    dotPosition: { x: "750", y: "465" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
     renderOrder: "foreground" as const,
-    animationDuration: 3
+    animationDuration: 2
   },
   
   // Line 5: Base Fee to Deflation

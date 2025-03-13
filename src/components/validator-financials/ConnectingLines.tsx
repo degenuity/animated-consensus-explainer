@@ -114,11 +114,11 @@ const ConnectingLines = () => (
       />
     </div>
 
-    {/* Total Stake to Block Production Eligibility/Stake Weight - using precise coordinates */}
+    {/* Total Stake to Block Production Eligibility/Stake Weight - direct line to stake weight box */}
     <div className="absolute top-[340px] left-[400px]">
       <svg width="400" height="420" className="overflow-visible">
         <path 
-          d="M 380 0 L 380 150 C 380 180, 200 210, 30 230" 
+          d="M 380 0 L 380 125 L 322 125" 
           fill="none" 
           stroke="rgba(59, 130, 246, 0.8)" 
           strokeWidth="2"
@@ -138,7 +138,7 @@ const ConnectingLines = () => (
             ease: "linear"
           }}
           style={{ 
-            offsetPath: "path('M 380 0 L 380 150 C 380 180, 200 210, 30 230')" 
+            offsetPath: "path('M 380 0 L 380 125 L 322 125')" 
           }}
         />
       </svg>
