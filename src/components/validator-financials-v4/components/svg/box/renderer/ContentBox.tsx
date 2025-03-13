@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { SubItem } from '../types';
@@ -186,6 +187,10 @@ const ContentBox: React.FC<ContentBoxProps> = ({
     if (strokeColor.includes('EAB308')) return "#F59E0B"; // More subtle amber for yellow boxes
     return "#C026D3"; // More subtle violet/purple fallback
   };
+
+  // Fix: Define the displayText variable using the text from the item
+  // For MEV we want to display it in uppercase
+  const displayText = id === "mev" ? "MEV" : text;
 
   return (
     <motion.g
