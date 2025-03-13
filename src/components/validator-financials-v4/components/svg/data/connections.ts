@@ -101,6 +101,7 @@ export const connectionPaths = [
   },
   
   // Connection from Internal Rewards to Total Validator Rewards
+  // Updated to end at the top-right corner of the Total Validator Rewards box
   { 
     path: "M 450 300 L 550 450 L 850 450 L 1020 450 L 1020 550", 
     color: "#10B981", 
@@ -112,3 +113,4 @@ export const connectionPaths = [
     animationDuration: 2.5
   }
 ];
+
