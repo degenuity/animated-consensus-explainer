@@ -54,7 +54,7 @@ export const connectionPaths = [
     color: "#10B981", 
     animationIndex: 8,
     animateMotion: true,
-    dotPosition: { x: "1055", y: "500" },
+    dotPosition: { x: "1020", y: "500" },
     id: "block-rewards-to-total-validator-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 2
@@ -109,6 +109,4 @@ export const connectionPaths = [
     renderOrder: "foreground" as const,
     animationDuration: 1.8
   }
-  
-  // Removed any connections that might have been causing the dot in the top-left
 ];
