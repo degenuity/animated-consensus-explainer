@@ -12,14 +12,14 @@ const TotalStakeBoxV2 = () => {
         <span className="text-xl text-white">total stake</span>
       </div>
       
-      {/* Content section with significantly increased spacing */}
-      <div className="px-4 py-3 flex flex-col">
+      {/* Content section with consistent spacing */}
+      <div className="px-12 py-3 flex flex-col">
         {/* First item */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.3 }}
-          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
+          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-12"
         >
           delegated stake
         </motion.div>
@@ -29,12 +29,12 @@ const TotalStakeBoxV2 = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
+          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-12"
         >
           own stake
         </motion.div>
         
-        {/* Third item - added to match the three items in the SVG version */}
+        {/* Third item */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
