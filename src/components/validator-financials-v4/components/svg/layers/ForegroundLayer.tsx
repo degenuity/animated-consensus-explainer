@@ -21,10 +21,13 @@ const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) =>
     >
       {foregroundConnections.map((connection, index) => (
         <ConnectionLine
-          key={`connection-fg-${connection.id}-${index}`}
-          {...connection}
+          key={`connection-fg-${connection.id || index}`}
+          path={connection.path}
+          color={connection.color}
           animationIndex={connection.animationIndex || index}
           animateMotion={true}
+          id={connection.id}
+          targetBoxId={connection.targetBoxId}
           animationDuration={connection.animationDuration || 1.5}
         />
       ))}

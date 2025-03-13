@@ -12,7 +12,7 @@ const DiagramSVG = () => {
   const svgRef = useDiagramDebug();
   
   useEffect(() => {
-    // Log dot collision events
+    // Log dot collision events for debugging
     const handleDotCollision = (event: any) => {
       console.log('Dot collision detected:', event.detail);
     };

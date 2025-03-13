@@ -1,32 +1,26 @@
 
-import { useCallback, useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { viewBoxWidth, viewBoxHeight } from '../components/svg/data/constants';
 
+// Hook for debugging diagram SVG elements
 export const useDiagramDebug = () => {
   const svgRef = useRef<SVGSVGElement>(null);
   
-  const findPositionById = useCallback((id: string) => {
-    if (!svgRef.current) return null;
-    
-    const element = svgRef.current.querySelector(`[data-id="${id}"]`);
-    if (!element) return null;
-    
-    const boundingBox = element.getBoundingClientRect();
-    const svgBoundingBox = svgRef.current.getBoundingClientRect();
-    
-    // Calculate relative position
-    return {
-      id,
-      element,
-      position: {
-        top: boundingBox.top - svgBoundingBox.top,
-        left: boundingBox.left - svgBoundingBox.left,
-        width: boundingBox.width,
-        height: boundingBox.height,
-        bottom: boundingBox.bottom - svgBoundingBox.top,
-        right: boundingBox.right - svgBoundingBox.left
-      }
-    };
+  useEffect(() => {
+    if (svgRef.current) {
+      console.log("DiagramSVG mounted - debugging enabled");
+      
+      // Get SVG dimensions
+      const svgRect = svgRef.current.getBoundingClientRect();
+      console.log("SVG dimensions:", {
+        width: svgRect.width,
+        height: svgRect.height,
+        viewBox: `0 0 ${viewBoxWidth} ${viewBoxHeight}`
+      });
+    }
   }, []);
   
   return svgRef;
 };
+
+export default useDiagramDebug;

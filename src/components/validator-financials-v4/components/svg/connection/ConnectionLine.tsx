@@ -1,6 +1,5 @@
 
 import React, { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
 
 interface ConnectionPathProps {
   path: string;
@@ -20,7 +19,7 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
   animationIndex = 0,
   dotPosition,
   animationDirection,
-  animateMotion = true, // Default to true to ensure dots are always animated
+  animateMotion = true,
   id,
   targetBoxId,
   animationDuration = 1.5
@@ -53,7 +52,7 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
     const target = getTargetBoxId();
     if (!target) return;
     
-    // Observe the animation and trigger the collision event when appropriate
+    // Handle animation completion to trigger the collision event
     const handleAnimationIteration = () => {
       // When the animation completes, dispatch a custom event
       const collisionEvent = new CustomEvent('dotCollision', {
@@ -77,37 +76,35 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
     };
   }, [color, id]);
   
+  // Calculate animation delay based on index
+  const delay = animationIndex * 0.1;
+  
   return (
     <g>
       <path
+        ref={pathRef}
         d={path}
         fill="none"
         stroke={color}
         strokeWidth="1.5"
         strokeDasharray="4 2"
         opacity="0.6"
-        ref={pathRef}
       />
       
       {animateMotion && (
-        <motion.circle
+        <circle
           ref={dotRef}
           r="4"
           fill={color}
-          animate={{
-            offsetDistance: ["0%", "100%"]
-          }}
-          transition={{ 
-            duration: animationDuration,
-            repeat: Infinity,
-            ease: "linear",
-            delay: animationIndex * 0.1
-          }}
-          style={{
-            offsetPath: `path('${path}')`,
-            zIndex: 100
-          }}
-        />
+        >
+          <animateMotion
+            path={path}
+            dur={`${animationDuration}s`}
+            begin={`${delay}s`}
+            repeatCount="indefinite"
+            rotate="auto"
+          />
+        </circle>
       )}
     </g>
   );
