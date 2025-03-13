@@ -106,15 +106,15 @@ export const connectionPaths = [
     animationDuration: 1.8
   },
   
-  // New line: Base Fee right side to Deflation
+  // Base Fee right side to Deflation
+  // Updated to go from right side of Base Fee box to top center of Deflation box
+  // Removed the 50% label as requested
   { 
-    path: "M 1150 180 L 1300 280", 
+    path: "M 1150 180 L 1300 240", 
     color: "#EAB308", 
     animationIndex: 12,
     animateMotion: true,
-    dotPosition: { x: "1225", y: "230" },
-    label: "50%",
-    labelPosition: { x: 1195, y: 210 },
+    dotPosition: { x: "1225", y: "210" },
     id: "base-fee-right-to-deflation",
     renderOrder: "foreground" as const,
     animationDuration: 1.8
