@@ -1,6 +1,6 @@
 
 import React, { forwardRef } from 'react';
-import { viewBoxWidth, viewBoxHeight } from '../data/constants';
+import { zoomedViewBox } from '../data/constants';
 import { BoxComponent } from '../box';
 import { Box } from '../box/types';
 
@@ -14,7 +14,7 @@ const BoxLayer = forwardRef<SVGSVGElement, BoxLayerProps>(({ boxes }, ref) => {
       ref={ref}
       width="100%"
       height="100%"
-      viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+      viewBox={zoomedViewBox}
       preserveAspectRatio="xMidYMid meet"
       className="absolute top-0 left-0"
     >
