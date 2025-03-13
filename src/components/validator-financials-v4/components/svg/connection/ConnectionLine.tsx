@@ -6,8 +6,8 @@ interface ConnectionPathProps {
   path: string;
   color: string;
   animationIndex?: number;
-  dotPosition?: { x: string; y: string };
-  animationDirection?: 'right' | 'left' | 'up' | 'down';
+  dotPosition?: { x: string; y: string } | undefined;
+  animationDirection?: 'right' | 'left' | 'up' | 'down' | undefined;
   animateMotion?: boolean;
   id?: string;
   targetBoxId?: string;

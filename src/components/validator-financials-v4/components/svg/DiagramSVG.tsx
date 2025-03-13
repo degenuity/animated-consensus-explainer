@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
@@ -155,8 +156,6 @@ const DiagramSVG = () => {
             key={`connection-bg-${connection.id}-${index}`}
             {...connection}
             animationIndex={connection.animationIndex || index}
-            dotPosition={connection.dotPosition}
-            animationDirection={connection.animationDirection}
             animateMotion={connection.animateMotion}
             animationDuration={connection.animationDuration}
           />
@@ -194,8 +193,6 @@ const DiagramSVG = () => {
             key={`connection-fg-${connection.id}-${index}`}
             {...connection}
             animationIndex={connection.animationIndex || index}
-            dotPosition={connection.dotPosition}
-            animationDirection={connection.animationDirection}
             animateMotion={connection.animateMotion}
             animationDuration={connection.animationDuration}
           />
