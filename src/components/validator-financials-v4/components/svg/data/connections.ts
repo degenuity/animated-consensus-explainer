@@ -37,14 +37,14 @@ export const connectionPaths = [
     renderOrder: "foreground" as const
   },
   
-  // Line 4: Total Stake to Stake Weight - Updated with precise coordinates
+  // Line 4: Total Stake to Stake Weight - Updated with visually correct coordinates
   { 
-    path: "M 713 350 L 713 385 L 206 412", 
+    path: "M 1020 350 L 1020 500 L 1065 600 L 1065 690", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "450", y: "400" },
+    dotPosition: { x: "1065", y: "500" },
     animateMotion: true,
-    animationDirection: "left" as const,
+    animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
     renderOrder: "foreground" as const,
     animationDuration: 3

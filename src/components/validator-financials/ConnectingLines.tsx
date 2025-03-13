@@ -115,12 +115,12 @@ const ConnectingLines = () => (
       />
     </div>
 
-    {/* Total Stake to Block Production Eligibility - vertical - Updated with exact coordinates */}
-    <div className="absolute top-[380px] left-[713px] h-[130px] w-[2px] bg-blue-500/80 transform -translate-x-1/2">
+    {/* Total Stake to Block Production Eligibility - vertical - Updated with visually matching coordinates */}
+    <div className="absolute top-[350px] right-[250px] w-[2px] h-[340px] bg-blue-500/80">
       <motion.div 
         className="absolute top-0 left-0 w-full h-[20px] bg-blue-400"
         animate={{ 
-          y: [0, 130, 0],
+          y: [0, 340, 0],
           opacity: [0, 1, 0]
         }}
         transition={{ 
