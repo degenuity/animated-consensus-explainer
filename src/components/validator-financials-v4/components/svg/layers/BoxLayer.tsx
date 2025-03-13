@@ -19,15 +19,17 @@ const BoxLayer = forwardRef<SVGSVGElement, BoxLayerProps>(({ boxes }, ref) => {
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0 overflow-visible"
+      className="absolute top-0 left-0 overflow-visible pointer-events-none"
     >
-      {boxes.map((box, index) => (
-        <BoxComponent
-          key={`box-${index}`}
-          {...box}
-          data-id={box.title.replace(/\s+/g, '-')}
-        />
-      ))}
+      <g className="pointer-events-auto">
+        {boxes.map((box, index) => (
+          <BoxComponent
+            key={`box-${index}`}
+            {...box}
+            data-id={box.title.replace(/\s+/g, '-')}
+          />
+        ))}
+      </g>
     </svg>
   );
 });

@@ -11,13 +11,16 @@ const DiagramSVG = () => {
   const isMobile = useIsMobile();
   const svgRef = useDiagramDebug();
   
-  // Use responsive classes based on device type
-  const containerClass = isMobile 
-    ? "w-full h-full relative overflow-visible"  // Mobile - ensure overflow visibility
-    : "w-full h-full relative"; // Desktop - standard display
+  // Calculate responsive padding based on screen size
+  const containerClasses = [
+    "w-full h-full relative",
+    "overflow-visible",
+    // Device-specific padding to ensure no cropping
+    isMobile ? "px-4 sm:px-6" : "px-0 sm:px-0"
+  ].join(" ");
   
   return (
-    <div className={containerClass}>
+    <div className={containerClasses}>
       <AnimationStyleProvider />
       
       {/* Background Layer - Contains all background connections and elements */}

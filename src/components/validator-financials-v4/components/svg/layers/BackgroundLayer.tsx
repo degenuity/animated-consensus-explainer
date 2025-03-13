@@ -20,15 +20,17 @@ const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) =>
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0 overflow-visible"
+      className="absolute top-0 left-0 overflow-visible pointer-events-none"
     >
-      {backgroundConnections.map((connection, index) => (
-        <ConnectionLine
-          key={`connection-bg-${connection.id}-${index}`}
-          {...connection}
-          animationIndex={connection.animationIndex || index}
-        />
-      ))}
+      <g className="pointer-events-auto">
+        {backgroundConnections.map((connection, index) => (
+          <ConnectionLine
+            key={`connection-bg-${connection.id}-${index}`}
+            {...connection}
+            animationIndex={connection.animationIndex || index}
+          />
+        ))}
+      </g>
     </svg>
   );
 };
