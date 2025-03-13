@@ -1,11 +1,11 @@
 
 import React, { forwardRef } from 'react';
 import { viewBoxWidth, viewBoxHeight } from '../data/constants';
-import { boxes } from '../data/boxes';
-import { BoxComponent } from '..';
+import { BoxComponent } from '../box';
+import { Box } from '../box/types';
 
 interface BoxLayerProps {
-  boxes: typeof boxes;
+  boxes: Box[];
 }
 
 const BoxLayer = forwardRef<SVGSVGElement, BoxLayerProps>(({ boxes }, ref) => {

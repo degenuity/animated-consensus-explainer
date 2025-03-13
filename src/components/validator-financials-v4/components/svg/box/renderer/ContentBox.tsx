@@ -76,9 +76,11 @@ const ContentBox: React.FC<ContentBoxProps> = ({
       width: ${adjustedWidth}
       height: ${itemHeight}
       right-edge: ${adjustedX + adjustedWidth}
+      visual-right-edge: ${adjustedX + adjustedWidth + 2} // Adding stroke width compensation
       right-center: (${adjustedX + adjustedWidth}, ${y + yOffset + itemHeight/2})
       center: (${adjustedX + adjustedWidth/2}, ${y + yOffset + itemHeight/2})
       bottom: ${y + yOffset + itemHeight}
+      visual-bottom: ${y + yOffset + itemHeight + 2} // Adding stroke width compensation
     `);
   }
   
@@ -109,7 +111,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   
   // Log base fees box coordinates for debugging
   if (isBaseFees) {
-    console.log(`Base fees box: x=${adjustedX}, y=${y + yOffset}, width=${adjustedWidth}, height=${itemHeight}, bottom=${y + yOffset + itemHeight}, right-edge=${adjustedX + adjustedWidth}`);
+    console.log(`Base fees box: x=${adjustedX}, y=${y + yOffset}, width=${adjustedWidth}, height=${itemHeight}, bottom=${y + yOffset + itemHeight}, right-edge=${adjustedX + adjustedWidth}, visual-right-edge=${adjustedX + adjustedWidth + 2}`);
   }
   
   // Log block rewards box coordinates for debugging

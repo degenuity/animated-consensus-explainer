@@ -105,11 +105,10 @@ export const connectionPaths = [
   },
   
   // Base Fee right side to Deflation
-  // From the console logs, we know the base fees box starts at x=962
-  // And from the NetworkCostsSubitems, we can determine the width is 226px
-  // So the right edge is at 962 + 226 = 1188
+  // After analyzing the image, we need to increase the x-coordinate at the start point
+  // Based on the image, the connection should start from the visual edge of the base fees box
   { 
-    path: "M 1188 190 L 1300 240", 
+    path: "M 1200 190 L 1300 240", 
     color: "#EAB308", 
     animationIndex: 12,
     animateMotion: true,
