@@ -86,13 +86,13 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Base Fee bottom to Block Rewards center - Using 200 for the start y value (will adjust based on logging)
+  // Base Fee bottom to Block Rewards center - Updated with exact y=210 from the console logs
   { 
-    path: "M 1090 200 L 1090 260", 
+    path: "M 1090 210 L 1090 260", 
     color: "#EAB308", 
     animationIndex: 7,
     animateMotion: true,
-    dotPosition: { x: "1090", y: "230" },
+    dotPosition: { x: "1090", y: "235" },
     id: "base-fee-bottom-to-block-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 1.5
