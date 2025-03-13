@@ -1,3 +1,4 @@
+
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -87,9 +88,9 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Fixed to end at the right side of the commission box
+  // Delegated Stake to Commission - Fixed to end at the right side of the commission box instead of the center
   { 
-    path: "M 662 250 L 450 250", 
+    path: "M 662 250 L 420 250", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
