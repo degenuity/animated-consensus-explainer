@@ -28,18 +28,6 @@ export const connectionPaths = [
     animationDuration: 2
   },
   
-  // Line 5: Base Fee to Deflation
-  { 
-    path: "M 1090 180 L 1300 280", 
-    color: "#EAB308", 
-    animationIndex: 4,
-    dotPosition: { x: "1195", y: "230" },
-    label: "50%",
-    labelPosition: { x: 1195, y: 210 },
-    id: "base-fee-to-deflation",
-    renderOrder: "background" as const
-  },
-  
   // Line 6: Base Fees to Block Rewards
   { 
     path: "M 1090 180 L 1090 230", 
@@ -114,6 +102,20 @@ export const connectionPaths = [
     dotPosition: { x: "610", y: "310" },
     animationDirection: "left" as const,
     id: "own-stake-to-staking-rewards", 
+    renderOrder: "foreground" as const,
+    animationDuration: 1.8
+  },
+  
+  // New line: Base Fee right side to Deflation
+  { 
+    path: "M 1150 180 L 1300 280", 
+    color: "#EAB308", 
+    animationIndex: 12,
+    animateMotion: true,
+    dotPosition: { x: "1225", y: "230" },
+    label: "50%",
+    labelPosition: { x: 1195, y: 210 },
+    id: "base-fee-right-to-deflation",
     renderOrder: "foreground" as const,
     animationDuration: 1.8
   }
