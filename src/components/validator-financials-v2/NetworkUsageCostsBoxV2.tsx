@@ -29,7 +29,7 @@ const NetworkUsageCostsBoxV2 = () => {
         >
           <div className="bg-[#141b29] border border-[#2a3349] p-3 rounded">
             <div className="text-white mb-2">block rewards</div>
-            <div className="space-y-2">
+            <div className="space-y-2 px-2 py-2">
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
