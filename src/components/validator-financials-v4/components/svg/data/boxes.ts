@@ -37,9 +37,9 @@ export const boxes = [
     borderColor: "#10B981"
   },
   
-  // Total Stake Box
+  // Total Stake Box - Moved to the left to align with stake weight box
   {
-    x: 650,
+    x: 585, // Modified from 650 to 585 to align with stake weight box
     y: 180,
     width: 260,
     height: 160,

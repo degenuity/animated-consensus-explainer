@@ -13,9 +13,9 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // Line 4: Total Stake to Stake Weight
+  // Line 4: Total Stake to Stake Weight - Updated coordinates
   { 
-    path: "M 780 340 L 780 465 L 765 465 L 765 550", 
+    path: "M 715 340 L 715 465 L 765 465 L 765 550", 
     color: "#3B82F6", 
     animationIndex: 3,
     dotPosition: { x: "765", y: "530" },
@@ -72,26 +72,26 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission
+  // Delegated Stake to Commission - Updated coordinates
   { 
-    path: "M 662 250 L 558 250", 
+    path: "M 597 250 L 558 250", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
-    dotPosition: { x: "610", y: "250" },
+    dotPosition: { x: "575", y: "250" },
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
     animationDuration: 1.8
   },
   
-  // Own Stake to Staking Rewards
+  // Own Stake to Staking Rewards - Updated coordinates
   { 
-    path: "M 662 310 L 558 310", 
+    path: "M 597 310 L 558 310", 
     color: "#0EA5E9", 
     animationIndex: 11,
     animateMotion: true,
-    dotPosition: { x: "610", y: "310" },
+    dotPosition: { x: "575", y: "310" },
     animationDirection: "left" as const,
     id: "own-stake-to-staking-rewards", 
     renderOrder: "foreground" as const,
