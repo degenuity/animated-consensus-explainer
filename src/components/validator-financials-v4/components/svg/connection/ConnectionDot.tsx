@@ -30,6 +30,11 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     console.log("ConnectionDot for block-rewards-to-total-validator-rewards with:", { animated, animationDuration, path });
   }
   
+  // Add logging to find the total validator rewards box position
+  if (path && path.includes("850 480")) {
+    console.log("Checking path to total validator rewards:", path);
+  }
+  
   if (animated && path) {
     return (
       <g>

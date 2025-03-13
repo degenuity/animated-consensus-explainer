@@ -88,11 +88,11 @@ export const connectionPaths = [
   
   // NEW: Block Rewards to Total Validator Rewards - Using approximate coordinates
   { 
-    path: "M 1090 410 L 1090 480 L 850 480", 
+    path: "M 1090 410 L 1090 450 L 850 450", 
     color: "#F97316", 
     animationIndex: 8,
     animateMotion: true,
-    dotPosition: { x: "970", y: "480" },
+    dotPosition: { x: "970", y: "450" },
     id: "block-rewards-to-total-validator-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 2
