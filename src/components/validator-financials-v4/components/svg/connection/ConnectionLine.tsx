@@ -5,6 +5,10 @@ import { ConnectionDefinition } from './ConnectionDefinition';
 import { AnimatedConnection } from './AnimatedConnection';
 import { ConnectionProps } from './types';
 
+/**
+ * ConnectionLine is a facade component that delegates rendering to specialized components
+ * based on whether the connection should be rendered as a definition or a regular connection.
+ */
 const ConnectionLine: React.FC<ConnectionProps> = (props) => {
   const { 
     animationIndex,

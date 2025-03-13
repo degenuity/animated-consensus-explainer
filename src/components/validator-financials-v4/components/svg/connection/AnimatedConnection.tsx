@@ -10,6 +10,9 @@ interface AnimatedConnectionProps extends ConnectionProps {
   dotVariants: any;
 }
 
+/**
+ * AnimatedConnection handles the rendering of animated connections with proper motion elements.
+ */
 export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   path,
   color,
@@ -23,13 +26,9 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   dotVariants,
   animationDuration
 }) => {
-  // Add console log to track rendering of block-rewards-to-profitability path
-  if (path === "M 1090 320 L 1090 420 L 950 570") {
-    console.log("Rendering block-rewards-to-profitability path with:", { animateMotion, animationDuration });
-  }
-  
   return (
     <g>
+      {/* Animated path */}
       <motion.path
         d={path}
         stroke={color}
@@ -41,6 +40,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         animate="visible"
       />
       
+      {/* Static dot with animation */}
       {dotPosition && !animateMotion && (
         <motion.circle
           cx={dotPosition.x}
@@ -57,6 +57,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         />
       )}
       
+      {/* Animated dot with motion path */}
       {animateMotion && (
         <motion.g
           custom={animationIndex}
@@ -76,6 +77,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         </motion.g>
       )}
       
+      {/* Optional label */}
       {label && labelPosition && (
         <ConnectionLabel 
           label={label} 

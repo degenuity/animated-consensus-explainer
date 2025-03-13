@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
 
 interface ConnectionDotProps {
   path?: string;
@@ -11,6 +11,9 @@ interface ConnectionDotProps {
   animationDuration?: number;
 }
 
+/**
+ * ConnectionDot renders a dot along a connection path, either static or animated.
+ */
 export const ConnectionDot: React.FC<ConnectionDotProps> = ({ 
   path, 
   color, 
@@ -20,64 +23,10 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animated = false,
   animationDuration = 1.5
 }) => {
-  // Enhanced debugging for animation paths - especially for stake weight
-  useEffect(() => {
-    if (path && (path.includes("stake-weight") || path.includes("total-stake-to-stake"))) {
-      console.log("Stake weight connection path analysis:", { 
-        path,
-        pathType: typeof path,
-        pathLength: path.length,
-        pathSegments: path.split(/[ML]\s*/).filter(Boolean),
-        animated, 
-        animationDuration
-      });
-    }
-  }, [path, animated, animationDuration]);
-  
-  // Detailed path parsing to extract exact endpoints
-  useEffect(() => {
-    if (path) {
-      // First, clean up the path string by ensuring consistent spacing
-      const cleanPath = path.replace(/([ML])\s*/g, '$1 ').trim();
-      
-      // Parse the path to extract all coordinates precisely
-      const segments = cleanPath.split(/([ML])\s/).filter(Boolean);
-      const coordinates = [];
-      let currentCommand = '';
-      
-      for (let i = 0; i < segments.length; i++) {
-        if (segments[i] === 'M' || segments[i] === 'L') {
-          currentCommand = segments[i];
-        } else if (currentCommand) {
-          const coords = segments[i].trim().split(/\s+/);
-          if (coords.length >= 2) {
-            coordinates.push({ 
-              command: currentCommand, 
-              x: parseFloat(coords[0]), 
-              y: parseFloat(coords[1]) 
-            });
-          }
-        }
-      }
-      
-      // For the stake weight path, provide extremely detailed logging
-      if (path.includes("stake-weight") || path.includes("total-stake-to-stake")) {
-        console.log("Detailed stake weight path analysis:", {
-          rawPath: path,
-          cleanPath,
-          segments,
-          coordinates,
-          startPoint: coordinates.length > 0 ? coordinates[0] : null,
-          endPoint: coordinates.length > 0 ? coordinates[coordinates.length - 1] : null,
-          allPoints: coordinates
-        });
-      }
-    }
-  }, [path]);
-  
   if (animated && path) {
     return (
       <g>
+        {/* Primary animated dot */}
         <circle
           r={radius}
           fill={color}
@@ -102,6 +51,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
           />
         </circle>
         
+        {/* Secondary trailing dot */}
         <circle
           r={radius * 0.8}
           fill={color}
@@ -120,6 +70,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     );
   }
   
+  // Static dot
   return (
     <circle
       cx={cx}

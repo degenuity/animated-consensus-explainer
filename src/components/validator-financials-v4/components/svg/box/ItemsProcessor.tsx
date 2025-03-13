@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import { SubItem } from './types';
-import HorizontalItemsRenderer from './HorizontalItemsRenderer';
-import VerticalItemsRenderer from './VerticalItemsRenderer';
+import HorizontalItemsRenderer from './renderer/HorizontalItemsRenderer';
+import VerticalItemsRenderer from './renderer/VerticalItemsRenderer';
 
 interface ItemsProcessorProps {
   subitems: (string | SubItem)[];
@@ -13,6 +13,10 @@ interface ItemsProcessorProps {
   title: string;
 }
 
+/**
+ * ItemsProcessor determines whether to use horizontal or vertical layout
+ * for box subitems and delegates to the appropriate renderer.
+ */
 const ItemsProcessor: React.FC<ItemsProcessorProps> = ({
   subitems,
   x,
@@ -21,7 +25,7 @@ const ItemsProcessor: React.FC<ItemsProcessorProps> = ({
   height,
   title
 }) => {
-  const [yOffset, setYOffset] = useState(50); // Start after title
+  const [yOffset] = useState(50); // Start after title
   
   // Process subitems to ensure consistent format
   const processedSubitems = subitems.map(item => {
@@ -34,9 +38,6 @@ const ItemsProcessor: React.FC<ItemsProcessorProps> = ({
   // Check if all top-level items have isHorizontal property
   const allHorizontal = processedSubitems.length > 0 && 
                        processedSubitems.every((item: SubItem) => item.isHorizontal);
-  
-  // Rendered items array
-  const renderedItems: JSX.Element[] = [];
   
   if (allHorizontal) {
     // For horizontal layout
@@ -53,18 +54,14 @@ const ItemsProcessor: React.FC<ItemsProcessorProps> = ({
   } else {
     // For vertical layout
     return (
-      <>
-        <VerticalItemsRenderer
-          items={processedSubitems}
-          x={x}
-          y={y}
-          width={width}
-          boxTitle={title}
-          renderedItems={renderedItems}
-          setYOffset={setYOffset}
-        />
-        {renderedItems}
-      </>
+      <VerticalItemsRenderer
+        items={processedSubitems}
+        x={x}
+        y={y}
+        width={width}
+        boxTitle={title}
+        yOffset={yOffset}
+      />
     );
   }
 };

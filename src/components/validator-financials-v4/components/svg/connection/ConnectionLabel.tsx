@@ -7,6 +7,9 @@ interface ConnectionLabelProps {
   color: string;
 }
 
+/**
+ * ConnectionLabel renders a text label for a connection with proper styling.
+ */
 export const ConnectionLabel: React.FC<ConnectionLabelProps> = ({
   label,
   position,
