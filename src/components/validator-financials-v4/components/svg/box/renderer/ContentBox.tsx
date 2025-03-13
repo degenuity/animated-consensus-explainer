@@ -41,6 +41,10 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   
   // Set text alignment - center align only horizontal items
   const textAlign = isHorizontal ? "text-center" : "text-left";
+  
+  // Special styling for block rewards
+  const textColor = isBlockRewards ? "text-white" : `text-${strokeColor}`;
+  const verticalAlignment = isBlockRewards ? "items-start pt-3" : "justify-center";
 
   return (
     <motion.g
@@ -64,16 +68,19 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         width={adjustedWidth} 
         height={itemHeight}
       >
-        <div className={`flex flex-col justify-center h-full px-3 ${textAlign}`}>
+        <div className={`flex flex-col ${verticalAlignment} h-full px-3 ${textAlign}`}>
           {desc ? (
             <>
-              <div className={`${fontSize} ${fontWeight}`} style={{ color: strokeColor }}>
+              <div className={`${fontSize} ${fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
                 {text}
               </div>
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>
           ) : (
-            <div className={`flex items-center h-full ${fontWeight} ${fontSize} ${isHorizontal ? 'justify-center' : 'justify-start'}`} style={{ color: strokeColor }}>
+            <div 
+              className={`flex items-center h-full ${fontWeight} ${fontSize} ${isHorizontal ? 'justify-center' : 'justify-start'}`} 
+              style={{ color: isBlockRewards ? 'white' : strokeColor }}
+            >
               {text}
             </div>
           )}
