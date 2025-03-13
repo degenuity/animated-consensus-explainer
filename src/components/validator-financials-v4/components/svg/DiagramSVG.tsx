@@ -5,7 +5,7 @@ import {
   ConnectionLine,
 } from '.';
 // Removed ExplanationComponent import
-// Removed Logo import
+// Removed Logo import completely
 
 import { viewBoxWidth, viewBoxHeight } from './data/constants';
 import { boxes } from './data/boxes';
@@ -153,9 +153,7 @@ const DiagramSVG = () => {
         {backgroundConnections.map((connection, index) => (
           <ConnectionLine
             key={`connection-bg-${connection.id}-${index}`}
-            id={connection.id}
-            path={connection.path}
-            color={connection.color}
+            {...connection}
             animationIndex={connection.animationIndex || index}
             dotPosition={connection.dotPosition}
             animationDirection={connection.animationDirection}
@@ -177,17 +175,7 @@ const DiagramSVG = () => {
         {boxes.map((box, index) => (
           <BoxComponent
             key={`box-${index}`}
-            x={box.x}
-            y={box.y}
-            width={box.width}
-            height={box.height}
-            title={box.title}
-            subtitle={box.subtitle}
-            icon={box.icon}
-            color={box.color}
-            animationIndex={box.animationIndex}
-            subitems={box.subitems}
-            simpleStyle={box.simpleStyle}
+            {...box}
             data-id={box.title.replace(/\s+/g, '-')}
           />
         ))}
@@ -204,9 +192,7 @@ const DiagramSVG = () => {
         {foregroundConnections.map((connection, index) => (
           <ConnectionLine
             key={`connection-fg-${connection.id}-${index}`}
-            id={connection.id}
-            path={connection.path}
-            color={connection.color}
+            {...connection}
             animationIndex={connection.animationIndex || index}
             dotPosition={connection.dotPosition}
             animationDirection={connection.animationDirection}

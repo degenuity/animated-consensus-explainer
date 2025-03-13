@@ -1,103 +1,21 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
   ConnectionLine,
   // ExplanationComponent removed from here
-  // Logo removed from here
+  // Logo completely removed from here
 } from './components/svg';
 import { viewBoxWidth, viewBoxHeight } from './components/svg/data/constants';
 import { boxes } from './components/svg/data/boxes';
 import { connectionPaths } from './components/svg/data/connections';
+import { useDiagramDebug } from './hooks/useDiagramDebug';
 
 const DiagramSVG = () => {
   const isMobile = useIsMobile();
-  const svgRef = useRef<SVGSVGElement>(null);
-
-  // Enhanced debugging for all boxes, especially for delegated stake
-  useEffect(() => {
-    if (svgRef.current) {
-      // Find the total stake box
-      const totalStakeBox = boxes.find(box => box.title === "total stake");
-      if (totalStakeBox) {
-        console.log("Total stake box definition:", totalStakeBox);
-      }
-
-      // Try to find all subitems within boxes
-      setTimeout(() => {
-        // Give time for rendering
-        const allGroups = svgRef.current.querySelectorAll('g');
-        
-        // Look for delegated stake specifically
-        const delegatedStakeElement = svgRef.current.querySelector('[data-item-id="delegated-stake"]');
-        if (delegatedStakeElement) {
-          const rect = delegatedStakeElement.getBoundingClientRect();
-          const svgRect = svgRef.current.getBoundingClientRect();
-          
-          // Calculate relative position within SVG
-          const relativeX = rect.left - svgRect.left;
-          const relativeY = rect.top - svgRect.top;
-          
-          // Calculate the SVG coordinate
-          const svgWidth = svgRect.width;
-          const svgHeight = svgRect.height;
-          
-          const svgX = (relativeX / svgWidth) * viewBoxWidth;
-          const svgY = (relativeY / svgHeight) * viewBoxHeight;
-          
-          console.log('DELEGATED STAKE EXACT COORDINATES:', {
-            id: 'delegated-stake',
-            clientRect: {
-              top: rect.top,
-              left: rect.left,
-              width: rect.width,
-              height: rect.height
-            },
-            svgCoordinates: {
-              x: svgX,
-              y: svgY,
-              // Calculate left center point
-              leftCenter: {
-                x: svgX,
-                y: svgY + (rect.height / svgHeight) * viewBoxHeight / 2
-              }
-            }
-          });
-        } else {
-          console.log("Delegated stake element not found, searching in all groups...");
-          
-          // Search through all groups to find anything with delegated stake
-          allGroups.forEach(group => {
-            const text = group.textContent || '';
-            if (text.toLowerCase().includes('delegated stake')) {
-              console.log("Found possible delegated stake container:", group);
-              const rect = group.getBoundingClientRect();
-              const svgRect = svgRef.current.getBoundingClientRect();
-              
-              // Calculate relative position
-              const relativeX = rect.left - svgRect.left;
-              const relativeY = rect.top - svgRect.top;
-              
-              // Calculate the SVG coordinate
-              const svgX = (relativeX / svgRect.width) * viewBoxWidth;
-              const svgY = (relativeY / svgRect.height) * viewBoxHeight;
-              
-              console.log('Possible delegated stake position:', {
-                text: text,
-                svgCoordinates: {
-                  x: svgX,
-                  y: svgY,
-                  width: (rect.width / svgRect.width) * viewBoxWidth,
-                  height: (rect.height / svgRect.height) * viewBoxHeight
-                }
-              });
-            }
-          });
-        }
-      }, 500);
-    }
-  }, []);
-
+  const svgRef = useDiagramDebug();
+  
   // Separate connections by rendering order
   const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
   const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
@@ -133,14 +51,12 @@ const DiagramSVG = () => {
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
-        {/* Both ExplanationComponent and Logo removed from here */}
+        {/* Both ExplanationComponent and Logo completely removed from here */}
         
         {backgroundConnections.map((connection, index) => (
           <ConnectionLine
             key={`connection-bg-${connection.id}-${index}`}
-            id={connection.id}
-            path={connection.path}
-            color={connection.color}
+            {...connection}
             animationIndex={connection.animationIndex || index}
             dotPosition={connection.dotPosition}
             animationDirection={connection.animationDirection}
@@ -162,17 +78,7 @@ const DiagramSVG = () => {
         {boxes.map((box, index) => (
           <BoxComponent
             key={`box-${index}`}
-            x={box.x}
-            y={box.y}
-            width={box.width}
-            height={box.height}
-            title={box.title}
-            subtitle={box.subtitle}
-            icon={box.icon}
-            color={box.color}
-            animationIndex={box.animationIndex}
-            subitems={box.subitems}
-            simpleStyle={box.simpleStyle}
+            {...box}
             data-id={box.title}
           />
         ))}
@@ -189,9 +95,7 @@ const DiagramSVG = () => {
         {foregroundConnections.map((connection, index) => (
           <ConnectionLine
             key={`connection-fg-${connection.id}-${index}`}
-            id={connection.id}
-            path={connection.path}
-            color={connection.color}
+            {...connection}
             animationIndex={connection.animationIndex || index}
             dotPosition={connection.dotPosition}
             animationDirection={connection.animationDirection}
