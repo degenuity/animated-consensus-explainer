@@ -1,11 +1,10 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
   ConnectionLine,
 } from '.';
-import ExplanationComponent from './ExplanationComponent';
+// Removed ExplanationComponent import
 import Logo from './Logo';
 import { viewBoxWidth, viewBoxHeight } from './data/constants';
 import { boxes } from './data/boxes';
@@ -150,7 +149,7 @@ const DiagramSVG = () => {
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
-        <ExplanationComponent />
+        {/* Removed ExplanationComponent here */}
         <Logo />
         
         {backgroundConnections.map((connection, index) => (
