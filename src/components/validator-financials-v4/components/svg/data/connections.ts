@@ -88,9 +88,12 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Fixed to end at the right side of the commission box instead of the center
+  // Delegated Stake to Commission
+  // From the console logs and box definition:
+  // Internal rewards box x=320, width=260, so right edge is at x=580
+  // Commission is inside with some padding, right edge calculated from box layout
   { 
-    path: "M 662 250 L 420 250", 
+    path: "M 662 250 L 580 250", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
@@ -101,3 +104,4 @@ export const connectionPaths = [
     animationDuration: 1.8
   }
 ];
+

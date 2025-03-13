@@ -38,6 +38,21 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const isTotalValidatorRewards = id === "total-validator-rewards";
   const isOperationalCosts = id === "operational-costs";
   const isDelegatedStake = id === "delegated-stake";
+  const isCommission = id === "commission";
+  
+  // Special logging for commission box
+  if (isCommission) {
+    console.log(`COMMISSION BOX EXACT COORDINATES: 
+      id: ${id}
+      x: ${adjustedX}
+      y: ${y + yOffset}
+      width: ${adjustedWidth}
+      height: ${itemHeight}
+      right-edge: ${adjustedX + adjustedWidth}
+      right-center: (${adjustedX + adjustedWidth}, ${y + yOffset + itemHeight/2})
+      center: (${adjustedX + adjustedWidth/2}, ${y + yOffset + itemHeight/2})
+    `);
+  }
   
   // Special logging for delegated stake
   if (isDelegatedStake) {
@@ -163,3 +178,4 @@ const ContentBox: React.FC<ContentBoxProps> = ({
 };
 
 export default ContentBox;
+
