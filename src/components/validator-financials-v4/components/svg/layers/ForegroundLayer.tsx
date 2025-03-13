@@ -25,6 +25,7 @@ const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) =>
           {...connection}
           animationIndex={connection.animationIndex || index}
           animateMotion={true}
+          animationDuration={connection.animationDuration || 1.5}
         />
       ))}
     </svg>

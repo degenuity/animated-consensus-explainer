@@ -20,16 +20,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animated = true, // Default to true to ensure animation
   animationDuration = 1.5
 }) => {  
-  // Don't render anything if the path is missing when required
-  if (animated && !path) {
-    return null;
-  }
-  
-  // For static dots, don't render if coordinates are missing
-  if (!animated && (!cx || !cy)) {
-    return null;
-  }
-  
+  // For animated dots with paths
   if (animated && path) {
     return (
       <g>
@@ -75,6 +66,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     );
   }
   
+  // For static dots
   return (
     <circle
       cx={cx}

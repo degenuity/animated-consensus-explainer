@@ -89,24 +89,26 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
         ref={pathRef}
       />
       
-      <motion.circle
-        ref={dotRef}
-        r="4"
-        fill={color}
-        animate={{
-          offsetDistance: ["0%", "100%"]
-        }}
-        transition={{ 
-          duration: animationDuration,
-          repeat: Infinity,
-          ease: "linear",
-          delay: animationIndex * 0.1
-        }}
-        style={{
-          offsetPath: `path('${path}')`,
-          zIndex: 100
-        }}
-      />
+      {animateMotion && (
+        <motion.circle
+          ref={dotRef}
+          r="4"
+          fill={color}
+          animate={{
+            offsetDistance: ["0%", "100%"]
+          }}
+          transition={{ 
+            duration: animationDuration,
+            repeat: Infinity,
+            ease: "linear",
+            delay: animationIndex * 0.1
+          }}
+          style={{
+            offsetPath: `path('${path}')`,
+            zIndex: 100
+          }}
+        />
+      )}
     </g>
   );
 };
