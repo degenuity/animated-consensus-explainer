@@ -63,7 +63,7 @@ const SubBoxRenderer: React.FC<SubBoxRendererProps> = ({ box, index }) => {
         className={`col-span-2 p-4 rounded border border-blue-500/20 bg-[#1a1f31]`}
       >
         <div className="text-white text-xs mb-3">{box.title}</div>
-        <div className="space-y-3 pl-3">
+        <div className="space-y-6 pl-3">
           {box.subBoxes.map((subBox, subIndex) => (
             <div 
               key={`subbox-${subIndex}`}

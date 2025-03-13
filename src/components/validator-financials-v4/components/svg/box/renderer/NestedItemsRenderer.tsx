@@ -51,15 +51,15 @@ const NestedItemsRenderer = ({
           index={subIndex}
           x={childItemX}
           y={y}
-          yOffset={childY}
+          yOffset={childY + extraSpacing}
           width={childItemWidth}
           height={childItemHeight}
           isNested={true}
         />
       );
       
-      // Move down for next child
-      childY += childItemHeight + childSpacing + extraSpacing;
+      // Move down for next child - but account for any extra spacing already applied
+      childY += childItemHeight + childSpacing;
     });
     
     return childY; // Return the updated vertical position
@@ -71,6 +71,9 @@ const NestedItemsRenderer = ({
       const paddingLeft = depth * 10; // Indent based on depth
       const itemHeight = subItem.desc ? 50 : 40;
       
+      // Add extra spacing based on position property
+      const extraSpacing = subItem.position?.y || 0;
+      
       renderedItems.push(
         <SubItemRenderer 
           key={`nested-${subItem.id || subIndex}-${index}`}
@@ -78,7 +81,7 @@ const NestedItemsRenderer = ({
           index={subIndex}
           x={x + paddingLeft}
           y={y}
-          yOffset={childY}
+          yOffset={childY + extraSpacing}
           width={width - paddingLeft - 10}
           height={itemHeight}
           isNested={true}
@@ -86,7 +89,7 @@ const NestedItemsRenderer = ({
       );
       
       // Move down for next item
-      childY += itemHeight + childSpacing;
+      childY += itemHeight + childSpacing + extraSpacing;
       
       // Process any deeper nested items recursively
       if (subItem.subItems && subItem.subItems.length > 0) {
