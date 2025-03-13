@@ -1,7 +1,7 @@
 
 // Export components
 export { default as BoxComponent } from './box/BoxComponent';
-export { ConnectionLine } from './connection';
+export { default as ConnectionLine } from './connection/ConnectionLine';
 export { default as ExplanationComponent } from './ExplanationComponent';
 export { default as Logo } from './Logo';
 
@@ -11,7 +11,10 @@ export * from './data/boxes';
 export * from './data/connections';
 
 // Export hooks
-export * from './hooks';
+export * from './hooks/useConnectionAnimation';
+
+// Export layers
+export * from './layers';
 
 // Export main diagram component
 export { default as DiagramSVG } from './DiagramSVG';
