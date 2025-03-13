@@ -25,6 +25,11 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     console.log("ConnectionDot for base-fee-bottom-to-block-rewards with:", { animated, animationDuration, path });
   }
   
+  // Add logging for the block-rewards-to-total-validator-rewards path
+  if (path === "M 1090 410 L 1090 480 L 850 480") {
+    console.log("ConnectionDot for block-rewards-to-total-validator-rewards with:", { animated, animationDuration, path });
+  }
+  
   if (animated && path) {
     return (
       <g>
@@ -39,14 +44,14 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
             repeatCount="indefinite"
             rotate="auto"
           />
-          {/* Pulsating size effect */}
+          {/* Enhanced pulsating size effect */}
           <animate
             attributeName="r"
             values="3;6;3"
             dur="0.8s"
             repeatCount="indefinite"
           />
-          {/* Pulsating opacity effect */}
+          {/* Enhanced pulsating opacity effect */}
           <animate
             attributeName="opacity"
             values="0.7;1;0.7"
@@ -67,6 +72,22 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
             repeatCount="indefinite"
             rotate="auto"
             keyPoints="0.05;1.05" 
+            keyTimes="0;1"
+          />
+        </circle>
+        
+        {/* Tertiary trail dot (even smaller and more transparent) for longer paths */}
+        <circle
+          r={radius * 0.6}
+          fill={color}
+          opacity="0.4"
+        >
+          <animateMotion
+            path={path}
+            dur={`${animationDuration}s`}
+            repeatCount="indefinite"
+            rotate="auto"
+            keyPoints="0.1;1.1" 
             keyTimes="0;1"
           />
         </circle>

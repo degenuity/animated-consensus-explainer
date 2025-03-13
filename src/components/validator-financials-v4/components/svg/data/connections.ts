@@ -74,18 +74,6 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // Block Rewards to Profitability - With improved animation settings
-  { 
-    path: "M 1090 320 L 1090 420 L 950 570", 
-    color: "#F97316", 
-    animationIndex: 6,
-    animateMotion: true,
-    dotPosition: { x: "1020", y: "495" }, 
-    id: "block-rewards-to-profitability",
-    renderOrder: "background" as const,
-    animationDuration: 2.5
-  },
-  
   // Base Fee bottom to Block Rewards center - Updated with exact y=210 from the console logs
   { 
     path: "M 1090 210 L 1090 260", 
@@ -96,8 +84,20 @@ export const connectionPaths = [
     id: "base-fee-bottom-to-block-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 1.5
+  },
+  
+  // NEW: Block Rewards to Total Validator Rewards - Using approximate coordinates
+  { 
+    path: "M 1090 410 L 1090 480 L 850 480", 
+    color: "#F97316", 
+    animationIndex: 8,
+    animateMotion: true,
+    dotPosition: { x: "970", y: "480" },
+    id: "block-rewards-to-total-validator-rewards",
+    renderOrder: "foreground" as const,
+    animationDuration: 2
   }
   
+  // Removed: Block Rewards to Profitability line
   // Removed: Internal Rewards to Total Validator Rewards line
-  // Removed: Any connection from Block Rewards to Total Validator Rewards
 ];
