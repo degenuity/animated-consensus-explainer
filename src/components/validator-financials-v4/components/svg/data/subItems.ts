@@ -17,14 +17,18 @@ export const networkCostsSubitems = [
     text: "block rewards",
     id: "block-rewards",
     color: "#8E9196",  // Gray color
-    position: { y: 30 }, // Reduced vertical spacing from 50 to 30
+    position: { y: 30 }, // Spacing between base fees and block rewards
     subItems: [
-      { text: "priority fees", id: "priority-fees", color: "#10B981" },
+      { 
+        text: "priority fees", 
+        id: "priority-fees", 
+        color: "#10B981"
+      },
       { 
         text: "mev", 
         id: "mev", 
         color: "#10B981",
-        position: { y: 40 } // Increased space from 20px to 40px for more margin (20px) at bottom
+        position: { y: 20 } // Standard spacing between items
       }
     ]
   }

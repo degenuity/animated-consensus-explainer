@@ -41,6 +41,12 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
     
     // Special handling for block rewards with children
     if (isBlockRewards && hasChildren) {
+      // Calculate total height for block rewards container
+      const childItems = item.subItems || [];
+      const childrenHeight = childItems.length * 40 + (childItems.length - 1) * 20; // height + spacing
+      const additionalSpacing = childItems.reduce((acc, child) => acc + (child.position?.y || 0), 0);
+      const containerHeight = 40 + childrenHeight + additionalSpacing + 20; // parent + children + spacing + bottom padding
+      
       // Add the block rewards parent item
       renderedItems.push(
         <SubItemRenderer 
@@ -51,7 +57,7 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
           y={y}
           yOffset={yOffset}
           width={width - 10} // Added padding of 10px to ensure items stay inside
-          height={120} // Further reduced height from 145 to 120 for block rewards
+          height={containerHeight} // Dynamic height based on children
           isNested={false}
         />
       );
@@ -70,7 +76,7 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
       });
       
       // Move down past the block rewards section
-      yOffset += 120 + 20; // Item height + spacing (further reduced from 145)
+      yOffset += containerHeight + 20; // Item height + spacing
     } else if (!isNetworkCosts && item.subItems && item.subItems.length > 0) {
       // Regular parent item with children (but not network costs)
       renderedItems.push(
