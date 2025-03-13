@@ -74,17 +74,17 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // NEW Line: Base Fees bottom to Block Rewards - adjusted with reduced distance
-  { 
-    path: "M 1090 210 L 1090 232", // Further adjusted to touch the top of block rewards exactly
-    color: "#EAB308", 
-    animationIndex: 8,
-    dotPosition: { x: "1090", y: "220" },
-    animateMotion: true,
-    animationDirection: "down" as const,
-    id: "base-fees-bottom-to-block-rewards",
-    renderOrder: "foreground" as const
-  },
+  // Removing the bottom part of the connection as well
+  // { 
+  //   path: "M 1090 210 L 1090 232",
+  //   color: "#EAB308", 
+  //   animationIndex: 8,
+  //   dotPosition: { x: "1090", y: "220" },
+  //   animateMotion: true,
+  //   animationDirection: "down" as const,
+  //   id: "base-fees-bottom-to-block-rewards",
+  //   renderOrder: "foreground" as const
+  // },
   
   // Line 7: Internal Rewards to Total Validator Rewards
   { 
@@ -102,4 +102,3 @@ export const connectionPaths = [
   // Removed: Line 8: Block Rewards to Total Validator Rewards
   // This connection has been removed as requested
 ];
-
