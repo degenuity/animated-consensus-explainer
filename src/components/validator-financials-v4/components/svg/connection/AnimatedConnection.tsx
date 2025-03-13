@@ -23,6 +23,9 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   dotVariants,
   animationDuration
 }) => {
+  // Skip rendering if path is missing
+  if (!path) return null;
+  
   return (
     <g>
       <motion.path
@@ -52,7 +55,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         />
       )}
       
-      {animateMotion && (
+      {animateMotion && path && (
         <motion.g
           custom={animationIndex}
           initial={{ opacity: 0 }}

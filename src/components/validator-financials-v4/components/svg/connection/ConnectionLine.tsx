@@ -35,6 +35,11 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     );
   }
   
+  // Skip rendering if path is missing
+  if (!path) {
+    return null;
+  }
+  
   // Regular rendering with animations
   return (
     <AnimatedConnection 
