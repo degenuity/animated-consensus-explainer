@@ -4,17 +4,17 @@ export const viewBoxWidth = 1500;
 export const viewBoxHeight = 850;
 
 // DESKTOP SETTINGS:
-// For desktop, we want maximum zoom while maintaining full visibility
-// Small padding for safety but otherwise a tight fit to maximize diagram size
-const desktopPadding = 40;
+// For desktop, we want maximum zoom with minimal padding
+// Much smaller padding for desktop to maximize zoom level
+const desktopPadding = 20; // Reduced from 40 to zoom in more
 export const desktopViewBox = `${-desktopPadding} ${-desktopPadding} ${viewBoxWidth + 2*desktopPadding} ${viewBoxHeight + 2*desktopPadding}`;
 
 // MOBILE SETTINGS:
-// For mobile, we need the entire diagram visible with no cropping
-// Use a more generous padding to ensure everything is visible
+// For mobile, ensure all content is visible with optimized padding
+// More strategic padding to prevent cropping while maintaining good zoom
 const mobilePadding = {
-  x: 180, // Wider horizontal padding for mobile
-  y: 100,  // Vertical padding
+  x: 100, // Reduced horizontal padding but still enough to prevent cropping
+  y: 70,  // Reduced vertical padding
 };
 
 // Mobile viewBox calculation with strategic padding

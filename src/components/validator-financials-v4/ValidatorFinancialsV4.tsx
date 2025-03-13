@@ -29,10 +29,10 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
       <div className="max-w-7xl mx-auto w-full py-1 sm:py-2 md:py-3 relative flex flex-col items-center overflow-visible">
         <Title />
         
-        {/* Diagram container with responsive height and overflow handling */}
+        {/* Diagram container with maximized height for better zoom */}
         <div className={`
           relative w-full overflow-visible
-          h-[390px] sm:h-[420px] md:h-[460px] lg:h-[510px]
+          h-[390px] sm:h-[430px] md:h-[480px] lg:h-[530px]
           flex items-center justify-center
         `}>
           <DiagramSVG key={animationKey} />
