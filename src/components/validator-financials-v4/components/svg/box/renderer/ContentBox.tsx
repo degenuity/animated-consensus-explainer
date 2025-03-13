@@ -28,19 +28,18 @@ const ContentBox: React.FC<ContentBoxProps> = ({
 }) => {
   const { text, desc, id, isHorizontal } = item;
   
-  // Adjust stroke color for nested items to match parent's color when in network costs box
-  const strokeColor = isNested && id && (id === "priority-fees" || id === "mev") 
-    ? "#10B981" 
-    : item.color || "#3B82F6";
+  // Use the item's color directly
+  const strokeColor = item.color || "#3B82F6";
   
-  // For block rewards title, use a different style
+  // Determine if this is the block rewards parent or a nested item
   const isBlockRewards = id === "block-rewards";
+  const isPriorityFeeOrMEV = id === "priority-fees" || id === "mev";
   
   // Adjust text styles based on the element role
   const fontSize = isNested ? "text-sm" : (isBlockRewards ? "text-lg" : "text-sm");
-  const fontWeight = isBlockRewards ? "font-medium" : "font-medium";
+  const fontWeight = "font-medium";
   
-  // Set text alignment - left align block rewards and nested items, center align horizontal items
+  // Set text alignment - center align only horizontal items
   const textAlign = isHorizontal ? "text-center" : "text-left";
 
   return (
@@ -74,7 +73,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>
           ) : (
-            <div className={`flex items-center h-full ${fontWeight} ${fontSize} ${isHorizontal ? 'justify-center' : ''}`} style={{ color: strokeColor }}>
+            <div className={`flex items-center h-full ${fontWeight} ${fontSize} ${isHorizontal ? 'justify-center' : 'justify-start'}`} style={{ color: strokeColor }}>
               {text}
             </div>
           )}

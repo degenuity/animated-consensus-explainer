@@ -34,10 +34,13 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
     const hasChildren = item.subItems && item.subItems.length > 0;
     const isBlockRewards = item.id === 'block-rewards';
     
-    // Give more height to block rewards to fit its children
-    const itemHeight = isBlockRewards && hasChildren 
-      ? 150  // Increased height to 150px to accommodate child items with better padding
-      : (item.desc ? 50 : 40);
+    // Special heights for block rewards and its children
+    let itemHeight = item.desc ? 50 : 40;
+    
+    if (isBlockRewards && hasChildren) {
+      // Give more height to block rewards to fit its children properly
+      itemHeight = 160; // Increased height to allow proper spacing for child items
+    }
     
     // Special handling for network costs box and block rewards
     const isNetworkCosts = boxTitle === "network usage costs";
@@ -60,17 +63,17 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
     // Move down for the next item or child items
     const itemSpacing = 20; // Spacing between items
 
-    // If this is block rewards with children, process children specially
+    // If this is block rewards with children, handle specially to match the total stake design
     if (isBlockRewards && hasChildren) {
-      // Space for children inside block rewards
-      const childYStart = yOffset + 50; // Start position inside block rewards
+      // Start position inside block rewards - leave more space from the block rewards title
+      const childYStart = yOffset + 40; 
       const childSpacing = 20; // Spacing between child items
       let childY = childYStart;
       
       item.subItems?.forEach((subItem, subIndex) => {
-        // Calculate width and position for child item (priority fees and MEV)
+        // Calculate position and size for child items (priority fees and MEV)
         const childItemHeight = 40;
-        const childItemWidth = width - paddingLeft - 40; // Less width than parent
+        const childItemWidth = width - paddingLeft - 40; // Less width than parent, with some padding
         const childItemX = x + paddingLeft + 20; // Indented from parent
         
         renderedItems.push(

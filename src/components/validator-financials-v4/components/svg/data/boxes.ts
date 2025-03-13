@@ -51,12 +51,12 @@ export const boxes = [
     borderColor: "#3B82F6"
   },
   
-  // Network Costs Box - increased height to accommodate nested block rewards
+  // Network Costs Box - increased height for block rewards
   {
     x: 950,
     y: 120,
     width: 280,
-    height: 350, // Increased from 330 to 350 to properly fit the expanded block rewards with proper padding
+    height: 350, // Adjusted height to accommodate the redesigned block rewards
     title: "network usage costs",
     icon: "network-costs" as const,
     color: "#F97316",

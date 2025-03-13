@@ -93,6 +93,30 @@ const BoxContainer: React.FC<BoxContainerProps> = ({
   };
 
   const renderSubBox = (box: SubBox, index: number) => {
+    // Special case for block rewards in network costs
+    const isBlockRewards = box.title === "block rewards";
+    
+    if (isBlockRewards && box.subBoxes && box.subBoxes.length > 0) {
+      return (
+        <div 
+          key={index}
+          className={`col-span-2 p-4 rounded border border-blue-500/20 bg-[#1a1f31]`}
+        >
+          <div className="text-white text-lg mb-3">{box.title}</div>
+          <div className="space-y-3 pl-3">
+            {box.subBoxes.map((subBox, subIndex) => (
+              <div 
+                key={`subbox-${subIndex}`}
+                className="p-3 rounded border border-blue-500/20 bg-[#1a1f31]"
+              >
+                <div className="text-blue-400 text-sm">{subBox.title}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+    
     return (
       <div 
         key={index}

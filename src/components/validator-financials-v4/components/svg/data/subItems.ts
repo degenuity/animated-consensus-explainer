@@ -16,9 +16,10 @@ export const networkCostsSubitems = [
   { 
     text: "block rewards",
     id: "block-rewards",
+    color: "#3B82F6",  // Changed to blue to match total stake
     subItems: [
-      { text: "priority fees", id: "priority-fees", color: "#10B981" },
-      { text: "MEV", id: "mev", color: "#10B981" }
+      { text: "priority fees", id: "priority-fees", color: "#3B82F6" },  // Changed to blue
+      { text: "mev", id: "mev", color: "#3B82F6" }  // Changed to blue and lowercase
     ]
   }
 ];
