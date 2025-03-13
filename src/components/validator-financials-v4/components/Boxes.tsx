@@ -104,8 +104,8 @@ const Boxes: React.FC = () => {
         animationDelay={0.8}
         subBoxes={[
           {
-            title: "stake weight",
-            description: "amount of XNT staked",
+            title: "performance", // Swapped position with stake weight
+            description: "from recorded history",
             fullWidth: true
           },
           {
@@ -114,8 +114,8 @@ const Boxes: React.FC = () => {
             fullWidth: false
           },
           {
-            title: "performance/reputation",
-            description: "from recorded history",
+            title: "stake weight", // Swapped position with performance
+            description: "amount of XNT staked",
             fullWidth: false
           }
         ]}

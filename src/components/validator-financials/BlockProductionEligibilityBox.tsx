@@ -23,8 +23,8 @@ const BlockProductionEligibilityBox = () => (
           transition={{ duration: 0.3, delay: 0.5 }}
           className="border border-blue-500/70 bg-gray-800/50 p-3 rounded"
         >
-          <div className="text-blue-400 text-sm font-medium">stake weight</div>
-          <div className="text-xs text-gray-300 mt-1">amount of XNT staked</div>
+          <div className="text-blue-400 text-sm font-medium">performance</div>
+          <div className="text-xs text-gray-300 mt-1">from recorded history</div>
         </motion.div>
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
@@ -41,8 +41,8 @@ const BlockProductionEligibilityBox = () => (
           transition={{ duration: 0.3, delay: 0.7 }}
           className="border border-blue-500/70 bg-gray-800/50 p-3 rounded"
         >
-          <div className="text-blue-400 text-sm font-medium">performance</div>
-          <div className="text-xs text-gray-300 mt-1">from recorded history</div>
+          <div className="text-blue-400 text-sm font-medium">stake weight</div>
+          <div className="text-xs text-gray-300 mt-1">amount of XNT staked</div>
         </motion.div>
       </div>
     </div>

@@ -13,15 +13,15 @@ const BlockProductionEligibilityBoxV2 = () => {
       
       {/* Using grid with dramatically larger gap for more spacing */}
       <div className="grid grid-cols-5 gap-12 px-6 py-4">
-        {/* First column */}
+        {/* First column - now Performance */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.5 }}
           className="border border-blue-500/70 bg-[#141b29] p-4 rounded col-span-1"
         >
-          <div className="text-blue-400 text-sm font-medium">stake weight</div>
-          <div className="text-xs text-gray-300 mt-1">amount of XNT staked</div>
+          <div className="text-blue-400 text-sm font-medium">performance</div>
+          <div className="text-xs text-gray-300 mt-1">from recorded history</div>
         </motion.div>
 
         {/* First operator */}
@@ -34,7 +34,7 @@ const BlockProductionEligibilityBoxV2 = () => {
           <span className="text-[#0E7490] text-3xl font-normal">×</span>
         </motion.div>
 
-        {/* Second column */}
+        {/* Second column - still Randomness */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -55,15 +55,15 @@ const BlockProductionEligibilityBoxV2 = () => {
           <span className="text-[#0E7490] text-3xl font-normal">×</span>
         </motion.div>
         
-        {/* Third column */}
+        {/* Third column - now Stake Weight */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.7 }}
           className="border border-blue-500/70 bg-[#141b29] p-4 rounded col-span-1"
         >
-          <div className="text-blue-400 text-sm font-medium">performance</div>
-          <div className="text-xs text-gray-300 mt-1">from recorded history</div>
+          <div className="text-blue-400 text-sm font-medium">stake weight</div>
+          <div className="text-xs text-gray-300 mt-1">amount of XNT staked</div>
         </motion.div>
       </div>
     </div>

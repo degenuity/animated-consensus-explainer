@@ -1,3 +1,4 @@
+
 // Subitem definitions for different boxes
 
 export const internalRewardsSubitems = [
@@ -41,9 +42,9 @@ export const totalStakeSubitems = [
 
 export const blockProductionSubitems = [
   { 
-    text: "stake weight", 
-    desc: "amount of XNT staked", 
-    id: "stake-weight",
+    text: "performance", // Swapped with stake weight (moved from position 5 to position 1)
+    desc: "from recorded history", 
+    id: "performance-reputation",
     color: "#3B82F6",
     isHorizontal: true
   },
@@ -69,9 +70,9 @@ export const blockProductionSubitems = [
     isOperator: true
   },
   { 
-    text: "performance", // Kept as "performance" without "/reputation"
-    desc: "from recorded history", 
-    id: "performance-reputation",
+    text: "stake weight", // Swapped with performance (moved from position 1 to position 5)
+    desc: "amount of XNT staked", 
+    id: "stake-weight",
     color: "#3B82F6",
     isHorizontal: true
   }
