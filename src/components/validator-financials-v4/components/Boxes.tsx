@@ -131,17 +131,16 @@ const Boxes: React.FC = () => {
         useAlternativeStyle={true}
         subBoxes={[
           {
+            title: "total validator rewards",
+            description: "aggregate",
+            fullWidth: false,
+            customColor: "green"
+          },
+          {
             title: "operational costs",
             description: "only cost is server",
             fullWidth: false,
             customColor: "yellow"
-          },
-          {
-            title: "total validator rewards",
-            description: "aggregate",
-            fullWidth: false,
-            customColor: "green",
-            hasAddIcon: true
           },
         ]}
       />

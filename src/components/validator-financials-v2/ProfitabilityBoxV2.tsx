@@ -13,36 +13,38 @@ const ProfitabilityBoxV2 = () => {
       
       {/* Using grid with dramatically larger gap for more spacing */}
       <div className="grid grid-cols-3 gap-16 px-6 py-4">
-        {/* First column */}
+        {/* First column - Now showing total validator rewards (swapped) */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.6 }}
-          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded col-span-1"
+          className="border border-green-500/70 bg-[#141b29] p-3 rounded col-span-1"
+          style={{ width: "120%" }} // Increased width by 20%
         >
-          <div className="text-yellow-400 text-sm font-medium">operational costs</div>
-          <div className="text-xs text-gray-300 mt-1">only cost is server</div>
+          <div className="text-green-400 text-sm font-medium">total validator rewards</div>
+          <div className="text-xs text-gray-300 mt-1">aggregate</div>
         </motion.div>
         
-        {/* Middle column with operator */}
+        {/* Middle column with operator - Changed from + to - */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.65 }}
           className="flex items-center justify-center"
         >
-          <span className="text-[#8E9196] text-3xl font-normal">+</span>
+          <span className="text-[#8E9196] text-3xl font-normal">-</span>
         </motion.div>
         
-        {/* Third column */}
+        {/* Third column - Now showing operational costs (swapped) */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.7 }}
-          className="border border-green-500/70 bg-[#141b29] p-3 rounded col-span-1"
+          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded col-span-1"
+          style={{ width: "120%" }} // Increased width by 20%
         >
-          <div className="text-green-400 text-sm font-medium">total validator rewards</div>
-          <div className="text-xs text-gray-300 mt-1">aggregate</div>
+          <div className="text-yellow-400 text-sm font-medium">operational costs</div>
+          <div className="text-xs text-gray-300 mt-1">only cost is server</div>
         </motion.div>
       </div>
     </div>
