@@ -1,3 +1,4 @@
+
 // Subitem definitions for different boxes
 
 export const internalRewardsSubitems = [
@@ -24,7 +25,7 @@ export const networkCostsSubitems = [
         position: { y: 5 } // Reduced from 25 to 5px (moved up by 20px)
       },
       { 
-        text: "mev", 
+        text: "MEV", // Changed from "mev" to "MEV"
         id: "mev", 
         color: "#10B981",
         position: { y: 65 } // Keeping this the same

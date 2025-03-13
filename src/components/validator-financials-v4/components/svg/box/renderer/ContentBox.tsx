@@ -39,6 +39,17 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const isOperationalCosts = id === "operational-costs";
   const isDelegatedStake = id === "delegated-stake";
   const isCommission = id === "commission";
+  const isStakingRewards = id === "staking-rewards";
+  const isOwnStake = id === "own-stake";
+  
+  // Boxes that need centered text
+  const needsCenteredText = 
+    isCommission || 
+    isStakingRewards || 
+    isDelegatedStake || 
+    isOwnStake || 
+    isPriorityFeeOrMEV || 
+    isBaseFees;
   
   // Special logging for commission box
   if (isCommission) {
@@ -125,8 +136,8 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   // Add medium font weight for block rewards to match other headers
   const fontWeight = isBlockRewards ? "font-medium" : "font-medium";
   
-  // Always left-align text regardless of whether it's horizontal or not
-  const textAlign = "text-left";
+  // Set text alignment based on whether the box needs centered text
+  const textAlign = needsCenteredText ? "text-center" : "text-left";
   
   // Special styling for block rewards - force it to have white text without overrides
   const textColor = isBlockRewards ? "text-white !important" : `text-${strokeColor}`;
@@ -134,6 +145,9 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const verticalAlignment = isBlockRewards ? "items-start" : "justify-center";
   // Add padding to align text properly
   const paddingTop = isBlockRewards ? "pt-2" : "";
+
+  // Display "MEV" in uppercase for the MEV box
+  const displayText = id === "mev" ? "MEV" : text;
 
   console.log(`Rendering ContentBox for: ${id} with color: ${strokeColor}, yOffset: ${yOffset}`);
 
@@ -166,16 +180,16 @@ const ContentBox: React.FC<ContentBoxProps> = ({
           {desc ? (
             <>
               <div className={`${textSize} ${fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
-                {text}
+                {id === "mev" ? "MEV" : text}
               </div>
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>
           ) : (
             <div 
-              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${textSize} ${fontWeight} justify-start`} 
+              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${textSize} ${fontWeight} ${needsCenteredText ? 'justify-center w-full' : 'justify-start'}`} 
               style={{ color: isBlockRewards ? 'white' : strokeColor }}
             >
-              {text}
+              {displayText}
             </div>
           )}
         </div>
