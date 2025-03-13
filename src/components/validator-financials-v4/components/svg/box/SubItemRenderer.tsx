@@ -57,7 +57,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
       adjustedWidth={adjustedWidth}
       itemHeight={itemHeight}
       isNested={isNested}
-      hasPlus={!!item.hasPlus}
+      hasPlus={item.hasPlus || false}
     />
   );
 };
