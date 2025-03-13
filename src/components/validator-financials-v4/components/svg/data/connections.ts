@@ -101,5 +101,20 @@ export const connectionPaths = [
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
     animationDuration: 1.8
+  },
+  
+  // Own Stake to Staking Rewards
+  // Based on the console logs: own stake box is positioned below delegated stake (at y=290)
+  // and staking rewards right edge is likely at the same x coordinate as the commission box
+  { 
+    path: "M 662 310 L 558 310", 
+    color: "#0EA5E9", 
+    animationIndex: 11,
+    animateMotion: true,
+    dotPosition: { x: "610", y: "310" },
+    animationDirection: "left" as const,
+    id: "own-stake-to-staking-rewards", 
+    renderOrder: "foreground" as const,
+    animationDuration: 1.8
   }
 ];
