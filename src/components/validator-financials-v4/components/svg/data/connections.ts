@@ -109,4 +109,6 @@ export const connectionPaths = [
     renderOrder: "foreground" as const,
     animationDuration: 1.8
   }
+  
+  // Removed any connections that might have been causing the dot in the top-left
 ];

@@ -23,14 +23,30 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   dotVariants,
   animationDuration
 }) => {
-  // Skip rendering any dots positioned in the upper left corner (0-60px range)
-  const shouldRenderDot = !dotPosition || 
-                         !(parseFloat(dotPosition.x) < 60 && parseFloat(dotPosition.y) < 60);
-  
-  // Skip rendering any paths that start at the upper left corner
-  if (path && (path.startsWith("M 0,0") || path.startsWith("M0,0") || path.startsWith("M 0 0"))) {
+  // Skip rendering ANY connections that:
+  // 1. Start at the top-left corner
+  if (path && (
+      path.startsWith("M 0,0") || 
+      path.startsWith("M0,0") || 
+      path.startsWith("M 0 0") ||
+      path.startsWith("M 0") ||
+      path.startsWith("M0")
+    )) {
     return null;
   }
+  
+  // 2. Have any coordinates in the top-left region
+  const pathSegments = path ? path.split(/[ML]\s*/).filter(Boolean) : [];
+  for (const segment of pathSegments) {
+    const coords = segment.trim().split(/[\s,]+/).map(Number);
+    if (coords.length >= 2 && coords[0] < 100 && coords[1] < 100) {
+      return null;
+    }
+  }
+  
+  // 3. Have dot positions in the top-left
+  const shouldRenderDot = !dotPosition || 
+                         !(parseFloat(dotPosition.x) < 100 && parseFloat(dotPosition.y) < 100);
   
   return (
     <g>

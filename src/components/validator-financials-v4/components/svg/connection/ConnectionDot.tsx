@@ -20,77 +20,41 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animated = false,
   animationDuration = 1.5
 }) => {
-  // Enhanced debugging for animation paths - especially for stake weight
-  useEffect(() => {
-    if (path && (path.includes("stake-weight") || path.includes("total-stake-to-stake"))) {
-      console.log("Stake weight connection path analysis:", { 
-        path,
-        pathType: typeof path,
-        pathLength: path.length,
-        pathSegments: path.split(/[ML]\s*/).filter(Boolean),
-        animated, 
-        animationDuration
-      });
-    }
-  }, [path, animated, animationDuration]);
+  // Remove all debugging logs - they're not helping and cluttering the console
   
-  // Detailed path parsing to extract exact endpoints
-  useEffect(() => {
-    if (path) {
-      // First, clean up the path string by ensuring consistent spacing
-      const cleanPath = path.replace(/([ML])\s*/g, '$1 ').trim();
-      
-      // Parse the path to extract all coordinates precisely
-      const segments = cleanPath.split(/([ML])\s/).filter(Boolean);
-      const coordinates = [];
-      let currentCommand = '';
-      
-      for (let i = 0; i < segments.length; i++) {
-        if (segments[i] === 'M' || segments[i] === 'L') {
-          currentCommand = segments[i];
-        } else if (currentCommand) {
-          const coords = segments[i].trim().split(/\s+/);
-          if (coords.length >= 2) {
-            coordinates.push({ 
-              command: currentCommand, 
-              x: parseFloat(coords[0]), 
-              y: parseFloat(coords[1]) 
-            });
-          }
-        }
-      }
-      
-      // For the stake weight path, provide extremely detailed logging
-      if (path.includes("stake-weight") || path.includes("total-stake-to-stake")) {
-        console.log("Detailed stake weight path analysis:", {
-          rawPath: path,
-          cleanPath,
-          segments,
-          coordinates,
-          startPoint: coordinates.length > 0 ? coordinates[0] : null,
-          endPoint: coordinates.length > 0 ? coordinates[coordinates.length - 1] : null,
-          allPoints: coordinates
-        });
-      }
-    }
-  }, [path]);
-  
-  // Check if this is a dot that should be displayed
-  // Skip rendering if cx or cy are very near the upper left corner (0-60 range)
+  // First check: if cx and cy are defined, ensure they're not in the top-left corner
   if (cx && cy) {
     const cxNum = parseFloat(cx);
     const cyNum = parseFloat(cy);
-    if ((cxNum < 60 && cyNum < 60) || isNaN(cxNum) || isNaN(cyNum)) {
-      return null; // Don't render dots in the upper left corner
+    // Expanded check to catch more edge cases - make the safe zone larger (100px)
+    if ((cxNum < 100 && cyNum < 100) || isNaN(cxNum) || isNaN(cyNum)) {
+      return null; // Don't render dots in the upper left corner region
+    }
+  }
+  
+  // Second check: if this is an animated dot with a path, ensure the path doesn't start or end in the corner
+  if (path) {
+    // Check if path starts at or very near the origin (top-left corner)
+    if (path.startsWith("M 0") || 
+        path.startsWith("M0") || 
+        path.startsWith("M 0,0") || 
+        path.startsWith("M0,0") ||
+        path.startsWith("M 0 0")) {
+      return null;
+    }
+    
+    // Also check if ANY part of the path goes through the top-left corner
+    const pathSegments = path.split(/[ML]\s*/).filter(Boolean);
+    for (const segment of pathSegments) {
+      const coords = segment.trim().split(/[\s,]+/).map(Number);
+      // If any coordinates are in the top-left corner zone
+      if (coords.length >= 2 && coords[0] < 100 && coords[1] < 100) {
+        return null;
+      }
     }
   }
   
   if (animated && path) {
-    // Skip paths that are positioned in the upper left corner
-    if (path.startsWith("M 0") || path.startsWith("M0")) {
-      return null;
-    }
-    
     return (
       <g>
         <circle
