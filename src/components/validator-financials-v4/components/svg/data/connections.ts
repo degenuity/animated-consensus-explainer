@@ -106,13 +106,13 @@ export const connectionPaths = [
   
   // Base Fee right side to Deflation
   // After analyzing the image, we need to increase the x-coordinate at the start point
-  // Based on the image, the connection should start from the visual edge of the base fees box
+  // Based on the provided image, adjusting the starting x coordinate to match the box edge
   { 
-    path: "M 1200 190 L 1300 240", 
+    path: "M 1230 190 L 1300 240", 
     color: "#EAB308", 
     animationIndex: 12,
     animateMotion: true,
-    dotPosition: { x: "1240", y: "215" },
+    dotPosition: { x: "1265", y: "215" },
     id: "base-fee-right-to-deflation",
     renderOrder: "foreground" as const,
     animationDuration: 1.8
