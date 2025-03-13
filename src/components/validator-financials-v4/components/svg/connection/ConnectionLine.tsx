@@ -52,33 +52,48 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
     const target = getTargetBoxId();
     if (!target) return;
     
-    // Handle animation completion to trigger the collision event
-    const handleAnimationIteration = () => {
-      // When the animation completes, dispatch a custom event
+    // For debugging
+    console.log(`Connection line setup: ${id} → ${target}`);
+    
+    // Handle animation events to trigger the collision
+    const handleAnimationEnd = () => {
+      // When the animation reaches the end, dispatch a custom event
+      const targetBoxId = target;
+      console.log(`🔵 Dot collision event: ${id} → ${targetBoxId}`);
+      
       const collisionEvent = new CustomEvent('dotCollision', {
         detail: { 
-          targetId: target,
+          targetId: targetBoxId,
           dotColor: color,
           sourceId: id,
           timestamp: Date.now() // Add timestamp to ensure uniqueness
-        }
+        },
+        bubbles: true, // Make sure event bubbles up the DOM
+        cancelable: true,
       });
-      window.dispatchEvent(collisionEvent);
       
-      // Log collision for debugging
-      console.log(`🔵 Dot reached destination: ${target} from ${id || 'unknown'}`);
+      // Dispatch the event on window to ensure it's globally available
+      window.dispatchEvent(collisionEvent);
     };
     
-    // Add event listeners
+    // Add multiple event listeners to ensure we catch the animation completion
     const dotElement = dotRef.current;
-    dotElement.addEventListener('animationiteration', handleAnimationIteration);
+    dotElement.addEventListener('animationend', handleAnimationEnd);
+    dotElement.addEventListener('animationiteration', handleAnimationEnd);
+    
+    // Set up a repeating timer as a backup to ensure collisions happen
+    const timer = setInterval(() => {
+      handleAnimationEnd();
+    }, animationDuration * 1000 + 100); // Slightly longer than animation duration
     
     return () => {
       if (dotElement) {
-        dotElement.removeEventListener('animationiteration', handleAnimationIteration);
+        dotElement.removeEventListener('animationend', handleAnimationEnd);
+        dotElement.removeEventListener('animationiteration', handleAnimationEnd);
       }
+      clearInterval(timer);
     };
-  }, [color, id]);
+  }, [color, id, animationDuration]);
   
   // Calculate animation delay based on index
   const delay = animationIndex * 0.1;

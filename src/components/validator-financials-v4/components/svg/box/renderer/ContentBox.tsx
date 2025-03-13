@@ -54,28 +54,34 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   
   // Listen to global events for dot collisions
   useEffect(() => {
+    // Debug log
+    console.log(`ContentBox mounted: ${id}`);
+    
     // Define a custom event listener for dot collisions
     const handleDotCollision = (event: CustomEvent) => {
       // Check if this box's ID matches the target in the event
       if (event.detail.targetId === id) {
+        // Debug log
+        console.log(`✨ HIGHLIGHT TRIGGERED for item: ${id}, color: ${strokeColor}`);
+        
         // Trigger highlight animation
         setIsHighlighted(true);
         
         // Reset after animation completes
         setTimeout(() => {
           setIsHighlighted(false);
-        }, 600);
+        }, 800); // Longer duration for better visibility
       }
     };
 
     // Add event listener
-    window.addEventListener('dotCollision' as any, handleDotCollision as EventListener);
+    window.addEventListener('dotCollision', handleDotCollision as EventListener);
     
     // Clean up
     return () => {
-      window.removeEventListener('dotCollision' as any, handleDotCollision as EventListener);
+      window.removeEventListener('dotCollision', handleDotCollision as EventListener);
     };
-  }, [id]);
+  }, [id, strokeColor]);
   
   // Special logging for commission box
   if (isCommission) {
@@ -188,9 +194,22 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   return (
     <motion.g
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1.2 + index * 0.1 }}
+      animate={{ 
+        opacity: 1,
+        scale: isHighlighted ? [1, 1.05, 1] : 1 // Add subtle scale animation when highlighted
+      }}
+      transition={{ 
+        delay: 1.2 + index * 0.1,
+        scale: {
+          duration: 0.5,
+          ease: "easeInOut",
+          times: [0, 0.5, 1]
+        }
+      }}
       data-item-id={id}
+      style={{
+        transformOrigin: 'center'
+      }}
     >
       <rect
         x={adjustedX}
@@ -200,12 +219,12 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         rx="4"
         fill="transparent"
         stroke={isHighlighted ? getHighlightColor() : strokeColor}
-        strokeWidth={isHighlighted ? "2.5" : "1.5"}
+        strokeWidth={isHighlighted ? "3" : "1.5"} // Increase width difference
         data-item-rect={id}
-        // Add subtle motion animation when highlighted
+        // Add more dramatic animation when highlighted
         style={{
           transition: 'stroke 0.3s ease, stroke-width 0.3s ease',
-          filter: isHighlighted ? 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.6))' : 'none'
+          filter: isHighlighted ? 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))' : 'none' // Stronger glow
         }}
       />
       <foreignObject 
