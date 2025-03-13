@@ -28,7 +28,8 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   height,
   isNested = false
 }) => {
-  const { name, desc, color, fill, isHeader, isSubHeader, smallerText } = item;
+  // Instead of using name and fill which don't exist, use text and other properties that do exist in SubItem
+  const { text, desc, color, isHeader, isSubHeader, smallerText } = item;
   
   // Font size classes based on header type and smallerText flag
   let titleClass = "text-white font-medium";
@@ -49,9 +50,8 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
     ? { border: `1px solid ${color || '#374151'}` }
     : { border: `1px solid ${color || '#374151'}60` };
   
-  const bgStyle = fill 
-    ? { background: fill } 
-    : { background: 'rgba(17, 24, 39, 0.7)' };
+  // Use a consistent background without the 'fill' property
+  const bgStyle = { background: 'rgba(17, 24, 39, 0.7)' };
   
   // Animation delay based on index
   const animDelay = index * 0.1 + 0.3;
@@ -70,7 +70,7 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         className="h-full p-2 rounded"
         style={{ ...borderStyle, ...bgStyle }}
       >
-        <div className={titleClass}>{name}</div>
+        <div className={titleClass}>{text}</div>
         {desc && <div className="text-gray-300 text-xs mt-1">{desc}</div>}
       </div>
     </motion.foreignObject>
