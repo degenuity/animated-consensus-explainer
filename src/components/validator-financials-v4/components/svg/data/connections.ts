@@ -86,5 +86,18 @@ export const connectionPaths = [
     id: "internal-rewards-to-total-validator-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 2.5
+  },
+  
+  // NEW LINE: Delegated Stake to Commission
+  { 
+    path: "M 650 240 L 580 240", 
+    color: "#0EA5E9", 
+    animationIndex: 10,
+    animateMotion: true,
+    dotPosition: { x: "615", y: "240" },
+    animationDirection: "left" as const,
+    id: "delegated-stake-to-commission", 
+    renderOrder: "foreground" as const,
+    animationDuration: 1.8
   }
 ];
