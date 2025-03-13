@@ -24,7 +24,7 @@ export const networkCostsSubitems = [
         text: "mev", 
         id: "mev", 
         color: "#10B981",
-        position: { y: 10 } // Adding space between MEV and bottom of block rewards
+        position: { y: 20 } // Increased space from 10px to 20px for more margin (6px) at bottom
       }
     ]
   }
