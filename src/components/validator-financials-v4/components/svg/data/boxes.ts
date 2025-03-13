@@ -26,7 +26,7 @@ export const boxes = [
   // Internal Rewards Box - Aligned with Inflation's center Y value (240 + 100/2 = 290)
   {
     x: 320,
-    y: 210, // Aligned to center at Y=290 (290 - 160/2 = 210)
+    y: 210, // Adjusted from 180 to 210 to center at Inflation's Y center (290 - 160/2 = 210)
     width: 260,
     height: 160,
     title: "internal rewards",
@@ -40,7 +40,7 @@ export const boxes = [
   // Total Stake Box - Also aligned with Inflation's center Y value
   {
     x: 635,
-    y: 210, // Aligned to center at Y=290 (290 - 160/2 = 210)
+    y: 210, // Adjusted from 180 to 210 to center at Inflation's Y center (290 - 160/2 = 210)
     width: 260,
     height: 160,
     title: "total stake",
@@ -51,10 +51,10 @@ export const boxes = [
     borderColor: "#3B82F6"
   },
   
-  // Network Costs Box - Aligned with Inflation's center Y value, but has more height
+  // Network Costs Box
   {
     x: 950,
-    y: 135, // Adjusted to align center with inflation (290 - 310/2 = 135)
+    y: 120,
     width: 280,
     height: 310,
     title: "network usage costs",
