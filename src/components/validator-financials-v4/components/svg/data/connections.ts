@@ -72,18 +72,8 @@ export const connectionPaths = [
     labelPosition: { x: 1070, y: 205 },
     id: "base-fees-to-block-rewards",
     renderOrder: "background" as const
-  },
-  
-  // Internal Rewards to Total Validator Rewards
-  { 
-    path: "M 450 400 L 450 430 L 945 430 L 945 500", 
-    color: "#10B981", 
-    animationIndex: 6,
-    dotPosition: { x: "700", y: "430" },
-    animateMotion: true,
-    animationDirection: "right" as const,
-    id: "internal-rewards-to-total-validator-rewards",
-    renderOrder: "foreground" as const,
-    animationDuration: 3
   }
+  
+  // Removed: Internal Rewards to Total Validator Rewards line
+  // Removed: Any connection from Block Rewards to Total Validator Rewards
 ];
