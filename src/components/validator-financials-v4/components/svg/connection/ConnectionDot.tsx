@@ -25,10 +25,10 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     console.log("ConnectionDot for base-fee-bottom-to-block-rewards with:", { animated, animationDuration, path });
   }
   
-  // Add logging for the block-rewards-to-total-validator-rewards path
-  if (path === "M 1090 410 L 1090 450 L 850 450") {
+  // Add logging for the updated block-rewards-to-total-validator-rewards path
+  if (path === "M 1090 410 L 1090 450 L 960.75 450 L 960.75 550") {
     console.log("ConnectionDot for block-rewards-to-total-validator-rewards with:", { animated, animationDuration, path });
-    console.log("Total validator rewards destination:", { x: 850, y: 450 });
+    console.log("Total validator rewards destination:", { x: 960.75, y: 550 });
   }
   
   // Add specific logging for profitability box components with exact coordinates
