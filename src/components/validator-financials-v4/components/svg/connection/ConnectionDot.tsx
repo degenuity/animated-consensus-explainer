@@ -26,14 +26,13 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   // Only block dots at exact origin (0,0)
   // This is the key fix - we only block dots that are exactly at 0,0
   if ((cx === "0" && cy === "0") || (cx === "0.0" && cy === "0.0")) {
-    console.error("BLOCKED DOT AT EXACT ORIGIN:", { cx, cy, color });
+    console.log("Prevented rendering dot at origin:", { cx, cy, color });
     return null;
   }
   
   // For animated dots, only block if the path starts exactly at the origin
-  // We only check for the exact pattern to avoid blocking legitimate paths
-  if (animated && path && path.match(/^M\s*0\s*,\s*0\s+/)) {
-    console.error("BLOCKED DOT WITH PATH STARTING AT EXACT ORIGIN:", { path: path.substring(0, 20), color });
+  if (animated && path && (path === "M 0,0" || path === "M0,0" || path.startsWith("M 0,0 ") || path.startsWith("M0,0 "))) {
+    console.log("Prevented rendering animated dot with path starting at origin:", { path: path.substring(0, 20), color });
     return null;
   }
 
