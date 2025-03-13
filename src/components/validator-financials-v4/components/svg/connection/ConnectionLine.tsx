@@ -16,39 +16,35 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     ...restProps
   } = props;
   
-  // Global safety check: Log every connection line rendering attempt
-  console.log(`ConnectionLine render attempt: ${id}`, { 
+  // Debugging: Log connection rendering with detailed info
+  console.log(`Rendering ConnectionLine: ${id}`, { 
     dotPosition, 
-    path: path?.substring(0, 30) + '...'
+    path: path?.substring(0, 100)
   });
   
-  // SAFETY CHECK: Completely disable ANY dots in the top-left quadrant
+  // Create a ref to track DOM elements for post-render inspection
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  // ONLY block dots in the top-left corner (0,0 to 50,50)
+  // We're using a smaller area now to avoid blocking legitimate dots
   let safeProps = { ...props };
   
-  // Block dots in an expanded danger zone
   if (dotPosition) {
     const x = parseFloat(dotPosition.x);
     const y = parseFloat(dotPosition.y);
     
-    if (x < 200 && y < 200) {
-      console.error(`MASTER BLOCK: Connection ${id} attempted to render dot in danger zone:`, { x, y });
+    // Only block dots that are very close to the origin (0,0)
+    if (x < 50 && y < 50) {
+      console.error(`DANGEROUS DOT BLOCKED: Connection ${id} with dot at (${x}, ${y})`);
       safeProps = {
         ...props,
         dotPosition: undefined,
-        animateMotion: false // Disable any animation that might create dots
+        animateMotion: false
       };
     }
   }
   
-  // Block any paths that might create dots in the corner
-  if (path && (path.includes("M 0,0") || path.includes("L 0,0") || 
-      path.startsWith("M 0 ") || path.includes(" 0,0"))) {
-    console.error(`MASTER BLOCK: Connection ${id} has suspicious path:`, path);
-    return null; // Don't render anything with suspicious paths
-  }
-  
-  // If we're rendering as a definition, pass the modified safe props
+  // If we're rendering as a definition, return the definition component
   if (renderAsDefinition) {
     return (
       <defs>
@@ -72,7 +68,7 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     pathAnimationDuration: 0.7
   });
   
-  // Create a wrapper div to help with finding and removing rogue dots
+  // Create a wrapper div to help with finding any rogue dots
   return (
     <div ref={containerRef} data-connection-id={id}>
       <AnimatedConnection 

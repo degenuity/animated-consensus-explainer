@@ -110,5 +110,5 @@ export const connectionPaths = [
     animationDuration: 1.8
   }
   
-  // REMOVED ANY POTENTIAL ROGUE CONNECTION THAT MIGHT CREATE A DOT IN THE TOP-LEFT CORNER
+  // Removed any unsafe paths and connections
 ];

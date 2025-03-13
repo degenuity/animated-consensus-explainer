@@ -10,67 +10,61 @@ const DiagramSVG = () => {
   const svgRef = useDiagramDebug();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Extreme safety measure: Scan the entire DOM for rogue dots after rendering
+  // Focused safety check for rogue dots
   useEffect(() => {
-    console.log("DiagramSVG mounted - extreme safety measures engaged");
+    console.log("DiagramSVG mounted - checking all connections for origin (0,0) paths");
     
-    // First debug all connection paths
-    connectionPaths.forEach(conn => {
-      if (conn.dotPosition) {
-        const x = parseFloat(conn.dotPosition.x);
-        const y = parseFloat(conn.dotPosition.y);
+    // Find any suspicious connection that might create a dot at origin
+    const suspiciousConnections = connectionPaths.filter(conn => {
+      const hasOriginPath = conn.path && (
+        conn.path.includes("M 0,0") || 
+        conn.path.includes("M 0 0") ||
+        conn.path.startsWith("M0,0") ||
+        conn.path.startsWith("M 0,")
+      );
+      
+      const hasOriginDot = conn.dotPosition && 
+        parseFloat(conn.dotPosition.x) < 50 && 
+        parseFloat(conn.dotPosition.y) < 50;
         
-        if (x < 200 && y < 200) {
-          console.error("FOUND SUSPICIOUS CONNECTION DOT POSITION:", {
-            id: conn.id,
-            position: conn.dotPosition,
-            path: conn.path
-          });
-        }
-      }
+      return hasOriginPath || hasOriginDot;
     });
     
-    // Create an interval to continuously check for and remove any rogue dots
-    const cleanupInterval = setInterval(() => {
+    if (suspiciousConnections.length > 0) {
+      console.error("FOUND SUSPICIOUS CONNECTIONS:", suspiciousConnections);
+    }
+    
+    // Targeted DOM check for rogue dots
+    const checkForRogueDots = () => {
       if (containerRef.current) {
-        // Find any SVG elements within our container
-        const svgElements = containerRef.current.querySelectorAll('svg');
-        svgElements.forEach(svg => {
-          // Check for circles in each SVG
-          const circles = svg.querySelectorAll('circle');
+        const circles = containerRef.current.querySelectorAll('circle');
+        circles.forEach(circle => {
+          const cx = parseFloat(circle.getAttribute('cx') || '9999');
+          const cy = parseFloat(circle.getAttribute('cy') || '9999');
           
-          circles.forEach(circle => {
-            const cx = parseFloat(circle.getAttribute('cx') || '1000');
-            const cy = parseFloat(circle.getAttribute('cy') || '1000');
+          // Only inspect circles very close to origin (0,0)
+          if (!isNaN(cx) && !isNaN(cy) && cx < 50 && cy < 50) {
+            console.error("FOUND ROGUE DOT:", {
+              cx, cy,
+              fill: circle.getAttribute('fill'),
+              parent: circle.parentElement?.tagName
+            });
             
-            if (cx < 200 && cy < 200) {
-              console.error("FOUND AND REMOVING ROGUE DOT IN DOM:", {
-                cx, cy,
-                fill: circle.getAttribute('fill')
-              });
-              
-              // Remove the element
-              circle.remove();
-            }
-            
-            // Check for circles with animateMotion that might move to the corner
-            const animateMotion = circle.querySelector('animateMotion');
-            if (animateMotion) {
-              const path = animateMotion.getAttribute('path');
-              if (path && (path.includes("M 0") || path.includes("L 0,0"))) {
-                console.error("FOUND AND REMOVING CIRCLE WITH DANGEROUS ANIMATION PATH:", {
-                  path
-                });
-                circle.remove();
-              }
-            }
-          });
+            // Remove only the rogue dot, not all dots
+            circle.remove();
+          }
         });
       }
-    }, 500); // Check every 500ms
+    };
+    
+    // Check once after initial render
+    setTimeout(checkForRogueDots, 500);
+    
+    // Create an interval to check for rogue dots periodically
+    const intervalId = setInterval(checkForRogueDots, 2000);
     
     return () => {
-      clearInterval(cleanupInterval);
+      clearInterval(intervalId);
     };
   }, []);
   
@@ -94,13 +88,10 @@ const DiagramSVG = () => {
       {/* Foreground Layer - Contains only the connections that need to be on top */}
       <ForegroundLayer connectionPaths={connectionPaths} />
       
-      {/* Invisible overlay to detect and block any clicks in the danger zone */}
+      {/* Invisible shield just over the origin area to block any interactions */}
       <div 
-        className="absolute top-0 left-0 w-[200px] h-[200px] z-50 opacity-0"
-        onClick={(e) => {
-          console.log("Clicked in danger zone", e);
-          e.stopPropagation();
-        }}
+        className="absolute top-0 left-0 w-[50px] h-[50px] z-50"
+        style={{ pointerEvents: 'none' }}
       />
     </div>
   );
