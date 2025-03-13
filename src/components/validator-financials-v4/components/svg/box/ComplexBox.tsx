@@ -121,7 +121,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       
       // Give more height to block rewards to fit its children
       const itemHeight = isBlockRewards && hasChildren 
-        ? 140  // Height to accommodate child items
+        ? 150  // Increased height to 150px to accommodate child items with better padding
         : (item.desc ? 50 : 40);
       
       // Special handling for network costs box and block rewards
@@ -136,20 +136,20 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
           x={x + paddingLeft}
           y={y}
           yOffset={yOffset}
-          width={width - paddingLeft}
+          width={width - paddingLeft - 10} // Added extra padding of 10px to ensure items stay inside
           height={itemHeight}
           isNested={!!parentItem}
         />
       );
       
       // Move down for the next item or child items
-      const itemSpacing = 18; // Increased spacing between items
+      const itemSpacing = 20; // Increased spacing between items for better visual
 
       // If this is block rewards with children, process children specially
       if (isBlockRewards && hasChildren) {
         // Space for children inside block rewards
-        const childYStart = yOffset + 60; // Start position inside block rewards
-        const childSpacing = 16; // Spacing between child items
+        const childYStart = yOffset + 50; // Start position inside block rewards - increased from 60 to 50
+        const childSpacing = 20; // Increased spacing between child items for better visual
         let childY = childYStart;
         
         item.subItems?.forEach((subItem, subIndex) => {
@@ -161,7 +161,7 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
           renderedItems.push(
             <SubItemRenderer 
               key={`child-${subItem.id || subIndex}`}
-              item={{...subItem, isHeader: false, isSubHeader: true}}
+              item={{...subItem, isHeader: false, isSubHeader: false}}
               index={subIndex}
               x={childItemX}
               y={y}

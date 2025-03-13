@@ -56,7 +56,7 @@ export const boxes = [
     x: 950,
     y: 120,
     width: 280,
-    height: 330, // Increased from 270 to 330 to properly fit the expanded block rewards
+    height: 350, // Increased from 330 to 350 to properly fit the expanded block rewards with proper padding
     title: "network usage costs",
     icon: "network-costs" as const,
     color: "#F97316",

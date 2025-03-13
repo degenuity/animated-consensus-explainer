@@ -59,6 +59,14 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
   const strokeColor = isNested && id && (id === "priority-fees" || id === "mev") 
     ? "#10B981" 
     : itemColor || "#3B82F6";
+  
+  // For block rewards title, use a different style
+  const isBlockRewards = id === "block-rewards";
+  
+  // Adjust text styles based on the element role
+  const fontSize = isNested ? "text-sm" : (isBlockRewards ? "text-lg" : "text-sm");
+  const fontWeight = isBlockRewards ? "font-medium" : "font-medium";
+  const textAlign = isBlockRewards || isNested ? "text-center" : "";
 
   return (
     <motion.g
@@ -83,16 +91,16 @@ const SubItemRenderer: React.FC<SubItemRendererProps> = ({
         width={adjustedWidth} 
         height={itemHeight}
       >
-        <div className="flex flex-col justify-center h-full px-3">
+        <div className={`flex flex-col justify-center h-full px-3 ${textAlign}`}>
           {desc ? (
             <>
-              <div className="text-sm font-medium" style={{ color: strokeColor }}>
+              <div className={`${fontSize} ${fontWeight}`} style={{ color: strokeColor }}>
                 {text}
               </div>
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>
           ) : (
-            <div className="flex items-center h-full font-medium" style={{ color: strokeColor }}>
+            <div className={`flex items-center h-full ${fontWeight} ${fontSize} ${textAlign ? 'justify-center' : ''}`} style={{ color: strokeColor }}>
               {text}
             </div>
           )}

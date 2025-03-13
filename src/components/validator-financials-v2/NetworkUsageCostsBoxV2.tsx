@@ -12,14 +12,14 @@ const NetworkUsageCostsBoxV2 = () => {
         <span className="text-xl text-white">network usage costs</span>
       </div>
       
-      {/* Content section with dramatic spacing */}
-      <div className="px-4 py-3 flex flex-col">
-        {/* First item */}
+      {/* Content section */}
+      <div className="px-4 py-3 flex flex-col space-y-6">
+        {/* Base fees item */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-5"
+          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded text-sm text-white text-center"
         >
           base fees
         </motion.div>
@@ -29,32 +29,32 @@ const NetworkUsageCostsBoxV2 = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="relative"
+          className="border border-blue-500/70 bg-[#141b29] p-4 rounded"
         >
-          <div className="bg-[#141b29] border border-blue-500/70 p-3 rounded">
-            <div className="text-white font-medium mb-5">block rewards</div>
+          {/* Block rewards title */}
+          <div className="text-white text-lg text-center mb-4">block rewards</div>
             
-            <div className="px-5 py-2 flex flex-col space-y-4">
-              {/* First nested item */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.6 }}
-                className="border border-green-500/70 bg-[#101620] p-2 rounded text-xs text-white"
-              >
-                priority fees
-              </motion.div>
+          {/* Block rewards content items */}
+          <div className="flex flex-col space-y-3">
+            {/* Priority fees */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.6 }}
+              className="border border-green-500/70 bg-[#101620] p-2 rounded text-sm text-white text-center"
+            >
+              priority fees
+            </motion.div>
               
-              {/* Second nested item */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.7 }}
-                className="border border-green-500/70 bg-[#101620] p-2 rounded text-xs text-white"
-              >
-                MEV
-              </motion.div>
-            </div>
+            {/* MEV */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.7 }}
+              className="border border-green-500/70 bg-[#101620] p-2 rounded text-sm text-white text-center"
+            >
+              MEV
+            </motion.div>
           </div>
         </motion.div>
       </div>
