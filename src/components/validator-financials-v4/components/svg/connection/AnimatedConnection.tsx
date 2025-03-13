@@ -23,9 +23,13 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   dotVariants,
   animationDuration
 }) => {
-  // Add console log to track rendering of block-rewards-to-profitability path
-  if (path === "M 1090 320 L 1090 420 L 950 570") {
-    console.log("Rendering block-rewards-to-profitability path with:", { animateMotion, animationDuration });
+  // Skip rendering any dots positioned in the upper left corner (0-60px range)
+  const shouldRenderDot = !dotPosition || 
+                         !(parseFloat(dotPosition.x) < 60 && parseFloat(dotPosition.y) < 60);
+  
+  // Skip rendering any paths that start at the upper left corner
+  if (path && (path.startsWith("M 0,0") || path.startsWith("M0,0") || path.startsWith("M 0 0"))) {
+    return null;
   }
   
   return (
@@ -41,7 +45,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         animate="visible"
       />
       
-      {dotPosition && !animateMotion && (
+      {shouldRenderDot && dotPosition && !animateMotion && (
         <motion.circle
           cx={dotPosition.x}
           cy={dotPosition.y}
@@ -57,7 +61,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         />
       )}
       
-      {animateMotion && (
+      {shouldRenderDot && animateMotion && (
         <motion.g
           custom={animationIndex}
           initial={{ opacity: 0 }}

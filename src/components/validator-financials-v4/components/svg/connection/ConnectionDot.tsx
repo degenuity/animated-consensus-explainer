@@ -75,7 +75,22 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     }
   }, [path]);
   
+  // Check if this is a dot that should be displayed
+  // Skip rendering if cx or cy are very near the upper left corner (0-60 range)
+  if (cx && cy) {
+    const cxNum = parseFloat(cx);
+    const cyNum = parseFloat(cy);
+    if ((cxNum < 60 && cyNum < 60) || isNaN(cxNum) || isNaN(cyNum)) {
+      return null; // Don't render dots in the upper left corner
+    }
+  }
+  
   if (animated && path) {
+    // Skip paths that are positioned in the upper left corner
+    if (path.startsWith("M 0") || path.startsWith("M0")) {
+      return null;
+    }
+    
     return (
       <g>
         <circle

@@ -14,8 +14,6 @@ export const connectionPaths = [
   },
   
   // Line 4: Total Stake to Stake Weight
-  // The stake weight box is the rightmost box in block production eligibility row
-  // Based on the console log, the stake weight box center is at approximately x=765, y=600
   { 
     path: "M 780 340 L 780 465 L 765 465 L 765 550", 
     color: "#3B82F6", 
@@ -75,8 +73,6 @@ export const connectionPaths = [
   },
   
   // Delegated Stake to Commission
-  // From the console logs, we can see that the commission box right edge is at x=558
-  // and the center y is at 250
   { 
     path: "M 662 250 L 558 250", 
     color: "#0EA5E9", 
@@ -90,8 +86,6 @@ export const connectionPaths = [
   },
   
   // Own Stake to Staking Rewards
-  // Based on the console logs: own stake box is positioned below delegated stake (at y=290)
-  // and staking rewards right edge is likely at the same x coordinate as the commission box
   { 
     path: "M 662 310 L 558 310", 
     color: "#0EA5E9", 
@@ -105,7 +99,6 @@ export const connectionPaths = [
   },
   
   // Base Fee right side to Deflation
-  // Using EXACT right-edge value from the console logs (1208)
   { 
     path: "M 1208 190 L 1300 240", 
     color: "#EAB308", 
