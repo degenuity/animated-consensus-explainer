@@ -1,4 +1,3 @@
-
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -88,13 +87,13 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // NEW LINE: Delegated Stake to Commission
+  // Delegated Stake to Commission - CORRECTED
   { 
-    path: "M 580 290 L 450 290", 
+    path: "M 650 290 L 450 290", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
-    dotPosition: { x: "515", y: "290" },
+    dotPosition: { x: "550", y: "290" },
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
