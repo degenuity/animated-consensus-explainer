@@ -81,7 +81,7 @@ const SubBoxRenderer: React.FC<SubBoxRendererProps> = ({ box, index }) => {
       className={`p-4 rounded border ${getColorClass(box.customColor)} 
         ${box.fullWidth ? 'col-span-2' : 'col-span-1'}`}
     >
-      <div className={`${getTextColorClass(box.customColor)} text-lg mb-2 flex items-center`}>
+      <div className={`${getTextColorClass(box.customColor)} ${isBlockRewards ? 'text-xs' : 'text-lg'} mb-2 flex items-center`}>
         {box.title}
         {box.hasAddIcon && <PlusIcon size={16} className="ml-2 text-gray-400" />}
       </div>
