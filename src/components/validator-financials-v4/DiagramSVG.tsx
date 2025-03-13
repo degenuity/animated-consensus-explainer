@@ -6,10 +6,10 @@ import {
   ConnectionLine,
   ExplanationComponent,
   Logo
-} from './svg';
-import { viewBoxWidth, viewBoxHeight } from './svg/data/constants';
-import { boxes } from './svg/data/boxes';
-import { connectionPaths } from './svg/data/connections';
+} from './components/svg';
+import { viewBoxWidth, viewBoxHeight } from './components/svg/data/constants';
+import { boxes } from './components/svg/data/boxes';
+import { connectionPaths } from './components/svg/data/connections';
 
 const DiagramSVG = () => {
   const isMobile = useIsMobile();
