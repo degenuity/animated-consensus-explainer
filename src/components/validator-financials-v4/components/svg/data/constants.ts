@@ -4,17 +4,17 @@ export const viewBoxWidth = 1500;
 export const viewBoxHeight = 850;
 
 // DESKTOP SETTINGS:
-// For desktop, we want maximum zoom with minimal padding
-// Much smaller padding for desktop to maximize zoom level
-const desktopPadding = 20; // Reduced from 40 to zoom in more
-export const desktopViewBox = `${-desktopPadding} ${-desktopPadding} ${viewBoxWidth + 2*desktopPadding} ${viewBoxHeight + 2*desktopPadding}`;
+// For desktop, we want maximum zoom without cropping
+// Negative padding means we're zooming in beyond the original boundaries
+const desktopPadding = -200; // Significantly increased zoom by using negative padding
+export const desktopViewBox = `${desktopPadding} ${desktopPadding} ${viewBoxWidth - 2*desktopPadding} ${viewBoxHeight - 2*desktopPadding}`;
 
 // MOBILE SETTINGS:
 // For mobile, ensure all content is visible with optimized padding
-// More strategic padding to prevent cropping while maintaining good zoom
+// Strategic padding to prevent cropping while maintaining good zoom
 const mobilePadding = {
-  x: 100, // Reduced horizontal padding but still enough to prevent cropping
-  y: 70,  // Reduced vertical padding
+  x: 50, // Reduced horizontal padding significantly
+  y: 30, // Reduced vertical padding significantly
 };
 
 // Mobile viewBox calculation with strategic padding

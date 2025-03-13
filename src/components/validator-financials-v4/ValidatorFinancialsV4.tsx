@@ -21,7 +21,7 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
 
   return (
     <motion.div 
-      className="w-full relative overflow-visible bg-[#0d111c] rounded-xl min-h-[400px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[550px] flex flex-col items-center justify-start"
+      className="w-full relative overflow-visible bg-[#0d111c] rounded-xl min-h-[500px] sm:min-h-[550px] md:min-h-[600px] lg:min-h-[650px] flex flex-col items-center justify-start"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -32,7 +32,7 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
         {/* Diagram container with maximized height for better zoom */}
         <div className={`
           relative w-full overflow-visible
-          h-[390px] sm:h-[430px] md:h-[480px] lg:h-[530px]
+          h-[490px] sm:h-[530px] md:h-[580px] lg:h-[630px]
           flex items-center justify-center
         `}>
           <DiagramSVG key={animationKey} />

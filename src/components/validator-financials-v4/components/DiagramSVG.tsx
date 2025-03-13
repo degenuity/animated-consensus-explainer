@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { useIsMobile } from '@/hooks/use-mobile';
 import AnimationStyleProvider from './svg/AnimationStyleProvider';
 import { BackgroundLayer, BoxLayer, ForegroundLayer } from './svg/layers';
 import { boxes } from './svg/data/boxes';
@@ -8,15 +7,13 @@ import { connectionPaths } from './svg/data/connections';
 import { useDiagramDebug } from '../hooks/useDiagramDebug';
 
 const DiagramSVG = () => {
-  const isMobile = useIsMobile();
   const svgRef = useDiagramDebug();
   
-  // Calculate responsive padding based on screen size
+  // Optimized container class for maximum visibility and zoom
   const containerClasses = [
-    "w-full h-full relative",
-    "overflow-visible",
-    // Device-specific padding to ensure no cropping
-    isMobile ? "px-4 sm:px-6" : "px-0 sm:px-0"
+    "w-full h-full relative", 
+    "overflow-visible", // Essential to prevent cropping
+    "px-0" // No padding to maximize diagram size
   ].join(" ");
   
   return (
