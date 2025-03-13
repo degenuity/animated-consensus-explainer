@@ -84,8 +84,21 @@ export const connectionPaths = [
     id: "block-rewards-to-profitability",
     renderOrder: "background" as const,
     animationDuration: 2.5
+  },
+  
+  // NEW LINE: Base Fee bottom to Block Rewards center
+  { 
+    path: "M 1090 200 L 1090 230", 
+    color: "#EAB308", 
+    animationIndex: 7,
+    animateMotion: true,
+    dotPosition: { x: "1090", y: "215" },
+    id: "base-fee-bottom-to-block-rewards",
+    renderOrder: "background" as const,
+    animationDuration: 1.5
   }
   
   // Removed: Internal Rewards to Total Validator Rewards line
   // Removed: Any connection from Block Rewards to Total Validator Rewards
 ];
+

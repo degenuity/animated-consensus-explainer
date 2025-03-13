@@ -42,7 +42,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
           {/* Pulsating size effect */}
           <animate
             attributeName="r"
-            values="3;5;3"
+            values="3;6;3"
             dur="0.8s"
             repeatCount="indefinite"
           />
