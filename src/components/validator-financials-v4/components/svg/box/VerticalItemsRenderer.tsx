@@ -45,8 +45,8 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
       const childItems = item.subItems || [];
       const childrenHeight = childItems.length * 40 + (childItems.length - 1) * 15; // height + reduced spacing
       const additionalSpacing = childItems.reduce((acc, child) => acc + (child.position?.y || 0), 0);
-      // Reduce the container height by making bottom padding smaller (10px instead of 20px)
-      const containerHeight = 40 + childrenHeight + additionalSpacing + 10; 
+      // Reduce the container height by 20px (10px from top and 10px from bottom)
+      const containerHeight = 40 + childrenHeight + additionalSpacing - 10; // Reduced by 20px
       
       // Add the block rewards parent item
       renderedItems.push(
@@ -64,7 +64,7 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
       );
       
       // Handle nested items separately
-      const childYStart = yOffset + 40; // Leave space from the block rewards title
+      const childYStart = yOffset + 30; // Reduced from 40 to 30 to account for height reduction
       NestedItemsRenderer({
         parentItem: item,
         x,

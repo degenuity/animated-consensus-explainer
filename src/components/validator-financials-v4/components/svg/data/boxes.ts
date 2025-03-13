@@ -1,4 +1,3 @@
-
 // Box definitions with positions, dimensions and content
 import { 
   internalRewardsSubitems, 
@@ -51,12 +50,12 @@ export const boxes = [
     borderColor: "#3B82F6"
   },
   
-  // Network Costs Box - adjusted height to 310px
+  // Network Costs Box
   {
     x: 950,
     y: 120,
     width: 280,
-    height: 310, // Changed from 340px to 310px
+    height: 310,
     title: "network usage costs",
     icon: "network-costs" as const,
     color: "#F97316",

@@ -33,8 +33,8 @@ const NestedItemsRenderer = ({
     parentItem.subItems.forEach((subItem, subIndex) => {
       // Calculate position and size for child items (priority fees and MEV)
       const childItemHeight = 40; // Standard height for all items
-      const childItemWidth = width - 30; // Reduced width by an additional 10px (from 20 to 30)
-      const childItemX = x + 15; // Increased indent from 10 to 15 to center the narrower boxes
+      const childItemWidth = width - 40; // Reduced width by additional 10px (from 30 to 40)
+      const childItemX = x + 15; // Keeping the same left indent
       
       // Add extra spacing based on position property
       const extraSpacing = subItem.position?.y || 0;
