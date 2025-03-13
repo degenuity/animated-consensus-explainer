@@ -28,9 +28,6 @@ const BoxContainer: React.FC<BoxContainerProps> = ({
   subBoxes = [],
   useAlternativeStyle = false
 }) => {
-  // For determining if this is a top row box (for consistent alignment)
-  const isTopRowBox = ['inflation', 'internal-rewards', 'total-stake', 'network-costs', 'deflation'].includes(iconType);
-  
   return (
     <motion.div
       className={`absolute ${position} ${className}`}

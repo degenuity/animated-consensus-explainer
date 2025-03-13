@@ -1,25 +1,21 @@
 
 // Box definitions with positions, dimensions and content
-
-// New consistent Y value for all top row connections
-const TOP_CONNECTION_Y = 230;
-
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
   { 
-    path: `M 250 ${TOP_CONNECTION_Y} L 320 ${TOP_CONNECTION_Y}`, 
+    path: "M 250 290 L 320 290", 
     color: "#3B82F6", 
     animationIndex: 0,
-    dotPosition: { x: "285", y: `${TOP_CONNECTION_Y}` },
+    dotPosition: { x: "285", y: "290" },
     animationDirection: "right" as const,
     animateMotion: true,
     id: "inflation-to-internal-rewards",
     renderOrder: "background" as const
   },
   
-  // Line 4: Total Stake to Stake Weight - Updated coordinates
+  // Line 4: Total Stake to Stake Weight - Updated coordinates to match new Total Stake position
   { 
-    path: `M 765 340 L 765 465 L 765 550`, 
+    path: "M 765 340 L 765 465 L 765 550", 
     color: "#3B82F6", 
     animationIndex: 3,
     dotPosition: { x: "765", y: "530" },
@@ -30,31 +26,31 @@ export const connectionPaths = [
     animationDuration: 2
   },
   
-  // Line 6: Base Fees to Block Rewards - Updated Y coordinates
+  // Line 6: Base Fees to Block Rewards
   { 
-    path: `M 1090 260 L 1090 310`, 
+    path: "M 1090 180 L 1090 230", 
     color: "#EAB308", 
     animationIndex: 5,
-    dotPosition: { x: "1090", y: "285" },
+    dotPosition: { x: "1090", y: "205" },
     id: "base-fees-to-block-rewards",
     renderOrder: "background" as const
   },
   
-  // Base Fee bottom to Block Rewards center - Updated Y coordinates
+  // Base Fee bottom to Block Rewards center
   { 
-    path: `M 1090 290 L 1090 340`, 
+    path: "M 1090 210 L 1090 260", 
     color: "#EAB308", 
     animationIndex: 7,
     animateMotion: true,
-    dotPosition: { x: "1090", y: "315" },
+    dotPosition: { x: "1090", y: "235" },
     id: "base-fee-bottom-to-block-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 1.5
   },
   
-  // Block Rewards to Total Validator Rewards - Updated Y coordinates
+  // Block Rewards to Total Validator Rewards
   { 
-    path: `M 1090 430 L 1090 450 L 1020 450 L 1020 550`, 
+    path: "M 1090 410 L 1090 450 L 1020 450 L 1020 550", 
     color: "#10B981", 
     animationIndex: 8,
     animateMotion: true,
@@ -64,9 +60,9 @@ export const connectionPaths = [
     animationDuration: 2
   },
   
-  // Internal Rewards to Total Validator Rewards - Updated Y coordinates
+  // Internal Rewards to Total Validator Rewards
   { 
-    path: `M 450 340 L 450 450 L 1020 450 L 1020 550`, 
+    path: "M 450 340 L 450 450 L 1020 450 L 1020 550", 
     color: "#10B981", 
     animationIndex: 9,
     animateMotion: true,
@@ -76,39 +72,39 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Updated Y coordinates to match new box positions
+  // Delegated Stake to Commission - Updated coordinates for new Total Stake position
   { 
-    path: `M 635 230 L 580 230`, 
+    path: "M 635 250 L 558 250", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
-    dotPosition: { x: "607", y: "230" },
+    dotPosition: { x: "595", y: "250" },
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
     animationDuration: 1.8
   },
   
-  // Own Stake to Staking Rewards - Updated Y coordinates to match new box positions
+  // Own Stake to Staking Rewards - Updated coordinates for new Total Stake position
   { 
-    path: `M 635 290 L 580 290`, 
+    path: "M 635 310 L 558 310", 
     color: "#0EA5E9", 
     animationIndex: 11,
     animateMotion: true,
-    dotPosition: { x: "607", y: "290" },
+    dotPosition: { x: "595", y: "310" },
     animationDirection: "left" as const,
     id: "own-stake-to-staking-rewards", 
     renderOrder: "foreground" as const,
     animationDuration: 1.8
   },
   
-  // Base Fee right side to Deflation - Updated Y coordinates
+  // Base Fee right side to Deflation
   { 
-    path: `M 1230 ${TOP_CONNECTION_Y} L 1250 ${TOP_CONNECTION_Y}`, 
+    path: "M 1208 190 L 1300 240", 
     color: "#EAB308", 
     animationIndex: 12,
     animateMotion: true,
-    dotPosition: { x: "1240", y: `${TOP_CONNECTION_Y}` },
+    dotPosition: { x: "1254", y: "215" },
     id: "base-fee-right-to-deflation",
     renderOrder: "foreground" as const,
     animationDuration: 1.8
