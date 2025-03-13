@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -8,7 +9,7 @@ const ExplanationComponent: React.FC = () => {
       animate={{ opacity: 1 }}
       transition={{ delay: 3 }}
     >
-      {/* This was moved to the boxes array as an explanation box */}
+      {/* Empty component - no content needed */}
     </motion.g>
   );
 };
