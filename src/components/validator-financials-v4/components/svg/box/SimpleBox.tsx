@@ -29,10 +29,10 @@ const SimpleBox: React.FC<SimpleBoxProps> = ({ boxProps }) => {
         strokeWidth="1"
       />
       <foreignObject x={x} y={y} width={width} height={height}>
-        <div className="flex flex-col items-center justify-center text-white h-full p-4">
+        <div className="flex flex-col items-center justify-center text-white h-full p-2 sm:p-4">
           {!isExplanation && <BoxIcon icon={icon} size={24} />}
-          <div className="text-lg font-semibold text-center capitalize">{title}</div>
-          {subtitle && <div className="text-sm opacity-80 text-center mt-1">{subtitle}</div>}
+          <div className="text-base sm:text-lg font-semibold text-center capitalize">{title}</div>
+          {subtitle && <div className="text-xs sm:text-sm opacity-80 text-center mt-1">{subtitle}</div>}
         </div>
       </foreignObject>
     </motion.g>

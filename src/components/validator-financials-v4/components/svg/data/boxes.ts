@@ -9,9 +9,9 @@ import {
 } from './subItems';
 
 export const boxes = [
-  // Inflation Box
+  // Inflation Box - Moved slightly inward to prevent cropping
   {
-    x: 100,
+    x: 130,  // Increased from 100 to 130
     y: 240,
     width: 150,
     height: 100,
@@ -65,9 +65,9 @@ export const boxes = [
     borderColor: "#F97316"
   },
   
-  // Deflation Box
+  // Deflation Box - Moved slightly inward to prevent cropping
   {
-    x: 1250,
+    x: 1220, // Reduced from 1250 to 1220
     y: 240,
     width: 150,
     height: 100,
