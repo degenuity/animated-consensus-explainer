@@ -38,13 +38,13 @@ export const connectionPaths = [
   },
   
   // Line 4: Total Stake to Stake Weight
-  // FIXED PATH - The stake weight box is now the FIFTH item in blockProductionSubitems
-  // Based on the image and debugging, its center is around x=585, y=600
+  // The stake weight box is the rightmost box in block production eligibility row
+  // Based on the console log, the stake weight box center is at approximately x=765, y=600
   { 
-    path: "M 780 340 L 780 465 L 585 465 L 585 550", 
+    path: "M 780 340 L 780 465 L 765 465 L 765 550", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "585", y: "530" },
+    dotPosition: { x: "765", y: "530" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
