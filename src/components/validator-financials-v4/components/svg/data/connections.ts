@@ -72,6 +72,17 @@ export const connectionPaths = [
     labelPosition: { x: 1070, y: 205 },
     id: "base-fees-to-block-rewards",
     renderOrder: "background" as const
+  },
+  
+  // New Line: Block Rewards to Profitability
+  { 
+    path: "M 1090 320 L 1090 420 L 950 570", 
+    color: "#F97316", 
+    animationIndex: 6,
+    animateMotion: true,
+    id: "block-rewards-to-profitability",
+    renderOrder: "background" as const,
+    animationDuration: 2.5
   }
   
   // Removed: Internal Rewards to Total Validator Rewards line
