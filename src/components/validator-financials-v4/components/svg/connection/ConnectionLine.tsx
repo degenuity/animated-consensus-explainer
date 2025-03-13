@@ -59,13 +59,15 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
     // Track animation state to prevent duplicate events
     let lastTriggerTime = 0;
     const MIN_INTERVAL = 100; // Minimum milliseconds between triggers to prevent duplicates
+    let hasTriggeredForCycle = false; // Track if we've already triggered for this animation cycle
     
     // Improved function to dispatch the custom event with debouncing
     const triggerCollisionEvent = () => {
       const now = Date.now();
-      if (now - lastTriggerTime < MIN_INTERVAL) return;
+      if (now - lastTriggerTime < MIN_INTERVAL || hasTriggeredForCycle) return;
       
       lastTriggerTime = now;
+      hasTriggeredForCycle = true; // Mark as triggered for this cycle
       const targetBoxId = target;
       console.log(`🔵 Dot collision event: ${id} → ${targetBoxId}`);
       
@@ -82,77 +84,82 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
       
       // Dispatch the event on window
       window.dispatchEvent(collisionEvent);
+      
+      // Reset the trigger flag after the animation duration
+      setTimeout(() => {
+        hasTriggeredForCycle = false;
+      }, animationDuration * 1000);
     };
     
-    // Use both web standard event names and SVG-specific event names
     const animationElement = animationRef.current;
     
-    // Event listener for standard web animation end
+    // Listen specifically for the end of animation
     const handleAnimationEnd = () => {
+      // Only trigger at the end of the animation
       triggerCollisionEvent();
     };
     
-    // SVG-specific animateMotion events
+    // Track animation progress to detect when near the end
+    let isNearEnd = false;
+    const endThreshold = 0.95; // Consider 95% of the way as "near end"
+    
+    const handleAnimationUpdate = (event: any) => {
+      // Skip if we've already triggered
+      if (hasTriggeredForCycle) return;
+      
+      // If we have access to the event's progress value
+      if (event && typeof event.progress === 'number') {
+        // Only trigger when we're near the end
+        if (event.progress >= endThreshold && !isNearEnd) {
+          isNearEnd = true;
+          triggerCollisionEvent();
+        } else if (event.progress < endThreshold) {
+          isNearEnd = false;
+        }
+      }
+    };
+    
     if (animationElement) {
-      // Add SVG-specific event listeners
+      // Add SVG-specific event listeners for animation end
       animationElement.addEventListener('endEvent', handleAnimationEnd);
       animationElement.addEventListener('end', handleAnimationEnd);
       
-      // For more precise timing, listen to the standard 'animationend' event on the circle
-      if (dotRef.current) {
-        dotRef.current.addEventListener('animationend', handleAnimationEnd);
-      }
+      // Listen for timeupdate which happens throughout the animation
+      animationElement.addEventListener('timeupdate', handleAnimationUpdate);
       
-      // Observe the dot's position using MutationObserver
-      // This helps detect when the dot reaches the end of the path
-      let lastSegmentReached = false;
-      const observer = new MutationObserver((mutations) => {
-        for (const mutation of mutations) {
-          if (mutation.type === 'attributes' && 
-              (mutation.attributeName === 'transform' || mutation.attributeName === 'cx' || mutation.attributeName === 'cy')) {
-            
-            // When dot is at the end of the path (determined by transform value)
-            // This is a heuristic approach to detect end of path
-            const transform = dotRef.current?.getAttribute('transform');
-            if (transform && !lastSegmentReached) {
-              // Use heuristic to detect if we're near the end of the path
-              // Note: This is not perfect but helps improve timing
-              lastSegmentReached = true;
-              triggerCollisionEvent();
-              
-              // Reset after a short delay to allow for next animation cycle
-              setTimeout(() => {
-                lastSegmentReached = false;
-              }, animationDuration * 1000 * 0.8);
-            }
-          }
+      // Periodic check that only triggers near the expected end time
+      // This is a fallback mechanism
+      const checkInterval = animationDuration * 1000 / 10; // Check 10 times during the animation
+      let startTime: number | null = null;
+      
+      const animationTimer = setInterval(() => {
+        if (startTime === null) {
+          startTime = Date.now();
+          return;
         }
-      });
-      
-      if (dotRef.current) {
-        observer.observe(dotRef.current, { attributes: true });
-      }
-      
-      // Periodic check as a fallback, but with improved timing
-      // Only trigger if we haven't detected end through other methods
-      const timer = setInterval(() => {
-        // Only trigger if no event was recently triggered
-        if (Date.now() - lastTriggerTime > animationDuration * 1000 * 0.8) {
+        
+        const elapsed = Date.now() - startTime;
+        const progress = elapsed / (animationDuration * 1000);
+        
+        // Only trigger when very close to the end of a cycle
+        if (progress % 1 >= endThreshold && progress % 1 <= 1.0 && !hasTriggeredForCycle) {
           triggerCollisionEvent();
         }
-      }, animationDuration * 1000);
+        
+        // Reset startTime for next cycle if we've completed a cycle
+        if (progress >= 1.0) {
+          startTime = Date.now();
+          hasTriggeredForCycle = false;
+        }
+      }, checkInterval);
       
       return () => {
-        clearInterval(timer);
-        observer.disconnect();
+        clearInterval(animationTimer);
         
         if (animationElement) {
           animationElement.removeEventListener('endEvent', handleAnimationEnd);
           animationElement.removeEventListener('end', handleAnimationEnd);
-        }
-        
-        if (dotRef.current) {
-          dotRef.current.removeEventListener('animationend', handleAnimationEnd);
+          animationElement.removeEventListener('timeupdate', handleAnimationUpdate);
         }
       };
     }

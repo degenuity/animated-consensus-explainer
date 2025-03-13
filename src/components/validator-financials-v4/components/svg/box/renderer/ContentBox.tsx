@@ -240,7 +240,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
           {desc ? (
             <>
               <div className={`${textSize} ${fontWeight}`} style={{ color: isBlockRewards ? 'white' : strokeColor }}>
-                {id === "mev" ? "MEV" : text}
+                {displayText}
               </div>
               <div className="text-gray-400 text-xs mt-1">{desc}</div>
             </>

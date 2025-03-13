@@ -24,28 +24,6 @@ const DiagramSVG = () => {
     
     window.addEventListener('dotCollision', handleDotCollision);
     
-    // Manually trigger some test collision events after a delay to check if highlighting works
-    setTimeout(() => {
-      console.log('🔍 Testing collision events...');
-      
-      ['inflation', 'stake-weight', 'block-rewards'].forEach((id, index) => {
-        setTimeout(() => {
-          const testEvent = new CustomEvent('dotCollision', {
-            detail: { 
-              targetId: id,
-              dotColor: '#3B82F6',
-              sourceId: 'test',
-              timestamp: Date.now()
-            },
-            bubbles: true,
-            cancelable: true,
-          });
-          console.log(`🧪 Triggering test collision for: ${id}`);
-          window.dispatchEvent(testEvent);
-        }, index * 1000); // Stagger the test events
-      });
-    }, 5000);
-    
     return () => {
       window.removeEventListener('dotCollision', handleDotCollision);
     };

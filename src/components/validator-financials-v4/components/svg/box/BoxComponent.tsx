@@ -14,7 +14,7 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
     console.log(`Box mounted: ${props.title} with ID ${props.title.replace(/\s+/g, '-')}`);
     
     const handleDotCollision = (event: CustomEvent) => {
-      const { targetId } = event.detail;
+      const { targetId, sourceId } = event.detail;
       
       // Check if this box is the target
       if (targetId === props.title.replace(/\s+/g, '-') || 
