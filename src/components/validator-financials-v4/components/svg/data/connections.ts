@@ -1,3 +1,4 @@
+
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -36,7 +37,7 @@ export const connectionPaths = [
     renderOrder: "foreground" as const
   },
   
-  // Line 4: Total Stake to Stake Weight
+  // Line 4: Total Stake to Stake Weight - Updated to go directly to stake weight box and be in foreground
   { 
     path: "M 780 320 L 780 420 L 380 420 L 380 500", 
     color: "#3B82F6", 
@@ -45,7 +46,7 @@ export const connectionPaths = [
     animateMotion: true,
     animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
-    renderOrder: "background" as const,
+    renderOrder: "foreground" as const,
     animationDuration: 3
   },
   
@@ -88,7 +89,7 @@ export const connectionPaths = [
   // Block Rewards to Total Validator Rewards - Updated with green color
   { 
     path: "M 1090 410 L 1090 450 L 1019.5 450 L 1019.5 550", 
-    color: "#10B981", // Changed from #F97316 (orange) to #10B981 (green)
+    color: "#10B981", 
     animationIndex: 8,
     animateMotion: true,
     dotPosition: { x: "1055", y: "500" },

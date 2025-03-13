@@ -39,6 +39,7 @@ const BlockProductionEligibilityBox = () => (
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.7 }}
+          id="stake-weight-box"
           className="border border-blue-500/70 bg-gray-800/50 p-3 rounded"
         >
           <div className="text-blue-400 text-sm font-medium">stake weight</div>
