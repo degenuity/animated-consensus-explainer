@@ -15,44 +15,87 @@ const DiagramSVG = () => {
   const isMobile = useIsMobile();
   const svgRef = useRef<SVGSVGElement>(null);
 
-  // Use effect to log the exact coordinates of the stake weight box for debugging
+  // Enhanced debugging for all boxes, especially for delegated stake
   useEffect(() => {
     if (svgRef.current) {
-      const stakeWeightElement = svgRef.current.querySelector('[data-id="stake-weight"]');
-      if (stakeWeightElement) {
-        const rect = stakeWeightElement.getBoundingClientRect();
-        const svgRect = svgRef.current.getBoundingClientRect();
-        
-        // Calculate relative position within SVG
-        const relativeX = rect.left - svgRect.left;
-        const relativeY = rect.top - svgRect.top;
-        
-        // Calculate the SVG coordinate based on viewBox and client rect
-        const svgWidth = svgRect.width;
-        const svgHeight = svgRect.height;
-        
-        const svgX = (relativeX / svgWidth) * viewBoxWidth;
-        const svgY = (relativeY / svgHeight) * viewBoxHeight;
-        
-        console.log('Stake weight box exact coordinates:', {
-          id: 'stake-weight',
-          svgViewBox: { width: viewBoxWidth, height: viewBoxHeight },
-          clientRect: {
-            top: rect.top,
-            left: rect.left,
-            width: rect.width,
-            height: rect.height
-          },
-          svgCoordinates: {
-            x: svgX,
-            y: svgY,
-            topCenter: {
-              x: svgX + (rect.width / svgWidth) * viewBoxWidth / 2,
-              y: svgY
-            }
-          }
-        });
+      // Find the total stake box
+      const totalStakeBox = boxes.find(box => box.title === "total stake");
+      if (totalStakeBox) {
+        console.log("Total stake box definition:", totalStakeBox);
       }
+
+      // Try to find all subitems within boxes
+      setTimeout(() => {
+        // Give time for rendering
+        const allGroups = svgRef.current.querySelectorAll('g');
+        
+        // Look for delegated stake specifically
+        const delegatedStakeElement = svgRef.current.querySelector('[data-item-id="delegated-stake"]');
+        if (delegatedStakeElement) {
+          const rect = delegatedStakeElement.getBoundingClientRect();
+          const svgRect = svgRef.current.getBoundingClientRect();
+          
+          // Calculate relative position within SVG
+          const relativeX = rect.left - svgRect.left;
+          const relativeY = rect.top - svgRect.top;
+          
+          // Calculate the SVG coordinate
+          const svgWidth = svgRect.width;
+          const svgHeight = svgRect.height;
+          
+          const svgX = (relativeX / svgWidth) * viewBoxWidth;
+          const svgY = (relativeY / svgHeight) * viewBoxHeight;
+          
+          console.log('DELEGATED STAKE EXACT COORDINATES:', {
+            id: 'delegated-stake',
+            clientRect: {
+              top: rect.top,
+              left: rect.left,
+              width: rect.width,
+              height: rect.height
+            },
+            svgCoordinates: {
+              x: svgX,
+              y: svgY,
+              // Calculate left center point
+              leftCenter: {
+                x: svgX,
+                y: svgY + (rect.height / svgHeight) * viewBoxHeight / 2
+              }
+            }
+          });
+        } else {
+          console.log("Delegated stake element not found, searching in all groups...");
+          
+          // Search through all groups to find anything with delegated stake
+          allGroups.forEach(group => {
+            const text = group.textContent || '';
+            if (text.toLowerCase().includes('delegated stake')) {
+              console.log("Found possible delegated stake container:", group);
+              const rect = group.getBoundingClientRect();
+              const svgRect = svgRef.current.getBoundingClientRect();
+              
+              // Calculate relative position
+              const relativeX = rect.left - svgRect.left;
+              const relativeY = rect.top - svgRect.top;
+              
+              // Calculate the SVG coordinate
+              const svgX = (relativeX / svgRect.width) * viewBoxWidth;
+              const svgY = (relativeY / svgRect.height) * viewBoxHeight;
+              
+              console.log('Possible delegated stake position:', {
+                text: text,
+                svgCoordinates: {
+                  x: svgX,
+                  y: svgY,
+                  width: (rect.width / svgRect.width) * viewBoxWidth,
+                  height: (rect.height / svgRect.height) * viewBoxHeight
+                }
+              });
+            }
+          });
+        }
+      }, 500);
     }
   }, []);
 

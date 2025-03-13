@@ -37,6 +37,20 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const isBaseFees = id === "base-fees";
   const isTotalValidatorRewards = id === "total-validator-rewards";
   const isOperationalCosts = id === "operational-costs";
+  const isDelegatedStake = id === "delegated-stake";
+  
+  // Special logging for delegated stake
+  if (isDelegatedStake) {
+    console.log(`DELEGATED STAKE BOX DETAILS: 
+      id: ${id}
+      x: ${adjustedX}
+      y: ${y + yOffset}
+      width: ${adjustedWidth}
+      height: ${itemHeight}
+      left-center: (${adjustedX}, ${y + yOffset + itemHeight/2})
+      center: (${adjustedX + adjustedWidth/2}, ${y + yOffset + itemHeight/2})
+    `);
+  }
   
   // Detailed logging for the boxes we're interested in
   if (isTotalValidatorRewards) {
@@ -95,6 +109,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1.2 + index * 0.1 }}
+      data-item-id={id}
     >
       <rect
         x={adjustedX}
@@ -105,12 +120,14 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         fill="transparent"
         stroke={strokeColor}
         strokeWidth="1.5"
+        data-item-rect={id}
       />
       <foreignObject 
         x={adjustedX} 
         y={y + yOffset} 
         width={adjustedWidth} 
         height={itemHeight}
+        data-item-content={id}
       >
         <div className={`flex flex-col ${verticalAlignment} h-full px-3 ${textAlign}`}>
           {desc ? (

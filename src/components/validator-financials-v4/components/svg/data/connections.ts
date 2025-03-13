@@ -1,3 +1,4 @@
+
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -87,18 +88,19 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - CORRECTED
+  // Delegated Stake to Commission - UPDATED
+  // Based on in-depth analysis of coordinates, delegated stake box is a subitem within the total stake box
+  // Exact coordinates to be updated after debugging
   { 
-    path: "M 650 290 L 450 290", 
+    path: "M 650 260 L 450 260", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
-    dotPosition: { x: "550", y: "290" },
+    dotPosition: { x: "550", y: "260" },
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
     animationDuration: 1.8,
-    // Ensure this line is drawn above other elements
     renderAsDefinition: false
   }
 ];
