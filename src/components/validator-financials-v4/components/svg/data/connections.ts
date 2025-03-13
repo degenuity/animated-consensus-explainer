@@ -1,4 +1,3 @@
-
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -76,7 +75,7 @@ export const connectionPaths = [
     animationDuration: 2
   },
   
-  // NEW LINE: Internal Rewards to Total Validator Rewards
+  // Internal Rewards to Total Validator Rewards
   { 
     path: "M 450 340 L 450 450 L 1020 450 L 1020 550", 
     color: "#10B981", 
@@ -88,7 +87,7 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Fixed with correct position and foreground rendering
+  // Delegated Stake to Commission - Fixed to end at the right side of the commission box
   { 
     path: "M 662 250 L 450 250", 
     color: "#0EA5E9", 
