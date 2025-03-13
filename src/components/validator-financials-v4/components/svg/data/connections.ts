@@ -1,4 +1,4 @@
-
+// Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
   { 
@@ -73,17 +73,17 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // Line 7: Internal Rewards to Total Validator Rewards - UPDATED to point specifically to Total Validator Rewards
+  // Line 7: Internal Rewards to Total Validator Rewards - UPDATED to start from the bottom of the internal rewards box
   { 
-    path: "M 450 360 L 450 430 L 945 430 L 945 500", 
+    path: "M 450 400 L 450 430 L 945 430 L 945 500", 
     color: "#10B981", 
     animationIndex: 6,
     dotPosition: { x: "700", y: "430" },
     animateMotion: true,
     animationDirection: "right" as const,
     id: "internal-rewards-to-total-validator-rewards",
-    renderOrder: "foreground" as const, // Changed to foreground to show above boxes
-    animationDuration: 3, // Slowed down to match other dots
+    renderOrder: "foreground" as const,
+    animationDuration: 3,
   },
   
   // Line 8: Block Rewards to Total Validator Rewards
@@ -93,6 +93,6 @@ export const connectionPaths = [
     animationIndex: 7,
     dotPosition: { x: "1040", y: "430" },
     id: "block-rewards-to-total-validator-rewards",
-    renderOrder: "foreground" as const // Changed to foreground to show above boxes
+    renderOrder: "foreground" as const
   }
 ];
