@@ -29,9 +29,9 @@ const HorizontalItemsRenderer: React.FC<HorizontalItemsRendererProps> = ({
   const contentItems = items.filter(item => !item.isOperator);
   const operatorItems = items.filter(item => item.isOperator);
   
-  // Further reduce operator width to make more room for content boxes
-  const operatorWidth = 15; // Reduced from 20px to 15px for operator symbols
-  const itemMargin = 16; // Reduced margin from 20px to 16px
+  // Increase operator width from 15px to 25px to prevent cropping
+  const operatorWidth = 25; 
+  const itemMargin = 16; // Keep existing margin
   const totalOperatorWidth = operatorItems.length * operatorWidth;
   const totalMargins = (items.length - 1) * itemMargin;
   const remainingWidth = width - 20 - totalMargins - totalOperatorWidth;
