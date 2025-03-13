@@ -88,9 +88,9 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Updated based on the screenshot
+  // Delegated Stake to Commission - Fixed with correct position and foreground rendering
   { 
-    path: "M 650 250 L 450 250", 
+    path: "M 662 250 L 450 250", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
