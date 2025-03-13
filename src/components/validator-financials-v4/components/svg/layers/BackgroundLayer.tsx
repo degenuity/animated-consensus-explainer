@@ -28,14 +28,8 @@ const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) =>
       {backgroundConnections.map((connection, index) => (
         <ConnectionLine
           key={`connection-bg-${connection.id}-${index}`}
-          id={connection.id}
-          path={connection.path}
-          color={connection.color}
+          {...connection}
           animationIndex={connection.animationIndex || index}
-          dotPosition={connection.dotPosition}
-          animationDirection={connection.animationDirection}
-          animateMotion={connection.animateMotion}
-          animationDuration={connection.animationDuration}
         />
       ))}
     </svg>
