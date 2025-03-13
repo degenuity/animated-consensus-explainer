@@ -1,3 +1,4 @@
+
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -75,10 +76,10 @@ export const connectionPaths = [
   
   // NEW Line: Base Fees bottom to Block Rewards - UPDATED position and path
   { 
-    path: "M 1090 210 L 1090 285", 
+    path: "M 1090 210 L 1090 280", // Modified to end exactly at block rewards top line
     color: "#EAB308", 
     animationIndex: 8,
-    dotPosition: { x: "1090", y: "247" },
+    dotPosition: { x: "1090", y: "245" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "base-fees-bottom-to-block-rewards",
