@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React from 'react';
 import AnimationStyleProvider from './components/svg/AnimationStyleProvider';
 import { BackgroundLayer, BoxLayer, ForegroundLayer } from './components/svg/layers';
 import { boxes } from './components/svg/data/boxes';
@@ -8,17 +8,16 @@ import { useDiagramDebug } from './hooks/useDiagramDebug';
 
 const DiagramSVG = () => {
   const svgRef = useDiagramDebug();
-  const containerRef = useRef<HTMLDivElement>(null);
   
-  // Maximized container class with zero padding for maximum diagram size
+  // Optimized container class for maximum visibility
   const containerClasses = [
     "w-full h-full relative", 
     "overflow-visible", // Essential to prevent cropping
-    "flex items-center justify-center" // Center the diagram in available space
+    "px-1 sm:px-2" // Minimal padding to maximize diagram size
   ].join(" ");
   
   return (
-    <div className={containerClasses} ref={containerRef}>
+    <div className={containerClasses}>
       <AnimationStyleProvider />
       
       {/* Background Layer - Contains all background connections and elements */}

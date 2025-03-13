@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React from 'react';
 
 interface ConnectionDotProps {
   path?: string;
@@ -20,28 +20,20 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animated = false,
   animationDuration = 1.5
 }) => {  
-  // Reference for the circle element to monitor it
-  const circleRef = useRef<SVGCircleElement | null>(null);
-  
-  // Only block dots at exact origin (0,0)
-  // This is the key fix - we only block dots that are exactly at 0,0
-  if ((cx === "0" && cy === "0") || (cx === "0.0" && cy === "0.0")) {
-    console.log("Prevented rendering dot at origin:", { cx, cy, color });
+  // Don't render anything if the path is missing when required
+  if (animated && !path) {
     return null;
   }
   
-  // For animated dots, only block if the path starts exactly at the origin
-  if (animated && path && (path === "M 0,0" || path === "M0,0" || path.startsWith("M 0,0 ") || path.startsWith("M0,0 "))) {
-    console.log("Prevented rendering animated dot with path starting at origin:", { path: path.substring(0, 20), color });
+  // For static dots, don't render if coordinates are missing
+  if (!animated && (!cx || !cy)) {
     return null;
   }
-
-  // Normal rendering path for animated dots
+  
   if (animated && path) {
     return (
       <g>
         <circle
-          ref={circleRef}
           r={radius}
           fill={color}
         >
@@ -64,22 +56,31 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
             repeatCount="indefinite"
           />
         </circle>
+        
+        <circle
+          r={radius * 0.8}
+          fill={color}
+          opacity="0.6"
+        >
+          <animateMotion
+            path={path}
+            dur={`${animationDuration}s`}
+            repeatCount="indefinite"
+            rotate="auto"
+            keyPoints="0.05;1.05" 
+            keyTimes="0;1"
+          />
+        </circle>
       </g>
     );
   }
   
-  // Static dots
-  if (cx && cy) {
-    return (
-      <circle
-        ref={circleRef}
-        cx={cx}
-        cy={cy}
-        r={radius}
-        fill={color}
-      />
-    );
-  }
-  
-  return null;
+  return (
+    <circle
+      cx={cx}
+      cy={cy}
+      r={radius}
+      fill={color}
+    />
+  );
 };

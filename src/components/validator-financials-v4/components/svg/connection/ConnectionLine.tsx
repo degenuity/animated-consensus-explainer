@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useConnectionAnimation } from '../hooks/useConnectionAnimation';
 import { ConnectionDefinition } from './ConnectionDefinition';
 import { AnimatedConnection } from './AnimatedConnection';
@@ -11,21 +11,25 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     renderAsDefinition = false,
     path,
     dotPosition,
-    id,
     // Extracting all props with defaults to pass to appropriate components
     ...restProps
   } = props;
   
-  // Create a ref to track DOM elements for post-render inspection
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { lineVariants, dotVariants } = useConnectionAnimation({
+    animationIndex: animationIndex || 0,
+    dotAnimationDuration: props.animationDuration || 2,
+    pathAnimationDuration: 0.7
+  });
   
-  // If we're rendering as a definition, return the definition component
+  // If we're rendering as a definition for later use with <use>, return a <defs> element
   if (renderAsDefinition) {
     return (
       <defs>
         <ConnectionDefinition 
-          {...props}
-          animationIndex={animationIndex}
+          {...restProps}
+          path={path}
+          dotPosition={dotPosition}
+          animationIndex={animationIndex} // Pass animationIndex explicitly
         />
       </defs>
     );
@@ -36,22 +40,13 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     return null;
   }
   
-  // Get animation variants for this connection
-  const { lineVariants, dotVariants } = useConnectionAnimation({
-    animationIndex: animationIndex || 0,
-    dotAnimationDuration: props.animationDuration || 2,
-    pathAnimationDuration: 0.7
-  });
-  
-  // Create a wrapper div to help with debugging
+  // Regular rendering with animations
   return (
-    <div ref={containerRef} data-connection-id={id}>
-      <AnimatedConnection 
-        {...props}
-        lineVariants={lineVariants}
-        dotVariants={dotVariants}
-      />
-    </div>
+    <AnimatedConnection 
+      {...props}
+      lineVariants={lineVariants}
+      dotVariants={dotVariants}
+    />
   );
 };
 

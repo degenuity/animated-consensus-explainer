@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ConnectionLabel } from './ConnectionLabel';
 import { ConnectionDot } from './ConnectionDot';
@@ -24,16 +24,10 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   animationDuration
 }) => {
   // Skip rendering if path is missing
-  if (!path) {
-    console.log("Skipping AnimatedConnection - missing path");
-    return null;
-  }
-  
-  const containerRef = useRef<SVGGElement>(null);
+  if (!path) return null;
   
   return (
-    <g ref={containerRef}>
-      {/* Always render the path itself */}
+    <g>
       <motion.path
         d={path}
         stroke={color}
@@ -45,7 +39,6 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         animate="visible"
       />
       
-      {/* Render static dot if position is provided */}
       {dotPosition && !animateMotion && (
         <motion.circle
           cx={dotPosition.x}
@@ -62,8 +55,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         />
       )}
       
-      {/* Render animated dot */}
-      {animateMotion && (
+      {animateMotion && path && (
         <motion.g
           custom={animationIndex}
           initial={{ opacity: 0 }}
@@ -82,7 +74,6 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         </motion.g>
       )}
       
-      {/* Always render the label if it exists */}
       {label && labelPosition && (
         <ConnectionLabel 
           label={label} 

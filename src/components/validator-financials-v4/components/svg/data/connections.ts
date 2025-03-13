@@ -109,6 +109,4 @@ export const connectionPaths = [
     renderOrder: "foreground" as const,
     animationDuration: 1.8
   }
-  
-  // Removed any unsafe paths and connections
 ];
