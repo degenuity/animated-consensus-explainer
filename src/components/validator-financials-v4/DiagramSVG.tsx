@@ -4,8 +4,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
   ConnectionLine,
-  // ExplanationComponent removed from here
-  // Logo completely removed from here
 } from './components/svg';
 import { viewBoxWidth, viewBoxHeight } from './components/svg/data/constants';
 import { boxes } from './components/svg/data/boxes';
@@ -15,6 +13,19 @@ import { useDiagramDebug } from './hooks/useDiagramDebug';
 const DiagramSVG = () => {
   const isMobile = useIsMobile();
   const svgRef = useDiagramDebug();
+  
+  // Log event listener registration to make sure it's working
+  useEffect(() => {
+    const handleDotCollision = (event: any) => {
+      console.log('Dot collision detected:', event.detail);
+    };
+    
+    window.addEventListener('dotCollision', handleDotCollision);
+    
+    return () => {
+      window.removeEventListener('dotCollision', handleDotCollision);
+    };
+  }, []);
   
   // Separate connections by rendering order
   const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
@@ -51,15 +62,11 @@ const DiagramSVG = () => {
         preserveAspectRatio="xMidYMid meet"
         className="absolute top-0 left-0"
       >
-        {/* Both ExplanationComponent and Logo completely removed from here */}
-        
         {backgroundConnections.map((connection, index) => (
           <ConnectionLine
             key={`connection-bg-${connection.id}-${index}`}
             {...connection}
             animationIndex={connection.animationIndex || index}
-            dotPosition={connection.dotPosition}
-            animationDirection={connection.animationDirection}
             animateMotion={connection.animateMotion}
             animationDuration={connection.animationDuration}
           />
@@ -97,8 +104,6 @@ const DiagramSVG = () => {
             key={`connection-fg-${connection.id}-${index}`}
             {...connection}
             animationIndex={connection.animationIndex || index}
-            dotPosition={connection.dotPosition}
-            animationDirection={connection.animationDirection}
             animateMotion={connection.animateMotion}
             animationDuration={connection.animationDuration}
           />

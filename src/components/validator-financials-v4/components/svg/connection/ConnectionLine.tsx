@@ -27,7 +27,6 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
 }) => {
   const dotRef = useRef<SVGCircleElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
-  const animationRef = useRef<Animation | null>(null);
   
   // Extract target box ID from the connection ID if not explicitly provided
   const getTargetBoxId = () => {
@@ -54,7 +53,7 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
     const target = getTargetBoxId();
     if (!target) return;
     
-    // Observe when the dot finishes its animation
+    // Observe the animation and trigger the collision event when appropriate
     const handleAnimationIteration = () => {
       // When the animation completes, dispatch a custom event
       const collisionEvent = new CustomEvent('dotCollision', {
@@ -107,33 +106,6 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
           style={{
             offsetPath: `path('${path}')`,
             zIndex: 100
-          }}
-        />
-      </g>
-    );
-  }
-  
-  // For dots that move with CSS animation
-  if (dotPosition && animationDirection) {
-    return (
-      <g>
-        <path
-          d={path}
-          fill="none"
-          stroke={color}
-          strokeWidth="1.5"
-          strokeDasharray="4 2"
-          opacity="0.6"
-        />
-        
-        <circle
-          ref={dotRef}
-          cx={dotPosition.x}
-          cy={dotPosition.y}
-          r="4"
-          fill={color}
-          style={{
-            animation: `moveDot${animationDirection.charAt(0).toUpperCase() + animationDirection.slice(1)} 1.5s infinite linear`,
           }}
         />
       </g>
