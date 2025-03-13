@@ -1,4 +1,3 @@
-
 import React from 'react';
 import BoxContainer from './BoxContainer';
 import { Percent } from 'lucide-react';
@@ -34,11 +33,10 @@ const Boxes: React.FC = () => {
         title="internal rewards"
         color="52, 211, 153"
         animationDelay={0.2}
-        className="h-[220px]" // Added explicit height to match the SVG version
+        className="h-[160px]" // Reduced height from 220px to 160px
         subBoxes={[
           { title: "commission" },
-          { title: "staking rewards" },
-          { title: "voting rewards" }
+          { title: "staking rewards" }
         ]}
       />
 

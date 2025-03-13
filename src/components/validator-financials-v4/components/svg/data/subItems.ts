@@ -1,10 +1,8 @@
-
 // Subitem definitions for different boxes
 
 export const internalRewardsSubitems = [
   { text: "commission", id: "commission", color: "#10B981" },
-  { text: "staking rewards", id: "staking-rewards", color: "#10B981" },
-  { text: "voting rewards", id: "voting-rewards", color: "#10B981" }
+  { text: "staking rewards", id: "staking-rewards", color: "#10B981" }
 ];
 
 export const networkCostsSubitems = [

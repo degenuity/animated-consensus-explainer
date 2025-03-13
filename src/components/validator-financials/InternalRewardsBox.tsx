@@ -33,14 +33,6 @@ const InternalRewardsBox = () => (
         >
           staking rewards
         </motion.div>
-        <motion.div 
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3, delay: 0.5 }}
-          className="border border-green-500/70 bg-gray-800/50 p-2 rounded text-sm text-white"
-        >
-          voting rewards
-        </motion.div>
       </div>
     </div>
   </motion.div>

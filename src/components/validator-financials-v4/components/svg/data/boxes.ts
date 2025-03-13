@@ -1,3 +1,4 @@
+
 // Box definitions with positions, dimensions and content
 import { 
   internalRewardsSubitems, 
@@ -22,12 +23,12 @@ export const boxes = [
     simpleStyle: true
   },
   
-  // Internal Rewards Box
+  // Internal Rewards Box - Reduced height from 220 to 160
   {
     x: 320,
     y: 180,
     width: 260,
-    height: 220,
+    height: 160,
     title: "internal rewards",
     icon: "internal-rewards" as const,
     color: "#10B981",
