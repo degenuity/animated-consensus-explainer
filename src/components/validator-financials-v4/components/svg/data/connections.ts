@@ -90,7 +90,7 @@ export const connectionPaths = [
   
   // Block Rewards to Total Validator Rewards
   { 
-    path: "M 1090 410 L 1090 450 L 950 450 L 950 550", 
+    path: "M 1090 410 L 1090 450 L 960.75 450 L 960.75 550", 
     color: "#10B981", 
     animationIndex: 8,
     animateMotion: true,
@@ -102,7 +102,7 @@ export const connectionPaths = [
   
   // Connection from Internal Rewards to Total Validator Rewards
   { 
-    path: "M 450 300 L 550 450 L 850 450 L 950 450 L 950 550", 
+    path: "M 450 300 L 550 450 L 850 450 L 960.75 450 L 960.75 550", 
     color: "#10B981", 
     animationIndex: 9,
     animateMotion: true,
