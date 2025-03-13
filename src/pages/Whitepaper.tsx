@@ -53,7 +53,7 @@ const Whitepaper = () => {
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">X1 Whitepaper</span>
         </h1>
         
-        <div className="flex justify-center mb-12">
+        <div className="flex justify-center mb-8">
           <Button 
             variant="ghost" 
             className="text-white hover:text-blue-400 bg-transparent hover:bg-transparent flex items-center gap-2"
@@ -68,7 +68,7 @@ const Whitepaper = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
+          className="text-3xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
         >
           Models in this paper
         </motion.h2>
@@ -78,9 +78,9 @@ const Whitepaper = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 overflow-hidden"
+          className="mb-8 overflow-hidden"
         >
-          <Card className="p-4 md:p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
+          <Card className="p-3 md:p-4 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-indigo-900/10" />
             <div className="relative z-10">
               <ValidatorFinancialsV4 />
@@ -93,9 +93,9 @@ const Whitepaper = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-12 overflow-hidden"
+          className="mb-8 overflow-hidden"
         >
-          <Card className="p-2 md:p-4 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
+          <Card className="p-2 md:p-3 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
             <div className="relative z-10">
               <ValidatorFinancialsV3 />
             </div>
@@ -107,9 +107,9 @@ const Whitepaper = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="mb-8"
         >
-          <Card className="p-4 md:p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
+          <Card className="p-3 md:p-4 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
             <div className="relative z-10">
               <ValidatorFinancialsV2 />
             </div>
@@ -121,9 +121,9 @@ const Whitepaper = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="mb-8"
         >
-          <Card className="p-4 md:p-6 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
+          <Card className="p-3 md:p-4 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
             <div className="relative z-10">
               <ValidatorFinancials />
             </div>

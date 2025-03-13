@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
@@ -120,7 +121,7 @@ const DiagramSVG = () => {
   const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
   
   return (
-    <div className="w-full h-full relative px-6">
+    <div className="w-full h-full relative px-4">
       <style>
         {`
           @keyframes moveDotRight {
