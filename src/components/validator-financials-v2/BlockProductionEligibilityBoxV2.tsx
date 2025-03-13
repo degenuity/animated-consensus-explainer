@@ -19,10 +19,9 @@ const BlockProductionEligibilityBoxV2 = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.5 }}
           className="border border-blue-500/70 bg-[#141b29] p-4 rounded col-span-1"
-          style={{ width: "110%" }} // Increased width by 10%
         >
-          <div className="text-blue-400 text-sm font-medium px-1">stake weight</div>
-          <div className="text-xs text-gray-300 mt-1 px-1">amount of XNT staked</div>
+          <div className="text-blue-400 text-sm font-medium">stake weight</div>
+          <div className="text-xs text-gray-300 mt-1">amount of XNT staked</div>
         </motion.div>
 
         {/* First operator */}
@@ -41,10 +40,9 @@ const BlockProductionEligibilityBoxV2 = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.6 }}
           className="border border-blue-500/70 bg-[#141b29] p-4 rounded col-span-1"
-          style={{ width: "110%" }} // Increased width by 10%
         >
-          <div className="text-blue-400 text-sm font-medium px-1">randomness</div>
-          <div className="text-xs text-gray-300 mt-1 px-1">ACP anti-collusion protocol</div>
+          <div className="text-blue-400 text-sm font-medium">randomness</div>
+          <div className="text-xs text-gray-300 mt-1">ACP anti-collusion protocol</div>
         </motion.div>
         
         {/* Second operator */}
@@ -63,10 +61,9 @@ const BlockProductionEligibilityBoxV2 = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.7 }}
           className="border border-blue-500/70 bg-[#141b29] p-4 rounded col-span-1"
-          style={{ width: "110%" }} // Increased width by 10%
         >
-          <div className="text-blue-400 text-sm font-medium px-1">performance</div>
-          <div className="text-xs text-gray-300 mt-1 px-1">from recorded history</div>
+          <div className="text-blue-400 text-sm font-medium">performance</div>
+          <div className="text-xs text-gray-300 mt-1">from recorded history</div>
         </motion.div>
       </div>
     </div>
