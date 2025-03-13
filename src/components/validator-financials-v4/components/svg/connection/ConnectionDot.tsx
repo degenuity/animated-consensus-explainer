@@ -75,6 +75,18 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     );
   }
   
+  // For static dots, add a check to ensure we don't render dots in unwanted positions
+  // Filter out any dots positioned near the top-left corner
+  if (cx && cy) {
+    const numCx = parseFloat(cx);
+    const numCy = parseFloat(cy);
+    
+    // Skip rendering dots in the top-left corner region
+    if (numCx < 50 && numCy < 50) {
+      return null;
+    }
+  }
+  
   return (
     <circle
       cx={cx}
