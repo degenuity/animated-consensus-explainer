@@ -8,7 +8,6 @@ import { BoxProps } from './types';
 const BoxComponent: React.FC<BoxProps> = (props) => {
   const boxRef = useRef<SVGGElement>(null);
   const [isHighlighted, setIsHighlighted] = useState(false);
-  const [isBumped, setIsBumped] = useState(false);
   
   useEffect(() => {
     const handleDotCollision = (event: CustomEvent) => {
@@ -19,17 +18,13 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
           (props.subitems && props.subitems.some(item => 
             typeof item !== 'string' && item.id === targetId))) {
         
-        // Trigger bump animation
-        setIsBumped(true);
-        
         // Highlight the box
         setIsHighlighted(true);
         
         // Reset after animation duration
         setTimeout(() => {
-          setIsBumped(false);
           setIsHighlighted(false);
-        }, 300);
+        }, 600);
       }
     };
     
@@ -43,12 +38,22 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
   }, [props.title, props.subitems]);
   
   // Generate styling properties based on highlight state
+  const getHighlightColor = () => {
+    // Create complementary colors for different box types
+    const baseColor = props.color || props.borderColor || '#3B82F6';
+    
+    if (baseColor.includes('3B82F6')) return "#8B5CF6"; // Purple for blue boxes
+    if (baseColor.includes('10B981')) return "#06B6D4"; // Cyan for green boxes
+    if (baseColor.includes('EAB308')) return "#F97316"; // Orange for yellow boxes
+    return "#EC4899"; // Pink fallback
+  };
+  
   const borderColor = isHighlighted 
-    ? `${props.color || props.borderColor || '#3B82F6'}` 
+    ? getHighlightColor()
     : props.borderColor || props.color || '#3B82F6';
   
   const borderWidth = isHighlighted ? "2.5" : "1.5";
-  const filter = isHighlighted ? "drop-shadow(0 0 3px rgba(255, 255, 255, 0.5))" : "none";
+  const filter = isHighlighted ? "drop-shadow(0 0 4px rgba(255, 255, 255, 0.5))" : "none";
   
   // Determine if this is a complex or simple box
   const isComplex = props.subitems && props.subitems.length > 0;
@@ -65,21 +70,14 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
       ref={boxRef}
       data-id={props.title.replace(/\s+/g, '-')}
       initial={{ opacity: 0 }}
-      animate={{ 
-        opacity: 1,
-        scale: isBumped ? [1, 1.03, 1] : 1
-      }}
+      animate={{ opacity: 1 }}
       transition={{ 
-        duration: isBumped ? 0.3 : 0.3, 
-        delay: props.animationIndex ? props.animationIndex * 0.1 : 0,
-        scale: {
-          duration: 0.3,
-          ease: "easeInOut"
-        }
+        duration: 0.3, 
+        delay: props.animationIndex ? props.animationIndex * 0.1 : 0
       }}
       style={{
         filter,
-        transformOrigin: 'center center'
+        transition: 'filter 0.3s ease'
       }}
     >
       {isComplex ? (
