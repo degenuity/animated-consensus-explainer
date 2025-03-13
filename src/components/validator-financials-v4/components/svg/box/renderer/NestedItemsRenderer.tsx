@@ -56,6 +56,7 @@ const NestedItemsRenderer = ({
           width={childItemWidth}
           height={childItemHeight}
           isNested={true}
+          data-item-id={subItem.id} // Add data attribute for easier debugging
         />
       );
     });
@@ -75,6 +76,18 @@ const NestedItemsRenderer = ({
       // Add extra spacing based on position property
       const extraSpacing = subItem.position?.y || 0;
       
+      // Log the exact position of the stake weight box for debugging
+      if (subItem.id === 'stake-weight') {
+        console.log(`RENDERING STAKE WEIGHT BOX at position:`, {
+          x: x + paddingLeft,
+          y: y + childY + extraSpacing,
+          width: width - paddingLeft - 10,
+          height: itemHeight,
+          centerX: x + paddingLeft + (width - paddingLeft - 10) / 2,
+          centerY: y + childY + extraSpacing + itemHeight / 2
+        });
+      }
+      
       renderedItems.push(
         <SubItemRenderer 
           key={`nested-${subItem.id || subIndex}-${index}`}
@@ -86,6 +99,7 @@ const NestedItemsRenderer = ({
           width={width - paddingLeft - 10}
           height={itemHeight}
           isNested={true}
+          data-item-id={subItem.id} // Add data attribute for easier debugging
         />
       );
       
