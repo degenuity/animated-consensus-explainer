@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface ConnectionDotProps {
@@ -24,10 +23,9 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   if (path?.includes("total-stake-to-stake-weight")) {
     console.log("Stake weight path details:", { 
       path,
-      endPoint: "585,550",
+      endPoint: "705,550",
       animated, 
       animationDuration,
-      // Parse path to extract coordinates
       coordinates: path.split(/[ML]\s*/).filter(Boolean).map(coord => {
         const [x, y] = coord.trim().split(/\s+/).map(Number);
         return { x, y };
@@ -35,10 +33,20 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     });
   }
   
+  if (path?.includes("block-production")) {
+    console.log("Block production box connection:", {
+      path,
+      boxPositions: {
+        performance: "Left box - approximately at x=320-445, y=550",
+        randomness: "Middle box - approximately at x=585, y=550",
+        stakeWeight: "Right box - approximately at x=705, y=550"
+      }
+    });
+  }
+  
   if (animated && path) {
     return (
       <g>
-        {/* Main dot with motion animation */}
         <circle
           r={radius}
           fill={color}
@@ -49,14 +57,12 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
             repeatCount="indefinite"
             rotate="auto"
           />
-          {/* Enhanced pulsating size effect */}
           <animate
             attributeName="r"
             values="3;6;3"
             dur="0.8s"
             repeatCount="indefinite"
           />
-          {/* Enhanced pulsating opacity effect */}
           <animate
             attributeName="opacity"
             values="0.7;1;0.7"
@@ -65,7 +71,6 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
           />
         </circle>
         
-        {/* Secondary trail dot (slightly smaller and more transparent) */}
         <circle
           r={radius * 0.8}
           fill={color}
