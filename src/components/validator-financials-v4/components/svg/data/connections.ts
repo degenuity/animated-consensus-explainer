@@ -1,4 +1,3 @@
-
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -86,10 +85,10 @@ export const connectionPaths = [
     animationDuration: 1.5
   },
   
-  // Block Rewards to Total Validator Rewards - Updated to end 10px to the left of the previous point
+  // Block Rewards to Total Validator Rewards - Updated with green color
   { 
     path: "M 1090 410 L 1090 450 L 1019.5 450 L 1019.5 550", 
-    color: "#F97316", 
+    color: "#10B981", // Changed from #F97316 (orange) to #10B981 (green)
     animationIndex: 8,
     animateMotion: true,
     dotPosition: { x: "1055", y: "500" },
