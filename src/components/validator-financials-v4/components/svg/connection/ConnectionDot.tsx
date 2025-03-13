@@ -23,7 +23,8 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   // Enhanced debugging for the stake weight path
   if (path?.includes("total-stake-to-stake-weight")) {
     console.log("Stake weight path details:", { 
-      path, 
+      path,
+      endPoint: "585,550",
       animated, 
       animationDuration,
       // Parse path to extract coordinates
