@@ -1,3 +1,4 @@
+
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -10,30 +11,6 @@ export const connectionPaths = [
     animateMotion: true,
     id: "inflation-to-internal-rewards",
     renderOrder: "background" as const
-  },
-  
-  // Line 2: Delegated Stake to Commission
-  { 
-    path: "M 650 240 L 580 240", 
-    color: "#3B82F6", 
-    animationIndex: 1,
-    dotPosition: { x: "615", y: "240" },
-    animateMotion: true,
-    animationDirection: "left" as const,
-    id: "delegated-stake-to-commission",
-    renderOrder: "foreground" as const
-  },
-  
-  // Line 3: Own Stake to Staking Rewards
-  { 
-    path: "M 650 280 L 580 280", 
-    color: "#3B82F6", 
-    animationIndex: 2,
-    dotPosition: { x: "615", y: "280" },
-    animateMotion: true,
-    animationDirection: "left" as const,
-    id: "own-stake-to-staking-rewards",
-    renderOrder: "foreground" as const
   },
   
   // Line 4: Total Stake to Stake Weight
