@@ -1,4 +1,3 @@
-
 // Subitem definitions for different boxes
 
 export const internalRewardsSubitems = [
@@ -23,7 +22,7 @@ export const networkCostsSubitems = [
         text: "priority fees", 
         id: "priority-fees", 
         color: "#10B981",
-        position: { y: 25 } // Reduced from 45 to 25px to match the spacing pattern of delegated stake
+        position: { y: 5 } // Reduced from 25 to 5px (moved up by 20px)
       },
       { 
         text: "mev", 
