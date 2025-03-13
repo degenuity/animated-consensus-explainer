@@ -35,11 +35,32 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const isBlockRewards = id === "block-rewards";
   const isPriorityFeeOrMEV = id === "priority-fees" || id === "mev";
   const isBaseFees = id === "base-fees";
-  const isOperationalCosts = id === "operational-costs" || text?.toLowerCase().includes("operational costs");
+  const isTotalValidatorRewards = id === "total-validator-rewards";
+  const isOperationalCosts = id === "operational-costs";
   
-  // Log operational costs box coordinates for debugging
+  // Detailed logging for the boxes we're interested in
+  if (isTotalValidatorRewards) {
+    console.log(`TOTAL VALIDATOR REWARDS BOX: 
+      id: ${id}
+      x: ${adjustedX}
+      y: ${y + yOffset}
+      width: ${adjustedWidth}
+      height: ${itemHeight}
+      top-center: (${adjustedX + adjustedWidth/2}, ${y + yOffset})
+      center: (${adjustedX + adjustedWidth/2}, ${y + yOffset + itemHeight/2})
+    `);
+  }
+  
   if (isOperationalCosts) {
-    console.log(`Operational costs box: x=${adjustedX}, y=${y + yOffset}, width=${adjustedWidth}, height=${itemHeight}, top=${y + yOffset}, center-x=${adjustedX + adjustedWidth/2}, center-y=${y + yOffset}`);
+    console.log(`OPERATIONAL COSTS BOX: 
+      id: ${id}
+      x: ${adjustedX}
+      y: ${y + yOffset}
+      width: ${adjustedWidth}
+      height: ${itemHeight}
+      top-center: (${adjustedX + adjustedWidth/2}, ${y + yOffset})
+      center: (${adjustedX + adjustedWidth/2}, ${y + yOffset + itemHeight/2})
+    `);
   }
   
   // Log base fees box coordinates for debugging
@@ -49,7 +70,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   
   // Log block rewards box coordinates for debugging
   if (isBlockRewards) {
-    console.log(`Block rewards box: x=${adjustedX}, y=${y + yOffset}, height=${itemHeight}, top=${y + yOffset}`);
+    console.log(`Block rewards box: x=${adjustedX}, y=${y + yOffset}, height=${itemHeight}, top=${y + yOffset}, bottom=${y + yOffset + itemHeight}`);
   }
   
   // Make the block rewards text size match other header sizes - changed from xs to sm

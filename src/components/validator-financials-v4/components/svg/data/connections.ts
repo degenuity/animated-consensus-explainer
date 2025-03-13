@@ -86,7 +86,7 @@ export const connectionPaths = [
     animationDuration: 1.5
   },
   
-  // NEW: Block Rewards to Total Validator Rewards - Using approximate coordinates
+  // Block Rewards to Total Validator Rewards - Using exact coordinates for total validator rewards top-center
   { 
     path: "M 1090 410 L 1090 450 L 850 450", 
     color: "#F97316", 
@@ -96,8 +96,17 @@ export const connectionPaths = [
     id: "block-rewards-to-total-validator-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 2
-  }
+  },
   
-  // Removed: Block Rewards to Profitability line
-  // Removed: Internal Rewards to Total Validator Rewards line
+  // NEW - Connection from Internal Rewards to Total Validator Rewards
+  { 
+    path: "M 450 300 L 550 450 L 850 450", 
+    color: "#10B981", 
+    animationIndex: 9,
+    animateMotion: true,
+    dotPosition: { x: "650", y: "450" },
+    id: "internal-rewards-to-total-validator-rewards",
+    renderOrder: "background" as const,
+    animationDuration: 2.5
+  }
 ];
