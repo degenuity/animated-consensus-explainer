@@ -116,19 +116,33 @@ const ConnectingLines = () => (
     </div>
 
     {/* Total Stake to Block Production Eligibility/Stake Weight - curved line matching the image */}
-    <div className="absolute top-[340px] left-[400px] w-[2px] h-[420px] bg-blue-500/80 transform -translate-x-1/2">
-      <motion.div 
-        className="absolute top-0 left-0 w-full h-[20px] bg-blue-400"
-        animate={{ 
-          y: [0, 420, 0],
-          opacity: [0, 1, 0]
-        }}
-        transition={{ 
-          duration: 4,
-          repeat: Infinity,
-          ease: "linear"
-        }}
-      />
+    <div className="absolute top-[340px] left-[400px]">
+      <svg width="400" height="420" className="overflow-visible">
+        <path 
+          d="M 380 0 C 380 160 220 310 50 370 Q 0 390 -200 370" 
+          fill="none" 
+          stroke="rgba(59, 130, 246, 0.8)" 
+          strokeWidth="2"
+        />
+        <motion.circle 
+          cx="0" 
+          cy="0" 
+          r="4" 
+          fill="#3B82F6"
+          animate={{ 
+            offsetDistance: ["0%", "100%"],
+            opacity: [0, 1, 0]
+          }}
+          transition={{ 
+            duration: 4,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{ 
+            offsetPath: "path('M 380 0 C 380 160 220 310 50 370 Q 0 390 -200 370')" 
+          }}
+        />
+      </svg>
     </div>
 
     {/* Network Usage Costs to Operational Costs (Profitability) */}

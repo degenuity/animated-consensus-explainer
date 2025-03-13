@@ -20,6 +20,21 @@ const BlockProductionEligibilityBox = () => {
         topCenter: {
           x: rect.left + rect.width / 2,
           y: rect.top
+        },
+        // Additional detailed coordinates
+        topLeft: {
+          x: rect.left,
+          y: rect.top
+        },
+        topRight: {
+          x: rect.left + rect.width,
+          y: rect.top
+        },
+        absolutePosition: {
+          top: `${rect.top}px`,
+          left: `${rect.left}px`,
+          width: `${rect.width}px`,
+          height: `${rect.height}px`
         }
       });
     }
