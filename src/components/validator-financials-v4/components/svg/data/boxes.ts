@@ -8,11 +8,14 @@ import {
   profitabilitySubitems
 } from './subItems';
 
+// New consistent Y value for all top row boxes
+const TOP_ROW_Y = 180;
+
 export const boxes = [
   // Inflation Box
   {
-    x: 100,  // Reverted back to original position
-    y: 240,
+    x: 100,
+    y: TOP_ROW_Y, // Updated to consistent Y value
     width: 150,
     height: 100,
     title: "inflation",
@@ -23,10 +26,10 @@ export const boxes = [
     simpleStyle: true
   },
   
-  // Internal Rewards Box - Reduced height from 220 to 160
+  // Internal Rewards Box
   {
     x: 320,
-    y: 180,
+    y: TOP_ROW_Y, // Updated to consistent Y value
     width: 260,
     height: 160,
     title: "internal rewards",
@@ -37,10 +40,10 @@ export const boxes = [
     borderColor: "#10B981"
   },
   
-  // Total Stake Box - Aligned with center of stake weight box
+  // Total Stake Box
   {
-    x: 635, // Centered at approximately 763.7 (635 + 260/2 = 765)
-    y: 180,
+    x: 635,
+    y: TOP_ROW_Y, // Updated to consistent Y value
     width: 260,
     height: 160,
     title: "total stake",
@@ -54,7 +57,7 @@ export const boxes = [
   // Network Costs Box
   {
     x: 950,
-    y: 120,
+    y: TOP_ROW_Y, // Updated to consistent Y value
     width: 280,
     height: 310,
     title: "network usage costs",
@@ -67,8 +70,8 @@ export const boxes = [
   
   // Deflation Box
   {
-    x: 1250, // Reverted back to original position
-    y: 240,
+    x: 1250,
+    y: TOP_ROW_Y, // Updated to consistent Y value
     width: 150,
     height: 100,
     title: "deflation",

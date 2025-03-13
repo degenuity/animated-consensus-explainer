@@ -2,37 +2,40 @@
 import React from 'react';
 import ConnectionLine from './ConnectionLine';
 
+// New consistent Y value for connections
+const CONNECTION_Y = 115;
+
 const Connections: React.FC = () => {
   return (
     <>
       {/* Inflation to Internal Rewards */}
       <ConnectionLine 
-        from={{ top: '115px', left: 'calc(2% + 160px)' }}
-        to={{ top: '115px', left: 'calc(26% - 20px)' }}
+        from={{ top: `${CONNECTION_Y}px`, left: 'calc(2% + 160px)' }}
+        to={{ top: `${CONNECTION_Y}px`, left: 'calc(26% - 20px)' }}
         color="#3B82F6"
         delay={1.5}
       />
 
       {/* Internal Rewards to Total Stake */}
       <ConnectionLine 
-        from={{ top: '115px', left: 'calc(26% + 128px)' }}
-        to={{ top: '115px', left: 'calc(50% - 128px)' }}
+        from={{ top: `${CONNECTION_Y}px`, left: 'calc(26% + 128px)' }}
+        to={{ top: `${CONNECTION_Y}px`, left: 'calc(50% - 128px)' }}
         color="#10B981"
         delay={1.6}
       />
 
       {/* Network Costs to Total Stake */}
       <ConnectionLine 
-        from={{ top: '115px', left: 'calc(74% - 128px)' }}
-        to={{ top: '115px', left: 'calc(50% + 128px)' }}
+        from={{ top: `${CONNECTION_Y}px`, left: 'calc(74% - 128px)' }}
+        to={{ top: `${CONNECTION_Y}px`, left: 'calc(50% + 128px)' }}
         color="#F97316"
         delay={1.7}
       />
 
       {/* Deflation to Network Costs */}
       <ConnectionLine 
-        from={{ top: '115px', left: 'calc(98% - 160px)' }}
-        to={{ top: '115px', left: 'calc(74% + 20px)' }}
+        from={{ top: `${CONNECTION_Y}px`, left: 'calc(98% - 160px)' }}
+        to={{ top: `${CONNECTION_Y}px`, left: 'calc(74% + 20px)' }}
         color="#F59E0B"
         delay={1.8}
       />
