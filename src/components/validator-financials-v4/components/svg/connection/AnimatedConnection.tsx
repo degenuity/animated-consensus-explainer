@@ -31,23 +31,13 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   
   const containerRef = useRef<SVGGElement>(null);
   
-  // Debug which component is rendering which dot
-  console.log(`AnimatedConnection: ${animationIndex}`, { 
-    dotPosition,
-    animateMotion,
-    path: path.substring(0, 30) + '...'
-  });
+  // Very targeted safety check: Only block paths exactly at origin (not near origin)
+  const isSafePath = !path.match(/^M\s*0\s*,\s*0\s+/);
   
-  // Safety check: Never render dots for paths starting at origin
-  const isSafePath = !path.includes("M 0,0") && 
-                    !path.includes("M 0 0") && 
-                    !path.startsWith("M0,0") &&
-                    !path.startsWith("M 0,");
-  
-  // Safety check: Only allow dots with explicit positions away from the origin
-  const isSafeDotPosition = dotPosition && 
-                          parseFloat(dotPosition.x) > 50 && 
-                          parseFloat(dotPosition.y) > 50;
+  // Safety check: Only block dots exactly at origin (not near origin)
+  const isSafeDotPosition = !dotPosition || 
+                          !(dotPosition.x === "0" && dotPosition.y === "0") &&
+                          !(dotPosition.x === "0.0" && dotPosition.y === "0.0");
   
   return (
     <g ref={containerRef}>
@@ -63,7 +53,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         animate="visible"
       />
       
-      {/* Render static dot only if position is safe */}
+      {/* Render static dot if position is safe */}
       {dotPosition && !animateMotion && isSafeDotPosition && (
         <motion.circle
           cx={dotPosition.x}
@@ -80,7 +70,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         />
       )}
       
-      {/* Render animated dot only if path and animation are safe */}
+      {/* Render animated dot if path is safe */}
       {animateMotion && isSafePath && (
         <motion.g
           custom={animationIndex}

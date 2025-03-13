@@ -10,31 +10,28 @@ const DiagramSVG = () => {
   const svgRef = useDiagramDebug();
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Focused safety check for rogue dots
+  // Focused safety check just for rogue dots at exact origin
   useEffect(() => {
-    console.log("DiagramSVG mounted - checking all connections for origin (0,0) paths");
+    console.log("DiagramSVG mounted - checking for rogue dots at exact origin");
     
-    // Find any suspicious connection that might create a dot at origin
+    // Find any suspicious connection that might create a dot at exact origin
     const suspiciousConnections = connectionPaths.filter(conn => {
       const hasOriginPath = conn.path && (
-        conn.path.includes("M 0,0") || 
-        conn.path.includes("M 0 0") ||
-        conn.path.startsWith("M0,0") ||
-        conn.path.startsWith("M 0,")
+        conn.path.match(/^M\s*0\s*,\s*0\s+/)
       );
       
       const hasOriginDot = conn.dotPosition && 
-        parseFloat(conn.dotPosition.x) < 50 && 
-        parseFloat(conn.dotPosition.y) < 50;
+        conn.dotPosition.x === "0" && 
+        conn.dotPosition.y === "0";
         
       return hasOriginPath || hasOriginDot;
     });
     
     if (suspiciousConnections.length > 0) {
-      console.error("FOUND SUSPICIOUS CONNECTIONS:", suspiciousConnections);
+      console.error("FOUND SUSPICIOUS CONNECTIONS WITH EXACT ORIGIN PATHS:", suspiciousConnections);
     }
     
-    // Targeted DOM check for rogue dots
+    // Targeted DOM check for rogue dots exactly at 0,0
     const checkForRogueDots = () => {
       if (containerRef.current) {
         const circles = containerRef.current.querySelectorAll('circle');
@@ -42,15 +39,15 @@ const DiagramSVG = () => {
           const cx = parseFloat(circle.getAttribute('cx') || '9999');
           const cy = parseFloat(circle.getAttribute('cy') || '9999');
           
-          // Only inspect circles very close to origin (0,0)
-          if (!isNaN(cx) && !isNaN(cy) && cx < 50 && cy < 50) {
-            console.error("FOUND ROGUE DOT:", {
+          // Only remove circles exactly at 0,0 (with small tolerance)
+          if (!isNaN(cx) && !isNaN(cy) && cx < 1 && cy < 1) {
+            console.error("FOUND ROGUE DOT AT EXACT ORIGIN:", {
               cx, cy,
               fill: circle.getAttribute('fill'),
               parent: circle.parentElement?.tagName
             });
             
-            // Remove only the rogue dot, not all dots
+            // Remove only the exact origin dot
             circle.remove();
           }
         });
@@ -88,10 +85,15 @@ const DiagramSVG = () => {
       {/* Foreground Layer - Contains only the connections that need to be on top */}
       <ForegroundLayer connectionPaths={connectionPaths} />
       
-      {/* Invisible shield just over the origin area to block any interactions */}
+      {/* Invisible shield just to block any interactions at the exact origin */}
       <div 
-        className="absolute top-0 left-0 w-[50px] h-[50px] z-50"
-        style={{ pointerEvents: 'none' }}
+        className="absolute top-0 left-0 w-[2px] h-[2px] z-50 pointer-events-none"
+        style={{ 
+          backgroundColor: 'transparent',
+          position: 'absolute', 
+          top: 0, 
+          left: 0
+        }}
       />
     </div>
   );

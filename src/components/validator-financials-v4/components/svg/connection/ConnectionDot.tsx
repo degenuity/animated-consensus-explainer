@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 interface ConnectionDotProps {
   path?: string;
@@ -23,33 +23,17 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   // Reference for the circle element to monitor it
   const circleRef = useRef<SVGCircleElement | null>(null);
   
-  // Debugging: Log all dot rendering
-  console.log("Rendering ConnectionDot:", { path, color, cx, cy, animated });
-  
-  // Specific check for dangerous dots at top-left
-  const dangerZoneSize = 50; // Only block dots very close to origin
-  
-  if (cx && cy) {
-    const numCx = parseFloat(cx);
-    const numCy = parseFloat(cy);
-    
-    // If dot is in danger zone, block it
-    if (numCx < dangerZoneSize && numCy < dangerZoneSize) {
-      console.error("BLOCKED DOT IN DANGER ZONE:", { cx, cy, color });
-      return null;
-    }
+  // Only block dots at exact origin (0,0)
+  // This is the key fix - we only block dots that are exactly at 0,0
+  if ((cx === "0" && cy === "0") || (cx === "0.0" && cy === "0.0")) {
+    console.error("BLOCKED DOT AT EXACT ORIGIN:", { cx, cy, color });
+    return null;
   }
   
-  // SPECIFIC check for the exact SVG path that's creating the rogue dot
-  // This is focused on catching exactly the problem pattern
-  if (animated && path && (
-      path.includes("M 0,0") || 
-      path.includes("M 0 0") ||
-      path.startsWith("M0,0") || 
-      path.startsWith("M 0,") ||
-      path.includes(" 0 0 ")
-  )) {
-    console.error("BLOCKED SUSPICIOUS PATH:", { path, color });
+  // For animated dots, only block if the path starts exactly at the origin
+  // We only check for the exact pattern to avoid blocking legitimate paths
+  if (animated && path && path.match(/^M\s*0\s*,\s*0\s+/)) {
+    console.error("BLOCKED DOT WITH PATH STARTING AT EXACT ORIGIN:", { path: path.substring(0, 20), color });
     return null;
   }
 
