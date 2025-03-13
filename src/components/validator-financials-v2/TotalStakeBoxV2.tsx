@@ -13,14 +13,13 @@ const TotalStakeBoxV2 = () => {
       </div>
       
       {/* Content section */}
-      <div className="px-4 py-3">
-        {/* First item with spacing after it */}
+      <div className="px-4 py-3 flex flex-col space-y-6">
+        {/* First item */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.3 }}
           className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white"
-          style={{ marginBottom: '24px' }}
         >
           delegated stake
         </motion.div>

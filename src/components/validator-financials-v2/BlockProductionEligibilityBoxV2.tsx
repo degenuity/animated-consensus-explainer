@@ -11,8 +11,8 @@ const BlockProductionEligibilityBoxV2 = () => {
         <span className="text-xl text-white">block production eligibility</span>
       </div>
       
-      {/* Using grid with explicit gap between elements */}
-      <div className="grid grid-cols-5 gap-6 px-6 py-4">
+      {/* Using grid with larger gap for more spacing */}
+      <div className="grid grid-cols-5 gap-8 px-6 py-4">
         {/* First column */}
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
