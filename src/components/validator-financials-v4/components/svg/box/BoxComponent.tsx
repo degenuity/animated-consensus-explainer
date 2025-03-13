@@ -37,15 +37,23 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
     };
   }, [props.title, props.subitems]);
   
-  const strokeColor = isHighlighted 
+  // Generate styling properties based on highlight state
+  const borderColor = isHighlighted 
     ? `${props.color || props.borderColor || '#3B82F6'}` 
     : props.borderColor || props.color || '#3B82F6';
   
-  const strokeWidth = isHighlighted ? "2.5" : "1.5";
+  const borderWidth = isHighlighted ? "2.5" : "1.5";
   const filter = isHighlighted ? "drop-shadow(0 0 3px rgba(255, 255, 255, 0.5))" : "none";
   
   // Determine if this is a complex or simple box
   const isComplex = props.subitems && props.subitems.length > 0;
+  
+  // Set up the props for the correct box component
+  const boxStyleProps = {
+    ...props,
+    borderColor,
+    borderWidth,
+  };
   
   return (
     <motion.g
@@ -62,9 +70,9 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
       }}
     >
       {isComplex ? (
-        <ComplexBox {...props} strokeColor={strokeColor} strokeWidth={strokeWidth} />
+        <ComplexBox boxProps={boxStyleProps} />
       ) : (
-        <SimpleBox {...props} strokeColor={strokeColor} strokeWidth={strokeWidth} />
+        <SimpleBox boxProps={boxStyleProps} />
       )}
     </motion.g>
   );

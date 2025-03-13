@@ -6,11 +6,19 @@ import TitleBar from './TitleBar';
 import ItemsProcessor from './ItemsProcessor';
 
 interface ComplexBoxProps {
-  boxProps: BoxProps;
+  boxProps: BoxProps & {
+    borderColor?: string;
+    borderWidth?: string;
+  };
 }
 
 const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
-  const { x, y, width, height, title, icon, animationIndex, subitems = [] } = boxProps;
+  const { 
+    x, y, width, height, title, icon, 
+    animationIndex, subitems = [],
+    borderColor = "#1e293b",
+    borderWidth = "1"
+  } = boxProps;
 
   return (
     <motion.g
@@ -27,8 +35,8 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
         height={height}
         rx="4"
         fill="#0f172a"
-        stroke="#1e293b"
-        strokeWidth="1"
+        stroke={borderColor}
+        strokeWidth={borderWidth}
       />
       
       {/* Title bar */}

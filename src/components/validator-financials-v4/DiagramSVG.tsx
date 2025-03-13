@@ -5,7 +5,7 @@ import AnimationStyleProvider from './components/svg/AnimationStyleProvider';
 import { BackgroundLayer, BoxLayer, ForegroundLayer } from './components/svg/layers';
 import { boxes } from './components/svg/data/boxes';
 import { connectionPaths } from './components/svg/data/connections';
-import { useDiagramDebug } from '../hooks/useDiagramDebug';
+import { useDiagramDebug } from './hooks/useDiagramDebug';
 
 const DiagramSVG = () => {
   const isMobile = useIsMobile();
