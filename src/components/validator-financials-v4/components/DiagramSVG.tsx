@@ -9,11 +9,11 @@ import { useDiagramDebug } from '../hooks/useDiagramDebug';
 const DiagramSVG = () => {
   const svgRef = useDiagramDebug();
   
-  // Optimized container class for maximum visibility and zoom
+  // Maximized container class with zero padding for maximum diagram size
   const containerClasses = [
     "w-full h-full relative", 
     "overflow-visible", // Essential to prevent cropping
-    "px-0" // No padding to maximize diagram size
+    "p-0" // No padding to maximize diagram size
   ].join(" ");
   
   return (
