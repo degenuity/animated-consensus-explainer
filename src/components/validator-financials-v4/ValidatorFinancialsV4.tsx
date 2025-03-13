@@ -21,15 +21,15 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
 
   return (
     <motion.div 
-      className="w-full relative overflow-hidden bg-[#0d111c] rounded-xl min-h-[500px] sm:min-h-[550px] md:min-h-[600px] lg:min-h-[650px] flex flex-col items-center justify-start"
+      className="w-full relative overflow-hidden bg-[#0d111c] rounded-xl min-h-[420px] sm:min-h-[480px] md:min-h-[520px] lg:min-h-[580px] flex flex-col items-center justify-start"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 relative w-full flex flex-col items-center">
+      <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 py-1 sm:py-2 md:py-3 relative w-full flex flex-col items-center">
         <Title />
         
-        <div className="relative w-full h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] flex items-center justify-center">
+        <div className="relative w-full h-[380px] sm:h-[430px] md:h-[470px] lg:h-[520px] flex items-center justify-center">
           <DiagramSVG key={animationKey} />
         </div>
       </div>
