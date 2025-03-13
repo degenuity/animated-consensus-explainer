@@ -11,12 +11,12 @@ const InternalRewardsBoxV2 = () => {
         <span className="text-xl text-white">internal rewards</span>
       </div>
       
-      <div className="flex flex-col space-y-4 px-4 py-3">
+      <div className="flex flex-col px-4 py-3">
         <motion.div 
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3, delay: 0.3 }}
-          className="border border-green-500/70 bg-[#141b29] p-3 rounded text-sm text-white"
+          className="border border-green-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
         >
           commission
         </motion.div>
@@ -24,7 +24,7 @@ const InternalRewardsBoxV2 = () => {
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="border border-green-500/70 bg-[#141b29] p-3 rounded text-sm text-white"
+          className="border border-green-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
         >
           staking rewards
         </motion.div>

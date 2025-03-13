@@ -11,12 +11,12 @@ const NetworkUsageCostsBoxV2 = () => {
         <span className="text-xl text-white">network usage costs</span>
       </div>
       
-      <div className="flex flex-col space-y-4 px-4 py-3">
+      <div className="flex flex-col px-4 py-3">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded text-sm text-white"
+          className="border border-yellow-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
         >
           base fees
         </motion.div>
@@ -29,12 +29,12 @@ const NetworkUsageCostsBoxV2 = () => {
         >
           <div className="bg-[#141b29] border border-[#2a3349] p-3 rounded">
             <div className="text-white mb-2">block rewards</div>
-            <div className="flex flex-col space-y-3 px-2 py-2">
+            <div className="flex flex-col px-2 py-2">
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, delay: 0.6 }}
-                className="border border-green-500/70 bg-[#101620] p-2 rounded text-xs text-white"
+                className="border border-green-500/70 bg-[#101620] p-2 rounded text-xs text-white mb-6"
               >
                 priority fees
               </motion.div>

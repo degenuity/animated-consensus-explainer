@@ -11,7 +11,7 @@ const ProfitabilityBoxV2 = () => {
         <span className="text-xl text-white">profitability</span>
       </div>
       
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-6">
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
