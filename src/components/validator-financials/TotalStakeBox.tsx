@@ -15,7 +15,12 @@ const TotalStakeBox = () => {
         width: rect.width,
         height: rect.height,
         centerX: rect.left + rect.width / 2,
-        centerY: rect.bottom
+        centerY: rect.bottom,
+        // Log exact bottom center
+        bottomCenter: {
+          x: rect.left + rect.width / 2,
+          y: rect.bottom
+        }
       });
     }
   }, []);

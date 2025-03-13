@@ -15,7 +15,12 @@ const BlockProductionEligibilityBox = () => {
         width: rect.width,
         height: rect.height,
         centerX: rect.left + rect.width / 2,
-        centerY: rect.top
+        centerY: rect.top,
+        // Log exact top center
+        topCenter: {
+          x: rect.left + rect.width / 2,
+          y: rect.top
+        }
       });
     }
   }, []);
