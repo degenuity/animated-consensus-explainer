@@ -26,6 +26,7 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
 }) => {
   const dotRef = useRef<SVGCircleElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
+  const animationRef = useRef<SVGAnimateMotionElement>(null);
   
   // Extract target box ID from the connection ID if not explicitly provided
   const getTargetBoxId = () => {
@@ -47,7 +48,7 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
   };
   
   useEffect(() => {
-    if (!dotRef.current) return;
+    if (!dotRef.current || !animationRef.current) return;
     
     const target = getTargetBoxId();
     if (!target) return;
@@ -55,9 +56,11 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
     // For debugging
     console.log(`Connection line setup: ${id} → ${target}`);
     
-    // Handle animation events to trigger the collision
+    // Track animation progress more precisely
+    let previousEndTime = 0;
+    
+    // Handle animation events to trigger the collision at the precise moment
     const handleAnimationEnd = () => {
-      // When the animation reaches the end, dispatch a custom event
       const targetBoxId = target;
       console.log(`🔵 Dot collision event: ${id} → ${targetBoxId}`);
       
@@ -66,32 +69,26 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
           targetId: targetBoxId,
           dotColor: color,
           sourceId: id,
-          timestamp: Date.now() // Add timestamp to ensure uniqueness
+          timestamp: Date.now()
         },
-        bubbles: true, // Make sure event bubbles up the DOM
+        bubbles: true,
         cancelable: true,
       });
       
-      // Dispatch the event on window to ensure it's globally available
+      // Dispatch the event on window
       window.dispatchEvent(collisionEvent);
     };
     
-    // Add multiple event listeners to ensure we catch the animation completion
-    const dotElement = dotRef.current;
-    dotElement.addEventListener('animationend', handleAnimationEnd);
-    dotElement.addEventListener('animationiteration', handleAnimationEnd);
-    
-    // Set up a repeating timer as a backup to ensure collisions happen
-    const timer = setInterval(() => {
-      handleAnimationEnd();
-    }, animationDuration * 1000 + 100); // Slightly longer than animation duration
+    // Add animation end event to the animateMotion element for precise timing
+    const animationElement = animationRef.current;
+    if (animationElement) {
+      animationElement.addEventListener('endEvent', handleAnimationEnd);
+    }
     
     return () => {
-      if (dotElement) {
-        dotElement.removeEventListener('animationend', handleAnimationEnd);
-        dotElement.removeEventListener('animationiteration', handleAnimationEnd);
+      if (animationElement) {
+        animationElement.removeEventListener('endEvent', handleAnimationEnd);
       }
-      clearInterval(timer);
     };
   }, [color, id, animationDuration]);
   
@@ -117,6 +114,7 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
           fill={color}
         >
           <animateMotion
+            ref={animationRef}
             path={path}
             dur={`${animationDuration}s`}
             begin={`${delay}s`}
