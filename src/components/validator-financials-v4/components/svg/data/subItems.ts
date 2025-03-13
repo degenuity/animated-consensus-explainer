@@ -24,7 +24,7 @@ export const networkCostsSubitems = [
         text: "mev", 
         id: "mev", 
         color: "#10B981",
-        position: { y: 20 } // Increased space from 10px to 20px for more margin (6px) at bottom
+        position: { y: 40 } // Increased space from 20px to 40px for more margin (20px) at bottom
       }
     ]
   }
