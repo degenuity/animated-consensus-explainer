@@ -26,6 +26,11 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   // Skip rendering if path is missing
   if (!path) return null;
   
+  // For debugging - add console output to identify any unexpected renders
+  if (dotPosition && (parseFloat(dotPosition.x) < 50 && parseFloat(dotPosition.y) < 50)) {
+    console.log('WARNING: Attempt to render dot in top-left corner:', { path, color, dotPosition });
+  }
+  
   return (
     <g>
       <motion.path

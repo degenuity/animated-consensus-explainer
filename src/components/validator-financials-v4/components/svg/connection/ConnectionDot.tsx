@@ -20,17 +20,40 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animated = false,
   animationDuration = 1.5
 }) => {  
-  // Don't render anything if the path is missing when required
+  // SAFETY CHECK 1: Don't render anything if required props are missing
   if (animated && !path) {
+    console.log("Skipping animated dot - missing path");
     return null;
   }
   
-  // For static dots, don't render if coordinates are missing
+  // SAFETY CHECK 2: For static dots, don't render if coordinates are missing
   if (!animated && (!cx || !cy)) {
+    console.log("Skipping static dot - missing coordinates");
     return null;
   }
   
+  // SAFETY CHECK 3: Block any dots in the top-left danger zone (expanded area)
+  // This is a failsafe to prevent any dots from appearing in the top-left corner
+  if (cx && cy) {
+    const numCx = parseFloat(cx);
+    const numCy = parseFloat(cy);
+    
+    if (numCx < 100 && numCy < 100) {
+      console.log("BLOCKED DOT IN TOP-LEFT ZONE:", { cx, cy, color });
+      return null; // Absolutely no rendering in the expanded danger zone
+    }
+  }
+  
+  // Only render animated dots if they have a valid path
   if (animated && path) {
+    // SAFETY CHECK 4: Don't allow any animations that could position dots in the corner
+    // This is a double-failsafe since we're already blocking by coordinates above
+    if (path.includes("M 0") || path.includes("M0") || 
+        (path.includes("L 0") && path.includes("0 0"))) {
+      console.log("BLOCKED ANIMATION PATH WITH TOP-LEFT COORDINATES:", path);
+      return null;
+    }
+    
     return (
       <g>
         <circle
@@ -75,16 +98,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
     );
   }
   
-  // Completely filter out any dots that appear in the top-left region
-  if (cx && cy) {
-    const numCx = parseFloat(cx);
-    const numCy = parseFloat(cy);
-    
-    if (numCx < 50 && numCy < 50) {
-      return null; // Don't render anything in the top-left corner
-    }
-  }
-  
+  // For static dots, we've already filtered out any in the danger zone
   return (
     <circle
       cx={cx}

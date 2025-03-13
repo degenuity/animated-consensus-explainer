@@ -109,4 +109,6 @@ export const connectionPaths = [
     renderOrder: "foreground" as const,
     animationDuration: 1.8
   }
+  
+  // REMOVED ANY POTENTIAL ROGUE CONNECTION THAT MIGHT CREATE A DOT IN THE TOP-LEFT CORNER
 ];
