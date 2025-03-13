@@ -35,6 +35,12 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const isBlockRewards = id === "block-rewards";
   const isPriorityFeeOrMEV = id === "priority-fees" || id === "mev";
   const isBaseFees = id === "base-fees";
+  const isOperationalCosts = id === "operational-costs" || text?.toLowerCase().includes("operational costs");
+  
+  // Log operational costs box coordinates for debugging
+  if (isOperationalCosts) {
+    console.log(`Operational costs box: x=${adjustedX}, y=${y + yOffset}, width=${adjustedWidth}, height=${itemHeight}, top=${y + yOffset}, center-x=${adjustedX + adjustedWidth/2}, center-y=${y + yOffset}`);
+  }
   
   // Log base fees box coordinates for debugging
   if (isBaseFees) {

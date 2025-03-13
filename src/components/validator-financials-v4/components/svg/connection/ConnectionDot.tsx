@@ -26,13 +26,23 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   }
   
   // Add logging for the block-rewards-to-total-validator-rewards path
-  if (path === "M 1090 410 L 1090 480 L 850 480") {
+  if (path === "M 1090 410 L 1090 450 L 850 450") {
     console.log("ConnectionDot for block-rewards-to-total-validator-rewards with:", { animated, animationDuration, path });
   }
   
   // Add logging to find the total validator rewards box position
-  if (path && path.includes("850 480")) {
+  if (path && path.includes("850 450")) {
     console.log("Checking path to total validator rewards:", path);
+  }
+  
+  // Add logging to find all boxes in the profitability section
+  if (path && (path.includes("profitability") || path.includes("operational-costs"))) {
+    console.log("Profitability related path:", path);
+  }
+  
+  // Find any reference to the operational costs box
+  if (path && path.includes("operational")) {
+    console.log("Found operational costs reference in path:", path);
   }
   
   if (animated && path) {
