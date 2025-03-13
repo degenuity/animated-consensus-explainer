@@ -49,7 +49,7 @@ const Boxes: React.FC = () => {
         title="total stake"
         color="93, 174, 236"
         animationDelay={0.4}
-        className="h-[180px]" // Added explicit height to match the SVG version
+        className="h-[160px]" // Reduced height from 180px to 160px to match the SVG version
         subBoxes={[
           { title: "validator balance" },
           { title: "delegator stakes" },

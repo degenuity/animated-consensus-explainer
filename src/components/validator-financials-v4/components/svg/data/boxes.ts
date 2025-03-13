@@ -42,7 +42,7 @@ export const boxes = [
     x: 650,
     y: 180,
     width: 260,
-    height: 180, // Increased height from 140 to 180 to fit all subitems
+    height: 160, // Reduced height from 180 to 160 for more appropriate sizing
     title: "total stake",
     icon: "total-stake" as const,
     color: "#3B82F6",

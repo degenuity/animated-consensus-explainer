@@ -13,13 +13,13 @@ const TotalStakeBoxV2 = () => {
       </div>
       
       {/* Content section with consistent spacing */}
-      <div className="px-12 py-3 flex flex-col">
+      <div className="px-12 py-3 flex flex-col space-y-4">
         {/* First item */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.3 }}
-          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
+          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white"
         >
           delegated stake
         </motion.div>
@@ -29,7 +29,7 @@ const TotalStakeBoxV2 = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3, delay: 0.4 }}
-          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white mb-6"
+          className="border border-blue-500/70 bg-[#141b29] p-3 rounded text-sm text-white"
         >
           own stake
         </motion.div>
