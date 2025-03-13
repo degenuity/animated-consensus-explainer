@@ -81,6 +81,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
       center: (${adjustedX + adjustedWidth/2}, ${y + yOffset + itemHeight/2})
       bottom: ${y + yOffset + itemHeight}
       visual-bottom: ${y + yOffset + itemHeight + 2} // Adding stroke width compensation
+      full-details: {x: ${adjustedX}, y: ${y + yOffset}, width: ${adjustedWidth}, height: ${itemHeight}, right: ${adjustedX + adjustedWidth}}
     `);
   }
   
