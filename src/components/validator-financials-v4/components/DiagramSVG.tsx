@@ -11,11 +11,11 @@ const DiagramSVG = () => {
   const isMobile = useIsMobile();
   const svgRef = useDiagramDebug();
   
-  // Add responsive padding based on screen size
-  const containerPadding = isMobile ? "px-0" : "px-0";
+  // Use mobile-specific classes to prevent cropping
+  const containerClass = isMobile ? "w-full h-full relative px-2 sm:px-0" : "w-full h-full relative px-0";
   
   return (
-    <div className={`w-full h-full relative ${containerPadding}`}>
+    <div className={containerClass}>
       <AnimationStyleProvider />
       
       {/* Background Layer - Contains all background connections and elements */}
