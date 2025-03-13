@@ -40,9 +40,10 @@ const NestedItemsRenderer = ({
       const childItemWidth = width - 40; // Reduced width by additional 10px (from 30 to 40)
       const childItemX = x + 15; // Keeping the same left indent
       
-      // Add extra spacing based on position property
-      const extraSpacing = subItem.position?.y || 0;
-      console.log(`Child item ${subItem.id} with extraSpacing: ${extraSpacing}`);
+      // Use position.y directly without adding to childY - this forces absolute positioning
+      // from the top of the parent container
+      const absolutePosition = subItem.position?.y || 0;
+      console.log(`Child item ${subItem.id} with absolutePosition: ${absolutePosition}`);
       
       renderedItems.push(
         <SubItemRenderer 
@@ -51,18 +52,18 @@ const NestedItemsRenderer = ({
           index={subIndex}
           x={childItemX}
           y={y}
-          yOffset={childY + extraSpacing}
+          yOffset={yOffset + absolutePosition} // Use absolute positioning from parent's yOffset
           width={childItemWidth}
           height={childItemHeight}
           isNested={true}
         />
       );
-      
-      // Move down for next child - but account for any extra spacing already applied
-      childY += childItemHeight + childSpacing;
     });
     
-    return childY; // Return the updated vertical position
+    // For block rewards, we're using absolute positioning, so childY doesn't change based on children
+    // Just add some standard amount to account for the container size
+    childY += 150; // Approximate height for the container with both children
+    return childY;
   }
   
   // For regular nested items

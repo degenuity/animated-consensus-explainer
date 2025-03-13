@@ -47,13 +47,16 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
     if (isBlockRewards && hasChildren) {
       // Calculate total height for block rewards container
       const childItems = item.subItems || [];
-      const childrenHeight = childItems.length * 40 + (childItems.length - 1) * 15; // height + reduced spacing
-      const additionalSpacing = childItems.reduce((acc, child) => acc + (child.position?.y || 0), 0);
+      const baseHeight = 40; // Base height for the container itself
+      // Calculate height to accommodate all children with their positions
+      const maxPosition = childItems.reduce((max, child) => {
+        return Math.max(max, (child.position?.y || 0) + 40); // 40 is the height of each child
+      }, 0);
       
-      console.log(`Block rewards container with additionalSpacing: ${additionalSpacing}`);
+      // Use the maximum position value plus some padding for the container height
+      const containerHeight = baseHeight + maxPosition + 20; // Added 20px padding
       
-      // Reduce the container height by 20px (10px from top and 10px from bottom)
-      const containerHeight = 40 + childrenHeight + additionalSpacing - 10; // Reduced by 20px
+      console.log(`Block rewards container height: ${containerHeight}, maxPosition: ${maxPosition}`);
       
       // Add the block rewards parent item - ensure font size is small
       renderedItems.push(
@@ -70,7 +73,7 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
         />
       );
       
-      // Handle nested items separately
+      // Handle nested items separately with absolute positioning
       const childYStart = yOffset + 30; // Reduced from 40 to 30 to account for height reduction
       NestedItemsRenderer({
         parentItem: item,

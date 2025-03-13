@@ -37,7 +37,7 @@ const NetworkUsageCostsBoxV2 = () => {
           </div>
             
           {/* Block rewards content items */}
-          <div className="flex flex-col space-y-6"> {/* Increased space-y from 2 to 6 for more separation */}
+          <div className="flex flex-col space-y-10"> {/* Increased space-y from 6 to 10 for even more separation */}
             {/* Priority fees - text left-aligned */}
             <motion.div 
               initial={{ opacity: 0 }}

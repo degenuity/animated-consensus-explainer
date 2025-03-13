@@ -50,7 +50,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   // Add padding to align text properly
   const paddingTop = isBlockRewards ? "pt-2" : "";
 
-  console.log(`Rendering ContentBox for: ${id} with color: ${strokeColor} and textSize: ${textSize}`);
+  console.log(`Rendering ContentBox for: ${id} with color: ${strokeColor}, yOffset: ${yOffset}`);
 
   return (
     <motion.g
