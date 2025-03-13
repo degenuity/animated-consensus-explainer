@@ -18,7 +18,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   label,
   labelPosition,
   animationDirection,
-  animateMotion,
+  animateMotion = true, // Default to true to ensure animation
   lineVariants,
   dotVariants,
   animationDuration

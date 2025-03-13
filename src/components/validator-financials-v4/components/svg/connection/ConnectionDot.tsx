@@ -17,7 +17,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   cx, 
   cy, 
   radius = 5,
-  animated = false,
+  animated = true, // Default to true to ensure animation
   animationDuration = 1.5
 }) => {  
   // Don't render anything if the path is missing when required
