@@ -21,7 +21,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animationDuration = 1.5
 }) => {
   // Add logging for the specific base-fee-bottom-to-block-rewards path
-  if (path === "M 1090 200 L 1090 260") {
+  if (path === "M 1090 180 L 1090 260") {
     console.log("ConnectionDot for base-fee-bottom-to-block-rewards with:", { animated, animationDuration, path });
   }
   
