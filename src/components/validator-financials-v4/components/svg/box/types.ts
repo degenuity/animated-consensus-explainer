@@ -16,7 +16,8 @@ export interface SubItem {
   };
 }
 
-export interface BoxProps {
+// Export Box interface for BoxLayer to use
+export interface Box {
   x: number;
   y: number;
   width: number;
@@ -28,8 +29,11 @@ export interface BoxProps {
   animationIndex: number;
   subitems?: SubItem[];
   simpleStyle?: boolean;
-  isExplanation?: boolean;
   borderColor?: string;
+}
+
+export interface BoxProps extends Box {
+  isExplanation?: boolean;
 }
 
 // Animation variants for boxes
