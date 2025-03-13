@@ -39,25 +39,29 @@ const ComplexBox: React.FC<ComplexBoxProps> = ({ boxProps }) => {
       const contentItems = horizontalItems.filter(item => !item.isOperator);
       const operatorItems = horizontalItems.filter(item => item.isOperator);
       
-      // Operators get less space than content items
-      const operatorWidth = 40; // Increased width for operator symbols (was 30)
+      // Operators get much less space (reduced from previous setting)
+      const operatorWidth = 25; // Reduced width for operator symbols (was 40)
       const totalOperatorWidth = operatorItems.length * operatorWidth;
       const totalMargins = (horizontalItems.length - 1) * itemMargin;
       const remainingWidth = width - 20 - totalMargins - totalOperatorWidth;
       
-      // Allocate more width to the randomness box specifically to fit "protocol"
+      // Allocate more width to stake weight and performance boxes
       let contentItemWidths: number[] = [];
       
       if (contentItems.length > 0) {
-        // Base width calculation
+        // Base width calculation - this is our starting point
         const baseWidth = remainingWidth / contentItems.length;
         
-        // Allocate widths, giving significantly more to the randomness box
+        // Allocate widths, giving more to stake weight, randomness, and performance
         contentItems.forEach(item => {
           if (item.id === 'randomness') {
-            contentItemWidths.push(baseWidth * 1.3); // 30% more width for randomness (increased from 15% to 30%)
+            contentItemWidths.push(baseWidth * 1.3); // 30% more width for randomness
+          } else if (item.id === 'stake-weight') {
+            contentItemWidths.push(baseWidth * 1.5); // 50% more width for stake weight
+          } else if (item.id === 'performance-reputation') {
+            contentItemWidths.push(baseWidth * 1.5); // 50% more width for performance
           } else {
-            contentItemWidths.push(baseWidth * 0.875); // Further reduce others to compensate (was 0.925)
+            contentItemWidths.push(baseWidth * 0.5); // Significantly reduce others to compensate
           }
         });
       }
