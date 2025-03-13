@@ -20,7 +20,12 @@ export const networkCostsSubitems = [
     position: { y: 30 }, // Reduced vertical spacing from 50 to 30
     subItems: [
       { text: "priority fees", id: "priority-fees", color: "#10B981" },
-      { text: "mev", id: "mev", color: "#10B981" }
+      { 
+        text: "mev", 
+        id: "mev", 
+        color: "#10B981",
+        position: { y: 10 } // Adding space between MEV and bottom of block rewards
+      }
     ]
   }
 ];

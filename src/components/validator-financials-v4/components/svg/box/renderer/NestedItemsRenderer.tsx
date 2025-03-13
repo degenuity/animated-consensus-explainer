@@ -36,6 +36,9 @@ const NestedItemsRenderer = ({
       const childItemWidth = width - 40; // Less width than parent, with some padding
       const childItemX = x + 20; // Indented from parent
       
+      // Add extra spacing for MEV item based on position property
+      const extraSpacing = subItem.position?.y || 0;
+      
       renderedItems.push(
         <SubItemRenderer 
           key={`child-${subItem.id || subIndex}-${index}`}
@@ -51,7 +54,7 @@ const NestedItemsRenderer = ({
       );
       
       // Move down for next child
-      childY += childItemHeight + childSpacing;
+      childY += childItemHeight + childSpacing + extraSpacing;
     });
     
     return childY; // Return the updated vertical position
