@@ -39,8 +39,8 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const fontSize = isNested ? "text-sm" : (isBlockRewards ? "text-lg" : "text-sm");
   const fontWeight = "font-medium";
   
-  // Set text alignment - center align only horizontal items
-  const textAlign = isHorizontal ? "text-center" : "text-left";
+  // Always left-align text regardless of whether it's horizontal or not
+  const textAlign = "text-left";
   
   // Special styling for block rewards
   const textColor = isBlockRewards ? "text-white" : `text-${strokeColor}`;
@@ -81,7 +81,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
             </>
           ) : (
             <div 
-              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${fontWeight} ${fontSize} ${isHorizontal ? 'justify-center' : 'justify-start'}`} 
+              className={`flex items-center ${paddingTop} ${isBlockRewards ? 'h-auto self-start' : 'h-full'} ${fontWeight} ${fontSize} justify-start`} 
               style={{ color: isBlockRewards ? 'white' : strokeColor }}
             >
               {text}
