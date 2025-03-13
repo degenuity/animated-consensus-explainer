@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SubItem } from '../types';
@@ -35,7 +36,8 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const isPriorityFeeOrMEV = id === "priority-fees" || id === "mev";
   
   // Adjust text styles based on the element role
-  const fontSize = isNested ? "text-sm" : (isBlockRewards ? "text-sm" : "text-sm");
+  // Make block rewards the same font size as total stake (text-sm)
+  const fontSize = isNested ? "text-sm" : "text-sm";
   const fontWeight = "font-medium";
   
   // Always left-align text regardless of whether it's horizontal or not
