@@ -56,17 +56,16 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
     // For debugging
     console.log(`Connection line setup: ${id} → ${target}`);
     
-    // Use multiple event listeners to ensure we catch the animation events
-    const handleAnimationEnd = () => {
-      triggerCollisionEvent();
-    };
+    // Track animation state to prevent duplicate events
+    let lastTriggerTime = 0;
+    const MIN_INTERVAL = 100; // Minimum milliseconds between triggers to prevent duplicates
     
-    const handleAnimationIteration = () => {
-      triggerCollisionEvent();
-    };
-    
-    // Function to dispatch the custom event
+    // Improved function to dispatch the custom event with debouncing
     const triggerCollisionEvent = () => {
+      const now = Date.now();
+      if (now - lastTriggerTime < MIN_INTERVAL) return;
+      
+      lastTriggerTime = now;
       const targetBoxId = target;
       console.log(`🔵 Dot collision event: ${id} → ${targetBoxId}`);
       
@@ -75,7 +74,7 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
           targetId: targetBoxId,
           dotColor: color,
           sourceId: id,
-          timestamp: Date.now()
+          timestamp: now
         },
         bubbles: true,
         cancelable: true,
@@ -85,23 +84,75 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
       window.dispatchEvent(collisionEvent);
     };
     
-    // Add animation end and iteration events to the animateMotion element for precise timing
+    // Use both web standard event names and SVG-specific event names
     const animationElement = animationRef.current;
+    
+    // Event listener for standard web animation end
+    const handleAnimationEnd = () => {
+      triggerCollisionEvent();
+    };
+    
+    // SVG-specific animateMotion events
     if (animationElement) {
+      // Add SVG-specific event listeners
       animationElement.addEventListener('endEvent', handleAnimationEnd);
-      animationElement.addEventListener('repeatEvent', handleAnimationIteration);
+      animationElement.addEventListener('end', handleAnimationEnd);
       
-      // Backup timer-based approach in case SVG animation events aren't reliable
-      // This will trigger the collision event once per animation duration
+      // For more precise timing, listen to the standard 'animationend' event on the circle
+      if (dotRef.current) {
+        dotRef.current.addEventListener('animationend', handleAnimationEnd);
+      }
+      
+      // Observe the dot's position using MutationObserver
+      // This helps detect when the dot reaches the end of the path
+      let lastSegmentReached = false;
+      const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.type === 'attributes' && 
+              (mutation.attributeName === 'transform' || mutation.attributeName === 'cx' || mutation.attributeName === 'cy')) {
+            
+            // When dot is at the end of the path (determined by transform value)
+            // This is a heuristic approach to detect end of path
+            const transform = dotRef.current?.getAttribute('transform');
+            if (transform && !lastSegmentReached) {
+              // Use heuristic to detect if we're near the end of the path
+              // Note: This is not perfect but helps improve timing
+              lastSegmentReached = true;
+              triggerCollisionEvent();
+              
+              // Reset after a short delay to allow for next animation cycle
+              setTimeout(() => {
+                lastSegmentReached = false;
+              }, animationDuration * 1000 * 0.8);
+            }
+          }
+        }
+      });
+      
+      if (dotRef.current) {
+        observer.observe(dotRef.current, { attributes: true });
+      }
+      
+      // Periodic check as a fallback, but with improved timing
+      // Only trigger if we haven't detected end through other methods
       const timer = setInterval(() => {
-        triggerCollisionEvent();
+        // Only trigger if no event was recently triggered
+        if (Date.now() - lastTriggerTime > animationDuration * 1000 * 0.8) {
+          triggerCollisionEvent();
+        }
       }, animationDuration * 1000);
       
       return () => {
         clearInterval(timer);
+        observer.disconnect();
+        
         if (animationElement) {
           animationElement.removeEventListener('endEvent', handleAnimationEnd);
-          animationElement.removeEventListener('repeatEvent', handleAnimationIteration);
+          animationElement.removeEventListener('end', handleAnimationEnd);
+        }
+        
+        if (dotRef.current) {
+          dotRef.current.removeEventListener('animationend', handleAnimationEnd);
         }
       };
     }

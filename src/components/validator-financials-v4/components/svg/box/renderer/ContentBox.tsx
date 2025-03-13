@@ -69,7 +69,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         // Reset after animation completes
         setTimeout(() => {
           setIsHighlighted(false);
-        }, 600); // Medium duration for better visibility
+        }, 500); // Slightly shorter duration
       }
     };
 
@@ -177,17 +177,14 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   // Add padding to align text properly
   const paddingTop = isBlockRewards ? "pt-2" : "";
 
-  // Display "MEV" in uppercase for the MEV box
-  const displayText = id === "mev" ? "MEV" : text;
-
   console.log(`Rendering ContentBox for: ${id} with color: ${strokeColor}, yOffset: ${yOffset}`);
 
-  // Define highlight animation colors based on the box's theme
+  // Define more subtle highlight animation colors
   const getHighlightColor = () => {
-    if (strokeColor.includes('10B981')) return "#0EA5E9"; // Bright blue for green boxes
-    if (strokeColor.includes('3B82F6')) return "#8B5CF6"; // Purple for blue boxes
-    if (strokeColor.includes('EAB308')) return "#F97316"; // Orange for yellow boxes
-    return "#D946EF"; // Magenta pink fallback
+    if (strokeColor.includes('10B981')) return "#0D9488"; // More subtle teal for green boxes
+    if (strokeColor.includes('3B82F6')) return "#6366F1"; // More subtle indigo for blue boxes
+    if (strokeColor.includes('EAB308')) return "#F59E0B"; // More subtle amber for yellow boxes
+    return "#C026D3"; // More subtle violet/purple fallback
   };
 
   return (
@@ -195,12 +192,12 @@ const ContentBox: React.FC<ContentBoxProps> = ({
       initial={{ opacity: 0 }}
       animate={{ 
         opacity: 1,
-        scale: isHighlighted ? [1, 1.03, 1] : 1 // Medium subtle scale animation when highlighted
+        scale: isHighlighted ? [1, 1.01, 1] : 1 // Much more subtle scale effect
       }}
       transition={{ 
         delay: 1.2 + index * 0.1,
         scale: {
-          duration: 0.4, // Medium duration
+          duration: 0.3, // Shorter duration
           ease: "easeInOut",
           times: [0, 0.5, 1]
         }
@@ -218,12 +215,12 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         rx="4"
         fill="transparent"
         stroke={isHighlighted ? getHighlightColor() : strokeColor}
-        strokeWidth={isHighlighted ? "2.5" : "1.5"} // Medium width difference
+        strokeWidth={isHighlighted ? "1.8" : "1.5"} // More subtle width difference
         data-item-rect={id}
-        // Add moderate animation when highlighted
+        // Add subtle animation when highlighted
         style={{
           transition: 'stroke 0.2s ease, stroke-width 0.2s ease',
-          filter: isHighlighted ? 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.5))' : 'none' // Medium glow
+          filter: isHighlighted ? 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.25))' : 'none' // Much more subtle glow
         }}
       />
       

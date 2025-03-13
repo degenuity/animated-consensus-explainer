@@ -30,7 +30,7 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
         // Reset after animation duration
         setTimeout(() => {
           setIsHighlighted(false);
-        }, 600); // Medium duration for a visible but not distracting effect
+        }, 500); // Slightly shorter duration
       }
     };
     
@@ -45,21 +45,21 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
   
   // Generate styling properties based on highlight state
   const getHighlightColor = () => {
-    // Create medium-intensity complementary colors
+    // Create more subtle complementary colors
     const baseColor = props.color || props.borderColor || '#3B82F6';
     
-    if (baseColor.includes('3B82F6')) return "#8B5CF6"; // Purple for blue boxes
-    if (baseColor.includes('10B981')) return "#06B6D4"; // Cyan for green boxes
-    if (baseColor.includes('EAB308')) return "#F97316"; // Orange for yellow boxes
-    return "#EC4899"; // Pink fallback
+    if (baseColor.includes('3B82F6')) return "#6366F1"; // Lighter purple for blue boxes
+    if (baseColor.includes('10B981')) return "#0D9488"; // Darker teal for green boxes
+    if (baseColor.includes('EAB308')) return "#F59E0B"; // Softer amber for yellow boxes
+    return "#D946EF"; // Default pink
   };
   
   const borderColor = isHighlighted 
     ? getHighlightColor()
     : props.borderColor || props.color || '#3B82F6';
   
-  const borderWidth = isHighlighted ? "2.5" : "1.5"; // More noticeable difference
-  const filter = isHighlighted ? "drop-shadow(0 0 5px rgba(255, 255, 255, 0.5))" : "none"; // Medium intensity glow
+  const borderWidth = isHighlighted ? "2" : "1.5"; // More subtle difference
+  const filter = isHighlighted ? "drop-shadow(0 0 3px rgba(255, 255, 255, 0.3))" : "none"; // Subtler glow
   
   // Determine if this is a complex or simple box
   const isComplex = props.subitems && props.subitems.length > 0;
@@ -78,20 +78,20 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
       initial={{ opacity: 0 }}
       animate={{ 
         opacity: 1,
-        scale: isHighlighted ? [1, 1.03, 1] : 1, // Medium scale animation when highlighted
+        scale: isHighlighted ? [1, 1.01, 1] : 1, // Much subtler scale animation
       }}
       transition={{ 
         duration: 0.3, 
         delay: props.animationIndex ? props.animationIndex * 0.1 : 0,
         scale: {
-          duration: 0.4, // Medium duration for visible effect
+          duration: 0.3, // Shorter duration
           ease: "easeInOut",
           times: [0, 0.5, 1]
         }
       }}
       style={{
         filter,
-        transition: 'filter 0.3s ease, stroke 0.3s ease, stroke-width 0.3s ease'
+        transition: 'filter 0.2s ease, stroke 0.2s ease, stroke-width 0.2s ease'
       }}
     >
       {isComplex ? (
