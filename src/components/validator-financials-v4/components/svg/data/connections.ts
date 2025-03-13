@@ -86,13 +86,13 @@ export const connectionPaths = [
     animationDuration: 1.5
   },
   
-  // Block Rewards to Total Validator Rewards - Updated to end at top-right corner of total validator rewards box
+  // Block Rewards to Total Validator Rewards - Updated to end 10px to the left of the previous point
   { 
-    path: "M 1090 410 L 1090 450 L 1029.5 450 L 1029.5 550", 
+    path: "M 1090 410 L 1090 450 L 1019.5 450 L 1019.5 550", 
     color: "#F97316", 
     animationIndex: 8,
     animateMotion: true,
-    dotPosition: { x: "1060", y: "500" },
+    dotPosition: { x: "1055", y: "500" },
     id: "block-rewards-to-total-validator-rewards",
     renderOrder: "foreground" as const,
     animationDuration: 2
@@ -100,7 +100,7 @@ export const connectionPaths = [
   
   // Connection from Internal Rewards to Total Validator Rewards - Also updated to match the new endpoint
   { 
-    path: "M 450 300 L 550 450 L 850 450 L 1029.5 450 L 1029.5 550", 
+    path: "M 450 300 L 550 450 L 850 450 L 1019.5 450 L 1019.5 550", 
     color: "#10B981", 
     animationIndex: 9,
     animateMotion: true,

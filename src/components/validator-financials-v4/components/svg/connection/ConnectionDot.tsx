@@ -25,9 +25,9 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   }
   
   // Add logging for the updated block-rewards-to-total-validator-rewards path
-  if (path === "M 1090 410 L 1090 450 L 1029.5 450 L 1029.5 550") {
+  if (path === "M 1090 410 L 1090 450 L 1019.5 450 L 1019.5 550") {
     console.log("ConnectionDot for block-rewards-to-total-validator-rewards with:", { animated, animationDuration, path });
-    console.log("Total validator rewards destination:", { x: 1029.5, y: 550 });
+    console.log("Total validator rewards destination:", { x: 1019.5, y: 550 });
   }
   
   // Add specific logging for profitability box components with exact coordinates
