@@ -1,4 +1,3 @@
-
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -37,13 +36,13 @@ export const connectionPaths = [
     renderOrder: "foreground" as const
   },
   
-  // Line 4: Total Stake to Stake Weight - Direct line to stake weight box top center
-  // Updated to target the RIGHT BOX (stake weight) rather than the middle box (randomness)
+  // Line 4: Total Stake to Stake Weight - Direct line to stake weight box center
+  // Updated to target the exact horizontal center of the stake weight box
   { 
-    path: "M 780 340 L 780 465 L 705 465 L 705 550", 
+    path: "M 780 340 L 780 465 L 710 465 L 710 550", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "705", y: "520" },
+    dotPosition: { x: "710", y: "520" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
