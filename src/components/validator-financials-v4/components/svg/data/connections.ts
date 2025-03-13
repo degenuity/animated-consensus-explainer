@@ -1,4 +1,3 @@
-
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards
@@ -105,13 +104,13 @@ export const connectionPaths = [
   },
   
   // Base Fee right side to Deflation
-  // Based on the provided image, adjusting the starting x coordinate to match exactly the edge of the base fees box
+  // From the ContentBox.tsx logs, we can see the exact right edge coordinate of the base fees box
   { 
-    path: "M 1150 190 L 1300 240", 
+    path: "M 1190 190 L 1300 240", 
     color: "#EAB308", 
     animationIndex: 12,
     animateMotion: true,
-    dotPosition: { x: "1225", y: "215" },
+    dotPosition: { x: "1245", y: "215" },
     id: "base-fee-right-to-deflation",
     renderOrder: "foreground" as const,
     animationDuration: 1.8
