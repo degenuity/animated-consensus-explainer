@@ -23,13 +23,13 @@ export const networkCostsSubitems = [
         text: "priority fees", 
         id: "priority-fees", 
         color: "#10B981",
-        position: { y: 45 } // Reduced from 95 to 45px (-50px)
+        position: { y: 25 } // Reduced from 45 to 25px to match the spacing pattern of delegated stake
       },
       { 
         text: "mev", 
         id: "mev", 
         color: "#10B981",
-        position: { y: 65 } // Reduced from 115 to 65px (-50px)
+        position: { y: 65 } // Keeping this the same
       }
     ]
   }
