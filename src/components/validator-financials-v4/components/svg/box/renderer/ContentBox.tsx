@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { SubItem } from '../types';
@@ -61,7 +60,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
     const handleDotCollision = (event: CustomEvent) => {
       // Check if this box's ID matches the target in the event
       if (event.detail.targetId === id) {
-        // Debug log
+        // Debug log for matched collision
         console.log(`✨ HIGHLIGHT TRIGGERED for item: ${id}, color: ${strokeColor}`);
         
         // Trigger highlight animation
@@ -70,7 +69,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         // Reset after animation completes
         setTimeout(() => {
           setIsHighlighted(false);
-        }, 800); // Longer duration for better visibility
+        }, 600); // Medium duration for better visibility
       }
     };
 
@@ -196,12 +195,12 @@ const ContentBox: React.FC<ContentBoxProps> = ({
       initial={{ opacity: 0 }}
       animate={{ 
         opacity: 1,
-        scale: isHighlighted ? [1, 1.05, 1] : 1 // Add subtle scale animation when highlighted
+        scale: isHighlighted ? [1, 1.03, 1] : 1 // Medium subtle scale animation when highlighted
       }}
       transition={{ 
         delay: 1.2 + index * 0.1,
         scale: {
-          duration: 0.5,
+          duration: 0.4, // Medium duration
           ease: "easeInOut",
           times: [0, 0.5, 1]
         }
@@ -219,14 +218,15 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         rx="4"
         fill="transparent"
         stroke={isHighlighted ? getHighlightColor() : strokeColor}
-        strokeWidth={isHighlighted ? "3" : "1.5"} // Increase width difference
+        strokeWidth={isHighlighted ? "2.5" : "1.5"} // Medium width difference
         data-item-rect={id}
-        // Add more dramatic animation when highlighted
+        // Add moderate animation when highlighted
         style={{
-          transition: 'stroke 0.3s ease, stroke-width 0.3s ease',
-          filter: isHighlighted ? 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.8))' : 'none' // Stronger glow
+          transition: 'stroke 0.2s ease, stroke-width 0.2s ease',
+          filter: isHighlighted ? 'drop-shadow(0 0 5px rgba(255, 255, 255, 0.5))' : 'none' // Medium glow
         }}
       />
+      
       <foreignObject 
         x={adjustedX} 
         y={y + yOffset} 

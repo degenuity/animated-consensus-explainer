@@ -27,10 +27,10 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
         // Highlight the box
         setIsHighlighted(true);
         
-        // Reset after animation duration - shorter now for more immediate effect
+        // Reset after animation duration
         setTimeout(() => {
           setIsHighlighted(false);
-        }, 400); // Shorter duration for a more subtle effect
+        }, 600); // Medium duration for a visible but not distracting effect
       }
     };
     
@@ -45,7 +45,7 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
   
   // Generate styling properties based on highlight state
   const getHighlightColor = () => {
-    // Create more subtle complementary colors
+    // Create medium-intensity complementary colors
     const baseColor = props.color || props.borderColor || '#3B82F6';
     
     if (baseColor.includes('3B82F6')) return "#8B5CF6"; // Purple for blue boxes
@@ -58,8 +58,8 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
     ? getHighlightColor()
     : props.borderColor || props.color || '#3B82F6';
   
-  const borderWidth = isHighlighted ? "2" : "1.5"; // More subtle difference
-  const filter = isHighlighted ? "drop-shadow(0 0 3px rgba(255, 255, 255, 0.4))" : "none"; // More subtle glow
+  const borderWidth = isHighlighted ? "2.5" : "1.5"; // More noticeable difference
+  const filter = isHighlighted ? "drop-shadow(0 0 5px rgba(255, 255, 255, 0.5))" : "none"; // Medium intensity glow
   
   // Determine if this is a complex or simple box
   const isComplex = props.subitems && props.subitems.length > 0;
@@ -78,20 +78,20 @@ const BoxComponent: React.FC<BoxProps> = (props) => {
       initial={{ opacity: 0 }}
       animate={{ 
         opacity: 1,
-        scale: isHighlighted ? [1, 1.01, 1] : 1, // More subtle scale animation when highlighted
+        scale: isHighlighted ? [1, 1.03, 1] : 1, // Medium scale animation when highlighted
       }}
       transition={{ 
         duration: 0.3, 
         delay: props.animationIndex ? props.animationIndex * 0.1 : 0,
         scale: {
-          duration: 0.3, // Shorter duration for more immediate effect
+          duration: 0.4, // Medium duration for visible effect
           ease: "easeInOut",
           times: [0, 0.5, 1]
         }
       }}
       style={{
         filter,
-        transition: 'filter 0.2s ease, stroke 0.2s ease, stroke-width 0.2s ease'
+        transition: 'filter 0.3s ease, stroke 0.3s ease, stroke-width 0.3s ease'
       }}
     >
       {isComplex ? (

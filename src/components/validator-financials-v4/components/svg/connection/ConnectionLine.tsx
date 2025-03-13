@@ -56,11 +56,17 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
     // For debugging
     console.log(`Connection line setup: ${id} → ${target}`);
     
-    // Track animation progress more precisely
-    let previousEndTime = 0;
-    
-    // Handle animation events to trigger the collision at the precise moment
+    // Use multiple event listeners to ensure we catch the animation events
     const handleAnimationEnd = () => {
+      triggerCollisionEvent();
+    };
+    
+    const handleAnimationIteration = () => {
+      triggerCollisionEvent();
+    };
+    
+    // Function to dispatch the custom event
+    const triggerCollisionEvent = () => {
       const targetBoxId = target;
       console.log(`🔵 Dot collision event: ${id} → ${targetBoxId}`);
       
@@ -79,17 +85,26 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
       window.dispatchEvent(collisionEvent);
     };
     
-    // Add animation end event to the animateMotion element for precise timing
+    // Add animation end and iteration events to the animateMotion element for precise timing
     const animationElement = animationRef.current;
     if (animationElement) {
       animationElement.addEventListener('endEvent', handleAnimationEnd);
+      animationElement.addEventListener('repeatEvent', handleAnimationIteration);
+      
+      // Backup timer-based approach in case SVG animation events aren't reliable
+      // This will trigger the collision event once per animation duration
+      const timer = setInterval(() => {
+        triggerCollisionEvent();
+      }, animationDuration * 1000);
+      
+      return () => {
+        clearInterval(timer);
+        if (animationElement) {
+          animationElement.removeEventListener('endEvent', handleAnimationEnd);
+          animationElement.removeEventListener('repeatEvent', handleAnimationIteration);
+        }
+      };
     }
-    
-    return () => {
-      if (animationElement) {
-        animationElement.removeEventListener('endEvent', handleAnimationEnd);
-      }
-    };
   }, [color, id, animationDuration]);
   
   // Calculate animation delay based on index
@@ -120,6 +135,7 @@ const ConnectionLine: React.FC<ConnectionPathProps> = ({
             begin={`${delay}s`}
             repeatCount="indefinite"
             rotate="auto"
+            id={`animation-${id || 'unknown'}`}
           />
         </circle>
       )}
