@@ -11,7 +11,7 @@ const TotalStakeBoxV2 = () => {
         <span className="text-xl text-white">total stake</span>
       </div>
       
-      <div className="space-y-2">
+      <div className="space-y-2 px-4 py-3">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

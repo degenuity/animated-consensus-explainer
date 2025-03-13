@@ -11,7 +11,7 @@ const NetworkUsageCostsBoxV2 = () => {
         <span className="text-xl text-white">network usage costs</span>
       </div>
       
-      <div className="space-y-4">
+      <div className="space-y-4 px-4 py-3">
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
