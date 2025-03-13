@@ -45,9 +45,9 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   // Special styling for block rewards
   const textColor = isBlockRewards ? "text-white" : `text-${strokeColor}`;
   // Position the block rewards text in the upper left instead of center
-  const verticalAlignment = isBlockRewards ? "items-start pt-3" : "justify-center";
-  // Adjust the padding for block rewards to maintain spacing at the top
-  const paddingTop = isBlockRewards ? "pt-3" : "";
+  const verticalAlignment = isBlockRewards ? "items-start" : "justify-center";
+  // Adjust the padding for block rewards to align it with "network usage costs"
+  const paddingTop = isBlockRewards ? "pt-2" : "";
 
   return (
     <motion.g
