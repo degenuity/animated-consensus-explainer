@@ -20,8 +20,8 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animated = false,
   animationDuration = 1.5
 }) => {
-  // If this is our stake weight path, log details to verify
-  if (path?.includes("total-stake-to-stake-weight") || path === "M 780 340 L 780 450 C 780 500, 550 570, 206 550") {
+  // Log specific paths to verify path coordinates
+  if (path?.includes("total-stake-to-stake-weight")) {
     console.log("Rendering stake weight path with:", { path, animated, animationDuration });
   }
   

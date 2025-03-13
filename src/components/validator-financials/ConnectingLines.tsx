@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from "framer-motion";
 
@@ -115,11 +114,11 @@ const ConnectingLines = () => (
       />
     </div>
 
-    {/* Total Stake to Block Production Eligibility/Stake Weight - cleaner curved line */}
+    {/* Total Stake to Block Production Eligibility/Stake Weight - based on the image */}
     <div className="absolute top-[340px] left-[400px]">
       <svg width="400" height="420" className="overflow-visible">
         <path 
-          d="M 380 0 C 380 160, 300 250, 0 210" 
+          d="M 380 0 L 380 220 C 380 280, 250 310, 100 320 C 0 330, -100 330, -200 320 L -300 300" 
           fill="none" 
           stroke="rgba(59, 130, 246, 0.8)" 
           strokeWidth="2"
@@ -139,7 +138,7 @@ const ConnectingLines = () => (
             ease: "linear"
           }}
           style={{ 
-            offsetPath: "path('M 380 0 C 380 160, 300 250, 0 210')" 
+            offsetPath: "path('M 380 0 L 380 220 C 380 280, 250 310, 100 320 C 0 330, -100 330, -200 320 L -300 300')" 
           }}
         />
       </svg>

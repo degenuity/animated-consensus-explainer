@@ -37,12 +37,12 @@ export const connectionPaths = [
     renderOrder: "foreground" as const
   },
   
-  // Line 4: Total Stake to Stake Weight - Simple clean path based on exact coordinates
+  // Line 4: Total Stake to Stake Weight - Based on the actual image position
   { 
-    path: "M 780 340 L 780 450 C 780 500, 550 570, 206 550", 
+    path: "M 780 340 L 780 560 C 780 620, 650 650, 500 660 C 400 670, 300 670, 200 660 L 100 640", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "500", y: "500" },
+    dotPosition: { x: "500", y: "650" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
