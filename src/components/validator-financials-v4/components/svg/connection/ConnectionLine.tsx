@@ -14,7 +14,9 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
   } = props;
   
   const { lineVariants, dotVariants } = useConnectionAnimation({
-    animationIndex
+    animationIndex: animationIndex || 0,
+    dotAnimationDuration: props.animationDuration || 2,
+    pathAnimationDuration: 0.7
   });
   
   // If we're rendering as a definition for later use with <use>, return a <defs> element

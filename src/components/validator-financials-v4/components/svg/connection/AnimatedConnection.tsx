@@ -23,6 +23,11 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   dotVariants,
   animationDuration
 }) => {
+  // Add console log to track rendering of block-rewards-to-profitability path
+  if (path === "M 1090 320 L 1090 420 L 950 570") {
+    console.log("Rendering block-rewards-to-profitability path with:", { animateMotion, animationDuration });
+  }
+  
   return (
     <g>
       <motion.path

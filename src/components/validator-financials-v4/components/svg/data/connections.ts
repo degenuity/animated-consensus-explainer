@@ -74,12 +74,13 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // New Line: Block Rewards to Profitability
+  // Block Rewards to Profitability - With improved animation settings
   { 
     path: "M 1090 320 L 1090 420 L 950 570", 
     color: "#F97316", 
     animationIndex: 6,
     animateMotion: true,
+    dotPosition: { x: "1020", y: "495" }, // Added explicit dot position
     id: "block-rewards-to-profitability",
     renderOrder: "background" as const,
     animationDuration: 2.5

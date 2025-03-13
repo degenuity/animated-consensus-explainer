@@ -20,6 +20,11 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   animated = false,
   animationDuration = 1.5
 }) => {
+  // Add logging for the block-rewards-to-profitability path
+  if (path === "M 1090 320 L 1090 420 L 950 570") {
+    console.log("ConnectionDot for block-rewards-to-profitability with:", { animated, animationDuration });
+  }
+  
   if (animated && path) {
     return (
       <g>
@@ -50,31 +55,21 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
           />
         </circle>
         
-        {/* Optional: Add a subtle glow effect (uncomment if desired) */}
-        {/* <circle
-          r={radius * 2}
+        {/* Secondary trail dot (slightly smaller and more transparent) */}
+        <circle
+          r={radius * 0.8}
           fill={color}
-          opacity="0.2"
+          opacity="0.6"
         >
           <animateMotion
             path={path}
             dur={`${animationDuration}s`}
             repeatCount="indefinite"
             rotate="auto"
+            keyPoints="0.05;1.05" 
+            keyTimes="0;1"
           />
-          <animate
-            attributeName="r"
-            values="6;9;6"
-            dur="1.5s"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="opacity"
-            values="0.1;0.3;0.1"
-            dur="1.5s"
-            repeatCount="indefinite"
-          />
-        </circle> */}
+        </circle>
       </g>
     );
   }
