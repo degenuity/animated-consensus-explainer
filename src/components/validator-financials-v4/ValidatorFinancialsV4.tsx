@@ -21,7 +21,11 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
 
   return (
     <motion.div 
-      className="w-full relative overflow-visible bg-[#0d111c] rounded-xl min-h-[500px] sm:min-h-[550px] md:min-h-[600px] lg:min-h-[650px] flex flex-col items-center justify-start"
+      className="w-full relative overflow-visible bg-[#0d111c] rounded-xl flex flex-col items-center justify-start"
+      style={{
+        minHeight: 'min(650px, 90vh)', // Dynamic scaling with viewport height
+        maxHeight: 'max(450px, 90vh)'  // Ensures minimum height on small screens
+      }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -29,12 +33,13 @@ const ValidatorFinancialsV4: React.FC<ValidatorFinancialsV4Props> = ({
       <div className="max-w-7xl mx-auto w-full py-1 sm:py-2 md:py-3 relative flex flex-col items-center overflow-visible">
         <Title />
         
-        {/* Diagram container with even more height for better display */}
-        <div className={`
-          relative w-full overflow-visible
-          h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px]
-          flex items-center justify-center
-        `}>
+        {/* Diagram container with responsive height */}
+        <div 
+          className="relative w-full overflow-visible flex items-center justify-center"
+          style={{
+            height: isMobile ? 'min(450px, 80vh)' : 'min(600px, 85vh)'
+          }}
+        >
           <DiagramSVG key={animationKey} />
         </div>
       </div>
