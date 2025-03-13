@@ -11,7 +11,7 @@ const InternalRewardsBoxV2 = () => {
         <span className="text-xl text-white">internal rewards</span>
       </div>
       
-      <div className="flex flex-col gap-4 px-4 py-3">
+      <div className="grid grid-cols-1 gap-2 px-4 py-3">
         <motion.div 
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
