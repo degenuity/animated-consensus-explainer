@@ -20,6 +20,9 @@ const HorizontalItemsRenderer: React.FC<HorizontalItemsRendererProps> = ({
   width,
   height
 }) => {
+  // Log the items we're about to render with their IDs for debugging
+  console.log("Rendering horizontal items:", items.map(item => item.id));
+  
   const renderedItems: JSX.Element[] = [];
   
   // Filter out operator items to calculate widths for content items
@@ -42,6 +45,9 @@ const HorizontalItemsRenderer: React.FC<HorizontalItemsRendererProps> = ({
     
     // For block production box (530px width), adjust the ratios
     if (width === 530) {
+      // Log the specific adjustment for width=530 case (block production box)
+      console.log(`Using specialized ratios for block production box (width=${width}px)`);
+      
       contentItems.forEach(item => {
         if (item.id === 'randomness') {
           contentItemWidths.push(baseWidth * 0.9);
@@ -70,6 +76,9 @@ const HorizontalItemsRenderer: React.FC<HorizontalItemsRendererProps> = ({
   let currentX = x + 10;
   let itemIndex = 0;
   
+  // Log the calculated item positions for debugging
+  let positionMap: Record<string, {x: number, width: number}> = {};
+  
   items.forEach((item, index) => {
     let itemWidth: number;
     
@@ -79,6 +88,12 @@ const HorizontalItemsRenderer: React.FC<HorizontalItemsRendererProps> = ({
       itemWidth = contentItemWidths[itemIndex];
       itemIndex++;
     }
+    
+    // Store the calculated position for debugging
+    positionMap[item.id || `item-${index}`] = {
+      x: currentX,
+      width: itemWidth
+    };
     
     renderedItems.push(
       <SubItemRenderer 
@@ -90,12 +105,16 @@ const HorizontalItemsRenderer: React.FC<HorizontalItemsRendererProps> = ({
         yOffset={yOffset}
         width={itemWidth}
         height={height - yOffset - 10}
+        data-item-id={item.id} // Add data attribute for identification
       />
     );
     
     // Update position for next item
     currentX += itemWidth + itemMargin;
   });
+  
+  // Log final positions for all items for verification
+  console.log("Calculated horizontal item positions:", positionMap);
   
   return <>{renderedItems}</>;
 };

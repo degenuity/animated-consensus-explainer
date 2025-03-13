@@ -38,12 +38,13 @@ export const connectionPaths = [
   },
   
   // Line 4: Total Stake to Stake Weight
-  // Corrected path to target the exact center of the stake weight box at x=585
+  // FIXED PATH - This now targets the stake weight box (not randomness)
+  // The stake weight box is positioned at approximately x=710, y=550
   { 
-    path: "M 780 340 L 780 465 L 585 465 L 585 550", 
+    path: "M 780 340 L 780 465 L 710 465 L 710 550", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "585", y: "520" },
+    dotPosition: { x: "710", y: "520" },
     animateMotion: true,
     animationDirection: "down" as const,
     id: "total-stake-to-stake-weight",
