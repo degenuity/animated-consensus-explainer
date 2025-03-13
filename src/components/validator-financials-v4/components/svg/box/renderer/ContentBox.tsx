@@ -35,9 +35,9 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   const isBlockRewards = id === "block-rewards";
   const isPriorityFeeOrMEV = id === "priority-fees" || id === "mev";
   
-  // Adjust text styles based on the element role
-  // Make block rewards the same font size as total stake (text-sm)
-  const fontSize = isNested ? "text-sm" : "text-sm";
+  // Explicitly make block rewards font smaller to match other boxes
+  // Use text-xs instead of text-sm for block rewards to make it even smaller
+  const fontSize = isNested ? "text-sm" : (isBlockRewards ? "text-xs" : "text-sm");
   const fontWeight = "font-medium";
   
   // Always left-align text regardless of whether it's horizontal or not
