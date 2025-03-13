@@ -90,14 +90,16 @@ export const connectionPaths = [
   
   // NEW LINE: Delegated Stake to Commission
   { 
-    path: "M 650 240 L 580 240", 
+    path: "M 650 290 L 580 290", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
-    dotPosition: { x: "615", y: "240" },
+    dotPosition: { x: "615", y: "290" },
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
-    animationDuration: 1.8
+    animationDuration: 1.8,
+    // Ensure this line is drawn above other elements
+    renderAsDefinition: false
   }
 ];
