@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { SubItem } from '../types';
 
@@ -27,6 +27,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   hasPlus
 }) => {
   const { text, desc, id, isHorizontal } = item;
+  const [isHighlighted, setIsHighlighted] = useState(false);
   
   // Use the item's color directly
   const strokeColor = item.color || "#3B82F6";
@@ -50,6 +51,28 @@ const ContentBox: React.FC<ContentBoxProps> = ({
     isOwnStake || 
     isPriorityFeeOrMEV || 
     isBaseFees;
+  
+  // Listen to global events for dot collisions
+  useEffect(() => {
+    // Define a custom event listener for dot collisions
+    const handleDotCollision = (event: CustomEvent) => {
+      // Check if this box's ID matches the target in the event
+      if (event.detail.targetId === id) {
+        // Trigger highlight animation
+        setIsHighlighted(true);
+        // Reset after animation completes
+        setTimeout(() => setIsHighlighted(false), 600);
+      }
+    };
+
+    // Add event listener
+    window.addEventListener('dotCollision' as any, handleDotCollision as EventListener);
+    
+    // Clean up
+    return () => {
+      window.removeEventListener('dotCollision' as any, handleDotCollision as EventListener);
+    };
+  }, [id]);
   
   // Special logging for commission box
   if (isCommission) {
@@ -151,6 +174,14 @@ const ContentBox: React.FC<ContentBoxProps> = ({
 
   console.log(`Rendering ContentBox for: ${id} with color: ${strokeColor}, yOffset: ${yOffset}`);
 
+  // Define highlight animation colors based on the box's theme
+  const getHighlightColor = () => {
+    if (strokeColor.includes('10B981')) return "#0EA5E9"; // Bright blue for green boxes
+    if (strokeColor.includes('3B82F6')) return "#8B5CF6"; // Purple for blue boxes
+    if (strokeColor.includes('EAB308')) return "#F97316"; // Orange for yellow boxes
+    return "#D946EF"; // Magenta pink fallback
+  };
+
   return (
     <motion.g
       initial={{ opacity: 0 }}
@@ -165,9 +196,14 @@ const ContentBox: React.FC<ContentBoxProps> = ({
         height={itemHeight}
         rx="4"
         fill="transparent"
-        stroke={strokeColor}
-        strokeWidth="1.5"
+        stroke={isHighlighted ? getHighlightColor() : strokeColor}
+        strokeWidth={isHighlighted ? "2.5" : "1.5"}
         data-item-rect={id}
+        // Add subtle motion animation when highlighted
+        style={{
+          transition: 'stroke 0.3s ease, stroke-width 0.3s ease',
+          filter: isHighlighted ? 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.6))' : 'none'
+        }}
       />
       <foreignObject 
         x={adjustedX} 
