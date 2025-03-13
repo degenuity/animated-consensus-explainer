@@ -54,8 +54,8 @@ const VerticalItemsRenderer: React.FC<VerticalItemsRendererProps> = ({
       }, 0);
       
       // Use the maximum position value plus some padding for the container height
-      // Reduced container height by 10px from the bottom
-      const containerHeight = baseHeight + maxPosition + 10; // Reduced from 20 to 10px padding
+      // Further reduced container height by 5px (total 15px from original)
+      const containerHeight = baseHeight + maxPosition + 5; // Reduced from 10 to 5px padding
       
       console.log(`Block rewards container height: ${containerHeight}, maxPosition: ${maxPosition}`);
       

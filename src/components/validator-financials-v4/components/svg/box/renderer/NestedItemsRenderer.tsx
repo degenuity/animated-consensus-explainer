@@ -25,7 +25,7 @@ const NestedItemsRenderer = ({
   index
 }: NestedItemsRendererProps) => {
   const isBlockRewards = parentItem.id === 'block-rewards';
-  const childSpacing = isBlockRewards ? 15 : 20; // Reduced spacing for block rewards items
+  const childSpacing = isBlockRewards ? 10 : 20; // Further reduced spacing for block rewards items from 15 to 10
   let childY = yOffset;
   
   console.log(`NestedItemsRenderer for ${parentItem.id}, isBlockRewards: ${isBlockRewards}`);
@@ -62,7 +62,7 @@ const NestedItemsRenderer = ({
     
     // For block rewards, we're using absolute positioning, so childY doesn't change based on children
     // Just add some standard amount to account for the container size
-    childY += 150; // Approximate height for the container with both children
+    childY += 140; // Slightly reduced from approximate container height of 150
     return childY;
   }
   
