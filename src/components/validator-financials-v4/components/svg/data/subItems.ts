@@ -23,13 +23,13 @@ export const networkCostsSubitems = [
         text: "priority fees", 
         id: "priority-fees", 
         color: "#10B981",
-        position: { y: 35 } // Increased spacing from 15 to 35px (+20px)
+        position: { y: 55 } // Increased spacing from 35 to 55px (+20px)
       },
       { 
         text: "mev", 
         id: "mev", 
         color: "#10B981",
-        position: { y: 55 } // Increased spacing from 35 to 55px (+20px)
+        position: { y: 75 } // Increased spacing from 55 to 75px (+20px)
       }
     ]
   }
