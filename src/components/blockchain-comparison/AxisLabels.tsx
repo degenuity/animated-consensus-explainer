@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { viewBoxWidth, CHART_LEFT, CHART_RIGHT, CHART_BOTTOM } from './data';
+import { blockchains } from './data/blockchains';
 
 const AxisLabels: React.FC = () => {
   return (
@@ -63,38 +64,59 @@ const AxisLabels: React.FC = () => {
         <text x="1150" y={CHART_BOTTOM + 15} fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">132</text>
         <text x="1300" y={CHART_BOTTOM + 15} fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">200+</text>
         
-        {/* Connection lines from X-axis values to blockchain logos with animation */}
+        {/* Connection lines from X-axis values to blockchain logos with enhanced animation */}
         <g className="connection-lines">
-          {/* Animated lines for each blockchain */}
-          {[
-            { x: 260, y: 380, id: "tron" },      // Tron
-            { x: 330, y: 440, id: "ethereum" },  // Ethereum
-            { x: 280, y: 580, id: "bitcoin" },   // Bitcoin
-            { x: 350, y: 500, id: "xrp" },       // XRP
-            { x: 450, y: 180, id: "sui" },       // Sui
-            { x: 550, y: 120, id: "solana" },    // Solana
-            { x: 650, y: 300, id: "avalanche" }, // Avalanche
-            { x: 900, y: 300, id: "cardano" },   // Cardano
-            { x: 1150, y: 300, id: "polkadot" }, // Polkadot
-            { x: 1300, y: 120, id: "x1" }        // X1
-          ].map((item, index) => (
-            <motion.line
-              key={`line-${item.id}`}
-              x1={item.x}
-              y1={CHART_BOTTOM}
-              x2={item.x}
-              y2={CHART_BOTTOM}
-              stroke={item.id === "x1" ? "#3B82F6" : "#667085"}
-              strokeWidth={item.id === "x1" ? "2" : "1"}
-              strokeDasharray="3,3"
-              initial={{ y2: CHART_BOTTOM }}
-              animate={{ y2: item.y }}
-              transition={{ 
-                duration: 1.2, 
-                delay: 0.5 + (index * 0.1),
-                ease: "easeOut"
-              }}
-            />
+          {blockchains.map((blockchain, index) => (
+            <React.Fragment key={`line-container-${blockchain.id}`}>
+              {/* Pulsating effect for the line */}
+              <motion.line
+                key={`line-bg-${blockchain.id}`}
+                x1={blockchain.x}
+                y1={CHART_BOTTOM}
+                x2={blockchain.x}
+                y2={CHART_BOTTOM}
+                stroke={blockchain.id === "x1" ? "#3B82F6" : "#667085"}
+                strokeWidth={blockchain.id === "x1" ? "3" : "2"}
+                strokeDasharray="3,3"
+                initial={{ y2: CHART_BOTTOM }}
+                animate={{ 
+                  y2: blockchain.y + 15, // Stop at the logo (adding 15 to account for logo height)
+                  opacity: [0.3, 0.8, 0.3]
+                }}
+                transition={{ 
+                  y2: {
+                    duration: 1.2, 
+                    delay: 0.3 + (index * 0.1),
+                    ease: "easeOut"
+                  },
+                  opacity: {
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }
+                }}
+              />
+              
+              {/* Line highlight effect */}
+              <motion.line
+                key={`line-highlight-${blockchain.id}`}
+                x1={blockchain.x}
+                y1={CHART_BOTTOM}
+                x2={blockchain.x}
+                y2={CHART_BOTTOM}
+                stroke={blockchain.id === "x1" ? "#60A5FA" : "#94A3B8"}
+                strokeWidth={blockchain.id === "x1" ? "1" : "1"}
+                initial={{ y2: CHART_BOTTOM }}
+                animate={{ 
+                  y2: blockchain.y + 15 // Stop at the logo (adding 15 to account for logo height)
+                }}
+                transition={{ 
+                  duration: 1.5, 
+                  delay: 0.5 + (index * 0.1),
+                  ease: "easeOut"
+                }}
+              />
+            </React.Fragment>
           ))}
         </g>
 
