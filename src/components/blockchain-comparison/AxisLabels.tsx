@@ -6,33 +6,33 @@ import { viewBoxWidth } from './data';
 const AxisLabels: React.FC = () => {
   return (
     <>
-      {/* Y-Axis Labels (Left Side) */}
+      {/* Y-Axis Labels (Left Side) - Moved further left */}
       <motion.g
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
         {/* Top section label */}
-        <text x="50" y="130" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="15" y="130" fill="#F8FAFC" className="text-sm font-semibold">
           Parallelism +
         </text>
-        <text x="35" y="150" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="10" y="150" fill="#F8FAFC" className="text-sm font-semibold">
           Smart Contracts
         </text>
         
         {/* Middle section label */}
-        <text x="50" y="380" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="15" y="380" fill="#F8FAFC" className="text-sm font-semibold">
           Sequential +
         </text>
-        <text x="35" y="400" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="10" y="400" fill="#F8FAFC" className="text-sm font-semibold">
           Smart Contracts
         </text>
         
         {/* Bottom section label */}
-        <text x="70" y="580" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="25" y="580" fill="#F8FAFC" className="text-sm font-semibold">
           No Smart
         </text>
-        <text x="65" y="600" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="20" y="600" fill="#F8FAFC" className="text-sm font-semibold">
           Contracts
         </text>
       </motion.g>
