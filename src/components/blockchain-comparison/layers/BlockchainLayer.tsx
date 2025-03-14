@@ -1,17 +1,7 @@
 
 import React from 'react';
 import { motion } from "framer-motion";
-
-interface Blockchain {
-  id: string;
-  name: string;
-  x: number;
-  y: number;
-  logo: string;
-  logoClass?: string;
-  animationDelay?: number;
-  highlighted?: boolean;
-}
+import { Blockchain } from '../data/blockchains';
 
 interface BlockchainLayerProps {
   blockchains: Blockchain[];

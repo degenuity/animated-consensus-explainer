@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import { useIsMobile } from '@/hooks/use-mobile';
-import { viewBoxWidth, viewBoxHeight, blockchains, gridLines } from './data';
+import { viewBoxWidth, viewBoxHeight, blockchains, gridLines, CHART_TOP, CHART_BOTTOM, CHART_LEFT, CHART_RIGHT, chartWidth, chartHeight } from './data';
 import ChartTitle from './ChartTitle';
 import GridLayer from './layers/GridLayer';
 import BlockchainLayer from './layers/BlockchainLayer';
@@ -10,15 +10,6 @@ import AxisLabels from './AxisLabels';
 
 const BlockchainComparisonChart: React.FC = () => {
   const isMobile = useIsMobile();
-  
-  // Constants for chart area (from data.ts)
-  const CHART_LEFT = 100;
-  const CHART_RIGHT = 1380;
-  const CHART_TOP = 80;
-  const CHART_BOTTOM = 630;
-  
-  const chartWidth = CHART_RIGHT - CHART_LEFT;
-  const chartHeight = CHART_BOTTOM - CHART_TOP;
   
   return (
     <motion.div 

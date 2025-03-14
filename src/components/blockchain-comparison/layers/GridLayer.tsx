@@ -1,19 +1,7 @@
 
 import React from 'react';
 import { motion } from "framer-motion";
-
-interface GridLine {
-  type: 'horizontal' | 'vertical';  // Now strictly typed to only allow these two values
-  x?: number;
-  y?: number;
-  x1?: number;
-  y1?: number;
-  x2?: number;
-  y2?: number;
-  animate?: boolean;
-  animationDelay?: number;
-  className?: string;
-}
+import { GridLine } from '../data/gridLines';
 
 interface GridLayerProps {
   gridLines: GridLine[];
