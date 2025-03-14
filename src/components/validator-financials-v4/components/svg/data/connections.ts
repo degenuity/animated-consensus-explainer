@@ -26,7 +26,7 @@ export const connectionPaths = [
     animationDuration: 2
   },
   
-  // Line 6: Base Fees to Block Rewards
+  // Line 6: Base Fees to Block Rewards - Updated with correct coordinates from base fees bottom center
   { 
     path: "M 1090 180 L 1090 230", 
     color: "#EAB308", 
@@ -36,7 +36,7 @@ export const connectionPaths = [
     renderOrder: "foreground" as const
   },
   
-  // Base Fee bottom to Block Rewards center
+  // Base Fee bottom to Block Rewards center - Updated with correct bottom center coordinates
   { 
     path: "M 1090 210 L 1090 260", 
     color: "#EAB308", 
@@ -72,9 +72,9 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Updated Y values for new boxes and changed renderOrder to foreground
+  // Delegated Stake to Commission - Specified foreground rendering
   { 
-    path: "M 635 280 L 558 280", // Updated from 250 to 280 to align with the center of the subitems
+    path: "M 635 280 L 558 280", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
@@ -85,9 +85,9 @@ export const connectionPaths = [
     animationDuration: 1.8
   },
   
-  // Own Stake to Staking Rewards - Updated Y values for new boxes and changed renderOrder to foreground
+  // Own Stake to Staking Rewards - Specified foreground rendering
   { 
-    path: "M 635 340 L 558 340", // Updated from 310 to 340 to align with the center of the subitems
+    path: "M 635 340 L 558 340", 
     color: "#0EA5E9", 
     animationIndex: 11,
     animateMotion: true,

@@ -111,6 +111,51 @@ const DiagramSVG = () => {
           })
         });
       }
+      
+      // Find the base fees box position for debugging
+      const networkCostsGroup = Array.from(allGroups).find(g => 
+        g.getAttribute('data-id') === 'network-usage-costs'
+      );
+      
+      if (networkCostsGroup) {
+        const baseFeesBox = networkCostsGroup.querySelector('[data-item-id="base-fees"]');
+        
+        if (baseFeesBox) {
+          const baseFeesRect = baseFeesBox.getBoundingClientRect();
+          const svgRect = svgRef.current.getBoundingClientRect();
+          
+          // Calculate relative position within SVG
+          const relativeX = baseFeesRect.left - svgRect.left;
+          const relativeY = baseFeesRect.top - svgRect.top;
+          
+          // Calculate the SVG coordinate based on viewBox
+          const svgX = (relativeX / svgRect.width) * viewBoxWidth;
+          const svgY = (relativeY / svgRect.height) * viewBoxHeight;
+          
+          console.log('BASE FEES BOX COORDS:', {
+            id: 'base-fees',
+            clientRect: {
+              top: baseFeesRect.top,
+              left: baseFeesRect.left,
+              width: baseFeesRect.width,
+              height: baseFeesRect.height,
+              bottom: baseFeesRect.bottom,
+            },
+            svgCoordinates: {
+              x: svgX,
+              y: svgY,
+              width: (baseFeesRect.width / svgRect.width) * viewBoxWidth,
+              height: (baseFeesRect.height / svgRect.height) * viewBoxHeight,
+              bottom: svgY + (baseFeesRect.height / svgRect.height) * viewBoxHeight,
+              centerX: svgX + (baseFeesRect.width / svgRect.width) * viewBoxWidth / 2,
+              bottomCenterX: svgX + (baseFeesRect.width / svgRect.width) * viewBoxWidth / 2,
+              bottomCenterY: svgY + (baseFeesRect.height / svgRect.height) * viewBoxHeight
+            }
+          });
+        } else {
+          console.log("Base fees box not found in DOM");
+        }
+      }
     }
   }, []);
   
