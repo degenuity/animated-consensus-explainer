@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from "framer-motion";
 
@@ -45,32 +44,44 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
             />
           )}
           
-          {/* Logo image */}
-          <image 
-            href={blockchain.logo} 
-            x={blockchain.x - 20} 
-            y={blockchain.y - 20} 
-            width="40" 
-            height="40" 
-            className={blockchain.logoClass}
-            style={{ 
-              transform: `translate(-50%, -50%)`,
-              transformOrigin: `${blockchain.x}px ${blockchain.y}px`
-            }}
-          />
-          
-          {/* Name text */}
-          {blockchain.id !== 'x1' && (
-            <text 
-              x={blockchain.x} 
-              y={blockchain.y + 25} 
-              textAnchor="middle" 
-              fill="#E2E8F0" 
-              fontSize="12"
-              className="font-medium"
-            >
-              {blockchain.name}
-            </text>
+          {/* For X1, keep centered logo */}
+          {blockchain.id === 'x1' ? (
+            <image 
+              href={blockchain.logo} 
+              x={blockchain.x - 20} 
+              y={blockchain.y - 20} 
+              width="40" 
+              height="40" 
+              className={blockchain.logoClass}
+              style={{ 
+                transform: `translate(-50%, -50%)`,
+                transformOrigin: `${blockchain.x}px ${blockchain.y}px`
+              }}
+            />
+          ) : (
+            <>
+              {/* Logo image - positioned to the left of name */}
+              <image 
+                href={blockchain.logo} 
+                x={blockchain.x - 50} 
+                y={blockchain.y - 10} 
+                width="20" 
+                height="20" 
+                className={blockchain.logoClass}
+              />
+              
+              {/* Name text */}
+              <text 
+                x={blockchain.x} 
+                y={blockchain.y + 5} 
+                textAnchor="middle" 
+                fill="#E2E8F0" 
+                fontSize="12"
+                className="font-medium"
+              >
+                {blockchain.name}
+              </text>
+            </>
           )}
         </motion.g>
       ))}
