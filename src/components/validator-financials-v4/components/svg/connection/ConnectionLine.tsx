@@ -11,6 +11,7 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     renderAsDefinition = false,
     path,
     dotPosition,
+    renderOrder,
     // Extracting all props with defaults to pass to appropriate components
     ...restProps
   } = props;
@@ -30,6 +31,7 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
           path={path}
           dotPosition={dotPosition}
           animationIndex={animationIndex} // Pass animationIndex explicitly
+          renderOrder={renderOrder}
         />
       </defs>
     );
@@ -40,13 +42,18 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     return null;
   }
   
+  // Determine the z-index based on renderOrder
+  const zIndex = renderOrder === 'foreground' ? 5 : 1;
+  
   // Regular rendering with animations
   return (
-    <AnimatedConnection 
-      {...props}
-      lineVariants={lineVariants}
-      dotVariants={dotVariants}
-    />
+    <g style={{ zIndex: zIndex }}>
+      <AnimatedConnection 
+        {...props}
+        lineVariants={lineVariants}
+        dotVariants={dotVariants}
+      />
+    </g>
   );
 };
 

@@ -22,7 +22,11 @@ const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) =>
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none z-30"
+      className="absolute top-0 left-0 w-full h-full overflow-visible z-50"
+      style={{ 
+        pointerEvents: 'none',
+        isolation: 'isolate' // Creates a new stacking context
+      }}
     >
       <g className="pointer-events-auto">
         {foregroundConnections.map((connection, index) => (

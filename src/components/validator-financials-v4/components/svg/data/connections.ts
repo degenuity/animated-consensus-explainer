@@ -82,7 +82,8 @@ export const connectionPaths = [
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
-    animationDuration: 1.8
+    animationDuration: 1.8,
+    zIndex: 100 // Add explicit high z-index
   },
   
   // Own Stake to Staking Rewards - Updated Y values for new boxes

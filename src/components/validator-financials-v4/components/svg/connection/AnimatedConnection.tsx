@@ -1,84 +1,79 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ConnectionLabel } from './ConnectionLabel';
 import { ConnectionDot } from './ConnectionDot';
+import { ConnectionLabel } from './ConnectionLabel';
 import { ConnectionProps } from './types';
 
 interface AnimatedConnectionProps extends ConnectionProps {
-  lineVariants: any;
-  dotVariants: any;
+  lineVariants?: any;
+  dotVariants?: any;
 }
 
 export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
+  id,
   path,
-  color,
-  animationIndex,
   dotPosition,
-  label,
-  labelPosition,
-  animationDirection,
-  animateMotion,
+  color,
   lineVariants,
   dotVariants,
-  animationDuration
+  animateMotion = false,
+  animationDuration = 2,
+  animationDirection,
+  label,
+  renderOrder
 }) => {
-  // Skip rendering if path is missing
+  // Skip rendering if the path is missing
   if (!path) return null;
   
+  // Set style based on renderOrder
+  const connectionStyle = {
+    zIndex: renderOrder === 'foreground' ? 50 : 10
+  };
+  
   return (
-    <g>
+    <g data-connection-id={id} style={connectionStyle}>
+      {/* Path */}
       <motion.path
         d={path}
         stroke={color}
         strokeWidth="2"
         fill="none"
-        custom={animationIndex}
-        variants={lineVariants}
         initial="hidden"
         animate="visible"
+        variants={lineVariants}
+        style={{ 
+          strokeDasharray: '4 2', 
+          zIndex: renderOrder === 'foreground' ? 50 : 10 
+        }}
       />
       
-      {dotPosition && !animateMotion && (
-        <motion.circle
-          cx={dotPosition.x}
-          cy={dotPosition.y}
-          r="5"
-          fill={color}
-          custom={animationIndex}
-          variants={dotVariants}
-          initial="hidden"
-          animate="visible"
-          style={animationDirection ? {
-            animation: `moveDot${animationDirection.charAt(0).toUpperCase() + animationDirection.slice(1)} ${animationDuration || 3}s linear infinite`
-          } : undefined}
-        />
-      )}
-      
-      {animateMotion && path && (
-        <motion.g
-          custom={animationIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ 
-            delay: animationIndex * 0.3 + 0.5,
-            duration: 0.3
-          }}
-        >
-          <ConnectionDot 
+      {/* Animated Dot */}
+      {dotPosition && (
+        animateMotion ? (
+          <ConnectionDot
             path={path}
             color={color}
             animated={true}
             animationDuration={animationDuration}
           />
-        </motion.g>
+        ) : (
+          <ConnectionDot
+            cx={dotPosition.x}
+            cy={dotPosition.y}
+            color={color}
+            animated={false}
+          />
+        )
       )}
       
-      {label && labelPosition && (
-        <ConnectionLabel 
-          label={label} 
-          position={labelPosition} 
-          color={color} 
+      {/* Optional Label */}
+      {label && (
+        <ConnectionLabel
+          x={label.x || "0"}
+          y={label.y || "0"}
+          text={label.text || ""}
+          variant={label.variant || "default"}
         />
       )}
     </g>

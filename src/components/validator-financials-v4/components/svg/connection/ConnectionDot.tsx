@@ -9,6 +9,7 @@ interface ConnectionDotProps {
   radius?: number;
   animated?: boolean;
   animationDuration?: number;
+  renderOrder?: 'foreground' | 'background';
 }
 
 export const ConnectionDot: React.FC<ConnectionDotProps> = ({ 
@@ -18,7 +19,8 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   cy, 
   radius = 5,
   animated = false,
-  animationDuration = 1.5
+  animationDuration = 1.5,
+  renderOrder = 'background'
 }) => {  
   // Don't render anything if the path is missing when required
   if (animated && !path) {
@@ -38,13 +40,19 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
       return null;
     }
     
+    // Determine z-index based on renderOrder
+    const zIndex = renderOrder === 'foreground' ? 50 : 10;
+    
     return (
-      <g>
+      <g style={{ zIndex }}>
         {/* The main animated dot */}
         <circle
           r={radius}
           fill={color}
-          style={{ transform: 'translateZ(0)' }} // Force hardware acceleration
+          style={{ 
+            transform: 'translateZ(0)', // Force hardware acceleration
+            zIndex
+          }}
         >
           <animateMotion
             path={path}
@@ -71,7 +79,10 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
           r={radius * 0.8}
           fill={color}
           opacity="0.6"
-          style={{ transform: 'translateZ(0)' }} // Force hardware acceleration
+          style={{ 
+            transform: 'translateZ(0)', // Force hardware acceleration
+            zIndex
+          }}
         >
           <animateMotion
             path={path}
@@ -93,6 +104,7 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
       cy={cy}
       r={radius}
       fill={color}
+      style={{ zIndex: renderOrder === 'foreground' ? 50 : 10 }}
     />
   );
 };
