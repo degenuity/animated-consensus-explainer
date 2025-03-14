@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ConnectionDot } from './ConnectionDot';
-import { ConnectionLabel, ConnectionLabelProps } from './ConnectionLabel';
+import { ConnectionLabel } from './ConnectionLabel';
 import { ConnectionProps } from './types';
 
 interface AnimatedConnectionProps extends ConnectionProps {
@@ -79,7 +79,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
           x={label.x}
           y={label.y}
           text={label.text}
-          variant={label.variant}
+          variant={label.variant || "default"}
         />
       )}
     </g>

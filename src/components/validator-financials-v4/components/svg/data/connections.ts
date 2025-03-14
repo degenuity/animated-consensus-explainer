@@ -87,7 +87,7 @@ export const connectionPaths = [
       text: "DS",
       x: "595",
       y: "260",
-      variant: "highlighted"
+      variant: "highlighted" as const
     }
   },
   
@@ -106,7 +106,7 @@ export const connectionPaths = [
       text: "OS",
       x: "595", 
       y: "320",
-      variant: "highlighted"
+      variant: "highlighted" as const
     }
   },
   
