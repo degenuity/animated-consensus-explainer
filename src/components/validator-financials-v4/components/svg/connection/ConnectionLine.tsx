@@ -50,10 +50,14 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
   // Regular rendering with animations - IMPORTANT: Pass renderOrder correctly
   return (
     <AnimatedConnection 
-      {...props}
+      {...restProps}
+      path={path}
+      dotPosition={dotPosition}
+      animationIndex={animationIndex}
       lineVariants={lineVariants}
       dotVariants={dotVariants}
       renderOrder={effectiveRenderOrder} // Ensure renderOrder is explicitly passed
+      id={id}
     />
   );
 };

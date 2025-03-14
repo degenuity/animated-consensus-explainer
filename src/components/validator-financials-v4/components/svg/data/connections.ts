@@ -13,15 +13,15 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // Line 4: Delegated Stake to Stake Weight - Updated to start from delegated stake box, not total stake
+  // Line 4: Total Stake to Stake Weight - Important: This must be foreground!
   { 
-    path: "M 635 280 L 650 280 L 650 465 L 765 465 L 765 550", 
+    path: "M 765 370 L 765 465 L 765 550", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "715", y: "507" },
+    dotPosition: { x: "765", y: "500" },
     animateMotion: true,
     animationDirection: "down" as const,
-    id: "delegated-stake-to-stake-weight",
+    id: "total-stake-to-stake-weight",
     renderOrder: "foreground" as const,
     animationDuration: 2
   },
@@ -72,7 +72,7 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Updated to target right edge of commission box
+  // Delegated Stake to Commission - Explicitly marked as foreground
   { 
     path: "M 635 280 L 558 280", 
     color: "#0EA5E9", 
@@ -85,7 +85,7 @@ export const connectionPaths = [
     animationDuration: 1.8
   },
   
-  // Own Stake to Staking Rewards - Updated Y values for new boxes
+  // Own Stake to Staking Rewards - Explicitly marked as foreground
   { 
     path: "M 635 340 L 558 340", 
     color: "#0EA5E9", 
