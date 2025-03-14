@@ -110,3 +110,4 @@ export const connectionPaths = [
     animationDuration: 1.8
   }
 ];
+

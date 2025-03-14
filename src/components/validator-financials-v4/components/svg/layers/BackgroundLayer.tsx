@@ -13,13 +13,16 @@ const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) =>
   const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
   const isMobile = useIsMobile();
   
+  // Add a console log to verify which connections are being rendered in the background
+  console.info("Background connections:", backgroundConnections.map(c => c.id));
+  
   return (
     <svg
       width="100%"
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none"
+      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none z-10"
     >
       <g className="pointer-events-auto">
         {backgroundConnections.map((connection, index) => (
