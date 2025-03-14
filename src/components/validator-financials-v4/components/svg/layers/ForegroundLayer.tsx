@@ -13,13 +13,15 @@ const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) =>
   const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
   const isMobile = useIsMobile();
   
+  // Ensure the SVG appears on top by setting a high z-index
   return (
     <svg
       width="100%"
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none"
+      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none z-30"
+      style={{ zIndex: 30 }} // Explicit z-index for browsers that need it
     >
       {foregroundConnections.map((connection, index) => (
         <ConnectionLine

@@ -19,18 +19,20 @@ const DiagramSVG = () => {
   return (
     <div 
       className={containerClasses}
-      style={{ isolation: 'isolate' }} // Create a new stacking context
     >
       <AnimationStyleProvider />
       
-      {/* Background Layer - Contains all background connections and elements */}
+      {/* The order of these layers determines their stacking order in SVG */}
+      {/* Each layer must be a direct child of the container div */}
+      
+      {/* 1. Background Layer - Rendered FIRST (bottom layer) */}
       <BackgroundLayer connectionPaths={connectionPaths} />
       
-      {/* Box Layer - Contains all boxes */}
+      {/* 2. Box Layer - Rendered SECOND (middle layer) */}
       <BoxLayer ref={svgRef} boxes={boxes} />
       
-      {/* Foreground Layer - Rendered LAST to ensure it's on top 
-          SVG elements stack in DOM order - the last one rendered appears on top */}
+      {/* 3. Foreground Layer - Rendered LAST (top layer)
+          This ensures foreground connections appear on top of boxes */}
       <ForegroundLayer connectionPaths={connectionPaths} />
     </div>
   );
