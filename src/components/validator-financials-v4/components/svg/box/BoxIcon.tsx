@@ -15,28 +15,34 @@ import {
 interface BoxIconProps {
   icon: 'inflation' | 'deflation' | 'internal-rewards' | 'total-stake' | 'network-costs' | 'block-production' | 'block-rewards' | 'profitability' | 'info';
   size?: number;
+  className?: string;
 }
 
-const BoxIcon: React.FC<BoxIconProps> = ({ icon, size = 22 }) => {
+const BoxIcon: React.FC<BoxIconProps> = ({ icon, size = 22, className = '' }) => {
+  const iconProps = {
+    size,
+    className
+  };
+  
   switch (icon) {
     case 'inflation': 
-      return <TrendingUp size={size} color="white" />;
+      return <TrendingUp {...iconProps} color="white" />;
     case 'deflation': 
-      return <TrendingDown size={size} color="white" />;
+      return <TrendingDown {...iconProps} color="white" />;
     case 'internal-rewards': 
-      return <BarChart3 size={size} color="#10B981" />;
+      return <BarChart3 {...iconProps} color="#10B981" />;
     case 'total-stake': 
-      return <Lock size={size} color="#3B82F6" />;
+      return <Lock {...iconProps} color="#3B82F6" />;
     case 'network-costs': 
-      return <ServerCrash size={size} color="#F97316" />;
+      return <ServerCrash {...iconProps} color="#F97316" />;
     case 'block-production': 
-      return <Box size={size} color="#3B82F6" />;
+      return <Box {...iconProps} color="#3B82F6" />;
     case 'block-rewards': 
-      return <CircleDollarSign size={size} color="#10B981" />;
+      return <CircleDollarSign {...iconProps} color="#10B981" />;
     case 'profitability': 
-      return <Percent size={size} color="#3B82F6" />;
+      return <Percent {...iconProps} color="#3B82F6" />;
     case 'info':
-      return <Info size={size} color="#3B82F6" />;
+      return <Info {...iconProps} color="#3B82F6" />;
     default: 
       return null;
   }

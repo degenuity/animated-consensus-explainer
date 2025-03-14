@@ -3,10 +3,9 @@ import React from 'react';
 import { zoomedViewBox, desktopViewBox } from '../data/constants';
 import { ConnectionLine } from '../connection';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { ConnectionProps } from '../connection/types';
 
 interface ForegroundLayerProps {
-  connectionPaths: ConnectionProps[];
+  connectionPaths: any[];
 }
 
 const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) => {
@@ -20,7 +19,7 @@ const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) =>
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none z-20"
+      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none"
     >
       <g className="pointer-events-auto">
         {foregroundConnections.map((connection, index) => (
