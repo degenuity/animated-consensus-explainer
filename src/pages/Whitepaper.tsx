@@ -85,6 +85,21 @@ const Whitepaper = () => {
           </Card>
         </motion.div>
 
+        {/* New Container - Placeholder for future content */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-8 overflow-hidden"
+        >
+          <Card className="p-1 sm:p-2 md:p-3 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors min-h-[400px]">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 to-blue-900/10" />
+            <div className="relative z-10 flex items-center justify-center h-full">
+              <p className="text-gray-400 text-lg">Additional content will be added here</p>
+            </div>
+          </Card>
+        </motion.div>
+
         <motion.div
           id="pdf-section"
           initial={{ opacity: 0, y: 20 }}
