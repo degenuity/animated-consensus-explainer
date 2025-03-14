@@ -72,7 +72,7 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Explicitly marked as foreground
+  // Delegated Stake to Commission - Fixed starting point to be at the left-center of delegated stake box
   { 
     path: "M 635 280 L 558 280", 
     color: "#0EA5E9", 

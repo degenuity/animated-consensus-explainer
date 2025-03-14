@@ -9,6 +9,13 @@ import { useDiagramDebug } from './hooks/useDiagramDebug';
 const DiagramSVG = () => {
   const svgRef = useDiagramDebug();
   
+  // Debug the connections starting points
+  console.log('Connection paths setup:', connectionPaths.map(conn => ({
+    id: conn.id,
+    startPoint: conn.path.split(' ')[1] + ',' + conn.path.split(' ')[2],
+    renderOrder: conn.renderOrder
+  })));
+  
   // Optimized container class for maximum visibility
   const containerClasses = [
     "w-full h-full relative", 
@@ -21,7 +28,7 @@ const DiagramSVG = () => {
       
       {/* CRITICAL DOM ORDER FOR PROPER LAYERING:
           1. Background connections first (lowest layer)
-          2. Boxes in the middle layer
+          2. Boxes in the middle layer  
           3. Foreground connections last (highest layer) */}
       
       {/* 1. First layer - Background connections */}

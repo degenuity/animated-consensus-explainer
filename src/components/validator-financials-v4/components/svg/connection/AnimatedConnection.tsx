@@ -29,8 +29,14 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   // Essential class attribute for distinguishing foreground vs background connections
   const connectionClass = `${renderOrder}-connection connection-${id}`;
   
+  // Add data-debugger attribute to help trace the element in DOM
   return (
-    <g data-connection-id={id} className={connectionClass} data-render-order={renderOrder}>
+    <g 
+      data-connection-id={id} 
+      className={connectionClass} 
+      data-render-order={renderOrder}
+      data-start-point={path.split(' ')[1] + ',' + path.split(' ')[2]} // Extract start point from path
+    >
       {/* Path */}
       <motion.path
         d={path}
