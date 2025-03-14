@@ -1,4 +1,3 @@
-
 // Box definitions with positions, dimensions and content
 export const connectionPaths = [
   // Line 1: Inflation to Internal Rewards - Updated Y to match new center points (290)
@@ -98,13 +97,13 @@ export const connectionPaths = [
     animationDuration: 1.8
   },
   
-  // Base Fee right side to Deflation - Updated to go from exact right edge to deflation box top center
+  // Base Fee right side to Deflation - Updated to use a straight path with right angle
   { 
-    path: "M 1208 190 L 1375 240", 
+    path: "M 1208 190 L 1375 190 L 1375 240", 
     color: "#EAB308", 
     animationIndex: 12,
     animateMotion: true,
-    dotPosition: { x: "1290", y: "215" },
+    dotPosition: { x: "1345", y: "210" },
     id: "base-fee-right-to-deflation",
     renderOrder: "foreground" as const,
     animationDuration: 1.8
