@@ -6,9 +6,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowDown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import PDFViewer from "@/components/PDFViewer";
-import ValidatorFinancials from "@/components/validator-financials";
-import ValidatorFinancialsV2 from "@/components/validator-financials-v2";
-import { ValidatorFinancialsV3 } from "@/components/validator-financials-v3";
 import { ValidatorFinancialsV4 } from "@/components/validator-financials-v4";
 
 const Whitepaper = () => {
@@ -70,62 +67,20 @@ const Whitepaper = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-5 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
         >
-          Models in this paper
+          X1 Validator Financials Model
         </motion.h2>
 
-        {/* New V4 Animation using BLS-style animation system */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-4 sm:mb-6 overflow-hidden"
-        >
-          <Card className="p-1 sm:p-2 md:p-3 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-indigo-900/10" />
-            <div className="relative z-10">
-              <ValidatorFinancialsV4 />
-            </div>
-          </Card>
-        </motion.div>
-
-        {/* New V3 Simple Animation */}
+        {/* V4 Animation using BLS-style animation system */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="mb-8 overflow-hidden"
         >
-          <Card className="p-2 md:p-3 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
+          <Card className="p-1 sm:p-2 md:p-3 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 to-indigo-900/10" />
             <div className="relative z-10">
-              <ValidatorFinancialsV3 />
-            </div>
-          </Card>
-        </motion.div>
-
-        {/* X1 Validator Financials V2 Model */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
-        >
-          <Card className="p-3 md:p-4 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
-            <div className="relative z-10">
-              <ValidatorFinancialsV2 />
-            </div>
-          </Card>
-        </motion.div>
-
-        {/* X1 Validator Financials Model */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
-        >
-          <Card className="p-3 md:p-4 bg-slate-800/50 backdrop-blur border-slate-700 overflow-hidden relative hover:border-blue-500/50 transition-colors">
-            <div className="relative z-10">
-              <ValidatorFinancials />
+              <ValidatorFinancialsV4 />
             </div>
           </Card>
         </motion.div>
