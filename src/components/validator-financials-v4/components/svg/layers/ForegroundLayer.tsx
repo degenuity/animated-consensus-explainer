@@ -13,9 +13,6 @@ const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) =>
   const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
   const isMobile = useIsMobile();
   
-  // Add a console log to verify which connections are being rendered in the foreground
-  console.info("Foreground connections:", foregroundConnections.map(c => c.id));
-  
   return (
     <svg
       width="100%"
@@ -23,20 +20,15 @@ const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) =>
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
       className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none"
-      style={{ 
-        zIndex: 300, // Much higher z-index than boxes (10)
-        position: 'relative', // Ensure it creates a stacking context
-      }}
+      style={{ position: 'absolute' }}
     >
-      <g className="pointer-events-auto">
-        {foregroundConnections.map((connection, index) => (
-          <ConnectionLine
-            key={`connection-fg-${connection.id}-${index}`}
-            {...connection}
-            animationIndex={connection.animationIndex || index}
-          />
-        ))}
-      </g>
+      {foregroundConnections.map((connection, index) => (
+        <ConnectionLine
+          key={`connection-fg-${connection.id}-${index}`}
+          {...connection}
+          animationIndex={connection.animationIndex || index}
+        />
+      ))}
     </svg>
   );
 };

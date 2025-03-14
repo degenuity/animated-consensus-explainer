@@ -23,13 +23,14 @@ const DiagramSVG = () => {
     >
       <AnimationStyleProvider />
       
-      {/* Background Layer - Contains all background connections and elements - z-index: 10 */}
+      {/* Background Layer - Contains all background connections and elements */}
       <BackgroundLayer connectionPaths={connectionPaths} />
       
-      {/* Box Layer - Contains all boxes - z-index: 20 */}
+      {/* Box Layer - Contains all boxes */}
       <BoxLayer ref={svgRef} boxes={boxes} />
       
-      {/* Foreground Layer - Contains only the connections that need to be on top - z-index: 50 */}
+      {/* Foreground Layer - Rendered LAST to ensure it's on top 
+          SVG elements stack in DOM order - the last one rendered appears on top */}
       <ForegroundLayer connectionPaths={connectionPaths} />
     </div>
   );

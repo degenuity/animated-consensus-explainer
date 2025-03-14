@@ -26,17 +26,11 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   // Skip rendering if the path is missing
   if (!path) return null;
   
-  // Use an extremely high z-index for foreground connections
-  const zIndex = renderOrder === 'foreground' ? 350 : 5;
+  // Note: We don't use CSS z-index for SVG elements here as it doesn't work that way
+  // SVG elements stack based on their order in the DOM - later elements appear on top
   
   return (
-    <g 
-      data-connection-id={id} 
-      style={{ 
-        zIndex, 
-        position: 'relative' 
-      }}
-    >
+    <g data-connection-id={id}>
       {/* Path */}
       <motion.path
         d={path}
@@ -46,10 +40,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         initial="hidden"
         animate="visible"
         variants={lineVariants}
-        style={{ 
-          strokeDasharray: '4 2', 
-          zIndex
-        }}
+        style={{ strokeDasharray: '4 2' }}
       />
       
       {/* Animated Dot */}

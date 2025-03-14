@@ -29,16 +29,12 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
       return null;
     }
     
-    // Higher z-index for foreground elements
-    const zIndex = renderOrder === 'foreground' ? 350 : 5;
-    
     return (
-      <g style={{ zIndex, position: 'relative' }}>
+      <g>
         {/* The main animated dot */}
         <circle
           r={radius}
           fill={color}
-          style={{ zIndex }}
         >
           <animateMotion
             path={path}
@@ -59,15 +55,12 @@ export const ConnectionDot: React.FC<ConnectionDotProps> = ({
   
   // Static dot rendering
   if (!animated && cx && cy) {
-    const zIndex = renderOrder === 'foreground' ? 350 : 5;
-    
     return (
       <circle
         cx={cx}
         cy={cy}
         r={radius}
         fill={color}
-        style={{ zIndex, position: 'relative' }}
       />
     );
   }
