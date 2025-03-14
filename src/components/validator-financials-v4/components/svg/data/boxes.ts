@@ -14,7 +14,7 @@ export const boxes = [
     x: 100,
     y: 240,
     width: 150,
-    height: 110, // Increased height from 100 to 110 to ensure subtitle fits
+    height: 100,
     title: "inflation",
     subtitle: "token issuance",
     icon: "inflation" as const,
@@ -23,10 +23,10 @@ export const boxes = [
     simpleStyle: true
   },
   
-  // Internal Rewards Box - Aligned with Inflation's center Y value (240 + 110/2 = 295)
+  // Internal Rewards Box - Aligned with Inflation's center Y value (240 + 100/2 = 290)
   {
     x: 320,
-    y: 215, // Adjusted to 215 to center at Inflation's Y center (295 - 160/2 = 215)
+    y: 210, // Adjusted from 180 to 210 to center at Inflation's Y center (290 - 160/2 = 210)
     width: 260,
     height: 160,
     title: "internal rewards",
@@ -40,7 +40,7 @@ export const boxes = [
   // Total Stake Box - Also aligned with Inflation's center Y value
   {
     x: 635,
-    y: 215, // Adjusted to 215 to center at Inflation's Y center (295 - 160/2 = 215)
+    y: 210, // Adjusted from 180 to 210 to center at Inflation's Y center (290 - 160/2 = 210)
     width: 260,
     height: 160,
     title: "total stake",
@@ -70,7 +70,7 @@ export const boxes = [
     x: 1250,
     y: 240,
     width: 150,
-    height: 110, // Increased height from 100 to 110 to ensure subtitle fits
+    height: 100,
     title: "deflation",
     subtitle: "token burns",
     icon: "deflation" as const,

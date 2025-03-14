@@ -19,7 +19,7 @@ const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) =>
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none z-0" // Changed from -z-10 to z-0
+      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none"
     >
       <g className="pointer-events-auto">
         {backgroundConnections.map((connection, index) => (

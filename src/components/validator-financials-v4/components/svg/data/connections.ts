@@ -10,7 +10,7 @@ export const connectionPaths = [
     animationDirection: "right" as const,
     animateMotion: true,
     id: "inflation-to-internal-rewards",
-    renderOrder: "foreground" as const
+    renderOrder: "background" as const
   },
   
   // Line 4: Total Stake to Stake Weight - Updated coordinates to match new Total Stake position
@@ -26,17 +26,17 @@ export const connectionPaths = [
     animationDuration: 2
   },
   
-  // Line 6: Base Fees to Block Rewards - Updated with correct coordinates from base fees bottom center
+  // Line 6: Base Fees to Block Rewards
   { 
     path: "M 1090 180 L 1090 230", 
     color: "#EAB308", 
     animationIndex: 5,
     dotPosition: { x: "1090", y: "205" },
     id: "base-fees-to-block-rewards",
-    renderOrder: "foreground" as const
+    renderOrder: "background" as const
   },
   
-  // Base Fee bottom to Block Rewards center - Updated with correct bottom center coordinates
+  // Base Fee bottom to Block Rewards center
   { 
     path: "M 1090 210 L 1090 260", 
     color: "#EAB308", 
@@ -72,9 +72,9 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Specified foreground rendering
+  // Delegated Stake to Commission - Updated Y values for new boxes
   { 
-    path: "M 635 280 L 558 280", 
+    path: "M 635 280 L 558 280", // Updated from 250 to 280 to align with the center of the subitems
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
@@ -85,9 +85,9 @@ export const connectionPaths = [
     animationDuration: 1.8
   },
   
-  // Own Stake to Staking Rewards - Specified foreground rendering
+  // Own Stake to Staking Rewards - Updated Y values for new boxes
   { 
-    path: "M 635 340 L 558 340", 
+    path: "M 635 340 L 558 340", // Updated from 310 to 340 to align with the center of the subitems
     color: "#0EA5E9", 
     animationIndex: 11,
     animateMotion: true,

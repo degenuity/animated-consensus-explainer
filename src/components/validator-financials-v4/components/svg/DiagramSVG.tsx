@@ -1,9 +1,12 @@
+
 import React, { useEffect, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
   BoxComponent,
   ConnectionLine,
 } from '.';
+// Removed ExplanationComponent import
+// Removed Logo import completely
 
 import { viewBoxWidth, viewBoxHeight } from './data/constants';
 import { boxes } from './data/boxes';
@@ -13,12 +16,15 @@ const DiagramSVG = () => {
   const isMobile = useIsMobile();
   const svgRef = useRef<SVGSVGElement>(null);
   
+  // Enhanced useEffect for debugging all box positions
   useEffect(() => {
     if (svgRef.current) {
       console.log("DiagramSVG mounted - checking for block production boxes");
       
+      // Look for all subitems to identify stake weight and randomness
       const allGroups = svgRef.current.querySelectorAll('g');
       
+      // Find all items specifically in block production
       const blockProductionGroup = Array.from(allGroups).find(g => 
         g.getAttribute('data-id') === 'block-production-eligibility'
       );
@@ -26,6 +32,7 @@ const DiagramSVG = () => {
       if (blockProductionGroup) {
         console.log("Found block production group:", blockProductionGroup);
         
+        // Try to find the stake weight and randomness boxes
         const stakeWeightBox = blockProductionGroup.querySelector('[data-item-id="stake-weight"]');
         const randomnessBox = blockProductionGroup.querySelector('[data-item-id="randomness"]');
         
@@ -33,9 +40,11 @@ const DiagramSVG = () => {
           const stakeWeightRect = stakeWeightBox.getBoundingClientRect();
           const svgRect = svgRef.current.getBoundingClientRect();
           
+          // Calculate relative position within SVG
           const relativeX = stakeWeightRect.left - svgRect.left;
           const relativeY = stakeWeightRect.top - svgRect.top;
           
+          // Calculate the SVG coordinate based on viewBox
           const svgX = (relativeX / svgRect.width) * viewBoxWidth;
           const svgY = (relativeY / svgRect.height) * viewBoxHeight;
           
@@ -61,9 +70,11 @@ const DiagramSVG = () => {
           const randomnessRect = randomnessBox.getBoundingClientRect();
           const svgRect = svgRef.current.getBoundingClientRect();
           
+          // Calculate relative position within SVG
           const relativeX = randomnessRect.left - svgRect.left;
           const relativeY = randomnessRect.top - svgRect.top;
           
+          // Calculate the SVG coordinate based on viewBox
           const svgX = (relativeX / svgRect.width) * viewBoxWidth;
           const svgY = (relativeY / svgRect.height) * viewBoxHeight;
           
@@ -86,6 +97,7 @@ const DiagramSVG = () => {
         }
       }
       
+      // Find exact positions of all boxes in the block production section
       const blockProductionBox = boxes.find(box => box.title === "block production eligibility");
       if (blockProductionBox && blockProductionBox.subitems) {
         console.log("Block production box definition:", {
@@ -101,57 +113,12 @@ const DiagramSVG = () => {
           })
         });
       }
-      
-      const networkCostsGroup = Array.from(allGroups).find(g => 
-        g.getAttribute('data-id') === 'network-usage-costs'
-      );
-      
-      if (networkCostsGroup) {
-        const baseFeesBox = networkCostsGroup.querySelector('[data-item-id="base-fees"]');
-        
-        if (baseFeesBox) {
-          const baseFeesRect = baseFeesBox.getBoundingClientRect();
-          const svgRect = svgRef.current.getBoundingClientRect();
-          
-          const relativeX = baseFeesRect.left - svgRect.left;
-          const relativeY = baseFeesRect.top - svgRect.top;
-          
-          const svgX = (relativeX / svgRect.width) * viewBoxWidth;
-          const svgY = (relativeY / svgRect.height) * viewBoxHeight;
-          
-          console.log('BASE FEES BOX COORDS:', {
-            id: 'base-fees',
-            clientRect: {
-              top: baseFeesRect.top,
-              left: baseFeesRect.left,
-              width: baseFeesRect.width,
-              height: baseFeesRect.height,
-              bottom: baseFeesRect.bottom,
-            },
-            svgCoordinates: {
-              x: svgX,
-              y: svgY,
-              width: (baseFeesRect.width / svgRect.width) * viewBoxWidth,
-              height: (baseFeesRect.height / svgRect.height) * viewBoxHeight,
-              bottom: svgY + (baseFeesRect.height / svgRect.height) * viewBoxHeight,
-              centerX: svgX + (baseFeesRect.width / svgRect.width) * viewBoxWidth / 2,
-              bottomCenterX: svgX + (baseFeesRect.width / svgRect.width) * viewBoxWidth / 2,
-              bottomCenterY: svgY + (baseFeesRect.height / svgRect.height) * viewBoxHeight
-            }
-          });
-        } else {
-          console.log("Base fees box not found in DOM");
-        }
-      }
     }
   }, []);
   
-  const backgroundConnections = connectionPaths.filter(conn => 
-    conn.renderOrder === 'background'
-  );
-  const foregroundConnections = connectionPaths.filter(conn => 
-    conn.renderOrder === 'foreground' || conn.renderOrder === undefined
-  );
+  // Identify connections that need to be on top
+  const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
+  const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
   
   return (
     <div className="w-full h-full relative px-4">
@@ -176,6 +143,7 @@ const DiagramSVG = () => {
         `}
       </style>
       
+      {/* Background SVG - Contains all background connections and elements */}
       <svg
         width="100%"
         height="100%"
@@ -196,6 +164,7 @@ const DiagramSVG = () => {
         ))}
       </svg>
       
+      {/* Box Layer SVG - Contains all boxes */}
       <svg
         ref={svgRef}
         width="100%"
@@ -213,6 +182,7 @@ const DiagramSVG = () => {
         ))}
       </svg>
       
+      {/* Foreground SVG - Contains only the connections that need to be on top */}
       <svg
         width="100%"
         height="100%"

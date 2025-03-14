@@ -10,9 +10,7 @@ interface ForegroundLayerProps {
 
 const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) => {
   // Filter connections that should be rendered in the foreground
-  const foregroundConnections = connectionPaths.filter(conn => 
-    conn.renderOrder === 'foreground' || conn.renderOrder === undefined
-  );
+  const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
   const isMobile = useIsMobile();
   
   return (
@@ -21,7 +19,7 @@ const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) =>
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none z-30" // z-30 to ensure it's above BoxLayer
+      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none"
     >
       <g className="pointer-events-auto">
         {foregroundConnections.map((connection, index) => (
