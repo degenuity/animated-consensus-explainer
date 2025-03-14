@@ -30,7 +30,7 @@ const Home = () => {
         {/* Laboratory Research label in top right */}
         <div className="absolute right-0 top-0">
           <img 
-            src="/lovable-uploads/801a9d4e-829b-46a0-97a9-50e76583d252.png" 
+            src="/lovable-uploads/5b3efd2a-a37b-4812-8d1e-bba5c1d325f3.png" 
             alt="For Laboratory Research Use Only" 
             className="h-24 w-auto" 
           />
