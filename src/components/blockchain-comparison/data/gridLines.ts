@@ -1,4 +1,3 @@
-
 import { CHART_TOP, CHART_BOTTOM, CHART_LEFT, CHART_RIGHT } from './constants';
 
 export interface GridLine {
@@ -14,9 +13,9 @@ export interface GridLine {
   className?: string;
 }
 
-// Grid lines that define the chart structure
+// Grid lines that define the chart structure - keeping only essential dividers
 export const gridLines: GridLine[] = [
-  // Horizontal grid lines (sections)
+  // Horizontal grid lines for section divisions only
   { 
     type: 'horizontal', 
     y: 250, 
@@ -24,7 +23,7 @@ export const gridLines: GridLine[] = [
     x2: CHART_RIGHT, 
     animate: true,
     animationDelay: 0.2,
-    className: 'stroke-gray-600 stroke-[1px] stroke-dashed'
+    className: 'stroke-gray-600/30 stroke-[1px]'
   },
   { 
     type: 'horizontal', 
@@ -33,7 +32,7 @@ export const gridLines: GridLine[] = [
     x2: CHART_RIGHT, 
     animate: true,
     animationDelay: 0.3,
-    className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
+    className: 'stroke-gray-600/30 stroke-[1px]' 
   },
   { 
     type: 'horizontal', 
@@ -45,7 +44,7 @@ export const gridLines: GridLine[] = [
     className: 'stroke-gray-500 stroke-[1.5px]' 
   },
   
-  // Vertical grid lines
+  // Only keeping left and right boundary lines
   { 
     type: 'vertical', 
     x: CHART_LEFT, 
@@ -57,56 +56,11 @@ export const gridLines: GridLine[] = [
   },
   { 
     type: 'vertical', 
-    x: 200, 
+    x: CHART_RIGHT, 
     y1: CHART_TOP, 
     y2: CHART_BOTTOM, 
     animate: true,
-    animationDelay: 0.3,
-    className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
-  },
-  { 
-    type: 'vertical', 
-    x: 350, 
-    y1: CHART_TOP, 
-    y2: CHART_BOTTOM, 
-    animate: true,
-    animationDelay: 0.4,
-    className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
-  },
-  { 
-    type: 'vertical', 
-    x: 500, 
-    y1: CHART_TOP, 
-    y2: CHART_BOTTOM, 
-    animate: true,
-    animationDelay: 0.5,
-    className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
-  },
-  { 
-    type: 'vertical', 
-    x: 700, 
-    y1: CHART_TOP, 
-    y2: CHART_BOTTOM, 
-    animate: true,
-    animationDelay: 0.6,
-    className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
-  },
-  { 
-    type: 'vertical', 
-    x: 900, 
-    y1: CHART_TOP, 
-    y2: CHART_BOTTOM, 
-    animate: true,
-    animationDelay: 0.7,
-    className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
-  },
-  { 
-    type: 'vertical', 
-    x: 1200, 
-    y1: CHART_TOP, 
-    y2: CHART_BOTTOM, 
-    animate: true,
-    animationDelay: 0.8,
-    className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
+    animationDelay: 0.1,
+    className: 'stroke-gray-500 stroke-[1.5px]' 
   }
 ];

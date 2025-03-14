@@ -24,8 +24,8 @@ const BlockchainComparisonChart: React.FC = () => {
       <div className="max-w-7xl mx-auto w-full py-1 sm:py-2 md:py-3 relative flex flex-col items-center overflow-visible h-full">
         <ChartTitle />
         
-        {/* Chart container optimized for visibility - providing more margin on left side */}
-        <div className="relative w-full md:w-[96%] lg:w-[92%] overflow-visible flex items-center justify-center flex-1 mx-auto">
+        {/* Chart container with increased left margin for the labels */}
+        <div className="relative w-full md:w-[90%] lg:w-[85%] overflow-visible flex items-center justify-center flex-1 mx-auto pl-12">
           <div className="w-full h-full relative">
             {/* Background segments */}
             <svg
@@ -64,8 +64,6 @@ const BlockchainComparisonChart: React.FC = () => {
                 fill="#27548a" 
                 opacity="0.85"
               />
-              
-              {/* Removed the grid pattern that was here */}
             </svg>
             
             {/* Main SVG with viewBox */}
@@ -76,13 +74,13 @@ const BlockchainComparisonChart: React.FC = () => {
               preserveAspectRatio="xMidYMid meet"
               className="absolute top-0 left-0"
             >
-              {/* 1. Grid lines layer */}
+              {/* Grid lines layer - Using only horizontal section dividers */}
               <GridLayer gridLines={gridLines} />
               
-              {/* 2. Blockchain logos layer */}
+              {/* Blockchain logos layer */}
               <BlockchainLayer blockchains={blockchains} />
               
-              {/* 3. Axis labels */}
+              {/* Axis labels */}
               <AxisLabels />
             </svg>
           </div>
