@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { motion } from "framer-motion";
+import { viewBoxWidth } from './data';
 
 const AxisLabels: React.FC = () => {
   return (

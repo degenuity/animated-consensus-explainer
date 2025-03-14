@@ -1,4 +1,3 @@
-
 export const viewBoxWidth = 1440;
 export const viewBoxHeight = 750;
 
@@ -12,7 +11,7 @@ const CHART_RIGHT = 1380;
 export const gridLines = [
   // Horizontal grid lines (sections)
   { 
-    type: 'horizontal', 
+    type: 'horizontal' as const, 
     y: 250, 
     x1: CHART_LEFT, 
     x2: CHART_RIGHT, 
@@ -21,7 +20,7 @@ export const gridLines = [
     className: 'stroke-gray-600 stroke-[1px] stroke-dashed'
   },
   { 
-    type: 'horizontal', 
+    type: 'horizontal' as const, 
     y: 500, 
     x1: CHART_LEFT, 
     x2: CHART_RIGHT, 
@@ -30,7 +29,7 @@ export const gridLines = [
     className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
   },
   { 
-    type: 'horizontal', 
+    type: 'horizontal' as const, 
     y: CHART_BOTTOM, 
     x1: CHART_LEFT, 
     x2: CHART_RIGHT, 
@@ -41,7 +40,7 @@ export const gridLines = [
   
   // Vertical grid lines
   { 
-    type: 'vertical', 
+    type: 'vertical' as const, 
     x: CHART_LEFT, 
     y1: CHART_TOP, 
     y2: CHART_BOTTOM, 
@@ -50,7 +49,7 @@ export const gridLines = [
     className: 'stroke-gray-500 stroke-[1.5px]' 
   },
   { 
-    type: 'vertical', 
+    type: 'vertical' as const, 
     x: 200, 
     y1: CHART_TOP, 
     y2: CHART_BOTTOM, 
@@ -59,7 +58,7 @@ export const gridLines = [
     className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
   },
   { 
-    type: 'vertical', 
+    type: 'vertical' as const, 
     x: 350, 
     y1: CHART_TOP, 
     y2: CHART_BOTTOM, 
@@ -68,7 +67,7 @@ export const gridLines = [
     className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
   },
   { 
-    type: 'vertical', 
+    type: 'vertical' as const, 
     x: 500, 
     y1: CHART_TOP, 
     y2: CHART_BOTTOM, 
@@ -77,7 +76,7 @@ export const gridLines = [
     className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
   },
   { 
-    type: 'vertical', 
+    type: 'vertical' as const, 
     x: 700, 
     y1: CHART_TOP, 
     y2: CHART_BOTTOM, 
@@ -86,7 +85,7 @@ export const gridLines = [
     className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
   },
   { 
-    type: 'vertical', 
+    type: 'vertical' as const, 
     x: 900, 
     y1: CHART_TOP, 
     y2: CHART_BOTTOM, 
@@ -95,7 +94,7 @@ export const gridLines = [
     className: 'stroke-gray-600 stroke-[1px] stroke-dashed' 
   },
   { 
-    type: 'vertical', 
+    type: 'vertical' as const, 
     x: 1200, 
     y1: CHART_TOP, 
     y2: CHART_BOTTOM, 

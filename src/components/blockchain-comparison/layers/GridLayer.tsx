@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from "framer-motion";
 
 interface GridLine {
-  type: 'horizontal' | 'vertical';
+  type: 'horizontal' | 'vertical';  // Now strictly typed to only allow these two values
   x?: number;
   y?: number;
   x1?: number;
