@@ -51,6 +51,21 @@ const ContentBox: React.FC<ContentBoxProps> = ({
     isPriorityFeeOrMEV || 
     isBaseFees;
   
+  // ENHANCED logging for delegated stake box with EXACT coordinates
+  if (isDelegatedStake) {
+    console.log(`DELEGATED STAKE BOX EXACT COORDINATES: 
+      id: ${id}
+      x: ${adjustedX}
+      y: ${y + yOffset}
+      width: ${adjustedWidth}
+      height: ${itemHeight}
+      left-edge: ${adjustedX}
+      left-center: (${adjustedX}, ${y + yOffset + itemHeight/2})
+      center: (${adjustedX + adjustedWidth/2}, ${y + yOffset + itemHeight/2})
+      absolute-left-center: "${adjustedX} ${y + yOffset + itemHeight/2}"
+    `);
+  }
+  
   // Special logging for commission box
   if (isCommission) {
     console.log(`COMMISSION BOX EXACT COORDINATES: 
@@ -65,9 +80,9 @@ const ContentBox: React.FC<ContentBoxProps> = ({
     `);
   }
   
-  // Special logging for delegated stake
-  if (isDelegatedStake) {
-    console.log(`DELEGATED STAKE BOX DETAILS: 
+  // Special logging for own stake
+  if (isOwnStake) {
+    console.log(`OWN STAKE BOX EXACT COORDINATES: 
       id: ${id}
       x: ${adjustedX}
       y: ${y + yOffset}

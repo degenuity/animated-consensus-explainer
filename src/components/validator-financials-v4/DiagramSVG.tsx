@@ -13,7 +13,9 @@ const DiagramSVG = () => {
   console.log('Connection paths setup:', connectionPaths.map(conn => ({
     id: conn.id,
     startPoint: conn.path.split(' ')[1] + ',' + conn.path.split(' ')[2],
-    renderOrder: conn.renderOrder
+    endPoint: conn.path.split(' ')[conn.path.split(' ').length - 2] + ',' + conn.path.split(' ')[conn.path.split(' ').length - 1],
+    renderOrder: conn.renderOrder,
+    fullPath: conn.path
   })));
   
   // Optimized container class for maximum visibility

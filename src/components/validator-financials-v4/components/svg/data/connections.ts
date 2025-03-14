@@ -74,7 +74,7 @@ export const connectionPaths = [
   
   // Delegated Stake to Commission - Fixed starting point to be at the left-center of delegated stake box
   { 
-    path: "M 635 280 L 558 280", 
+    path: "M 647 280 L 558 280", 
     color: "#0EA5E9", 
     animationIndex: 10,
     animateMotion: true,
@@ -87,7 +87,7 @@ export const connectionPaths = [
   
   // Own Stake to Staking Rewards - Explicitly marked as foreground
   { 
-    path: "M 635 340 L 558 340", 
+    path: "M 647 340 L 558 340", 
     color: "#0EA5E9", 
     animationIndex: 11,
     animateMotion: true,
