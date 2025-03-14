@@ -6,33 +6,33 @@ import { viewBoxWidth } from './data';
 const AxisLabels: React.FC = () => {
   return (
     <>
-      {/* Y-Axis Labels (Left Side) - Moved much further left to avoid cropping */}
+      {/* Y-Axis Labels (Left Side) - Positioning fixed to be more visible */}
       <motion.g
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        {/* Top section label */}
-        <text x="-30" y="165" fill="#FFFFFF" textAnchor="end" className="text-sm font-semibold">
+        {/* Top section label - moved further to the left and increased visibility */}
+        <text x="50" y="165" fill="#FFFFFF" textAnchor="middle" className="text-sm font-semibold">
           Parallelism +
         </text>
-        <text x="-30" y="185" fill="#FFFFFF" textAnchor="end" className="text-sm font-semibold">
+        <text x="50" y="185" fill="#FFFFFF" textAnchor="middle" className="text-sm font-semibold">
           Smart Contracts
         </text>
         
         {/* Middle section label */}
-        <text x="-30" y="380" fill="#FFFFFF" textAnchor="end" className="text-sm font-semibold">
+        <text x="50" y="380" fill="#FFFFFF" textAnchor="middle" className="text-sm font-semibold">
           Sequential +
         </text>
-        <text x="-30" y="400" fill="#FFFFFF" textAnchor="end" className="text-sm font-semibold">
+        <text x="50" y="400" fill="#FFFFFF" textAnchor="middle" className="text-sm font-semibold">
           Smart Contracts
         </text>
         
         {/* Bottom section label */}
-        <text x="-30" y="580" fill="#FFFFFF" textAnchor="end" className="text-sm font-semibold">
+        <text x="50" y="580" fill="#FFFFFF" textAnchor="middle" className="text-sm font-semibold">
           No Smart
         </text>
-        <text x="-30" y="600" fill="#FFFFFF" textAnchor="end" className="text-sm font-semibold">
+        <text x="50" y="600" fill="#FFFFFF" textAnchor="middle" className="text-sm font-semibold">
           Contracts
         </text>
       </motion.g>

@@ -24,8 +24,8 @@ const BlockchainComparisonChart: React.FC = () => {
       <div className="max-w-7xl mx-auto w-full py-1 sm:py-2 md:py-3 relative flex flex-col items-center overflow-visible h-full">
         <ChartTitle />
         
-        {/* Chart container with increased left margin for the labels */}
-        <div className="relative w-full md:w-[90%] lg:w-[85%] overflow-visible flex items-center justify-center flex-1 mx-auto pl-12">
+        {/* Chart container with proper padding to ensure labels are visible */}
+        <div className="relative w-full md:w-[90%] lg:w-[85%] overflow-visible flex items-center justify-center flex-1 mx-auto pl-16">
           <div className="w-full h-full relative">
             {/* Background segments */}
             <svg
