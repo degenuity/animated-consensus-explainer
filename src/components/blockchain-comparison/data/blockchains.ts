@@ -46,12 +46,12 @@ export const blockchains: Blockchain[] = [
     nakamotoCoefficient: 17
   },
   
-  // Updated positioning for Tron and Ethereum in Parallelism section (Top)
+  // Sequential + Smart Contracts (Middle section)
   { 
     id: 'tron', 
     name: 'Tron', 
-    x: 170, 
-    y: 160, 
+    x: 360, 
+    y: 520, 
     logo: 'https://cryptologos.cc/logos/tron-trx-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
     animationDelay: 0.2,
@@ -60,15 +60,13 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'ethereum', 
     name: 'Ethereum', 
-    x: 250, 
-    y: 160, 
+    x: 450, 
+    y: 520, 
     logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
     animationDelay: 0.2,
     nakamotoCoefficient: 2
   },
-  
-  // Sequential + Smart Contracts (Middle section)
   { 
     id: 'polkadot', 
     name: 'Polkadot', 
@@ -100,25 +98,25 @@ export const blockchains: Blockchain[] = [
     nakamotoCoefficient: 27
   },
   
-  // No Smart Contracts (Bottom section) - Updated positions
-  { 
-    id: 'xrp', 
-    name: 'XRP', 
-    x: 300, 
-    y: 580, 
-    logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png',
-    logoClass: 'w-[30px] h-[30px] object-contain',
-    animationDelay: 0.4,
-    nakamotoCoefficient: 4
-  },
+  // No Smart Contracts (Bottom section)
   { 
     id: 'bitcoin', 
     name: 'Bitcoin', 
-    x: 250, 
-    y: 580, 
+    x: 540, 
+    y: 830, 
     logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
     animationDelay: 0.1,
     nakamotoCoefficient: 3
+  },
+  { 
+    id: 'xrp', 
+    name: 'XRP', 
+    x: 630, 
+    y: 750, 
+    logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png',
+    logoClass: 'w-[30px] h-[30px] object-contain',
+    animationDelay: 0.4,
+    nakamotoCoefficient: 4
   }
 ];

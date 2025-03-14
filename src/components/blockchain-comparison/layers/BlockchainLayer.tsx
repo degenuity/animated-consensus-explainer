@@ -50,24 +50,48 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
               {/* Logo image */}
               <image 
                 href={blockchain.logo} 
-                x={blockchain.x - 15} 
-                y={blockchain.y - 15} 
-                width="30" 
-                height="30" 
+                x={blockchain.x - 20} 
+                y={blockchain.y - 20} 
+                width="40" 
+                height="40" 
                 className={blockchain.logoClass}
               />
               
-              {/* Name text - positioned to the right of the logo */}
-              <text 
-                x={blockchain.x + 20} 
-                y={blockchain.y + 5} 
-                textAnchor="start" 
-                fill="#E2E8F0" 
-                fontSize="14"
-                className="font-medium"
-              >
-                {blockchain.name}
-              </text>
+              {/* Special positioning for specific blockchains to match the reference image */}
+              {blockchain.id === 'tron' || blockchain.id === 'ethereum' ? (
+                <text 
+                  x={blockchain.x + 25} 
+                  y={blockchain.y + 5} 
+                  textAnchor="start" 
+                  fill="#E2E8F0" 
+                  fontSize="16"
+                  className="font-medium"
+                >
+                  {blockchain.name}
+                </text>
+              ) : blockchain.id === 'xrp' ? (
+                <text 
+                  x={blockchain.x} 
+                  y={blockchain.y - 25} 
+                  textAnchor="middle" 
+                  fill="#E2E8F0" 
+                  fontSize="16"
+                  className="font-medium"
+                >
+                  {blockchain.name}
+                </text>
+              ) : (
+                <text 
+                  x={blockchain.x} 
+                  y={blockchain.y + 35} 
+                  textAnchor="middle" 
+                  fill="#E2E8F0" 
+                  fontSize="16"
+                  className="font-medium"
+                >
+                  {blockchain.name}
+                </text>
+              )}
             </>
           )}
         </motion.g>
