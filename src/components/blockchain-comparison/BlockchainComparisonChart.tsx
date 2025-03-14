@@ -27,7 +27,7 @@ const BlockchainComparisonChart: React.FC = () => {
         {/* Chart container with 10% margin on each side */}
         <div className="relative w-[80%] overflow-visible flex items-center justify-center flex-1 mx-auto">
           <div className="w-full h-full relative">
-            {/* Gradient background */}
+            {/* Background segments */}
             <svg
               width="100%"
               height="100%"
@@ -35,28 +35,35 @@ const BlockchainComparisonChart: React.FC = () => {
               preserveAspectRatio="xMidYMid meet"
               className="absolute top-0 left-0"
             >
-              <defs>
-                <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#0c1d32" />
-                  <stop offset="40%" stopColor="#13294b" />
-                  <stop offset="100%" stopColor="#1e3c6b" />
-                </linearGradient>
-                <radialGradient id="accent-glow" cx="30%" cy="20%" r="70%" fx="30%" fy="20%">
-                  <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.2" />
-                  <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
-                </radialGradient>
-                <radialGradient id="accent-glow-2" cx="70%" cy="70%" r="50%" fx="70%" fy="70%">
-                  <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.15" />
-                  <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
-                </radialGradient>
-              </defs>
+              {/* Top section - Parallelism + Smart Contracts */}
+              <rect 
+                x="0" 
+                y="0" 
+                width={viewBoxWidth} 
+                height="250" 
+                fill="#1a3050" 
+                opacity="0.85"
+              />
               
-              {/* Background rectangle with gradient */}
-              <rect x="0" y="0" width={viewBoxWidth} height={viewBoxHeight} fill="url(#bg-gradient)" />
+              {/* Middle section - Sequential + Smart Contracts */}
+              <rect 
+                x="0" 
+                y="250" 
+                width={viewBoxWidth} 
+                height="250" 
+                fill="#1e4060" 
+                opacity="0.85"
+              />
               
-              {/* Accent glows */}
-              <rect x="0" y="0" width={viewBoxWidth} height={viewBoxHeight} fill="url(#accent-glow)" />
-              <rect x="0" y="0" width={viewBoxWidth} height={viewBoxHeight} fill="url(#accent-glow-2)" />
+              {/* Bottom section - No Smart Contracts */}
+              <rect 
+                x="0" 
+                y="500" 
+                width={viewBoxWidth} 
+                height={viewBoxHeight - 500} 
+                fill="#27548a" 
+                opacity="0.85"
+              />
               
               {/* Subtle grid pattern */}
               <pattern id="smallGrid" width="40" height="40" patternUnits="userSpaceOnUse">
