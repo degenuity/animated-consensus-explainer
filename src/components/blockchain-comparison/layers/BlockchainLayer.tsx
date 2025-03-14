@@ -45,7 +45,7 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
             />
           )}
           
-          {/* For X1, use centered logo with adjusted positioning */}
+          {/* X1 logo centered */}
           {blockchain.id === 'x1' ? (
             <image 
               href={blockchain.logo} 
@@ -57,11 +57,11 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
             />
           ) : (
             <>
-              {/* Logo image - positioned to the left of name with more space */}
+              {/* Logo image - positioned to the left of name */}
               <image 
                 href={blockchain.logo} 
-                x={blockchain.x - 75} 
-                y={blockchain.y - 10} 
+                x={blockchain.x - 85} 
+                y={blockchain.y - 12} 
                 width="24" 
                 height="24" 
                 className={blockchain.logoClass}
