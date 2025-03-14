@@ -13,15 +13,15 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // Line 4: Total Stake to Stake Weight - Important: This must be foreground!
+  // Line 4: Delegated Stake to Stake Weight - Updated to start from delegated stake box, not total stake
   { 
-    path: "M 765 370 L 765 465 L 765 550", 
+    path: "M 635 280 L 650 280 L 650 465 L 765 465 L 765 550", 
     color: "#3B82F6", 
     animationIndex: 3,
-    dotPosition: { x: "765", y: "530" },
+    dotPosition: { x: "715", y: "507" },
     animateMotion: true,
     animationDirection: "down" as const,
-    id: "total-stake-to-stake-weight",
+    id: "delegated-stake-to-stake-weight",
     renderOrder: "foreground" as const,
     animationDuration: 2
   },

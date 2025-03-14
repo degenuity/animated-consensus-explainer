@@ -19,7 +19,11 @@ const DiagramSVG = () => {
     <div className={containerClasses}>
       <AnimationStyleProvider />
       
-      {/* FUNDAMENTAL SVG STACKING - DOM ORDER MATTERS! */}
+      {/* CRITICAL DOM ORDER FOR PROPER LAYERING:
+          1. Background connections first (lowest layer)
+          2. Boxes in the middle layer
+          3. Foreground connections last (highest layer) */}
+      
       {/* 1. First layer - Background connections */}
       <BackgroundLayer connectionPaths={connectionPaths} />
       
