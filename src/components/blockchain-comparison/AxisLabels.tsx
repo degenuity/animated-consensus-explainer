@@ -63,19 +63,39 @@ const AxisLabels: React.FC = () => {
         <text x="1150" y={CHART_BOTTOM + 15} fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">132</text>
         <text x="1300" y={CHART_BOTTOM + 15} fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">200+</text>
         
-        {/* Connection lines from X-axis values to blockchain logos */}
-        <g className="connection-lines" stroke="#667085" strokeDasharray="3,3" strokeWidth="1">
-          {/* Lines for each blockchain */}
-          <line x1="260" y1={CHART_BOTTOM} x2="260" y2="410" />  {/* Tron */}
-          <line x1="330" y1={CHART_BOTTOM} x2="330" y2="470" />  {/* Ethereum */}
-          <line x1="280" y1={CHART_BOTTOM} x2="280" y2="610" />  {/* Bitcoin */}
-          <line x1="350" y1={CHART_BOTTOM} x2="350" y2="530" />  {/* XRP */}
-          <line x1="450" y1={CHART_BOTTOM} x2="450" y2="210" />  {/* Sui */}
-          <line x1="550" y1={CHART_BOTTOM} x2="550" y2="150" />  {/* Solana */}
-          <line x1="650" y1={CHART_BOTTOM} x2="650" y2="330" />  {/* Avalanche */}
-          <line x1="900" y1={CHART_BOTTOM} x2="900" y2="330" />  {/* Cardano */}
-          <line x1="1150" y1={CHART_BOTTOM} x2="1150" y2="330" /> {/* Polkadot */}
-          <line x1="1300" y1={CHART_BOTTOM} x2="1300" y2="150" /> {/* X1 */}
+        {/* Connection lines from X-axis values to blockchain logos with animation */}
+        <g className="connection-lines">
+          {/* Animated lines for each blockchain */}
+          {[
+            { x: 260, y: 380, id: "tron" },      // Tron
+            { x: 330, y: 440, id: "ethereum" },  // Ethereum
+            { x: 280, y: 580, id: "bitcoin" },   // Bitcoin
+            { x: 350, y: 500, id: "xrp" },       // XRP
+            { x: 450, y: 180, id: "sui" },       // Sui
+            { x: 550, y: 120, id: "solana" },    // Solana
+            { x: 650, y: 300, id: "avalanche" }, // Avalanche
+            { x: 900, y: 300, id: "cardano" },   // Cardano
+            { x: 1150, y: 300, id: "polkadot" }, // Polkadot
+            { x: 1300, y: 120, id: "x1" }        // X1
+          ].map((item, index) => (
+            <motion.line
+              key={`line-${item.id}`}
+              x1={item.x}
+              y1={CHART_BOTTOM}
+              x2={item.x}
+              y2={CHART_BOTTOM}
+              stroke={item.id === "x1" ? "#3B82F6" : "#667085"}
+              strokeWidth={item.id === "x1" ? "2" : "1"}
+              strokeDasharray="3,3"
+              initial={{ y2: CHART_BOTTOM }}
+              animate={{ y2: item.y }}
+              transition={{ 
+                duration: 1.2, 
+                delay: 0.5 + (index * 0.1),
+                ease: "easeOut"
+              }}
+            />
+          ))}
         </g>
 
         {/* Horizontal X-axis line */}
