@@ -46,6 +46,28 @@ export const blockchains: Blockchain[] = [
     nakamotoCoefficient: 17
   },
   
+  // Updated positioning for Tron and Ethereum in Parallelism section (Top)
+  { 
+    id: 'tron', 
+    name: 'Tron', 
+    x: 170, 
+    y: 160, 
+    logo: 'https://cryptologos.cc/logos/tron-trx-logo.png',
+    logoClass: 'w-[30px] h-[30px] object-contain',
+    animationDelay: 0.2,
+    nakamotoCoefficient: 1
+  },
+  { 
+    id: 'ethereum', 
+    name: 'Ethereum', 
+    x: 250, 
+    y: 160, 
+    logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+    logoClass: 'w-[30px] h-[30px] object-contain',
+    animationDelay: 0.2,
+    nakamotoCoefficient: 2
+  },
+  
   // Sequential + Smart Contracts (Middle section)
   { 
     id: 'polkadot', 
@@ -77,33 +99,13 @@ export const blockchains: Blockchain[] = [
     animationDelay: 0.5,
     nakamotoCoefficient: 27
   },
-  { 
-    id: 'tron', 
-    name: 'Tron', 
-    x: 170, 
-    y: 380, 
-    logo: 'https://cryptologos.cc/logos/tron-trx-logo.png',
-    logoClass: 'w-[30px] h-[30px] object-contain',
-    animationDelay: 0.2,
-    nakamotoCoefficient: 2
-  },
-  { 
-    id: 'ethereum', 
-    name: 'Ethereum', 
-    x: 250, 
-    y: 380, 
-    logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
-    logoClass: 'w-[30px] h-[30px] object-contain',
-    animationDelay: 0.2,
-    nakamotoCoefficient: 3
-  },
   
-  // No Smart Contracts (Bottom section)
+  // No Smart Contracts (Bottom section) - Updated positions
   { 
     id: 'xrp', 
     name: 'XRP', 
     x: 300, 
-    y: 530, 
+    y: 580, 
     logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
     animationDelay: 0.4,
@@ -112,11 +114,11 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'bitcoin', 
     name: 'Bitcoin', 
-    x: 90, 
+    x: 250, 
     y: 580, 
     logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
     animationDelay: 0.1,
-    nakamotoCoefficient: 1
+    nakamotoCoefficient: 3
   }
 ];

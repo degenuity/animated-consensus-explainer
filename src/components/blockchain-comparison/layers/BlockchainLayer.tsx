@@ -47,7 +47,7 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
             />
           ) : (
             <>
-              {/* Logo image - positioned to the left of name */}
+              {/* Logo image */}
               <image 
                 href={blockchain.logo} 
                 x={blockchain.x - 15} 
@@ -57,7 +57,7 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
                 className={blockchain.logoClass}
               />
               
-              {/* Name text */}
+              {/* Name text - positioned to the right of the logo */}
               <text 
                 x={blockchain.x + 20} 
                 y={blockchain.y + 5} 
