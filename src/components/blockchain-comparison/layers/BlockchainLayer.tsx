@@ -35,6 +35,17 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
             />
           )}
           
+          {/* Line from blockchain to x-axis */}
+          <line 
+            x1={blockchain.x} 
+            y1={blockchain.y + 15} 
+            x2={blockchain.x} 
+            y2={blockchain.y - 15} 
+            stroke={blockchain.highlighted ? "#3B82F6" : "#667085"} 
+            strokeWidth={blockchain.highlighted ? "1.5" : "1"}
+            opacity="0.7"
+          />
+          
           {/* X1 logo centered */}
           {blockchain.id === 'x1' ? (
             <image 

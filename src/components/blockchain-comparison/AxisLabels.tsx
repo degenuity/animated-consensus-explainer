@@ -51,14 +51,50 @@ const AxisLabels: React.FC = () => {
           (Censorship Resistance)
         </text>
         
-        {/* X-Axis values - Improved contrast */}
-        <text x="100" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs">1-4</text>
-        <text x="300" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs">17</text>
-        <text x="400" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs">19</text>
-        <text x="600" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs">27</text>
-        <text x="800" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs">59</text>
-        <text x="1100" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs">132</text>
-        <text x="1350" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs">200+</text>
+        {/* X-Axis values - Updated to match the specified sequence */}
+        <text x="150" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">1</text>
+        <text x="200" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">2</text>
+        <text x="250" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">3</text>
+        <text x="300" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">4</text>
+        <text x="400" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">17</text>
+        <text x="500" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">19</text>
+        <text x="650" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">27</text>
+        <text x="800" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">59</text>
+        <text x="1000" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">132</text>
+        <text x="1200" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">200+</text>
+        
+        {/* Connection lines from X-axis values to blockchain logos */}
+        <g className="connection-lines">
+          {/* Line from 1 to Bitcoin */}
+          <line x1="150" y1="640" x2="150" y2="580" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          
+          {/* Line from 2 to Tron */}
+          <line x1="200" y1="640" x2="200" y2="380" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          
+          {/* Line from 3 to Ethereum */}
+          <line x1="250" y1="640" x2="200" y2="450" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          
+          {/* Line from 4 to XRP */}
+          <line x1="300" y1="640" x2="400" y2="550" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          
+          {/* Line from 17 to Sui */}
+          <line x1="400" y1="640" x2="350" y2="200" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          
+          {/* Line from 19 to Solana */}
+          <line x1="500" y1="640" x2="500" y2="130" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          
+          {/* Line from 27 to Avalanche */}
+          <line x1="650" y1="640" x2="650" y2="320" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          
+          {/* Line from 59 to Cardano */}
+          <line x1="800" y1="640" x2="900" y2="320" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          
+          {/* Line from 132 to Polkadot */}
+          <line x1="1000" y1="640" x2="1100" y2="320" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          
+          {/* Line from 200+ to X1 */}
+          <line x1="1200" y1="640" x2="1200" y2="160" stroke="#3B82F6" strokeDasharray="3,3" strokeWidth="1.5" />
+        </g>
       </motion.g>
     </>
   );
