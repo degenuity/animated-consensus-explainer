@@ -26,6 +26,15 @@ const Home = () => {
             className="h-7 w-auto" 
           />
         </Link>
+
+        {/* Laboratory Research label in top right */}
+        <div className="absolute right-0 top-0">
+          <img 
+            src="/lovable-uploads/801a9d4e-829b-46a0-97a9-50e76583d252.png" 
+            alt="For Laboratory Research Use Only" 
+            className="h-24 w-auto" 
+          />
+        </div>
       </div>
 
       <motion.div
