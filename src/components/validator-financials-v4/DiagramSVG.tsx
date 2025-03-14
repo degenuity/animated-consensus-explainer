@@ -18,6 +18,14 @@ const DiagramSVG = () => {
   
   return (
     <div className={containerClasses}>
+      <style jsx>{`
+        /* Custom text size for very small screens */
+        .text-xxs {
+          font-size: 0.65rem;
+          line-height: 1;
+        }
+      `}</style>
+      
       <AnimationStyleProvider />
       
       {/* Background Layer - Contains all background connections and elements */}
