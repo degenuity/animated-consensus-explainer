@@ -10,7 +10,7 @@ export const connectionPaths = [
     animationDirection: "right" as const,
     animateMotion: true,
     id: "inflation-to-internal-rewards",
-    renderOrder: "foreground" as const  // Changed to foreground to ensure visibility
+    renderOrder: "foreground" as const
   },
   
   // Line 4: Total Stake to Stake Weight - Updated coordinates to match new Total Stake position
@@ -33,7 +33,7 @@ export const connectionPaths = [
     animationIndex: 5,
     dotPosition: { x: "1090", y: "205" },
     id: "base-fees-to-block-rewards",
-    renderOrder: "foreground" as const  // Changed to foreground
+    renderOrder: "foreground" as const
   },
   
   // Base Fee bottom to Block Rewards center
@@ -81,7 +81,7 @@ export const connectionPaths = [
     dotPosition: { x: "595", y: "280" },
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
-    renderOrder: "foreground" as const, // Ensure this is in the foreground
+    renderOrder: "foreground" as const,
     animationDuration: 1.8
   },
   
@@ -94,7 +94,7 @@ export const connectionPaths = [
     dotPosition: { x: "595", y: "340" },
     animationDirection: "left" as const,
     id: "own-stake-to-staking-rewards", 
-    renderOrder: "foreground" as const, // Ensure this is in the foreground
+    renderOrder: "foreground" as const,
     animationDuration: 1.8
   },
   
