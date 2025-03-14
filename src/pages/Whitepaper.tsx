@@ -67,7 +67,7 @@ const Whitepaper = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-5 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"
         >
-          X1 Validator Financials Model
+          Architectural Designs for X1
         </motion.h2>
 
         {/* V4 Animation using BLS-style animation system */}
