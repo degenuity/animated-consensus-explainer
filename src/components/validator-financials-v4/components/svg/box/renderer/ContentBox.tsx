@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SubItem } from '../types';
@@ -93,7 +92,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
     `);
   }
   
-  // Enhanced logging for base fees
+  // SUPER DETAILED Enhanced logging for base fees - with exact right edge coordinates
   if (isBaseFees) {
     console.log(`BASE FEES BOX EXACT COORDINATES: 
       id: ${id}
@@ -102,11 +101,12 @@ const ContentBox: React.FC<ContentBoxProps> = ({
       width: ${adjustedWidth}
       height: ${itemHeight}
       right-edge: ${adjustedX + adjustedWidth}
-      visual-right-edge: ${adjustedX + adjustedWidth + 2} // Adding stroke width compensation
-      right-center: (${adjustedX + adjustedWidth}, ${y + yOffset + itemHeight/2})
+      visual-right-edge-exact: ${adjustedX + adjustedWidth + 1.5} // Adding stroke width compensation
+      right-center-exact: (${adjustedX + adjustedWidth}, ${y + yOffset + itemHeight/2})
+      right-center-with-stroke: (${adjustedX + adjustedWidth + 1.5}, ${y + yOffset + itemHeight/2})
       center: (${adjustedX + adjustedWidth/2}, ${y + yOffset + itemHeight/2})
       bottom: ${y + yOffset + itemHeight}
-      visual-bottom: ${y + yOffset + itemHeight + 2} // Adding stroke width compensation
+      visual-bottom: ${y + yOffset + itemHeight + 1.5} // Adding stroke width compensation
       full-details: {x: ${adjustedX}, y: ${y + yOffset}, width: ${adjustedWidth}, height: ${itemHeight}, right: ${adjustedX + adjustedWidth}}
     `);
   }
@@ -138,7 +138,7 @@ const ContentBox: React.FC<ContentBoxProps> = ({
   
   // Log base fees box coordinates for debugging
   if (isBaseFees) {
-    console.log(`Base fees box: x=${adjustedX}, y=${y + yOffset}, width=${adjustedWidth}, height=${itemHeight}, bottom=${y + yOffset + itemHeight}, right-edge=${adjustedX + adjustedWidth}, visual-right-edge=${adjustedX + adjustedWidth + 2}`);
+    console.log(`Base fees box: x=${adjustedX}, y=${y + yOffset}, width=${adjustedWidth}, height=${itemHeight}, bottom=${y + yOffset + itemHeight}, right-edge=${adjustedX + adjustedWidth}, visual-right-edge=${adjustedX + adjustedWidth + 1.5}`);
   }
   
   // Log block rewards box coordinates for debugging
