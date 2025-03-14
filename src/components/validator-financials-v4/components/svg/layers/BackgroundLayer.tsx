@@ -10,7 +10,9 @@ interface BackgroundLayerProps {
 
 const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) => {
   // Filter connections that should be rendered in the background
-  const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
+  const backgroundConnections = connectionPaths.filter(conn => 
+    conn.renderOrder === 'background' || !conn.renderOrder
+  );
   const isMobile = useIsMobile();
   
   return (
@@ -21,13 +23,16 @@ const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) =>
       preserveAspectRatio="xMidYMid meet"
       className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none"
     >
-      {backgroundConnections.map((connection, index) => (
-        <ConnectionLine
-          key={`connection-bg-${connection.id}-${index}`}
-          {...connection}
-          animationIndex={connection.animationIndex || index}
-        />
-      ))}
+      <g className="background-connections">
+        {backgroundConnections.map((connection, index) => (
+          <ConnectionLine
+            key={`connection-bg-${connection.id}-${index}`}
+            {...connection}
+            animationIndex={connection.animationIndex || index}
+            renderOrder="background"
+          />
+        ))}
+      </g>
     </svg>
   );
 };

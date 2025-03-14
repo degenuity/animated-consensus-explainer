@@ -13,9 +13,9 @@ export const connectionPaths = [
     renderOrder: "background" as const
   },
   
-  // Line 4: Total Stake to Stake Weight - Updated coordinates to match new Total Stake position
+  // Line 4: Total Stake to Stake Weight - Important: This must be foreground!
   { 
-    path: "M 765 370 L 765 465 L 765 550", // Updated starting Y from 340 to 370 (210 + 160 = 370)
+    path: "M 765 370 L 765 465 L 765 550", 
     color: "#3B82F6", 
     animationIndex: 3,
     dotPosition: { x: "765", y: "530" },
@@ -62,7 +62,7 @@ export const connectionPaths = [
   
   // Internal Rewards to Total Validator Rewards - Updated starting Y to match new Internal Rewards box position
   { 
-    path: "M 450 370 L 450 450 L 1020 450 L 1020 550", // Updated from 340 to 370 (210 + 160/2 = 370)
+    path: "M 450 370 L 450 450 L 1020 450 L 1020 550", 
     color: "#10B981", 
     animationIndex: 9,
     animateMotion: true,
@@ -87,7 +87,7 @@ export const connectionPaths = [
   
   // Own Stake to Staking Rewards - Updated Y values for new boxes
   { 
-    path: "M 635 340 L 558 340", // Updated from 310 to 340 to align with the center of the subitems
+    path: "M 635 340 L 558 340", 
     color: "#0EA5E9", 
     animationIndex: 11,
     animateMotion: true,

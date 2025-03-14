@@ -17,6 +17,9 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     ...restProps
   } = props;
   
+  // CRITICAL: Enforce the renderOrder prop - default to "background" if not specified
+  const effectiveRenderOrder = renderOrder || "background";
+  
   const { lineVariants, dotVariants } = useConnectionAnimation({
     animationIndex: animationIndex || 0,
     dotAnimationDuration: props.animationDuration || 2,
@@ -32,7 +35,7 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
           path={path}
           dotPosition={dotPosition}
           animationIndex={animationIndex}
-          renderOrder={renderOrder}
+          renderOrder={effectiveRenderOrder}
           id={id}
         />
       </defs>
@@ -50,7 +53,7 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
       {...props}
       lineVariants={lineVariants}
       dotVariants={dotVariants}
-      renderOrder={renderOrder} // Ensure renderOrder is explicitly passed
+      renderOrder={effectiveRenderOrder} // Ensure renderOrder is explicitly passed
     />
   );
 };

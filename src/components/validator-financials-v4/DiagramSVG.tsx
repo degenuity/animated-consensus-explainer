@@ -15,20 +15,18 @@ const DiagramSVG = () => {
     "overflow-visible", // Essential to prevent cropping
   ].join(" ");
   
-  // IMPORTANT: In SVG, z-index has no effect - rendering order is determined by DOM order
-  // The last element in the DOM is rendered on top
   return (
     <div className={containerClasses}>
       <AnimationStyleProvider />
       
-      {/* 1. BackgroundLayer - Rendered first (bottom-most in SVG stacking context) */}
+      {/* FUNDAMENTAL SVG STACKING - DOM ORDER MATTERS! */}
+      {/* 1. First layer - Background connections */}
       <BackgroundLayer connectionPaths={connectionPaths} />
       
-      {/* 2. BoxLayer - Rendered second (middle layer) */}
+      {/* 2. Second layer - The boxes with content */}
       <BoxLayer ref={svgRef} boxes={boxes} />
       
-      {/* 3. ForegroundLayer - Rendered LAST (top-most layer)
-          This ensures foreground connections appear on top of all other elements */}
+      {/* 3. CRITICAL: Foreground layer MUST be last in DOM order to appear on top */}
       <ForegroundLayer connectionPaths={connectionPaths} />
     </div>
   );

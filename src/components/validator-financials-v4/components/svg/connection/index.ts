@@ -6,5 +6,5 @@ export * from './types';
 export { default as ConnectionLine } from './ConnectionLine';
 export * from './ConnectionDefinition';
 export * from './ConnectionDot';
-export { ConnectionLabel } from './ConnectionLabel';
+export * from './ConnectionLabel';
 export * from './AnimatedConnection';

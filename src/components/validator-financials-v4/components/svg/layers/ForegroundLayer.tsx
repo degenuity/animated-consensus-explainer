@@ -10,8 +10,13 @@ interface ForegroundLayerProps {
 
 const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) => {
   // Filter connections that should be rendered in the foreground
-  const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
+  const foregroundConnections = connectionPaths.filter(conn => 
+    conn.renderOrder === 'foreground'
+  );
   const isMobile = useIsMobile();
+  
+  // Important console log to verify we're getting the right connections
+  console.log('Foreground connections:', foregroundConnections.map(c => c.id));
   
   return (
     <svg
@@ -21,13 +26,16 @@ const ForegroundLayer: React.FC<ForegroundLayerProps> = ({ connectionPaths }) =>
       preserveAspectRatio="xMidYMid meet"
       className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none"
     >
-      {foregroundConnections.map((connection, index) => (
-        <ConnectionLine
-          key={`connection-fg-${connection.id}-${index}`}
-          {...connection}
-          animationIndex={connection.animationIndex || index}
-        />
-      ))}
+      <g className="foreground-connections">
+        {foregroundConnections.map((connection, index) => (
+          <ConnectionLine
+            key={`connection-fg-${connection.id}-${index}`}
+            {...connection}
+            animationIndex={connection.animationIndex || index}
+            renderOrder="foreground"
+          />
+        ))}
+      </g>
     </svg>
   );
 };
