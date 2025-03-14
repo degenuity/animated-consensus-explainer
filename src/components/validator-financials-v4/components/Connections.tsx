@@ -29,9 +29,9 @@ const Connections: React.FC = () => {
         delay={1.7}
       />
 
-      {/* Deflation to Network Costs - kept at 115px which is the relative center */}
+      {/* Deflation to Network Costs - kept at 115px which is the relative center - adjusted for new deflation position */}
       <ConnectionLine 
-        from={{ top: '115px', left: 'calc(98% - 160px)' }}
+        from={{ top: '115px', left: 'calc(96% - 160px)' }}
         to={{ top: '115px', left: 'calc(74% + 20px)' }}
         color="#F59E0B"
         delay={1.8}

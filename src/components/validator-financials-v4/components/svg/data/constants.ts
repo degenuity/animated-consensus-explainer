@@ -5,7 +5,7 @@ export const viewBoxHeight = 850;
 
 // The leftmost and rightmost boxes positions (from boxes.ts)
 const leftmostBoxX = 100; // Inflation box x position
-const rightmostBoxX = 1250; // Deflation box x position
+const rightmostBoxX = 1300; // Deflation box x position (updated from 1250)
 
 // Calculate content width and apply 5% margin (reduced from 10%)
 const contentWidth = rightmostBoxX - leftmostBoxX + 150 + 150; // Add box widths

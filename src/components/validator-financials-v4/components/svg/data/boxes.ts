@@ -65,9 +65,9 @@ export const boxes = [
     borderColor: "#F97316"
   },
   
-  // Deflation Box
+  // Deflation Box - Moved further right to match symmetry with inflation box
   {
-    x: 1250,
+    x: 1300, // Updated from 1250 to 1300 to create symmetrical spacing
     y: 240,
     width: 150,
     height: 100,
