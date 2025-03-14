@@ -35,17 +35,6 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
             />
           )}
           
-          {/* Line from blockchain to x-axis */}
-          <line 
-            x1={blockchain.x} 
-            y1={blockchain.y + 15} 
-            x2={blockchain.x} 
-            y2={blockchain.y - 15} 
-            stroke={blockchain.highlighted ? "#3B82F6" : "#667085"} 
-            strokeWidth={blockchain.highlighted ? "1.5" : "1"}
-            opacity="0.7"
-          />
-          
           {/* X1 logo centered */}
           {blockchain.id === 'x1' ? (
             <image 
@@ -61,7 +50,7 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
               {/* Logo image - positioned to the left of name */}
               <image 
                 href={blockchain.logo} 
-                x={blockchain.x - 85} 
+                x={blockchain.x - 45} 
                 y={blockchain.y - 12} 
                 width="24" 
                 height="24" 
@@ -70,9 +59,9 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
               
               {/* Name text */}
               <text 
-                x={blockchain.x} 
+                x={blockchain.x + 5} 
                 y={blockchain.y + 5} 
-                textAnchor="middle" 
+                textAnchor="start" 
                 fill="#E2E8F0" 
                 fontSize="14"
                 className="font-medium"

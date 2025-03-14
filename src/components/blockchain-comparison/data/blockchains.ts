@@ -38,7 +38,7 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'sui', 
     name: 'Sui', 
-    x: 350, 
+    x: 400, 
     y: 200, 
     logo: 'https://cryptologos.cc/logos/sui-sui-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
@@ -50,7 +50,7 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'polkadot', 
     name: 'Polkadot', 
-    x: 1100, 
+    x: 1000, 
     y: 320, 
     logo: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
@@ -60,7 +60,7 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'cardano', 
     name: 'Cardano', 
-    x: 900, 
+    x: 800, 
     y: 320, 
     logo: 'https://cryptologos.cc/logos/cardano-ada-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
@@ -90,7 +90,7 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'ethereum', 
     name: 'Ethereum', 
-    x: 200, 
+    x: 250, 
     y: 450, 
     logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
@@ -102,7 +102,7 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'xrp', 
     name: 'XRP', 
-    x: 400, 
+    x: 300, 
     y: 550, 
     logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
@@ -112,7 +112,7 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'bitcoin', 
     name: 'Bitcoin', 
-    x: 150, 
+    x: 170, 
     y: 580, 
     logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
