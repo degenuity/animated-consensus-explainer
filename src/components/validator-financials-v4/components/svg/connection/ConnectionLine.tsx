@@ -45,12 +45,9 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
   }
   
   // Assign different z-indices based on connection ID for precise control
-  let zIndex = renderOrder === 'foreground' ? 50 : 1;
-  
-  // Special case for the delegated stake and own stake connections
-  if (id === 'delegated-stake-to-commission' || id === 'own-stake-to-staking-rewards') {
-    zIndex = 200; // Extra high z-index for these specific connections
-  }
+  // Note: z-index in SVG only works for positioned elements within the same stacking context
+  // This might not always work as expected across different SVG elements/layers
+  const zIndex = renderOrder === 'foreground' ? 300 : 1;
   
   console.log(`Rendering connection: ${id} with zIndex: ${zIndex}`);
   

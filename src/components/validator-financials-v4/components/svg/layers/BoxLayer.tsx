@@ -22,7 +22,7 @@ const BoxLayer = forwardRef<SVGSVGElement, BoxLayerProps>(({ boxes }, ref) => {
       className="absolute top-0 left-0 w-full h-full overflow-visible"
       style={{ 
         pointerEvents: 'none',
-        zIndex: 15, // Lower z-index than before (was 20) to ensure lines can pass over boxes
+        zIndex: 10, // Further lowered z-index (was 15) to ensure lines can pass over boxes
         isolation: 'isolate' // Creates a new stacking context
       }}
     >

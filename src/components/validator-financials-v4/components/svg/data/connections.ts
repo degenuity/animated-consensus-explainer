@@ -82,13 +82,7 @@ export const connectionPaths = [
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
-    animationDuration: 1.8,
-    label: {
-      text: "DS",
-      x: "595",
-      y: "260",
-      variant: "highlighted" as const
-    }
+    animationDuration: 1.8
   },
   
   // Own Stake to Staking Rewards - Updated Y values for new boxes
@@ -101,13 +95,7 @@ export const connectionPaths = [
     animationDirection: "left" as const,
     id: "own-stake-to-staking-rewards", 
     renderOrder: "foreground" as const,
-    animationDuration: 1.8,
-    label: {
-      text: "OS",
-      x: "595", 
-      y: "320",
-      variant: "highlighted" as const
-    }
+    animationDuration: 1.8
   },
   
   // Base Fee right side to Deflation

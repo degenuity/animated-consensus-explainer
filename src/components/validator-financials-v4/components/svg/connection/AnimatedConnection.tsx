@@ -28,11 +28,8 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   
   // Set explicit style based on ID for exact control
   const getZIndex = () => {
-    // Special high z-index for the delegated stake and own stake connections
-    if (id === 'delegated-stake-to-commission' || id === 'own-stake-to-staking-rewards') {
-      return 200;
-    }
-    return renderOrder === 'foreground' ? 50 : 10;
+    // Make ALL foreground connections have higher z-index than the box layer
+    return renderOrder === 'foreground' ? 300 : 5;
   };
   
   const zIndex = getZIndex();
@@ -73,7 +70,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         )
       )}
       
-      {/* Optional Label */}
+      {/* Optional Label - Only render if label exists */}
       {label && (
         <ConnectionLabel
           x={label.x}
