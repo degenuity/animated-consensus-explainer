@@ -72,7 +72,7 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Updated Y values for new boxes
+  // Delegated Stake to Commission - Updated Y values for new boxes and changed renderOrder to foreground
   { 
     path: "M 635 280 L 558 280", // Updated from 250 to 280 to align with the center of the subitems
     color: "#0EA5E9", 
@@ -81,11 +81,11 @@ export const connectionPaths = [
     dotPosition: { x: "595", y: "280" },
     animationDirection: "left" as const,
     id: "delegated-stake-to-commission", 
-    renderOrder: "foreground" as const,
+    renderOrder: "foreground" as const, // Ensure this is in the foreground
     animationDuration: 1.8
   },
   
-  // Own Stake to Staking Rewards - Updated Y values for new boxes
+  // Own Stake to Staking Rewards - Updated Y values for new boxes and changed renderOrder to foreground
   { 
     path: "M 635 340 L 558 340", // Updated from 310 to 340 to align with the center of the subitems
     color: "#0EA5E9", 
@@ -94,7 +94,7 @@ export const connectionPaths = [
     dotPosition: { x: "595", y: "340" },
     animationDirection: "left" as const,
     id: "own-stake-to-staking-rewards", 
-    renderOrder: "foreground" as const,
+    renderOrder: "foreground" as const, // Ensure this is in the foreground
     animationDuration: 1.8
   },
   
