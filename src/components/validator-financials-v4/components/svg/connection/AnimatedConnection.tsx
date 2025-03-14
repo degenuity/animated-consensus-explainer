@@ -26,9 +26,6 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   // Skip rendering if the path is missing
   if (!path) return null;
   
-  // Note: We don't use CSS z-index for SVG elements here as it doesn't work that way
-  // SVG elements stack based on their order in the DOM - later elements appear on top
-  
   return (
     <g data-connection-id={id}>
       {/* Path */}

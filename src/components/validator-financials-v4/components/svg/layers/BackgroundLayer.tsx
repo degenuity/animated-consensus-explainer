@@ -20,7 +20,6 @@ const BackgroundLayer: React.FC<BackgroundLayerProps> = ({ connectionPaths }) =>
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
       className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none"
-      style={{ position: 'absolute' }}
     >
       {backgroundConnections.map((connection, index) => (
         <ConnectionLine
