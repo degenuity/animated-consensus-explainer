@@ -52,8 +52,8 @@ const AxisLabels: React.FC = () => {
         </text>
         
         {/* X-Axis values - Updated to match the specified sequence */}
-        <text x="170" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">1</text>
-        <text x="200" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">2</text>
+        <text x="90" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">1</text>
+        <text x="170" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">2</text>
         <text x="250" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">3</text>
         <text x="300" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">4</text>
         <text x="400" y="650" fill="#F1F1F1" textAnchor="middle" className="text-xs font-medium">17</text>
@@ -65,35 +65,35 @@ const AxisLabels: React.FC = () => {
         
         {/* Connection lines from X-axis values to blockchain logos */}
         <g className="connection-lines">
-          {/* Line from 1 to Bitcoin */}
-          <line x1="170" y1="640" x2="170" y2="545" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          {/* Line from 1 to Bitcoin - stopping just below the logo */}
+          <line x1="90" y1="640" x2="90" y2="565" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
           
-          {/* Line from 2 to Tron */}
-          <line x1="200" y1="640" x2="200" y2="415" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          {/* Line from 2 to Tron - stopping just below the logo */}
+          <line x1="170" y1="640" x2="170" y2="395" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
           
-          {/* Line from 3 to Ethereum */}
-          <line x1="250" y1="640" x2="250" y2="485" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          {/* Line from 3 to Ethereum - stopping just below the logo */}
+          <line x1="250" y1="640" x2="250" y2="395" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
           
-          {/* Line from 4 to XRP */}
-          <line x1="300" y1="640" x2="300" y2="585" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          {/* Line from 4 to XRP - stopping just below the logo */}
+          <line x1="300" y1="640" x2="300" y2="545" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
           
-          {/* Line from 17 to Sui */}
-          <line x1="400" y1="640" x2="400" y2="235" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          {/* Line from 17 to Sui - stopping just below the logo */}
+          <line x1="400" y1="640" x2="400" y2="215" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
           
-          {/* Line from 19 to Solana */}
-          <line x1="500" y1="640" x2="500" y2="165" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          {/* Line from 19 to Solana - stopping just below the logo */}
+          <line x1="500" y1="640" x2="500" y2="145" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
           
-          {/* Line from 27 to Avalanche */}
-          <line x1="650" y1="640" x2="650" y2="355" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          {/* Line from 27 to Avalanche - stopping just below the logo */}
+          <line x1="650" y1="640" x2="650" y2="395" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
           
-          {/* Line from 59 to Cardano */}
-          <line x1="800" y1="640" x2="800" y2="355" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          {/* Line from 59 to Cardano - stopping just below the logo */}
+          <line x1="800" y1="640" x2="800" y2="395" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
           
-          {/* Line from 132 to Polkadot */}
-          <line x1="1000" y1="640" x2="1000" y2="355" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
+          {/* Line from 132 to Polkadot - stopping just below the logo */}
+          <line x1="1000" y1="640" x2="1000" y2="395" stroke="#667085" strokeDasharray="3,3" strokeWidth="1" />
           
-          {/* Line from 200+ to X1 */}
-          <line x1="1200" y1="640" x2="1200" y2="195" stroke="#3B82F6" strokeDasharray="3,3" strokeWidth="1.5" />
+          {/* Line from 200+ to X1 - stopping just below the logo */}
+          <line x1="1200" y1="640" x2="1200" y2="175" stroke="#3B82F6" strokeDasharray="3,3" strokeWidth="1.5" />
         </g>
       </motion.g>
     </>
