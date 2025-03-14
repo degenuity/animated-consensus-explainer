@@ -72,7 +72,18 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Removed the "Delegated Stake to Commission" line as requested
+  // Delegated Stake to Commission - Using coordinates from console logs
+  { 
+    path: "M 635 280 L 450 280", 
+    color: "#0EA5E9", 
+    animationIndex: 10,
+    animateMotion: true,
+    dotPosition: { x: "540", y: "280" },
+    animationDirection: "left" as const,
+    id: "delegated-stake-to-commission", 
+    renderOrder: "foreground" as const,
+    animationDuration: 1.8
+  },
   
   // Own Stake to Staking Rewards - Updated Y values for new boxes
   { 
