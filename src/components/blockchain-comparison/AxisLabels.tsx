@@ -13,26 +13,26 @@ const AxisLabels: React.FC = () => {
         transition={{ duration: 0.5, delay: 0.3 }}
       >
         {/* Top section label */}
-        <text x="-60" y="130" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="30" y="130" fill="#F8FAFC" className="text-sm font-semibold">
           Parallelism +
         </text>
-        <text x="-60" y="150" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="30" y="150" fill="#F8FAFC" className="text-sm font-semibold">
           Smart Contracts
         </text>
         
         {/* Middle section label */}
-        <text x="-60" y="380" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="30" y="380" fill="#F8FAFC" className="text-sm font-semibold">
           Sequential +
         </text>
-        <text x="-60" y="400" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="30" y="400" fill="#F8FAFC" className="text-sm font-semibold">
           Smart Contracts
         </text>
         
         {/* Bottom section label */}
-        <text x="-60" y="580" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="30" y="580" fill="#F8FAFC" className="text-sm font-semibold">
           No Smart
         </text>
-        <text x="-60" y="600" fill="#F8FAFC" className="text-sm font-semibold">
+        <text x="30" y="600" fill="#F8FAFC" className="text-sm font-semibold">
           Contracts
         </text>
       </motion.g>
