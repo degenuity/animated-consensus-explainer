@@ -18,7 +18,7 @@ const DiagramSVG = () => {
   
   return (
     <div className={containerClasses}>
-      <style jsx>{`
+      <style>{`
         /* Custom text size for very small screens */
         .text-xxs {
           font-size: 0.65rem;
