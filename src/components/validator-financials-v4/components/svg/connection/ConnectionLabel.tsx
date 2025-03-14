@@ -2,38 +2,68 @@
 import React from 'react';
 
 interface ConnectionLabelProps {
-  label: string;
-  position: { x: number; y: number };
-  color: string;
+  x: string | number;
+  y: string | number;
+  text: string;
+  variant?: "default" | "highlighted" | "subdued";
 }
 
 export const ConnectionLabel: React.FC<ConnectionLabelProps> = ({
-  label,
-  position,
-  color
+  x,
+  y,
+  text,
+  variant = "default"
 }) => {
+  // Set styles based on variant
+  const getStyles = () => {
+    switch (variant) {
+      case "highlighted":
+        return {
+          circleFill: "#2563eb",
+          circleStroke: "#1e40af",
+          textColor: "white"
+        };
+      case "subdued":
+        return {
+          circleFill: "#6b7280",
+          circleStroke: "#4b5563",
+          textColor: "#f3f4f6"
+        };
+      default:
+        return {
+          circleFill: "#1f2937", 
+          circleStroke: "#111827",
+          textColor: "white"
+        };
+    }
+  };
+
+  const styles = getStyles();
+
   return (
     <g>
       <circle
-        cx={position.x}
-        cy={position.y}
+        cx={x}
+        cy={y}
         r="15"
-        fill="#1f2937"
-        stroke={color}
+        fill={styles.circleFill}
+        stroke={styles.circleStroke}
         strokeWidth="1.5"
         opacity="0.9"
       />
       <text
-        x={position.x}
-        y={position.y}
+        x={x}
+        y={y}
         textAnchor="middle"
         dominantBaseline="middle"
-        fill="white"
+        fill={styles.textColor}
         fontSize="12"
         fontWeight="600"
       >
-        {label}
+        {text}
       </text>
     </g>
   );
 };
+
+export type { ConnectionLabelProps };

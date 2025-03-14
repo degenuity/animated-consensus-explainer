@@ -13,7 +13,12 @@ export interface ConnectionProps {
   animationDuration?: number;
   renderOrder?: 'background' | 'foreground';
   renderAsDefinition?: boolean;
-  label?: string;
+  label?: {
+    text: string;
+    x: string | number;
+    y: string | number;
+    variant?: "default" | "highlighted" | "subdued";
+  };
   labelPosition?: {
     x: number;
     y: number;
