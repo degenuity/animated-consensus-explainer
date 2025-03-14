@@ -26,8 +26,11 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   // Skip rendering if the path is missing
   if (!path) return null;
   
+  // Essential class attribute for distinguishing foreground vs background connections
+  const connectionClass = renderOrder === 'foreground' ? 'foreground-connection' : 'background-connection';
+  
   return (
-    <g data-connection-id={id}>
+    <g data-connection-id={id} className={connectionClass}>
       {/* Path */}
       <motion.path
         d={path}

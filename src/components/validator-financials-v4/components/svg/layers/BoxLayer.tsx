@@ -19,8 +19,8 @@ const BoxLayer = forwardRef<SVGSVGElement, BoxLayerProps>(({ boxes }, ref) => {
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0 w-full h-full overflow-visible z-20"
-      style={{ zIndex: 20 }} // Middle layer with explicit z-index
+      className="absolute top-0 left-0 w-full h-full overflow-visible"
+      style={{ pointerEvents: 'none' }} // Allow clicks to pass through to underlying elements
     >
       <g>
         {boxes.map((box, index) => (

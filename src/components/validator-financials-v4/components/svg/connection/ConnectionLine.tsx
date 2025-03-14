@@ -44,15 +44,13 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     return null;
   }
   
-  // Console log to help debug
-  console.log(`Rendering connection: ${id} with renderOrder: ${renderOrder}`);
-  
-  // Regular rendering with animations
+  // Regular rendering with animations - IMPORTANT: Pass renderOrder correctly
   return (
     <AnimatedConnection 
       {...props}
       lineVariants={lineVariants}
       dotVariants={dotVariants}
+      renderOrder={renderOrder} // Ensure renderOrder is explicitly passed
     />
   );
 };
