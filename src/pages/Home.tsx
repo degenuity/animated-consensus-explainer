@@ -48,7 +48,7 @@ const Home = () => {
         </h1>
         
         <p className="text-xl mb-10 text-slate-300">
-          Learn how X1 Blockchain's consensus mechanisms improve scalability and efficiency
+          Learn the architectural designs and research for X1 Blockchain
         </p>
         
         <div className="flex flex-col gap-6 max-w-md mx-auto">
