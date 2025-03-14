@@ -15,7 +15,7 @@ const BlockchainComparisonChart: React.FC = () => {
     <motion.div 
       className="w-full relative overflow-visible bg-[#0d111c] rounded-xl flex flex-col items-center justify-start"
       style={{
-        height: isMobile ? '400px' : '500px',
+        height: isMobile ? '500px' : '650px', // Increased height
       }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -24,8 +24,8 @@ const BlockchainComparisonChart: React.FC = () => {
       <div className="max-w-7xl mx-auto w-full py-1 sm:py-2 md:py-3 relative flex flex-col items-center overflow-visible h-full">
         <ChartTitle />
         
-        {/* Chart container */}
-        <div className="relative w-full overflow-visible flex items-center justify-center flex-1">
+        {/* Chart container with 10% margin on each side */}
+        <div className="relative w-[80%] overflow-visible flex items-center justify-center flex-1 mx-auto">
           <div className="w-full h-full relative">
             {/* Main SVG with viewBox */}
             <svg

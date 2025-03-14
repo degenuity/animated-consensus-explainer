@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from "framer-motion";
 
@@ -48,10 +49,10 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
           {blockchain.id === 'x1' ? (
             <image 
               href={blockchain.logo} 
-              x={blockchain.x - 20} 
-              y={blockchain.y - 20} 
-              width="40" 
-              height="40" 
+              x={blockchain.x - 25} 
+              y={blockchain.y - 25} 
+              width="50" 
+              height="50" 
               className={blockchain.logoClass}
               style={{ 
                 transform: `translate(-50%, -50%)`,
@@ -63,10 +64,10 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
               {/* Logo image - positioned to the left of name */}
               <image 
                 href={blockchain.logo} 
-                x={blockchain.x - 50} 
+                x={blockchain.x - 65} 
                 y={blockchain.y - 10} 
-                width="20" 
-                height="20" 
+                width="24" 
+                height="24" 
                 className={blockchain.logoClass}
               />
               
@@ -76,7 +77,7 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
                 y={blockchain.y + 5} 
                 textAnchor="middle" 
                 fill="#E2E8F0" 
-                fontSize="12"
+                fontSize="14"
                 className="font-medium"
               >
                 {blockchain.name}
