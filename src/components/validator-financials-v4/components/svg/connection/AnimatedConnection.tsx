@@ -26,13 +26,19 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   // Skip rendering if the path is missing
   if (!path) return null;
   
-  // Set style based on renderOrder
-  const connectionStyle = {
-    zIndex: renderOrder === 'foreground' ? 50 : 10
+  // Set explicit style based on ID for exact control
+  const getZIndex = () => {
+    // Special high z-index for the delegated stake and own stake connections
+    if (id === 'delegated-stake-to-commission' || id === 'own-stake-to-staking-rewards') {
+      return 200;
+    }
+    return renderOrder === 'foreground' ? 50 : 10;
   };
   
+  const zIndex = getZIndex();
+  
   return (
-    <g data-connection-id={id} style={connectionStyle}>
+    <g data-connection-id={id} style={{ zIndex }}>
       {/* Path */}
       <motion.path
         d={path}
@@ -44,7 +50,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
         variants={lineVariants}
         style={{ 
           strokeDasharray: '4 2', 
-          zIndex: renderOrder === 'foreground' ? 50 : 10 
+          zIndex
         }}
       />
       

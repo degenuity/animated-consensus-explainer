@@ -12,6 +12,7 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     path,
     dotPosition,
     renderOrder,
+    id,
     // Extracting all props with defaults to pass to appropriate components
     ...restProps
   } = props;
@@ -32,6 +33,7 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
           dotPosition={dotPosition}
           animationIndex={animationIndex} // Pass animationIndex explicitly
           renderOrder={renderOrder}
+          id={id}
         />
       </defs>
     );
@@ -42,12 +44,19 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     return null;
   }
   
-  // Determine the z-index based on renderOrder
-  const zIndex = renderOrder === 'foreground' ? 5 : 1;
+  // Assign different z-indices based on connection ID for precise control
+  let zIndex = renderOrder === 'foreground' ? 50 : 1;
+  
+  // Special case for the delegated stake and own stake connections
+  if (id === 'delegated-stake-to-commission' || id === 'own-stake-to-staking-rewards') {
+    zIndex = 200; // Extra high z-index for these specific connections
+  }
+  
+  console.log(`Rendering connection: ${id} with zIndex: ${zIndex}`);
   
   // Regular rendering with animations
   return (
-    <g style={{ zIndex: zIndex }}>
+    <g style={{ zIndex }}>
       <AnimatedConnection 
         {...props}
         lineVariants={lineVariants}

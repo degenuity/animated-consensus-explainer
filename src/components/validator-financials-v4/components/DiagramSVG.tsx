@@ -17,16 +17,16 @@ const DiagramSVG = () => {
   ].join(" ");
   
   return (
-    <div className={containerClasses}>
+    <div className={containerClasses} style={{ isolation: 'isolate' }}>
       <AnimationStyleProvider />
       
-      {/* Background Layer - Contains all background connections and elements */}
+      {/* Background Layer - Contains all background connections and elements - z-index: 10 */}
       <BackgroundLayer connectionPaths={connectionPaths} />
       
-      {/* Box Layer - Contains all boxes */}
+      {/* Box Layer - Contains all boxes - z-index: 20 */}
       <BoxLayer ref={svgRef} boxes={boxes} />
       
-      {/* Foreground Layer - Contains only the connections that need to be on top */}
+      {/* Foreground Layer - Contains only the connections that need to be on top - z-index: 100 */}
       <ForegroundLayer connectionPaths={connectionPaths} />
     </div>
   );

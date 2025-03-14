@@ -62,7 +62,7 @@ export const connectionPaths = [
   
   // Internal Rewards to Total Validator Rewards - Updated starting Y to match new Internal Rewards box position
   { 
-    path: "M 450 370 L 450 450 L 1020 450 L 1020 550", // Updated from 340 to 370 (210 + 160 = 370)
+    path: "M 450 370 L 450 450 L 1020 450 L 1020 550", // Updated from 340 to 370 (210 + 160/2 = 370)
     color: "#10B981", 
     animationIndex: 9,
     animateMotion: true,
@@ -83,7 +83,12 @@ export const connectionPaths = [
     id: "delegated-stake-to-commission", 
     renderOrder: "foreground" as const,
     animationDuration: 1.8,
-    zIndex: 100 // Add explicit high z-index
+    label: {
+      text: "DS",
+      x: "595",
+      y: "260",
+      variant: "highlighted"
+    }
   },
   
   // Own Stake to Staking Rewards - Updated Y values for new boxes
@@ -96,7 +101,13 @@ export const connectionPaths = [
     animationDirection: "left" as const,
     id: "own-stake-to-staking-rewards", 
     renderOrder: "foreground" as const,
-    animationDuration: 1.8
+    animationDuration: 1.8,
+    label: {
+      text: "OS",
+      x: "595", 
+      y: "320",
+      variant: "highlighted"
+    }
   },
   
   // Base Fee right side to Deflation
@@ -111,4 +122,3 @@ export const connectionPaths = [
     animationDuration: 1.8
   }
 ];
-

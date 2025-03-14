@@ -19,8 +19,12 @@ const BoxLayer = forwardRef<SVGSVGElement, BoxLayerProps>(({ boxes }, ref) => {
       height="100%"
       viewBox={isMobile ? zoomedViewBox : desktopViewBox}
       preserveAspectRatio="xMidYMid meet"
-      className="absolute top-0 left-0 w-full h-full overflow-visible pointer-events-none z-20"
-      style={{ pointerEvents: 'none' }} // Ensure box layer doesn't block pointer events
+      className="absolute top-0 left-0 w-full h-full overflow-visible"
+      style={{ 
+        pointerEvents: 'none',
+        zIndex: 20, // Lower z-index than the foreground layer (100)
+        isolation: 'isolate' // Creates a new stacking context
+      }}
     >
       <g className="pointer-events-auto">
         {boxes.map((box, index) => (
