@@ -11,7 +11,7 @@ export interface ConnectionProps {
   animationDirection?: 'right' | 'left' | 'up' | 'down';
   animateMotion?: boolean;
   animationDuration?: number;
-  renderOrder?: 'background' | 'foreground';
+  renderOrder: 'background' | 'foreground';
   renderAsDefinition?: boolean;
   label?: string;
   labelPosition?: {

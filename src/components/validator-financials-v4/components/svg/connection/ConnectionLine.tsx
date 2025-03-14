@@ -5,12 +5,13 @@ import { ConnectionDefinition } from './ConnectionDefinition';
 import { AnimatedConnection } from './AnimatedConnection';
 import { ConnectionProps } from './types';
 
-const ConnectionLine: React.FC<ConnectionProps> = (props) => {
+const ConnectionLine: React.FC<Partial<ConnectionProps> & { id: string; path: string; color: string }> = (props) => {
   const { 
-    animationIndex,
+    animationIndex = 0,
     renderAsDefinition = false,
     path,
     dotPosition,
+    renderOrder = 'background',
     // Extracting all props with defaults to pass to appropriate components
     ...restProps
   } = props;
@@ -26,10 +27,11 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     return (
       <defs>
         <ConnectionDefinition 
-          {...restProps}
+          {...restProps as ConnectionProps}
           path={path}
           dotPosition={dotPosition}
-          animationIndex={animationIndex} // Pass animationIndex explicitly
+          animationIndex={animationIndex}
+          renderOrder={renderOrder}
         />
       </defs>
     );
@@ -43,7 +45,7 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
   // Regular rendering with animations
   return (
     <AnimatedConnection 
-      {...props}
+      {...props as ConnectionProps}
       lineVariants={lineVariants}
       dotVariants={dotVariants}
     />
