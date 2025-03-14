@@ -26,21 +26,22 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
   // Skip rendering if the path is missing
   if (!path) return null;
   
-  // Set explicit style based on ID for exact control
-  const getZIndex = () => {
-    // Make ALL foreground connections have higher z-index than the box layer
-    return renderOrder === 'foreground' ? 300 : 5;
-  };
-  
-  const zIndex = getZIndex();
+  // Use an extremely high z-index for foreground connections
+  const zIndex = renderOrder === 'foreground' ? 350 : 5;
   
   return (
-    <g data-connection-id={id} style={{ zIndex }}>
+    <g 
+      data-connection-id={id} 
+      style={{ 
+        zIndex, 
+        position: 'relative' 
+      }}
+    >
       {/* Path */}
       <motion.path
         d={path}
         stroke={color}
-        strokeWidth="2"
+        strokeWidth="2.5" // Slightly thicker lines for better visibility
         fill="none"
         initial="hidden"
         animate="visible"
@@ -59,6 +60,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
             color={color}
             animated={true}
             animationDuration={animationDuration}
+            renderOrder={renderOrder}
           />
         ) : (
           <ConnectionDot
@@ -66,6 +68,7 @@ export const AnimatedConnection: React.FC<AnimatedConnectionProps> = ({
             cy={dotPosition.y}
             color={color}
             animated={false}
+            renderOrder={renderOrder}
           />
         )
       )}

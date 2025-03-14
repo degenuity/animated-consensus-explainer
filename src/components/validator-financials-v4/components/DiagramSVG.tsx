@@ -17,16 +17,22 @@ const DiagramSVG = () => {
   ].join(" ");
   
   return (
-    <div className={containerClasses} style={{ isolation: 'isolate' }}>
+    <div 
+      className={containerClasses} 
+      style={{ 
+        position: 'relative', 
+        transform: 'translateZ(0)' // Force stacking context with hardware acceleration
+      }}
+    >
       <AnimationStyleProvider />
       
-      {/* Background Layer - Contains all background connections and elements - z-index: 5 */}
+      {/* Background Layer - Contains background connections - z-index: 5 */}
       <BackgroundLayer connectionPaths={connectionPaths} />
       
       {/* Box Layer - Contains all boxes - z-index: 10 */}
       <BoxLayer ref={svgRef} boxes={boxes} />
       
-      {/* Foreground Layer - Contains only the connections that need to be on top - z-index: 300 */}
+      {/* Foreground Layer - Contains foreground connections - z-index: 300 */}
       <ForegroundLayer connectionPaths={connectionPaths} />
     </div>
   );

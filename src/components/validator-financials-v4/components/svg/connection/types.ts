@@ -1,26 +1,24 @@
 
+export interface ConnectionLabel {
+  x: string;
+  y: string;
+  text: string;
+  variant?: "default" | "highlighted" | "subdued";
+}
+
 export interface ConnectionProps {
   id: string;
   path: string;
   color: string;
-  animationIndex: number;
   dotPosition?: {
     x: string;
     y: string;
   };
-  animationDirection?: 'right' | 'left' | 'up' | 'down';
+  animationIndex?: number;
   animateMotion?: boolean;
   animationDuration?: number;
-  renderOrder?: 'background' | 'foreground';
+  animationDirection?: "left" | "right" | "up" | "down";
+  label?: ConnectionLabel;
   renderAsDefinition?: boolean;
-  label?: {
-    text: string;
-    x: string | number;
-    y: string | number;
-    variant?: "default" | "highlighted" | "subdued";
-  };
-  labelPosition?: {
-    x: number;
-    y: number;
-  };
+  renderOrder?: 'foreground' | 'background';
 }

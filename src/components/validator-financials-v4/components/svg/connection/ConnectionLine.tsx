@@ -31,7 +31,7 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
           {...restProps}
           path={path}
           dotPosition={dotPosition}
-          animationIndex={animationIndex} // Pass animationIndex explicitly
+          animationIndex={animationIndex}
           renderOrder={renderOrder}
           id={id}
         />
@@ -44,22 +44,16 @@ const ConnectionLine: React.FC<ConnectionProps> = (props) => {
     return null;
   }
   
-  // Assign different z-indices based on connection ID for precise control
-  // Note: z-index in SVG only works for positioned elements within the same stacking context
-  // This might not always work as expected across different SVG elements/layers
-  const zIndex = renderOrder === 'foreground' ? 300 : 1;
-  
-  console.log(`Rendering connection: ${id} with zIndex: ${zIndex}`);
+  // Console log to help debug
+  console.log(`Rendering connection: ${id} with renderOrder: ${renderOrder}`);
   
   // Regular rendering with animations
   return (
-    <g style={{ zIndex }}>
-      <AnimatedConnection 
-        {...props}
-        lineVariants={lineVariants}
-        dotVariants={dotVariants}
-      />
-    </g>
+    <AnimatedConnection 
+      {...props}
+      lineVariants={lineVariants}
+      dotVariants={dotVariants}
+    />
   );
 };
 
