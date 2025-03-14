@@ -45,26 +45,22 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
             />
           )}
           
-          {/* For X1, keep centered logo */}
+          {/* For X1, use centered logo with adjusted positioning */}
           {blockchain.id === 'x1' ? (
             <image 
               href={blockchain.logo} 
-              x={blockchain.x - 25} 
-              y={blockchain.y - 25} 
-              width="50" 
-              height="50" 
+              x={blockchain.x - 40} 
+              y={blockchain.y - 10} 
+              width="80" 
+              height="20" 
               className={blockchain.logoClass}
-              style={{ 
-                transform: `translate(-50%, -50%)`,
-                transformOrigin: `${blockchain.x}px ${blockchain.y}px`
-              }}
             />
           ) : (
             <>
-              {/* Logo image - positioned to the left of name */}
+              {/* Logo image - positioned to the left of name with more space */}
               <image 
                 href={blockchain.logo} 
-                x={blockchain.x - 65} 
+                x={blockchain.x - 75} 
                 y={blockchain.y - 10} 
                 width="24" 
                 height="24" 
