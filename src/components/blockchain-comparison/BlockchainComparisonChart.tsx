@@ -11,6 +11,15 @@ import AxisLabels from './AxisLabels';
 const BlockchainComparisonChart: React.FC = () => {
   const isMobile = useIsMobile();
   
+  // Constants for chart area (from data.ts)
+  const CHART_LEFT = 100;
+  const CHART_RIGHT = 1380;
+  const CHART_TOP = 80;
+  const CHART_BOTTOM = 630;
+  
+  const chartWidth = CHART_RIGHT - CHART_LEFT;
+  const chartHeight = CHART_BOTTOM - CHART_TOP;
+  
   return (
     <motion.div 
       className="w-full relative overflow-visible bg-[#0d111c] rounded-xl flex flex-col items-center justify-start"
@@ -37,19 +46,19 @@ const BlockchainComparisonChart: React.FC = () => {
             >
               {/* Top section - Parallelism + Smart Contracts */}
               <rect 
-                x="0" 
-                y="0" 
-                width={viewBoxWidth} 
-                height="250" 
+                x={CHART_LEFT} 
+                y={CHART_TOP} 
+                width={chartWidth} 
+                height="170" 
                 fill="#1a3050" 
                 opacity="0.85"
               />
               
               {/* Middle section - Sequential + Smart Contracts */}
               <rect 
-                x="0" 
-                y="250" 
-                width={viewBoxWidth} 
+                x={CHART_LEFT} 
+                y={CHART_TOP + 170} 
+                width={chartWidth} 
                 height="250" 
                 fill="#1e4060" 
                 opacity="0.85"
@@ -57,10 +66,10 @@ const BlockchainComparisonChart: React.FC = () => {
               
               {/* Bottom section - No Smart Contracts */}
               <rect 
-                x="0" 
-                y="500" 
-                width={viewBoxWidth} 
-                height={viewBoxHeight - 500} 
+                x={CHART_LEFT} 
+                y={CHART_TOP + 420} 
+                width={chartWidth} 
+                height={CHART_BOTTOM - (CHART_TOP + 420)} 
                 fill="#27548a" 
                 opacity="0.85"
               />
@@ -69,7 +78,7 @@ const BlockchainComparisonChart: React.FC = () => {
               <pattern id="smallGrid" width="40" height="40" patternUnits="userSpaceOnUse">
                 <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
               </pattern>
-              <rect x="0" y="0" width={viewBoxWidth} height={viewBoxHeight} fill="url(#smallGrid)" />
+              <rect x={CHART_LEFT} y={CHART_TOP} width={chartWidth} height={chartHeight} fill="url(#smallGrid)" />
             </svg>
             
             {/* Main SVG with viewBox */}
