@@ -34,7 +34,7 @@ const BlockchainComparisonChart: React.FC = () => {
         <ChartTitle />
         
         {/* Chart container optimized for visibility - providing more margin on left side */}
-        <div className="relative w-full md:w-[96%] lg:w-[94%] overflow-visible flex items-center justify-center flex-1 mx-auto">
+        <div className="relative w-full md:w-[96%] lg:w-[92%] overflow-visible flex items-center justify-center flex-1 mx-auto">
           <div className="w-full h-full relative">
             {/* Background segments */}
             <svg
@@ -74,11 +74,7 @@ const BlockchainComparisonChart: React.FC = () => {
                 opacity="0.85"
               />
               
-              {/* Subtle grid pattern */}
-              <pattern id="smallGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="0.5" />
-              </pattern>
-              <rect x={CHART_LEFT} y={CHART_TOP} width={chartWidth} height={chartHeight} fill="url(#smallGrid)" />
+              {/* Removed the grid pattern that was here */}
             </svg>
             
             {/* Main SVG with viewBox */}
