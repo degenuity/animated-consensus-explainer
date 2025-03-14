@@ -1,12 +1,12 @@
 
 // Chart dimensions
 export const viewBoxWidth = 1440;
-export const viewBoxHeight = 1000; // Increased height to accommodate the vertically stretched layout
+export const viewBoxHeight = 900;
 
 // Chart positioning constants
-export const CHART_TOP = 80;
-export const CHART_BOTTOM = 880; // Increased to match the new X-axis position
-export const CHART_LEFT = 150; // Keeping space for labels
+export const CHART_TOP = 100;
+export const CHART_BOTTOM = 650;
+export const CHART_LEFT = 150;
 export const CHART_RIGHT = 1380;
 
 // Derived measurements

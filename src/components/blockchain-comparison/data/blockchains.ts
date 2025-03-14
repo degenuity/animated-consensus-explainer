@@ -17,8 +17,8 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'x1', 
     name: 'X1 Blockchain', 
-    x: 1200, 
-    y: 160, 
+    x: 1300, 
+    y: 120, 
     logo: '/lovable-uploads/f20e89ba-6ef8-4889-bcbb-4c6052e8d553.png',
     logoClass: 'w-[80px] h-[20px] object-contain',
     animationDelay: 0.8,
@@ -27,9 +27,9 @@ export const blockchains: Blockchain[] = [
   },
   { 
     id: 'solana', 
-    name: 'Solana', 
-    x: 500, 
-    y: 130, 
+    name: 'SOLANA', 
+    x: 550, 
+    y: 120, 
     logo: 'https://cryptologos.cc/logos/solana-sol-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
     animationDelay: 0.3,
@@ -38,8 +38,8 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'sui', 
     name: 'Sui', 
-    x: 400, 
-    y: 200, 
+    x: 450, 
+    y: 180, 
     logo: 'https://cryptologos.cc/logos/sui-sui-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
     animationDelay: 0.4,
@@ -48,10 +48,40 @@ export const blockchains: Blockchain[] = [
   
   // Sequential + Smart Contracts (Middle section)
   { 
+    id: 'avalanche', 
+    name: 'AVALANCHE', 
+    x: 650, 
+    y: 300, 
+    logo: 'https://cryptologos.cc/logos/avalanche-avax-logo.png',
+    logoClass: 'w-[30px] h-[30px] object-contain',
+    animationDelay: 0.5,
+    nakamotoCoefficient: 27
+  },
+  { 
+    id: 'cardano', 
+    name: 'CARDANO', 
+    x: 900, 
+    y: 300, 
+    logo: 'https://cryptologos.cc/logos/cardano-ada-logo.png',
+    logoClass: 'w-[30px] h-[30px] object-contain',
+    animationDelay: 0.6,
+    nakamotoCoefficient: 59
+  },
+  { 
+    id: 'polkadot', 
+    name: 'Polkadot', 
+    x: 1150, 
+    y: 300, 
+    logo: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png',
+    logoClass: 'w-[30px] h-[30px] object-contain',
+    animationDelay: 0.7,
+    nakamotoCoefficient: 132
+  },
+  { 
     id: 'tron', 
-    name: 'Tron', 
-    x: 360, 
-    y: 520, 
+    name: 'TRON', 
+    x: 260, 
+    y: 380, 
     logo: 'https://cryptologos.cc/logos/tron-trx-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
     animationDelay: 0.2,
@@ -60,63 +90,33 @@ export const blockchains: Blockchain[] = [
   { 
     id: 'ethereum', 
     name: 'Ethereum', 
-    x: 450, 
-    y: 520, 
+    x: 330, 
+    y: 440, 
     logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
     animationDelay: 0.2,
     nakamotoCoefficient: 2
   },
-  { 
-    id: 'polkadot', 
-    name: 'Polkadot', 
-    x: 1000, 
-    y: 380, 
-    logo: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png',
-    logoClass: 'w-[30px] h-[30px] object-contain',
-    animationDelay: 0.7,
-    nakamotoCoefficient: 132
-  },
-  { 
-    id: 'cardano', 
-    name: 'Cardano', 
-    x: 800, 
-    y: 380, 
-    logo: 'https://cryptologos.cc/logos/cardano-ada-logo.png',
-    logoClass: 'w-[30px] h-[30px] object-contain',
-    animationDelay: 0.6,
-    nakamotoCoefficient: 59
-  },
-  { 
-    id: 'avalanche', 
-    name: 'Avalanche', 
-    x: 650, 
-    y: 380, 
-    logo: 'https://cryptologos.cc/logos/avalanche-avax-logo.png',
-    logoClass: 'w-[30px] h-[30px] object-contain',
-    animationDelay: 0.5,
-    nakamotoCoefficient: 27
-  },
   
   // No Smart Contracts (Bottom section)
   { 
-    id: 'bitcoin', 
-    name: 'Bitcoin', 
-    x: 540, 
-    y: 830, 
-    logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
-    logoClass: 'w-[30px] h-[30px] object-contain',
-    animationDelay: 0.1,
-    nakamotoCoefficient: 3
-  },
-  { 
     id: 'xrp', 
     name: 'XRP', 
-    x: 630, 
-    y: 750, 
+    x: 350, 
+    y: 500, 
     logo: 'https://cryptologos.cc/logos/xrp-xrp-logo.png',
     logoClass: 'w-[30px] h-[30px] object-contain',
     animationDelay: 0.4,
     nakamotoCoefficient: 4
+  },
+  { 
+    id: 'bitcoin', 
+    name: 'Bitcoin', 
+    x: 280, 
+    y: 580, 
+    logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
+    logoClass: 'w-[30px] h-[30px] object-contain',
+    animationDelay: 0.1,
+    nakamotoCoefficient: 3
   }
 ];

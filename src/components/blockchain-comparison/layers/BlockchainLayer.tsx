@@ -35,63 +35,116 @@ const BlockchainLayer: React.FC<BlockchainLayerProps> = ({ blockchains }) => {
             />
           )}
           
-          {/* X1 logo centered */}
+          {/* Logo and name positioning based on blockchain id */}
           {blockchain.id === 'x1' ? (
-            <image 
-              href={blockchain.logo} 
-              x={blockchain.x - 40} 
-              y={blockchain.y - 10} 
-              width="80" 
-              height="20" 
-              className={blockchain.logoClass}
-            />
+            <>
+              <image 
+                href={blockchain.logo} 
+                x={blockchain.x - 40} 
+                y={blockchain.y - 10} 
+                width="80" 
+                height="20" 
+                className={blockchain.logoClass}
+              />
+              <text 
+                x={blockchain.x} 
+                y={blockchain.y - 25} 
+                textAnchor="middle" 
+                fill="#E2E8F0" 
+                fontSize="0"
+                className="font-medium opacity-0"
+              >
+                {blockchain.name}
+              </text>
+            </>
+          ) : blockchain.id === 'tron' ? (
+            <>
+              <image 
+                href={blockchain.logo} 
+                x={blockchain.x - 15} 
+                y={blockchain.y - 15} 
+                width="30" 
+                height="30" 
+                className={blockchain.logoClass}
+              />
+              <text 
+                x={blockchain.x + 25} 
+                y={blockchain.y + 5} 
+                textAnchor="start" 
+                fill="#E2E8F0" 
+                fontSize="14"
+                className="font-medium uppercase"
+              >
+                {blockchain.name}
+              </text>
+            </>
+          ) : blockchain.id === 'ethereum' ? (
+            <>
+              <image 
+                href={blockchain.logo} 
+                x={blockchain.x - 15} 
+                y={blockchain.y - 15} 
+                width="30" 
+                height="30" 
+                className={blockchain.logoClass}
+              />
+              <text 
+                x={blockchain.x + 25} 
+                y={blockchain.y + 5} 
+                textAnchor="start" 
+                fill="#E2E8F0" 
+                fontSize="14"
+                className="font-medium"
+              >
+                {blockchain.name}
+              </text>
+            </>
+          ) : blockchain.id === 'xrp' ? (
+            <>
+              <text 
+                x={blockchain.x} 
+                y={blockchain.y - 25} 
+                textAnchor="middle" 
+                fill="#E2E8F0" 
+                fontSize="14"
+                className="font-medium"
+              >
+                {blockchain.name}
+              </text>
+              <text 
+                x={blockchain.x} 
+                y={blockchain.y} 
+                textAnchor="middle" 
+                fill="#E2E8F0" 
+                fontSize="20"
+                className="font-medium"
+              >
+                ⨯
+              </text>
+            </>
           ) : (
             <>
               {/* Logo image */}
               <image 
                 href={blockchain.logo} 
-                x={blockchain.x - 20} 
-                y={blockchain.y - 20} 
-                width="40" 
-                height="40" 
+                x={blockchain.x - 15} 
+                y={blockchain.y - 15} 
+                width="30" 
+                height="30" 
                 className={blockchain.logoClass}
               />
               
-              {/* Special positioning for specific blockchains to match the reference image */}
-              {blockchain.id === 'tron' || blockchain.id === 'ethereum' ? (
-                <text 
-                  x={blockchain.x + 25} 
-                  y={blockchain.y + 5} 
-                  textAnchor="start" 
-                  fill="#E2E8F0" 
-                  fontSize="16"
-                  className="font-medium"
-                >
-                  {blockchain.name}
-                </text>
-              ) : blockchain.id === 'xrp' ? (
-                <text 
-                  x={blockchain.x} 
-                  y={blockchain.y - 25} 
-                  textAnchor="middle" 
-                  fill="#E2E8F0" 
-                  fontSize="16"
-                  className="font-medium"
-                >
-                  {blockchain.name}
-                </text>
-              ) : (
-                <text 
-                  x={blockchain.x} 
-                  y={blockchain.y + 35} 
-                  textAnchor="middle" 
-                  fill="#E2E8F0" 
-                  fontSize="16"
-                  className="font-medium"
-                >
-                  {blockchain.name}
-                </text>
-              )}
+              {/* Name below logo */}
+              <text 
+                x={blockchain.x} 
+                y={blockchain.y + 30} 
+                textAnchor="middle" 
+                fill="#E2E8F0" 
+                fontSize="14"
+                className="font-medium"
+              >
+                {blockchain.name}
+              </text>
             </>
           )}
         </motion.g>
