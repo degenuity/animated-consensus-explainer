@@ -72,18 +72,7 @@ export const connectionPaths = [
     animationDuration: 2.5
   },
   
-  // Delegated Stake to Commission - Updated Y values for new boxes
-  { 
-    path: "M 635 280 L 558 280", // Updated from 250 to 280 to align with the center of the subitems
-    color: "#0EA5E9", 
-    animationIndex: 10,
-    animateMotion: true,
-    dotPosition: { x: "595", y: "280" },
-    animationDirection: "left" as const,
-    id: "delegated-stake-to-commission", 
-    renderOrder: "foreground" as const,
-    animationDuration: 1.8
-  },
+  // Removed the "Delegated Stake to Commission" line as requested
   
   // Own Stake to Staking Rewards - Updated Y values for new boxes
   { 
