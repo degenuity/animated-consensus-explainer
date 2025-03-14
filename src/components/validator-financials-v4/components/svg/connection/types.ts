@@ -1,5 +1,5 @@
 
-export interface ConnectionLabel {
+export interface ConnectionLabelProps {
   x: string;
   y: string;
   text: string;
@@ -18,7 +18,7 @@ export interface ConnectionProps {
   animateMotion?: boolean;
   animationDuration?: number;
   animationDirection?: "left" | "right" | "up" | "down";
-  label?: ConnectionLabel;
+  label?: ConnectionLabelProps;
   renderAsDefinition?: boolean;
   renderOrder?: 'foreground' | 'background';
 }

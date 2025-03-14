@@ -1,12 +1,6 @@
 
 import React from 'react';
-
-interface ConnectionLabelProps {
-  x: string | number;
-  y: string | number;
-  text: string;
-  variant?: "default" | "highlighted" | "subdued";
-}
+import { ConnectionLabelProps } from './types';
 
 export const ConnectionLabel: React.FC<ConnectionLabelProps> = ({
   x,
@@ -65,5 +59,3 @@ export const ConnectionLabel: React.FC<ConnectionLabelProps> = ({
     </g>
   );
 };
-
-export type { ConnectionLabelProps };
