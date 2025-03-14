@@ -5,8 +5,6 @@ import {
   BoxComponent,
   ConnectionLine,
 } from '.';
-// Removed ExplanationComponent import
-// Removed Logo import completely
 
 import { viewBoxWidth, viewBoxHeight } from './data/constants';
 import { boxes } from './data/boxes';
@@ -118,7 +116,9 @@ const DiagramSVG = () => {
   
   // Identify connections that need to be on top
   const backgroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'background');
-  const foregroundConnections = connectionPaths.filter(conn => conn.renderOrder === 'foreground');
+  const foregroundConnections = connectionPaths.filter(conn => 
+    conn.renderOrder === 'foreground' || conn.renderOrder === undefined
+  );
   
   return (
     <div className="w-full h-full relative px-4">
